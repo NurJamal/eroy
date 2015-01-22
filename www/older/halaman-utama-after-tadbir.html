@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>04 - HALAMAN UTAMA SELEPAS LOG MASUK</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" href="css/menu.css" />
+	</head>
+	<body>
+	<!-- header -->
+		<div class="upper">
+			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+			<div class="icon-upper">
+			<a href="menu.html"><img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/></a>
+			</div>
+		<!--menu -->
+		<div id="toggle"> </div>
+			<div class="menu closed">
+			  <ul>
+				<li class="title">Hi, Suffian</li>
+				<li><a href="index.html" class="text-menu"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
+				
+				<li class="title">Menu</li>
+				
+				<li><a href="halaman-utama-tadbir.html" class="text-menu"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+				
+				<li><a href="" class="text-menu"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
+				
+				<li><a href="" class="text-menu"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
+				
+				<li><a href="carian-maklumat-terperinci.html" class="text-menu"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
+				
+				<li><a href="pindaan-pertubuhan-belia.html" class="text-menu"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
+				
+				<li><a href="" class="text-menu"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
+				
+				<li><a href="" class="text-menu"><img src="img/laporan-icon.png" class="menu-icon"/>Pelaporan</a></li>
+				
+				<li class="title">Pengenalan</li>
+				
+				<li><a href="hubungi-kami.html" class="text-menu"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+				
+				<li><a href="" class="text-menu"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			  </ul>
+			</div>
+			<div id="wrapper">
+
+			<script src="js/1.11.1.js"></script> 
+			<script>
+				$( "#toggle" ).click(function() {
+				  $(".menu").toggleClass("closed");
+				  $(this).toggleClass("closed");
+				  $(".content").toggleClass("closed");
+				  $("#wrapper").toggleClass("closed")
+				});
+			</script>
+		<!-- end of menu -->	
+		</div>
+		</div>
+		<hr class="headerline-top" />
+			<h1>HALAMAN UTAMA</h1>
+		<hr class="headerline-bottom" />
+	<!-- end of header -->
+	
+	<h1 class="body-text">Kini anda boleh mendaftar pertubuhan belia melalui aplikasi telefon pintar</h1>
+	<img src="img/jata.png" width="50%" height="50%" class="center"/>
+	
+		<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+window.localStorage.setItem("api_location", "http://eroy.me-tech.com.my");
