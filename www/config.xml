@@ -6,10 +6,10 @@
         id        = "com.phonegap.helloworld"
         version   = "1.0.0">
 
-    <name>e-ROY</name>
+    <name>HelloWorld</name>
 
     <description>
-        Sistem Pendaftaran Belia, Kementerian Belia dan Sukan
+        Hello World sample application that responds to the deviceready event.
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">

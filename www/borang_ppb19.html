@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/borang_ppb19.css">
+	</head>
+	<body>
+	
+	<!-- header -->
+	<div class="upper">
+		<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
+			<a href="menu_carian.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+		</div>
+	</div>
+	<hr class="headerline-top" />
+		<h1>CARIAN MAKLUMAT</h1>
+	<hr class="headerline-bottom" />
+	<!-- end of header -->
+	
+	<h2>Permohonan Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+	<h2>Maklumat Pemohon</h2>
+	
+	<div class="display">
+		<form id="form_display" action="" method="POST">
+			<input type="text" id="f_nama" name="f_nama" disabled><br/>
+			<input type="text" id="f_kp" name="f_kp"  disabled><br/>
+			<input type="text" id="f_alamat" name="f_alamat"  class="address" disabled><br/>
+			<input type="text" id="f_jawatan" name="f_jawatan"  disabled><br/>
+			<input type="text" id="f_telefon" name="f_telefon"  disabled><br/>
+			<input type="text" id="f_tarikh_daftar" name="f_tarikh_daftar"  disabled><br/>
+		</form>
+	</div>
+	
+	<h2>Permohonan Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+	
+	<div class="inform">
+		<form id="form_inform" action="" method="POST">
+			<input type="text" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
+		</form>
+	</div>
+	
+	<h2>Dokumen Yang Dipohon<br/><br/>
+	1. Maklumat Sijil Pendaftaran Pertubuhan Belia<br/>
+	2. Senarai Ahli Jawatankuasa<br/>
+	3. Perlembagaan/Undang-undang Tubuh</h2>
+	
+	<div class="default_button_holder">
+		<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+	</div>
+	<br/>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_pengguna_info.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_pengguna_info").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var nama = $(this).find("nama");
+					var no_kp = $(this).find("no_kp");
+					var alamat = $(this).find("alamat");
+					var jawatan = $(this).find("jawatan");
+					var no_telefon = $(this).find("no_telefon");
+					var tarikh_daftar = $(this).find("tarikh_daftar");
+					$('#f_nama').val($(nama).text());
+					$('#f_kp').val($(no_kp).text());
+					$('#f_alamat').val($(alamat).text());
+					$('#f_jawatan').val($(jawatan).text());
+					$('#f_telefon').val($(no_telefon).text());
+					$('#f_tarikh_daftar').val($(tarikh_daftar).text());
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+	
+	$("#btn_submit").click(function(e){
+
+			e.preventDefault();
+
+			var no_sijil = $("#f_sijil").val();
+
+			if (no_sijil.length == 0) {
+				alert('Sila lengkapkan borang tersebut!');
+			} 
+			else {
+			
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
+					type:'GET',
+					data:{
+						no_sijil : no_sijil
+					},
+					dataType:'xml',
+					error: function(e) {
+						console.log(e);
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							console.log(json.status);
+							window.location.href = "bayaran_ppb19.html";
+						}
+						else if (json.status == 'error') {
+							console.log(json.status);
+							alert(json.message);
+						}
+						else{}
+					}
+				});
+			}
+	
+	});
+	</script>
+	
+	
+	</body>
+</html>
