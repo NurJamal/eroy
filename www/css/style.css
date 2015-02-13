@@ -1,60 +1,9 @@
-/* ------------------------------------------------------------ *\
-|* ------------------------------------------------------------ *|
-|* Globals
-|* ------------------------------------------------------------ *|
-\* ------------------------------------------------------------ */
-button {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-/* ------------------------------------------------------------ *\
-|* ------------------------------------------------------------ *|
-|* Template
-|* ------------------------------------------------------------ *|
-\* ------------------------------------------------------------ */
 body {
-    overflow-x: hidden
+    overflow-x: hidden;
 }
-#wrapper {
-    position: relative;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
-}
-section {
-    margin-bottom: 30px
-}
-section h1 {
-    font-family: "Oswald", sans-serif;
-    margin-bottom: 10px;
-}
-section p {
-    margin-bottom: 30px
-}
-section p:last-child {
-    margin-bottom: 0
-}
+
 section:last-child {
     margin-bottom: 0
-}
-section.toggle {
-    text-align: center
 }
 .mask {
     position: fixed;
@@ -65,32 +14,7 @@ section.toggle {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
 }
-/* ------------------------------------------------------------ *\
-|* ------------------------------------------------------------ *|
-|* Toggle Buttons
-|* ------------------------------------------------------------ *|
-\* ------------------------------------------------------------ */
-.buttons {
-    margin-bottom: 30px;
-    text-align: center;
-}
-.buttons button {
-    display: inline-block;
-    margin: 0 0 4px 0;
-    padding: 15px 30px;
-    color: #fff;
-    background-color: #67b5d1;
-}
-.buttons button:hover,
-.buttons button.active {
-    background-color: #3184a1
-}
-.buttons button:focus {
-    outline: none
-}
-/* ------------------------------------------------------------ *\
-|* Menus
-\* ------------------------------------------------------------ */
+
 /* general style for all menus */
 nav.menu {
     position: fixed;
@@ -104,22 +28,18 @@ nav.menu {
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
+
 nav.menu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
+
 nav.menu a {
     font-weight: 300;
     color: #3f3f3f;
 }
-button.close-menu {
-    background-color: #3184a1;
-    color: #fff;
-}
-button.close-menu:focus {
-    outline: none
-}
+
 /* slide menu left and right, push menu left and right */
 nav.slide-menu-right
  {
@@ -130,8 +50,6 @@ nav.slide-menu-right
 
 nav.slide-menu-right li{
     display: block;
-   /*  text-align: center; */
-    /* border-bottom: solid 1px #3184a1; */
     border-top: solid 1px #959595;
 }
 
@@ -148,61 +66,12 @@ nav.slide-menu-right a{
     font-size: 18px;
 }
 
-nav.slide-menu-right button.close-menu{
-    margin: 10px 0;
-    padding: 10px 30px;
-    background-color: #3184a1;
-    color: #fff;
+nav.slide-menu-right{
+    right: -300px;
 }
 
-nav.slide-menu-right,
-nav.push-menu-right {
-    right: -300px
-}
-
-body.smr-open nav.slide-menu-right,
-body.pmr-open nav.push-menu-right {
-    right: 0
-}
-
-body.pmr-open #wrapper {
-    left: -300px
-}
-
-/* ------------------------------------------------------------ *\
-|* ------------------------------------------------------------ *|
-|* Media Queries
-|* ------------------------------------------------------------ *|
-\* ------------------------------------------------------------ */
-@media all and (max-width: 860px) { 
-	.buttons br {
-	  	display: none
-	}
-	.buttons button {
-	  	padding: 10px 20px
-	}
-}
-
-@media all and (max-width: 330px) { 
-	nav.slide-menu-right{
-	  	top: 0;
-	  	width: 100%;
-	}
-	
-	nav.slide-menu-right,
-	nav.push-menu-right {
-	  	right: -100%
-	}
-	
-	body.smr-open nav.slide-menu-right{
-	  	right: 0
-	}
-	body.pml-open #wrapper {
-	  	left: 100%
-	}
-	body.pmr-open #wrapper {
-	  	left: -100%
-	}
+body.smr-open nav.slide-menu-right {
+    right: 0;
 }
 
 a {
@@ -237,5 +106,5 @@ ul li.title
 .menu-icon
 {
 	height: 30px;
-	margin: 0px 10px -5px 0px;
+	margin: 0px 10px -7px 0px;
 }

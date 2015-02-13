@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/log_masuk.css">
+	</head>
+	<body>
+	
+	<input type="text" name="f_no_sijil" id="f_no_sijil" placeholder="T45678"><br/>
+	<br/>
+	<input type="text" name="d_nama_tubuh" id="d_nama_tubuh" disabled/>
+	
+	<input class="default_button" type="button" value="LOG MASUK" id="btn_submit"></a>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	$("#btn_submit").click(function(e){
+
+			e.preventDefault();
+
+			var no_sijil = $("#f_no_sijil").val();
+
+			if (no_sijil.length == 0) {
+				alert('Sila masukkan No Sijil!');
+			} 
+			else {
+			
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/api_test2.php",
+					type:'GET',
+					data:{
+						no_sijil : no_sijil
+					},
+					dataType:'xml',
+					error: function(e) {
+						console.log(e);
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+						
+								$(document).ready(function(){
+									$('#f_no_sijil').keyup(function(e){
+										
+									$('#d_nama_tubuh').val($(nama_pertubuhan).text());
+									});
+								});
+							
+							console.log(json.status);
+							alert(json.message);
+						}
+						else if (json.status == 'error') {
+							console.log(json.status);
+							alert(json.message);
+						}
+						else{}
+					}
+				});
+			}
+	
+	});
+	</script>
+	</body>
+</html>

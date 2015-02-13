@@ -5,50 +5,58 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" type="text/css" href="css/bayaran_ppb20.css">
 	</head>
 	<body>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
 	<!-- header -->
-	<div class="upper">
-		<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
 		<div class="icon-upper">
-			<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
-			<a href="status_carian.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+			<img src="img/menu-icon.png" class="menu_icon"/>
+			<a href="borang_ppb19.html"><img src="img/back-icon.png" class="back_icon"/></a>
 		</div>
-	</div>
-	<hr class="headerline-top" />
-		<h1>CARIAN MAKLUMAT</h1>
-	<hr class="headerline-bottom" />
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+			</div>
+		</div>
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
 	
-	<h2>Pembayaran Carian Salinan Diperakui (Bercetak)</h2>
-	
-	<div class="selection">
-		<h6 id="h6">Cara Pengambilan Dokumen</h6>
-		<form action="">
-			<select id="sel_ambildokumen" name="sel" class="sel">
-			<option value="none"></option>
-			</select>
-		</form>		
+	<div id="content">
+		<h2 class="_orange_text">Pembayaran Carian Salinan Diperakui (Bercetak)</h2>
+		
+		<div class="selection">
+			<h5 id="_orange_title">Cara Pengambilan Dokumen</h5>
+			<form action="">
+				<select id="sel_ambildokumen" name="sel_ambildokumen" class="sel">
+				<option value="none"></option>
+				</select>
+			</form>		
+		</div>
+		
+		<div class="selection">
+				<h5 id="_orange_title">Bentuk Bayaran</h5>	
+				<h2 id="_text">Atas Talian</h2>
+				
+		</div>
+		
+		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+		
+		<div class="display">
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
+		</div>
+		
+		<div class="default_button_holder">
+			<a href="menu_carian.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit">
+		</div></a>
 	</div>
-	
-	<div class="selection">
-			<h6 id="h6">Bentuk Bayaran</h6>	
-			<h2 id="text">Atas Talian</h2>
-			
-	</div>
-	
-	<h2>Jumlah wang yang perlu dibayar</h2>
-	
-	<div class="display">
-		<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
-	</div>
-	
-	<div class="default_button_holder">
-		<a href="menu_carian.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit">
-	</div></a>
 	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

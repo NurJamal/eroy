@@ -5,29 +5,47 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" type="text/css" href="css/log_masuk.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Menu</li>
+			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
 	<!-- header -->
-		<div class="upper">
-			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
-			<div class="icon-upper">
-				<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
-				<a href="index.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon"/>
+			<a href="index.html"><img src="img/back-icon.png" class="back_icon"/></a>
+		</div>
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">LOG MASUK</h1>
 			</div>
 		</div>
-		<hr class="headerline-top" />
-			<h1>LOG MASUK</h1>
-		<hr class="headerline-bottom" />
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
-	
+	<div id="content">
 	<!-- form -->
-		<div class="login">
-			<form id="form_login" action="" method="POST">
+		<div class="_form">
+			<form id="" action="" method="POST">
 				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
 				
@@ -38,14 +56,16 @@
 		</div>
 	<!-- end of form -->
 	
-	<!-- sentences -->
 		<div class="multi-links">
-		<h5 align="center"><a href= "daftar_pengguna.html">Daftar</a></h5>
-		<h5 align="center"><a href= "lupa-kata-laluan.html">Reset Kata Laluan?</a></h5>
+			<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
+			<h5 align="center"><a href="lupa_kata_laluan.html">Lupa Kata Laluan?</a></h5>
+			<h5 align= "center"><a href="pengesahan-emel-pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
 		</div>
-		<h5 align= "center"><a href="pengesahan-emel-pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
-	<!-- end of alert sentences -->
-		
+	</div>	
+	
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>

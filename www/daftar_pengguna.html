@@ -5,98 +5,50 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" type="text/css" href="css/daftar_pengguna.css">
-		<link rel="stylesheet" type="text/css" href="css/test.css">
 	</head>
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- header -->
-		<div class="upper">
-			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
-			<div class="icon-upper">
-				<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
-				<a href="log_masuk.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" class="menu_icon"/>
+			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon"/></a>
+		</div>
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">DAFTAR PENGGUNA</h1>
 			</div>
 		</div>
-		<hr class="headerline-top" />
-			<h1>DAFTAR PENGGUNA</h1>
-		<hr class="headerline-bottom" />
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
 	
+	<div id="content">
 	<!-- form -->
-	<!-- <div class="register">
-			<form id="form_register" action="" method="POST">
-				<input type="text" name="name" id="frm_name" placeholder="Nama Penuh"><br/>
-				<input type="text" name="identity card no" id="frm_idNo" placeholder="No. K/P"><br/>
-				<h5>Tanpa simbol "-"</h5>
-				<input type="password" name="password" id="frm_password" placeholder="Kata Laluan"><br/>
-				<h5>Gabungan huruf (A-Z a-z), nombor (0-9), simbol (! @ # $ * ?). Minimum 8 aksara</h5>
-				<input type="password" name="repeat password" id="frm_rpassword" placeholder="Sahkan Kata Laluan"><br/>
-				<input type="text" name="email" id="frm_email" placeholder="Email"><br/>
+		<div class="_form">
+			<form id="" action="" method="POST">
+				<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
+				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				<h5>Tidak termasuk simbol '-'</h5>
+				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
+				<h5>Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
+				<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
+				placeholder="Sahkan Kata Laluan"><br/>
+				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
 				
-				<div class="default_button_holder">
-					<a href="Log_Masuk.html"><input class="default_button" type="button" value="DAFTAR" id="btn_submit"></a>
-				</div>
-			</form>
-	</div> -->
-	<!-- end of form -->
-	
-	<form>
-		<fieldset class="register">
-				<div>
-					<!-- <label for="input01">Nama Penuh</label> -->
-						<div>
-							<input type="text" pattern="[a-zA-Z ]+" 
-							required title="Sila masukkan huruf sahaja" 
-							name="f_nama" id="f_nama"  placeholder="Nama Penuh">
-							<label class="err-msg"></label>
-						</div>
-				</div>
-				<div>
-					<!-- <label for="input02">No. K/P</label> -->
-						<div >
-							<input type="text" pattern="[0-9]+"  
-							required  title="Sila masukkan 12 nombor tanpa '-'" maxlength="12" 
-							name="f_kp" id="f_kp"  placeholder="No Kad Pengenalan"> 
-							<label  class="err-msg"></label>
-						</div>
-				</div>
-				<div>
-					<!-- <label for="input03">Kata Laluan</label> -->
-						<div >
-							<input type="password" pattern="[a-zA-Z0-9!@#$*?]{15}"  
-							required  title="Minimum 8 aksara dan berdasarkan gabungan (a-z A-z 0-9 !@#$*?)" maxlength="15" 
-							name="f_katalaluan" id="f_katalaluan"   placeholder="Kata Laluan"> 
-							<label  class="err-msg"></label>
-						</div>
-				</div>
-				<div>     
-					<!-- <label for="input04">Sahkan Kata Laluan</label> -->
-						<div>
-							<input type="password"  pattern="[a-zA-Z0-9!@#$*?]{8}" 
-							required  title="Sila masukkan sekali lagi" maxlength="8" name="f_sah_katalaluan" id="f_sah_katalaluan"  
-							placeholder="Sahkan Kata Laluan">
-							<label class="err-msg"></label>
-						</div>
-				</div>
-				<div>     
-					<!-- <label for="input05">Email</label> -->
-						<div >
-							<input type="email" required title="Sila masukkan emel mengikut format" 
-							name="f_emel" id="f_emel"  placeholder="Emel">
-							<label class="err-msg"></label>
-						</div>
-				</div>
-				<br/>
 				<div class="default_button_holder">
 					<input class="default_button" type="button" value="DAFTAR" id="btn_submit"></a>
 				</div>
-				
-		</fieldset>
-	</form> 
+			</form>
+		</div>
+	</div>
+	<!-- end of form -->
 	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

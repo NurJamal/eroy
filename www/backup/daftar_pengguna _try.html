@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DAFTAR PENGGUNA</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/daftar_pengguna.css">
+		<link rel="stylesheet" type="text/css" href="css/test.css">
+	</head>
+	<body>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- header -->
+		<div class="upper">
+			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+			<div class="icon-upper">
+				<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
+				<a href="log_masuk.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+			</div>
+		</div>
+		<hr class="headerline-top" />
+			<h1>DAFTAR PENGGUNA</h1>
+		<hr class="headerline-bottom" />
+	<!-- end of header -->
+	
+	<!-- form -->
+	<div class="register">
+			<form id="form_register" action="" method="POST">
+				<input type="text" name="name" id="frm_name" placeholder="Nama Penuh"><br/>
+				<input type="text" name="identity card no" id="frm_idNo" placeholder="No. K/P"><br/>
+				<h5>Tanpa simbol "-"</h5>
+				<input type="password" name="password" id="frm_password" placeholder="Kata Laluan"><br/>
+				<h5>Gabungan huruf (A-Z a-z), nombor (0-9), simbol (! @ # $ * ?). Minimum 8 aksara</h5>
+				<input type="password" name="repeat password" id="frm_rpassword" placeholder="Sahkan Kata Laluan"><br/>
+				<input type="text" name="email" id="frm_email" placeholder="Email"><br/>
+				
+				<div class="default_button_holder">
+					<a href="Log_Masuk.html"><input class="default_button" type="button" value="DAFTAR" id="btn_submit"></a>
+				</div>
+			</form>
+	</div>
+	<!-- end of form -->
+	
+	
+	
+	<script>
+	// alert
+		window.onload=function() {
+			var query = ["input[pattern]", "input[type=email]"];
+				for(var q = 0; q < query.length; q++) {
+					var inp = document.querySelectorAll(query[q]);
+						for(var i = 0; i < inp.length; i++) {
+							inp[i].onkeyup = validation;
+						}
+				}
+			};
+
+		function validation(event) {
+			var p = this.parentNode.querySelector("label");
+				if (this.checkValidity() == false) { //the control is here!
+					p.innerHTML=this.getAttribute("title");
+				} 
+				else {
+					p.innerHTML="";
+				}     
+		}
+	// end alert
+	
+		$("#btn_submit").click(function(e){
+
+		e.preventDefault();
+		
+		var nama = $("#f_nama").val();
+		var kadp = $("#f_kp").val();
+		var katalaluan = $("#f_katalaluan").val();
+		var sah_katalaluan = $("#f_sah_katalaluan").val();
+		var emel = $("#f_emel").val();
+		
+		if (nama.length == 0  || kadp.length == 0 || katalaluan.length == 0 || sah_katalaluan.length == 0 || emel.length == 0) 
+		{
+			alert('Sila lengkapkan borang tersebut!');
+		} 
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+				type:'POST',
+				data: {
+					nama : nama,
+					kadp: kadp,
+					katalaluan : katalaluan,
+					sah_katalaluan : sah_katalaluan,
+					emel : emel
+				},
+				dataType:'xml',
+				error: function(e) {
+				console.log(e);
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert(json.message);
+						window.location.href = "log_masuk.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						alert(json.message);
+					}
+					else{}
+				}
+				});
+			
+			}
+			
+		});
+	</script>
+</body>
+</html>

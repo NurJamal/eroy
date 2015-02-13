@@ -5,48 +5,58 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/color.css" />
-		<link rel="stylesheet" type="text/css" href="css/before-log-masuk.css" />
-		
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 	</head>
 	<body>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
 	<!-- header -->
-		<div class="upper">
-			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
-			<div class="icon-upper">
-				<a href="#"><img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/></a>
-				<a href="index.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" class="menu_icon"/>
+			<a href="index.html"><img src="img/back-icon.png" class="back_icon"/></a>
+		</div>
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">HUBUNGI KAMI</h1>
 			</div>
 		</div>
-		<hr class="headerline-top" />
-			<h1>HUBUNGI KAMI</h1>
-		<hr class="headerline-bottom" />
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
 	
-		<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-		<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-	
-	<div class="selection">
-			<h6 id="h6">Mesej berkenaan</h6>
-			<form action="">
-				<select id="sel_mberkenaan" name="mesej" class="mesej">
-				<option value="none"></option>
-				</select>
-			</form>		
+	<div id="content">
+	<!-- form -->
+		<div class="_form">
+			<form id="" action="" method="POST">
+				<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
+				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+					
+				<div class="selection">
+					<h5 id="_orange_title">Mesej berkenaan</h5>
+					<form action="">
+						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+				</div>
+				
+				<input type="text" name="f_mesej" id="f_mesej" placeholder="Mesej" class="mesej"><br/>
+				<h5>Untuk mengelak dari <i>SPAM</i>, sila nyatakan perkataan di bawah: </h5>
+				<input type="text" name="f_captcha" id="f_captcha"  >
+				
+				
+				<div class="default_button_holder">
+					<input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
+				</div>
+			</form>
+		</div>
 	</div>
-	<input type="text" name="f_mesej" id="f_mesej" placeholder="Mesej" class="mesej"><br/>
-	Untuk mengelak dari SPAM, sila nyatakan perkataan di bawah :<br/>
-	<input type="text" name="f_captcha" id="f_captcha"  >
-	
-	<div class="default_button_holder">
-		<input class="default_button" type="button" value="HANTAR" id="btn_submit">
-	</div>
+	<!-- end of form -->
 	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

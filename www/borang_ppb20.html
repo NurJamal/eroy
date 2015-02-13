@@ -5,64 +5,75 @@
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" type="text/css" href="css/borang_ppb20.css">
 	</head>
 	<body>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
 	<!-- header -->
-	<div class="upper">
-		<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
 		<div class="icon-upper">
-			<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
-			<a href="menu_carian.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+			<img src="img/menu-icon.png" class="menu_icon"/>
+			<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon"/></a>
 		</div>
-	</div>
-	<hr class="headerline-top" />
-		<h1>CARIAN MAKLUMAT</h1>
-	<hr class="headerline-bottom" />
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+			</div>
+		</div>
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
 	
-	<h2>Permohonan Carian Salinan Diperakui (Bercetak)</h2>
-	<h2>Maklumat Pemohon</h2>
-	
-	<div class="display">
-		<form id="form_display" action="" method="POST">
-			<input type="text" id="f_nama" name="f_nama" disabled><br/>
-			<input type="text" id="f_kp" name="f_kp"  disabled><br/>
-			<input type="text" id="f_alamat" name="f_alamat"  class="address" disabled><br/>
-			<input type="text" id="f_jawatan" name="f_jawatan"  disabled><br/>
-			<input type="text" id="f_telefon" name="f_telefon"  disabled><br/>
-			<input type="text" id="f_tarikh_daftar" name="f_tarikh_daftar"  disabled><br/>
-		</form>
+	<div id="content">
+		<h2 class="_orange_text">Permohonan Carian Salinan Diperakui (Bercetak)</h2>
+		<h2 class="_orange_text">Maklumat Pemohon</h2>
+		
+		<div class="display">
+			<form id="" action="" method="POST">
+				<input type="text" id="d_nama" name="d_nama" disabled><br/>
+				<input type="text" id="d_kp" name="d_kp"  disabled><br/>
+				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
+				<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
+				<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
+				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar"  disabled><br/>
+			</form>
+		</div>
+		
+		<h2 class="_orange_text">Carian Salinan Diperakui (Bercetak)</h2>
+		
+		<div class="inform">
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
+		</div>
+		<div class="disp">
+				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
+		</div>
+		
+		<h2 class="_orange_text">Dokumen Yang Dipohon<br/><br/>
+		<div class="checkbox">
+			<input id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
+			<label for="c_box1">Maklumat Sijil Pendaftaran <span class="line2"> Pertubuhan Belia</span></label><br>
+			
+			<input id="c_box2" type="checkbox" name="senarai" value="Senarai Ahli Jawatankuasa" />
+			<label for="c_box2">Senarai Ahli Jawatankuasa</label><br>
+			
+			<input id="c_box3" type="checkbox" name="senarai" value="Perlembagaan/Undang-undang Tubuh">
+			<label for="c_box3">Perlembagaan/Undang-<span class="line2">undang Tubuh</span></label><br>
+			
+			<input id="c_box4" type="checkbox" name="senarai" value="Lain-Lain">
+			<label for="c_box4">Lain-Lain</label>
+		</div><h2>
+			<input type="text" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="_inform2"><br/>
+		
+		<div class="default_button_holder">
+			<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+		</div>
 	</div>
 	
-	<h2>Carian Salinan Diperakui (Bercetak)</h2>
-	
-	<div class="inform">
-		<form id="form_inform" action="" method="POST">
-			<input type="text" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
-		</form>
-	</div>
-	
-	<h2>Dokumen Yang Dipohon<br/><br/>
-	<div class="checkbox">
-		<input id="checkbox1" type="checkbox" name="senarai" value="perlembagaan" />
-		<label for="checkbox1">Maklumat Sijil Pendaftaran Pertubuhan Belia</label><br>
-		<input id="checkbox2" type="checkbox" name="senarai" value="ahli" />
-		<label for="checkbox2">Senarai Ahli Jawatankuasa</label><br>
-		<input id="checkbox3" type="checkbox" name="senarai" value="sijil">
-		<label for="checkbox3">Perlembagaan/Undang-undang Tubuh</label><br>
-		<input id="checkbox4" type="checkbox" name="senarai" value="lain">
-		<label for="checkbox4">Lain-Lain</label>
-	</div><h2>
-	<div class="inform">
-		<input type="text" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="lain_box"><br/>
-	</div>
-	
-	<div class="default_button_holder">
-		<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-	</div>
 	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -70,6 +81,11 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
+	function upperF() {
+		var x = document.getElementById("f_sijil");
+		x.value = x.value.toUpperCase();
+	}
+	
 	$(function() {
 
 		$.ajax({
@@ -88,12 +104,12 @@
 					var jawatan = $(this).find("jawatan");
 					var no_telefon = $(this).find("no_telefon");
 					var tarikh_daftar = $(this).find("tarikh_daftar");
-					$('#f_nama').val($(nama).text());
-					$('#f_kp').val($(no_kp).text());
-					$('#f_alamat').val($(alamat).text());
-					$('#f_jawatan').val($(jawatan).text());
-					$('#f_telefon').val($(no_telefon).text());
-					$('#f_tarikh_daftar').val($(tarikh_daftar).text());
+					$('#d_nama').val($(nama).text());
+					$('#d_kp').val($(no_kp).text());
+					$('#d_alamat').val($(alamat).text());
+					$('#d_jawatan').val($(jawatan).text());
+					$('#d_telefon').val($(no_telefon).text());
+					$('#d_tarikh_daftar').val($(tarikh_daftar).text());
 				});
 			},
 			error: function() {
@@ -116,10 +132,10 @@
 			else {
 			
 				$.ajax({
-					url:"http://eroy.me-tech.com.my/api/api_bayaran.php",
+					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
 					type:'GET',
 					data:{
-						no_sijil : no_sijil,
+						no_sijil : no_sijil
 					},
 					dataType:'xml',
 					error: function(e) {
@@ -131,7 +147,7 @@
 						console.log(json);
 						if (json.status == 'ok') {
 							console.log(json.status);
-							window.location.href = "bayaran_ppb20.html";
+							window.location.href = "menu_carian.html";
 						}
 						else if (json.status == 'error') {
 							console.log(json.status);
