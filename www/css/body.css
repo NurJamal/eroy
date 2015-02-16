@@ -204,7 +204,7 @@ select._sel{
 	background-size: 25px 25px;
 	background-color: white;
 }
-	
+
 select.sel{
 	-webkit-appearance: none;  /* REMOVES DEFAULT CHROME & SAFARI STYLE */
 	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
@@ -218,6 +218,18 @@ select.sel{
 	background-position: right;
 	background-size: 25px 25px;
 	background-color: white;
+}
+
+._upload{
+	/* font-size: 18px;
+	width: 100%;
+	height: 75%;
+	margin: 0px 4px 0px -4px; */
+	background-image: url("img/upload-icon.png");
+  /*   background-repeat: no-repeat;
+	background-position: right;
+	background-size: 25px 25px;
+	background-color: white; */
 }
 	
 	
