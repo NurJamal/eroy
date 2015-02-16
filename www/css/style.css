@@ -20,8 +20,8 @@ nav.menu {
     position: fixed;
     z-index: 20;
     background-color: #F2F1EF;
-    /* overflow: hidden; */
-	overflow-y: auto;
+    overflow: hidden;
+	/* overflow-y: auto; */
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
@@ -76,7 +76,7 @@ body.smr-open nav.slide-menu-right {
 
 a {
     text-decoration: none;
-    color: #67b5d1;
+    color: #0070c0;
 }
 
 .menu ul li 
@@ -106,5 +106,5 @@ ul li.title
 .menu-icon
 {
 	height: 30px;
-	margin: 0px 10px -7px 0px;
+	margin: 0px 10px -8px 0px;
 }

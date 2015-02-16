@@ -1,116 +1,87 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>TUKAR ID SETIAUSAHA</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/color.css" />
-		<link rel="stylesheet" type="text/css" href="css/before-log-masuk.css" />
-		
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		
-		<script type="text/javascript" src="js/global_vars.js"></script>
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Menu</li>
+			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
 	<!-- header -->
-		<div class="upper">
-			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
-			<div class="icon-upper">
-				<a href="#"><img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/></a>
-				<a href="index.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon"/>
+			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon"/></a>
+		</div>
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
 			</div>
 		</div>
-		<hr class="headerline-top" />
-			<h1>TUKAR ID SETIAUSAHA</h1>
-		<hr class="headerline-bottom" />
+		<hr id="thin_line" />
+	</div>	
 	<!-- end of header -->
+	<div id="content">
+	<!-- form -->
+		<div class="_form">
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
+		</div>	
+		<div class="display">
+				<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
+		</div>
+		<div class="_form">
+				<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
+				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				<input type="text" name="f_tlahir" id="f_tlahir" placeholder="Tarikh Lahir"><br/>
+		</div>
+		<div class="display">
+				<input type="text" id="d_umur" name="d_umur"  placeholder="Umur" disabled><br/>
+		</div>
+		<div class="_form">
+				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+				<input type="text" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
+		</div>			
+
 		
-		<input type="text" name="f_no_sijil" id="f_no_sijil" placeholder="No Sijil"><br/>
-		<input type="text" name="f_nama_tubuh" id="f_nama_tubuh" placeholder="Nama Pertubuhan"><br/>
-		<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-		<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-		<input type="text" name="f_tarikh_lahir" id="f_tarikh_lahir" placeholder="Tarikh Lahir"><br/>
-		<input type="text" name="f_umur" id="f_umur" placeholder="Umur"><br/>
-		<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-		<input type="text" name="f_tel" id="f_tel" placeholder="No Telefon"><br/>
+				<div class="default_button_holder">
+					<a href="index.html"><input class="default_button" type="button" value="MOHON" id="btn_submit"></a>
+				</div>
+		
+	<!-- end of form -->
+	</div>	
 	
-		<div class="default_button_holder">
-		<input class="default_button" type="button" value="MOHON" id="btn_submit">
-	</div>
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
 	
-	<script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/tukar_id_setiausaha.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_mberkenaan").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var mesej_ber = $(this).find("mesej_berkenaan");
-					$('#sel_mberkenaan').append('<option value="'+$(id).text()+'">'+$(mesej_ber).text()+'</option>');
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
-	});
-	
-	$("#btn_submit").click(function(e){
-
-			e.preventDefault();
-			
-			var nama = $("#f_nama").val();
-			var emel = $("#f_emel").val();
-			var mesej_berkenaan = $("#sel_mberkenaan").val();
-			var mesej = $("#f_mesej").val();
-			
-			if (nama.length == 0  || emel.length == 0 || mesej_berkenaan.length == 0 || mesej.length == 0) 
-			{
-				alert('Sila lengkapkan borang tersebut!');
-			} 
-			else {
-			
-					$.ajax({
-						url:"http://eroy.me-tech.com.my/api/tukar_id_setiausaha.php",
-						type:'POST',
-						data: {
-							nama : nama,
-							emel : emel,
-							mesej_berkenaan : mesej_berkenaan,
-							mesej : mesej
-						},
-						dataType:'',
-						error: function(e) 
-						{
-							console.log(e);
-						},
-						success:function(data){
-							console.log(data);
-							alert(data.message);
-							if (data.status == 'ok') {
-								// go to page
-								window.location.href = "halaman.html";
-							}
-						}
-					});
-				
-			}
-				
-			});
-	</script>
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
   </body>
 </html>
+
