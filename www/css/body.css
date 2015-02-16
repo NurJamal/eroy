@@ -239,6 +239,13 @@ select.sel{
 	margin-left: 0px;
 }
 
+._dark_text{
+	margin-top: 5px !important;
+	margin-bottom: 7px !important;
+	font-size: 18px;
+	color: #3f3f3f;
+}
+
 h2._orange_text{
 	font-size: 18px;
 	text-align: left;
@@ -280,6 +287,10 @@ h2._orange_text{
 	background-position: right;
 	background-size: 25px 25px;
 	background-color: white;
+}
+
+#_in_box{
+	display: inline-flex;
 }
 
 .title {
