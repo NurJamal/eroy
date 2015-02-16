@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>21 - CARIAN TERPERINCI</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/carian-maklumat-terperinci-new.css">
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/global_vars.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- header -->
+		<div class="upper">
+			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+			<div class="icon-upper">
+				<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
+				<a href="halaman-utama-after-biasa.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+			</div>
+		</div>
+		<hr class="headerline-top" />
+			<h1>CARIAN TERPERINCI</h1>
+		<hr class="headerline-bottom" />
+	<!-- end of header -->
+	
+	<!-- radio button -->
+	<h2>Jenis Permohonan Carian</h2>
+	
+	<div class="radio">  
+		<input id="dokumen" type="radio" name="field" value="dokumen">  
+		<label for="dokumen">Pemeriksaan Dokumen</label>  
+		<input id="salinan" type="radio" name="field" value="salinan">  
+		<label for="salinan">Salinan Diperaku</label>  
+	</div>  
+	<!-- end radio button -->
+	
+	<!-- form -->
+	<div class="inform">
+			<form id="form_inform" action="" method="POST">
+				<input type="text" name="nama pertubuhan" id="frm_namaper" placeholder="Nama Pertubuhan"><br/>
+				<input type="text" name="tujuan carian" id="frm_tujuan" placeholder="Tujuan Carian" class="tujuan"><br/>
+			</form>
+	</div>
+	<!-- end form -->
+	
+	<!-- checkbox -->
+	<h2>Dokumen Yang Dipohon</h2>
+	
+	<div class="checkbox">
+		<input id="checkbox1" type="checkbox" name="senarai" value="perlembagaan" />
+		<label for="checkbox1" align="justify">Perlembagaan/Undang-undang Tubuh</label><br>
+		<input id="checkbox2" type="checkbox" name="senarai" value="ahli" />
+		<label for="checkbox2">Senarai Ahli Jawatankuasa</label><br>
+		<input id="checkbox3" type="checkbox" name="senarai" value="sijil">
+		<label for="checkbox3">Sijil Pendaftaran Pertubuhan</label><br>
+		<input id="checkbox4" type="checkbox" name="senarai" value="lain">
+		<label for="checkbox4">Lain-Lain</label>
+	</div>
+	<!-- end checkbox -->
+	
+	<!-- display info -->
+	<h2>Maklumat Pemohon</h2>
+	
+	<div class="display">
+			<form id="form_display" action="" method="POST">
+				<input type="text" name="nama penuh" id="frm_nama" placeholder="Suffian Harun" disabled><br/>
+				<input type="text" name="no kad pengenalan" id="frm_idNo" placeholder="600626-06-4444" disabled><br/>
+				<input type="text" name="address" id="frm_address" placeholder="C-1-2A, Block C, Jalan GC1, Glomac Cyberjaya,
+				Cyber4, 63200 Cyberjaya, Selangor" class="address" disabled><br/>
+				<input type="text" name="jawatan" id="frm_jawatan" placeholder="Pengerusi" disabled><br/>
+				<input type="text" name="no.tel" id="frm_tel" placeholder="011-1234567" disabled><br/>
+				<input type="text" name="tarikh" id="frm_date" placeholder="7/10/2014" disabled><br/>
+			</form>
+	</div>
+	<!-- end display info -->
+	
+	<!--button -->
+	<div class="default_button_holder">
+		<input class="default_button" type="button" value="CARI" id="btn_submit">
+	</div>
+	<!-- end button -->
+	</body>
+</html>

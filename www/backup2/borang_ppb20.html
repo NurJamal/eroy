@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<div class="icon-upper">
+			<img src="img/menu-icon.png" class="menu_icon"/>
+			<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon"/></a>
+		</div>
+		<hr id="thick_line" />
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+			</div>
+		</div>
+		<hr id="thin_line" />
+	</div>	
+	<!-- end of header -->
+	
+	<div id="content">
+		<h2 class="_orange_text">Permohonan Carian Salinan Diperakui (Bercetak)</h2>
+		<h2 class="_orange_text">Maklumat Pemohon</h2>
+		
+		<div class="display">
+			<form id="" action="" method="POST">
+				<input type="text" id="d_nama" name="d_nama" disabled><br/>
+				<input type="text" id="d_kp" name="d_kp"  disabled><br/>
+				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
+				<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
+				<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
+				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar"  disabled><br/>
+			</form>
+		</div>
+		
+		<h2 class="_orange_text">Carian Salinan Diperakui (Bercetak)</h2>
+		
+		<div class="inform">
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
+		</div>
+		<div class="disp">
+				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
+		</div>
+		
+		<h2 class="_orange_text">Dokumen Yang Dipohon<br/><br/>
+		<div class="checkbox">
+			<input id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
+			<label for="c_box1">Maklumat Sijil Pendaftaran <span class="line2"> Pertubuhan Belia</span></label><br>
+			
+			<input id="c_box2" type="checkbox" name="senarai" value="Senarai Ahli Jawatankuasa" />
+			<label for="c_box2">Senarai Ahli Jawatankuasa</label><br>
+			
+			<input id="c_box3" type="checkbox" name="senarai" value="Perlembagaan/Undang-undang Tubuh">
+			<label for="c_box3">Perlembagaan/Undang-<span class="line2">undang Tubuh</span></label><br>
+			
+			<input id="c_box4" type="checkbox" name="senarai" value="Lain-Lain">
+			<label for="c_box4">Lain-Lain</label>
+		</div><h2>
+			<input type="text" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="_inform2"><br/>
+		
+		<div class="default_button_holder">
+			<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+		</div>
+	</div>
+	
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	function upperF() {
+		var x = document.getElementById("f_sijil");
+		x.value = x.value.toUpperCase();
+	}
+	
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_pengguna_info.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_pengguna_info").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var nama = $(this).find("nama");
+					var no_kp = $(this).find("no_kp");
+					var alamat = $(this).find("alamat");
+					var jawatan = $(this).find("jawatan");
+					var no_telefon = $(this).find("no_telefon");
+					var tarikh_daftar = $(this).find("tarikh_daftar");
+					$('#d_nama').val($(nama).text());
+					$('#d_kp').val($(no_kp).text());
+					$('#d_alamat').val($(alamat).text());
+					$('#d_jawatan').val($(jawatan).text());
+					$('#d_telefon').val($(no_telefon).text());
+					$('#d_tarikh_daftar').val($(tarikh_daftar).text());
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+	
+	
+	$("#btn_submit").click(function(e){
+
+			e.preventDefault();
+
+			var no_sijil = $("#f_sijil").val();
+
+			if (no_sijil.length == 0) {
+				alert('Sila lengkapkan borang tersebut!');
+			} 
+			else {
+			
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
+					type:'GET',
+					data:{
+						no_sijil : no_sijil
+					},
+					dataType:'xml',
+					error: function(e) {
+						console.log(e);
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							console.log(json.status);
+							window.location.href = "menu_carian.html";
+						}
+						else if (json.status == 'error') {
+							console.log(json.status);
+							alert(json.message);
+						}
+						else{}
+					}
+				});
+			}
+	
+	});
+	</script>
+	
+	
+	</body>
+</html>

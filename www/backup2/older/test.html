@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>03 - DAFTAR PENGGUNA</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/test.css">
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/global_vars.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- header -->
+		<div class="upper">
+			<img src="img/logo-atas.png" width="50%" height="50%" class="center"/>
+			<div class="icon-upper">
+				<img src="img/menu-icon.png" width="12%" height="12%" align="right" class="right"/>
+				<a href="Log_Masuk.html"><img src="img/back-icon.png" width="12%" height="12%" align="left" class="left"/></a>
+			</div>
+		</div>
+		<hr class="headerline-top" />
+			<h1>DAFTAR PENGGUNA</h1>
+		<hr class="headerline-bottom" />
+	<!-- end of header -->
+	
+	<script>
+	window.onload=function() {
+    var query = ["input[pattern]", "input[type=email]"];
+    for(var q = 0; q < query.length; q++) {
+        var inp = document.querySelectorAll(query[q]);
+        for(var i = 0; i < inp.length; i++) {
+                inp[i].onkeyup = validation;
+        }
+    }
+	};
+
+	function validation(event) {
+    var p = this.parentNode.querySelector("label");
+    if (this.checkValidity() == false) { //the control is here!
+        p.innerHTML=this.getAttribute("title");
+    } else {
+        p.innerHTML="";
+    }     
+	}
+	</script>
+
+	<form>
+		<fieldset class="register">
+				<div>
+					<!-- <label for="input01">Nama Penuh</label> -->
+						<div>
+							<input type="text" pattern="[a-zA-Z ]+" 
+							required title="Sila masukkan huruf sahaja" 
+							id="input01" name="name" placeholder="Nama Penuh">
+							<label class="err-msg"></label>
+						</div>
+				</div>
+				<div>
+					<!-- <label for="input02">No. K/P</label> -->
+						<div >
+							<input type="text" pattern="[0-9]+"  
+							required  title="Sila masukkan 12 nombor tanpa '-'" maxlength="12" 
+							id="input02" name="kad" placeholder="No. K/P"> 
+							<label  class="err-msg"></label>
+						</div>
+				</div>
+				<div>
+					<!-- <label for="input03">Kata Laluan</label> -->
+						<div >
+							<input type="text" pattern="[a-zA-z0-9!@#$*?]{8}"  
+							required  title="Minimum 8 aksara" maxlength="8" 
+							id="input02"  name="pin" placeholder="Kata Laluan"> 
+							<label  class="err-msg"></label>
+						</div>
+				</div>
+				<div>     
+					<!-- <label for="input04">Sahkan Kata Laluan</label> -->
+						<div>
+							<input type="text"  pattern="[a-zA-z0-9!@#$*?]{8}" 
+							required  title="Sila masukkan lagi sekali" maxlength="8" id="input03" name="cell" placeholder="Sahkan Kata Laluan">
+							<label class="err-msg"></label>
+						</div>
+				</div>
+				<div>     
+					<!-- <label for="input05">Email</label> -->
+						<div >
+							<input type="email" required title="Sila masukkan email mengikut format" 
+							id="input04" name="email" placeholder="Email">
+							<label class="err-msg"></label>
+						</div>
+				</div>
+      
+				<div class="default_button_holder">
+					<a href="Log_Masuk.html"><input class="default_button" type="button" value="DAFTAR" id="btn_submit"></a>
+				</div>
+				
+		</fieldset>
+	</form>
+</body>
+</html>
