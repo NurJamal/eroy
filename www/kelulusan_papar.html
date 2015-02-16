@@ -99,10 +99,10 @@
 			<input type="text" id="d_jawatan3" name="d_jawatan3" placeholder="Fatimah Bin Husin" disabled><br/>
 			
 			<div class="default_button_holder">
-				<a href="menu_kelulusan.html"><input class="default_button" type="button" value="LULUS" id="btn_submit"></a>
+				<a href="menu_kelulusan.html"><input class="default_button" type="button" value="LULUS" id="btn_submit" onclick="lulus()"></a>
 			</div>
 			<div class="default_button_holder">
-				<a href="menu_kelulusan.html"><input class="default_button" type="button" value="TOLAK" id="btn_submit"></a>
+				<a href="menu_kelulusan.html"><input class="default_button" type="button" value="TOLAK" id="btn_submit" ></a>
 			</div>
 		</div>
 	</div>
@@ -117,7 +117,13 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	
+	function lulus() {
+		if (confirm("Anda pasti untuk meluluskan permohonan ini? ") == true) {
+			window.location.href = "menu_kelulusan.html";
+		} else {
+			window.location.href = "kelulusan_papar.html";
+		}
+	}
 	</script>
 	
 	
