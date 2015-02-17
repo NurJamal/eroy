@@ -11,13 +11,18 @@
 		
 		<style>
 			._upload{
-				font-size: 18px;
-				width: 100%;
-				height: 75%;
 				background-image: url("img/upload-icon.png");
 				background-repeat: no-repeat;
-				background-position: right;
+				background-position: 97% 50%;
 				background-size: 35px 35px;
+				background-color: white;
+			}
+			
+			._datepick{
+				background-image: url("img/date-picker-icon.png");
+				background-repeat: no-repeat;
+				background-position: 97% 50%;
+				background-size: 30px 30px;
 				background-color: white;
 			}
 		</style>
@@ -37,7 +42,7 @@
 			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
 			<li id="colored"><a href="#"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
 			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
-			<li id="colored"><a href="pindaan_list.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
+			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
 			<li id="colored"><a href="#"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
 			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
 			<li class="title">Pengenalan</li>
@@ -66,16 +71,23 @@
 	<!-- end of header -->
 	
 	<div id="content">	
-		<h5>Nota: </h5><h5 align="right">Pindaan hanya boleh dibuat dalam <span>temporh 60 hari setelah Mesyuarat Agong</span> Tahunan atau Mesyuarat Agong Khas</h5>	
+		<h5>Nota: Pindaan hanya boleh dibuat dalam <span class="line3">tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</span></h5>	
 		
 		<div class="inform">
-			<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat"><br/>
+			<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
 		</div>
 		
-		<h5>Nota: </h5><h5 align="right">Setiap pindaan mestilah disertakan tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.(format .jpg)</h5>
+		<h5>Nota: Setiap pindaan mestilah disertakan<span class="line3"> tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></span></h5>
 		
 		<div class="inform">
-		<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
+			<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
+			
+			<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
+			<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
+			
+			<h2 class="_orange_text">No Daftar/No Sijil</h2>
+			<h1 class="_dark_text">T45678</h1>
+			
 			<input type="text" name="p_npertubuhan" id="p_npertubuhan" placeholder="Nama Pertubuhan"><br/>
 			<input type="text" name="p_nringkasan" id="p_nringkasan" placeholder="Nama Ringkasan"><br/>
 			<input type="text" name="p_emel_pertubuhan" id="p_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
