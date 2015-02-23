@@ -11,9 +11,16 @@ body{
 }
 
 #content {
-	padding: 65px 3%;
+	padding: 10px 3%;
 	height: 100%;
 	overflow: auto;
+}
+.content_title {
+	padding: 58px 3% 0 3%;
+	height: 100%;
+	overflow: auto;
+	border-bottom: 2px solid #F9690E;
+	padding-bottom: 2px;
 }
 
 .text1 {
@@ -205,12 +212,19 @@ a:hover{
 	-moz-outline-radius: 3px;
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	background-image: url("img/bottom-arrow-icon.png");
+    background-repeat: no-repeat;
+	background-position: 98% ;
+	background-size: 25px 25px;
+	background-color: white;
+	 
+
 }
 
 select._sel{
-	-webkit-appearance: none;  /* REMOVES DEFAULT CHROME & SAFARI STYLE */
-	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
-	border: none !important;  /* REMOVES BORDER */
+	/*-webkit-appearance: none;  
+	-moz-appearance: none;  
+	border: none !important;  
 	font-size: 18px;
 	width: 100%;
 	height: 75%;
@@ -219,7 +233,14 @@ select._sel{
     background-repeat: no-repeat;
 	background-position: right;
 	background-size: 25px 25px;
-	background-color: white;
+	background-color: white;*/
+	-webkit-appearance: none;  /* REMOVES DEFAULT CHROME & SAFARI STYLE */
+	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
+	border: none !important;  /* REMOVES BORDER */
+	font-size: 18px;
+	width: 93%;
+	height: 20px;
+	outline:none;
 }
 
 select.sel{
@@ -227,14 +248,14 @@ select.sel{
 	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
 	border: none !important;  /* REMOVES BORDER */
 	font-size: 18px;
-	width: 100%;
+	width: 93%;
 	height: 20px;
-	margin: 0px 4px 0px -4px;
-	background-image: url("img/bottom-arrow-icon.png");
+	outline:none;
+	/*background-image: url("img/bottom-arrow-icon.png");
     background-repeat: no-repeat;
 	background-position: right;
 	background-size: 25px 25px;
-	background-color: white;
+	background-color: white;*/
 }
 
 ._upload{
@@ -319,7 +340,7 @@ h2._orange_text{
 	text-align: left;
 	font-size: 18px;
 	font-family: "Arial", regular;
-	margin: 5px 0px 5px;
+	margin: 5px 25px 5px 0px;
 }
 
 img.right-icon{

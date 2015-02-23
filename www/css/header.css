@@ -16,6 +16,7 @@ img.logo{
 }
 img.menu_icon
 {
+position: absolute;
  margin-top: 7px;
  max-width: 60%;
  max-height: 70%;
@@ -33,7 +34,7 @@ img.menu_icon
 
 .main_title{
 	margin-top: 5px !important;
-	margin-bottom: 7px !important;
+	margin-bottom: 5px !important;
 	text-align: center;
 	font-weight: bold;
 	font-size: 20px;
@@ -90,6 +91,6 @@ img.back_icon{
 	color: #F9690E;
 	background-color: #F9690E;
 	height: 2px;
-	margin-top: 5px !important;
+	margin-top: 3px !important;
 	margin-bottom: 5px;
 }
