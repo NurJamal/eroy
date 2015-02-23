@@ -1,7 +1,26 @@
 #head{
-	position: fixed;
-	overflow: hidden;
-	background-color: #F2F1EF;
+ position: fixed;
+ top: 0;
+ height: 55px;
+ width: 100%;
+ background-color: #F2F1EF;
+ z-index:10;
+ border-bottom: 10px solid #F9690E;
+ text-align:center;
+}
+img.logo{
+ margin-top: 7px;
+ max-width: 60%;
+ max-height: 70%;
+ display: inline-block;
+}
+img.menu_icon
+{
+ margin-top: 7px;
+ max-width: 60%;
+ max-height: 70%;
+ display: inline-block;
+ right: 2%;
 }
 
 .icon {
@@ -21,35 +40,38 @@
 	color: #3f3f3f;
 }
 
-img.logo{
+/* img.logo{
 	display: block;
 	margin: 0 auto;
 	margin-top: 7px;
 	height: 50%;
 	width: 50%;
-}
+} */
 
 img.logo2{
 	display: block;
 	margin: 0 auto;
-	height: 45%;
-	width: 55%;
+	max-height: 45%;
+	max-width: 75%;
+	
 }
 
-img.menu_icon{
+/* img.menu_icon{
 	position: absolute;
 	top: 18px;
 	right: 2%;
 	width: 10%;
 	height: 25%;
 }
-
+ */
 img.back_icon{
 	position: absolute;
-	top: 19px;
+	margin-top: 7px;
 	left: 2%;
-	width: 10%;
-	height: 25%;
+	max-width: 60%;
+	max-height: 70%;
+	display: inline-block;
+
 }
 
 #thick_line{
