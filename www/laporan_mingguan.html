@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Menu</li>
+			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+			<a href="menu_pelaporan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+	
+	</div>	
+	<!-- end of header -->
+
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PELAPORAN</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<!-- list -->
+	<div id="content">
+		<h2 class="_orange_text">Statitik Laporan Mingguan</h2>
+		
+		<div class="inform">
+			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="Dari" class="_datepick"><br/>
+			<input type="text" name="tarikh_hingga" id="tarikh_hingga" placeholder="Hingga" class="_datepick"><br/>
+		</div>
+		
+				
+		<div class="checkbox2">
+				<input id="c_box1" type="checkbox" name="" value="Semua Zon" />
+				<label for="c_box1">Pilih Semua Zon</label><br>
+		</div>
+		
+		<div class="checkbox">
+			<div id="left">			
+				<h2 class="_orange_text">Zon Utara</h2>
+				<input id="c_box1" type="checkbox" name="" value="Kedah" />
+				<label for="c_box1">Kedah</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="Perlis" />
+				<label for="c_box1">Perlis</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="P.Pinang" />
+				<label for="c_box1">P.Pinang</label><br>
+				
+				<h2 class="_orange_text">Zon Tengah</h2>
+				<input id="c_box1" type="checkbox" name="" value="Perak" />
+				<label for="c_box1">Perak</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="Selangor" />
+				<label for="c_box1">Selangor</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="W.Persekutuan" />
+				<label for="c_box1">W.Persekutuan</label><br>
+				
+				<h2 class="_orange_text">Zon Sabah</h2>
+				<input id="c_box1" type="checkbox" name="" value="Sabah" />
+				<label for="c_box1">Sabah</label><br>
+				
+				<h2 class="_orange_text">Ibu Pejabat</h2>
+				<input id="c_box1" type="checkbox" name="" value="Ibu Pejabat" />
+				<label for="c_box1">Ibu Pejabat</label><br>
+			</div>
+			
+			<div id="right">
+				<h2 class="_orange_text">Zon Selatan</h2>
+				<input id="c_box1" type="checkbox" name="" value="Melaka" />
+				<label for="c_box1">Melaka</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="Johor" />
+				<label for="c_box1">Johor</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="N.Sembilan" />
+				<label for="c_box1">N.Sembilan</label><br>
+				
+				<h2 class="_orange_text">Zon Timur</h2>
+				<input id="c_box1" type="checkbox" name="" value="Pahang" />
+				<label for="c_box1">Pahang</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="Kelantan" />
+				<label for="c_box1">Kelantan</label><br>
+				
+				<input id="c_box1" type="checkbox" name="" value="Terengganu" />
+				<label for="c_box1">Terengganu</label><br>
+				
+				<h2 class="_orange_text">Zon Sarawak</h2>
+				<input id="c_box1" type="checkbox" name="" value="Sarawak" />
+				<label for="c_box1">Sarawak</label><br>
+			</div>
+		</div>
+		
+		<div class="default_button_holder">
+			<a href="statistik_laporan_mingguan.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
+		</div>
+
+	</div>
+	
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+
+	</body>
+</html>
