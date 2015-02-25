@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />		
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 	
@@ -41,74 +41,73 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		
 			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="semakan_keaktifan_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+			<a href="menu_pelaporan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 		
 	</div>	
 	<!-- end of header -->
 	
-		<!-- header title -->
+<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
-
 			<div class="input-group-btn">
-				<h1 class="main_title">SEMAKAN KEAKTIFAN</h1>
+				<h1 class="main_title">PELAPORAN</h1>
 			</div>
 		</div>
-
+	
 	</div>
 	<!-- end of header-title-->
 
-	<div id="content">	
-		<div id="box_no_icon">
-			<h2 class="li1" id="nama_pertubuhan">KELAB BASIKAL MALAYSIA</h2>
-			<h2 class="li2" id="tarikh_kemaskini">Tarikh Akhir Kemaskini: 12/01/2014</h2>
-			<h2 class="li2" id="status">Status Keaktifan: Aktif</h2>
-			<h2 class="li2" id="tarikh_daftar">Status Keaktifan: Gantung</h2>
-			<h2 class="li2" id="tempoh_gantung">Tempoh Gantung: 10 Hari</h2>
-			<h2 class="li2" id="sebab">Sebab: Tidak menghantar MyKD</h2><h2></h2>
+	<div id="content">
+		<h2 class="_orange_text">Statistik Ahli</h2>
+		
+		<div class="selection">
+			<h5 id="_orange_title">Pilihan</h5>
+			<form action="">
+				<select id="sel_pilihan" name="sel_pilihan" class="sel">
+				<option value="none"></option>
+				</select>
+			</form>		
 		</div>
+		
+		<div class="inform">
+			<input style="margin-top:1px" type="text" name="" id="" placeholder="Carian" class="_cari"><br/>
+		</div>
+		
+		<div class="selection">
+			<h5 id="_orange_title">Nama Pertubuhan</h5>
+			<form action="">
+				<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel">
+				<option value="none"></option>
+				</select>
+			</form>		
+		</div>
+		
+		<h2 class="_orange_text">Jumlah bilangan ahli dalam daftar keanggotaan</h2>
+		
+		<div class="display">
+			<h5 style="margin-left:5px">Melayu</h5>
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="20" disabled><br/>
+			
+			<h5 style="margin-left:5px">Cina</h5>
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="15" disabled><br/>
+			
+			<h5 style="margin-left:5px">India</h5>
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="10" disabled><br/>
+			
+			<h5 style="margin-left:5px">Lain-lain</h5>
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="5" disabled><br/>
+			
+			<h5 style="margin-left:5px">Keseluruhan</h5>
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="50" disabled><br/>
+		</div>
+		
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
-	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
-	});
-	</script> -->
-	
 	
 	</body>
 </html>
