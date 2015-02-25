@@ -300,6 +300,14 @@ select.sel{
 	margin-bottom: 3px;
 }
 
+#_orange_title_imal{
+	font-size: 18px;
+	color:  #F9690E;
+	margin-bottom : 1px;
+}
+
+
+
 #_text{
 	font-size: 18px;
 	color: #a1a1a1;
@@ -308,7 +316,14 @@ select.sel{
 }
 
 ._dark_text{
-	margin-top: -7px !important;
+	margin-top: 5px !important;
+	margin-bottom: 7px !important;
+	font-size: 18px;
+	color: #3f3f3f;
+}
+
+._dark_text_imal{
+	margin-top: 2px;
 	margin-bottom: 7px !important;
 	font-size: 18px;
 	color: #3f3f3f;
@@ -358,6 +373,7 @@ h2._orange_text{
 	background-color: white;
 }
 
+<<<<<<< HEAD
 #box_no_icon{
 	width: 100%;
 	color: #696969;
@@ -370,6 +386,9 @@ h2._orange_text{
 	margin-bottom: 15px;
 	padding: 10px;
 }
+=======
+
+>>>>>>> cf48f89238d0bb88bb63afd453bb0fc08726bd88
 
 #_in_box{
 	display: inline-flex;
@@ -404,17 +423,23 @@ input[type=checkbox] {
 	display: none; 
 	overflow: hidden; 
 	margin-left: 20px;
+}
+
+.input_checkbox { 
+	display: none; 
+	overflow: hidden; 
+	margin-left: 20px;
 } 
 
 input[type=checkbox]:checked + label:before { 
 	content: "\2713"; 
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
-	color: #f9690e; 
-	line-height: 20px; 
+	color: #f91290e; 
+	line-height: 20px;  
 	border: 2px solid; 
-	border-radius: 5px; 
+	border-radius: 3px; 
 	font-size: 14px; 
-	padding: 1px 2px; 
+	padding: 1px 1px; 
 	margin-right: 10px; 
 	/*   font-weight: bold;  */
 } 
@@ -425,18 +450,18 @@ input[type=checkbox] + label:before {
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
 	line-height: 20px; 
 	border: 2px solid; 
-	border-radius: 5px; 
+	border-radius: 3px; 
 	font-size: 14px; 
-	padding: 1px 2px; 
+	padding: 1px 1px; 
 	color: #f9690e; 
 	margin-right: 10px; 
 	/*  font-weight: bold; */ 
 } 
 
+
 .checkbox label{
 	color: #f9690e;
 	font-size: 18px;
-	margin-right: 15px; 
 	word-wrap:break-word;
 }
 
@@ -494,6 +519,7 @@ input[type=checkbox] + label:before {
 	margin-left: 37px;
 }
 
+<<<<<<< HEAD
 /* update - pelaporan */
 #left{
 	width: 55%;
@@ -600,3 +626,31 @@ h2._orange_text2{
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
+=======
+
+/*Imal*/
+.table_pindaan_maklumat td:image{
+	
+	width: 200%;
+    height: auto;
+	
+}
+
+#transparent_layer {
+	
+	position: absolute; 
+	top: 0; 
+	right: 0; 
+	bottom: 0; 
+	left: 0;
+	background: #CCC;
+    z-index:11;
+	
+	/*Browser compatibility*/
+	filter:alpha(opacity=60); 
+    -moz-opacity:0.6; 
+    opacity: 0.6; 
+	display: none;
+}
+
+>>>>>>> cf48f89238d0bb88bb63afd453bb0fc08726bd88
