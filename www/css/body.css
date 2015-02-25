@@ -75,7 +75,7 @@ input.double_button {
 ._form input[type=text], input[type=password], input[type=date]{
 	height: 50px;
 	width: 100%;
-	margin-top: 5px;
+	/* margin-top: 5px; */
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #696969;
@@ -277,6 +277,14 @@ select.sel{
 	background-color: white;
 }
 
+._cari{
+	background-image: url("img/carian-icon.png");
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+}
+
 ._upload{
 	background-image: url("img/upload-icon.png");
 	background-repeat: no-repeat;
@@ -292,6 +300,14 @@ select.sel{
 	background-size: 30px 30px;
 	background-color: white;
 }	
+
+.disable_datepick{
+	background-image: url("img/date-picker-icon2.png");
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	background-size: 30px 30px;
+	background-color: white;
+}
 	
 #_orange_title{
 	font-size: 18px;
@@ -299,14 +315,6 @@ select.sel{
 	margin-top: -8px;
 	margin-bottom: 3px;
 }
-
-#_orange_title_imal{
-	font-size: 18px;
-	color:  #F9690E;
-	margin-bottom : 1px;
-}
-
-
 
 #_text{
 	font-size: 18px;
@@ -316,14 +324,7 @@ select.sel{
 }
 
 ._dark_text{
-	margin-top: 5px !important;
-	margin-bottom: 7px !important;
-	font-size: 18px;
-	color: #3f3f3f;
-}
-
-._dark_text_imal{
-	margin-top: 2px;
+	margin-top: -7px !important;
 	margin-bottom: 7px !important;
 	font-size: 18px;
 	color: #3f3f3f;
@@ -373,7 +374,6 @@ h2._orange_text{
 	background-color: white;
 }
 
-<<<<<<< HEAD
 #box_no_icon{
 	width: 100%;
 	color: #696969;
@@ -386,9 +386,6 @@ h2._orange_text{
 	margin-bottom: 15px;
 	padding: 10px;
 }
-=======
-
->>>>>>> cf48f89238d0bb88bb63afd453bb0fc08726bd88
 
 #_in_box{
 	display: inline-flex;
@@ -423,23 +420,17 @@ input[type=checkbox] {
 	display: none; 
 	overflow: hidden; 
 	margin-left: 20px;
-}
-
-.input_checkbox { 
-	display: none; 
-	overflow: hidden; 
-	margin-left: 20px;
 } 
 
 input[type=checkbox]:checked + label:before { 
 	content: "\2713"; 
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
-	color: #f91290e; 
-	line-height: 20px;  
+	color: #f9690e; 
+	line-height: 20px; 
 	border: 2px solid; 
-	border-radius: 3px; 
+	border-radius: 5px; 
 	font-size: 14px; 
-	padding: 1px 1px; 
+	padding: 1px 2px; 
 	margin-right: 10px; 
 	/*   font-weight: bold;  */
 } 
@@ -450,18 +441,18 @@ input[type=checkbox] + label:before {
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
 	line-height: 20px; 
 	border: 2px solid; 
-	border-radius: 3px; 
+	border-radius: 5px; 
 	font-size: 14px; 
-	padding: 1px 1px; 
+	padding: 1px 2px; 
 	color: #f9690e; 
 	margin-right: 10px; 
 	/*  font-weight: bold; */ 
 } 
 
-
 .checkbox label{
 	color: #f9690e;
 	font-size: 18px;
+	margin-right: 15px; 
 	word-wrap:break-word;
 }
 
@@ -519,7 +510,6 @@ input[type=checkbox] + label:before {
 	margin-left: 37px;
 }
 
-<<<<<<< HEAD
 /* update - pelaporan */
 #left{
 	width: 55%;
@@ -531,24 +521,6 @@ input[type=checkbox] + label:before {
     width: 45%;
     height: 100%; 
 	float: right;
-}
-
-#left2{
-	width: 20%;
-    /* height: 100%; */
-    float: left;
-}
-
-#right2{
-    width: 50%;
-    /* height: 100%;  */
-	float: left;
-}
-
-#middle{
-	width: 30%;
-	/* height: 100%; */
-	float: left;
 }
 
 .grey_wrap{
@@ -585,8 +557,6 @@ h2._orange_text2{
 	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
 	border-radius: 5px;
 	-moz-outline-radius: 3px;
-	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .orange_wrap2{
@@ -599,8 +569,6 @@ h2._orange_text2{
 	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
 	border-radius: 5px;
 	-moz-outline-radius: 3px;
-	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .vertical_text{
@@ -626,31 +594,3 @@ h2._orange_text2{
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
-=======
-
-/*Imal*/
-.table_pindaan_maklumat td:image{
-	
-	width: 200%;
-    height: auto;
-	
-}
-
-#transparent_layer {
-	
-	position: absolute; 
-	top: 0; 
-	right: 0; 
-	bottom: 0; 
-	left: 0;
-	background: #A1A1A1;
-    z-index:11;
-	
-	/*Browser compatibility*/
-	filter:alpha(opacity=40); 
-    -moz-opacity:0.4; 
-    opacity: 0.4; 
-	display: none;
-}
-
->>>>>>> cf48f89238d0bb88bb63afd453bb0fc08726bd88

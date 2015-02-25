@@ -60,11 +60,19 @@
 
 	<!-- list -->
 	<div id="content">
-		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
+		<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
+		<h2 class="_orange_text">eROY dan Data Migrasi</h2>
 		
-		<div class="inform">
-			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="Dari" class="_datepick"><br/>
-			<input type="text" name="tarikh_hingga" id="tarikh_hingga" placeholder="Hingga" class="_datepick"><br/>
+		<div class="checkbox2">
+				<input id="c_box1" type="checkbox" name="" value="Semua Zon" />
+				<label for="c_box1">Keseluruhan</label><br>
+		</div>
+		
+		<div class="display">
+			<form id="" action="" method="POST">
+				<input type="text" id="dari" name="dari" placeholder="Dari" class="disable_datepick" disabled><br/>
+				<input type="text" id="hingga" name="hingga" placeholder="Hingga" class="disable_datepick" disabled><br/>
+			</form>
 		</div>
 		
 				
@@ -132,7 +140,7 @@
 		</div>
 		
 		<div class="default_button_holder">
-			<a href="statistik_laporan_mingguan.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
+			<a href="statistik_laporan_keseluruhan_eroy_migrasi.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
 		</div>
 
 	</div>
