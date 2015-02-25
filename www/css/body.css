@@ -496,13 +496,13 @@ input[type=checkbox] + label:before {
 	right: 0; 
 	bottom: 0; 
 	left: 0;
-	background: #CCC;
+	background: #A1A1A1;
     z-index:11;
 	
 	/*Browser compatibility*/
-	filter:alpha(opacity=60); 
-    -moz-opacity:0.6; 
-    opacity: 0.6; 
+	filter:alpha(opacity=40); 
+    -moz-opacity:0.4; 
+    opacity: 0.4; 
 	display: none;
 }
 
