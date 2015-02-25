@@ -13,7 +13,7 @@ body{
 #content {
 	padding: 10px 3%;
 	height: 100%;
-	overflow: auto;
+	/* overflow: auto; */
 }
 .content_title {
 	padding: 58px 3% 0 3%;
@@ -236,6 +236,7 @@ a:hover{
 
 }
 
+/* update */
 .dis_selection {
 	height: 50px;
 	width: 100%;
@@ -493,6 +494,7 @@ input[type=checkbox] + label:before {
 	margin-left: 37px;
 }
 
+/* update - pelaporan */
 #left{
 	width: 55%;
     height: 100%;
@@ -512,7 +514,7 @@ input[type=checkbox] + label:before {
 }
 
 #right2{
-    width: 45%;
+    width: 50%;
     /* height: 100%;  */
 	float: left;
 }
@@ -540,11 +542,11 @@ input[type=checkbox] + label:before {
 }
 
 h2._orange_text2{
-	font-size: 18px;
+	font-size: 16px;
 	text-align: left;
 	color: #f9690e;
 	width: 90%;
-	margin-top: -5px;
+	margin-top: -3px;
 }
 
 .orange_wrap{
@@ -561,9 +563,40 @@ h2._orange_text2{
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
+.orange_wrap2{
+	width: 20%;
+	/* margin-top: 5px; */
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #ffffff;
+	background: #fda303;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
 .vertical_text{
-	white-space: pre; 
-	font-size: 18px;
+	white-space: pre;
+	text-align: center;
+	font-size: 16px;
 	margin: -20px;
-	margin-left: -250px;
+	margin-left: -245px;
+}
+
+.white_wrap{
+	height: 30px;
+	width: 100%;
+	margin-top: -7px;
+	margin-bottom: 15px;
+	padding: 3px;
+	color: #3f3f3f;
+	background: #ffffff;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
