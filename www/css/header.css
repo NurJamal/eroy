@@ -45,9 +45,11 @@ img.menu_icon{
 img.logo2{
 	display: block;
 	margin: 0 auto;
-	max-height: 45%;
-	max-width: 75%;
 	
+	max-height: auto;
+	max-width: auto;
+	height:auto;
+	width:220px;
 }
 
 img.back_icon{
