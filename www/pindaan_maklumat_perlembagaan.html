@@ -86,7 +86,7 @@
 	<!-- end of header-title-->
 
 	<div id="content">	
-	
+	<span id="hehe2">test</span>
 		 <!--<h2 class="demoHeaders">
   <span id='tooltipClick' title='This is a tooltip that appears on click...'>Tooltip on Click</span>
 </h2>-->
@@ -96,8 +96,8 @@
 		<h5 id="_orange_title_imal">
 		<table class="table_pindaan_maklumat" >
 		<tbody>
-		<tr class="checkbox" style="margin-bottom:10px;">
-			<td width="30px" ><image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip"></td>
+		<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">
+			<td width="30px" id="edit_tooltip"><image src="img/pindaan-icon.png" width="25px" height="25px" ></td>
 			<td>
 				<input class="input_checkbox" id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
 				<label/>
@@ -274,28 +274,31 @@
 // Create the tooltips only when document ready
 $( document ).ready(function() {
     $('#edit_tooltip').qtip({
-    content: {
-        text: 'I get shown on click'
+	content: {
+		text: "<table width='220' height='30'><tr align='center'><td width='10' class='ccc'></td><td><img src='img/addbottom-icon.png' width='28px' height='35px'></td><td><img src='img/addtop-icon.png' width='28px' height='35px'/></td><td><img src='img/add-icon.png' width='28px' height='35px' /></td><td><img src='img/pindaan-icon.png' width='28px' height='35px'/></td><td width='10'></td></tr></table>",
+		//text: '<table width="220" height="30"><tr align="center"><td id="hehe"><img src="img/add-icon.png" width="28px" height="35px" /></td></tr></table>',
+		//text: '<div id="huhu"><label id="hehe">test</div>',
+
+
+	   button: true
+			
     },
+	 style: {
+		width: 230, 
+		height: 43,
+		classes: 'qtip-rounded'
+	 },   
+		
     show: {
 	 effect: function(offset) {
             $(this).slideDown(100); // "this" refers to the tooltip
         },
         event: 'click',
-        solo: true
+        solo: true,
+		
    
     },
-	hide: {
-	effect: function(offset) {
-            $(this).slideDown(100); // "this" refers to the tooltip
-        },
-        event: 'click',
-		fixed: true
-		
-    },
-	 style: {
-        classes: 'qtip-blue qtip-shadow'
-    },
+	hide:false,
 	events: {
         visible: function(event, api) {
             $('#transparent_layer').show();
@@ -303,11 +306,19 @@ $( document ).ready(function() {
 		 hide: function(event, api) {
             $('#transparent_layer').hide();
         }
+    },
+	 position: {
+        my: 'bottom left',
+		 at: 'top left'
     }
 });
+
+
+
+
 });
-
-
- 
+ $('.ccc').click(function(){
+    alert('lol');
+});
 </script>
 </html>
