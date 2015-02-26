@@ -13,7 +13,7 @@ body{
 #content {
 	padding: 10px 3%;
 	height: 100%;
-	overflow: auto;
+	/* overflow: aut1o; */
 }
 .content_title {
 	padding: 58px 3% 0 3%;
@@ -75,7 +75,7 @@ input.double_button {
 ._form input[type=text], input[type=password], input[type=date]{
 	height: 50px;
 	width: 100%;
-	margin-top: 5px;
+	/* margin-top: 5px; */
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #696969;
@@ -107,6 +107,22 @@ input.double_button {
 }
 
 .display input[type=text] , input[type=date]{
+	height: 50px;
+	width: 100%;
+	/* margin-top: 5px; */
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #a1a1a1;
+	background: #ececec;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.display.large_box input[type=text] {
 	height: 50px;
 	width: 100%;
 	/* margin-top: 5px; */
@@ -220,6 +236,7 @@ a:hover{
 
 }
 
+/* update */
 .dis_selection {
 	height: 50px;
 	width: 100%;
@@ -260,6 +277,14 @@ select.sel{
 	background-color: white;
 }
 
+._cari{
+	background-image: url("img/carian-icon.png");
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+}
+
 ._upload{
 	background-image: url("img/upload-icon.png");
 	background-repeat: no-repeat;
@@ -275,6 +300,14 @@ select.sel{
 	background-size: 30px 30px;
 	background-color: white;
 }	
+
+.disable_datepick{
+	background-image: url("img/date-picker-icon2.png");
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	background-size: 30px 30px;
+	background-color: white;
+}
 	
 #_orange_title{
 	font-size: 18px;
@@ -283,30 +316,15 @@ select.sel{
 	margin-bottom: 3px;
 }
 
-#_orange_title_imal{
-	font-size: 18px;
-	color:  #F9690E;
-	margin-bottom : 1px;
-}
-
-
-
 #_text{
 	font-size: 18px;
-	color: #696969;
+	color: #a1a1a1;
 	margin-top: 5px;
 	margin-left: 0px;
 }
 
 ._dark_text{
-	margin-top: 5px !important;
-	margin-bottom: 7px !important;
-	font-size: 18px;
-	color: #3f3f3f;
-}
-
-._dark_text_imal{
-	margin-top: 2px;
+	margin-top: -7px !important;
 	margin-bottom: 7px !important;
 	font-size: 18px;
 	color: #3f3f3f;
@@ -356,7 +374,18 @@ h2._orange_text{
 	background-color: white;
 }
 
-
+#box_no_icon{
+	width: 100%;
+	color: #696969;
+	background: white;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border: 1px solid #bcbcbc;
+	background: #ffffff;
+	margin-top: 5px;
+	margin-bottom: 15px;
+	padding: 10px;
+}
 
 #_in_box{
 	display: inline-flex;
@@ -391,23 +420,17 @@ input[type=checkbox] {
 	display: none; 
 	overflow: hidden; 
 	margin-left: 20px;
-}
-
-.input_checkbox { 
-	display: none; 
-	overflow: hidden; 
-	margin-left: 20px;
 } 
 
 input[type=checkbox]:checked + label:before { 
 	content: "\2713"; 
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
-	color: #f91290e; 
-	line-height: 20px;  
+	color: #f9690e; 
+	line-height: 20px; 
 	border: 2px solid; 
-	border-radius: 3px; 
+	border-radius: 5px; 
 	font-size: 14px; 
-	padding: 1px 1px; 
+	padding: 1px 2px; 
 	margin-right: 10px; 
 	/*   font-weight: bold;  */
 } 
@@ -418,18 +441,25 @@ input[type=checkbox] + label:before {
 	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  */
 	line-height: 20px; 
 	border: 2px solid; 
-	border-radius: 3px; 
+	border-radius: 5px; 
 	font-size: 14px; 
-	padding: 1px 1px; 
+	padding: 1px 2px; 
 	color: #f9690e; 
 	margin-right: 10px; 
 	/*  font-weight: bold; */ 
 } 
 
-
 .checkbox label{
 	color: #f9690e;
 	font-size: 18px;
+	margin-right: 15px; 
+	word-wrap:break-word;
+}
+
+.checkbox2 label{
+	color: #3f3f3f;
+	font-size: 18px;
+	margin-right: 15px; 
 	word-wrap:break-word;
 }
 
@@ -480,14 +510,114 @@ input[type=checkbox] + label:before {
 	margin-left: 37px;
 }
 
+/* update - pelaporan */
+#left{
+	width: 55%;
+    height: 100%;
+    float: left;
+}
 
-/*Imal*/
+
+/*Imal - */
 .table_pindaan_maklumat td:image{
 	
 	width: 200%;
     height: auto;
 	
 }
+#right{
+    width: 45%;
+    height: 100%; 
+	float: right;
+}
+
+.grey_wrap{
+	height: 30px;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #a1a1a1;
+	background: #acacac;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+h2._orange_text2{
+	font-size: 16px;
+	text-align: left;
+	color: #f9690e;
+	width: 90%;
+	margin-top: -3px;
+}
+
+.orange_wrap{
+	width: 20%;
+	height: 185px;
+	/* margin-top: 5px; */
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #ffffff;
+	background: #fda303;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+}
+
+.orange_wrap2{
+	width: 20%;
+	/* margin-top: 5px; */
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #ffffff;
+	background: #fda303;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+}
+
+.vertical_text{
+	white-space: pre;
+	text-align: center;
+	font-size: 16px;
+	margin: -20px;
+	margin-left: -245px;
+}
+
+.white_wrap{
+	height: 30px;
+	width: 100%;
+	margin-top: -7px;
+	margin-bottom: 15px;
+	padding: 3px;
+	color: #3f3f3f;
+	background: #ffffff;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+
+#_orange_title_imal{
+	font-size: 18px;
+	color:  #F9690E;
+	margin-bottom : 1px;
+}
+
+._dark_text_imal{
+	margin-top: 2px;
+	margin-bottom: 7px !important;
+	font-size: 18px;
+	color: #3f3f3f;
+}
+
 
 #transparent_layer {
 	
@@ -506,3 +636,18 @@ input[type=checkbox] + label:before {
 	display: none;
 }
 
+/* semakan keaktifan icon */
+.dummy_icon{
+	position: relative;
+	/* margin-top: -10px; */
+	/* left: 2%; */
+	max-width: 20%;
+	max-height: 20%;
+}
+.dummy_icon2{
+	position: relative;
+	margin-top: -5px;
+	right: 2%;
+	max-width: 12%;
+	max-height: 12%;
+}

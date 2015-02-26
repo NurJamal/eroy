@@ -39,54 +39,31 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
+		
 			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="pindaan_maklumat_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+			<a href="menu_pelaporan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+	
 	</div>	
 	<!-- end of header -->
-	
+
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+				<h1 class="main_title">PELAPORAN</h1>
 			</div>
 		</div>
+	
 	</div>
 	<!-- end of header-title-->
 
-	<div id="content">	
-		<h5>Nota: Pindaan hanya boleh dibuat dalam <span class="line3">tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</span></h5>	
-		
-		<div class="inform">
-			<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
-		</div>
-		
-		<h5>Nota: Setiap pindaan mestilah disertakan<span class="line3"> tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></span></h5>
-		
-		<div class="inform">
-			<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
-			
-			<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-			<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
-			
-			<h2 class="_orange_text">No Daftar/Sijil</h2>
-			<h1 class="_dark_text">T45678</h1>
-			
-			<input type="text" name="p_npertubuhan" id="p_npertubuhan" placeholder="Nama Pertubuhan"><br/>
-			<input type="text" name="p_nringkasan" id="p_nringkasan" placeholder="Nama Ringkasan"><br/>
-			<input type="text" name="p_emel_pertubuhan" id="p_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
-			
-			<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-			<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-			
-			<h2 class="_orange_text">Pindaan Alamat Tempat Urusan</h2>
-			<input type="text" name="p_alamat1" id="p_alamat1" placeholder="Alamat 1"><br/>
-			<input type="text" name="p_alamat2" id="p_alamat2" placeholder="Alamat 2"><br/>
-			<input type="text" name="p_alamat3" id="p_alamat3" placeholder="Alamat 3"><br/>
-		</div>
+	<!-- list -->
+	<div id="content">
+		<h2 class="_orange_text">Statistik Laporan Tahunan</h2>
 		
 		<div class="selection">
-			<h5 id="_orange_title">Negeri</h5>
+			<!-- <h5 id="_orange_title">Tahun</h5> -->
 			<form action="">
 				<select id="sel_negeri" name="sel_negeri" class="sel">
 				<option value="none"></option>
@@ -94,39 +71,78 @@
 			</form>		
 		</div>
 		
-		<div class="selection">
-			<h5 id="_orange_title">Daerah</h5>
-			<form action="">
-				<select id="sel_daerah" name="sel_daerah" class="sel">
-				<option value="none"></option>
-				</select>
-			</form>		
+				
+		<div class="checkbox2">
+				<input id="c_box1" type="checkbox" name="" value="Semua Zon" />
+				<label for="c_box1">Pilih Semua Zon</label><br>
 		</div>
 		
-		<h2 class="_orange_text">Pindaan Lambang/Logo/Lencana /Bendera</h2>
-		<h5>Logo Sedia Ada</h5>
-		<img src="img/logo_bolasepak.png" style="max-height:20%;max-width:25%"/>
-		
-		
-		<h5>Logo Baru</h5>
-		<div class="inform">
-				<input type="text" name="p_logo" id="p_logo" placeholder="Muat naik" class="_upload"><br/>
+		<div class="checkbox">
+			<div id="left">			
+				<h2 class="_orange_text">Zon Utara</h2>
+				<input id="c_box2" type="checkbox" name="" value="Kedah" />
+				<label for="c_box2">Kedah</label><br>
+				
+				<input id="c_box3" type="checkbox" name="" value="Perlis" />
+				<label for="c_box3">Perlis</label><br>
+				
+				<input id="c_box4" type="checkbox" name="" value="P.Pinang" />
+				<label for="c_box4">P.Pinang</label><br>
+				
+				<h2 class="_orange_text">Zon Tengah</h2>
+				<input id="c_box5" type="checkbox" name="" value="Perak" />
+				<label for="c_box5">Perak</label><br>
+				
+				<input id="c_box6" type="checkbox" name="" value="Selangor" />
+				<label for="c_box6">Selangor</label><br>
+				
+				<input id="c_box7" type="checkbox" name="" value="W.Persekutuan" />
+				<label for="c_box7">W.Persekutuan</label><br>
+				
+				<h2 class="_orange_text">Zon Sabah</h2>
+				<input id="c_box8" type="checkbox" name="" value="Sabah" />
+				<label for="c_box8">Sabah</label><br>
+				
+				<h2 class="_orange_text">Ibu Pejabat</h2>
+				<input id="c_box9" type="checkbox" name="" value="Ibu Pejabat" />
+				<label for="c_box9">Ibu Pejabat</label><br>
+			</div>
+			
+			<div id="right">
+				<h2 class="_orange_text">Zon Selatan</h2>
+				<input id="c_box10" type="checkbox" name="" value="Melaka" />
+				<label for="c_box10">Melaka</label><br>
+				
+				<input id="c_box11" type="checkbox" name="" value="Johor" />
+				<label for="c_box11">Johor</label><br>
+				
+				<input id="c_box12" type="checkbox" name="" value="N.Sembilan" />
+				<label for="c_box12">N.Sembilan</label><br>
+				
+				<h2 class="_orange_text">Zon Timur</h2>
+				<input id="c_box13" type="checkbox" name="" value="Pahang" />
+				<label for="c_box13">Pahang</label><br>
+				
+				<input id="c_box14" type="checkbox" name="" value="Kelantan" />
+				<label for="c_box14">Kelantan</label><br>
+				
+				<input id="c_box15" type="checkbox" name="" value="Terengganu" />
+				<label for="c_box15">Terengganu</label><br>
+				
+				<h2 class="_orange_text">Zon Sarawak</h2>
+				<input id="c_box16" type="checkbox" name="" value="Sarawak" />
+				<label for="c_box16">Sarawak</label><br>
+			</div>
 		</div>
 		
 		<div class="default_button_holder">
-			<a href="pindaan_maklumat_perlembagaan.html"><input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit"></a>
+			<a href="statistik_laporan_tahunan.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
 		</div>
+
 	</div>
 	
-	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
-	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
-	
+
 	</body>
 </html>

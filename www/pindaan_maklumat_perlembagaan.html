@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="css/style.css" />
 	
 		<!-- js for slide menu -->
-		<script type="text/javascript" src="js/classie.js"></script>
+		<script  src="js/classie.js"></script>
 		<script type="text/javascript" src="js/nav.js"></script>
 		
 		<!--Load to Local Later-->
@@ -28,18 +28,12 @@
 		<script type="text/javascript" src="qtip/jquery.imagesloaded.pkg.min.js"></script>
 
 </head>
-<body>
-
-
 
 		
 		
-		
-	
-	</head>
 	
 	<body>
-	
+	<div id="transparent_layer" ></div>
 	
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
@@ -64,7 +58,7 @@
 	</nav>
 	<!-- /slide menu right -->
 	
-	<div id="transparent_layer" ></div>
+	
 	
 	<!-- header -->
 	<div id="head">
@@ -302,10 +296,13 @@ $( document ).ready(function() {
 	events: {
         visible: function(event, api) {
             $('#transparent_layer').show();
+			$("body").css("overflow-y", "hidden");
         },
 		 hide: function(event, api) {
             $('#transparent_layer').hide();
-        }
+			$("body").css("overflow-y", "visible");
+        
+		}
     },
 	 position: {
         my: 'bottom left',
@@ -315,10 +312,7 @@ $( document ).ready(function() {
 
 
 
+});
 
-});
- $('.ccc').click(function(){
-    alert('lol');
-});
 </script>
 </html>
