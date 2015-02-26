@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Hi, Suffian</li>
+			<li id="colored"><a href="index.html"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
+			<li class="title">Menu</li>
+			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
+			<li id="colored"><a href="semakan_permohonan_listing.html"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
+			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
+			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
+			<li id="colored"><a href="semakan_keaktifan_listing.html"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
+			<li id="colored"><a href="menu_pelaporan.html"><img src="img/pelaporan-icon.png" class="menu-icon"/>Pelaporan</a></li>
+			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="daftar_pengguna.html"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="menu_pendaftaran.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+		
+	</div>	
+	<!-- end of header -->
+	
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+	
+	<div id="content">
+	
+
+		
+	<!-- navbar -->
+		<div class="navbar">
+		
+			<div align="center">
+		
+				<img src="img\numbering1.png" width="100%" height="100%"/>
+			
+			</div>
+		
+		</div>
+	<!-- end of navbar -->
+	
+	<!-- form -->
+		<div class="_form">
+		
+			<div class="selection">
+					<h5 id="_orange_title">Jenis Pertubuhan</h5>
+					<form action="">
+						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+				</div>
+				
+			<div class="selection">
+					<h5 id="_orange_title">Kategori Pertubuhan</h5>
+					<form action="">
+						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+				
+			<div class="selection">
+					<h5 id="_orange_title">Negeri</h5>
+					<form action="">
+						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+			
+			<div class="selection">
+					<h5 id="_orange_title">Daerah</h5>
+					<form action="">
+						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+		
+			<form id="" action="" method="POST">
+				<input type="text" name="lokaliti" id="lokaliti" placeholder="Lokaliti"><br/>
+				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
+				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
+				
+			<div class="display">
+				<input type="text" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" placeholder="Nama Penuh Pertubuhan"disabled><br/>
+			</div>
+			
+				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
+				
+				
+				
+				
+				
+				<div class="default_button_holder">
+				
+					<a href="pendaftaran-tunggal-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- end of form -->
+	
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+		
+  </body>
+</html>
