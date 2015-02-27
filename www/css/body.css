@@ -551,7 +551,7 @@ h2._orange_text2{
 	font-size: 16px;
 	text-align: left;
 	color: #f9690e;
-	width: 90%;
+	/* width: 90%; */
 	margin-top: -3px;
 }
 
@@ -560,7 +560,7 @@ h2._orange_text2{
 	height: 185px;
 	/* margin-top: 5px; */
 	margin-bottom: 10px;
-	padding: 10px;
+	padding: 13px;
 	color: #ffffff;
 	background: #fda303;
 	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
@@ -594,6 +594,7 @@ h2._orange_text2{
 	margin-top: -7px;
 	margin-bottom: 15px;
 	padding: 3px;
+	/* padding-left: 15px; */
 	color: #3f3f3f;
 	background: #ffffff;
 	border: 1px solid;
