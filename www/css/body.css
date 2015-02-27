@@ -11,7 +11,7 @@ body{
 }
 
 #content {
-	padding: 10px 3%;
+	padding: 5px 3%;
 	height: 100%;
 	/* overflow: aut1o; */
 }
@@ -30,31 +30,14 @@ body{
 }
 
 .text2{
-	font-size: 18px;
+	font-size: 16px;
+	font-weight: bold;
 	margin-top: -7px;
 	color: #acacac;
 	text-align: center;
 }
 
 input.default_button {
-	height: 55px;
-	width: 100%;
-	font-size: 20px;
-	font-weight: bold;
-	margin-top: 30px;
-	color: #ffffff;
-	background: #f9690e;
-	border: 0px solid;
-	border-radius: 5px;
-	background-image: -webkit-linear-gradient(top, #fda303, #f9690e);
-	background-image: -moz-linear-gradient(top, #fda303, #f9690e);
-	background-image: -o-linear-gradient(top, #fda303, #f9690e);
-	background-image: linear-gradient(to bottom, #fda303, #f9690e);
-	-webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
-	box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
-}
-
-input.double_button {
 	height: 55px;
 	width: 100%;
 	font-size: 20px;
@@ -72,10 +55,28 @@ input.double_button {
 	box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
+input.double_button {
+	height: 55px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 25px;
+	color: #ffffff;
+	background: #f9690e;
+	border: 0px solid;
+	border-radius: 5px;
+	background-image: -webkit-linear-gradient(top, #fda303, #f9690e);
+	background-image: -moz-linear-gradient(top, #fda303, #f9690e);
+	background-image: -o-linear-gradient(top, #fda303, #f9690e);
+	background-image: linear-gradient(to bottom, #fda303, #f9690e);
+	-webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+	box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
 ._form input[type=text], input[type=password], input[type=date]{
 	height: 50px;
 	width: 100%;
-	/* margin-top: 5px; */
+	margin-top: 8px;
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #696969;
@@ -93,7 +94,7 @@ input.double_button {
 	text-align: left;
 	height: 100px;
 	width: 100%;
-	/* margin-top: 5px; */
+	margin-top: 4px;
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #a1a1a1;
@@ -109,7 +110,7 @@ input.double_button {
 .display input[type=text] , input[type=date]{
 	height: 50px;
 	width: 100%;
-	/* margin-top: 5px; */
+	margin-top: 4px;
 	margin-bottom: 10px;
 	padding: 10px;
 	color: #a1a1a1;
@@ -122,10 +123,10 @@ input.double_button {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.display.large_box input[type=text] {
+/* .display.large_box input[type=text] {
 	height: 50px;
 	width: 100%;
-	/* margin-top: 5px; */
+	margin-top: 8px;
 	margin-bottom: 10px;
 	padding: 10px;
 	color: #a1a1a1;
@@ -136,12 +137,12 @@ input.double_button {
 	-moz-outline-radius: 3px;
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-}
+} */
 
 .inform input[type=text], input[type=date] {
 	height: 50px;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 8px;
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #696969;
@@ -157,7 +158,7 @@ input.double_button {
 .disp input[type=text], input[type=date]{
 	height: 50px;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 9px;
 	margin-bottom: 5px;
 	padding: 10px;
 	color: #a1a1a1;
@@ -190,16 +191,16 @@ input.double_button {
 
 a,
 .multi-links{
-    color:#1d9ce5;
+    color: #0070c0;
     text-decoration:none;
     cursor:pointer;
 }
 
-.multi-links,.multi-links:hover.multi-links:active,.multi-links:focus{
+.multi-links{
     position:static;
     text-decoration:none;
     font-weight:normal;
-    color:#1d9ce5;
+    color: #0070c0;
     outline:none;
     cursor:text;
 	margin-top: 20px;
@@ -217,7 +218,7 @@ a:hover{
 .selection {
 	height: 50px;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 8px;
 	margin-bottom: 10px;
 	padding: 10px;
 	color: #696969;
@@ -259,10 +260,11 @@ select._sel{
 	border: none !important;  /* REMOVES BORDER */
 	background-color: white;
 	font-size: 18px;
+	color: #a1a1a1;
 	width: 93%;
 	height: 21px;
 	outline: none;
-	margin-left: -4px;
+	margin-left: -3px;
 }
 
 select.sel{
@@ -270,10 +272,11 @@ select.sel{
 	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
 	border: none !important;  /* REMOVES BORDER */
 	font-size: 18px;
+	color: #a1a1a1;
 	width: 93%;
 	height: 21px;
 	outline: none;
-	margin-left: -4px;
+	margin-left: -3px;
 	background-color: white;
 }
 
@@ -346,7 +349,7 @@ h2._orange_text{
 	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
 	border: 1px solid #bcbcbc;
 	background: #ffffff;
-	margin-top: 5px;
+	margin-top: 15px;
 	margin-bottom: 15px;
 	padding: 10px;
 	background-image: url("img/right-arrow-icon.png");
@@ -364,7 +367,7 @@ h2._orange_text{
 	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
 	border: 1px solid #bcbcbc;
 	background: #ffffff;
-	margin-top: 5px;
+	margin-top: 15px;
 	margin-bottom: 15px;
 	padding: 10px;
 	background-image: url("img/pindaan-icon.png");
@@ -382,7 +385,7 @@ h2._orange_text{
 	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
 	border: 1px solid #bcbcbc;
 	background: #ffffff;
-	margin-top: 5px;
+	margin-top: 15px;
 	margin-bottom: 15px;
 	padding: 10px;
 }

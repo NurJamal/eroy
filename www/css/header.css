@@ -45,11 +45,10 @@ img.menu_icon{
 img.logo2{
 	display: block;
 	margin: 0 auto;
-	
 	max-height: auto;
 	max-width: auto;
 	height:auto;
-	width:220px;
+	width: 170px;
 }
 
 img.back_icon{

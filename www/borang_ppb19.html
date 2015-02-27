@@ -60,21 +60,22 @@
 	<!-- end of header-title-->
 
 	<div id="content">
-		<h2 class="_orange_text">Permohonan Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+		<h2 class="_orange_text" style="margin-top:13px">Permohonan Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		<h2 class="_orange_text">Maklumat Pemohon</h2>
 		
 		<div class="display">
 			<form id="" action="" method="POST">
-				<input type="text" id="d_nama" name="d_nama" disabled><br/>
-				<input type="text" id="d_kp" name="d_kp"  disabled><br/>
-				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
-				<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
-				<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
-				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar"  disabled><br/>
+				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" placeholder="Suffian Harun" disabled><br/>
+				<input type="text" id="d_kp" name="d_kp" placeholder="600626064444"  disabled><br/>
+				<textarea id="d_alamat_pos" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
+				<!-- <textarea id="d_alamat" name="d_alamat" placeholder="Suffian Harun" disabled></textarea> -->
+				<input type="text" id="d_jawatan" name="d_jawatan" placeholder="Pengerusi"  disabled><br/>
+				<input type="text" id="d_telefon" name="d_telefon" placeholder="0111234567"  disabled><br/>
+				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" placeholder="07/10/2014"  disabled><br/>
 			</form>
 		</div>
 		
-		<h2 class="_orange_text">Permohonan Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+		<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
 		<div class="inform">
 				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
@@ -83,14 +84,16 @@
 				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
 		</div>
 		
-		<h2 class="_orange_text">Dokumen Yang Dipohon<br/><br/>
+		<h2 class="_orange_text">Dokumen Yang Dipohon</h2>
+		<h2 class="_orange_text">
 		1. Maklumat Sijil Pendaftaran Pertubuhan Belia<br/>
 		2. Senarai Ahli Jawatankuasa<br/>
-		3. Perlembagaan/Undang-undang Tubuh</h2>
+		3. Perlembagaan/Undang-undang Tubuh
+		</h2>
 		
 		<div class="default_button_holder">
-			<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-		</div>
+			<a href="bayaran_ppb19.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+		</div></a>
 		<br/>
 	</div>
 	
@@ -104,7 +107,7 @@
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
-	<script>
+	<!-- <script>
 	function upperF() {
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
@@ -210,7 +213,7 @@
 					},
 				});
 		});
-	</script>
+	</script> -->
 	
 	
 	</body>
