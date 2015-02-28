@@ -57,9 +57,10 @@
 		<h5 style="margin-top:15px">Nota: Pindaan hanya boleh dibuat dalam <span class="line3">tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</span></h5>	
 		
 		<div class="inform">
-			<input type="date" name="p_tmesyuarat" ng-click="openCalendar()" onClick="openCalendar()" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+			<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+			<!--<input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">-->
 		</div>
-		
+		 <!--ng-click="openCalendar()"-->
 		<h5>Nota: Setiap pindaan mestilah disertakan<span class="line3"> tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></span></h5>
 		
 		<div class="inform">
