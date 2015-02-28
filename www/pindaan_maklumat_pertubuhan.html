@@ -11,8 +11,7 @@
 	</head>
 	<body>
 	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	
+
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
 		<ul>
@@ -58,7 +57,7 @@
 		<h5 style="margin-top:15px">Nota: Pindaan hanya boleh dibuat dalam <span class="line3">tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</span></h5>	
 		
 		<div class="inform">
-			<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+			<input   name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
 		</div>
 		
 		<h5>Nota: Setiap pindaan mestilah disertakan<span class="line3"> tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></span></h5>
@@ -126,7 +125,16 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<script src="external/jquery/jquery.js"></script>
+	<script src="jquery-ui.js"></script>
 	
-	
+	<script>
+	$( document ).ready(function() {
+		$("#p_tmesyuarat").datepicker({
+	inline: true
+});
+});
+	</script>
 	</body>
 </html>
