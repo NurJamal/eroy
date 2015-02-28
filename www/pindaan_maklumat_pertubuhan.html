@@ -57,7 +57,7 @@
 		<h5 style="margin-top:15px">Nota: Pindaan hanya boleh dibuat dalam <span class="line3">tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</span></h5>	
 		
 		<div class="inform">
-			<input   name="p_tmesyuarat" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+			<input name="p_tmesyuarat" ng-click="openCalendar()" onClick="openCalendar()" id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
 		</div>
 		
 		<h5>Nota: Setiap pindaan mestilah disertakan<span class="line3"> tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></span></h5>
@@ -121,20 +121,40 @@
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
-	<script src="js/jquery.min.js"></script>
+	<!--<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<link href="jquery-ui.css" rel="stylesheet">
 	<script src="external/jquery/jquery.js"></script>
-	<script src="jquery-ui.js"></script>
+	<script src="jquery-ui.js"></script>-->
 	
-	<script>
-	$( document ).ready(function() {
+	<!--<script>
+	$(document).ready(function() {
 		$("#p_tmesyuarat").datepicker({
 	inline: true
 });
 });
-	</script>
+	</script>-->
+	<script>
+	
+	function openCalendar()
+{
+
+       // defining options
+    var options = {
+      date: new Date(),
+      mode: 'date'
+    };
+
+    //This event is fired when the user has selected a date on the DatePicker
+    datePicker.show(options, function(date){ 
+
+        date = date //Does not get updated!
+		alert("date result " + date);  
+    });
+}
+
+</script>
 	</body>
 </html>
