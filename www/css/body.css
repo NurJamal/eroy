@@ -694,6 +694,8 @@ h2._white_text{
 	background: #A1A1A1;
     z-index:11;
 	
+	height:100%;
+	
 	/*Browser compatibility*/
 	filter:alpha(opacity=40); 
     -moz-opacity:0.4; 

@@ -84,8 +84,8 @@ img.back_icon{
 /*Will move to custom css*/
 /* Scroll To Top CSS */
 #scrollTop {
-	width:65px;
-	height:65px;
+	width:60px;
+	height:60px;
 	position:fixed;
 	right: 18px;
 	bottom: 35px;
@@ -98,8 +98,8 @@ img.back_icon{
     filter: alpha(opacity=30);
 }
 .scrolltop_arrow {
-	width:65px;
-	height:65px;
+	width:60px;
+	height:60px;
 	opacity: 0.4;
     filter: alpha(opacity=100);
 }
