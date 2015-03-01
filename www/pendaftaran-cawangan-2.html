@@ -9,8 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
 		
-	
-    </style>
 	</head>
 	<body>
 	
@@ -43,31 +41,30 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-6.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="pendaftaran-cawangan-1.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
+	
 	
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+				<h1 class="main_title">PENDAFTARAN CAWANGAN</h1>
 			</div>
 		</div>
 	
 	</div>
 	<!-- end of header-title-->
 	
-	<div id="content">
+	<div id="content">	
 	
 	<!-- navbar -->
 		<div class="navbar">
 		
 			<div align="center">
 		
-				<img src="img\numbering7.png" width="100%" height="100%"/>
+				<img src="img\numbering2.png" width="100%" height="100%"/>
 			
 			</div>
 		
@@ -76,47 +73,85 @@
 	
 	<!-- form -->
 	
-	<form>
-	
-	<div class="_form">
-	
+		<div class="_form">
+		
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1>
+			<h1 class="_dark_text">PB4B(M) CAWANGAN TAMAN U BATU PAHAT</h1><br/>
 		</div>
-	
-		<h5 id="_dark_text">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
-		</h5>
-		
-		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2">05/06/2014</span> </p></br>
-		</div>
-		
-		
-		
-		<div>
-			<h5 id="_orange_title">Saya,</h5></br>
-		</div>
-		
-	
-		<p class="perakuan1">Nama : <span class="perakuan2">Rahmah Binti Umar</span> </p>
-		<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2">760112015432</span> </p>
-		
-		
-		
-			
-		<div class="default_button_holder">
-			<a href="pendaftaran-tunggal-8.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-		</div>
-		</form>
-		
-		
-	</form>
 
 		
+			
+			<h5 id="_orange_title">Alamat Tempat Urusan</h5>
+			<form id="" action="" method="POST">
+				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+			</form>
+			
+			<div class="selection">
+					<h5 id="_orange_title">Negeri</h5>
+					<form action="">
+						<select id="negeri" name="negeri" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+			
+			<div class="selection">
+					<h5 id="_orange_title">Daerah</h5>
+					<form action="">
+						<select id="daerah" name="daerah" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div><br/>
+			
+			<h5 id="_orange_title">Alamat Pos</h5>
+			<form id="" action="" method="POST">
+			<h5>
+			<input type="checkbox" name="klik" id="c_box1"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
+			
+				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+			</form>
+			
+			<div class="selection">
+					<h5 id="_orange_title">Negeri</h5>
+					<form action="">
+						<select id="negeri" name="negeri" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+			
+			<div class="selection">
+					<h5 id="_orange_title">Daerah</h5>
+					<form action="">
+						<select id="daerah" name="daerah" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+			
+				
+			
+		
+			
+																
+				<div class="default_button_holder">
+					<a href="pendaftaran-cawangan-3.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+				</div>
+			</form>
+		</div>
+	</div>
 	<!-- end of form -->
+		
+				
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -127,6 +162,6 @@
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
-		
-  </body>
+	
+	</body>
 </html>

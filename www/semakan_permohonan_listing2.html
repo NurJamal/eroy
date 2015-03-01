@@ -7,10 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-		
-	
-    </style>
+		<link rel="stylesheet" href="css/style.css" />		
 	</head>
 	<body>
 	
@@ -42,81 +39,36 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-6.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+			<a href="halaman_utama_pengguna_biasa.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
 		
 		
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
+		<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
+
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+				<h1 class="main_title">SEMAKAN PERMOHONAN</h1>
 			</div>
 		</div>
-	
+
 	</div>
 	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-				<img src="img\numbering7.png" width="100%" height="100%"/>
-			
-			</div>
-		
-		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1>
-		</div>
-	
-		<h5 id="_dark_text">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
-		</h5>
-		
-		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2">05/06/2014</span> </p></br>
-		</div>
-		
-		
-		
-		<div>
-			<h5 id="_orange_title">Saya,</h5></br>
-		</div>
-		
-	
-		<p class="perakuan1">Nama : <span class="perakuan2">Rahmah Binti Umar</span> </p>
-		<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2">760112015432</span> </p>
-		
-		
-		
-			
-		<div class="default_button_holder">
-			<a href="pendaftaran-tunggal-8.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-		</div>
-		</form>
-		
-		
-	</form>
 
+	<div id="content">	
+		<a href="pendaftaran-tunggal-1.html" style="text-decoration:none;">
+		<div id="box_icon">
+			<h2 class="li1" id="nama_pertubuhan">PERSATUAN BELIA CEMERLANG DAERAH BERA</h2>
+			<h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: 12/01/2014</h2>
+			<h2 class="li2" id="status">Status: Lulus Bersyarat</h2><h2></h2>
+		</div></a>
 		
-	<!-- end of form -->
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -127,6 +79,35 @@
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
-		
-  </body>
+	<!-- <script>
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_pertubuhan_info").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var nama_pertubuhan = $(this).find("nama_pertubuhan");
+					var tarikh_mohon = $(this).find("tarikh_mohon");
+					var status = $(this).find("status");
+					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
+					$('#tarikh_permohonan').append($(tarikh_mohon).text());
+					$('#status').append($(status).text());
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+	</script> -->
+	
+	
+	</body>
 </html>
