@@ -80,3 +80,27 @@ img.back_icon{
 	margin-top: 3px !important;
 	margin-bottom: 5px;
 }
+
+/*Will move to custom css*/
+/* Scroll To Top CSS */
+#scrollTop {
+	width:65px;
+	height:65px;
+	position:fixed;
+	right: 18px;
+	bottom: 35px;
+	visibility: hidden;
+	border-radius:50%;
+}
+	
+.scrolltop_arrow:active {
+	opacity: 0.8;
+    filter: alpha(opacity=30);
+}
+.scrolltop_arrow {
+	width:65px;
+	height:65px;
+	opacity: 0.4;
+    filter: alpha(opacity=100);
+}
+

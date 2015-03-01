@@ -2,12 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
 	</head>
 	<body>
 	
@@ -22,7 +25,7 @@
 			<li class="title">Menu</li>
 			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
 			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
-			<li id="colored"><a href="#"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
+			<li id="colored"><a href="semakan_permohonan_listing.html"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
 			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
 			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
 			<li id="colored"><a href="semakan_keaktifan_listing.html"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
@@ -60,7 +63,7 @@
 
 	<!-- list -->
 	<div id="content">
-		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
+		<h2 class="_orange_text">Statitik Laporan Mingguan</h2>
 		
 		<div class="inform">
 			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="12/10/2014"><br/>
@@ -72,17 +75,17 @@
 			<table>
 				
 				<tr>
-					<td width="35px"><h2 class="_orange_text2">NO.</h2></td>
-					<td width="100px"><h2 class="_orange_text2">ZON</h2></td>		
-					<td width="210px"><h2 class="_orange_text2">NEGERI</h2></td>
+					<td width="30px"><h2 class="_orange_text2">NO.</h2></td>
+					<td width="90px"><h2 class="_orange_text2">ZON</h2></td>		
+					<td><h2 class="_orange_text2">NEGERI</h2></td>
 				</tr>
 			</table>
 				
-			<table>
+			<table style="margin-right:-5px">
 				<tr>
-					<td></td>
-					<td></td>		
-					<td width="45px">
+					<td width="30px"></td>
+					<td width="90px"></td>		
+					<td width="40px">
 						<div class="orange_wrap">
 						  <h5 class="vertical_text">
 							 P 
@@ -99,7 +102,7 @@
 						</div>
 					</td>
 					
-					<td width="45px">
+					<td width="40px">
 						<div class="orange_wrap">
 						  <h5 class="vertical_text">
 							 K 
@@ -115,7 +118,7 @@
 						</div>
 					</td>
 					
-					<td width="45px">
+					<td width="40px">
 						<div class="orange_wrap">
 						  <h5 class="vertical_text">
 							 S 
@@ -129,7 +132,7 @@
 						</div>
 					</td>
 					
-					<td width="45px">
+					<td width="40px">
 						<div class="orange_wrap">
 						  <h5 class="vertical_text">
 							 K 
@@ -141,7 +144,7 @@
 						</div>
 					</td>
 					
-					<td width="45px">
+					<td width="40px">
 						<div class="orange_wrap">
 						  <h5 class="vertical_text">
 							 P 
@@ -157,20 +160,22 @@
 						</div>
 					</td>
 				</tr>
-				
-				<tr>
-					<td VALIGN=TOP><h2 class="_orange_text2">1</h2></td>
-					<td  VALIGN=TOP><h2 class="_orange_text2">IBU<br/>PEJABAT</h2></td>		
+		</table>
+
+		<table style="margin-top:10px">
+				<tr><!-- width adjust -->
+					<td VALIGN=TOP width="30px"><h2 class="_orange_text2">1</h2></td>
+					<td  VALIGN=TOP width="90px"><h2 class="_orange_text2">IBU<br/>PEJABAT</h2></td>		
 					<td>
 						<h2 class="_orange_text2">IBU PEJABAT</h2>
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -185,11 +190,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -204,11 +209,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -223,11 +228,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -242,11 +247,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -261,11 +266,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -280,11 +285,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -299,11 +304,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -318,11 +323,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -337,11 +342,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -356,11 +361,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -375,11 +380,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -394,11 +399,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -413,11 +418,11 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
@@ -432,29 +437,33 @@
 						<div class="white_wrap">
 							<table>
 								<tr>
-									<td>25</td>
-									<td>3</td>
-									<td>0</td>
-									<td>13</td>
-									<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 								</tr>
 							</table>
 						</div>
 					</td>
 				</tr>
-				
+		</table>
+		<table>
 				<tr>
-					<td></td>
-					<td VALIGN=TOP><h2 class="_orange_text2">JUMLAH<br/>KESELURUHAN</h2></td>
-					<td VALIGN=TOP>
+					<td VALIGN=TOP width="10px">
+						<div class="orange_wrap2">
+							<h2 class="_white_text">JUMLAH<br/>KESELURUHAN</h2>
+						</div>
+					</td>
+					<td VALIGN=TOP width="50px">
 						<div class="white_wrap">
 								<table>
 									<tr>
-										<td>25</td>
-										<td>3</td>
-										<td>0</td>
-										<td>13</td>
-										<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 									</tr>
 								</table>
 							</div>
@@ -462,23 +471,26 @@
 				</tr>
 				
 				<tr>
-					<td></td>
-					<td VALIGN=TOP><h2 class="_orange_text2">PERATUSAN</h2></td>
+					<td VALIGN=TOP>
+						<div class="orange_wrap2" style="height:30px">
+							<h2 class="_white_text">PERATUSAN</h2>
+						</div>
+					</td>
 					<td VALIGN=TOP>
 						<div class="white_wrap">
 								<table>
 									<tr>
-										<td>25</td>
-										<td>3</td>
-										<td>0</td>
-										<td>13</td>
-										<td>9</td>
+									<td width="35px">25</td>
+									<td width="35px" style="padding-left:8px">3</td>
+									<td width="35px" style="padding-left:12px">0</td>
+									<td width="35px" style="padding-left:13px">13</td>
+									<td width="35px" style="padding-left:27px">9</td>
 									</tr>
 								</table>
 							</div>
 					</td>
-				</tr>
-			</table>
+				</tr>		
+		</table>
 			
 		</div>
 		
@@ -486,6 +498,7 @@
 	
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
-
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	</body>
 </html>
