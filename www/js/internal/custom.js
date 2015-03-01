@@ -10,7 +10,7 @@
 	});
 	
 	$(window).scroll(function() {
-        if($(window).scrollTop() > 40) {
+        if($(window).scrollTop() > 70) {
 			$("#scrollTop").css("visibility","visible");
         } else {
 			$("#scrollTop").css("visibility","hidden");
