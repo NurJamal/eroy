@@ -2,12 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<div id="scrollTop" >
+			<div>Top</div>
+		</div>
 	</head>
 	<body>
 	
@@ -118,44 +121,16 @@
 		</div>
 	</div>
 	
-	<!-- js for slide menu -->
+		<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
-	<!--<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	<link href="jquery-ui.css" rel="stylesheet">
-	<script src="external/jquery/jquery.js"></script>
-	<script src="jquery-ui.js"></script>-->
-	
-	<!--<script>
-	$(document).ready(function() {
-		$("#p_tmesyuarat").datepicker({
-	inline: true
-});
-});
-	</script>-->
-	<script>
-	
-	function openCalendar()
-{
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
-       // defining options
-    var options = {
-      date: new Date(),
-      mode: 'date'
-    };
-
-    //This event is fired when the user has selected a date on the DatePicker
-    datePicker.show(options, function(date){ 
-
-        date = date //Does not get updated!
-		alert("date result " + date);  
-    });
-}
-
-</script>
 	</body>
 </html>
