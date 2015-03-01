@@ -93,9 +93,9 @@ img.back_icon{
 	border-radius:50%;
 }
 	
-#scrollTop:active {
-	opacity: 0.9;
-    filter: alpha(opacity=20);
+.scrolltop_arrow:active {
+	opacity: 0.8;
+    filter: alpha(opacity=30);
 }
 .scrolltop_arrow {
 	width:65px;
