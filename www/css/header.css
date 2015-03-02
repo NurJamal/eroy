@@ -97,6 +97,7 @@ img.back_icon{
 	opacity: 0.8;
     filter: alpha(opacity=30);
 }
+
 .scrolltop_arrow {
 	width:60px;
 	height:60px;
@@ -104,3 +105,25 @@ img.back_icon{
     filter: alpha(opacity=100);
 }
 
+/* add icon */
+
+#scrolladd {
+	width:60px;
+	height:60px;
+	position:fixed;
+	right: 150px;
+	bottom: 20px;
+	visibility: hidden;
+	border-radius:50%;
+}
+	
+.scrolladd_icon:active {
+	opacity: 0.8;
+    filter: alpha(opacity=30);
+}
+.scrolladd_icon {
+	width:60px;
+	height:60px;
+	opacity: 1.4;
+    filter: alpha(opacity=100);
+}
