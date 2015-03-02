@@ -376,6 +376,10 @@ select.sel{
 	margin-left: 0px;
 }
 
+#H5{
+	font-size: 16px;
+}
+
 ._dark_text{
 	margin-top: -7px !important;
 	margin-bottom: 7px !important;

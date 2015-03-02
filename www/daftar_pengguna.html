@@ -60,9 +60,9 @@
 			<form id="" action="" method="POST">
 				<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
 				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-				<h5 style="margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
 				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-				<h5 style="margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
 				<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
 				placeholder="Sahkan Kata Laluan"><br/>
 				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
@@ -83,36 +83,11 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-<<<<<<< HEAD
 	
-	<!-- <script>
-=======
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<script>
->>>>>>> 8557073412a6cee8aa12d6c2f6d19b15bff383a6
-	// alert
-		window.onload=function() {
-			var query = ["input[pattern]", "input[type=email]"];
-				for(var q = 0; q < query.length; q++) {
-					var inp = document.querySelectorAll(query[q]);
-						for(var i = 0; i < inp.length; i++) {
-							inp[i].onkeyup = validation;
-						}
-				}
-			};
-
-		function validation(event) {
-			var p = this.parentNode.querySelector("label");
-				if (this.checkValidity() == false) { //the control is here!
-					p.innerHTML=this.getAttribute("title");
-				} 
-				else {
-					p.innerHTML="";
-				}     
-		}
-	// end alert
 	
+<!-- 	<script>
 		$("#btn_submit").click(function(e){
 
 		e.preventDefault();
