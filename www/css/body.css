@@ -113,7 +113,7 @@ input.double_button {
 	margin-top: 4px;
 	margin-bottom: 10px;
 	padding: 10px;
-	color: #a1a1a1;
+	color: #989898;
 	background: #ececec;
 	border: 1px solid;
 	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
@@ -376,6 +376,10 @@ select.sel{
 	margin-left: 0px;
 }
 
+#H5{
+	font-size: 16px;
+}
+
 ._dark_text{
 	margin-top: -7px !important;
 	margin-bottom: 7px !important;
@@ -585,7 +589,7 @@ input[type=checkbox] + label:before {
 }
 
 .grey_wrap{
-	height: 30px;
+	height: 25px;
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 10px;
@@ -605,20 +609,21 @@ h2._orange_text2{
 	text-align: left;
 	color: #f9690e;
 	/* width: 90%; */
-	margin-top: -3px;
+	margin-top: -6px;
 }
 
 h2._white_text{
-	font-size: 16px;
+	font-size: 14px;
 	font-family: "arial";
 	text-align: left;
 	/* width: 90%; */
-	margin-top: -3px;
+	margin-top: -5px;
+	margin-left: -5px;
 }
 
  .orange_wrap2{
-	width: 100%;
-	height: 50px;
+	width: 95%;
+	height: 40px;
 	/* margin-top: 5px; */
 	margin-bottom: 10px;
 	padding: 10px;
@@ -731,4 +736,18 @@ span.perakuan2 {
 color:#3f3f3f;
 font-family:"Arial", regular, sans-serif;
 font-size:18px 
+}
+
+/* placeholder color */
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #989898;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #989898;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #989898;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #989898;
 }
