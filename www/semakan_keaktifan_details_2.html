@@ -8,10 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		<!-- <div id="scrollTop" >
+		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div> -->
-		
+		</div>		
 	</head>
 	<body>
 	
@@ -43,55 +42,49 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+			<a href="semakan_keaktifan_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
 		
 		
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
+		<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
+
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+				<h1 class="main_title">SEMAKAN KEAKTIFAN</h1>
 			</div>
 		</div>
-	
+
 	</div>
 	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-				<img src="img\numbering4.png" style="width:100%;height:auto"/>
-			
-			</div>
-		
+
+	<div id="content">	
+		<div id="box_no_icon">
+			<h2 class="li1" id="nama_pertubuhan">KELAB BASIKAL MALAYSIA</h2>
+			<h2 class="li2" id="tarikh_kemaskini">Tarikh Akhir Kemaskini:<b> 12/01/2014</b></h2>
+			<h2 class="li2" id="tarikh_daftar">Status Keaktifan:<b> Aktif</b></h2>
+			<h2 class="li2" id="">
+			<table>
+				<tr>
+					<td>Tahun:</td>
+					<td style="padding-left:15px">2013</td>
+					<td style="padding-left:15px"><img src="img/aktif_icon2.png" align="left" width="50px" height="auto"/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="padding-top:8px; padding-left:15px">2014</td>
+					<td style="padding-left:12px"><img src="img/aktif_icon.png" align="left" width="80px" height="auto"/></td>
+				</tr>
+			</table>			
+			</h2>
+			<h2></h2>
 		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	</br>
-	
-	<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
-	</center>
-	</form>
-		
-		
-	<div id="scrolladd" style="visibility: visible; width:800px; margin:0 auto;">
-			<a href="pendaftaran-tunggal-4A.html"><img src="img/add_icon.png" class="scrolladd_icon" align="center"></a>		
-		</div>
-	<!-- end of form -->
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -103,6 +96,35 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-		
-  </body>
+	<!-- <script>
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_pertubuhan_info").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var nama_pertubuhan = $(this).find("nama_pertubuhan");
+					var tarikh_mohon = $(this).find("tarikh_mohon");
+					var status = $(this).find("status");
+					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
+					$('#tarikh_permohonan').append($(tarikh_mohon).text());
+					$('#status').append($(status).text());
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+	</script> -->
+	
+	
+	</body>
 </html>

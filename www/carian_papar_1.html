@@ -8,10 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		<!-- <div id="scrollTop" >
+		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div> -->
-		
+		</div>
 	</head>
 	<body>
 	
@@ -44,7 +43,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="status_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
@@ -63,35 +62,46 @@
 	
 	<div id="content">
 	
+
+		
 	<!-- navbar -->
 		<div class="navbar">
 		
 			<div align="center">
 		
-				<img src="img\numbering4.png" style="width:100%;height:auto"/>
+				<img src="img\numbering-carian-01.png" style="width:100%;height:auto"/>
 			
 			</div>
 		
 		</div>
 	<!-- end of navbar -->
 	
-	<!-- form -->
+	<div class="display">
 	
-	<form>
-	
-	</br>
-	
-	<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
-	</center>
-	</form>
+		<h2 class="_orange_text" style="margin-top:-18px">Maklumat Pertubuhan</h2>
+		<h2 class="_orange_text" style="margin-top:-5px">Peringkat Pertubuhan</h2>
 		
+		<input type="text" style="margin-top:0px" id="d_peringkat" name="d_peringkat"  placeholder="Kebangsaan" disabled><br/>
 		
-	<div id="scrolladd" style="visibility: visible; width:800px; margin:0 auto;">
-			<a href="pendaftaran-tunggal-4A.html"><img src="img/add_icon.png" class="scrolladd_icon" align="center"></a>		
+		<h2 class="_orange_text" style="margin-top:0px">Nama Pertubuhan</h2>
+		
+		<input type="text" style="margin-top:0px" id="d_nama" name="d_nama" placeholder="PERSATUAN SILAT MALAYSIA" disabled><br/>
+		
+		<h2 class="_orange_text" style="margin-top:0px">Nama Ringkasan</h2>
+		
+		<input type="text" style="margin-top:0px" id="d_nama_ringkas" name="d_nama_ringkas" placeholder="PSM" disabled><br/>
+		
+		<h2 class="_orange_text" style="margin-top:0px">Emel Pertubuhan</h2>
+		
+		<input type="text" style="margin-top:0px" id="d_emel" name="d_emel" placeholder="psm.admin@gmail.com" disabled><br/>
+		
+		<div class="default_button_holder">
+				<a href="carian_papar_2.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
 		</div>
-	<!-- end of form -->
+	</div>
+	
+	
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
