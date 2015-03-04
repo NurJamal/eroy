@@ -21,7 +21,7 @@
 		// Hide Header on on scroll down
 		var didScroll;
 		var lastScrollTop = 0;
-		var delta = 100;
+		var delta = 120;
 		var navbarHeight = $("#head").outerHeight();
 
 		$(window).scroll(function(event){
@@ -33,7 +33,7 @@
 				hasScrolled();
 				didScroll = false;
 			}
-		}, 250);
+		}, 450);
 
 		function hasScrolled() {
 		var st = $(this).scrollTop();
@@ -56,7 +56,7 @@
 				$(".navbar").css("background-color","#F2F1EF");
 				$(".navbar").css("padding-top","12px");
 				$(".navbar").css("z-index","9");
-				$("._form").css("padding-top","80px");
+				$("._form").css("padding-top","83px");
 
 				$(".content_title").css("border-bottom","0px");
 				
