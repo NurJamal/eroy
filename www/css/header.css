@@ -1,12 +1,15 @@
 #head{
 	position: fixed;
 	top: 0;
+	left:0;
+	right:0;
 	height: 55px;
 	width: 100%;
 	background-color: #F2F1EF;
 	z-index:10;
 	border-bottom: 10px solid #F9690E;
 	text-align:center;
+	
 }
 
 img.logo{
@@ -81,7 +84,7 @@ img.back_icon{
 	margin-bottom: 5px;
 }
 
-/*Will move to custom css*/
+/*Below ----- Will move to custom css*/
 /* Scroll To Top CSS */
 #scrollTop {
 	width:60px;
@@ -102,5 +105,9 @@ img.back_icon{
 	height:60px;
 	opacity: 0.4;
     filter: alpha(opacity=100);
+}
+
+.nav-up {
+    top: -40px;
 }
 
