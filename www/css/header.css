@@ -110,13 +110,14 @@ img.back_icon{
 #scrolladd {
 	width:60px;
 	height:60px;
-	position:fixed;
-	right: 150px;
-	bottom: 20px;
+	position:fixed; 
+	right:0%;
+	left:0%;
+	bottom: 10px;
 	visibility: hidden;
 	border-radius:50%;
 }
-	
+
 .scrolladd_icon:active {
 	opacity: 0.8;
     filter: alpha(opacity=30);
@@ -127,3 +128,13 @@ img.back_icon{
 	opacity: 1.4;
     filter: alpha(opacity=100);
 }
+
+.img_add{
+
+	width:60px;
+	height:60px;
+    position: fixed;
+    bottom:0;
+    left: 0;
+}
+

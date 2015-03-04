@@ -8,13 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		 <div id="scrollTop" >
+		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-		 <div id="scrolladd" style="visibility: visible;">
-			<a href="pendaftaran-tunggal-4A.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>		
-		</div> 
-		</head>
+	</head>
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
@@ -46,7 +43,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="penambahan-cawangan-1.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
@@ -56,7 +53,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+				<h1 class="main_title">PENAMBAHAN CAWANGAN</h1>
 			</div>
 		</div>
 	
@@ -65,33 +62,44 @@
 	
 	<div id="content">
 	
-	<!-- navbar -->
-		<div class="navbar">
 		
-			<div align="center">
-		
-				<img src="img\numbering4.png" style="width:100%;height:auto"/>
-			
-			</div>
-		
-		</div>
-	<!-- end of navbar -->
-	
 	<!-- form -->
 	
 	<form>
 	
-	</br>
+		<div class="_form">
 	
-	<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
-	</center>
+			<div class="selection">
+					<h5 id="_orange_title">Bentuk Bayaran</h5>
+					<form action="">
+						<select id="bayaran" name="bayaran" class="_sel">
+						<option value="none"></option>
+						</select>
+					</form>		
+			</div>
+			
+						
+			<form id="" action="" method="POST">
+				<input type="text" name="wang_pos" id="wang_pos" placeholder="No. Wang Pos/Bank Draf"></br><br/>
+			
+			<h5 id="_orange_title">Jumlah wang yang perlu dibayar</h5>
+			
+			<div class="display">
+				<input type="text" name="jumlah_bayar" id="jumlah_bayar" placeholder="RM 30.00" disabled>			
+			</div>
+				
+			</form>
+			
+			<div class="default_button_holder">
+				<a href="halaman_utama_pengguna_pendaftarhtml"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
+			</div>
+			
+		</div>	
+		
 	</form>
 		
 	<!-- end of form -->
 	
-		
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
