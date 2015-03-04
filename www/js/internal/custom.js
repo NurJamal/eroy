@@ -48,18 +48,23 @@
 			// Scroll Down
 			/*Put in custom class later nav-down*/
 			
+			
+				$( "p" ).removeClass( "myClass noClass" ).addClass( "yourClass" );
+			
+			
 				//$("#head").css("top","-80px");
 				//tak smooth la pulak
-				$("#head").animate({opacity: '0.0'});					
+				$("#head").animate({opacity: '0.0'}, "fast");					
 				//$("#head").animate({opacity: '0.0',});					
 
-				$(".navbar").css("top","0");
-				$(".navbar").css("position","fixed");
-				$(".navbar").css("background-color","#F2F1EF");
-				$(".navbar").css("padding-top","12px");
-				$(".navbar").css("z-index","9");
-				$("._form").css("padding-top","83px");
-
+				//$(".navbar").css("top","0");
+				//$(".navbar").css("position","fixed");
+				//$(".navbar").css("background-color","#F2F1EF");
+				//$(".navbar").css("padding-top","12px");
+				//$(".navbar").css("z-index","9");
+				//$("._form").css("padding-top","83px");
+				//$(".navbar").css("width","100%");
+				//$(".navbar").css("height","auto");
 				//$(".content_title").css("border-bottom","0px");
 				
 				//$(".navbar").css("border-bottom","2px solid #F9690E");
@@ -78,13 +83,15 @@
 				//$("#head").css("top","0");
 				//$("#head").animate({top: '0'}, "fast");
 				
-				$("#head").animate({opacity: '1'});					
+				$("#head").animate({opacity: '1'}, "fast");					
 				//$("#head").animate({opacity: '1'});	
-				$(".navbar").css("top","");
-				$(".navbar").css("position","");
-				$(".navbar").css("padding-top","");
-				$(".navbar").css("z-index","");
-				$("._form").css("padding-top","");
+				//$(".navbar").css("top","");
+				//$(".navbar").css("position","");
+				//$(".navbar").css("padding-top","");
+				//$(".navbar").css("z-index","");
+				
+				
+				//$("._form").css("padding-top","");
 
 				//$(".navbar").css("padding-left","");
 				//$("._form").css("padding-left","");
