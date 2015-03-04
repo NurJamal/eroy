@@ -108,12 +108,20 @@ img.back_icon{
 /* add icon */
 
 #scrolladd {
+<<<<<<< HEAD
 	width:60px;
 	height:60px;
 	position:fixed; 
 	right:0%;
 	left:0%;
 	bottom: 10px;
+=======
+	/* width:60px;
+	height:60px; */
+	position:fixed;
+	/* right: 150px; */
+	bottom: 20px;
+>>>>>>> 6969a02529ff54ab41b935b9f4dad02b26113ade
 	visibility: hidden;
 	border-radius:50%;
 }
