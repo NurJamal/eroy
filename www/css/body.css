@@ -60,7 +60,7 @@ input.double_button {
 	width: 100%;
 	font-size: 20px;
 	font-weight: bold;
-	margin-top: 25px;
+	margin-top: 20px;
 	color: #ffffff;
 	background: #f9690e;
 	border: 0px solid;
@@ -122,22 +122,6 @@ input.double_button {
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
-
-/* .display.large_box input[type=text] {
-	height: 50px;
-	width: 100%;
-	margin-top: 8px;
-	margin-bottom: 10px;
-	padding: 10px;
-	color: #a1a1a1;
-	background: #ececec;
-	border: 1px solid;
-	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
-	border-radius: 5px;
-	-moz-outline-radius: 3px;
-	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-} */
 
 .inform input[type=text], input[type=date] {
 	height: 50px;
@@ -381,7 +365,7 @@ select.sel{
 }
 
 ._dark_text{
-	margin-top: -7px !important;
+	margin-top: -7px;
 	margin-bottom: 7px !important;
 	font-size: 18px;
 	color: #3f3f3f;
@@ -446,6 +430,22 @@ h2._orange_text{
 
 #_in_box{
 	display: inline-flex;
+}
+
+#extra_box{
+	/* height: 80px; */
+	width: 100%;
+	margin-top: 4px;
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #989898;
+	background: #ececec;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .title {
