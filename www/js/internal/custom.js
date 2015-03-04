@@ -48,9 +48,11 @@
 			// Scroll Down
 			/*Put in custom class later nav-down*/
 			
-				$("#head").css("top","-80px");
+				//$("#head").css("top","-80px");
 				//tak smooth la pulak
-				//$("#head").animate({top: '-80px'}, "fast");					
+				$("#head").animate({opacity: '0.0'});					
+				//$("#head").animate({opacity: '0.0',});					
+
 				$(".navbar").css("top","0");
 				$(".navbar").css("position","fixed");
 				$(".navbar").css("background-color","#F2F1EF");
@@ -58,7 +60,7 @@
 				$(".navbar").css("z-index","9");
 				$("._form").css("padding-top","83px");
 
-				$(".content_title").css("border-bottom","0px");
+				//$(".content_title").css("border-bottom","0px");
 				
 				//$(".navbar").css("border-bottom","2px solid #F9690E");
 				//$("._form").css("padding-left","9px");
@@ -73,18 +75,21 @@
 			/*Put in custom class later nav-up*/
 
 			if(st + $(window).height() < $(document).height()) {
-				$("#head").css("top","0");
+				//$("#head").css("top","0");
 				//$("#head").animate({top: '0'}, "fast");
+				
+				$("#head").animate({opacity: '1'});					
+				//$("#head").animate({opacity: '1'});	
 				$(".navbar").css("top","");
 				$(".navbar").css("position","");
 				$(".navbar").css("padding-top","");
 				$(".navbar").css("z-index","");
-				$(".content_title").css("border-bottom","2px solid #F9690E");
 				$("._form").css("padding-top","");
 
 				//$(".navbar").css("padding-left","");
 				//$("._form").css("padding-left","");
 				//$("._form").css("padding-right","");
+				//$(".content_title").css("border-bottom","2px solid #F9690E");
 			}
 		}
 		
