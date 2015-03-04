@@ -12,6 +12,7 @@
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 	</head>
+	
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
@@ -43,9 +44,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-majlis-6.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="pendaftaran-tunggal-2.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
@@ -53,10 +52,9 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN MAJLIS</h1>
+				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
 	
@@ -67,7 +65,7 @@
 		
 			<div align="center">
 		
-				<img src="img\numbering7.png" style="width:100%;height:auto"/>
+				<img src="img\numbering3.png" style="width:100%;height:auto"/>
 			
 			</div>
 		
@@ -82,35 +80,98 @@
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">MAJLIS BELIA MALAYSIA</h1>
-		</div></br>
-	
-			<h5 id="_orange_title">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
-		</h5>
-		
-		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2">05/06/2014</span></p></br>
+			<h1 class="_dark_text">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1><br/>
 		</div>
-		
 		
 		
 		<div>
-			<h5 id="_orange_title">Saya,</h5></br>
+			<h5 id="_orange_title">Tarikh Mesyuarat Penubuhan</h5>
+			<h5 id="_dark_text">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
 		</div>
 		
-		<div style="line-height:0.5em;">
-			<p class="perakuan1">Nama : <span class="perakuan2">Rahmah Binti Umar</span> </p>
-			<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2">760112015432</span> </p>
+		<div class="inform">
+			<input type="text" name="t_mesyuarat" id="t_mesyuarat" placeholder="hh/bb/tttt" class="_datepick"></br><br/>
 		</div>
 		
+		<div>
+			<h5 id="_orange_title">Bilangan yang menghadiri mesyuarat penubuhan</h5>
+			<h5 id="_dark_text">(Minimum 7 orang.)</h5>
+		</div>
 		
+		<form id="" action="" method="POST">
+			<input type="text" name="bil_ahli" id="bil_ahli" placeholder="Bilangan ahli"></br><br/>
+			
+		<div>
+			<h5 id="_orange_title">Bilangan terkini ahli dalam daftar keanggotaan</h5>
+			<h5 id="_dark_text">Lelaki</h5>
+		</div>
+		
+		<form id="" action="" method="POST">
+			<input type="text" name="ahli_Melayu" id="ahli_Melayu" placeholder="Melayu"><br/>
+			<input type="text" name="ahli_Cina" id="ahli_Cina" placeholder="Cina"><br/>
+			<input type="text" name="ahli_India" id="ahli_India" placeholder="India"><br/>
+			<input type="text" name="ahli_Lain2" id="ahli_Lain2" placeholder="Lain-lain"><br></br>
+			
+		<div>
+			<h5 id="_orange_title">Bilangan terkini ahli dalam daftar keanggotaan</h5>
+			<h5 id="_dark_text">Perempuan</h5>
+		</div>
+		
+		<form id="" action="" method="POST">
+			<input type="text" name="ahli_Melayu" id="ahli_Melayu" placeholder="Melayu"><br/>
+			<input type="text" name="ahli_Cina" id="ahli_Cina" placeholder="Cina"><br/>
+			<input type="text" name="ahli_India" id="ahli_India" placeholder="India"><br/>
+			<input type="text" name="ahli_Lain2" id="ahli_Lain2" placeholder="Lain-lain"><br/>
+			
+		<div class="display">
+				
+			<input type="text" name="jumlah" id="jumlah" placeholder="Jumlah" disabled><br/>
+			<input type="text" name="jumlah_keseluruhan" id="jumlah_keseluruhan" placeholder="Jumlah Keseluruhan" disabled><br/></br>
+		</div>
+		
+		<div>
+			<h5 id="_orange_title">Pernahkah pertubuhan ini didaftarkan sebelum ini dibawah Akta Pertubuhan 1966 atau Akta Pertubuhan Belia dan 
+			Pembangunan Belia 2007?</h5>
+			
+		<div class="selection">
+					<form action="Ya">
+					<select id="ya" name="ya" class="_sel">
+					<option value="Tidak"></option>
+					</select>
+				</form>		
+		</div>
+		
+		<div>
+			
+		<h5 id="_dark_text">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
+		<input type="text" name="no_dahulu" id="no_dahulu"><br/></br>
+			
+		</div>
+
+		<div>
+			<h5 id="_orange_title">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
+			
+		<div class="selection">
+					<form action="Ya">
+					<select id="ya" name="ya" class="_sel">
+					<option value="Tidak"></option>
+					</select>
+				</form>		
+		</div>
+		
+		<div>
+			
+		<h5 id="_dark_text">Jika Ya, sila muat naik gambar</h5>
+		
+		<div class="inform">
+			<input type="text" name="muat_naik" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
+		</div>
+			
+				
 		<div class="default_button_holder">
-			<a href="pendaftaran-majlis-8.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+			<a href="pendaftaran-tunggal-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
 		</div>
 		</form>
-	
 	</form>
 		
 	<!-- end of form -->

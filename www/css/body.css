@@ -2,7 +2,10 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  
 }
+
+
 
 body{
 	font-family: "Arial", regular, sans-serif !important;
@@ -713,13 +716,15 @@ h2._white_text{
 p.perakuan1 { 
 color:#F9690E;
 font-family:"Arial", regular, sans-serif;
-font-size:18px 
+font-size:18px
+line-height:1
 }
 		
 span.perakuan2 { 
 color:#3f3f3f;
 font-family:"Arial", regular, sans-serif;
-font-size:18px 
+font-size:18px
+line-height:1 
 }
 
 /* placeholder color */

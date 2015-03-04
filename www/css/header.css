@@ -1,12 +1,15 @@
 #head{
 	position: fixed;
 	top: 0;
+	left:0;
+	right:0;
 	height: 55px;
 	width: 100%;
 	background-color: #F2F1EF;
 	z-index:10;
 	border-bottom: 10px solid #F9690E;
 	text-align:center;
+	
 }
 
 img.logo{
@@ -81,7 +84,7 @@ img.back_icon{
 	margin-bottom: 5px;
 }
 
-/*Will move to custom css*/
+/*Below ----- Will move to custom css*/
 /* Scroll To Top CSS */
 #scrollTop {
 	width:60px;
@@ -105,9 +108,16 @@ img.back_icon{
     filter: alpha(opacity=100);
 }
 
-/* add icon */
 
+
+/* add icon */
 #scrolladd {
+	width:60px;
+	height:60px;
+	position:fixed; 
+	right:0%;
+	left:0%;
+	bottom: 10px;
 	/* width:60px;
 	height:60px; */
 	position:fixed;
@@ -116,7 +126,7 @@ img.back_icon{
 	visibility: hidden;
 	border-radius:50%;
 }
-	
+
 .scrolladd_icon:active {
 	opacity: 0.8;
     filter: alpha(opacity=30);
@@ -127,3 +137,13 @@ img.back_icon{
 	opacity: 1.4;
     filter: alpha(opacity=100);
 }
+
+.img_add{
+
+	width:60px;
+	height:60px;
+    position: fixed;
+    bottom:0;
+    left: 0;
+}
+
