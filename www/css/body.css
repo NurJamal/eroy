@@ -1,3 +1,7 @@
+.ui-page {
+    -webkit-backface-visibility: hidden;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -12,6 +16,7 @@ body{
 	font-family: "Arial", regular, sans-serif !important;
 	font-size: 18px;
 	background-color: #F2F1EF;
+	transform: translate3d(0,0,0);
 }
 
 #content {
