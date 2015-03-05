@@ -11,6 +11,11 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+
+		<style>
+			input.invalid {outline-color: #FF0000}
+			input.valid {background-color: white}
+		</style>
 	</head>
 	<body>
 	
@@ -57,18 +62,18 @@
 	<div id="content">
 	<!-- form -->
 		<div class="_form">
-			<form id="" action="" method="POST">
+			<form id="" action="" method="POST" onSubmit="return validateForm(this)">
 				<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
 				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
 				<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
 				placeholder="Sahkan Kata Laluan"><br/>
-				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+				<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
 				
 				<div class="default_button_holder">
-					<a href="log_masuk.html"><input class="default_button" type="button" value="DAFTAR" id="btn_submit"></a>
+					<input class="default_button" type="submit" value="DAFTAR" id="btn_submit">
 				</div>
 			</form>
 		</div>
@@ -87,53 +92,36 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-<!-- 	<script>
-		$("#btn_submit").click(function(e){
-
-		e.preventDefault();
-		
-		var nama = $("#f_nama").val();
-		var kadp = $("#f_kp").val();
-		var katalaluan = $("#f_katalaluan").val();
-		var sah_katalaluan = $("#f_sah_katalaluan").val();
-		var emel = $("#f_emel").val();
-		
-		if (nama.length == 0  || kadp.length == 0 || katalaluan.length == 0 || sah_katalaluan.length == 0 || emel.length == 0) 
+ 	<script>
+		function valueProvided(formField, fieldLabel)
 		{
-			alert('Sila lengkapkan borang tersebut!');
-		} 
-		else {
-		
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
-				type:'POST',
-				data: {
-					nama : nama,
-					kadp: kadp,
-					katalaluan : katalaluan,
-					sah_katalaluan : sah_katalaluan,
-					emel : emel
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						alert(json.message);
-						window.location.href = "log_masuk.html";
-					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						alert(json.message);
-					}
-					else{}
-				}
-			});
+			var result = true;
+			formField.className = "valid";
 			
+			if (formField.value == "")
+			{
+				alert('Sila lengkapkan "' + fieldLabel +'" anda.');
+				formField.focus();
+				formField.className = "invalid";
+				result = false;
+			}
+			return result;
 		}
-			
-	});
-	</script> -->
+
+		function validateForm(theForm)
+		{
+			if (!valueProvided(theForm.f_nama, "Nama Penuh"))
+				return false;
+			if (!valueProvided(theForm.f_kp, "No Kad Pengenalan"))
+				return false;	
+			if (!valueProvided(theForm.f_katalaluan, "Kata Laluan"))
+				return false;	
+			if (!valueProvided(theForm.f_sah_katalaluan, "Sahkan Kata Laluan"))
+				return false;
+			if (!valueProvided(theForm.f_emel, "Emel"))
+				return false;
+			return true;
+		}
+	</script>
 </body>
 </html>
