@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
@@ -54,25 +55,25 @@
 		<div class="_fill">
 				<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
 		</div>	
-		<div class="_dis">
+		<!-- <div class="_dis">
 				<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
-		</div>
+		</div> -->
 		<div class="_fill">
 				<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-				<input type="text" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 				<input type="text" name="f_tlahir" id="f_tlahir" placeholder="Tarikh Lahir"><br/>
 		</div>
-		<div class="_dis">
+		<!-- <div class="_dis">
 				<input type="text" id="d_umur" name="d_umur"  placeholder="Umur" disabled><br/>
-		</div>
+		</div> -->
 		<div class="_fill">
-				<input type="text" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-				<input type="text" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
+				<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+				<input type="tel" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
 		</div>			
 
 		
 				<div class="default_button_holder">
-					<a href="index.html"><input class="default_button" type="button" value="MOHON" id="btn_submit"></a>
+					<input class="default_button" type="submit" value="MOHON" id="btn_submit">
 				</div>
 	</div>	
 	
@@ -86,6 +87,59 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+		$("#btn_submit").click(function(e){
+
+		e.preventDefault();
+		
+		var no_sijil = $("#f_sijil").val();
+		var nama = $("#f_nama").val();
+		var kadp = $("#f_kp").val();
+		var t_lahir = $("#f_tlahir").val();
+		var emel = $("#f_emel").val();
+		var no_tel = $("#f_telefon").val();
+		
+		if (no_sijil.length == 0 || nama.length == 0  || kadp.length == 0 || t_lahir.length == 0 || emel.length == 0 || no_tel.length == 0) 
+		{
+			alert('Sila lengkapkan borang tersebut!');
+		} 
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
+				type:'POST',
+				data: {
+					no_sijil : no_sijil,
+					nama : nama,
+					kadp: kadp,
+					t_lahir : t_lahir,
+					emel : emel,
+					no_tel : no_tel
+					
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert(json.message);
+						window.location.href = "log_masuk.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						alert(json.message);
+					}
+					else{}
+				}
+			});
+			
+		}
+			
+	});
+	</script>
+	
   </body>
 </html>
 
