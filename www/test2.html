@@ -2,14 +2,58 @@
 <html>
 <body>
 
-<form action="action_page.php">
-  E-mail:
-  <input type="email" name="email">
-  <input type="submit">
+<form id="myForm" method="POST" action="...">
+<p>Username: <input id="field_username" title="Username must not be blank and contain only letters, numbers and underscores." type="text" required pattern="\w+" name="username"></p>
+<p>Password: <input id="field_pwd1" title="Password must contain at least 6 characters, including UPPER/lowercase and numbers." type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="pwd1"></p>
+<p>Confirm Password: <input id="field_pwd2" title="Please enter the same Password as above." type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="pwd2"></p>
+<p><input type="submit" value="Submit"></p>
 </form>
 
-<p>
-<b>Note:</b>type="email" is not supported in IE9 and earlier.</p>
+<script type="text/javascript">
+
+    // JavaScript form validation
+
+    var checkPassword = function(str)
+    {
+      var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+      return re.test(str);
+    };
+
+    var checkForm = function(e)
+    {
+      if(this.username.value == "") {
+        alert("Error: Username cannot be blank!");
+        this.username.focus();
+        e.preventDefault(); // equivalent to return false
+        return;
+      }
+      re = /^\w+$/;
+      if(!re.test(this.username.value)) {
+        alert("Error: Username must contain only letters, numbers and underscores!");
+        this.username.focus();
+        e.preventDefault();
+        return;
+      }
+      if(this.pwd1.value != "" && this.pwd1.value == this.pwd2.value) {
+        if(!checkPassword(this.pwd1.value)) {
+          alert("The password you have entered is not valid!");
+          this.pwd1.focus();
+          e.preventDefault();
+          return;
+        }
+      } else {
+        alert("Error: Please check that you've entered and confirmed your password!");
+        this.pwd1.focus();
+        e.preventDefault();
+        return;
+      }
+      alert("Both username and password are VALID!");
+    };
+
+    var myForm = document.getElementById("myForm");
+    myForm.addEventListener("submit", checkForm, true);
+
+</script>
 
 </body>
 </html>
