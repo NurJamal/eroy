@@ -3,18 +3,15 @@
 	<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
-
+		</div>	
 	</head>
 	
 	<body>
@@ -70,7 +67,7 @@
 			<div align="center">
 		
 				<img src="img\numbering3.png" style="width:100%;height:auto"/>
-
+			
 			</div>
 		
 		</div>
@@ -84,7 +81,7 @@
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1><br/>
+			<h1 class="_dark_text">PB4B(M) CAWANGAN TAMAN U BATU PAHAT</h1><br/>
 		</div>
 		
 		
@@ -92,11 +89,14 @@
 			<h5 id="_orange_title">Tarikh Mesyuarat Penubuhan</h5>
 			<h5 id="_dark_text">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
 		</div>
+	</div>
 		
 		<div class="inform">
-			<input type="text" name="t_mesyuarat" id="t_mesyuarat" placeholder="hh/bb/tttt" class="_datepick"></br><br/>
+			<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" 
+			placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick"><br/></br>
 		</div>
-		
+	
+	<div class="_form">	
 		<div>
 			<h5 id="_orange_title">Bilangan yang menghadiri mesyuarat penubuhan</h5>
 			<h5 id="_dark_text">(Minimum 7 orang.)</h5>
@@ -148,37 +148,11 @@
 		<div>
 			
 		<h5 id="_dark_text">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
-
-		<input type="text" name="no_dahulu" id="no_dahulu"><br/></br>
-			
-		</div>
-
-		<div>
-			<h5 id="_orange_title">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
-			
-		<div class="selection">
-					<form action="Ya">
-					<select id="ya" name="ya" class="_sel">
-					<option value="Tidak"></option>
-					</select>
-				</form>		
-		</div>
-		
-		<div>
-			
-		<h5 id="_dark_text">Jika Ya, sila muat naik gambar</h5>
-		
-		<div class="inform">
-			<input type="text" name="muat_naik" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
-		</div>
-			
-
 		<input type="text" name="no_dahulu" id="no_dahulu"><br/>
 			
 		</div>
 
-				
-
+					
 				
 		<div class="default_button_holder">
 			<a href="pendaftaran-cawangan-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
@@ -196,10 +170,8 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>	
-
-	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 		
   </body>
 </html>

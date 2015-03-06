@@ -89,21 +89,24 @@
 			<h5 id="_orange_title" style="margin-top:-20px">Tarikh Mesyuarat Penubuhan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
 		</div>
+	</div>
 		
-		<div class="inform">
+	<div class="inform">
 			<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick"><br/>
 			<!--<input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">-->
-		</div></br>
+			
+	</div></br>
 		<!--ng-click="openCalendar()"-->
-		
-		<div>
+	
+	<div class="_form">
+
 			<h5 id="_orange_title" style="margin-top:-15px">Bilangan yang menghadiri mesyuarat penubuhan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">(Minimum 7 orang.)</h5>
-		</div>
 		
+	
 		<form id="" action="" method="POST">
 			<input type="text" style="margin-top:0px" name="bil_ahli" id="bil_ahli" placeholder="Bilangan ahli"></br><br/>
-			
+		
 		<div>
 			<h5 id="_orange_title" style="margin-top:-15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">Lelaki</h5>
@@ -114,18 +117,21 @@
 			<input type="text" name="ahli_Cina" id="ahli_Cina" placeholder="Cina"><br/>
 			<input type="text" name="ahli_India" id="ahli_India" placeholder="India"><br/>
 			<input type="text" name="ahli_Lain2" id="ahli_Lain2" placeholder="Lain-lain"><br></br>
-			
+		</form>	
+		
 		<div>
 			<h5 id="_orange_title" style="margin-top:-15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">Perempuan</h5>
 		</div>
+			
 		
-		<form id="" action="" method="POST">
+		
 			<input type="text" style="margin-top:0px" name="ahli_Melayu" id="ahli_Melayu" placeholder="Melayu"><br/>
 			<input type="text" name="ahli_Cina" id="ahli_Cina" placeholder="Cina"><br/>
 			<input type="text" name="ahli_India" id="ahli_India" placeholder="India"><br/>
 			<input type="text" name="ahli_Lain2" id="ahli_Lain2" placeholder="Lain-lain"><br/>
-			
+		
+		
 		<div class="display">
 				
 			<input type="text" name="jumlah" id="jumlah" placeholder="Jumlah" disabled><br/>
@@ -133,7 +139,7 @@
 		</div>
 		
 		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Pernahkah pertubuhan ini didaftarkan sebelum ini dibawah Akta Pertubuhan 1966 atau Akta Pertubuhan Belia dan 
+		<h5 id="_orange_title" style="margin-top:-15px">Pernahkah pertubuhan ini didaftarkan sebelum ini dibawah Akta Pertubuhan 1966 atau Akta Pertubuhan Belia dan 
 			Pembangunan Belia 2007?</h5>
 			
 		<div class="selection">
@@ -145,14 +151,15 @@
 		</div>
 		
 		<div>
-			
-		<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
-		<input type="text" style="margin-top:0px" name="no_dahulu" id="no_dahulu"><br/></br>
-			
+			<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
+		</div>
+		
+		<form id="" action="" method="POST">
+			<input type="text" style="margin-top:0px" name="no_dahulu" id="no_dahulu"><br/></br>
 		</div>
 
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
+		
+		<h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
 			
 		<div class="selection">
 					<form action="Ya">
@@ -161,22 +168,25 @@
 					</select>
 				</form>		
 		</div>
+		</div>
 		
 		<div>
 			
 		<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
 		
+		</div>
+		
 		<div class="inform">
 			<input type="text" style="margin-top:0px" name="muat_naik" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
 		</div>
-			
-				
+						
+		
 		<div class="default_button_holder">
 			<a href="pendaftaran-tunggal-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
 		</div>
-		</form>
-	</form>
 		
+
+	</form>	
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->

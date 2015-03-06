@@ -84,8 +84,16 @@
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
 			<h1 class="_dark_text">MAJLIS BELIA MALAYSIA</h1>
 		</div>
+	</div>
 	
-		<div class="selection">
+		<div class="inform">
+			<input type="text" style="margin-top:0px" name="muat_naik" id="muat_naik" placeholder="No. Kad Pengenalan" class="_searching"><br/></br>
+		</div>
+		
+			
+	<div class="_form">
+	
+		<div class="selection" style="margin-top:-20px">
 					<h5 id="_orange_title">Jawatan</h5>
 					<form action="">
 						<select id="bayaran" name="bayaran" class="_sel">
@@ -96,16 +104,22 @@
 		</div>
 		
 		<div>
-			<input type="text" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
-			<input type="text" name="no_kp" id="no_kp" placeholder="No. Kad Pengenalan">
-			<input type="text" name="t_lahir" id="t_lahir" placeholder="Tarikh Lahir">
+			<input type="text" style="margin-top:3px" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
 		</div>
+	</div>
+		
+		<div class="inform">
+			<input type="text" name="t_lahir" onfocus="(this.type='date')" onblur="(this.type='text')"  id="t_lahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+			<!--<input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">-->
+		</div>
+	
+	<div class="_form">
 			
 		<div class="display">
-			<input type="text" name="umur" id="umur" placeholder="Umur"disabled"><br/>
+			<input type="text" style="margin-top:9px" name="umur" id="umur" placeholder="Umur" disabled><br/>
 		</div>
 		
-		<div class="selection">
+		<div class="selection" style="margin-top:6px">
 					<h5 id="_orange_title">Negeri Kelahiran</h5>
 					<form action="">
 						<select id="n_kelahiran" name="n_kelahiran" class="_sel">
@@ -115,7 +129,7 @@
 
 		</div>
 		
-		<div class="selection">
+		<div class="selection" style="margin-top:15px">
 					<h5 id="_orange_title">Daerah Kelahiran</h5>
 					<form action="">
 						<select id="d_kelahiran" name="d_kelahiran" class="_sel">
@@ -125,7 +139,7 @@
 
 		</div>
 		
-		<div class="selection">
+		<div class="selection" style="margin-top:15px">
 					<h5 id="_orange_title">Jantina</h5>
 					<form action="">
 						<select id="jantina" name="jantina" class="_sel">
@@ -135,7 +149,7 @@
 
 		</div></br>
 		
-		<h5 id="_orange_title">Alamat Tetap</h5>
+		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tetap</h5>
 			<form id="" action="" method="POST">
 				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
 				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
@@ -152,7 +166,7 @@
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
@@ -161,12 +175,12 @@
 					</form>		
 			</div><br/>
 			
-			<h5 id="_orange_title">Alamat Pos</h5>
+			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
 			<form id="" action="" method="POST">
-			<h6>
-			<input type="checkbox" name="klik" id="c_box1"> <label for="c_box1">Klik jika alamat sama seperti di atas.</label></h6>
+			<h5 id="H5" style="margin-top:0px">
+			<input type="checkbox" name="klik" id="c_box1"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 			
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" style="margin-top:0px" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
 				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
 				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
 				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
@@ -181,16 +195,16 @@
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
-			</div></br>
+			</div>
 			
-			<h5 id="_orange_title">Majikan</h5>
+			<h5 id="_orange_title" style="margin-top:15px">Majikan</h5>
 			<form id="" action="" method="POST">
 				<input type="text" name="n_majikan" id="n_majikan" placeholder="Nama Majikan"><br/>
 				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
@@ -208,7 +222,7 @@
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
@@ -217,7 +231,7 @@
 					</form>		
 			</div>
 			
-				<input type="text" name="no_tel_rumah" id="no_tel_rumah" placeholder="No Telefon Rumah"><br/>
+				<input type="text" style="margin-top:5px" name="no_tel_rumah" id="no_tel_rumah" placeholder="No Telefon Rumah"><br/>
 				<input type="text" name="no_tel_pej" id="no_tel_pej" placeholder="No Telefon Pejabat"><br/>
 				<input type="text" name="no_tel_bimbit" id="no_tel_bimbit" placeholder="No Telefon Bimbit"><br/>
 				<input type="text" name="no_faks" id="no_faks" placeholder="No Faksimili"><br/>
@@ -228,7 +242,7 @@
 	<div class="default_button_holder">
 			<a href="pendaftaran-majlis-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
 		</div>
-	
+	</div>
 	</form>
 		
 	<!-- end of form -->

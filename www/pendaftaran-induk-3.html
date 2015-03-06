@@ -45,7 +45,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-cawangan-2.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="pendaftaran-induk-2.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
@@ -53,7 +53,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN CAWANGAN</h1>
+				<h1 class="main_title">PENDAFTARAN INDUK</h1>
 			</div>
 		</div>
 	</div>
@@ -89,11 +89,14 @@
 			<h5 id="_orange_title">Tarikh Mesyuarat Penubuhan</h5>
 			<h5 id="_dark_text">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
 		</div>
+	</div>
 		
 		<div class="inform">
-			<input type="text" name="t_mesyuarat" id="t_mesyuarat" placeholder="hh/bb/tttt" class="_datepick"></br><br/>
+			<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" 
+			placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick"><br/></br>
 		</div>
-		
+	
+	<div class="_form">	
 		<div>
 			<h5 id="_orange_title">Bilangan yang menghadiri mesyuarat penubuhan</h5>
 			<h5 id="_dark_text">(Minimum 7 orang.)</h5>
