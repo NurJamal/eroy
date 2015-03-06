@@ -22,8 +22,8 @@ img.logo{
 img.menu_icon{
 	position: absolute;
 	margin-top: 7px;
-	max-width: 60%;
-	max-height: 70%;
+	width: 35px;
+	height: 30px;
 	display: inline-block;
 	right: 2%;
 }
@@ -58,8 +58,8 @@ img.back_icon{
 	position: absolute;
 	margin-top: 7px;
 	left: 2%;
-	max-width: 60%;
-	max-height: 70%;
+	width: 35px;
+	height: 30px;
 	display: inline-block;
 
 }
