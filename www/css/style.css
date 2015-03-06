@@ -92,6 +92,13 @@ a {
 	transition: all .7s;
 }
 
+#fixed_name
+{
+	background : #F2F1EF;
+	position:fixed;
+	width:100%;
+}
+
 #colored
 {
 	background : #ececec;
