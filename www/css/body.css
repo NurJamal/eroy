@@ -340,6 +340,15 @@ select.sel{
 	background-position: 97% 50%;
 	background-size: 30px 30px;
 	background-color: white;
+}
+
+._searching{
+	background-image: url("img/carian-icon.png");
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	background-size: 30px 30px;
+	background-color: white;
+
 }	
 
 .disable_datepick{
