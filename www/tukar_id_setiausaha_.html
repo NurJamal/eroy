@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
@@ -33,14 +34,10 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		
+		<img src="img/logo-atas.png" class="logo"/>			
 			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
-	</div>	
+	</div>		
 	<!-- end of header -->
 	
 	<!-- header title -->
@@ -53,9 +50,8 @@
 	
 	</div>
 	<!-- end of header-title-->
-
+	
 	<div id="content">
-	<!-- form -->
 		<form id="" action="" method="POST">
 			<div class="_form">
 					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
@@ -85,8 +81,7 @@
 						<input class="default_button" type="submit" value="MOHON" id="btn_submit">
 					</div>
 		</form>
-	</div>
-	<!-- end of form -->
+	</div>	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -113,37 +108,36 @@
 			yearRange: '1920:2010',
 			changeMonth: true,
 			changeYear: true
-		});	
-	</script>
-
- 	<script>
+		});
+	
 		$("#btn_submit").click(function(e){
 
 		e.preventDefault();
 		
-		var no_sijil = $("#f_sijil").val();
+		//var no_sijil = $("#f_sijil").val();
 		var nama = $("#f_nama").val();
-		var kadp = $("#f_kp").val();
-		var t_lahir = $("#f_tlahir").val();
-		var emel = $("#f_emel").val();
-		var no_tel = $("#f_telefon").val();
+		//var kadp = $("#f_kp").val();
+		//var t_lahir = $("#f_tlahir").val();
+		//var emel = $("#f_emel").val();
+		//var no_tel = $("#f_telefon").val();
 		
-		if (no_sijil.length == 0 || nama.length == 0 || kadp.length == 0 || t_lahir.length == 0 || emel.length == 0 || no_tel.length == 0) 
+		if (nama.length == 0) 
 		{
 			alert('Sila lengkapkan borang tersebut!');
 		} 
+		
 		else {
 		
 			$.ajax({
 				url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
 				type:'POST',
 				data: {
-					no_sijil : no_sijil,
-					nama : nama,
-					kadp : kadp,
-					t_lahir : t_lahir,
-					emel : emel,
-					no_tel : no_tel
+					//no_sijil : no_sijil,
+					nama : nama
+					//kadp: kadp,
+					//t_lahir : t_lahir,
+					//emel : emel,
+					//no_tel : no_tel
 				},
 				success:function(data){
 					console.log(data);
@@ -166,5 +160,7 @@
 			
 	});
 	</script>
-</body>
+	
+  </body>
 </html>
+

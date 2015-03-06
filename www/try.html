@@ -1,117 +1,24 @@
-<!DOCTYPE HTML>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title></title>
-	  <link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<!-- <link rel="stylesheet" type="text/css" href="css/body.css" /> -->
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-	  
-      <style>
-		 
-		 .orange_wrap2{
-			width: 40%;
-			/* margin-top: 5px; */
-			margin-bottom: 10px;
-			padding: 10px;
-			color: #ffffff;
-			background: #fda303;
-			border-color: #c2c2c2 #d1d1d1 #d4d4d4;
-			border-radius: 5px;
-			-moz-outline-radius: 3px;
-			-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
-		}
-		
-		h2._white_text{
-		font-size: 16px;
-		font-family: "arial";
-		text-align: left;
-		/* width: 90%; */
-		margin-top: -3px;
-	}
-      </style>
-   </head>
-   <body>
-   <div class="orange_wrap2">
-      <h2 class="_white_text">JUMLAH<br/>KESELURUHAN</h2>
-	</div>
-   
-   
-	<!-- 
-	<div class="orange_wrap">
-      <h5 class="vertical_text">
-         P 
-         E 
-         R 
-         M 
-         O 
-         H 
-         O 
-         N
-         A 
-         N
-      </h5>
-	</div>
-	
-	<TABLE>
-		<td></td>
-		<TD>
-			<TABLE  >
-				   <TD>
-					<div class="orange_wrap">
-					  <h5 class="vertical_text">
-						 P 
-						 E 
-						 R 
-						 M 
-						 O 
-						 H 
-						 O 
-						 N
-						 A 
-						 N
-					  </h5>
-					</div> 
-				   </TD>
-				   
-				   <TD>
-					<div class="orange_wrap">
-					  <h5 class="vertical_text">
-						 P 
-						 E 
-						 R 
-						 M 
-						 O 
-						 H 
-						 O 
-						 N
-						 A 
-						 N
-					  </h5>
-					</div> 
-				   </TD>
-				   
-				   <TD>
-					<div class="orange_wrap">
-					  <h5 class="vertical_text">
-						 P 
-						 E 
-						 R 
-						 M 
-						 O 
-						 H 
-						 O 
-						 N
-						 A 
-						 N
-					  </h5>
-					</div> 
-				   </TD>
-		   </TABLE>
-		</TD>
-	</TABLE> -->
-   </body>
-</html>
+<input id="dob" type="text" />
+
+<p id="age"></p>
+
+<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
+<script>
+$('#dob').datepicker({
+    onSelect: function(value, ui) {
+        var today = new Date(), 
+            dob = new Date(value), 
+            age = new Date(today - dob).getFullYear() - 1970;
+        
+        $('#age').text(age);
+    },
+    maxDate: '+0d',
+    yearRange: '1920:2010',
+    changeMonth: true,
+    changeYear: true
+});
+</script>
