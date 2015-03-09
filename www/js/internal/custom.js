@@ -102,10 +102,7 @@
 		
 		lastScrollTop = st;
 	}
-		
-		
-  
-	
+
 	
 	if (navigator.userAgent.indexOf("Android") != -1) {
 	   $.mobile.defaultPageTransition = 'none';
