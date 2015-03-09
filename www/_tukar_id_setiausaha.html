@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
+		</div>
 	</head>
 	<body>
 	
@@ -38,7 +38,7 @@
 			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
-	
+		
 		
 	</div>	
 	<!-- end of header -->
@@ -47,26 +47,46 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">LUPA KATA LALUAN</h1>
+				<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
 			</div>
 		</div>
 	
 	</div>
 	<!-- end of header-title-->
-	
+
 	<div id="content">
 	<!-- form -->
-		<div class="_form">
-			<form id="" action="" method="POST">
-				<input type="number" style="margin-top:15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-				
-				<div class="default_button_holder">
-					<input class="default_button" type="submit" value="HANTAR" id="btn_submit">
-				</div>
-			</form>
-		</div>
+		<form id="" action="" method="POST">
+			<div class="_form">
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
+			</div>	
+			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
+			</div>
+			<div class="_form">
+					<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
+					
+					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+					
+					<input type="text" name="f_tlahir1" onfocus="(this.type='date')" onblur="(this.type='text')"  id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+					
+					<!-- <input type="text" name="f_tlahir" id="f_tlahir" placeholder="Tarikh Lahir"><br/> -->
+			</div>
+			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+					<input type="text" id="d_umur" name="d_umur"  placeholder="Umur" disabled><br/>
+			</div>
+			<div class="_form">
+					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+					<input type="tel" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
+			</div>			
+
+			
+					<div class="default_button_holder">
+						<input class="default_button" type="submit" value="MOHON" id="btn_submit">
+					</div>
+		</form>
+	</div>
 	<!-- end of form -->
-	</div>	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -76,32 +96,49 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	$("#btn_submit").click(function(e){
+		$('#f_tlahir').datepicker({
+			onSelect: function(value, ui) {
+				var today = new Date(), 
+					dob = new Date(value), 
+					umur = new Date(today - dob).getFullYear() - 1970;
+				$('#d_umur').text(umur);
+			},
+		});	
+	</script>
 
-		e.preventDefault();			
+<!--  	<script>
+		$("#btn_submit").click(function(e){
 
-		var kadp = $.trim($('#f_kp').val());
+		e.preventDefault();
 		
-		if (kadp.length == 0) {
-			alert('Sila Masukkan No Kad Pengenalan');
-			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
-
+		var no_sijil = $("#f_sijil").val();
+		var nama = $("#f_nama").val();
+		var kadp = $("#f_kp").val();
+		var t_lahir = $("#f_tlahir").val();
+		var emel = $("#f_emel").val();
+		var no_tel = $("#f_telefon").val();
+		
+		if (no_sijil.length == 0 || nama.length == 0 || kadp.length == 0 || t_lahir.length == 0 || emel.length == 0 || no_tel.length == 0) 
+		{
+			alert('Sila lengkapkan borang tersebut!');
+		} 
 		else {
 		
 			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
-				type:'GET',
-				data:{
-					kadp : kadp
-				},
-				dataType:'xml',
-				error: function(e) {
-					console.log(e);
+				url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
+				type:'POST',
+				data: {
+					no_sijil : no_sijil,
+					nama : nama,
+					kadp : kadp,
+					t_lahir : t_lahir,
+					emel : emel,
+					no_tel : no_tel
 				},
 				success:function(data){
 					console.log(data);
@@ -119,11 +156,10 @@
 					else{}
 				}
 			});
+			
 		}
-
+			
 	});
-	</script>
-
- </body>
+	</script> -->
+</body>
 </html>
-

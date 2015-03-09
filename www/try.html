@@ -1,24 +1,35 @@
-<input id="dob" type="text" />
+<!DOCTYPE HTML>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title></title>
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="css/body.css" /> -->
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+	  
+   </head>
+   <body>
+  
+	<input id="dob" type="text" />
 
-<p id="age"></p>
-
-<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-
-<script>
-$('#dob').datepicker({
-    onSelect: function(value, ui) {
-        var today = new Date(), 
-            dob = new Date(value), 
-            age = new Date(today - dob).getFullYear() - 1970;
-        
-        $('#age').text(age);
-    },
-    maxDate: '+0d',
-    yearRange: '1920:2010',
-    changeMonth: true,
-    changeYear: true
-});
-</script>
+	<p id="age"></p>
+	
+	<script>
+	$('#dob').datepicker({
+		onSelect: function(value, ui) {
+			var today = new Date(), 
+				dob = new Date(value), 
+				age = new Date(today - dob).getFullYear() - 1970;
+			
+			$('#age').text(age);
+		},
+		maxDate: '+0d',
+		yearRange: '1920:2010',
+		changeMonth: true,
+		changeYear: true
+	});
+	</script>
+   </body>
+</html>

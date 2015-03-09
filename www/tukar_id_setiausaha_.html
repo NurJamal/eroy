@@ -96,68 +96,82 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-		$('#f_tlahir').datepicker({
-			onSelect: function(value, ui) {
-				var today = new Date(), 
-					dob = new Date(value), 
-					umur = new Date(today - dob).getFullYear() - 1970;
-				
-				$('#d_umur').text(umur);
-			},
-			maxDate: '+0d',
-			yearRange: '1920:2010',
-			changeMonth: true,
-			changeYear: true
-		});
-	
 		$("#btn_submit").click(function(e){
 
-		e.preventDefault();
-		
-		//var no_sijil = $("#f_sijil").val();
-		var nama = $("#f_nama").val();
-		//var kadp = $("#f_kp").val();
-		//var t_lahir = $("#f_tlahir").val();
-		//var emel = $("#f_emel").val();
-		//var no_tel = $("#f_telefon").val();
-		
-		if (nama.length == 0) 
-		{
-			alert('Sila lengkapkan borang tersebut!');
-		} 
-		
-		else {
-		
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
-				type:'POST',
-				data: {
-					//no_sijil : no_sijil,
-					nama : nama
-					//kadp: kadp,
-					//t_lahir : t_lahir,
-					//emel : emel,
-					//no_tel : no_tel
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						alert(json.message);
-						window.location.href = "log_masuk.html";
-					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						alert(json.message);
-					}
-					else{}
-				}
-			});
+			e.preventDefault();			
+
+			var no_sijil = $.trim($('#f_sijil').val());
+			var nama = $.trim($('#f_nama').val());
+			var kadp = $.trim($('#f_kp').val());
+			var t_lahir = $.trim($('#f_tlahir').val());
+			var emel = $.trim($('#f_emel').val());
+			var no_tel = $.trim($('#f_telefon').val());
 			
-		}
+			if (no_sijil.length == 0) {
+				alert('Sila Masukkan No Sijil');
+				$('input[type="text"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
 			
+			else if (nama == 0) {
+				alert('Sila Masukkan Nama Penuh');
+				$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			
+			else if (kadp.length == 0) {
+				alert('Sila Masukkan No Kad Pengenalan');
+				$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			
+			else if (t_lahir.length == 0) {
+				alert('Sila Masukkan Tarikh Lahir');
+				$('input[type="text"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			
+			else if (emel.length == 0) {
+				alert('Sila Masukkan Emel');
+				$('input[type="email"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			
+			else if (no_tel.length == 0) {
+				alert('Sila Masukkan No Telefon');
+				$('input[type="tel"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+
+			else {
+			
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
+					type:'GET',
+					data:{
+						no_sijil : no_sijil,
+						nama : nama,
+						kadp : kadp,
+						t_lahir : t_lahir,
+						emel : emel,
+						no_tel : no_tel
+					},
+					dataType:'xml',
+					error: function(e) {
+						console.log(e);
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							console.log(json.status);
+							alert(json.message);
+							window.location.href = "halaman_utama_pengguna_biasa.html";
+						}
+						else if (json.status == 'error') {
+							console.log(json.status);
+							alert(json.message);
+						}
+						else{}
+					}
+				});
+			}
+	
 	});
 	</script>
 	
