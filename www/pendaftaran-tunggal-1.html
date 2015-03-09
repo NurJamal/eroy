@@ -79,11 +79,11 @@
 	<!-- form -->
 		<div class="_form">
 		
-			<div class="selection" style="margin-top:-10px">
+			<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+					<!-- 	<select id="sel_jenis_pertubuhan" name="sel_jenis_pertubuhan" class="_sel"> -->
+						<option value="tunggal" selected>Tunggal</option>
 						</select>
 					</form>		
 			</div>
@@ -91,8 +91,9 @@
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_kategori" name="sel_kategori" class="_sel">
+						<option value="1">Kelab Belia</option>
+						<option value="2">Youth Club</option>
 						</select>
 					</form>		
 			</div>
@@ -100,7 +101,7 @@
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="sel_negeri" name="sel_negeri" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -109,7 +110,7 @@
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="sel_daerah" name="sel_daerah" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -121,10 +122,10 @@
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
 				
 			<div class="display">
-				<input type="text" style="margin-top:8px" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" placeholder="Nama Penuh Pertubuhan"disabled><br/>
+				<textarea id="d_alamat_pos" name="d_alamat_pos" style="resize:none"   disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
-				<input type="text" style="margin-top:5px" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
+				<input type="email" style="margin-top:5px" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
 				
 				
 				
@@ -150,6 +151,55 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- 	<script>
+		$("#btn_submit").click(function(e){
+
+		e.preventDefault();
+		
+		var nama = $("#f_nama").val();
+		var kadp = $("#f_kp").val();
+		var katalaluan = $("#f_katalaluan").val();
+		var sah_katalaluan = $("#f_sah_katalaluan").val();
+		var emel = $("#f_emel").val();
+		
+		if (nama.length == 0  || kadp.length == 0 || katalaluan.length == 0 || sah_katalaluan.length == 0 || emel.length == 0) 
+		{
+			alert('Sila lengkapkan borang tersebut!');
+		} 
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+				type:'POST',
+				data: {
+					nama : nama,
+					kadp: kadp,
+					katalaluan : katalaluan,
+					sah_katalaluan : sah_katalaluan,
+					emel : emel
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert(json.message);
+						window.location.href = "pendaftaran-tunggal-2.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						alert(json.message);
+					}
+					else{}
+				}
+			});
+			
+		}
+			
+	});
+	</script> -->
 		
   </body>
 </html>
