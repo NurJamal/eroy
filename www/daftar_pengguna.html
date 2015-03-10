@@ -100,12 +100,16 @@
 	<script src="js/jquery-confirm.min.js"></script>	
 	
  	<script>
-		function ValidateEmail(email) {
+		function cekEmel(email) {
 			var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 			return reg.test(email);
 		};
 		
-		
+		function cekPass(str)
+		{
+			var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+			return re.test(str);
+		}
 		
 		$("#btn_submit").click(function(e){
 
@@ -147,6 +151,16 @@
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
+		else if(!cekPass(emel)){
+				$.alert({
+				title: 'Daftar Pengguna',
+				content: 'Sila Isikan Format Kata Laluan yang Betul!',
+				confirm: function(){
+				 }
+				});
+				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
 		else if (sah_katalaluan.length == 0) {
 			$.alert({
 			title: 'Daftar Pengguna',
@@ -176,7 +190,7 @@
 				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 		}
 		
-		else if(!ValidateEmail(emel)){
+		else if(!cekEmel(emel)){
 				$.alert({
 				title: 'Daftar Pengguna',
 				content: 'Sila Isikan Format Emel yang Betul!',
