@@ -8,11 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
+		</div>
 	</head>
 	<body>
 	
@@ -38,100 +36,50 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		
 			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+			<a href="carian_asas_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 	
-		
 	</div>	
 	<!-- end of header -->
-	
+
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">LUPA KATA LALUAN</h1>
+				<h1 class="main_title">CARIAN</h1>
 			</div>
 		</div>
 	
 	</div>
 	<!-- end of header-title-->
-	
+
+	<!-- list -->
 	<div id="content">
-	<!-- form -->
-		<div class="_form">
-			<form id="" action="" method="POST">
-				<input type="number" style="margin-top:15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-				
-				<div class="default_button_holder">
-					<input class="default_button" type="submit" value="HANTAR" id="btn_submit">
-				</div>
-			</form>
-		</div>
-	<!-- end of form -->
-	</div>	
+		<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
+		<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
+		
+		<h2 class="_orange_text">Alamat Tempat Urusan</h2>
+		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
+		
+		<h2 class="_orange_text">Alamat Surat Menyurat</h2>
+		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
+		
+		<h2 class="_orange_text">Peringkat Pertubuhan</h2>
+		<h1 class="_dark_text">Daerah</h1>
+		
+		<h2 class="_orange_text">No Daftar/No Sijil</h2>
+		<h1 class="_dark_text">T45678</h1>
+		
+		<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
+		<h1 class="_dark_text">20/10/2014</h1>
+		
+		<h2 class="_orange_text">Status</h2>
+		<h1 class="_dark_text">Aktif</h1>
+	</div>
 	
-	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
-	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	
-	<!-- alert box -->
-	<script src="js/jquery-confirm.js"></script>
-	<script src="js/jquery-confirm.min.js"></script>
-	
-	<script>
-		$("#btn_submit").click(function(e){
-
-		e.preventDefault();
-		
-		var kadp = $.trim($("#f_kp").val());
-
-		if (kadp.length == 0) {
-			$.alert({
-			title: 'Lupa Kata Laluan',
-			content: 'Sila Isikan No Kad Pengenalan!',
-			confirm: function(){
-			 }
-			});
-			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
-	
-		else {
-		
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
-				type:'POST',
-				data: {
-					kadp: kadp
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						alert(json.message);
-						window.location.href = "log_masuk.html";
-					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						alert(json.message);
-					}
-					else{}
-				}
-			});
-			
-		}
-			
-	});
-	</script>
-
- </body>
+	</body>
 </html>
-

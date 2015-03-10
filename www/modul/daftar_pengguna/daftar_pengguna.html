@@ -3,20 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-
-		<style>
-			input.invalid {outline-color: #FF0000}
-			input.valid {background-color: white}
-		</style>
 	</head>
 	<body>
 	
@@ -63,14 +57,20 @@
 	<div id="content">
 	<!-- form -->
 		<div class="_form">
-			<form id="" action="" method="POST" onSubmit="return validateForm(this)">
+			<form id="" action="" method="POST">
 				<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
+				
 				<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
+				
 				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
+				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
+				
 				<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
 				placeholder="Sahkan Kata Laluan"><br/>
+				
 				<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
 				
 				<div class="default_button_holder">
@@ -94,35 +94,74 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
  	<script>
-		function valueProvided(formField, fieldLabel)
-		{
-			var result = true;
-			formField.className = "valid";
-			
-			if (formField.value == "")
-			{
-				alert('Sila lengkapkan "' + fieldLabel +'" anda.');
-				formField.focus();
-				formField.className = "invalid";
-				result = false;
-			}
-			return result;
+		$("#btn_submit").click(function(e){
+
+		e.preventDefault();
+		
+		var nama = $.trim($("#f_nama").val());
+		var kadp = $.trim($("#f_kp").val());
+		var katalaluan = $.trim($("#f_katalaluan").val());
+		var sah_katalaluan = $.trim($("#f_sah_katalaluan").val());
+		var emel = $.trim($("#f_emel").val());
+		
+		if (nama.length == 0) {
+			alert('Sila Masukkan Nama Penuh');
+			$('input[type="text"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (kadp.length == 0) {
+			alert('Sila Masukkan No Kad Pengenalan');
+			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (katalaluan.length == 0) {
+			alert('Sila Masukkan Kata Laluan');
+			$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (sah_katalaluan.length == 0) {
+			alert('Sila Masukkan Sah Kata Laluan');
+			$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (emel.length == 0 && emel.match(/^([a-zA-Z0-9])+([.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-]+)+/ == "")) {
+			alert('Sila Masukkan Emel');
+			$('input[type="email"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 
-		function validateForm(theForm)
-		{
-			if (!valueProvided(theForm.f_nama, "Nama Penuh"))
-				return false;
-			if (!valueProvided(theForm.f_kp, "No Kad Pengenalan"))
-				return false;	
-			if (!valueProvided(theForm.f_katalaluan, "Kata Laluan"))
-				return false;	
-			if (!valueProvided(theForm.f_sah_katalaluan, "Sahkan Kata Laluan"))
-				return false;
-			if (!valueProvided(theForm.f_emel, "Emel"))
-				return false;
-			return true;
+		
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+				type:'POST',
+				data: {
+					nama : nama,
+					kadp: kadp,
+					katalaluan : katalaluan,
+					sah_katalaluan : sah_katalaluan,
+					emel : emel
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert(json.message);
+						window.location.href = "log_masuk.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						alert(json.message);
+					}
+					else{}
+				}
+			});
+			
 		}
+			
+	});
 	</script>
 </body>
 </html>

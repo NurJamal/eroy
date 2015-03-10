@@ -7,6 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
@@ -88,6 +90,9 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
 	
 	<script>
 	$("#btn_submit").click(function(e){
@@ -98,13 +103,23 @@
 		var katalaluan = $.trim($('#f_katalaluan').val());
 		
 		if (kadp.length == 0) {
-			alert('Sila Masukkan No Kad Pengenalan');
-			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Log Masuk',
+			content: 'Sila Isikan No Kad Pengenalan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
 		else if (katalaluan == 0) {
-			alert('Sila Masukkan Kata Laluan');
-			$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Log Masuk',
+			content: 'Sila Isikan Kata Laluan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 
 		else {
