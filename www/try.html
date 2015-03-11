@@ -12,24 +12,20 @@
    </head>
    <body>
   
-	<input id="dob" type="text" />
+	<input id="f_tlahir" type="text"  onfocus="(this.type='date')" onblur="(this.type='text')" />
 
-	<p id="age"></p>
+	<p id="d_umur" ></p>
 	
-	<script>
-	$('#dob').datepicker({
-		onSelect: function(value, ui) {
-			var today = new Date(), 
-				dob = new Date(value), 
-				age = new Date(today - dob).getFullYear() - 1970;
-			
-			$('#age').text(age);
-		},
-		maxDate: '+0d',
-		yearRange: '1920:2010',
-		changeMonth: true,
-		changeYear: true
-	});
+	<script>		
+		
+		
+		$("#f_tlahir").select(function(){
+			var dob = new Date(value);
+			var today = new Date();
+			var userAge = (today.getFullYear() - dob.getFullYear()); 
+			$('#d_umur').val(userAge);
+		});
+
 	</script>
    </body>
 </html>
