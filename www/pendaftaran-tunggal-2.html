@@ -98,7 +98,9 @@
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
 						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+						<option value="0">Johor</option>
+						<option value="1">N.Sembilan</option>
+						<option value="2">Melaka</option>
 						</select>
 					</form>		
 			</div>
@@ -107,7 +109,9 @@
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+						<option value="0">Muar</option>
+						<option value="1">Batu Pahat</option>
+						<option value="2">Segamat</option>
 						</select>
 					</form>		
 			</div><br/>
@@ -115,7 +119,7 @@
 			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
 			<form id="" action="" method="POST">
 			<h5 id="" style="margin-top:0px">
-			<input type="checkbox" name="billingtoo" id="c_box1" class="checkboxClass" onclick="FillBilling(this.form)"> 
+			<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="Alamat(this.form)"> 
 			<label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 				
 				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
@@ -128,8 +132,10 @@
 			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+						<select id="negeri_pos" name="negeri" class="_sel">
+						<option value="0">Johor</option>
+						<option value="1">N.Sembilan</option>
+						<option value="2">Melaka</option>
 						</select>
 					</form>		
 			</div>
@@ -137,8 +143,10 @@
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+						<select id="daerah_pos" name="daerah" class="_sel">
+						<option value="0">Muar</option>
+						<option value="1">Batu Pahat</option>
+						<option value="2">Segamat</option>
 						</select>
 					</form>		
 			</div>
@@ -176,8 +184,8 @@
 	<script>
 
 	
-	function FillBilling(f) {
-	if(f.billingtoo.checked == true) 
+	function Alamat(f) {
+	if(f.alamat_sama.checked == true) 
 	{	
 		var copythis = $("#alamat1").val();
 		$("#alamat_pos1").val(copythis);
@@ -191,25 +199,36 @@
 		var copythis = $("#poskod").val();
 		$("#poskod_pos").val(copythis);
 		
+		var copythis = $("#negeri").val();
+		$("#negeri_pos").val(copythis);
 		
+		var copythis = $("#daerah").val();
+		$("#daerah_pos").val(copythis);
 	}
-}
+	}
+	
+	function setSelect(name1, name2){
+		var select1 = document.forms.formname.elements[name1];
+		var select2 = document.forms.formname.elements[name2];
+		select1.selectedIndex = select2.selectedIndex;
+	}
+
 	
 		$("#btn_submit").click(function(e){
 
 				e.preventDefault();
 				
-				var alamat_tempat_urusan_1= $("#f_alamat_tempat_urusan_1").val();
-				var alamat_tempat_urusan_2= $("#f_alamat_tempat_urusan_2").val();
-				var alamat_tempat_urusan_3= $("#f_alamat_tempat_urusan_3").val();
+				var alamat1= $("#f_alamat1").val();
+				var alamat2= $("#f_alamat2").val();
+				var alamat3= $("#f_alamat3").val();
 				var poskod = $("#f_poskod").val();
-				var alamat_tempat_pos_1= $("#f_alamat_pos_1").val();
-				var alamat_tempat_pos_2= $("#f_alamat_pos_2").val();
-				var alamat_tempat_pos_3= $("#f_alamat_pos_3").val();
-				var alamat_pos_poskod = $("#f_alamat_pos_poskod").val();
+				var alamat_pos1= $("#f_alamat_pos1").val();
+				var alamat_pos2= $("#f_alamat_pos2").val();
+				var alamat_pos3= $("#f_alamat_pos3").val();
+				var poskod_pos = $("#f_poskod_pos").val();
 				
 				
-				if (alamat_tempat_urusan_1.length == 0  || poskod.length == 0) 
+				if (alamat1.length == 0  || poskod.length == 0 || alamat_pos1.length == 0 || poskod_pos.length == 0) 
 				{
 					alert('Sila lengkapkan borang ini!');
 				} 
