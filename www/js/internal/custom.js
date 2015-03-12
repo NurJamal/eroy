@@ -1,4 +1,5 @@
 
+	var ajaxTimeout = 1000 * 10;
 
 	/*On Ready Event*/
 	/*Click To Top*/
@@ -50,13 +51,13 @@
 			/*Put in custom class later nav-down*/
 			
 			
-				$( "p" ).removeClass( "myClass noClass" ).addClass( "yourClass" );
-			
-			
 				//$("#head").css("top","-80px");
 				//tak smooth la pulak
-				$("#head").animate({opacity: '0.0'}, "fast");					
-				//$("#head").animate({opacity: '0.0',});					
+			
+				
+				//$("#head").css("transform","translate3d( -300px, 0, 0 )").animate({top:-80px}, "fast");
+				//$("#head").css("transform", "translate3d( -300px, 0, 0 )");					
+				$("#head").animate({opacity: '0.0',},"slow");					
 
 				//$(".navbar").css("top","0");
 				//$(".navbar").css("position","fixed");
@@ -84,8 +85,8 @@
 				//$("#head").css("top","0");
 				//$("#head").animate({top: '0'}, "fast");
 				
-				$("#head").animate({opacity: '1'}, "fast");					
-				//$("#head").animate({opacity: '1'});	
+				//$("#head").animate({top: '0'}, "fast");					
+				$("#head").animate({opacity: '1'},"fast");	
 				//$(".navbar").css("top","");
 				//$(".navbar").css("position","");
 				//$(".navbar").css("padding-top","");
@@ -127,11 +128,11 @@
 		
 		
 	/*Loading Indicator*/
-	function run_waitMe(effect){
+	function run_waitMe(){
 		$('body').waitMe({
-			effect: effect,
-			text: 'Sila Tunggu...',
-			bg: 'rgba(255,255,255,0.7)',
+			effect: "orbit",
+			text: '',
+			bg: 'rgba(0,0,0,0.2)',
 			color:'#000',
 			sizeW:'',
 			sizeH:'',
@@ -139,13 +140,16 @@
 		});
 	}
 		
-		
-		
-		
-		
-		
-		
-		
+
+	/*function ajax_delay(str){
+		alert("Delay");
+		setTimeout(WindowRedirect(str),10000);
+	}
+
+	function WindowRedirect(str)
+	{
+		window.location.href = str;
+	}*/
 		
 		
 		

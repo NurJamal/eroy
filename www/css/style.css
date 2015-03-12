@@ -24,11 +24,11 @@ nav.menu {
     background-color: #F2F1EF;
     /* overflow: hidden; */
 	overflow-y: auto;
-    -webkit-transition: all 0.7s;
-    -moz-transition: all 0.7s;
-    -ms-transition: all 0.7s;
-    -o-transition: all 0.7s;
-    transition: all 0.7s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
 	
 	
 	
@@ -97,8 +97,8 @@ a {
 	height: 48px;
 	line-height: 50px;
 	padding-left: 10px;
-	-webkit-transition: all .7s;
-	transition: all .7s;
+	-webkit-transition: all .5s;
+	transition: all .5s;
 }
 
 #fixed_name

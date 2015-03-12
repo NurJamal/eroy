@@ -15,14 +15,14 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
+		<div id="loadingLayer"></div>
 		
 		<style>
 			input.invalid {outline-color: #FF0000}
 			input.valid {background-color: white}
 		</style>
 	</head>
-	<body class="bodyClass">
-
+	<body>
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
@@ -47,41 +47,41 @@
 			<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>		
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">LOG MASUK</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">LOG MASUK</h1>
+				</div>
 			</div>
+		
 		</div>
+		<!-- end of header-title-->
+		
+		<div id="content">
+		
+		<!-- form -->
+			<div class="_form">
+				<form id="login_form" action="" method="POST">
+					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
+					
+					<div class="default_button_holder">
+						<input class="default_button" type="submit" value="LOG MASUK" id="btn_submit">
+					</div>
+				</form>
+			</div>
+		<!-- end of form -->
+		
+			<div class="multi-links">
+				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
+				<h5 align="center"><a href="lupa_kata_laluan.html">Lupa Kata Laluan?</a></h5>
+				<h5 align="center"><a href="pengesahan_emel_pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
+			</div>
+		</div>	
 	
 	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- form -->
-		<div class="_form">
-			<form id="login_form" action="" method="POST">
-				<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-				
-				<div class="default_button_holder">
-					<input class="default_button" type="submit" value="LOG MASUK" id="btn_submit">
-				</div>
-			</form>
-		</div>
-	<!-- end of form -->
-	
-		<div class="multi-links">
-			<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
-			<h5 align="center"><a href="lupa_kata_laluan.html">Lupa Kata Laluan?</a></h5>
-			<h5 align="center"><a href="pengesahan_emel_pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
-		</div>
-	</div>	
-	
-	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -141,8 +141,9 @@
 					katalaluan : katalaluan
 				},
 				beforeSend: function() {
-					run_waitMe("orbit");
+					run_waitMe();
 				},
+				timeout: ajaxTimeout,
 				dataType:'xml',
 				error: function(e) {
 					console.log(e);
@@ -153,13 +154,16 @@
 					console.log(json);
 					if (json.status == 'ok') {
 						console.log(json.status);
-						$.alert({
+						/*$.alert({
 							title: 'Log Masuk',
 							content: json.message,
 							confirm: function(){
+							  	window.location.href = "halaman_utama_pengguna_biasa.html";
 						 }
-						});
-						window.location.href = "halaman_utama_pengguna_biasa.html";
+						});*/
+						
+						//beforeSend: function (xhr) { xhr.withCredentials = true; },
+						window.location.href = "halaman_utama_pengguna_biasa.html"
 					}
 					else if (json.status == 'error') {
 						console.log(json.status);
@@ -168,6 +172,7 @@
 							title: 'Log Masuk',
 							content: json.message,
 							confirm: function(){
+								$('body').waitMe('hide');
 						 }
 						});
 					}
@@ -175,9 +180,7 @@
 					else{}
 				}
 			})
-			.done(function( html ) {
-				$('body').waitMe('hide');
-			});
+			
 			
 			
 
