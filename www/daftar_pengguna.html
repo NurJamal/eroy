@@ -151,15 +151,15 @@
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if(!cekPass(emel)){
-				$.alert({
-				title: 'Daftar Pengguna',
-				content: 'Sila Isikan Format Kata Laluan yang Betul!',
-				confirm: function(){
-				 }
-				});
-				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
+		//else if(!cekPass(emel)){
+		//		$.alert({
+		//		title: 'Daftar Pengguna',
+		//		content: 'Sila Isikan Format Kata Laluan yang Betul!',
+		//		confirm: function(){
+		//		 }
+		//		});
+		//		$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		//}
 		
 		else if (sah_katalaluan.length == 0) {
 			$.alert({
@@ -219,12 +219,22 @@
 					console.log(json);
 					if (json.status == 'ok') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Daftar Pengguna',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 						window.location.href = "log_masuk.html";
 					}
 					else if (json.status == 'error') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Daftar Pengguna',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 					}
 					else{}
 				}

@@ -1,0 +1,25 @@
+<input id="f_tlahir" type="text"  onfocus="(this.type='date')" onblur="(this.type='text')" />
+
+<p id="d_umur" ></p>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+<script>
+$(document).ready(function() {
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+	
+	var value = $("#f_tlahir").val();
+
+    onSelect: function (value){
+        var dob = new Date(value);
+        var today = new Date();
+		var userAge = (today.getFullYear() - dob.getFullYear()); 
+    }
+});
+</script>
