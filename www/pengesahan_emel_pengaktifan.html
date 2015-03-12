@@ -8,6 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -60,7 +62,7 @@
 				<input type="number" style="margin-top: 15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 				
 				<div class="default_button_holder">
-					<a href="log_masuk.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
+					<input class="default_button" type="submit" value="HANTAR" id="btn_submit">
 				</div>
 			</form>
 		</div>
@@ -79,29 +81,34 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-		<script>
-	$("#btn_submit").click(function(e){
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>
+	
+	<script>
+		$("#btn_submit").click(function(e){
 
-		e.preventDefault();			
-
-		var kadp = $.trim($('#f_kp').val());
+		e.preventDefault();
 		
-		if (kadp.length == 0) {
-			alert('Sila Masukkan No Kad Pengenalan');
-			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
+		var kadp = $.trim($("#f_kp").val());
 
+		if (kadp.length == 0) {
+			$.alert({
+			title: 'Pengesahan Emel Pengaktifan',
+			content: 'Sila Isikan No Kad Pengenalan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+	
 		else {
 		
 			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_sahkan_emel_aktif.php",
-				type:'GET',
-				data:{
-					kadp : kadp
-				},
-				dataType:'xml',
-				error: function(e) {
-					console.log(e);
+				url:"http://eroy.me-tech.com.my/api/api_sahkan_emel_keaktifan.php",
+				type:'POST',
+				data: {
+					kadp: kadp
 				},
 				success:function(data){
 					console.log(data);
@@ -119,8 +126,9 @@
 					else{}
 				}
 			});
+			
 		}
-
+			
 	});
 	</script>
   

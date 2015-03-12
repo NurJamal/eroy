@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Menu</li>
+			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+	</div>	
+	<!-- end of header -->
+	
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">EMEL PENGAKTIFAN</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<div id="content">
+	<!-- form -->
+		<div class="_form">
+			<form id="" action="" method="POST">
+				<h5 id="H5" style="margin-top: 15px"><font color="#3f3f3f">PANDUAN:<br/>
+				Mohon semak terlebih dahulu di dalam akuan emel, sekiranya emel pengaktifan akaun tiada di dalam <i>Folder INBOX</i>, 
+				sila semak di dalam <i>Folder SPAM/JUNK</i>.</font></h5>
+				<input type="number" style="margin-top: 15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+				
+				<div class="default_button_holder">
+					<a href="log_masuk.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
+				</div>
+			</form>
+		</div>
+	<!-- end of form -->
+	</div>	
+		
+	
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+		<script>
+	$("#btn_submit").click(function(e){
+
+		e.preventDefault();			
+
+		var kadp = $.trim($('#f_kp').val());
+		
+		if (kadp.length == 0) {
+			alert('Sila Masukkan No Kad Pengenalan');
+			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/api_sahkan_emel_aktif.php",
+				type:'GET',
+				data:{
+					kadp : kadp
+				},
+				dataType:'xml',
+				error: function(e) {
+					console.log(e);
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert(json.message);
+						window.location.href = "log_masuk.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						alert(json.message);
+					}
+					else{}
+				}
+			});
+		}
+
+	});
+	</script>
+  
+  </body>
+</html>
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />	
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Hi, Suffian</li>
+			<li id="colored"><a href="index.html"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
+			<li class="title">Menu</li>
+			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
+			<li id="colored"><a href="semakan_permohonan_listing.html"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
+			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
+			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
+			<li id="colored"><a href="semakan_keaktifan_listing.html"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
+			<li id="colored"><a href="menu_pelaporan.html"><img src="img/pelaporan-icon.png" class="menu-icon"/>Pelaporan</a></li>
+			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="daftar_pengguna.html"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		
+			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+			<a href="status_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+		
+		
+	</div>	
+	<!-- end of header -->
+	
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<div id="content">
+		<h2 class="_orange_text">Pembayaran Carian Salinan Diperakui (Bercetak)</h2>
+		
+		<div class="selection">
+			<h5 id="_orange_title">Cara Pengambilan Dokumen</h5>
+			<form action="">
+				<select id="sel_ambildokumen" name="sel_ambildokumen" class="sel">
+				<option value="none"></option>
+				</select>
+			</form>		
+		</div>
+		
+		<div class="dis_selection">
+				<h5 id="_orange_title">Bentuk Bayaran</h5>	
+				<h2 id="_text">Atas Talian</h2>
+				
+		</div>
+		
+		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+		
+		<div class="display">
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
+		</div>
+		
+		<div class="default_button_holder">
+			<a href="menu_carian.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit">
+		</div></a>
+	</div>
+	
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<!-- <script>
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_cara_ambil_dokumen.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_ambildokumen").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var cara_doc = $(this).find("cara_ambil_dokumen");
+					$('#sel_ambildokumen').append('<option value="'+$(id).text()+'">'+$(cara_doc).text()+'</option>');
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+	</script> -->
+	
+	</body>
+</html>

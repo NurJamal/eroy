@@ -8,6 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -93,7 +95,22 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
  	<script>
+		function cekEmel(email) {
+			var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			return reg.test(email);
+		};
+		
+		function cekPass(str)
+		{
+			var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+			return re.test(str);
+		}
+		
 		$("#btn_submit").click(function(e){
 
 		e.preventDefault();
@@ -105,28 +122,82 @@
 		var emel = $.trim($("#f_emel").val());
 		
 		if (nama.length == 0) {
-			alert('Sila Masukkan Nama Penuh');
-			$('input[type="text"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Daftar Pengguna',
+			content: 'Sila Isikan Nama Penuh!',
+			confirm: function(){
+			 }
+			});
+			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
 		else if (kadp.length == 0) {
-			alert('Sila Masukkan No Kad Pengenalan');
-			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Daftar Pengguna',
+			content: 'Sila Isikan No Kad Pengenalan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
 		else if (katalaluan.length == 0) {
-			alert('Sila Masukkan Kata Laluan');
-			$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Daftar Pengguna',
+			content: 'Sila Isikan Kata Laluan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
+		
+		//else if(!cekPass(emel)){
+		//		$.alert({
+		//		title: 'Daftar Pengguna',
+		//		content: 'Sila Isikan Format Kata Laluan yang Betul!',
+		//		confirm: function(){
+		//		 }
+		//		});
+		//		$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		//}
 		
 		else if (sah_katalaluan.length == 0) {
-			alert('Sila Masukkan Sah Kata Laluan');
-			$('input[type="password"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$.alert({
+			title: 'Daftar Pengguna',
+			content: 'Sila Isikan Sahkan Kata Laluan!',
+			confirm: function(){
+			 }
+			});
+			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (emel.length == 0 && emel.match(/^([a-zA-Z0-9])+([.a-zA-Z0-9_-])*@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-]+)+/ == "")) {
-			alert('Sila Masukkan Emel');
-			$('input[type="email"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		else if (sah_katalaluan != katalaluan) {
+			$.alert({
+			title: 'Daftar Pengguna',
+			content: 'Sahkan Kata Laluan dan Kata Laluan Tidak Sama!',
+			confirm: function(){
+			 }
+			});
+			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (emel.length == 0) {
+				$.alert({
+				title: 'Daftar Pengguna',
+				content: 'Sila Isikan Emel!',
+				confirm: function(){}
+				});
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+		}
+		
+		else if(!cekEmel(emel)){
+				$.alert({
+				title: 'Daftar Pengguna',
+				content: 'Sila Isikan Format Emel yang Betul!',
+				confirm: function(){
+				 }
+				});
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 
 		
@@ -148,12 +219,22 @@
 					console.log(json);
 					if (json.status == 'ok') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Daftar Pengguna',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 						window.location.href = "log_masuk.html";
 					}
 					else if (json.status == 'error') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Daftar Pengguna',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 					}
 					else{}
 				}
