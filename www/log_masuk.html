@@ -10,6 +10,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -20,7 +21,7 @@
 			input.valid {background-color: white}
 		</style>
 	</head>
-	<body>
+	<body class="bodyClass">
 
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
@@ -85,11 +86,11 @@
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script>
 
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
@@ -97,7 +98,9 @@
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
-
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
 	<script>
 	$("#btn_submit").click(function(e){
@@ -137,6 +140,9 @@
 					kadp : kadp,
 					katalaluan : katalaluan
 				},
+				beforeSend: function() {
+					run_waitMe("orbit");
+				},
 				dataType:'xml',
 				error: function(e) {
 					console.log(e);
@@ -170,7 +176,7 @@
 				}
 			})
 			.done(function( html ) {
-				alert("FINISH");
+				$('body').waitMe('hide');
 			});
 			
 			
@@ -178,6 +184,11 @@
 		}
 
 	});
+	
+	
+	
+	
+
 	
 	/*var options = {
 	  date: new Date(),

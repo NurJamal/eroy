@@ -1,4 +1,5 @@
 
+
 	/*On Ready Event*/
 	/*Click To Top*/
 	$( document ).ready(function() {
@@ -120,11 +121,23 @@
             document.forms[0].TransactionCode.value = strTransactionCode;
         }
 		
+
+		
 });		
 		
 		
-		
-		
+	/*Loading Indicator*/
+	function run_waitMe(effect){
+		$('body').waitMe({
+			effect: effect,
+			text: 'Sila Tunggu...',
+			bg: 'rgba(255,255,255,0.7)',
+			color:'#000',
+			sizeW:'',
+			sizeH:'',
+			source: 'img.svg'
+		});
+	}
 		
 		
 		
