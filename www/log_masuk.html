@@ -141,12 +141,22 @@
 					console.log(json);
 					if (json.status == 'ok') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Log Masuk',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 						window.location.href = "halaman_utama_pengguna_biasa.html";
 					}
 					else if (json.status == 'error') {
 						console.log(json.status);
-						alert(json.message);
+						$.alert({
+						title: 'Log Masuk',
+						content: json.message,
+						confirm: function(){
+						 }
+						});
 					}
 					else{}
 				}
