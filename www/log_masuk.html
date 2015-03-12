@@ -7,6 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
@@ -17,7 +19,7 @@
 		</style>
 	</head>
 	<body>
-	
+
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
@@ -76,6 +78,7 @@
 		</div>
 	</div>	
 	
+	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -84,21 +87,28 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
 
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-
+    <script type="text/javascript" src="js/jquery-confirm.js"></script>
 	
 	<script>
 	$("#btn_submit").click(function(e){
 
 		e.preventDefault();			
-
+	
 		var kadp = $.trim($('#f_kp').val());
 		var katalaluan = $.trim($('#f_katalaluan').val());
 		
 		if (kadp.length == 0) {
-			alert('Sila Masukkan No Kad Pengenalan');
+			$.alert({
+							title: 'Alert!',
+							content: 'Alert! alert! alert!',
+							confirm: function(){
+							}
+						});
+			//alert('Sila Masukkan No Kad Pengenalan');
 			$('input[type="number"]').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
@@ -108,7 +118,7 @@
 		}
 
 		else {
-		
+			
 			$.ajax({
 				url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
 				type:'GET',
@@ -120,6 +130,7 @@
 				error: function(e) {
 					console.log(e);
 				},
+				
 				success:function(data){
 					console.log(data);
 					var json = $.xml2json(data);
@@ -132,15 +143,87 @@
 					else if (json.status == 'error') {
 						console.log(json.status);
 						alert(json.message);
+					
 					}
+					
 					else{}
 				}
+			})
+			.done(function( html ) {
+				alert("FINISH");
 			});
+			
+			
+
 		}
 
 	});
-	</script>
+	
+	/*var options = {
+	  date: new Date(),
+	  mode: 'date'
+	};
 
+	datePicker.show(options, function(date){
+	  alert("date result " + date);  
+	});*/
+	
+	
+	
+
+	/*$(function() {
+    $('#f_tlahir').datepicker({
+        onSelect: function(date) {
+            alert(date);
+        },
+   
+		});
+	});
+		/*var value = $("#f_tlahir").val();
+		alert(value);
+		var dob = new Date(value);
+		var today = new Date();
+		var userAge = (today.getFullYear() - dob.getFullYear());	
+		$('#d_umur').val(userAge);*/
+		
+	/*	var today = new Date();
+		age = dob.getFullYear() - today.getFullYear();
+		
+		$('#f_tlahir').datepicker({
+		 onSelect: function(value, ui) {
+		 var today = new Date(), 
+		 dob = new Date(value), 
+		 
+		 
+		 $('#d_umur').text(age);
+		 },
+		 maxDate: '+0d',
+		 yearRange: '1920:2010',
+		 changeMonth: true,
+		 changeYear: true
+		});
+	
+		 onSelect: function (date) {
+         var dob = new Date(date);
+         var today = new Date();
+
+        if (value.getFullYear() + 18 < today.getFullYear())
+        {
+            alert("Under 18");
+        }
+        else
+        {
+            alert(" Over 18");
+        }
+    }
+	
+	beforeSend: function() {
+		alert("LOADING");
+	},
+	
+	*/
+	
+        </script>
 
   </body>
 </html>
