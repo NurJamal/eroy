@@ -1,4 +1,5 @@
 
+
 	/*On Ready Event*/
 	/*Click To Top*/
 	$( document ).ready(function() {
@@ -108,12 +109,35 @@
 	   $.mobile.defaultPageTransition = 'none';
 	   $.mobile.defaultDialogTransition = 'none';
 } 
+
+
+	/*Set Payment Transaction Code*/
+	 function SetTransactionCode() {
+            var dtDate = new Date();
+            var strTransactionCode = dtDate.getFullYear().toString() + dtDate.getMonth().toString() + dtDate.getDate().toString() + dtDate.getTime().toString();
+            var strAmount = String(document.forms[0].Amount.value);
+            strAmount = strAmount.replace(".", "");
+            strTransactionCode = strTransactionCode.rpad("0", 27) + "001" + strAmount.rpad("0", 10);
+            document.forms[0].TransactionCode.value = strTransactionCode;
+        }
+		
+
 		
 });		
 		
 		
-		
-		
+	/*Loading Indicator*/
+	function run_waitMe(effect){
+		$('body').waitMe({
+			effect: effect,
+			text: 'Sila Tunggu...',
+			bg: 'rgba(255,255,255,0.7)',
+			color:'#000',
+			sizeW:'',
+			sizeH:'',
+			source: 'img.svg'
+		});
+	}
 		
 		
 		
