@@ -151,15 +151,15 @@
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		//else if(!cekPass(emel)){
-		//		$.alert({
-		//		title: 'Daftar Pengguna',
-		//		content: 'Sila Isikan Format Kata Laluan yang Betul!',
-		//		confirm: function(){
-		//		 }
-		//		});
-		//		$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		//}
+		else if(!cekPass(katalaluan)){
+				$.alert({
+				title: 'Daftar Pengguna',
+				content: 'Sila Isikan Format Kata Laluan yang Betul!',
+				confirm: function(){
+				 }
+				});
+				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
 		
 		else if (sah_katalaluan.length == 0) {
 			$.alert({
