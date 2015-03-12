@@ -550,10 +550,10 @@ input[type=checkbox] {
 	padding: 1px 2px; 
 	color: #f9690e; 
 	margin-right: 10px; 
-	/*  font-weight: bold;
+	/*  font-weight: bold; */
 } 
 
-/* .checkbox label{
+ .checkbox label{
 	color: #f9690e;
 	font-size: 18px;
 	margin-right: 15px; 
@@ -566,7 +566,7 @@ input[type=checkbox] {
 	margin-right: 15px; 
 	word-wrap:break-word;
 }
- */
+ 
  
 .li1{
 	color: #f9690e;
