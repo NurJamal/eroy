@@ -143,6 +143,7 @@
 				beforeSend: function() {
 					run_waitMe();
 				},
+				timeout: ajaxTimeout,
 				dataType:'xml',
 				error: function(e) {
 					console.log(e);
@@ -160,10 +161,9 @@
 							  	window.location.href = "halaman_utama_pengguna_biasa.html";
 						 }
 						});*/
-						loc = "halaman_utama_pengguna_biasa.html"
-						ajax_delay(loc);
 						
-						
+						//beforeSend: function (xhr) { xhr.withCredentials = true; },
+						window.location.href = "halaman_utama_pengguna_biasa.html"
 					}
 					else if (json.status == 'error') {
 						console.log(json.status);
