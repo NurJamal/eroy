@@ -127,11 +127,11 @@
 		
 		
 	/*Loading Indicator*/
-	function run_waitMe(effect){
+	function run_waitMe(){
 		$('body').waitMe({
-			effect: effect,
-			text: 'Sila Tunggu...',
-			bg: 'rgba(255,255,255,0.7)',
+			effect: "timer",
+			text: '',
+			bg: 'rgba(0,0,0,0.2)',
 			color:'#000',
 			sizeW:'',
 			sizeH:'',
@@ -139,7 +139,14 @@
 		});
 	}
 		
-		
+	function ajax_delay(str){
+		setTimeout(WindowRedirect(str),123000);
+	}
+
+	function WindowRedirect(str)
+	{
+		window.location.href = str;
+	}
 		
 		
 		

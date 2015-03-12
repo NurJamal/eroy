@@ -4,8 +4,8 @@ Author: vadimsva
 Github: https://github.com/vadimsva/waitMe
 */
 .waitMe_container {position:relative;transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
-body.waitMe_container {position:fixed;width:100%;height:100%}
-.waitMe_container .waitMe {position:absolute;top:0;left:0;right:0;bottom:0;z-index:9989;text-align:center}
+body.waitMe_container {position:absolute;width:100%;height:100%}
+.waitMe_container .waitMe {position:absolute;top:0;left:0;right:0;bottom:0;z-index:5;text-align:center}
 .waitMe_container .waitMe * {font-family:sans-serif;font-size:14px;font-weight:initial;font-style:initial;color:initial;text-decoration:initial;text-transform:initial;padding:initial;margin:initial}
 .waitMe_container .waitMe .waitMe_content {position:absolute;width:100%;top:50%}
 .waitMe_container .waitMe .waitMe_progress {position:relative}
@@ -14,7 +14,7 @@ body.waitMe_container {position:fixed;width:100%;height:100%}
 
 /* before load animation */
 body.waitMe_body {overflow:hidden}
-body.waitMe_body .waitMe_container:not([data-waitme_id]) {position:fixed;z-index:9989;top:0;bottom:0;left:0;right:0;background:#fff}
+body.waitMe_body .waitMe_container:not([data-waitme_id]) {position:fixed;z-index:5;top:0;bottom:0;left:0;right:0;background:#fff}
 body.waitMe_body .waitMe_container:not([data-waitme_id]) > div {-webkit-animation-fill-mode:both;animation-fill-mode:both;position:absolute}
 body.waitMe_body .waitMe_container.progress > div {
 width:0;height:3px;top:0;left:0;background:#000;box-shadow:-5px 0 5px 2px rgba(0,0,0,0.2);
