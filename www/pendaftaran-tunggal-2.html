@@ -184,9 +184,10 @@
 	<script>
 
 	
-	function Alamat(f) {
+	function Alamat(f) 
+	{
 	if(f.alamat_sama.checked == true) 
-	{	
+		{	
 		var copythis = $("#alamat1").val();
 		$("#alamat_pos1").val(copythis);
 		
@@ -204,15 +205,15 @@
 		
 		var copythis = $("#daerah").val();
 		$("#daerah_pos").val(copythis);
-	}
+		}
+		
+	else{
+	
+		$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #negeri_pos, #daerah_pos').val('');
+		
+		}
 	}
 	
-	function setSelect(name1, name2){
-		var select1 = document.forms.formname.elements[name1];
-		var select2 = document.forms.formname.elements[name2];
-		select1.selectedIndex = select2.selectedIndex;
-	}
-
 	
 		$("#btn_submit").click(function(e){
 
@@ -235,14 +236,22 @@
 				else {
 				
 					$.ajax({
-						url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+						url:"http://eroy.me-tech.com.my/eroy/api/api_butir2_pertubuhan.php
+",
 						type:'POST',
 						data: {
-							nama : nama,
-							kadp: kadp,
-							katalaluan : katalaluan,
-							sah_katalaluan : sah_katalaluan,
-							emel_pertubuhan : emel_pertubuhan
+							alamat1 : alamat1,
+							alamat2 : alamat2,
+							alamat3 : alamat3,
+							poskod : poskod,
+							negeri : negeri,
+							daerah : daerah,
+							alamat_pos1 : alamat_pos1,
+							alamat_pos2 : alamat_pos2,
+							alamat_pos3 : alamat_pos3,
+							poskod_pos : poskod_pos,
+							negeri_pos : negeri_pos,
+							daerah_pos : daerah_pos
 						},
 						success:function(data){
 							console.log(data);

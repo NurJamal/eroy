@@ -235,15 +235,14 @@
 					console.log($(this).text());
 					var npertubuhan = $(this).find("nama_pertubuhan");
 					var no_sijil = $(this).find("no_sijil");
-					
-					
+
 					$( "#f_sijil" ).keyup(function() {
-						var input = $(this).val(); // We take the input value
-							if ( input.length >= 5 ){
-									
-									$('#d_npertubuhan').val($(npertubuhan).text());
-								}
-						});
+						var input = $(this).val(); //take the input value
+						if ( input.length >= 5 ){
+								
+							$('#d_npertubuhan').val($(npertubuhan).text());
+						}
+					});
 				});
 
 			},
