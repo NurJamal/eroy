@@ -1,5 +1,0 @@
-1. waitMe.js 
-- Use for  Ajax loading indicator.
-
-2. jquery-confirm.min.js/jquery-confirm.js
-- Use for confirmation box upon any action.
