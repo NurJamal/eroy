@@ -7,15 +7,22 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>		
+		</div>	
+		
+		<div id="loadingLayer"></div>
+		
 		<style>
-			#sbox{
-				padding-left: 2.5%;
-				padding-right: 2%;
-			}
+		#sbox
+		{
+			padding-left: 2.5%;
+			padding-right: 2%;
+		}
 		</style>
+		
 	</head>
 	<body>
 
@@ -40,32 +47,122 @@
 	</div>	
 	<!-- end of header -->
 
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-				<input type="text" class="form-control" placeholder="Carian Nama Pertubuhan" name="srch-term" id="srch-term">
-				<div class="input-group-btn">
-					<a href="carian_asas_listing.html"><button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search icon">
-					</i></button></a>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+					<input type="text" class="form-control" placeholder="Carian Nama Pertubuhan" name="n_carian" id="n_carian">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit" id="btn_submit"><i class="glyphicon glyphicon-search icon">
+						</i></button>
+					</div>
 				</div>
-			</div>
-	</div>
-	<!-- end of header-title-->
+		</div>
+		<!-- end of header-title-->
 
-	<div id="content">
-		<h1 class="text1" style="margin-top:15px"><b>Aplikasi Pendaftaran Pertubuhan Belia</b></h1>
-		<h1 class="text2">Kementerian Belia dan Sukan Malaysia</h1>
-		<img src="img/jata.png" class="logo2"/>
-		<div class="default_button_holder">
-			<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
-		</div>	
+		<div id="content">
+			<h1 class="text1" style="margin-top:15px"><b>Aplikasi Pendaftaran Pertubuhan Belia</b></h1>
+			<h1 class="text2">Kementerian Belia dan Sukan Malaysia</h1>
+			<img src="img/jata.png" class="logo2"/>
+			<div class="default_button_holder">
+				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
+			</div>	
+		</div>
 	</div>
 
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();			
+	
+		var carian_nama = $.trim($('#n_carian').val());
+		
+		if (carian_nama.length == 0 || carian_nama.length < 10) 
+		{
+			alert('Sila Masukkan Sekurang-kurangnya 10 Aksara Untuk Semak Nama Pertubuhan');
+		}
+		
+		else
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_carian_asas.php",
+					type:'POST',
+					data:
+					{
+						carian_nama : carian_nama
+					},
+					beforeSend: function()
+					{
+						run_waitMe();
+					},
+					timeout: ajaxTimeout,
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Halaman Utama',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+							window.location.href = "carian_listing_test.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Halaman Utama',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+						}
+						else{}
+					}
+				}
+			)
+		}
+
+	});	
+    </script>
+	
 	</body>
 </html>

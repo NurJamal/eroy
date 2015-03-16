@@ -2,20 +2,18 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
 	</head>
 	<body>
-	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
@@ -35,11 +33,8 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="carian_asas_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-	
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 
@@ -50,37 +45,55 @@
 				<h1 class="main_title">CARIAN</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
 
 	<!-- list -->
 	<div id="content">
-		<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-		<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
+		<a href="carian_asas_papar.html" style="text-decoration:none;">
+		<div id="box">
+				<h2 class="title" id="nama_pertubuhan"></h2>
+		</div></a>
 		
-		<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-		
-		<h2 class="_orange_text">Alamat Surat Menyurat</h2>
-		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-		
-		<h2 class="_orange_text">Peringkat Pertubuhan</h2>
-		<h1 class="_dark_text">Daerah</h1>
-		
-		<h2 class="_orange_text">No Daftar/No Sijil</h2>
-		<h1 class="_dark_text">T45678</h1>
-		
-		<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
-		<h1 class="_dark_text">20/10/2014</h1>
-		
-		<h2 class="_orange_text">Status</h2>
-		<h1 class="_dark_text">Aktif</h1>
 	</div>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	$(function()
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/api_carian_asas.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("nama_pertubuhan").each(function()
+					{
+						console.log($(this).text());
+						var nama_pertubuhan = $(this).find("nama_pertubuhan");
+						$('#nama_pertubuhan').val($(nama_pertubuhan).text());
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	</script>
+	
 	</body>
 </html>

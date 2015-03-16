@@ -169,7 +169,18 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							window.location.href = "halaman_utama_pengguna_biasa.html"
+							$.alert
+							(
+								{
+									title: 'Log Masuk',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+							window.location.href = "halaman_utama_pengguna_biasa.html";
 						}
 						else if (json.status == 'error') 
 						{

@@ -13,6 +13,9 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+		
+		<div id="loadingLayer"></div>
+		
 	</head>
 	<body>
 	
@@ -40,42 +43,44 @@
 	</div>		
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 	
-	<div id="content">
-		<form id="" action="" method="POST">
-			<div class="_form">
-				<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
-			</div>	
-			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
-				<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
-			</div>
-			<div class="_form">
-				<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>	
-				<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>	
-				<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')" id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
-			</div>
-			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
-				<input type="text" id="d_umur" name="d_umur" Onchange="return calcUmur();" placeholder="Umur" disabled><br/>
-			</div>
-			<div class="_form">
-				<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-				<input type="tel" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
-			</div>			
+		<div id="content">
+			<form id="" action="" method="POST">
+				<div class="_form">
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
+				</div>	
+				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
+				</div>
+				<div class="_form">
+					<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>	
+					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>	
+					<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')" id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+				</div>
+				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+					<input type="text" id="d_umur" name="d_umur" Onchange="return calcUmur();" placeholder="Umur" disabled><br/>
+				</div>
+				<div class="_form">
+					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+					<input type="tel" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
+				</div>			
 
-			<div class="default_button_holder">
-				<input class="default_button" type="submit" value="MOHON" id="btn_submit">
-			</div>
-		</form>
-	</div>	
+				<div class="default_button_holder">
+					<input class="default_button" type="submit" value="MOHON" id="btn_submit">
+				</div>
+			</form>
+		</div>	
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -92,6 +97,9 @@
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
 	<script>
 	function ValidateEmail(email) 
@@ -218,6 +226,16 @@
 						emel : emel,
 						no_tel : no_tel
 					},
+					beforeSend: function()
+					{
+						run_waitMe();
+					},
+					timeout: ajaxTimeout,
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -226,13 +244,33 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							alert(json.message);
+							$.alert
+							(
+								{
+									title: 'Tukar ID Setiausaha',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
 							window.location.href = "index.html";
 						}
 						else if (json.status == 'error')
 						{
 							console.log(json.status);
-							alert(json.message);
+							$.alert
+							(
+								{
+									title: 'Tukar ID Setiausaha',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
 						}
 						else{}
 					}
