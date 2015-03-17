@@ -66,33 +66,7 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	$(function()
-	{
-		$.ajax
-		(
-			{
-				type: "GET",
-				url: "http://eroy.me-tech.com.my/api/api_carian_asas.php",
-				dataType: "xml",
-				success: function(xml)
-				{
-					var xmlDoc = $.parseXML(xml),
-					$xml = $(xmlDoc);
-					$(xml).find("nama_pertubuhan").each(function()
-					{
-						console.log($(this).text());
-						var nama_pertubuhan = $(this).find("nama_pertubuhan");
-						$('#nama_pertubuhan').val($(nama_pertubuhan).text());
-					});
-				},
-				error: function() 
-				{
-					console.log("An error occurred while processing XML file.");
-				}
-			}
-		);
 
-	});
 	</script>
 	
 	</body>

@@ -2,18 +2,14 @@
 <html lang="en">
 	<head>    
 		<meta charset="utf-8">
-<<<<<<< HEAD
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-=======
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta name="HandheldFriendly" content="True">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-		<!-- css -->
->>>>>>> f6cdd03e9201ae6cc24cbf9a1337282d4c91d3a5
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
@@ -32,6 +28,8 @@
 		
 	</head>
 	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
@@ -89,7 +87,10 @@
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-<<<<<<< HEAD
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
@@ -98,14 +99,22 @@
 	$("#btn_submit").click(function(e)
 	{
 		e.preventDefault();			
-	
+
 		var carian_nama = $.trim($('#n_carian').val());
 		
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
-			alert('Sila Masukkan Sekurang-kurangnya 10 Aksara Untuk Semak Nama Pertubuhan');
+			$.alert
+			(
+				{
+					title: 'Halaman Utama',
+					content: 'Sila masukkan sekurang-kurangnya 10 aksara untuk semak nama pertubuhan',
+					confirm: function(){}
+				}
+			);
+			$('#n_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
+
 		else
 		{
 			$.ajax
@@ -172,8 +181,5 @@
 	});	
     </script>
 	
-=======
-
->>>>>>> f6cdd03e9201ae6cc24cbf9a1337282d4c91d3a5
 	</body>
 </html>
