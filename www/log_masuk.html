@@ -2,12 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
-		
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
@@ -15,20 +14,22 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
+		
 		<div id="loadingLayer"></div>
 		
 		<style>
 			input.invalid {outline-color: #FF0000}
 			input.valid {background-color: white}
 		</style>
+		
 	</head>
 	<body>
+	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
 		<ul>
-			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
 			<li class="title">Menu</li>
 			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
 			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
@@ -43,10 +44,16 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
+<<<<<<< HEAD
+		<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
+		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+=======
 			<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
 			<a href="#" onclick="back();"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+>>>>>>> f6cdd03e9201ae6cc24cbf9a1337282d4c91d3a5
 	</div>		
 	<!-- end of header -->
+	
 	<div class="containerBlock">
 		<!-- header title -->
 		<div class="content_title">
@@ -60,8 +67,7 @@
 		<!-- end of header-title-->
 		
 		<div id="content">
-		
-		<!-- form -->
+			<!-- form -->
 			<div class="_form">
 				<form id="login_form" action="" method="POST">
 					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
@@ -72,7 +78,7 @@
 					</div>
 				</form>
 			</div>
-		<!-- end of form -->
+			<!-- end of form -->
 		
 			<div class="multi-links">
 				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
@@ -80,8 +86,8 @@
 				<h5 align="center"><a href="pengesahan_emel_pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
 			</div>
 		</div>	
-	
 	</div>
+	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -103,99 +109,111 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var value = window.localStorage.getItem("LOGIN");
+	//var value = window.localStorage.getItem("LOGIN");
 	//alert(value);
 	
-	$("#btn_submit").click(function(e){
-
+	$("#btn_submit").click(function(e)
+	{
 		e.preventDefault();			
 	
 		var kadp = $.trim($('#f_kp').val());
 		var katalaluan = $.trim($('#f_katalaluan').val());
 		
-		if (kadp.length == 0) {
-			$.alert({
-				title: 'Log Masuk',
-				content: 'Sila Isikan No Kad Pengenalan!',
-				confirm: function(){
-				 }
-			});
-
+		if (kadp.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Log Masuk',
+					content: 'Sila Isikan No Kad Pengenalan!',
+					confirm: function(){}
+				}
+			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (katalaluan == 0) {
-			$.alert({
-				title: 'Log Masuk',
-				content: 'Sila Isikan Kata Laluan!',
-				confirm: function(){
-				 }
-			});
+		else if (katalaluan == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Log Masuk',
+					content: 'Sila Isikan Kata Laluan!',
+					confirm: function(){}
+				}
+			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
-		else {
-			
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
-				type:'POST',
-				data:{
-					kadp : kadp,
-					katalaluan : katalaluan
-				},
-				beforeSend: function() {
-					run_waitMe();
-				},
-				timeout: ajaxTimeout,
-				dataType:'xml',
-				error: function(e) {
-					console.log(e);
-				},
-					success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						/*$.alert({
-							title: 'Log Masuk',
-							content: json.message,
-							confirm: function(){
-							  	window.location.href = "halaman_utama_pengguna_biasa.html";
-						 }
-						});*/
-						
-						//beforeSend: function (xhr) { xhr.withCredentials = true; },
-						window.location.href = "halaman_utama_pengguna_biasa.html"
+		else
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
+					type:'POST',
+					data:
+					{
+						kadp : kadp,
+						katalaluan : katalaluan
+					},
+					beforeSend: function()
+					{
+						run_waitMe();
+					},
+					timeout: ajaxTimeout,
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Log Masuk',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+							window.location.href = "halaman_utama_pengguna_biasa.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Log Masuk',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+						}
+						else{}
 					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						//alert(json.message);
-						$.alert({
-							title: 'Log Masuk',
-							content: json.message,
-							confirm: function(){
-								$('body').waitMe('hide');
-						 }
-						});
-					}
-					
-					else{}
 				}
-			})
-			
-			
-			
-
+			)
 		}
 
-	});
+	});	
+    </script>
 	
-	
-	
-	
-
-	
+<<<<<<< HEAD
+	</body>
+=======
 	/*var options = {
 	  date: new Date(),
 	  mode: 'date'
@@ -268,5 +286,6 @@
         </script>
 
   </body>
+>>>>>>> f6cdd03e9201ae6cc24cbf9a1337282d4c91d3a5
 </html>
 

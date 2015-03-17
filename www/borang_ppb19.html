@@ -81,7 +81,7 @@
 		<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
 		<div class="inform">
-				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperCase()"><br/>
 		</div>
 		<div class="disp">
 				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
@@ -112,7 +112,7 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	<script>
-	function upperF() {
+	function upperCase() {
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}

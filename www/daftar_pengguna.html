@@ -2,17 +2,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+		
+		<div id="loadingLayer"></div>
+		
 	</head>
 	<body>
 	
@@ -36,52 +41,50 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">DAFTAR PENGGUNA</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">DAFTAR PENGGUNA</h1>
+				</div>
+			</div>
+		
+		</div>
+		<!-- end of header-title-->
+
+		<div id="content">
+		<!-- form -->
+			<div class="_form">
+				<form id="" action="" method="POST">
+					<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh" onkeyup="upperCase()"><br/>
+					
+					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+					
+					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
+					
+					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
+					
+					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
+					
+					<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
+					placeholder="Sahkan Kata Laluan"><br/>
+					
+					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
+					
+					<div class="default_button_holder">
+						<input class="default_button" type="submit" value="DAFTAR" id="btn_submit">
+					</div>
+				</form>
 			</div>
 		</div>
-	
+		<!-- end of form -->
 	</div>
-	<!-- end of header-title-->
-
-	<div id="content">
-	<!-- form -->
-		<div class="_form">
-			<form id="" action="" method="POST">
-				<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-				
-				<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-				
-				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
-				
-				<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-				
-				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
-				
-				<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
-				placeholder="Sahkan Kata Laluan"><br/>
-				
-				<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-				
-				<div class="default_button_holder">
-					<input class="default_button" type="submit" value="DAFTAR" id="btn_submit">
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- end of form -->
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -99,19 +102,30 @@
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
 	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
  	<script>
-		function cekEmel(email) {
-			var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-			return reg.test(email);
-		};
+	function upperCase() 
+	{
+		var x = document.getElementById("f_nama");
+		x.value = x.value.toUpperCase();
+	}
+	
+	function cekEmel(email) 
+	{
+		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		return reg.test(email);
+	};
 		
-		function cekPass(str)
-		{
-			var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-			return re.test(str);
-		}
+	function cekPass(str)
+	{
+		var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+		return re.test(str);
+	}
 		
-		$("#btn_submit").click(function(e){
+	$("#btn_submit").click(function(e)
+	{
 
 		e.preventDefault();
 		
@@ -121,128 +135,178 @@
 		var sah_katalaluan = $.trim($("#f_sah_katalaluan").val());
 		var emel = $.trim($("#f_emel").val());
 		
-		if (nama.length == 0) {
-			$.alert({
-			title: 'Daftar Pengguna',
-			content: 'Sila Isikan Nama Penuh!',
-			confirm: function(){
-			 }
-			});
+		if (nama.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Nama Penuh',
+					confirm: function(){}
+				}
+			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
-		else if (kadp.length == 0) {
-			$.alert({
-			title: 'Daftar Pengguna',
-			content: 'Sila Isikan No Kad Pengenalan!',
-			confirm: function(){
-			 }
-			});
+
+		else if (kadp.length == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan No Kad Pengenalan',
+					confirm: function(){}
+				}
+			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (katalaluan.length == 0) {
-			$.alert({
-			title: 'Daftar Pengguna',
-			content: 'Sila Isikan Kata Laluan!',
-			confirm: function(){
-			 }
-			});
+		else if (katalaluan.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Kata Laluan',
+					confirm: function(){}
+				}
+			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if(!cekPass(katalaluan)){
-				$.alert({
-				title: 'Daftar Pengguna',
-				content: 'Sila Isikan Format Kata Laluan yang Betul!',
-				confirm: function(){
-				 }
-				});
-				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		else if(!cekPass(katalaluan))
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Format Kata Laluan yang Betul',
+					confirm: function(){}
+				}
+			);
+			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (sah_katalaluan.length == 0) {
-			$.alert({
-			title: 'Daftar Pengguna',
-			content: 'Sila Isikan Sahkan Kata Laluan!',
-			confirm: function(){
-			 }
-			});
+		else if (sah_katalaluan.length == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Sahkan Kata Laluan',
+					confirm: function(){}
+				}
+			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (sah_katalaluan != katalaluan) {
-			$.alert({
-			title: 'Daftar Pengguna',
-			content: 'Sahkan Kata Laluan dan Kata Laluan Tidak Sama!',
-			confirm: function(){
-			 }
-			});
+		else if (sah_katalaluan != katalaluan)
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sahkan Kata Laluan dan Kata Laluan Tidak Sama',
+					confirm: function(){}
+				}
+			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (emel.length == 0) {
-				$.alert({
-				title: 'Daftar Pengguna',
-				content: 'Sila Isikan Emel!',
-				confirm: function(){}
-				});
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+		else if (emel.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Emel',
+					confirm: function(){}
+				}
+			);
+			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 		}
 		
-		else if(!cekEmel(emel)){
-				$.alert({
-				title: 'Daftar Pengguna',
-				content: 'Sila Isikan Format Emel yang Betul!',
-				confirm: function(){
-				 }
-				});
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		else if(!cekEmel(emel))
+		{
+			$.alert
+			(
+				{
+					title: 'Daftar Pengguna',
+					content: 'Sila Isikan Format Emel yang Betul',
+					confirm: function(){}
+				}
+			);
+			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 
-		
 		else {
 		
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
-				type:'POST',
-				data: {
-					nama : nama,
-					kadp: kadp,
-					katalaluan : katalaluan,
-					sah_katalaluan : sah_katalaluan,
-					emel : emel
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						$.alert({
-						title: 'Daftar Pengguna',
-						content: json.message,
-						confirm: function(){
-						 }
-						});
-						window.location.href = "log_masuk.html";
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+					type:'POST',
+					data:
+					{
+						nama : nama,
+						kadp: kadp,
+						katalaluan : katalaluan,
+						sah_katalaluan : sah_katalaluan,
+						emel : emel
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					timeout: ajaxTimeout,
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Daftar Pengguna',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+							window.location.href = "log_masuk.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Daftar Pengguna',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+						}
+						else{}
 					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						$.alert({
-						title: 'Daftar Pengguna',
-						content: json.message,
-						confirm: function(){
-						 }
-						});
-					}
-					else{}
 				}
-			});
-			
+			);	
 		}
-			
 	});
 	</script>
-</body>
+	
+	</body>
 </html>

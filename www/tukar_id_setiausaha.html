@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
@@ -14,6 +13,9 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+		
+		<div id="loadingLayer"></div>
+		
 	</head>
 	<body>
 	
@@ -22,7 +24,6 @@
 	<!-- slide menu right -->
 	<nav class="menu slide-menu-right">
 		<ul>
-			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
 			<li class="title">Menu</li>
 			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
 			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
@@ -42,48 +43,44 @@
 	</div>		
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">TUKAR ID SETIAUSAHA</h1>
+				</div>
 			</div>
 		</div>
+		<!-- end of header-title-->
 	
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-		<form id="" action="" method="POST">
-			<div class="_form">
+		<div id="content">
+			<form id="" action="" method="POST">
+				<div class="_form">
 					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
-			</div>	
-			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+				</div>	
+				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
-			</div>
-			<div class="_form">
-					<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
-					
-					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-					
-					<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')"  id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
-					
-					<!-- <input type="text" name="f_tlahir" id="f_tlahir" placeholder="Tarikh Lahir"><br/> -->
-			</div>
-			<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
+				</div>
+				<div class="_form">
+					<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>	
+					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>	
+					<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')" id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+				</div>
+				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_umur" name="d_umur" Onchange="return calcUmur();" placeholder="Umur" disabled><br/>
-			</div>
-			<div class="_form">
+				</div>
+				<div class="_form">
 					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
 					<input type="tel" name="f_telefon" id="f_telefon" placeholder="No Telefon"><br/>
-			</div>			
+				</div>			
 
-			
-					<div class="default_button_holder">
-						<input class="default_button" type="submit" value="MOHON" id="btn_submit">
-					</div>
-		</form>
-	</div>	
+				<div class="default_button_holder">
+					<input class="default_button" type="submit" value="MOHON" id="btn_submit">
+				</div>
+			</form>
+		</div>	
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -101,152 +98,218 @@
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>
 	
-	<script>
-		function ValidateEmail(email) {
-			var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-			return reg.test(email);
-		};
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
-		$("#btn_submit").click(function(e){
+	<script>
+	function ValidateEmail(email) 
+	{
+		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		return reg.test(email);
+	};
 
+	$("#btn_submit").click(function(e)
+	{
 		e.preventDefault();
-		
+	
 		var no_sijil = $.trim($("#f_sijil").val());
 		var nama = $.trim($("#f_nama").val());
 		var kadp = $.trim($("#f_kp").val());
 		var t_lahir = $.trim($('#f_tlahir').val());
 		var emel = $.trim($('#f_emel').val());
 		var no_tel = $.trim($('#f_telefon').val());
-		
-		if (no_sijil.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan No Sijil!',
-			confirm: function(){
-			 }
-			});
+	
+		if (no_sijil.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan No Sijil!',
+					confirm: function(){}
+				}
+			);
 			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
-		else if (nama.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan Nama Penuh!',
-			confirm: function(){
-			 }
-			});
+	
+		else if (nama.length == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan Nama Penuh!',
+					confirm: function(){}
+				}
+			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (kadp.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan No Kad Pengenalan!',
-			confirm: function(){
-			 }
-			});
+		else if (kadp.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan No Kad Pengenalan!',
+					confirm: function(){}
+				}
+			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (t_lahir.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan Tarikh Lahir!',
-			confirm: function(){
-			 }
-			});
+		else if (t_lahir.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan Tarikh Lahir!',
+					confirm: function(){}
+				}
+			);
 			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (emel.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan Emel!',
-			confirm: function(){}
-			});
+		else if (emel.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan Emel!',
+					confirm: function(){}
+				}
+			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 		}
 		
-		else if(!ValidateEmail(emel)){
-				$.alert({
-				title: 'Tukar ID Setiausahaa',
-				content: 'Sila Isikan Format Emel yang Betul!',
-				confirm: function(){
-				 }
-				});
+		else if(!ValidateEmail(emel))
+		{
+				$.alert
+				(
+					{
+						title: 'Tukar ID Setiausahaa',
+						content: 'Sila Isikan Format Emel yang Betul!',
+						confirm: function(){}
+					}
+				);
 				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
-		else if (no_tel.length == 0) {
-			$.alert({
-			title: 'Tukar ID Setiausaha',
-			content: 'Sila Isikan No Telefon!',
-			confirm: function(){
-			 }
-			});
+	
+		else if (no_tel.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Tukar ID Setiausaha',
+					content: 'Sila Isikan No Telefon!',
+					confirm: function(){}
+				}
+			);
 			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
-		
-		else {
-		
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
-				type:'POST',
-				data: {
-					no_sijil : no_sijil,
-					nama : nama,
-					kadp: kadp,
-					t_lahir : t_lahir,
-					emel : emel,
-					no_tel : no_tel
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						alert(json.message);
-						window.location.href = "index.html";
+	
+		else 
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
+					type:'POST',
+					data: 
+					{
+						no_sijil : no_sijil,
+						nama : nama,
+						kadp: kadp,
+						t_lahir : t_lahir,
+						emel : emel,
+						no_tel : no_tel
+					},
+					beforeSend: function()
+					{
+						run_waitMe();
+					},
+					timeout: ajaxTimeout,
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Tukar ID Setiausaha',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+							window.location.href = "index.html";
+						}
+						else if (json.status == 'error')
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Tukar ID Setiausaha',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
+						}
+						else{}
 					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						alert(json.message);
-					}
-					else{}
 				}
-			});
-			
+			);	
 		}
 			
 	});
-	
-	$(function() {
 
-		$.ajax({
-		type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var npertubuhan = $(this).find("nama_pertubuhan");
-					var no_sijil = $(this).find("no_sijil");
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_pertubuhan_info").each(function()
+					{
+						console.log($(this).text());
+						var npertubuhan = $(this).find("nama_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
 
-					$( "#f_sijil" ).keyup(function() {
-						var input = $(this).val(); //take the input value
-						if ( input.length >= 5 ){
-								
-							$('#d_npertubuhan').val($(npertubuhan).text());
-						}
+						$( "#f_sijil" ).keyup(function()
+						{
+							var input = $(this).val(); //take the input value
+							if ( input.length >= 5 )
+							{	
+								$('#d_npertubuhan').val($(npertubuhan).text());
+							}
+						});
 					});
-				});
-
-			},
-		});
+				},
+			}
+		);
 	});
 	</script>
 	
