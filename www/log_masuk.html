@@ -106,9 +106,6 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	
-	//alert(value);
-	
 	$("#btn_submit").click(function(e)
 	{
 		e.preventDefault();			
@@ -141,8 +138,9 @@
 			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		else
+		else 
 		{
+		
 			$.ajax
 			(
 				{
@@ -153,11 +151,6 @@
 						kadp : kadp,
 						katalaluan : katalaluan
 					},
-					beforeSend: function()
-					{
-						run_waitMe();
-					},
-					timeout: ajaxTimeout,
 					dataType:'xml',
 					error: function(e) 
 					{
@@ -171,20 +164,15 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							window.localStorage.setItem("LOGIN", kadp);
-							var keyname = window.localStorage.kadp(i);
-							var value = window.localStorage.getItem("LOGIN");
 							$.alert
 							(
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
+							window.localStorage.setItem('kp', kadp);
 							window.location.href = "halaman_utama_pengguna_biasa.html";
 						}
 						else if (json.status == 'error') 
@@ -195,20 +183,17 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
 					}
 				}
-			)
+			);
 		}
 
-	});	
+	});
     </script>
 
   </body>

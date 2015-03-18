@@ -22,7 +22,7 @@
 		
 		<ul>
 			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
-			<li class="title" id="session_name">Hi, </li>
+			<li class="title" id="session_indicator">Hi, </li>
 			<li id="colored"><a href="#" onclick="logKeluar();"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
 			<li class="title">Menu</li>
 			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
@@ -78,10 +78,10 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-	<!--<script>
-	 var value = window.localStorage.getItem("LOGIN");
-	 alert(value);
-	</script>-->
-
+	<script>
+		var value = window.localStorage.getItem('kp');
+		 $('#session_indicator').append(value);
+	</script>
+	
 	</body>
 </html>
