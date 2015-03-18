@@ -248,16 +248,6 @@
 						mesej : mesej,
 						captcha : captcha
 					},
-					beforeSend: function()
-					{
-						run_waitMe();
-					},
-					timeout: ajaxTimeout,
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
 					success:function(data)
 					{
 						console.log(data);
@@ -271,10 +261,7 @@
 								{
 									title: 'Hubungi Kami',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 							window.location.href = "index.html";
@@ -287,10 +274,7 @@
 								{
 									title: 'Hubungi Kami',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
