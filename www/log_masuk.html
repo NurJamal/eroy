@@ -28,18 +28,9 @@
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
-	<nav class="menu slide-menu-right">
-		<ul>
-			<li class="title">Menu</li>
-			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
-			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
-			<li class="title">Pengenalan</li>
-			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
-			<li></li>
-		</ul>
-	</nav>
+	<div id="navigation"></div>
 	<!-- /slide menu right -->
+
 	
 	<!-- header -->
 	<div id="head">
@@ -156,6 +147,10 @@
 					{
 						console.log(e);
 					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -164,15 +159,8 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Log Masuk',
-									content: json.message,
-									confirm: function(){}
-								}
-							);
-							window.localStorage.setItem('kp', kadp);
+							window.localStorage.setItem("NAMA", json.details.nama);
+							window.localStorage.setItem("LOGIN", kadp);
 							window.location.href = "halaman_utama_pengguna_biasa.html";
 						}
 						else if (json.status == 'error') 
@@ -183,11 +171,13 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function(){}
+									confirm: function(){
+									}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			);

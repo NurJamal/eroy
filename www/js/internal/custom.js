@@ -105,12 +105,6 @@
 		lastScrollTop = st;
 	}
 
-	
-	if (navigator.userAgent.indexOf("Android") != -1) {
-	   $.mobile.defaultPageTransition = 'none';
-	   $.mobile.defaultDialogTransition = 'none';
-} 
-
 
 	/*Set Payment Transaction Code*/
 	 function SetTransactionCode() {
@@ -140,36 +134,23 @@
 		});
 	}
 		
-	/*Loading Indicator*/
+	/*Logout - remove localstorage*/
 	function logKeluar(){
 		localStorage.removeItem("LOGIN");
 		window.location.replace("index.html");
 	}
-
-		
-
-	/*function ajax_delay(str){
-		alert("Delay");
-		setTimeout(WindowRedirect(str),10000);
-	}
-
-	function WindowRedirect(str)
+	
+	/*Slide Menu Display Depend on User Session*/
+	var value = window.localStorage.getItem("LOGIN");
+	if(value == null)	
 	{
-		window.location.href = str;
-	}*/
+		$("#navigation").load('navigation_menu/nav_Xlogin.html');
+	}
+	else
+	{
+		$("#navigation").load('navigation_menu/nav_login.html');
 		
-		
-		
-		/*Include Global Header (should be css & javascript* )*/
-		/*$(function(){
-			$("#actionbar").load("../head/actionbar.html", function(responseTxt, statusTxt, xhr){
-			if(statusTxt == "success")
-				$(".MainBody").css("visibility","visible");	  
-			if(statusTxt == "error")
-				alert("Error: " + xhr.status + ": " + xhr.statusText);
-			});
-		});
-		*/
+	}
 	
 	/* Refresh Captcha  */
 	function refreshCaptcha() 
