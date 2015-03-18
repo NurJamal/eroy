@@ -106,7 +106,7 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	//var value = window.localStorage.getItem("LOGIN");
+	
 	//alert(value);
 	
 	$("#btn_submit").click(function(e)
@@ -171,6 +171,9 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
+							window.localStorage.setItem("LOGIN", kadp);
+							var keyname = window.localStorage.kadp(i);
+							var value = window.localStorage.getItem("LOGIN");
 							$.alert
 							(
 								{
