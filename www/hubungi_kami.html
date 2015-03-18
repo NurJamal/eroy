@@ -75,7 +75,13 @@
 					</div>
 					
 					<input type="text" name="f_mesej" id="f_mesej" placeholder="Mesej" class="mesej" onkeyup="upperCase()"><br/>
+					
 					<h5 id="H5" style="margin-left:5px;">Untuk mengelak dari <i>SPAM</i>, sila nyatakan perkataan di bawah: </h5>
+					
+					<img id="captcha_code" src="http://eroy.me-tech.com.my/api/captcha_code.php" width="120" height="45" style="margin-left:5px" />
+					
+					<img id="captcha_code" src="img/reload_icon.png"  style="padding: 10px; width: 40px; height:auto;" onClick="refreshCaptcha();" />
+					
 					<input type="text" name="f_captcha" id="f_captcha"  >
 					
 					
@@ -108,16 +114,6 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	//Boleh letak global function kt custom.js eg upperCase & validateE
-	function upperCase() 
-	{
-		var nama = document.getElementById("f_nama");
-		var message = document.getElementById("f_mesej");
-		nama.value = nama.value.toUpperCase();
-		message.value = message.value.toUpperCase();
-	}
-	
-
 	$(function() 
 	{
 		$.ajax
@@ -147,12 +143,6 @@
 
 	});
 	
-	function ValidateEmail(email)
-	{
-		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		return reg.test(email);
-	};
-	
 	$("#btn_submit").click(function(e)
 	{
 
@@ -162,6 +152,7 @@
 		var emel = $.trim($("#f_emel").val());
 		var mesej_berkenaan = $.trim($("#sel_mberkenaan").val());
 		var mesej = $.trim($("#f_mesej").val());
+		var captcha = $.trim($("#f_captcha").val());
 		
 		if (nama.length == 0) 
 		{
@@ -169,7 +160,7 @@
 			(
 				{
 					title: 'Hubungi Kami',
-					content: 'Sila Isikan Nama Penuh!',
+					content: 'Sila Isikan Nama Penuh',
 					confirm: function(){}
 				}
 			);
@@ -182,7 +173,7 @@
 			(
 				{
 					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Emel!',
+					content: 'Sila Isikan Emel',
 					confirm: function(){}
 				}
 			);
@@ -195,7 +186,7 @@
 			(
 				{
 					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Format Emel yang Betul!',
+					content: 'Sila Isikan Format Emel yang Betul',
 					confirm: function(){ }
 				}
 			);
@@ -208,7 +199,7 @@
 			(
 				{
 					title: 'Hubungi Kami',
-					content: 'Sila Plih Mesej Berkenaan!',
+					content: 'Sila Plih Mesej Berkenaan',
 					confirm: function(){}
 				}
 			);
@@ -221,11 +212,24 @@
 			(
 				{
 					title: 'Hubungi Kami',
-					content: 'Sila Isikan Mesej!',
+					content: 'Sila Isikan Mesej',
 					confirm: function(){}
 				}
 			);
 			$("#f_mesej").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		
+		else if (captcha.length == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Hubungi Kami',
+					content: 'Sila Isikan Captcha',
+					confirm: function(){}
+				}
+			);
+			$("#f_captcha").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
 		else 
@@ -241,7 +245,8 @@
 						nama : nama,
 						emel : emel,
 						mesej_berkenaan : mesej_berkenaan,
-						mesej : mesej
+						mesej : mesej,
+						captcha : captcha
 					},
 					beforeSend: function()
 					{

@@ -152,6 +152,24 @@
 		
 	}
 	
-	/*Set Username*/
+	/* Refresh Captcha  */
+	function refreshCaptcha() 
+	{
+		$("#captcha_code").attr('src','http://eroy.me-tech.com.my/api/captcha_code.php');
+	}
 	
+	/* For Uppercase */
+	function upperCase() 
+	{
+		var nama = document.getElementById("f_nama");
+		var message = document.getElementById("f_mesej");
+		nama.value = nama.value.toUpperCase();
+		message.value = message.value.toUpperCase();
+	}
 	
+	/* Email Validation */
+	function ValidateEmail(email)
+	{
+		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		return reg.test(email);
+	};

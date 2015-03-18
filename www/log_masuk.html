@@ -28,18 +28,9 @@
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
-	<nav class="menu slide-menu-right">
-		<ul>
-			<li class="title">Menu</li>
-			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
-			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
-			<li class="title">Pengenalan</li>
-			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
-			<li></li>
-		</ul>
-	</nav>
+	<div id="navigation"></div>
 	<!-- /slide menu right -->
+
 	
 	<!-- header -->
 	<div id="head">
@@ -106,9 +97,6 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	//var value = window.localStorage.getItem("LOGIN");
-	//alert(value);
-	
 	$("#btn_submit").click(function(e)
 	{
 		e.preventDefault();			
@@ -141,8 +129,9 @@
 			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		else
+		else 
 		{
+		
 			$.ajax
 			(
 				{
@@ -152,10 +141,6 @@
 					{
 						kadp : kadp,
 						katalaluan : katalaluan
-					},
-					beforeSend: function()
-					{
-						run_waitMe();
 					},
 					dataType:'xml',
 					error: function(e) 
@@ -170,18 +155,6 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							//alert(json.details);
-							/*$.alert
-							(
-								{
-									title: 'Log Masuk',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);*/
 							window.localStorage.setItem("NAMA", json.details.nama);
 							window.localStorage.setItem("LOGIN", kadp);
 							window.location.href = "halaman_utama_pengguna_biasa.html";
@@ -194,23 +167,17 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
 					}
 				}
-			)
+			);
 		}
 
-	});	
-	
-
-	</script>
+	});
     </script>
 
   </body>
