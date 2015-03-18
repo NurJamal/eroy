@@ -1,9 +1,9 @@
 
-	var ajaxTimeout = 1000 * 10;
+	//var ajaxTimeout = 1000 * 10;
 
 	/*On Ready Event*/
 	/*Click To Top*/
-	$( document ).ready(function() {
+	//$( document ).ready(function() {
 
 		$("#scrollTop").click(function() {
 		  $("html, body").animate({ scrollTop: 0 }, "100");
@@ -124,7 +124,7 @@
 		
 
 		
-});		
+//});		
 		
 		
 	/*Loading Indicator*/
@@ -139,6 +139,13 @@
 			source: 'img.svg'
 		});
 	}
+		
+	/*Loading Indicator*/
+	function logKeluar(){
+		localStorage.removeItem("LOGIN");
+		window.location.replace("index.html");
+	}
+
 		
 
 	/*function ajax_delay(str){

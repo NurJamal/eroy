@@ -157,7 +157,6 @@
 					{
 						run_waitMe();
 					},
-					timeout: ajaxTimeout,
 					dataType:'xml',
 					error: function(e) 
 					{
@@ -182,6 +181,7 @@
 									}
 								}
 							);
+							window.localStorage.setItem("LOGIN", kadp);
 							window.location.href = "halaman_utama_pengguna_biasa.html";
 						}
 						else if (json.status == 'error') 
@@ -206,6 +206,9 @@
 		}
 
 	});	
+	
+
+	</script>
     </script>
 
   </body>
