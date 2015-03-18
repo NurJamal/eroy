@@ -147,6 +147,10 @@
 					{
 						console.log(e);
 					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -167,11 +171,13 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function(){}
+									confirm: function(){
+									}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			);
