@@ -17,8 +17,27 @@
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
-	<div id="navigation"></div>
-	<!-- end of slide menu right -->
+	<nav class="menu slide-menu-right">
+		<ul>
+			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
+			<li class="title">Hi, Suffian</li>
+			<li id="colored"><a href="index.html"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
+			<li class="title">Menu</li>
+			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
+			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
+			<li id="colored"><a href="semakan_permohonan_listing.html"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
+			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
+			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
+			<li id="colored"><a href="semakan_keaktifan_listing.html"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
+			<li id="colored"><a href="menu_pelaporan.html"><img src="img/pelaporan-icon.png" class="menu-icon"/>Pelaporan</a></li>
+			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
+			<li class="title">Pengenalan</li>
+			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
+			<li id="colored"><a href="daftar_pengguna.html"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<!-- /slide menu right -->
 	
 	<!-- header -->
 	<div id="head">
@@ -45,9 +64,10 @@
 	<!-- list -->
 	<div id="content">
 		<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
+		<h2 class="_orange_text" style="margin-top:-5px">eROY dan Data Migrasi</h2>
 		
 		<h5 id="H5" style="margin-top: 5px">
-			<input class="checkboxClass" type="checkbox" name="" id="c_box"> <label for="c_box">Keseluruhan</label>
+			<input type="checkbox" name="" id="c_box1"> <label for="c_box1">Keseluruhan</label>
 		</h5>
 		
 		<div class="display">
@@ -56,71 +76,71 @@
 				<input type="text" id="hingga" name="hingga" placeholder="Hingga" class="disable_datepick" disabled><br/>
 			</form>
 		</div>
-				
+		
 		<h5 id="H5" style="margin-top: 5px">
-			<input type="checkbox" name="" id="c_box1" class="checkboxClass"> <label for="c_box1">Pilih Semua Zon</label>
+			<input type="checkbox" name="" id="c_box1"> <label for="c_box1">Pilih Semua Zon</label>
 		</h5>
 		
 		<div class="checkbox">
 			<div id="left" style="margin-top:-15px">			
 				<h2 class="_orange_text">Zon Utara</h2>
-				<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="Kedah" />
+				<input id="c_box2" type="checkbox" name="" value="Kedah" />
 				<label for="c_box2">Kedah</label><br>
 				
-				<input class="checkboxClass" id="c_box3" type="checkbox" name="" value="Perlis" />
+				<input id="c_box3" type="checkbox" name="" value="Perlis" />
 				<label for="c_box3">Perlis</label><br>
 				
-				<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="P.Pinang" />
+				<input id="c_box4" type="checkbox" name="" value="P.Pinang" />
 				<label for="c_box4">P.Pinang</label><br>
 				
 				<h2 class="_orange_text">Zon Tengah</h2>
-				<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="Perak" />
+				<input id="c_box5" type="checkbox" name="" value="Perak" />
 				<label for="c_box5">Perak</label><br>
 				
-				<input class="checkboxClass" id="c_box6" type="checkbox" name="" value="Selangor" />
+				<input id="c_box6" type="checkbox" name="" value="Selangor" />
 				<label for="c_box6">Selangor</label><br>
 				
-				<input class="checkboxClass" id="c_box7" type="checkbox" name="" value="W.Persekutuan" />
+				<input id="c_box7" type="checkbox" name="" value="W.Persekutuan" />
 				<label for="c_box7">W.Persekutuan</label><br>
 				
 				<h2 class="_orange_text">Zon Sabah</h2>
-				<input class="checkboxClass" id="c_box8" type="checkbox" name="" value="Sabah" />
+				<input id="c_box8" type="checkbox" name="" value="Sabah" />
 				<label for="c_box8">Sabah</label><br>
 				
 				<h2 class="_orange_text">Ibu Pejabat</h2>
-				<input class="checkboxClass" id="c_box9" type="checkbox" name="" value="Ibu Pejabat" />
+				<input id="c_box9" type="checkbox" name="" value="Ibu Pejabat" />
 				<label for="c_box9">Ibu Pejabat</label><br>
 			</div>
 			
 			<div id="right" style="margin-top:-15px">
 				<h2 class="_orange_text">Zon Selatan</h2>
-				<input class="checkboxClass" id="c_box10" type="checkbox" name="" value="Melaka" />
+				<input id="c_box10" type="checkbox" name="" value="Melaka" />
 				<label for="c_box10">Melaka</label><br>
 				
-				<input class="checkboxClass" id="c_box11" type="checkbox" name="" value="Johor" />
+				<input id="c_box11" type="checkbox" name="" value="Johor" />
 				<label for="c_box11">Johor</label><br>
 				
-				<input class="checkboxClass" id="c_box12" type="checkbox" name="" value="N.Sembilan" />
+				<input id="c_box12" type="checkbox" name="" value="N.Sembilan" />
 				<label for="c_box12">N.Sembilan</label><br>
 				
 				<h2 class="_orange_text">Zon Timur</h2>
-				<input class="checkboxClass" id="c_box13" type="checkbox" name="" value="Pahang" />
+				<input id="c_box13" type="checkbox" name="" value="Pahang" />
 				<label for="c_box13">Pahang</label><br>
 				
-				<input class="checkboxClass" id="c_box14" type="checkbox" name="" value="Kelantan" />
+				<input id="c_box14" type="checkbox" name="" value="Kelantan" />
 				<label for="c_box14">Kelantan</label><br>
 				
-				<input class="checkboxClass" id="c_box15" type="checkbox" name="" value="Terengganu" />
+				<input id="c_box15" type="checkbox" name="" value="Terengganu" />
 				<label for="c_box15">Terengganu</label><br>
 				
 				<h2 class="_orange_text">Zon Sarawak</h2>
-				<input class="checkboxClass" id="c_box16" type="checkbox" name="" value="Sarawak" />
+				<input id="c_box16" type="checkbox" name="" value="Sarawak" />
 				<label for="c_box16">Sarawak</label><br>
 			</div>
 		</div>
 		
 		<div class="default_button_holder">
-			<!-- <a href="statistik_laporan_keseluruhan_eroy.html"> --><input class="default_button" type="button" value="HANTAR" id="btn_submit"><!-- </a> -->
+			<a href="statistik_laporan_keseluruhan_eroy_migrasi.html"><input class="default_button" type="button" value="HANTAR" id="btn_submit"></a>
 		</div>
 
 	</div>
@@ -129,20 +149,5 @@
 	<script src="js/nav.js"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<script src="js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
-	<script type="text/javascript">
-		$("#btn_submit").click(function()
-		{
-			window.location.href = "statistik_laporan_keseluruhan_eroy.html";
-			//for( var i = 2 ; i < 17 ; i++ )
-			//{
-			//	if($("#c_box"+i).is(":checked"))
-			//	{
-			//		alert("yes");
-			//	}
-			//}
-
-		});
-	</script>
 	</body>
 </html>
