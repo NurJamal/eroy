@@ -116,16 +116,6 @@
 					{
 						carian_nama : carian_nama
 					},
-					beforeSend: function()
-					{
-						run_waitMe();
-					},
-					timeout: ajaxTimeout,
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
 					success:function(data)
 					{
 						console.log(data);
@@ -145,6 +135,7 @@
 									}
 								}
 							);
+							window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
 							window.location.href = "carian_listing_test.html";
 						}
 						else if (json.status == 'error') 
