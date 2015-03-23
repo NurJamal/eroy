@@ -149,9 +149,9 @@
 	else
 	{
 		$("#navigation").load('navigation_menu/nav_login.html');
-		
-	}
 	
+	}
+
 	/* Refresh Captcha  */
 	function refreshCaptcha() 
 	{
