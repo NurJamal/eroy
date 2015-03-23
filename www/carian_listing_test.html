@@ -49,9 +49,7 @@
 		<!-- list -->
 		<div id="content">
 			<!-- <a href="carian_asas_papar.html" style="text-decoration:none;"> -->
-			<!-- <div id="box">
-				<h2 class="title" id="nama_pertubuhan"></h2>
-			</div> -->
+			
 			<!-- </a> -->	
 		</div>
 	</div>
@@ -77,32 +75,14 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	//var nama_pertubuhan = window.localStorage.getItem('NAMA PERTUBUHAN');
+	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
 	
-    //for (i = 0; i < localStorage.length; i++)
-	//{
-	//	var key = localStorage.key(i);
-	//	var nama_pertubuhan = window.localStorage.getItem('NAMA PERTUBUHAN');
-	//	alert(key + ": " + nama_pertubuhan);
-	//	console.log(key + ": " + nama_pertubuhan);
-	//	}
-	
-	var nama_pertubuhan = window.localStorage.getItem('NAMA PERTUBUHAN');
-	
-	for (var nama_pertubuhan = 0; nama_pertubuhan < localStorage.length; nama_pertubuhan++)
+	$.each(nama_pertubuhan.details, function (index, value) 
 	{
+		console.log(value);
+		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>").appendTo('#content');
 		
-		
-		//$('#content').append(localStorage.getItem(localStorage.key(i)));
-		$('#nama_pertubuhan').append(nama_pertubuhan);
-		$("<div id='box'><h2 class='title' id='nama_pertubuhan'></h2></div>").appendTo('#content');
-		
-		//("<div id='box'><h2 class='title' id='nama_pertubuhan'></h2></div>").appendTo('#content');
-		
-		alert(nama_pertubuhan);
-	}
-	
-	//$("<div id='box'><h2 class='title' id='nama_pertubuhan'></h2></div>").appendTo('#content');
+	});	
 	</script>
 	
 	</body>

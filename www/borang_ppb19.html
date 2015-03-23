@@ -2,11 +2,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -94,9 +96,9 @@
 	}
 	
 	var nama = window.localStorage.getItem('NAMA');
-	var kp = window.localStorage.getItem('LOGIN');
+	//var kp = window.localStorage.getItem('LOGIN');
 	
-	//alert(nama);
+	alert(nama);
 	
 	$(function() {
 
@@ -119,18 +121,21 @@
 					var no_telefon = $(this).find("no_tel");
 					var tarikh_daftar = $(this).find("tarikh_daftar");
 					
+					
+					
 					if (nama == nama_user)
 					{
+						alert("error");
+					}
+					else
+					{ 
+						alert(nama);
 						$('#d_nama').val($(nama_user).text());
 						$('#d_kp').val($(no_kp).text());
 						$('#d_alamat').val($(alamat).text());
 						$('#d_jawatan').val($(jawatan).text());
 						$('#d_telefon').val($(no_telefon).text());
 						$('#d_tarikh_daftar').val($(tarikh_daftar).text());
-					}
-					else
-					{ 
-						alert("error");
 					}
 				});
 			},
