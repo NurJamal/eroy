@@ -104,7 +104,7 @@
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
 				
 			<div class="display">
-				<textarea id="d_alamat_pos" name="d_alamat_pos" style="resize:none"   disabled>Nama Penuh Pertubuhan</textarea>
+				<textarea id="nama_penuh_pertubuhan" name="nama_penuh_pertubuhan" style="resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
 				<input type="email" style="margin-top:5px" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
@@ -134,18 +134,43 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-	<!-- 	<script>
+	<script>
+		$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://eroy.me-tech.com.my/api/get_mesej_berkenaan.php",
+			dataType: "xml",
+			success: function(xml){
+				var xmlDoc = $.parseXML(xml),
+				$xml = $(xmlDoc);
+				$(xml).find("lk_mberkenaan").each(function(){
+					console.log($(this).text());
+					var id = $(this).find("id");
+					var mesej_ber = $(this).find("mesej_berkenaan");
+					$('#sel_mberkenaan').append('<option value="'+$(id).text()+'">'+$(mesej_ber).text()+'</option>');
+				});
+			},
+			error: function() {
+				console.log("An error occurred while processing XML file.");
+			}
+		});
+
+	});
+		
+		
+		
 		$("#btn_submit").click(function(e){
 
 		e.preventDefault();
 		
-		var nama = $("#f_nama").val();
-		var kadp = $("#f_kp").val();
-		var katalaluan = $("#f_katalaluan").val();
-		var sah_katalaluan = $("#f_sah_katalaluan").val();
-		var emel = $("#f_emel").val();
+		var lokaliti= $("#f_lokaliti").val();
+		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
+		var nama_ringkasan = $("#f_nama_ringkasan").val();
+		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val();
+		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
 		
-		if (nama.length == 0  || kadp.length == 0 || katalaluan.length == 0 || sah_katalaluan.length == 0 || emel.length == 0) 
+		if (nama.length == 0  || daerah.length == 0 || lokaliti.length == 0 || nama_pertubuhan.length == 0 || emel_pertubuhan.length == 0) 
 		{
 			alert('Sila lengkapkan borang tersebut!');
 		} 
@@ -159,7 +184,7 @@
 					kadp: kadp,
 					katalaluan : katalaluan,
 					sah_katalaluan : sah_katalaluan,
-					emel : emel
+					emel_pertubuhan : emel_pertubuhan
 				},
 				success:function(data){
 					console.log(data);
@@ -181,7 +206,7 @@
 		}
 			
 	});
-	</script> -->
+	</script>
 		
   </body>
 </html>

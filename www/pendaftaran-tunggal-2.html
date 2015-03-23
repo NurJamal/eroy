@@ -14,7 +14,8 @@
 		</div>
 		
 	</head>
-	<body>
+	
+<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
@@ -38,28 +39,23 @@
 				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
 	
 	<div id="content">	
 	
 	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-				<img src="img\numbering2.png" style="width:100%;height:auto"/>
-			
-			</div>
-		
+	<div class="navbar">
+		<div align="center">
+			<img src="img\numbering2.png" style="width:100%;height:auto"/>
 		</div>
+	</div>
 	<!-- end of navbar -->
 	
 	<!-- form -->
 	
-		<div class="_form">
-		
+	<div class="_form">
+	
 		<div>
 			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
 			<h1 class="_dark_text" style="margin-top:-4px">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1><br/>
@@ -67,7 +63,7 @@
 
 		
 			
-			<h5 id="_orange_title" style="margin-top:-20px">Alamat Tempat Urusan</h5>
+		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tempat Urusan</h5>
 			<form id="" action="" method="POST">
 				<input type="text" name="alamat_1" id="alamat1" placeholder="Alamat 1"><br/>
 				<input type="text" name="alamat_2" id="alamat2" placeholder="Alamat 2"><br/>
@@ -75,9 +71,11 @@
 				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
 			</form>
 			
-			<div class="selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
+	<div class="selection">
+					
+			<h5 id="_orange_title">Negeri</h5>
+			
+				<form action="">
 						<select id="negeri" name="negeri" class="_sel">
 						<option value="0">Johor</option>
 						<option value="1">N.Sembilan</option>
@@ -162,7 +160,7 @@
 	</body>
 </html>
 
-	<script>
+<script>
 
 	
 	function Alamat(f) 
@@ -195,64 +193,7 @@
 		}
 	}
 	
-	
-		$("#btn_submit").click(function(e){
-
-				e.preventDefault();
-				
-				var alamat1= $("#f_alamat1").val();
-				var alamat2= $("#f_alamat2").val();
-				var alamat3= $("#f_alamat3").val();
-				var poskod = $("#f_poskod").val();
-				var alamat_pos1= $("#f_alamat_pos1").val();
-				var alamat_pos2= $("#f_alamat_pos2").val();
-				var alamat_pos3= $("#f_alamat_pos3").val();
-				var poskod_pos = $("#f_poskod_pos").val();
-				
-				
-				if (alamat1.length == 0  || poskod.length == 0 || alamat_pos1.length == 0 || poskod_pos.length == 0) 
-				{
-					alert('Sila lengkapkan borang ini!');
-				} 
-				else {
-				
-					$.ajax({
-						url:"http://eroy.me-tech.com.my/eroy/api/api_butir2_pertubuhan.php
-",
-						type:'POST',
-						data: {
-							alamat1 : alamat1,
-							alamat2 : alamat2,
-							alamat3 : alamat3,
-							poskod : poskod,
-							negeri : negeri,
-							daerah : daerah,
-							alamat_pos1 : alamat_pos1,
-							alamat_pos2 : alamat_pos2,
-							alamat_pos3 : alamat_pos3,
-							poskod_pos : poskod_pos,
-							negeri_pos : negeri_pos,
-							daerah_pos : daerah_pos
-						},
-						success:function(data){
-							console.log(data);
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'ok') {
-								console.log(json.status);
-								alert(json.message);
-								window.location.href = "pendaftaran-tunggal-3.html";
-							}
-							else if (json.status == 'error') {
-								console.log(json.status);
-								alert(json.message);
-							}
-							else{}
-						}
-					});
-					
-				}
-					
-			});
+		
 			
-	</script>
+			
+</script>
