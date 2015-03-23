@@ -174,14 +174,21 @@
 		
 		<div>
 			
-		<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
+			<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
 		
 		</div>
 		
 		<div class="inform">
-			<input type="file"  name="muat_naik" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
+			<input type="file"  name="muat_naik" onfocus="(this.type='file')" onblur="(this.type='file')" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
+			<!-- <input type="text"  name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick"><br/> -->
 		</div>
 						
+	
+		<div class="inputWrapper" style="height: 48px; width: 96px;">
+		Muat Naik
+			<input class="fileInput hidden" type="file" name="file3"/>
+		</div><br/>
+		
 		
 		<div class="default_button_holder">
 			<a href="pendaftaran-tunggal-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
@@ -203,4 +210,19 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 		
   </body>
+  <script>
+  
+	$(function() {
+    $(".inputWrapper").mousedown(function() {
+        var button = $(this);
+        button.addClass('clicked');
+        setTimeout(function(){
+            button.removeClass('clicked');
+        },50);
+    });
+});
+
+  
+  </script>
+  
 </html>

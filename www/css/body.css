@@ -145,6 +145,22 @@ input.double_button {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
+.inform input[type=file] {
+	height: 50px;
+	width: 100%;
+	margin-top: 8px;
+	margin-bottom: 5px;
+	padding: 10px;
+	color: #696969;
+	/* background: white; */
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
 .disp input[type=text], input[type=date]{
 	height: 50px;
 	width: 100%;
@@ -785,4 +801,37 @@ input::-moz-placeholder { /* Mozilla Firefox 19+ */
 input:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #989898;
 }
+/* testing only */
 
+.inputWrapper {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    /*Using a background color, but you can use a background image to represent a button*/
+    background-color: #DDF;
+}
+
+.fileInput {
+    cursor: pointer;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    /*This makes the button huge so that it can be clicked on*/
+    font-size:50px;
+}
+.hidden {
+    /*Opacity settings for all browsers*/
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+}
+
+
+/*Dynamic styles*/
+.inputWrapper:hover {
+    background-color: #FDD;
+}
+.inputWrapper.clicked {
+    background-color: #A66;
+}
