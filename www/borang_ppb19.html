@@ -93,33 +93,49 @@
 		x.value = x.value.toUpperCase();
 	}
 	
+	var nama = window.localStorage.getItem('NAMA');
+	var kp = window.localStorage.getItem('LOGIN');
+	
+	//alert(nama);
+	
 	$(function() {
 
 		$.ajax({
 			type: "GET",
 			url: "http://eroy.me-tech.com.my/api/get_pengguna_info.php",
 			dataType: "xml",
-			success: function(xml){
+			success: function(xml)
+			{
 				var xmlDoc = $.parseXML(xml),
 				$xml = $(xmlDoc);
-				$(xml).find("lk_pengguna_info").each(function(){
+				$(xml).find("lk_pengguna_info").each(function()
+				{
 					console.log($(this).text());
 					var id = $(this).find("id");
-					var nama = $(this).find("nama");
-					var no_kp = $(this).find("no_kp");
+					var nama_user = $(this).find("nama");
+					var no_kp = $(this).find("no_KP");
 					var alamat = $(this).find("alamat");
 					var jawatan = $(this).find("jawatan");
-					var no_telefon = $(this).find("no_telefon");
+					var no_telefon = $(this).find("no_tel");
 					var tarikh_daftar = $(this).find("tarikh_daftar");
-					$('#d_nama').val($(nama).text());
-					$('#d_kp').val($(no_kp).text());
-					$('#d_alamat').val($(alamat).text());
-					$('#d_jawatan').val($(jawatan).text());
-					$('#d_telefon').val($(no_telefon).text());
-					$('#d_tarikh_daftar').val($(tarikh_daftar).text());
+					
+					if (nama == nama_user)
+					{
+						$('#d_nama').val($(nama_user).text());
+						$('#d_kp').val($(no_kp).text());
+						$('#d_alamat').val($(alamat).text());
+						$('#d_jawatan').val($(jawatan).text());
+						$('#d_telefon').val($(no_telefon).text());
+						$('#d_tarikh_daftar').val($(tarikh_daftar).text());
+					}
+					else
+					{ 
+						alert("error");
+					}
 				});
 			},
-			error: function() {
+			error: function()
+			{
 				console.log("An error occurred while processing XML file.");
 			}
 		});

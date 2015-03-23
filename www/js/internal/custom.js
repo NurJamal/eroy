@@ -163,8 +163,10 @@
 	{
 		var nama = document.getElementById("f_nama");
 		var message = document.getElementById("f_mesej");
+		//var sijil = document.getElementById("f_sijil");
 		nama.value = nama.value.toUpperCase();
 		message.value = message.value.toUpperCase();
+		//sijil.value = sijil.value.toUpperCase();
 	}
 	
 	/* Email Validation */
