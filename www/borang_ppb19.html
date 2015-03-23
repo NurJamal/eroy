@@ -2,8 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
@@ -17,37 +16,14 @@
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
-	<nav class="menu slide-menu-right">
-		<ul>
-			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
-			<li class="title">Hi, Suffian</li>
-			<li id="colored"><a href="index.html"><img src="img/logmasuk-icon.png" class="menu-icon"/>Log Keluar</a></li>
-			<li class="title">Menu</li>
-			<li id="colored"><a href="halaman_utama_pengguna_biasa.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
-			<li id="colored"><a href="menu_pendaftaran.html"><img src="img/pendaftaran-icon.png" class="menu-icon"/>Pendaftaran</a></li>
-			<li id="colored"><a href="semakan_permohonan_listing.html"><img src="img/semak-mohon-icon.png" class="menu-icon"/>Semakan Permohonan</a></li>
-			<li id="colored"><a href="menu_carian.html"><img src="img/carian-icon.png" class="menu-icon"/>Carian</a></li>
-			<li id="colored"><a href="pindaan_maklumat_listing.html"><img src="img/pindaan-icon.png" class="menu-icon"/>Pindaan</a></li>
-			<li id="colored"><a href="semakan_keaktifan_listing.html"><img src="img/semak-aktif-icon.png" class="menu-icon"/>Semakan Keaktifan</a></li>
-			<li id="colored"><a href="menu_pelaporan.html"><img src="img/pelaporan-icon.png" class="menu-icon"/>Pelaporan</a></li>
-			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
-			<li class="title">Pengenalan</li>
-			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="daftar_pengguna.html"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
-			<li></li>
-		</ul>
-	</nav>
-	<!-- /slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu right -->
 	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
@@ -58,7 +34,6 @@
 				<h1 class="main_title">CARIAN MAKLUMAT</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
 
@@ -68,20 +43,19 @@
 		
 		<div class="display">
 			<form id="" action="" method="POST">
-				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" placeholder="Suffian Harun" disabled><br/>
-				<input type="text" id="d_kp" name="d_kp" placeholder="600626064444"  disabled><br/>
-				<textarea id="d_alamat_pos" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
-				<!-- <textarea id="d_alamat" name="d_alamat" placeholder="Suffian Harun" disabled></textarea> -->
-				<input type="text" id="d_jawatan" name="d_jawatan" placeholder="Pengerusi"  disabled><br/>
-				<input type="text" id="d_telefon" name="d_telefon" placeholder="0111234567"  disabled><br/>
-				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" placeholder="07/10/2014"  disabled><br/>
+				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" disabled><br/>
+				<input type="text" id="d_kp" name="d_kp" disabled><br/>
+				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
+				<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
+				<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
+				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" disabled><br/>
 			</form>
 		</div>
 		
 		<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
 		<div class="inform">
-				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperCase()"><br/>
 		</div>
 		<div class="disp">
 				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
@@ -109,10 +83,12 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
 	<script>
-	function upperF() {
+	function upperCase() {
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
@@ -204,18 +180,30 @@
 						var npertubuhan = $(this).find("nama_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
 						
-						
-						$( "#f_sijil" ).keyup(function() {
+						$( "#f_sijil" ).keyup(function() 
+						{
 							var input = $(this).val(); // We take the input value
-								if ( input.length >= 5 ){
-										
-											$('#d_npertubuhan').val($(npertubuhan).text());
+				
+								$.ajax
+								(
+									{
+										type: 'POST',
+										data: ({p : input}),
+										url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+										success: function(data) 
+										{
+											if ( input.length > 5 )
+											{		
+												$('#d_npertubuhan').val($(npertubuhan).text());
+											}
+
 										}
-								});
+									}
+								);
 						});
-	
-					},
-				});
+					});
+				},
+			});
 		});
 	</script>
 	

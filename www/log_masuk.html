@@ -2,12 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
-		
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
@@ -15,38 +14,34 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
+		
 		<div id="loadingLayer"></div>
 		
 		<style>
 			input.invalid {outline-color: #FF0000}
 			input.valid {background-color: white}
 		</style>
+		
 	</head>
 	<body>
+	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
-	<nav class="menu slide-menu-right">
-		<ul>
-			<!-- <li><button class="close-menu">Close &rarr;</button></li> -->
-			<li class="title">Menu</li>
-			<li id="colored"><a href="index.html"><img src="img/halamanutama-icon.png" class="menu-icon"/>Halaman Utama</a></li>
-			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
-			<li class="title">Pengenalan</li>
-			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
-			<li></li>
-		</ul>
-	</nav>
+	<div id="navigation"></div>
 	<!-- /slide menu right -->
+
 	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-			<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
-			<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
+		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+			<!-- <img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
+			<a href="#" onclick="back();"><img src="img/back-icon.png" class="back_icon" align="left"/></a> -->
 	</div>		
 	<!-- end of header -->
+	
 	<div class="containerBlock">
 		<!-- header title -->
 		<div class="content_title">
@@ -60,8 +55,7 @@
 		<!-- end of header-title-->
 		
 		<div id="content">
-		
-		<!-- form -->
+			<!-- form -->
 			<div class="_form">
 				<form id="login_form" action="" method="POST">
 					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
@@ -72,7 +66,7 @@
 					</div>
 				</form>
 			</div>
-		<!-- end of form -->
+			<!-- end of form -->
 		
 			<div class="multi-links">
 				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
@@ -80,8 +74,8 @@
 				<h5 align="center"><a href="pengesahan_emel_pengaktifan.html">Pengesahan Emel Pengaktifan</h5></a>
 			</div>
 		</div>	
-	
 	</div>
+	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -103,161 +97,94 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	$("#btn_submit").click(function(e){
-
+	$("#btn_submit").click(function(e)
+	{
 		e.preventDefault();			
 	
 		var kadp = $.trim($('#f_kp').val());
 		var katalaluan = $.trim($('#f_katalaluan').val());
 		
-		if (kadp.length == 0) {
-			$.alert({
-				title: 'Log Masuk',
-				content: 'Sila Isikan No Kad Pengenalan!',
-				confirm: function(){
-				 }
-			});
-
+		if (kadp.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Log Masuk',
+					content: 'Sila Isikan No Kad Pengenalan!',
+					confirm: function(){}
+				}
+			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (katalaluan == 0) {
-			$.alert({
-				title: 'Log Masuk',
-				content: 'Sila Isikan Kata Laluan!',
-				confirm: function(){
-				 }
-			});
+		else if (katalaluan == 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Log Masuk',
+					content: 'Sila Isikan Kata Laluan!',
+					confirm: function(){}
+				}
+			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
-		else {
-			
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
-				type:'POST',
-				data:{
-					kadp : kadp,
-					katalaluan : katalaluan
-				},
-				beforeSend: function() {
-					run_waitMe();
-				},
-				timeout: ajaxTimeout,
-				dataType:'xml',
-				error: function(e) {
-					console.log(e);
-				},
-					success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						/*$.alert({
-							title: 'Log Masuk',
-							content: json.message,
-							confirm: function(){
-							  	window.location.href = "halaman_utama_pengguna_biasa.html";
-						 }
-						});*/
-						
-						//beforeSend: function (xhr) { xhr.withCredentials = true; },
-						window.location.href = "halaman_utama_pengguna_biasa.html"
+		else 
+		{
+		
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
+					type:'POST',
+					data:
+					{
+						kadp : kadp,
+						katalaluan : katalaluan
+					},
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							window.localStorage.setItem("NAMA", json.details.nama);
+							//window.localStorage.setItem("LOGIN", kadp);
+							window.location.href = "halaman_utama_pengguna_biasa.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Log Masuk',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
 					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						//alert(json.message);
-						$.alert({
-							title: 'Log Masuk',
-							content: json.message,
-							confirm: function(){
-								$('body').waitMe('hide');
-						 }
-						});
-					}
-					
-					else{}
 				}
-			})
-			
-			
-			
-
+			);
 		}
 
 	});
-	
-	
-	
-	
-
-	
-	/*var options = {
-	  date: new Date(),
-	  mode: 'date'
-	};
-
-	datePicker.show(options, function(date){
-	  alert("date result " + date);  
-	});*/
-	
-	
-	
-
-	/*$(function() {
-    $('#f_tlahir').datepicker({
-        onSelect: function(date) {
-            alert(date);
-        },
-   
-		});
-	});
-		/*var value = $("#f_tlahir").val();
-		alert(value);
-		var dob = new Date(value);
-		var today = new Date();
-		var userAge = (today.getFullYear() - dob.getFullYear());	
-		$('#d_umur').val(userAge);*/
-		
-	/*	var today = new Date();
-		age = dob.getFullYear() - today.getFullYear();
-		
-		$('#f_tlahir').datepicker({
-		 onSelect: function(value, ui) {
-		 var today = new Date(), 
-		 dob = new Date(value), 
-		 
-		 
-		 $('#d_umur').text(age);
-		 },
-		 maxDate: '+0d',
-		 yearRange: '1920:2010',
-		 changeMonth: true,
-		 changeYear: true
-		});
-	
-		 onSelect: function (date) {
-         var dob = new Date(date);
-         var today = new Date();
-
-        if (value.getFullYear() + 18 < today.getFullYear())
-        {
-            alert("Under 18");
-        }
-        else
-        {
-            alert(" Over 18");
-        }
-    }
-	
-	beforeSend: function() {
-		alert("LOADING");
-	},
-	
-	*/
-	
-        </script>
+    </script>
 
   </body>
 </html>

@@ -1,9 +1,9 @@
 
-	var ajaxTimeout = 1000 * 10;
+	//var ajaxTimeout = 1000 * 10;
 
 	/*On Ready Event*/
 	/*Click To Top*/
-	$( document ).ready(function() {
+	//$( document ).ready(function() {
 
 		$("#scrollTop").click(function() {
 		  $("html, body").animate({ scrollTop: 0 }, "100");
@@ -105,12 +105,6 @@
 		lastScrollTop = st;
 	}
 
-	
-	if (navigator.userAgent.indexOf("Android") != -1) {
-	   $.mobile.defaultPageTransition = 'none';
-	   $.mobile.defaultDialogTransition = 'none';
-} 
-
 
 	/*Set Payment Transaction Code*/
 	 function SetTransactionCode() {
@@ -124,7 +118,7 @@
 		
 
 		
-});		
+//});		
 		
 		
 	/*Loading Indicator*/
@@ -140,27 +134,42 @@
 		});
 	}
 		
-
-	/*function ajax_delay(str){
-		alert("Delay");
-		setTimeout(WindowRedirect(str),10000);
+	/*Logout - remove localstorage*/
+	function logKeluar(){
+		localStorage.removeItem("LOGIN");
+		window.location.replace("index.html");
+	}
+	
+	/*Slide Menu Display Depend on User Session*/
+	var value = window.localStorage.getItem("LOGIN");
+	if(value == null)	
+	{
+		$("#navigation").load('navigation_menu/nav_Xlogin.html');
+	}
+	else
+	{
+		$("#navigation").load('navigation_menu/nav_login.html');
+	
 	}
 
-	function WindowRedirect(str)
+	/* Refresh Captcha  */
+	function refreshCaptcha() 
 	{
-		window.location.href = str;
-	}*/
-		
-		
-		
-		/*Include Global Header (should be css & javascript* )*/
-		/*$(function(){
-			$("#actionbar").load("../head/actionbar.html", function(responseTxt, statusTxt, xhr){
-			if(statusTxt == "success")
-				$(".MainBody").css("visibility","visible");	  
-			if(statusTxt == "error")
-				alert("Error: " + xhr.status + ": " + xhr.statusText);
-			});
-		});
-		*/
+		$("#captcha_code").attr('src','http://eroy.me-tech.com.my/api/captcha_code.php');
+	}
 	
+	/* For Uppercase */
+	function upperCase() 
+	{
+		var nama = document.getElementById("f_nama");
+		var message = document.getElementById("f_mesej");
+		nama.value = nama.value.toUpperCase();
+		message.value = message.value.toUpperCase();
+	}
+	
+	/* Email Validation */
+	function ValidateEmail(email)
+	{
+		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		return reg.test(email);
+	};
