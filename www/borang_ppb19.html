@@ -57,10 +57,10 @@
 		<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
 		<div class="inform">
-				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperCase()"><br/>
+			<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperCase()"><br/>
 		</div>
 		<div class="disp">
-				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
+			<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
 		</div>
 		
 		<h2 class="_orange_text">Dokumen Yang Dipohon</h2>
@@ -95,137 +95,123 @@
 		x.value = x.value.toUpperCase();
 	}
 	
-	var nama = window.localStorage.getItem('NAMA');
-	//var kp = window.localStorage.getItem('LOGIN');
+	var nama = JSON.parse(localStorage['NAMA']);
+	//var nama = window.localStorage.getItem('NAMA');
 	
-	alert(nama);
-	
-	$(function() {
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();
 
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_pengguna_info.php",
-			dataType: "xml",
-			success: function(xml)
-			{
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pengguna_info").each(function()
+		var no_sijil = $("#f_sijil").val();
+
+		if (no_sijil.length == 0) 
+		{
+			alert('Sila lengkapkan borang tersebut!');
+			$.alert
+			(
 				{
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_user = $(this).find("nama");
-					var no_kp = $(this).find("no_KP");
-					var alamat = $(this).find("alamat");
-					var jawatan = $(this).find("jawatan");
-					var no_telefon = $(this).find("no_tel");
-					var tarikh_daftar = $(this).find("tarikh_daftar");
-					
-					
-					
-					if (nama == nama_user)
+					title: 'Carian',
+					content: 'Sila Masukkan No Sijil',
+					confirm: function()
 					{
-						alert("error");
+						$('body').waitMe('hide');
 					}
-					else
-					{ 
-						alert(nama);
-						$('#d_nama').val($(nama_user).text());
-						$('#d_kp').val($(no_kp).text());
-						$('#d_alamat').val($(alamat).text());
-						$('#d_jawatan').val($(jawatan).text());
-						$('#d_telefon').val($(no_telefon).text());
-						$('#d_tarikh_daftar').val($(tarikh_daftar).text());
-					}
-				});
-			},
-			error: function()
-			{
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
-	});
-	
-	$("#btn_submit").click(function(e){
-
-			e.preventDefault();
-
-			var no_sijil = $("#f_sijil").val();
-
-			if (no_sijil.length == 0) {
-				alert('Sila lengkapkan borang tersebut!');
-			} 
-			else {
-			
-				$.ajax({
+				}
+			);
+		} 
+		else 
+		{
+			$.ajax
+			(
+				{
 					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
 					type:'GET',
-					data:{
+					data:
+					{
 						no_sijil : no_sijil
 					},
 					dataType:'xml',
-					error: function(e) {
+					error: function(e) 
+					{
 						console.log(e);
 					},
-					success:function(data){
+					success:function(data)
+					{
 						console.log(data);
 						var json = $.xml2json(data);
 						console.log(json);
-						if (json.status == 'ok') {
+						if (json.status == 'ok') 
+						{
 							console.log(json.status);
 							window.location.href = "bayaran_ppb19.html";
 						}
-						else if (json.status == 'error') {
+						else if (json.status == 'error')
+						{
 							console.log(json.status);
-							alert(json.message);
+							$.alert
+							(
+								{
+									title: 'Carian',
+									content: json.message,
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
+								}
+							);
 						}
 						else{}
 					}
-				});
-			}
+				}
+			);
+		}
 	
 	});
 	
-	$(function() {
-
-			$.ajax({
-			type: "GET",
+	$(function()
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
 				url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
 				dataType: "xml",
-				success: function(xml){
+				success: function(xml)
+				{
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("lk_pertubuhan_info").each(function(){
+					$(xml).find("lk_pertubuhan_info").each(function()
+					{
 						console.log($(this).text());
 						var npertubuhan = $(this).find("nama_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
-						
+								
 						$( "#f_sijil" ).keyup(function() 
 						{
 							var input = $(this).val(); // We take the input value
-				
-								$.ajax
-								(
+						
+							$.ajax
+							(
+								{
+									type: 'POST',
+									data: ({p : input}),
+									url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+									success: function(data) 
 									{
-										type: 'POST',
-										data: ({p : input}),
-										url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-										success: function(data) 
-										{
-											if ( input.length > 5 )
-											{		
-												$('#d_npertubuhan').val($(npertubuhan).text());
-											}
-
+										if ( input.length > 5 )
+										{		
+											$('#d_npertubuhan').val($(npertubuhan).text());
 										}
+
 									}
-								);
+								}
+							);
 						});
 					});
 				},
-			});
-		});
+			}
+		);
+	});
 	</script>
 	
 	
