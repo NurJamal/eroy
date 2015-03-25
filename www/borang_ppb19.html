@@ -80,7 +80,6 @@
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
-	
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
@@ -90,13 +89,24 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	function upperCase() {
+	function upperCase() 
+	{
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
 	
-	var nama = JSON.parse(localStorage['NAMA']);
-	//var nama = window.localStorage.getItem('NAMA');
+	var nama = window.localStorage.getItem('NAMA');
+	var no_kp = window.localStorage.getItem('LOGIN');
+	var alamat = window.localStorage.getItem('ALAMAT');
+	
+	$("#d_nama").val(nama);
+	$("#d_kp").val(no_kp);
+	$("#d_alamat").val(alamat);
+	
+	//alert(alamat);
+	
+	//var jawatan = window.localStorage.getItem('JAWATAN');
+	//var no_tel = window.localStorage.getItem('NO TEL');
 	
 	$("#btn_submit").click(function(e)
 	{
@@ -106,7 +116,7 @@
 
 		if (no_sijil.length == 0) 
 		{
-			alert('Sila lengkapkan borang tersebut!');
+			alert('Sila Isikan No Sijil');
 			$.alert
 			(
 				{
