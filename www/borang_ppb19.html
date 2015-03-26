@@ -89,6 +89,67 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
+	
+	
+	
+	var nama = window.localStorage.getItem('NAMA');
+	var no_kp = window.localStorage.getItem('LOGIN');
+	
+	//alert(nama);
+	//alert(no_kp);
+	
+	//window.localStorage.setItem("ALAMAT", "alamat tempat urusan");
+	
+
+		//e.preventDefault();			
+
+		//var carian_nama = $.trim($('#n_carian').val());
+		$(function()
+	{
+		$.ajax
+		(
+			{
+				url:"http://eroy.me-tech.com.my/api/api_carian_test.php",
+				type:'POST',
+				data:
+				{
+					kadp : no_kp
+				},
+				success:function(data)
+				{
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') 
+					{
+						console.log(json);
+						window.localStorage['NAMA_PERTUBUHAN'] = JSON.stringify(json);
+						
+						//window.localStorage.setItem("ALAMAT", json.details.alamat_tetap_1);
+						//window.location.href = "carian_asas_listing.html";
+						
+					}
+					else if (json.status == 'error') 
+					{
+						console.log(json.status);
+						$.alert
+						(
+							{
+								title: 'Carian',
+								content: json.message,
+								confirm: function()
+								{
+									$('body').waitMe('hide');
+								}
+							}
+						);
+					}
+					else{}
+				}
+			}
+		)
+});
+
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
@@ -153,7 +214,7 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							window.location.href = "bayaran_ppb19.html";
+							//window.location.href = "bayaran_ppb19.html";
 						}
 						else if (json.status == 'error')
 						{

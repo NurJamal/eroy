@@ -75,11 +75,20 @@
 	
 	$.each(nama_pertubuhan.details, function (index, value) 
 	{
-		console.log(value);
+		//console.log(value.nama_pertubuhan);
+		
+		int count = doc.SelectNodes("/root/nama_pertubuhan/details").Count;
+	if( count < 1 )
+	{
+		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value+"</h2></div>").appendTo('#content');
+	}
+	else
+	{
 		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>").appendTo('#content');
+	}	
 	});	
 	
-	$("#box").click(function(e)
+	/*$("#box").click(function(e)
 	{
 		e.preventDefault();			
 			
@@ -113,13 +122,6 @@
 						
 						window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
 						
-						/*window.localStorage['ALAMAT URUSAN'] = JSON.stringify(json);
-						window.localStorage['ALAMAT SURAT MENYURAT'] = JSON.stringify(json);
-						window.localStorage['PERINGKAT PERTUBUHAN'] = JSON.stringify(json);
-						window.localStorage['ALAMAT URUSAN'] = JSON.stringify(json);
-						window.localStorage['NO SIJIL'] = JSON.stringify(json);
-						window.localStorage['STATUS'] = JSON.stringify(json);*/
-						
 						//window.localStorage.setItem("NAMA", json.details.nama);
 						//window.localStorage.setItem("LOGIN", kadp);
 						
@@ -133,8 +135,7 @@
 							{
 								title: 'Carian',
 								content: json.message,
-								confirm: function(){
-								}
+								confirm: function(){}
 							}
 						);
 					}
@@ -143,7 +144,7 @@
 				}
 			}
 		);
-	});
+	});*/
 	
 	</script>
 	
