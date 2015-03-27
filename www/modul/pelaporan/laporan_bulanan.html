@@ -2,19 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
 	</head>
 	<body>
 	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -22,16 +23,14 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="menu_pelaporan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-	
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="menu_pelaporan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>	
 	</div>	
 	<!-- end of header -->
 
 	<!-- header title -->
+	<div class="containerBlock">
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
@@ -45,24 +44,23 @@
 	<!-- list -->
 	<div id="content">
 		<h2 class="_orange_text">Statistik Laporan Bulanan</h2>
-		<h2 class="_orange_text">Dari</h2>
+		<input type="hidden" id="jenis_laporan" value="laporan_bulanan">
 		
-		<div class="selection">
-			<!-- <h5 id="_orange_title">Bulan</h5> -->
-			<form action="">
-				<select id="sel_negeri" name="sel_negeri" class="sel">
-				<option value="none"></option>
+		<div class="selection" id="fb1">
+				<select id="dari_bulan" name="dari_bulan" class="sel">
+				<option value="" selected>Dari Bulan</option>
+				<option value="01" >Januari</option>
+				<option value="02" >Februari</option>
+				<option value="03" >Mac</option>
 				</select>
-			</form>		
 		</div>
-		
-		<div class="selection">
-			<!-- <h5 id="_orange_title">Tahun</h5> -->
-			<form action="">
-				<select id="sel_negeri" name="sel_negeri" class="sel">
-				<option value="none"></option>
+		<div class="selection" id="fb2">
+				<select id="ke_bulan" name="ke_bulan" class="sel">
+				<option value="" selected>Ke Bulan</option>
+				<option value="01" >Januari</option>
+				<option value="02" >Februari</option>
+				<option value="03" >Mac</option>
 				</select>
-			</form>		
 		</div>
 		
 		<h5 id="H5" style="margin-top: 15px">
@@ -132,25 +130,148 @@
 		</div>
 
 	</div>
+	</div>
 	
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
+	
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<script src="js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
+	<!-- alert box -->
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="../../js/waitMe.js"></script>
+	
 	<script type="text/javascript">
-		$("#btn_submit").click(function()
+	$("#btn_submit").click(function(e)
+	{
+	
+		var monthFrom =  $.trim($("#dari_bulan").val());
+		var monthTo =  $.trim($("#ke_bulan").val());
+		var jenisLaporan =  $.trim($("#jenis_laporan").val());
+		var selectedState = [];
+		
+		for( var i = 2 ; i < 17 ; i++ )
 		{
-			window.location.href = "statistik_laporan_bulanan.html";
-			//for( var i = 2 ; i < 17 ; i++ )
-			//{
-			//	if($("#c_box"+i).is(":checked"))
-			//	{
-			//		alert("yes");
-			//	}
-			//}
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedState.push($("#c_box"+i).val());
+			}
+		}
+		
+		/*Javascript Validation*/
+		if (monthFrom == "") 
+		{
 
-		});
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Bulan!',
+					confirm: function(){}
+				}
+			);
+			
+			$('#fb1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if (monthTo == "") 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Bulan!',
+					confirm: function(){}
+				}
+			);
+			$('#fb2').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if( selectedState.length <= 0)
+		{
+			$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila tandakan satu negeri!',
+						confirm: function(){}
+					}
+				);
+		}
+		else 
+		{
+		
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/laporan.php",
+					type:'POST',
+					data:
+					{				
+						monthFrom : monthFrom,
+						monthTo : monthTo,
+						jenisLaporan : jenisLaporan,
+						selectedState : selectedState,
+					},
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							
+							//window.localStorage.setItem("LAPORAN", json);
+							//saving object to localStorage
+							window.localStorage['LAPORAN'] = JSON.stringify(json);
+
+							
+							//window.localStorage.setItem("BULAN_DARI", json.bulan_dari);
+							//window.localStorage.setItem("BULAN_HINGGA", json.bulan_hingga);
+							window.location.href = "statistik_laporan_bulanan.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Perhatian',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				}
+			);
+		}
+
+		
+	});	
+
+	/*Will change Later*/
+	$("#navigation").load('../navigation_menu/nav_login.html');
+	
 	</script>
 	</body>
 </html>
