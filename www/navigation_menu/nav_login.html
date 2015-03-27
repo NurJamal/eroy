@@ -20,5 +20,9 @@
 </nav>
 	
 	<script>
-	$("#nav_nama").html(window.localStorage.getItem("NAMA"));
+		/* --- SET USERNAME --- */
+		$("#nav_nama").html(window.localStorage.getItem("NAMA"));
+		
+		/* --- SET MENU FIX TO FALSE--- */
+		window.localStorage.setItem("_MENU_FIX", "FALSE");	
 	</script>
