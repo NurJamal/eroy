@@ -164,12 +164,7 @@
 			<!-- <input type="text"  name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick"><br/> -->
 		</div>
 						
-	
-		<div class="inputWrapper" style="height: 48px; width: 96px;">
-		Muat Naik
-			<input class="fileInput hidden" type="file" name="file3"/>
-		</div><br/>
-		
+				
 		
 		<div class="default_button_holder">
 			<a href="pendaftaran-tunggal-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
@@ -187,22 +182,21 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 		
   </body>
   <script>
   
-	$(function() {
-    $(".inputWrapper").mousedown(function() {
-        var button = $(this);
-        button.addClass('clicked');
-        setTimeout(function(){
-            button.removeClass('clicked');
-        },50);
-    });
-});
-
+	
   
   </script>
   

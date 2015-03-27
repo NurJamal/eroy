@@ -72,23 +72,24 @@
 	
 	<script>
 	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
-	
-	$.each(nama_pertubuhan.details, function (index, value) 
-	{
-		//console.log(value.nama_pertubuhan);
+	var pertubuhan = nama_pertubuhan.details;
 		
-		int count = doc.SelectNodes("/root/nama_pertubuhan/details").Count;
-	if( count < 1 )
+	if (Array.isArray(pertubuhan))
 	{
-		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value+"</h2></div>").appendTo('#content');
+		for (var i = 0; i < pertubuhan.length; i++)
+		{
+			var value = pertubuhan[i];
+			$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>")
+			.appendTo('#content');
+		}
 	}
 	else
 	{
-		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>").appendTo('#content');
-	}	
-	});	
+		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+pertubuhan.nama_pertubuhan+"</h2></div>")
+		.appendTo('#content');
+	}
 	
-	/*$("#box").click(function(e)
+	$("#box").click(function(e)
 	{
 		e.preventDefault();			
 			
@@ -144,7 +145,7 @@
 				}
 			}
 		);
-	});*/
+	});
 	
 	</script>
 	
