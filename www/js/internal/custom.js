@@ -136,12 +136,16 @@
 		
 	/*Logout - remove localstorage*/
 	function logKeluar(){
-		localStorage.removeItem("LOGIN");
+		localStorage.removeItem("NAMA");
 		window.location.replace("index.html");
 	}
 	
+	//alert(window.localStorage.getItem("LOGIN"));
+	//window.localStorage.setItem("LOGIN", "TEST");
+	//alert(window.localStorage.getItem("LOGIN"));
+
 	/*Slide Menu Display Depend on User Session*/
-	var value = window.localStorage.getItem("LOGIN");
+	var value = window.localStorage.getItem("NAMA");
 	if(value == null)	
 	{
 		$("#navigation").load('navigation_menu/nav_Xlogin.html');
