@@ -88,10 +88,10 @@
 	<script>
 	$("#btn_submit").click(function(e)
 	{
-		e.preventDefault();			
-
 		var carian_nama = $.trim($('#n_carian').val());
 		
+		e.preventDefault();			
+
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
 			$.alert
@@ -104,7 +104,6 @@
 			);
 			$('#n_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
 		else
 		{
 			$.ajax
@@ -136,10 +135,7 @@
 								}
 							);
 							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
-							
-							//window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
-							window.location.href = "carian_asas_listing.html";
-							
+							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
 						{
