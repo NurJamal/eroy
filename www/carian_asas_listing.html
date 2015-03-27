@@ -8,12 +8,20 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>		
+		
+		<div id="loadingLayer"></div>
+		
 	</head>
 	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -26,41 +34,119 @@
 		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
-
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN</h1>
+	
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<!-- list -->
-	<div id="content">
-		<a href="carian_asas_papar.html" style="text-decoration:none;">
-		<div id="box">
-				<h2 class="title">PERSATUAN SENI SILAT CEKAK HANAFI MALAYSIA</h2>
-		</div></a>
-		
-		<a href="carian_asas_papar.html" style="text-decoration:none;">
-		<div id="box">
-				<h2 class="title">PERSATUAN SENI SILAT DAERAH KERIAN</h2>
-		</div></a>
-		
-		<a href="carian_asas_papar.html" style="text-decoration:none;">
-		<div id="box">
-				<h2 class="title">PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR</h2>
-		</div></a>
+		<!-- list -->
+		<div id="content"></div>
 	</div>
-	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>	
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
+	
+	$.each(nama_pertubuhan.details, function (index, value) 
+	{
+		//console.log(value.nama_pertubuhan);
+		
+		int count = doc.SelectNodes("/root/nama_pertubuhan/details").Count;
+	if( count < 1 )
+	{
+		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value+"</h2></div>").appendTo('#content');
+	}
+	else
+	{
+		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>").appendTo('#content');
+	}	
+	});	
+	
+	/*$("#box").click(function(e)
+	{
+		e.preventDefault();			
+			
+		$.ajax
+		(
+			{
+				url:"http://eroy.me-tech.com.my/api/api_carian_papar.php",
+				type:'POST',
+				data:
+				{
+					npertubuhan : localStorage.getItem('NAMA PERTUBUHAN')
+					
+				},
+				dataType:'xml',
+				error: function(e) 
+				{
+					console.log(e);
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success:function(data)
+				{
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') 
+					{
+						console.log(json.status);
+						
+						window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
+						
+						//window.localStorage.setItem("NAMA", json.details.nama);
+						//window.localStorage.setItem("LOGIN", kadp);
+						
+						window.location.href = "carian_asas_papar.html";
+					}
+					else if (json.status == 'error') 
+					{
+						console.log(json.status);
+						$.alert
+						(
+							{
+								title: 'Carian',
+								content: json.message,
+								confirm: function(){}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			}
+		);
+	});*/
+	
+	</script>
+	
 	</body>
 </html>

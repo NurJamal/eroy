@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+		 -->
+		
+		 
+	</head>
+	<body>
+
+
+
+
+
+
+<b>Mailing Address</b>
+<br><br>
+<form>
+Name:
+<input type="text" name="shippingname">
+<br>
+City:
+<input type="text" name="shippingcity">
+<br>
+<input type="checkbox" name="billingtoo" onclick="FillBilling(this.form)">
+<em>Check this box if Billing Address and Mailing Address are the same.</em>
+<P>
+<b>Billing Address</b>
+<br><br>
+Name:
+<input type="text" name="billingname">
+<br>
+City:
+<input type="text" name="billingcity">
+</form>
+
+</body>
+
+<script>
+
+function FillBilling(f) {
+  if(f.billingtoo.checked == true) {
+    f.billingname.value = f.shippingname.value;
+    f.billingcity.value = f.shippingcity.value;
+  }
+}
+
+</script>

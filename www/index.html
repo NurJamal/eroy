@@ -135,8 +135,11 @@
 									}
 								}
 							);
-							window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
-							window.location.href = "carian_listing_test.html";
+							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
+							
+							//window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
+							window.location.href = "carian_asas_listing.html";
+							
 						}
 						else if (json.status == 'error') 
 						{
