@@ -77,9 +77,7 @@
 			
 				<form action="">
 						<select id="negeri" name="negeri" class="_sel">
-						<option value="0">Johor</option>
-						<option value="1">N.Sembilan</option>
-						<option value="2">Melaka</option>
+						<option value="0"></option>
 						</select>
 					</form>		
 			</div>
@@ -88,9 +86,7 @@
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
-						<option value="0">Muar</option>
-						<option value="1">Batu Pahat</option>
-						<option value="2">Segamat</option>
+						<option value="0"></option>
 						</select>
 					</form>		
 			</div><br/>
@@ -109,12 +105,12 @@
 			
 		
 			<div class="selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="negeri_pos" name="negeri" class="_sel">
-						<option value="0">Johor</option>
-						<option value="1">N.Sembilan</option>
-						<option value="2">Melaka</option>
+					
+			<h5 id="_orange_title">Negeri</h5>
+			
+				<form action="">
+						<select id="negeri_pos" name="negeri_pos" class="_sel" placeholder="Pilih Negeri">
+						<option value=""></option>
 						</select>
 					</form>		
 			</div>
@@ -154,14 +150,21 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
 	</body>
 </html>
 
 <script>
-
 	
 	function Alamat(f) 
 	{
@@ -188,10 +191,41 @@
 		
 	else{
 	
-		$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #negeri_pos, #daerah_pos').val('');
+		$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #negeri_pos, #daerah').val('');
 		
 		}
 	}
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/get_kod_negeri.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_kod_negeri").each(function()
+					{
+						console.log($(this).text());
+						var id = $(this).find("id");
+						var negeri = $(this).find("negeri");
+						$('#negeri').append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	
+	
 	
 		
 			
