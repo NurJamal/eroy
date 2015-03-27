@@ -47,7 +47,7 @@
 		<div id="content">
 			<form id="" action="" method="POST">
 				<div class="_form">
-					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil"><br/>
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()"><br/>
 				</div>	
 				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
@@ -92,6 +92,12 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+	function upperCase() 
+	{
+		var sijil = document.getElementById("f_sijil");
+		sijil.value = sijil.value.toUpperCase();
+	}
+	
 	function ValidateEmail(email) 
 	{
 		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -135,13 +141,13 @@
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		
-		else if (kadp.length == 0) 
+		else if (kadp.length == 0 || kadp.length != 12)
 		{
 			$.alert
 			(
 				{
 					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Kad Pengenalan!',
+					content: 'Sila Isikan No Kad Pengenalan sekurang-kurangnya 12 nombor',
 					confirm: function(){}
 				}
 			);
@@ -220,7 +226,6 @@
 					{
 						run_waitMe();
 					},
-					timeout: ajaxTimeout,
 					dataType:'xml',
 					error: function(e) 
 					{
@@ -270,7 +275,7 @@
 			
 	});
 
-	$(function() 
+	$(function()
 	{
 		$.ajax
 		(
@@ -287,14 +292,27 @@
 						console.log($(this).text());
 						var npertubuhan = $(this).find("nama_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
-
-						$( "#f_sijil" ).keyup(function()
+								
+						$( "#f_sijil" ).keyup(function() 
 						{
-							var input = $(this).val(); //take the input value
-							if ( input.length >= 5 )
-							{	
-								$('#d_npertubuhan').val($(npertubuhan).text());
-							}
+							var input = $(this).val(); // We take the input value
+						
+							$.ajax
+							(
+								{
+									type: 'POST',
+									data: ({p : input}),
+									url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+									success: function(data) 
+									{
+										if ( input.length > 5 )
+										{		
+											$('#d_npertubuhan').val($(npertubuhan).text());
+										}
+
+									}
+								}
+							);
 						});
 					});
 				},

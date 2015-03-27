@@ -94,13 +94,7 @@
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
 	
- 	<script>
-	function upperCase() 
-	{
-		var x = document.getElementById("f_nama");
-		x.value = x.value.toUpperCase();
-	}
-	
+ 	<script>	
 	function cekEmel(email) 
 	{
 		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -137,13 +131,13 @@
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 
-		else if (kadp.length == 0)
+		else if (kadp.length == 0 || kadp.length != 12)
 		{
 			$.alert
 			(
 				{
 					title: 'Daftar Pengguna',
-					content: 'Sila Isikan No Kad Pengenalan',
+					content: 'Sila Isikan No Kad Pengenalan sekurang-kurangnya 12 nombor',
 					confirm: function(){}
 				}
 			);
@@ -247,7 +241,6 @@
 					{
 						run_waitMe();
 					},
-					timeout: ajaxTimeout,
 					dataType:'xml',
 					error: function(e) 
 					{
