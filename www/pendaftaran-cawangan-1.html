@@ -2,19 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
-
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-
 	</head>
 	<body>
 	
@@ -34,6 +32,7 @@
 	<!-- end of header -->
 	
 	<!-- header title -->
+	<div class="containerBlock">
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
@@ -60,7 +59,7 @@
 			<div class="selection">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="jenis_pertubuhan" name="jenis_pertubuhan" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -69,7 +68,7 @@
 			<div class="selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="kategori_pertubuhan" name="kategori_pertubuhan" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -78,7 +77,7 @@
 			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="negeri" name="negeri" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -87,13 +86,13 @@
 			<div class="selection">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
+						<select id="daerah" name="daerah" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
 			</div>
 		
-			<form id="" action="" method="POST">
+			
 				<input type="text" name="lokaliti" id="lokaliti" placeholder="Lokaliti"><br/>
 				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
@@ -103,22 +102,18 @@
 			</div>
 			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
+		
 				
-				
-				
-				
-				
-				<div class="default_button_holder">
-				
-					<a href="pendaftaran-cawangan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-					
-				</div>
-			</form>
+			
 		</div>
+		<div class="default_button_holder">
+					<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+				</div>
+	</div>
 	</div>
 	<!-- end of form -->
 	
-	<!-- js for slide menu -->
+		<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
@@ -126,8 +121,160 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+		var source =  navigator.camera.PictureSourceType.PHOTOLIBRARY;
+		navigator.camera.getPicture(successFn, errorFn, { quality: 50,
+		destinationType: this.photoDestinationType.FILE_URI,
+		sourceType: source,
+		mediaType: navigator.camera.MediaType.ALLMEDIA  });
 
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();
 		
+		var jenis_pertubuhan = $.trim($("#jenis_pertubuhan").val());
+		var kategori_pertubuhan = $.trim($("#kategori_pertubuhan").val());
+		var negeri = $.trim($("#negeri").val());
+		var daerah = $.trim($("#daerah").val());
+		var lokaliti = $.trim($("#lokaliti").val());
+		var nama_pertubuhan = $.trim($("#nama_pertubuhan").val());
+		var nama_ringkasan = $.trim($("#nama_ringkasan").val());
+		var paparan_nama_pertubuhan = $.trim($("#paparan_nama_pertubuhan").val());
+		var emel_pertubuhan = $.trim($("#emel_pertubuhan").val());
+
+		if (jenis_pertubuhan.length == 0) 
+		{
+			
+			$("#jenis_pertubuhan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (kategori_pertubuhan.length == 0) 
+		{
+			
+			$("#kategori_pertubuhan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (negeri.length == 0) 
+		{
+			
+			$("#negeri").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (daerah.length == 0) 
+		{
+			
+			$("#daerah").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (lokaliti.length == 0) 
+		{
+			
+			$("#lokaliti").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (nama_pertubuhan.length == 0) 
+		{
+			
+			$("#nama_pertubuhan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		if (nama_ringkasan.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Isikan Nama Penuh',
+					confirm: function(){}
+				}
+			);
+			$("#nama_ringkasan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if (paparan_nama_pertubuhan.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Isikan Nama Penuh',
+					confirm: function(){}
+				}
+			);
+			$("#paparan_nama_pertubuhan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if (emel_pertubuhan.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Isikan Nama Penuh',
+					confirm: function(){}
+				}
+			);
+			$("#emel_pertubuhan").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else 
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan.php",
+					type:'POST',
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					data: 
+					{
+						jenis_pertubuhan : jenis_pertubuhan,
+						kategori_pertubuhan : kategori_pertubuhan,
+						negeri : negeri,
+						daerah : daerah,
+						lokaliti : lokaliti,
+						nama_pertubuhan : nama_pertubuhan,
+						nama_ringkasan : nama_ringkasan,
+						paparan_nama_pertubuhan : paparan_nama_pertubuhan,
+						emel_pertubuhan : emel_pertubuhan,
+					},
+					success:function(data)
+					{
+						var json = $.xml2json(data);
+						if (json.status == 'ok') 
+						{
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,//Messages : Berjaya simpan
+									confirm: function(){}
+								}
+							);
+							window.location.href = "pendaftaran-cawangan-1.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+						}
+						else{}
+					}
+				}
+			);		
+		}
+	});
+
+	</script>
   </body>
 </html>

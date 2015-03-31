@@ -89,22 +89,14 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	
-	
-	
-	var nama = window.localStorage.getItem('NAMA');
-	var no_kp = window.localStorage.getItem('LOGIN');
-	
-	//alert(nama);
-	//alert(no_kp);
-	
+
 	//window.localStorage.setItem("ALAMAT", "alamat tempat urusan");
 	
 
 		//e.preventDefault();			
 
 		//var carian_nama = $.trim($('#n_carian').val());
-		$(function()
+/*	$(function()
 	{
 		$.ajax
 		(
@@ -149,7 +141,7 @@
 			}
 		)
 });
-
+*/
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
@@ -163,12 +155,7 @@
 	$("#d_nama").val(nama);
 	$("#d_kp").val(no_kp);
 	$("#d_alamat").val(alamat);
-	
-	//alert(alamat);
-	
-	//var jawatan = window.localStorage.getItem('JAWATAN');
-	//var no_tel = window.localStorage.getItem('NO TEL');
-	
+
 	$("#btn_submit").click(function(e)
 	{
 		e.preventDefault();
@@ -239,49 +226,39 @@
 	
 	});
 	
-	$(function()
+	$( "#f_sijil" ).keyup(function() 
 	{
-		$.ajax
-		(
+		var input = $('#f_sijil').val(); // We take the input value
+		if ( input.length > 5 ) {	
+			$(function()
 			{
-				type: "GET",
-				url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-				dataType: "xml",
-				success: function(xml)
-				{
-					var xmlDoc = $.parseXML(xml),
-					$xml = $(xmlDoc);
-					$(xml).find("lk_pertubuhan_info").each(function()
-					{
-						console.log($(this).text());
-						var npertubuhan = $(this).find("nama_pertubuhan");
-						var no_sijil = $(this).find("no_sijil");
-								
-						$( "#f_sijil" ).keyup(function() 
+				
+			
+				$.ajax({
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+						dataType: "xml",
+						data: {
+							nombor_sijil: input,
+						},
+						success: function(xml)
 						{
-							var input = $(this).val(); // We take the input value
-						
-							$.ajax
-							(
-								{
-									type: 'POST',
-									data: ({p : input}),
-									url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-									success: function(data) 
-									{
-										if ( input.length > 5 )
-										{		
-											$('#d_npertubuhan').val($(npertubuhan).text());
-										}
-
-									}
-								}
-							);
-						});
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_pertubuhan_info").each(function()
+							{
+								console.log($(this).text());
+								var npertubuhan = $(this).find("nama_pertubuhan");
+								var no_sijil = $(this).find("no_sijil");
+							
+								$('#d_npertubuhan').val($(npertubuhan).text());
+											
+							});
+						}
 					});
-				},
-			}
-		);
+			});
+		
+		}
 	});
 	</script>
 	
