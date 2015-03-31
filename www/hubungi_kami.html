@@ -21,6 +21,8 @@
 	</head>
 	<body>
 	
+	
+	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
@@ -82,6 +84,10 @@
 		</div>
 		<!-- end of form -->
 	</div>
+	
+	<script>
+		window.localStorage.setItem("_MENU_FIX", "TRUE");
+	</script>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -284,7 +290,10 @@
 		}
 				
 	});
-	</script>
 	
+	/*Set current menu to fix*/
+	window.localStorage.setItem("_MENU_FIX", "TRUE");
+	
+	</script>
   </body>
 </html>
