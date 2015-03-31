@@ -3,18 +3,24 @@
 	<head>
 		<meta charset="utf-8">
 
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
 
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -33,7 +39,7 @@
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -63,20 +69,22 @@
 	<!-- form -->
 		<div class="_form">
 		
-			<div class="selection">
+			<div class="selection" id="peringkat_selection">
 					<h5 id="_orange_title">Peringkat</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
+						<option value=""></option>
+						<option value="Kebangsaan">Kebangsaan</option>
 						</select>
 					</form>		
 				</div>
 				
-			<div class="selection">
+			<div class="selection" id="pertubuhan_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_pertubuhan" name="sel_pertubuhan" class="_sel">
+						<option value=""></option>
+						<option value="Persatuan">Persatuan</option>
 						</select>
 					</form>		
 			</div>
@@ -85,14 +93,14 @@
 			<form id="" action="" method="POST">
 				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="nama_per" id="nama_per" placeholder="Nama"><br/>
-				
+			</form>
 									
 			<form id="" action="" method="POST">
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
 				
-			<div class="display">
-				<input type="text" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" placeholder="Nama Penuh Pertubuhan""><br/>
-			</div>
+				<div class="display">
+					<input type="text" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" placeholder="Nama Penuh Pertubuhan" disabled><br/>
+				</div>
 			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
 																			
@@ -103,7 +111,7 @@
 		</div>
 	</div>
 	<!-- end of form -->
-	
+	</div>
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -116,6 +124,581 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>
+
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+
+		$("#sel_pertubuhan").change(function(){
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+
+			if(peringkat == "Kebangsaan")
+			{
+				peringkat = "MALAYSIA";
+			}
+
+			if( peringkat.length > 0 )
+			{
+				if( namaPertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+						}
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat);
+						}
+					}
+				}
+			}else
+			{
+				if( namaPertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
+						}
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt);
+						}
+					}
+				}
+			}
+		});
+
+		$("#nama_pertubuhan").keyup(function(){
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+
+			if(peringkat == "Kebangsaan")
+			{
+				peringkat = "MALAYSIA";
+			}
+
+			if( peringkat.length > 0 )
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat);
+						}
+					}
+				}
+			}else
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan);
+						}
+					}
+				}
+			}
+		});
+
+		$("#nama_per").keyup(function(){
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+
+			if(peringkat == "Kebangsaan")
+			{
+				peringkat = "MALAYSIA";
+			}
+
+			if( peringkat.length > 0 )
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
+						}
+					}
+				}else
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat);
+						}
+					}
+				}
+			}else
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer);
+						}
+					}
+				}else
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPer);
+						}
+					}
+				}
+			}
+		});
+
+		$("#nama_ringkasan").keyup(function(){
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+
+			//if( peringkat.length > 0 )
+			//{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaPer.length > 0 )
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' ['+namaRingkasan+']');
+						}
+					}else
+					{
+						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
+
+						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' ['+namaRingkasan+']');
+					}
+				}else
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if(namaPer.length > 0 )
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' ['+namaRingkasan+']');
+						}
+					}else
+					{
+						if(namaPer.length > 0 )
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+
+							$('#paparan_nama_pertubuhan').val(' ['+namaRingkasan+']');
+						}
+					}
+				}
+			//}
+		});
+
 		
+
+		$("#btn_submit").click(function(e){
+			var empty = false;
+			e.preventDefault();
+			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		
+			$('#sel_peringkat,#sel_pertubuhan,#nama_pertubuhan,#nama_ringkasan,#paparan_nama_pertubuhan,#emel_pertubuhan').css({"border":"","box-shadow":""});
+
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+			var emelPertubuhan = $("#emel_pertubuhan").val();
+
+			if (peringkat.length == 0)
+			{
+				$('#peringkat_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if(pertubuhan.length == 0)
+			{
+				$('#pertubuhan_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(namaPertubuhan.length == 0)
+			{
+				$('#nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(namaPer.length == 0)
+			{
+				$('#nama_per').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(namaRingkasan.length == 0)
+			{
+				$('#nama_ringkasan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(emelPertubuhan.length == 0)
+			{
+				$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(empty == true)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila isikan tempat kosong!',
+						confirm: function(){				
+						}
+					}
+				);
+			}
+
+		});
+	</script>
   </body>
 </html>
