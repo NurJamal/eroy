@@ -133,7 +133,7 @@
 	/*GET COUNTRY*/
 	function getCountry(id)
 	{
-
+		var sel_id = id;
 		$(function() 
 			{
 				$.ajax
@@ -151,7 +151,7 @@
 								console.log($(this).text());
 								var id = $(this).find("kod_negeri");
 								var negeri = $(this).find("negeri");
-								$('#'+id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
+								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
 							});
 						},
 						error: function() 
@@ -167,6 +167,7 @@
 	/*GET DAERAH*/
 	function getDaerah(negeri,id)
 	{
+		var daerah_id = id;
 		$(function() 
 			{
 				$.ajax
@@ -195,7 +196,7 @@
 								var kod = $(this).find("Kod");
 								var keterangan = $(this).find("Keterangan");
 								
-								$('#'+id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
+								$('#'+daerah_id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
 							});
 						},
 						error: function() 
