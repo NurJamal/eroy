@@ -208,3 +208,70 @@
 
 			});
 	};
+	
+	
+	/*Control IC - Input*/
+	function ic_control(ic_id)
+	{
+		var kad_pengenalan_field_id = ic_id;
+		$( "#"+kad_pengenalan_field_id ).keyup(function() 
+		{
+			var input = $("#"+kad_pengenalan_field_id).val(); 
+			if ( input.length == 6 ) {	
+				$(function()
+				{
+					$( "#"+kad_pengenalan_field_id ).val(input+"-");
+				});
+			}
+			if ( input.length == 9 ) {	
+				$(function()
+				{
+					$( "#"+kad_pengenalan_field_id ).val(input+"-");
+					
+				});
+			
+			}
+		});
+	}
+	
+	/*Auto Calculate Umur - Input*/
+	function auto_calculate_umur(tarikh_id)
+	{
+		var tarikh_id = tarikh_id;
+		
+		var dob = $("#"+tarikh_id).val();
+		dob = dob.split('-');
+		
+		var yearOfDob = dob[0];
+		var currentYear = (new Date).getFullYear(); 
+		var age = Math.floor(currentYear-yearOfDob);
+	
+		return age;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
