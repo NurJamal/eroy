@@ -2,16 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div> 
-		</head>
+		</div>	
+		<div id="loadingLayer"></div>
+	</head>
+	
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
@@ -25,10 +29,10 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="pendaftaran-tunggal-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
 	</div>	
 	<!-- end of header -->
+
+	<div class="containerBlock">
 	
 	<!-- header title -->
 	<div class="content_title">
@@ -57,41 +61,42 @@
 	
 	<!-- form -->
 	
-	<form>
+
 	
 	<div class="_form">
 	
 		<div>
 			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" style="margin-top:-4px">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1>
+			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_tunggal"></h1>
 		</div>
 	</div>
 	
 		<div class="inform">
-			<input type="text" style="margin-top:0px" name="muat_naik" id="muat_naik" placeholder="No. Kad Pengenalan" class="_searching"><br/></br>
+			<input type="text" style="margin-top:0px" name="kad_pengenalan" id="kad_pengenalan" maxlength="14" placeholder="No. Kad Pengenalan" ><br/></br>
 		</div>
 		
 	<div class="_form">
 	
 		<div class="selection" style="margin-top:-20px">
 					<h5 id="_orange_title">Jawatan</h5>
-					<form action="">
+					
 						<select id="bayaran" name="bayaran" class="_sel">
-						<option value="none"></option>
+						<option value="">Pilih Jawatan</option>
+						<option value="">Pengerusi</option>
+						<option value="">Naib Pengerusi</option>
+						<option value="">Setiausaha</option>
+						<option value="">Penolong Setiausaha</option>
 						</select>
-					</form>
-
 		</div>
 		
-		<div>
-			<input type="text" style="margin-top:3px" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
-		</div>
+	<div>
+		<input type="text" style="margin-top:3px" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
+	</div>
 	</div>
 		
-		<div class="inform">
-			<input type="text" name="t_lahir" onfocus="(this.type='date')" onblur="(this.type='text')"  id="t_lahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
-			<!--<input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">-->
-		</div>
+	<div class="inform">
+		<input type="text" name="t_lahir" onfocus="(this.type='date')" onblur="(this.type='text')"  onchange="calcUmur()" id="t_lahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+	</div>
 	
 	<div class="_form">
 			
@@ -223,8 +228,10 @@
 			<a href="pendaftaran-tunggal-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
 		</div>
 	
-	</form>
-		
+		</div>
+	</div>
+	</div>
+	
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
@@ -235,9 +242,26 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+		
+	<script>
+	
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
+	
+	/*IC CONTROLL*/
+	ic_control($('#kad_pengenalan').attr('id'));
+	
+	function calcUmur()  
+	{
+		var age = auto_calculate_umur($('#t_lahir').attr('id'));
+		$('#umur').val(age+" tahun");
+	}
+
+	
+	</script>	
+		
 		
   </body>
 </html>
