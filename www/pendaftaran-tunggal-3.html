@@ -97,10 +97,12 @@
 			<input type="number" style="margin-top:0px" name="ahli_melayu_lelaki" id="ahli_melayu_lelaki" placeholder="Melayu"><br/>
 			<input type="number" name="ahli_cina_lelaki" id="ahli_cina_lelaki" placeholder="Cina"><br/>
 			<input type="number" name="ahli_india_lelaki" id="ahli_india_lelaki" placeholder="India"><br/>
-			<input type="number" name="ahli_lain2_lelaki" id="ahli_lain2_lelaki" placeholder="Lain-lain"><br></br>
-		
+			<input type="number" name="ahli_lain2_lelaki" id="ahli_lain2_lelaki" placeholder="Lain-lain"><br><br/>	
+
+			<input type="number" name="jumlah_lelaki" id="jumlah_lelaki" placeholder="Jumlah" disabled><br/>
+	
 		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
+			<h5 id="_orange_title" style="margin-top:15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">Perempuan</h5>
 		</div>
 			
@@ -112,7 +114,7 @@
 		
 		<div class="display">
 				
-			<input type="number" name="jumlah" id="jumlah" placeholder="Jumlah" disabled><br/>
+			<input type="number" name="jumlah_perempuan" id="jumlah_perempuan" placeholder="Jumlah" disabled><br/>
 			<input type="number" name="jumlah_keseluruhan" id="jumlah_keseluruhan" placeholder="Jumlah Keseluruhan" disabled><br/></br>
 		</div>
 		
@@ -189,33 +191,55 @@
   /*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
 	
-	$("#ahli_melayu_lelaki,#ahli_cina_lelaki,#ahli_india_lelaki,#ahli_lain2_lelaki,#ahli_melayu_perempuan,#ahli_cina_perempuan,#ahli_india_perempuan,#ahli_lain2_perempuan").keyup(function() 
+	/*Calc Jumlah ahli lelaki*/
+	$("#ahli_melayu_lelaki,#ahli_cina_lelaki,#ahli_india_lelaki,#ahli_lain2_lelaki").keyup(function() 
 	{
 		var ahliMelayuL = $('#ahli_melayu_lelaki').val();
 		var ahliCinaL = $('#ahli_cina_lelaki').val();
 		var ahliIndiaL = $('#ahli_india_lelaki').val();
 		var ahliLainL = $('#ahli_lain2_lelaki').val();
+		var total = Number(ahliMelayuL)+Number(ahliCinaL)+Number(ahliIndiaL)+Number(ahliLainL);
+		
+		$('#jumlah_lelaki').val(total);
+		$('#jumlah_keseluruhan').val(Number(total) + Number($('#jumlah_perempuan').val()));
+
+	});
+	
+	/*Calc Jumlah ahli wanita*/
+	$("#ahli_melayu_perempuan,#ahli_cina_perempuan,#ahli_india_perempuan,#ahli_lain2_perempuan").keyup(function() 
+	{
 		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
 		var ahliCinaP = $('#ahli_cina_perempuan').val();
 		var ahliIndiaP = $('#ahli_india_perempuan').val();
 		var ahliLainP = $('#ahli_lain2_perempuan').val();
-		var total = Number(ahliMelayuL)+Number(ahliCinaL)+Number(ahliIndiaL)+Number(ahliLainL)+Number(ahliMelayuP)+Number(ahliCinaP)+Number(ahliIndiaP)+Number(ahliLainP);
-		$('#jumlah').val(total);
-	});
- 
-	
-
-	
-		$("#btn_submit").click(function(e){
-		/*Clear all highlighted*/
-		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu').css({"border":"","box-shadow":""});
+		var total = Number(ahliMelayuP)+Number(ahliCinaP)+Number(ahliIndiaP)+Number(ahliLainP);
 		
+		$('#jumlah_perempuan').val(total);
+		$('#jumlah_keseluruhan').val(Number(total) + Number($('#jumlah_lelaki').val()));
+
+	});
+	
+	
+	/*Submit form*/
+	$("#btn_submit").click(function(e){
+		
+		/*Clear all highlighted*/
+		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu,#logo').css({"border":"","box-shadow":""});
+		
+		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
+		var ahliCinaP = $('#ahli_cina_perempuan').val();
+		var ahliIndiaP = $('#ahli_india_perempuan').val();
+		var ahliLainP = $('#ahli_lain2_perempuan').val();
+		var ahliMelayuL = $('#ahli_melayu_lelaki').val();
+		var ahliCinaL = $('#ahli_cina_lelaki').val();
+		var ahliIndiaL = $('#ahli_india_lelaki').val();
+		var ahliLainL = $('#ahli_lain2_lelaki').val();
 		var p_tmesyuarat = $('#p_tmesyuarat').val();
 		var bil_ahli = $('#bil_ahli').val();
 		var dengan_logo = $('#dengan_logo').val();
 		var bawah_akta = $('#bawah_akta').val();
-			var bawah_akta = $('#bawah_akta').val();
-			var dengan_logo = $('#dengan_logo').val();
+		var dengan_logo = $('#dengan_logo').val();
+		
 		empty = false;
 	
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
@@ -272,13 +296,68 @@
 		}
 		else if(empty == false)
 		{
-			
-		//JQUEYR
+
+		$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_3.php",
+				type:'POST',
+				data: {
+
+					ahliMelayuL : ahliMelayuL,
+					ahliCinaL: ahliCinaL,
+					ahliIndiaL : ahliIndiaL,
+					ahliLainL : ahliLainL,
+					ahliMelayuP : ahliMelayuP,
+					ahliCinaP : ahliCinaP,
+					ahliIndiaP : ahliIndiaP,
+					ahliLainP : ahliLainP,
+					p_tmesyuarat : p_tmesyuarat,
+					bil_ahli : bil_ahli,
+					dengan_logo : dengan_logo,
+					bawah_akta : bawah_akta,
+					no_akta_dahulu : no_akta_dahulu,
+					logo : logo,
+
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+									window.location.href = "pendaftaran-tunggal-4.html";
+								}
+							}
+						);
+					
+					}
+					else if (json.status == 'error') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			});	
 			
 		}
 		
-		
-		
+
 		
 		});
 

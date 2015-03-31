@@ -159,13 +159,16 @@
 			getDaerah(selected_country,$('#sel_daerah').attr('id'));	
 		}
 
-		$("#f_nama_pertubuhan").keyup(function() 
+		$("#f_nama_pertubuhan,#f_nama_ringkasan,#f_lokaliti").keyup(function() 
 		{
 			var sel_kategori = $('#sel_kategori').val();
 			if(sel_kategori.length > 0){
 				var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
 				var sel_kategori_txt = $('#sel_kategori option:selected').text();
-				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan);
+				var f_nama_ringkasan = $('#f_nama_ringkasan').val();
+				var f_lokaliti = $('#f_lokaliti').val();
+
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" ("+f_nama_ringkasan+")");
 			}
 		});
 		
