@@ -134,16 +134,15 @@
 	
 	$("#btn_submit").click(function(e)
 	{
-
-		e.preventDefault();
-		
 		var nama = $.trim($("#f_nama").val());
 		var emel = $.trim($("#f_emel").val());
 		var mesej_berkenaan = $.trim($("#sel_mberkenaan").val());
 		var mesej = $.trim($("#f_mesej").val());
 		var captcha = $.trim($("#f_captcha").val());
 		
-		if (nama.length == 0) 
+		e.preventDefault();
+		
+		if (nama.length == 0)
 		{
 			$.alert
 			(
@@ -223,7 +222,6 @@
 		
 		else 
 		{
-		
 			$.ajax
 			(
 				{
@@ -235,7 +233,16 @@
 						emel : emel,
 						mesej_berkenaan : mesej_berkenaan,
 						mesej : mesej,
-						//captcha : captcha
+						captcha : captcha
+					},
+					beforeSend: function()
+					{
+						run_waitMe();
+					},
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
 					},
 					success:function(data)
 					{
@@ -250,7 +257,10 @@
 								{
 									title: 'Hubungi Kami',
 									content: json.message,
-									confirm: function(){}
+									confirm: function()
+									{
+										$('body').waitMe('hide');
+									}
 								}
 							);
 							window.location.href = "index.html";
