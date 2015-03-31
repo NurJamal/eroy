@@ -106,17 +106,19 @@
 		
 		<div class="selection" style="margin-top:6px">
 					<h5 id="_orange_title">Negeri Kelahiran</h5>
-				
-						<select id="n_kelahiran" name="n_kelahiran" class="_sel" onchange="getDaerahFromSelectedCountry()">
-						<option value="">Pilih Negeri Kelahiran</option>
+					<form action="">
+						<select id="n_kelahiran" name="n_kelahiran" class="_sel">
+						<option value="none"></option>
 						</select>
+					</form>
+
 		</div>
 		
 		<div class="selection" style="margin-top:15px">
 					<h5 id="_orange_title">Daerah Kelahiran</h5>
 					<form action="">
 						<select id="d_kelahiran" name="d_kelahiran" class="_sel">
-						<option value="">Pilih Daerah Kelahiran</option>
+						<option value="none"></option>
 						</select>
 					</form>
 
@@ -126,25 +128,27 @@
 					<h5 id="_orange_title">Jantina</h5>
 					<form action="">
 						<select id="jantina" name="jantina" class="_sel">
-						<option value="">Pilih Jantina</option>
-						<option value="L">Lelaki</option>
-						<option value="P">Perempuan</option>
+						<option value="none"></option>
 						</select>
 					</form>
 
 		</div></br>
 		
 		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tetap</h5>
-			<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-			<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-			<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-			<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+			<form id="" action="" method="POST">
+				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+			</form>
 			
-		<div class="selection">
+			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
+					<form action="">
 						<select id="negeri" name="negeri" class="_sel">
 						<option value="none"></option>
 						</select>
+					</form>		
 			</div>
 			
 			<div class="selection" style="margin-top:14px">
@@ -161,28 +165,28 @@
 			<h5 id="H5" style="margin-top:0px">
 			<input type="checkbox" name="klik" id="c_box1" class="checkboxClass"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 			
-				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
+				<input type="text" style="margin-top:0px" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
 			</form>
 			
 			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
-					
-						<select id="negeri_pos" name="negeri_pos" class="_sel">
+					<form action="">
+						<select id="negeri" name="negeri" class="_sel">
 						<option value="none"></option>
 						</select>
-						
+					</form>		
 			</div>
 			
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
-					
-						<select id="daerah_pos" name="daerah_pos" class="_sel">
+					<form action="">
+						<select id="daerah" name="daerah" class="_sel">
 						<option value="none"></option>
 						</select>
-					
+					</form>		
 			</div>
 			
 			<h5 id="_orange_title" style="margin-top:15px">Majikan</h5>
@@ -249,16 +253,12 @@
 	/*IC CONTROLL*/
 	ic_control($('#kad_pengenalan').attr('id'));
 	
-	/*KIRA UMUR*/
 	function calcUmur()  
 	{
 		var age = auto_calculate_umur($('#t_lahir').attr('id'));
 		$('#umur').val(age+" tahun");
 	}
 
-	/*LIST NEGERI*/
-	getCountry($('#n_kelahiran').attr('id'));	
-	
 	/*LIST Daerah*/
 	function getDaerahFromSelectedCountry()  
 	{
@@ -295,6 +295,7 @@
 				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #sel_negeripos, #sel_daerahpos').val('');
 			}
 	}
+
 	</script>	
 		
 		
