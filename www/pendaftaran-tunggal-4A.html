@@ -76,7 +76,7 @@
 		<div class="selection" style="margin-top:-20px">
 					<h5 id="_orange_title">Jawatan</h5>
 					<form action="">
-						<select id="bayaran" name="bayaran" class="_sel">
+						<select id="jawatan" name="jawatan" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>
@@ -158,12 +158,13 @@
 			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
 			<form id="" action="" method="POST">
 			<h5 id="H5" style="margin-top:0px">
-			<input type="checkbox" name="klik" id="c_box1" class="checkboxClass"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
+			<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="Alamat(this.form)"> 
+			<label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 			
-				<input type="text" style="margin-top:0px" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
 			</form>
 			
 			<div class="selection">
@@ -187,16 +188,16 @@
 			<h5 id="_orange_title" style="margin-top:15px">Majikan</h5>
 			<form id="" action="" method="POST">
 				<input type="text" name="n_majikan" id="n_majikan" placeholder="Nama Majikan"><br/>
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+				<input type="text" name="alamat_majikan1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_majikan2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_majikan3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="text" name="poskod_majikan" id="poskod_majikan" placeholder="Poskod"><br/>
 			</form>
 			
 			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
+						<select id="n_majiikan" name="n_majikan" class="_sel">
 						<option value="none"></option>
 						</select>
 					</form>		
@@ -237,6 +238,114 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	
+	function Alamat(f) 
+	{
+	if(f.alamat_sama.checked == true) 
+		{	
+		var copythis = $("#alamat1").val();
+		$("#alamat_pos1").val(copythis);
+		
+		var copythis = $("#alamat2").val();
+		$("#alamat_pos2").val(copythis);
+		
+		var copythis = $("#alamat3").val();
+		$("#alamat_pos3").val(copythis);
+		
+		var copythis = $("#poskod").val();
+		$("#poskod_pos").val(copythis);
+		
+		var copythis = $("#negeri").val();
+		$("#negeri_pos").val(copythis);
+		
+		var copythis = $("#daerah").val();
+		$("#daerah_pos").val(copythis);
+		}
+		
+	else{
+	
+		$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #negeri_pos, #daerah').val('');
+		
+		}
+	}
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/get_kod_negeri.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_kod_negeri").each(function()
+					{
+						console.log($(this).text());
+						var id = $(this).find("id");
+						var negeri = $(this).find("negeri");
+						$('#negeri').append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/get_kod_negeri.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_kod_negeri").each(function()
+					{
+						console.log($(this).text());
+						var id = $(this).find("id");
+						var negeri = $(this).find("negeri");
+						$('#n_majikan').append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	
+	$('#t_lahir').datepicker({
+    onSelect: function (value, ui) {
+        var today = new Date();
+        var format = value.split("/");
+        var t_lahir = new Date(format[2], format[0], format[1]);
+        var diff = (today - dob);
+        var umur = Math.floor(diff / 31536000000);
+        $('#umur').text(umur);
+    },
+    dateFormat: 'dd/mm/yy',
+    maxDate: '+0d',
+    yearRange: '1920:2015',
+    changeMonth: true,
+    changeYear: true
+});
+	
+	</script>
 		
   </body>
 </html>
