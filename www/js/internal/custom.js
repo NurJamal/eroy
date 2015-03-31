@@ -92,6 +92,7 @@
 			sizeW:'',
 			sizeH:'',
 			source: 'img.svg'
+
 		});
 	}
 		
@@ -128,3 +129,149 @@
 		var reg = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		return reg.test(email);
 	};
+	
+	/*GET COUNTRY*/
+	function getCountry(id)
+	{
+		var sel_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "GET",
+						url: "http://eroy.me-tech.com.my/api/get_kod_negeri.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_kod_negeri").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("kod_negeri");
+								var negeri = $(this).find("negeri");
+								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	};
+	
+	/*GET DAERAH*/
+	function getDaerah(negeri,id)
+	{
+		var daerah_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_kod_daerah.php",
+						data: {
+							negeri : negeri,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+				
+						
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_kod_daerah").each(function()
+							{
+								console.log($(this).text());
+								var kodDaerah = $(this).find("Kod_Daerah");
+								var kod = $(this).find("Kod");
+								var keterangan = $(this).find("Keterangan");
+								
+								$('#'+daerah_id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	};
+	
+	
+	/*Control IC - Input*/
+	function ic_control(ic_id)
+	{
+		var kad_pengenalan_field_id = ic_id;
+		$( "#"+kad_pengenalan_field_id ).keyup(function() 
+		{
+			var input = $("#"+kad_pengenalan_field_id).val(); 
+			if ( input.length == 6 ) {	
+				$(function()
+				{
+					$( "#"+kad_pengenalan_field_id ).val(input+"-");
+				});
+			}
+			if ( input.length == 9 ) {	
+				$(function()
+				{
+					$( "#"+kad_pengenalan_field_id ).val(input+"-");
+					
+				});
+			
+			}
+		});
+	}
+	
+	/*Auto Calculate Umur - Input*/
+	function auto_calculate_umur(tarikh_id)
+	{
+		var tarikh_id = tarikh_id;
+		
+		var dob = $("#"+tarikh_id).val();
+		dob = dob.split('-');
+		
+		var yearOfDob = dob[0];
+		var currentYear = (new Date).getFullYear(); 
+		var age = Math.floor(currentYear-yearOfDob);
+	
+		return age;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
