@@ -96,7 +96,7 @@ input.double_button {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.display textarea{
+.display textarea {
 	overflow: hidden;
 	text-align: left;
 	height: 100px;
@@ -114,7 +114,23 @@ input.double_button {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.display input[type=text] , input[type=date]{
+.display input[type=text] , input[type=date] {
+	height: 50px;
+	width: 100%;
+	margin-top: 4px;
+	margin-bottom: 10px;
+	padding: 10px;
+	color: #989898;
+	background: #ececec;
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	-moz-outline-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.display [type=number] {
 	height: 50px;
 	width: 100%;
 	margin-top: 4px;
