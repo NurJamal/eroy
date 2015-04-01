@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -30,81 +33,71 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="permohonan-induk-3.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="" onclick="goBack()"><img src="img/back-icon.png" class="back_icon" align="left"/></a>	
 	</div>	
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PERMOHONAN INDUK</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PERMOHONAN INDUK</h1>
+				</div>
 			</div>
 		</div>
-	
+		<!-- end of header-title-->
+		
+		<div id="content">
+		
+			<!-- navbar -->
+			<div class="navbar">
+				<div align="center">
+					<img src="img\numbering-ppb05-4.png" style="width:100%;height:auto"/>
+				</div>
+			</div>
+			<!-- end of navbar -->
+		
+			<!-- form -->
+		
+			<form>	
+				<div class="_form">
+				
+					<div>
+						<h5 id="_orange_title">Nama Pertubuhan</h5>
+						<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1>
+					</div>
+					
+					</br>
+			
+					<h5 id="_orange_title">
+						<input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass">
+						<label for="c_box1">Saya memperakui bahawa sepanjang pengetahuan dan 
+					kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
+					</h5>
+				
+					<div>	
+					 	<p class="perakuan1">Bertarikh : <span class="perakuan2" id="date"></span></p></br>
+					</div>
+				
+					<div>
+						<h5 id="_orange_title">Saya,</h5></br>
+					</div>
+				
+					<div style="line-height:0.5em;">
+						<p class="perakuan1">Nama : <span class="perakuan2" id="nama"></span> </p>
+						<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2" id="kadp"></span> </p>
+					</div>
+
+					<div class="default_button_holder">
+						<a href="permohonan-induk-5.html">
+							<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+						</a>
+					</div>
+
+				</div>	
+			</form>
+		</div>
 	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-
-				<img src="img\numbering-ppb05-4.png" style="width:100%;height:auto"/>
-
-			
-			</div>
-		
-		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h1>
-		</div></br>
-	
-			<h5 id="_orange_title">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
-		</h5>
-		
-		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2">05/06/2014</span></p></br>
-		</div>
-		
-		
-		
-		<div>
-			<h5 id="_orange_title">Saya,</h5></br>
-		</div>
-		
-		<div style="line-height:0.5em;">
-			<p class="perakuan1">Nama : <span class="perakuan2">Rahmah Binti Umar</span> </p>
-			<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2">760112015432</span> </p>
-		</div>
-		
-		
-			
-		<div class="default_button_holder">
-			<a href="permohonan-induk-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-		</div>
-		</form>
-		
-		
-	</form>
-
-		
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
@@ -119,6 +112,104 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+		<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	<script>
+		/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
+		$('#nama').html(window.localStorage.getItem("NAMA"));
+		$('#kadp').html(window.localStorage.getItem("LOGIN"));
+
+		var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+1; //January is 0!
+
+	    var yyyy = today.getFullYear();
+	    if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+	    var today = dd+'/'+mm+'/'+yyyy;
+	    $("#date").html(today);
+
+	    $('#c_box1').css({"border":"","box-shadow":""});
+
+	    $("#btn_submit").click(function(e){
+	    	var empty = false;
+			e.preventDefault();
+
+			if($('input[type=checkbox]:checked').length == 0) 
+			{
+				empty = true;
+			}
+
+			if(empty == true)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila tandakan perakuan!',
+						confirm: function(){				
+						}
+					}
+				);
+			}else if(empty == false)
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_4.php",
+					type:'POST',
+					data: {
+						
+					},
+					beforeSend: function() {
+							run_waitMe();
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "permohonan-induk-5.html";
+									}
+								}
+							);
+						
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				});
+				
+			}
+
+	    });
+
+	</script>
 		
   </body>
 </html>
