@@ -259,7 +259,43 @@
 		$('#umur').val(age+" tahun");
 	}
 
+	/*LIST Daerah*/
+	function getDaerahFromSelectedCountry()  
+	{
+		var selected_country = $('#n_kelahiran').val();
+		getDaerah(selected_country,$('#d_kelahiran').attr('id'));	
+	}
 	
+	function salinAlamat(f) 
+	{
+		if(f.alamat_sama.checked == true) 
+			{	
+				var alamat1 = $("#alamat1").val();
+				$("#alamat_pos1").val(alamat1);
+				
+				var alamat2 = $("#alamat2").val();
+				$("#alamat_pos2").val(alamat2);
+				
+				var alamat3 = $("#alamat3").val();
+				$("#alamat_pos3").val(alamat3);
+				
+				var poskod = $("#poskod").val();
+				$("#poskod_pos").val(poskod);
+				
+				var negeri = $("#negeri").val();
+				$("#sel_negeripos").val(negeri);
+				
+				//if copy address from main address. auto retrieve daerah
+				getDaerahFromSelectedCountry2(); 
+				
+				
+			}
+			
+		else{
+				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #sel_negeripos, #sel_daerahpos').val('');
+			}
+	}
+
 	</script>	
 		
 		
