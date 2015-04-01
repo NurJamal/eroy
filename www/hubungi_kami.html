@@ -240,9 +240,12 @@
 						nama : nama,
 						emel : emel,
 						mesej_berkenaan : mesej_berkenaan,
-						mesej : mesej,
+						mesej : mesej
 						//captcha : captcha
-					},
+					},	beforeSend: function() 
+				{
+					run_waitMe();
+				},
 					success:function(data)
 					{
 						console.log(data);
