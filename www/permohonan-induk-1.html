@@ -133,14 +133,17 @@
 
 	<script>
 
-		$("#sel_pertubuhan").change(function(){
-			var peringkat = $("#sel_peringkat").val();
-			var pertubuhan = $("#sel_pertubuhan").val();
-			var namaPertubuhan = $("#nama_pertubuhan").val();
-			var namaPer = $("#nama_per").val();
-			var namaRingkasan = $("#nama_ringkasan").val();
+		window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", "KELAB APA-APA SAHAJA");
 
-			if(peringkat == "Kebangsaan")
+		$("#sel_pertubuhan, #sel_peringkat").change(function(){
+			var peringkat = $("#sel_peringkat").val().toUpperCase();
+			var pertubuhan = $("#sel_pertubuhan").val().toUpperCase();
+			var namaPertubuhan = $("#nama_pertubuhan").val().toUpperCase();
+			var namaPer = $("#nama_per").val().toUpperCase();
+			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
+			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
+
+			if(peringkat == "KEBANGSAAN")
 			{
 				peringkat = "MALAYSIA";
 			}
@@ -153,30 +156,18 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
 						}
 					}
@@ -186,30 +177,18 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat);
 						}
 					}
@@ -222,30 +201,18 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
 						}
 					}
@@ -255,30 +222,18 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt);
 						}
 					}
@@ -286,14 +241,15 @@
 			}
 		});
 
-		$("#nama_pertubuhan").keyup(function(){
-			var peringkat = $("#sel_peringkat").val();
-			var pertubuhan = $("#sel_pertubuhan").val();
-			var namaPertubuhan = $("#nama_pertubuhan").val();
-			var namaPer = $("#nama_per").val();
-			var namaRingkasan = $("#nama_ringkasan").val();
+		$("#nama_pertubuhan,#nama_per,#nama_ringkasan").keyup(function(){
+			var peringkat = $("#sel_peringkat").val().toUpperCase();
+			var pertubuhan = $("#sel_pertubuhan").val().toUpperCase();
+			var namaPertubuhan = $("#nama_pertubuhan").val().toUpperCase();
+			var namaPer = $("#nama_per").val().toUpperCase();
+			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
+			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
 
-			if(peringkat == "Kebangsaan")
+			if(peringkat == "KEBANGSAAN")
 			{
 				peringkat = "MALAYSIA";
 			}
@@ -306,22 +262,13 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
 						}
 					}else
 					{
-						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
 					}
 				}else
@@ -330,26 +277,18 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat);
 						}
 					}
@@ -362,22 +301,13 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
 						}
 					}else
 					{
-						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
 						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
 					}
 				}else
@@ -386,249 +316,24 @@
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
 						}
 					}else
 					{
 						if(namaRingkasan.length > 0)
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+' ['+namaRingkasan+']');
 						}else
 						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
 							$('#paparan_nama_pertubuhan').val(namaPertubuhan);
 						}
 					}
 				}
 			}
 		});
-
-		$("#nama_per").keyup(function(){
-			var peringkat = $("#sel_peringkat").val();
-			var pertubuhan = $("#sel_pertubuhan").val();
-			var namaPertubuhan = $("#nama_pertubuhan").val();
-			var namaPer = $("#nama_per").val();
-			var namaRingkasan = $("#nama_ringkasan").val();
-
-			if(peringkat == "Kebangsaan")
-			{
-				peringkat = "MALAYSIA";
-			}
-
-			if( peringkat.length > 0 )
-			{
-				if( pertubuhan.length > 0 )
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
-						}
-					}else
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
-						}
-					}
-				}else
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
-						}
-					}else
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat);
-						}
-					}
-				}
-			}else
-			{
-				if( pertubuhan.length > 0 )
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
-						}
-					}else
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer);
-						}
-					}
-				}else
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
-						}
-					}else
-					{
-						if(namaRingkasan.length > 0)
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPer);
-						}
-					}
-				}
-			}
-		});
-
-		$("#nama_ringkasan").keyup(function(){
-			var peringkat = $("#sel_peringkat").val();
-			var pertubuhan = $("#sel_pertubuhan").val();
-			var namaPertubuhan = $("#nama_pertubuhan").val();
-			var namaPer = $("#nama_per").val();
-			var namaRingkasan = $("#nama_ringkasan").val();
-
-			//if( peringkat.length > 0 )
-			//{
-				if( pertubuhan.length > 0 )
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaPer.length > 0 )
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-							var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' ['+namaRingkasan+']');
-						}
-					}else
-					{
-						var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-						var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text();
-
-						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' ['+namaRingkasan+']');
-					}
-				}else
-				{
-					if( namaPertubuhan.length > 0 )
-					{
-						if(namaPer.length > 0 )
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' ['+namaRingkasan+']');
-						}
-					}else
-					{
-						if(namaPer.length > 0 )
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(namaPer+' ['+namaRingkasan+']');
-						}else
-						{
-							var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
-
-							$('#paparan_nama_pertubuhan').val(' ['+namaRingkasan+']');
-						}
-					}
-				}
-			//}
-		});
-
-		
 
 		$("#btn_submit").click(function(e){
 			var empty = false;
@@ -640,6 +345,7 @@
 			var peringkat = $("#sel_peringkat").val();
 			var pertubuhan = $("#sel_pertubuhan").val();
 			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var paparan_nama_pertubuhan = $("#paparan_nama_pertubuhan").val();
 			var namaPer = $("#nama_per").val();
 			var namaRingkasan = $("#nama_ringkasan").val();
 			var emelPertubuhan = $("#emel_pertubuhan").val();
@@ -696,8 +402,74 @@
 						}
 					}
 				);
-			}
+			}else if(empty == false)
+			{
+					if(!ValidateEmail(emelPertubuhan))
+					{
+						$.alert
+						(
+							{
+								title: 'Daftar Pengguna',
+								content: 'Sila Isikan Format Emel yang Betul',
+								confirm: function(){ }
+							}
+						);
+						$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+					}
+					else
+					{
+					$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+					type:'POST',
+					data: {
+						peringkat : peringkat,
+						pertubuhan: pertubuhan,
+						namaPertubuhan : namaPertubuhan,
+						paparan_nama_pertubuhan : paparan_nama_pertubuhan,
+						namaPer : namaPer,
+						namaRingkasan : namaRingkasan,
+						emelPertubuhan : emelPertubuhan,
+					},
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", paparan_nama_pertubuhan);
 
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "permohonan-induk-2.html";
+									}
+								}
+							);
+						
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				});
+				}
+			}
 		});
 	</script>
   </body>
