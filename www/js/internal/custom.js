@@ -167,6 +167,7 @@
 	/*GET DAERAH*/
 	function getDaerah(negeri,id)
 	{
+	
 		var daerah_id = id;
 		$(function() 
 			{
@@ -207,7 +208,126 @@
 				);
 
 			});
+			
+		
 	};
+	
+	/*GET NAMABANK*/
+	function getNamaBank(id)
+	{
+	
+		var daerah_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_kod_bank.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							
+						
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_nama_bank").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var nama_bank = $(this).find("nama_bank");
+								
+								$('#'+daerah_id).append('<option value="'+$(id).text()+'">'+$(nama_bank).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
+	
+	/*GET JENIS BAYARAN*/
+	function getJenisBayaran(id)
+	{
+	
+		var jenis_bayaran_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jenis_bayaran.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jenis_bayaran").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var jenis_bayaran = $(this).find("jenis_bayaran");
+								
+								$('#'+jenis_bayaran_id).append('<option value="'+$(id).text()+'">'+$(jenis_bayaran).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
+	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
+	function getJumlahBayaranMengikutPeringkat(id)
+	{
+	
+		var jumlah_bayaran_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jumlah_bayaran_mengikut_peringkat.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jumlah_bayaran").each(function()
+							{
+								console.log($(this).text());
+								var jumlah_bayaran = $(this).find("jumlah_bayaran");
+								
+								$('#'+jumlah_bayaran_id).val(jumlah_bayaran);
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
 	
 	
 	/*Control IC - Input*/
