@@ -253,6 +253,56 @@
 	{
 		window.history.back();
 	}
+
+	var count = 1;
+		function getFasal(id, kodPertubuhan)
+		{
+			var kod_nama_pertubuhan = kodPertubuhan;
+			var fasal_id = id;
+			$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_fasal.php",
+						data: {
+							kod_nama_pertubuhan : kod_nama_pertubuhan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("tb_perlembagaan").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var noFasal = $(this).find("no_fasal");
+								var fasal = $(this).find("fasal");
+
+								var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
+								var td = '<td width="30px" valign="top">';
+								var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
+								var tdClose = '</td>';
+								var tdOpen = '<td>';
+								var trClose = '</tr>';
+
+								$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
+
+								count++;
+							});
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+		};
 	
 	
 	
