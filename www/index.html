@@ -18,14 +18,6 @@
 		
 		<div id="loadingLayer"></div>
 		
-		<style>
-		#sbox
-		{
-			padding-left: 2.5%;
-			padding-right: 2%;
-		}
-		</style>
-		
 	</head>
 	<body>
 	
@@ -75,10 +67,12 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
- <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>
@@ -87,13 +81,12 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	
-	
-      document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() 
+	{
       	var devicePlatform = cordova.platformId;
 		alert(devicePlatform);
- 
+	}
 	
 	$("#btn_submit").click(function(e)
 	{
@@ -144,6 +137,7 @@
 								}
 							);
 							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
+							window.localStorage['KOD_ID'] = JSON.stringify(json);
 							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
