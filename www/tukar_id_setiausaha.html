@@ -10,10 +10,10 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -111,107 +111,66 @@
 	};
 
 	$("#btn_submit").click(function(e)
-	{
-		e.preventDefault();
-	
+	{	
 		var no_sijil = $.trim($("#f_sijil").val());
 		var nama = $.trim($("#f_nama").val());
 		var kadp = $.trim($("#f_kp").val());
 		var t_lahir = $.trim($('#f_tlahir').val());
 		var emel = $.trim($('#f_emel').val());
 		var no_tel = $.trim($('#f_telefon').val());
+		
+		e.preventDefault();
+		
+		var empty = false;
+		
+		$('#f_sijil, #f_nama, #f_kp, #f_tlahir, #f_emel, #f_telefon').css({"border":"","box-shadow":""});
 	
-		if (no_sijil.length == 0) 
+		if(no_sijil.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Sijil!',
-					confirm: function(){}
-				}
-			);
 			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-	
-		else if (nama.length == 0)
+		if (nama.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Nama Penuh!',
-					confirm: function(){}
-				}
-			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (kadp.length == 0 || kadp.length != 12)
+		if (kadp.length == 0 || kadp.length != 12)
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Kad Pengenalan sekurang-kurangnya 12 nombor',
-					confirm: function(){}
-				}
-			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (t_lahir.length == 0) 
+		if (t_lahir.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Tarikh Lahir!',
-					confirm: function(){}
-				}
-			);
 			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (emel.length == 0) 
+		if (emel.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Emel!',
-					confirm: function(){}
-				}
-			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+			empty = true;
 		}
-		
-		else if(!ValidateEmail(emel))
+		if(!ValidateEmail(emel))
 		{
-				$.alert
-				(
-					{
-						title: 'Tukar ID Setiausahaa',
-						content: 'Sila Isikan Format Emel yang Betul!',
-						confirm: function(){}
-					}
-				);
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-	
-		else if (no_tel.length == 0) 
+		if (no_tel.length == 0) 
+		{
+			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Telefon!',
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
 					confirm: function(){}
 				}
 			);
-			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-	
 		else 
 		{
 			$.ajax
@@ -232,11 +191,6 @@
 					{
 						run_waitMe();
 					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
 					success:function(data)
 					{
 						console.log(data);
@@ -253,10 +207,10 @@
 									confirm: function()
 									{
 										$('body').waitMe('hide');
+										window.location.href = "index.html";
 									}
 								}
 							);
-							window.location.href = "index.html";
 						}
 						else if (json.status == 'error')
 						{
@@ -266,14 +220,12 @@
 								{
 									title: 'Tukar ID Setiausaha',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			);	

@@ -103,169 +103,173 @@
 		var katalaluan = $.trim($("#f_katalaluan").val());
 		var sah_katalaluan = $.trim($("#f_sah_katalaluan").val());
 		var emel = $.trim($("#f_emel").val());
+		var empty = false;
+		
+		$('#f_nama, #f_kp, #f_katalaluan, #f_sah_katalaluan, #f_emel').css({"border":"","box-shadow":""});
 		
 		e.preventDefault();
 
-		if (nama.length == 0) 
+		if(nama.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Nama Penuh',
-					confirm: function(){}
-				}
-			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		else if (kadp.length == 0 || kadp.length != 12)
+		if (kadp.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan No Kad Pengenalan sekurang-kurangnya 12 nombor',
-					confirm: function(){}
-				}
-			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		else if (katalaluan.length == 0) 
+		if (katalaluan.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Kata Laluan',
-					confirm: function(){}
-				}
-			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		else if(!cekPass(katalaluan))
+		/*if(!cekPass(katalaluan))
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Format Kata Laluan yang Betul',
-					confirm: function(){}
-				}
-			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
-		else if (sah_katalaluan.length == 0)
+			empty = true;
+		}*/
+		if (sah_katalaluan.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Sahkan Kata Laluan',
-					confirm: function(){}
-				}
-			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		else if (sah_katalaluan != katalaluan)
+		/*if (sah_katalaluan != katalaluan)
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sahkan Kata Laluan dan Kata Laluan Tidak Sama',
-					confirm: function(){}
-				}
-			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
-		else if (emel.length == 0) 
+			empty = true;
+		}*/
+		if (emel.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Emel',
-					confirm: function(){}
-				}
-			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+			empty = true;
 		}
-		else if(!cekEmel(emel))
+		/*if(!cekEmel(emel))
+		{
+			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}*/
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Format Emel yang Betul',
-					confirm: function(){}
-				}
-			);
-			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-		}
-		else 
-		{
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
-					type:'POST',
-					data:
-					{
-						nama : nama,
-						kadp: kadp,
-						katalaluan : katalaluan,
-						sah_katalaluan : sah_katalaluan,
-						emel : emel
-					},
-					beforeSend: function() 
-					{
-						run_waitMe();
-					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Daftar Pengguna',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-							window.location.href = "log_masuk.html";
-						}
-						else if (json.status == 'error') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Daftar Pengguna',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-						}
-						else{}
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
 					}
 				}
-			);	
+			);
+		}
+		else if(empty == false)
+		{
+			if(kadp.length != 12)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
+						confirm: function(){}
+					}
+				);
+				$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else if(!ValidateEmail(emel_pertubuhan))
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Isikan Format Emel yang Betul',
+						confirm: function(){ }
+					}
+				);
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else if(!cekPass(katalaluan))
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Isikan Format Kata Laluan yang Betul',
+						confirm: function(){ }
+					}
+				);
+				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else if(sah_katalaluan != katalaluan)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sahkan Kata Laluan tidak sama dengan Kata Laluan',
+						confirm: function(){ }
+					}
+				);
+				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else 
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
+						type:'POST',
+						data:
+						{
+							nama : nama,
+							kadp: kadp,
+							katalaluan : katalaluan,
+							sah_katalaluan : sah_katalaluan,
+							emel : emel
+						},
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success:function(data)
+						{
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Daftar Pengguna',
+										content: json.message,
+										confirm: function()
+										{
+											$('body').waitMe('hide');
+											window.location.href = "log_masuk.html";
+										}
+									}
+								);
+								
+							}
+							else if (json.status == 'error') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Daftar Pengguna',
+										content: json.message,
+										confirm: function(){}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);	
+			}
 		}
 	});
 	</script>
