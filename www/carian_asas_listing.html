@@ -71,40 +71,58 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
-	var kod_nama = JSON.parse(localStorage['KOD_ID']);
+	var nama_pertubuhan = JSON.parse(localStorage['CARIAN_PERTUBUHAN']);
+	//var kod_nama = JSON.parse(localStorage['KOD_ID']);
 	
 	var pertubuhan = nama_pertubuhan.details;
-		
+
 	if (Array.isArray(pertubuhan))
 	{
 		for (var i = 0; i < pertubuhan.length; i++)
 		{
 			var value = pertubuhan[i];
-			
-			$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>")
-			.appendTo('#content');
+					
+			$("<div id='kod_"+value.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+value.nama_pertubuhan+"</h2></div>")
+			.appendTo('#content');	
+		
+			/*$('#kod_'+value.kod_nama_pertubuhan+'').click(function()
+			{
+				// save the selected id to the session storage and retrieve it in the next page
+				//localStorage.selectedId=anchor.attr('kod_nama');
+				// perform the transition
+				//changePage("carian_asas_papar.html");
+				//window.location.href = "carian_asas_papar.html";
+				//getCountry($('#sel_negeri').attr('id'));		
+				alert(value.kod_nama_pertubuhan);
+				//window.localStorage['CARIAN_KOD_PERTUBUHAN'] = 
+
+			});*/
 		}
 	}
 	else
 	{
-		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+pertubuhan.nama_pertubuhan+"</h2></div>")
+		$("<div id='kod_"+pertubuhan.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+pertubuhan.nama_pertubuhan+"</h2></div>")
 		.appendTo('#content');
 	}
 	
-	$('#box').children().each(function(){
-    var anchor = $(this).find('a');
-    if(anchor)
-    {
-        anchor.click(function()
+	//$('.box').children().each(function(){
+   // var anchor = $(this).find('a');
+   // if(anchor)
+    //{
+        $('.box').click(function()
 		{
             // save the selected id to the session storage and retrieve it in the next page
-            localStorage.selectedId=anchor.attr('kod_nama');
+            //localStorage.selectedId=anchor.attr('kod_nama');
             // perform the transition
-            changePage("carian_asas_papar.html");
+            //changePage("carian_asas_papar.html");
+			//window.location.href = "carian_asas_papar.html";
+			//getCountry($('#sel_negeri').attr('id'));		
+			//alert($(".box").attr('id'));
+			//window.localStorage['CARIAN_KOD_PERTUBUHAN'] = 
+
         });
-    }
-	});
+    //}
+	//});
 	
 	$("#box").click(function(e)
 	{
