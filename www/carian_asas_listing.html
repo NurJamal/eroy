@@ -15,7 +15,6 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>		
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -171,15 +170,12 @@
 							{
 								title: 'Carian',
 								content: json.message,
-								confirm: function()
-								{
-									$('body').waitMe('hide');
-								}
+								confirm: function(){}
 							}
 						);
 					}
 					else{}
-					
+					$('body').waitMe('hide');
 				}
 			}
 		);

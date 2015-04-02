@@ -117,7 +117,8 @@
 					{
 						carian_nama : carian_nama
 					},
-					beforeSend: function() {
+					beforeSend: function() 
+					{
 						run_waitMe();
 					},
 					success:function(data)
@@ -151,14 +152,12 @@
 								{
 									title: 'Halaman Utama',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			)
