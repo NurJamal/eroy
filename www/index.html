@@ -117,6 +117,9 @@
 					{
 						carian_nama : carian_nama
 					},
+					beforeSend: function() {
+						run_waitMe();
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -136,8 +139,8 @@
 									}
 								}
 							);
-							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
-							window.localStorage['KOD_ID'] = JSON.stringify(json);
+							window.localStorage['CARIAN_PERTUBUHAN'] = JSON.stringify(json);
+							//window.localStorage['KOD_ID'] = JSON.stringify(json.details.kod_nama_pertubuhan);
 							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
