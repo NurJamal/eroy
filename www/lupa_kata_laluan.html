@@ -15,7 +15,6 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -47,7 +46,6 @@
 		<!-- end of header-title-->
 	
 		<div id="content">
-			<!-- form -->
 			<div class="_form">
 				<form id="" action="" method="POST">
 					<input type="number" style="margin-top:15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
@@ -57,7 +55,6 @@
 					</div>
 				</form>
 			</div>
-			<!-- end of form -->
 		</div>	
 	</div>
 	
@@ -84,85 +81,99 @@
 	<script>
 	$("#btn_submit").click(function(e)
 	{
-		e.preventDefault();
-	
 		var kadp = $.trim($("#f_kp").val());
+		var empty = false;
+		
+		e.preventDefault();
+		
+		$('#f_kp').css({"border":"","box-shadow":""});
 
-		if (kadp.length == 0) 
+		if (kadp.length == 0)
+		{
+			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Lupa Kata Laluan',
-					content: 'Sila Isikan No Kad Pengenalan!',
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
 					confirm: function(){}
 				}
 			);
-			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		else 
+		else if(empty == false)
 		{
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
-					type:'POST',
-					data: 
+			if(kadp.length != 12)
+			{
+				$.alert
+				(
 					{
-						kadp: kadp
-					},
-					beforeSend: function() 
-					{
-						run_waitMe();
-					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Lupa Kata Laluan',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-							window.location.href = "log_masuk.html";
-						}
-						else if (json.status == 'error') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Lupa Kata Laluan',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-						}
-						else{}
+						title: 'Daftar Pengguna',
+						content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
+						confirm: function(){}
 					}
-				}
-			);
-		
-		}
-		
+				);
+				$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else 
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
+						type:'POST',
+						data: 
+						{
+							kadp: kadp
+						},
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success:function(data)
+						{
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Lupa Kata Laluan',
+										content: json.message,
+										confirm: function()
+										{
+											$('body').waitMe('hide');
+											window.location.href = "log_masuk.html";
+										}
+									}
+								);
+							}
+							else if (json.status == 'error') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Lupa Kata Laluan',
+										content: json.message,
+										confirm: function(){}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);
+			
+			}
+	}
 	});
 	</script>
 
