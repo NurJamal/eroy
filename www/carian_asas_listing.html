@@ -84,19 +84,7 @@
 					
 			$("<div id='kod_"+value.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+value.nama_pertubuhan+"</h2></div>")
 			.appendTo('#content');	
-		
-			/*$('#kod_'+value.kod_nama_pertubuhan+'').click(function()
-			{
-				// save the selected id to the session storage and retrieve it in the next page
-				//localStorage.selectedId=anchor.attr('kod_nama');
-				// perform the transition
-				//changePage("carian_asas_papar.html");
-				//window.location.href = "carian_asas_papar.html";
-				//getCountry($('#sel_negeri').attr('id'));		
-				alert(value.kod_nama_pertubuhan);
-				//window.localStorage['CARIAN_KOD_PERTUBUHAN'] = 
 
-			});*/
 		}
 	}
 	else
@@ -105,24 +93,11 @@
 		.appendTo('#content');
 	}
 	
-	//$('.box').children().each(function(){
-   // var anchor = $(this).find('a');
-   // if(anchor)
-    //{
+
         $('.box').click(function()
 		{
-            // save the selected id to the session storage and retrieve it in the next page
-            //localStorage.selectedId=anchor.attr('kod_nama');
-            // perform the transition
-            //changePage("carian_asas_papar.html");
-			//window.location.href = "carian_asas_papar.html";
-			//getCountry($('#sel_negeri').attr('id'));		
-			//alert($(".box").attr('id'));
-			//window.localStorage['CARIAN_KOD_PERTUBUHAN'] = 
-
+			alert($(this).attr('id'));
         });
-    //}
-	//});
 	
 	$("#box").click(function(e)
 	{
