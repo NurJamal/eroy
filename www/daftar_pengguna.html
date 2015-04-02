@@ -15,9 +15,7 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-		
 		<div id="loadingLayer"></div>
-		
 	</head>
 	<body>
 	
@@ -48,31 +46,22 @@
 		<!-- end of header-title-->
 
 		<div id="content">
-		<!-- form -->
 			<div class="_form">
 				<form id="" action="" method="POST">
 					<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh" onkeyup="upperCase()"><br/>
-					
 					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-					
 					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
-					
 					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-					
 					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
-					
 					<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
 					placeholder="Sahkan Kata Laluan"><br/>
-					
 					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="DAFTAR" id="btn_submit">
 					</div>
 				</form>
 			</div>
 		</div>
-		<!-- end of form -->
 	</div>
 	
 	<!-- js for slide menu -->
@@ -109,15 +98,14 @@
 		
 	$("#btn_submit").click(function(e)
 	{
-
-		e.preventDefault();
-		
 		var nama = $.trim($("#f_nama").val());
 		var kadp = $.trim($("#f_kp").val());
 		var katalaluan = $.trim($("#f_katalaluan").val());
 		var sah_katalaluan = $.trim($("#f_sah_katalaluan").val());
 		var emel = $.trim($("#f_emel").val());
 		
+		e.preventDefault();
+
 		if (nama.length == 0) 
 		{
 			$.alert
@@ -130,7 +118,6 @@
 			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
 		else if (kadp.length == 0 || kadp.length != 12)
 		{
 			$.alert
@@ -143,7 +130,6 @@
 			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else if (katalaluan.length == 0) 
 		{
 			$.alert
@@ -156,7 +142,6 @@
 			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else if(!cekPass(katalaluan))
 		{
 			$.alert
@@ -169,7 +154,6 @@
 			);
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else if (sah_katalaluan.length == 0)
 		{
 			$.alert
@@ -182,7 +166,6 @@
 			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else if (sah_katalaluan != katalaluan)
 		{
 			$.alert
@@ -195,7 +178,6 @@
 			);
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else if (emel.length == 0) 
 		{
 			$.alert
@@ -208,7 +190,6 @@
 			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 		}
-		
 		else if(!cekEmel(emel))
 		{
 			$.alert
@@ -221,9 +202,8 @@
 			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
-		else {
-		
+		else 
+		{
 			$.ajax
 			(
 				{
@@ -289,6 +269,5 @@
 		}
 	});
 	</script>
-	
 	</body>
 </html>

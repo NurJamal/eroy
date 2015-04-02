@@ -368,6 +368,11 @@
 	
 		return age;
 	}
+
+	function goBack()
+	{
+		window.history.back();
+	}
 	
 	
 	
