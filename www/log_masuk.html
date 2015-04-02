@@ -46,12 +46,10 @@
 					<h1 class="main_title">LOG MASUK</h1>
 				</div>
 			</div>
-		
 		</div>
 		<!-- end of header-title-->
 		
 		<div id="content">
-			<!-- form -->
 			<div class="_form">
 				<form id="login_form" action="" method="POST">
 					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
@@ -61,7 +59,6 @@
 					</div>
 				</form>
 			</div>
-			<!-- end of form -->
 		
 			<div class="multi-links">
 				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
@@ -96,37 +93,37 @@
 	{
 		var kadp = $.trim($('#f_kp').val());
 		var katalaluan = $.trim($('#f_katalaluan').val());
+		var empty = false;
+		
+		$('#f_kp, #f_katalaluan').css({"border":"","box-shadow":""});
 		
 		e.preventDefault();			
 		
-		if (kadp.length == 0) 
+		if(kadp.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Log Masuk',
-					content: 'Sila Isikan No Kad Pengenalan!',
-					confirm: function(){}
-				}
-			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
 		
-		else if (katalaluan == 0)
+		if(katalaluan == 0)
+		{
+			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Log Masuk',
-					content: 'Sila Isikan Kata Laluan!',
-					confirm: function(){}
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
 				}
 			);
-			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		else 
 		{
-		
 			$.ajax
 			(
 				{
@@ -136,11 +133,6 @@
 					{
 						kadp : kadp,
 						katalaluan : katalaluan
-					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
 					},
 					beforeSend: function() 
 					{
@@ -167,8 +159,7 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function(){
-									}
+									confirm: function(){}
 								}
 							);
 						}

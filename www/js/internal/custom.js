@@ -167,6 +167,7 @@
 	/*GET DAERAH*/
 	function getDaerah(negeri,id)
 	{
+	
 		var daerah_id = id;
 		$(function() 
 			{
@@ -207,7 +208,126 @@
 				);
 
 			});
+			
+		
 	};
+	
+	/*GET NAMABANK*/
+	function getNamaBank(id)
+	{
+	
+		var daerah_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_kod_bank.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							
+						
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_nama_bank").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var nama_bank = $(this).find("nama_bank");
+								
+								$('#'+daerah_id).append('<option value="'+$(id).text()+'">'+$(nama_bank).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
+	
+	/*GET JENIS BAYARAN*/
+	function getJenisBayaran(id)
+	{
+	
+		var jenis_bayaran_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jenis_bayaran.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jenis_bayaran").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var jenis_bayaran = $(this).find("jenis_bayaran");
+								
+								$('#'+jenis_bayaran_id).append('<option value="'+$(id).text()+'">'+$(jenis_bayaran).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
+	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
+	function getJumlahBayaranMengikutPeringkat(id)
+	{
+	
+		var jumlah_bayaran_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jumlah_bayaran_mengikut_peringkat.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jumlah_bayaran").each(function()
+							{
+								console.log($(this).text());
+								var jumlah_bayaran = $(this).find("jumlah_bayaran");
+								
+								$('#'+jumlah_bayaran_id).val(jumlah_bayaran);
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
+	
 	
 	
 	/*Control IC - Input*/
@@ -253,6 +373,56 @@
 	{
 		window.history.back();
 	}
+
+	var count = 1;
+		function getFasal(id, kodPertubuhan)
+		{
+			var kod_nama_pertubuhan = kodPertubuhan;
+			var fasal_id = id;
+			$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_fasal.php",
+						data: {
+							kod_nama_pertubuhan : kod_nama_pertubuhan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("tb_perlembagaan").each(function()
+							{
+								console.log($(this).text());
+								var id = $(this).find("id");
+								var noFasal = $(this).find("no_fasal");
+								var fasal = $(this).find("fasal");
+
+								var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
+								var td = '<td width="30px" valign="top">';
+								var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
+								var tdClose = '</td>';
+								var tdOpen = '<td>';
+								var trClose = '</tr>';
+
+								$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
+
+								count++;
+							});
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+		};
 	
 	
 	
