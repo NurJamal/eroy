@@ -96,7 +96,10 @@
 
         $('.box').click(function()
 		{
+			//split kan kode (kod_)	
 			alert($(this).attr('id'));
+			window.localStorage['CARIAN_KOD_PERTUBUHAN'] = $(this).attr('id');
+
         });
 	
 	$("#box").click(function(e)
