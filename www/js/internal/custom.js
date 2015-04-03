@@ -23,7 +23,7 @@
 			// Hide Header on on scroll down
 			var didScroll;
 			var lastScrollTop = 0;
-			var delta = 120;
+			var delta = 50;
 			var navbarHeight = $("#head").outerHeight();
 
 			$(window).scroll(function(event){
@@ -66,6 +66,13 @@
 		}
 	}
 
+	function redisplayHeader()
+	{
+		$("#head").animate({opacity: '1'},"fast");	
+		$("#scrollTop").css("visibility","hidden");
+
+	}
+	
 
 	/*Set Payment Transaction Code*/
 	 function SetTransactionCode() {
@@ -148,7 +155,6 @@
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
-								console.log($(this).text());
 								var id = $(this).find("kod_negeri");
 								var negeri = $(this).find("negeri");
 								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
@@ -192,7 +198,6 @@
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()
 							{
-								console.log($(this).text());
 								var kodDaerah = $(this).find("Kod_Daerah");
 								var kod = $(this).find("Kod");
 								var keterangan = $(this).find("Keterangan");
@@ -291,6 +296,8 @@
 		
 	};
 	
+	
+	
 	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
 	function getJumlahBayaranMengikutPeringkat(id)
 	{
@@ -329,7 +336,95 @@
 	};
 	
 	
+	/*GET JENIS PERTUBUHAN*/
+	function getJenisPertubuhan(id1,id2,id3)
+	{
+		var title_pendaftaran_pertubuhan = id1;
+		var jenis_pertubuhan_id = id2;
+		var static_kod_pertubuhan = id3;
+
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jenis_pertubuhan.php",
+						dataType: "xml",
+						data:{
+							static_kod_pertubuhan : static_kod_pertubuhan,
+						},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jenis_pertubuhan").each(function()
+							{	
+								/*SET JENIS PERTUBUHAN PADA ID BERIKUT*/
+								var nama_pertubuhan = $(this).find("jenis_pertubuhan");
+								$('#'+jenis_pertubuhan_id).html(nama_pertubuhan);
+					
+								/*SET JENIS PERTUBUHAN PADA ID BERIKUT*/
+								//$('#'+title_pendaftaran_pertubuhan).append(nama_pertubuhan);
+
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
 	
+	
+	/*GET JENIS PERTUBUHAN*/
+	function getKategoriPertubuhan(id1,id2)
+	{
+		var kategori_pertubuhan_id = id1;
+		var static_kategori_pertubuhan = id2;
+		
+		
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_kategori_pertubuhan.php",
+						dataType: "xml",
+						data:{
+							static_kategori_pertubuhan : static_kategori_pertubuhan,
+						},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_kategori_pertubuhan").each(function()
+							{
+								var id = $(this).find("id");
+								var kategori_pertubuhan = $(this).find("kategori_pertubuhan");
+								var lang = $(this).find("lang");
+
+								$('#'+kategori_pertubuhan_id).append('<option value="'+$(id).text()+'">'+$(kategori_pertubuhan).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
 	/*Control IC - Input*/
 	function ic_control(ic_id)
 	{

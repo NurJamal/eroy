@@ -66,97 +66,295 @@
 	
 	<!-- form -->
 	
-		<div class="_form">
-		
+	<div class="_form">
+	
 		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">PB4B(M) CAWANGAN TAMAN U BATU PAHAT</h1><br/>
+			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_cawangan"></h1><br/>
 		</div>
 
 		
 			
-			<h5 id="_orange_title">Alamat Tempat Urusan</h5>
+		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tempat Urusan</h5>
 			<form id="" action="" method="POST">
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+				<input type="text" name="alamat_1" id="alamat1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_2" id="alamat2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_3" id="alamat3" placeholder="Alamat 3"><br/>
+				<input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
 			</form>
 			
-			<div class="selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
+			<div class="selection" id="negeri_selection">
+				<h5 id="_orange_title">Negeri</h5>
+				<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry1()">
+				<option value="" selected>Pilih Negeri</option>
+				</select>	
 			</div>
 			
-			<div class="selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-			</div><br/>
+			<div class="selection" style="margin-top:14px" id="daerah_selection">
+				<h5 id="_orange_title">Daerah</h5>
+				<select id="sel_daerah" name="sel_daerah" class="_sel">
+				<option value="" selected>Pilih Daerah</option>
+				</select>
+			</div>
 			
-			<h5 id="_orange_title">Alamat Pos</h5>
+			<br/>
+			
+			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
 			<form id="" action="" method="POST">
-			<h5>
-			<input type="checkbox" class="checkboxClass" name="klik" id="c_box1"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
-			
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
-			</form>
-			
-			<div class="selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-			</div>
-			
-			<div class="selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-			</div>
-			
+			<h5 id="" style="margin-top:0px">
+			<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)"> 
+			<label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 				
+				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
+				<input type="number" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
+
+			<div class="selection" id="negeripos_selection">
+				<h5 id="_orange_title">Negeri</h5>
+				<select id="sel_negeripos" name="sel_negeripos" class="_sel" onChange="getDaerahFromSelectedCountry2()">
+				<option value="" selected>Pilih Negeri</option>
+				</select>	
+			</div>
 			
-		
+			<div class="selection" style="margin-top:14px" id="daerahpos_selection">
+				<h5 id="_orange_title">Daerah</h5>
+				<select id="sel_daerahpos" name="sel_daerahpos" class="_sel">
+				<option value="" selected>Pilih Daerah</option>
+				</select>
+			</div>
+														
+			<div class="default_button_holder">
+				<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+			</div>
 			
-																
-				<div class="default_button_holder">
-					<a href="pendaftaran-cawangan-3.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-				</div>
 			</form>
 		</div>
 	</div>
-	<!-- end of form -->
-		
-				
 	</div>
+	<!-- end of form -->
+	
+				
+	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
 	</body>
 </html>
+
+<script>
+
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_cawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_CAWANGAN"));
+	
+	getCountry($('#sel_negeri').attr('id'));		
+	getCountry($('#sel_negeripos').attr('id'));
+
+	function salinAlamat(f) 
+	{
+		if(f.alamat_sama.checked == true) 
+			{	
+				var alamat1 = $("#alamat1").val();
+				$("#alamat_pos1").val(alamat1);
+				
+				var alamat2 = $("#alamat2").val();
+				$("#alamat_pos2").val(alamat2);
+				
+				var alamat3 = $("#alamat3").val();
+				$("#alamat_pos3").val(alamat3);
+				
+				var poskod = $("#poskod").val();
+				$("#poskod_pos").val(poskod);
+				
+				var negeri = $("#sel_negeri").val();
+				$("#sel_negeripos").val(negeri);
+				
+				//if copy address from main address. auto retrieve daerah
+				getDaerahFromSelectedCountry2(); 
+				
+				
+			}
+			
+		else{
+				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #sel_negeripos, #sel_daerahpos').val('');
+			}
+	}
+	
+	function getDaerahFromSelectedCountry1()  
+	{
+		var selected_country1 = $('#sel_negeri').val();
+		getDaerah(selected_country1,$('#sel_daerah').attr('id'));	
+	}
+	
+	/*Only for this page*/
+	function getDaerahFromSelectedCountry2()  
+	{
+		var selected_country2 = $('#sel_negeripos').val();
+		getDaerah(selected_country2,$('#sel_daerahpos').attr('id'));	
+		
+		var daerah = $("#sel_daerah").val();
+		$("#sel_daerahpos").val(daerah);
+	}
+	
+	$("#btn_submit").click(function(e){
+		
+		var empty = false;
+		e.preventDefault();
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		
+		$('#alamat1,#alamat_pos1,#poskod,#poskod_pos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
+
+		var alamat1= $("#alamat1").val();
+		var alamat2 = $("#alamat2").val();
+		var alamat3 = $("#alamat3").val();
+		var sel_negeri = $("#sel_negeri").val();
+		var sel_daerah = $("#sel_daerah").val();
+		var poskod= $("#poskod").val();
+		
+		var alamat_pos1= $("#alamat_pos1").val();
+		var alamat_pos2 = $("#alamat_pos2").val();
+		var alamat_pos3 = $("#alamat_pos3").val();
+		var sel_negeripos = $("#sel_negeripos").val();
+		var sel_daerahpos = $("#sel_daerahpos").val();
+		var poskod_pos= $("#poskod_pos").val();
+
+
+
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
+		if (alamat1.length == 0)
+		{
+			$('#alamat1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_negeri.length == 0)
+		{
+			$('#negeri_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(sel_daerah.length == 0)
+		{
+			$('#daerah_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+	
+		if(alamat_pos1.length == 0)
+		{
+			$('#alamat_pos1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_negeripos.length == 0)
+		{
+			$('#negeripos_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_daerahpos.length == 0)
+		{
+			$('#daerahpos_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(poskod.length == 0)
+		{
+			$('#poskod').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(poskod_pos.length == 0)
+		{
+			$('#poskod_pos').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		
+		if(empty == true)
+		{
+		$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
+				}
+			);
+		}
+		else if(empty == false)
+		{
+				
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_2.php",
+				type:'POST',
+				data: {
+
+					alamat1 : alamat1,
+					alamat2: alamat2,
+					alamat3 : alamat3,
+					sel_negeri : sel_negeri,
+					sel_daerah : sel_daerah,
+					poskod : poskod,
+					alamat_pos1 : alamat_pos1,
+					alamat_pos2 : alamat_pos2,
+					alamat_pos3 : alamat_pos3,
+					sel_negeripos : sel_negeripos,
+					sel_daerahpos : sel_daerahpos,
+					poskod_pos : poskod_pos,
+					
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+									window.location.href = "pendaftaran-cawangan-3.html";
+								}
+							}
+						);
+					
+					}
+					else if (json.status == 'error') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			});
+			
+		}
+	});
+	
+			
+</script>
