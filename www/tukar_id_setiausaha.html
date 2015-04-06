@@ -10,10 +10,10 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -55,7 +55,7 @@
 				<div class="_form">
 					<input type="text" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>	
 					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>	
-					<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')" id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+					<input type="text" name="f_tlahir" onfocus="(this.type='date')" onblur="(this.type='text')" onchange="calcUmur()" id="f_tlahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
 				</div>
 				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_umur" name="d_umur" Onchange="return calcUmur();" placeholder="Umur" disabled><br/>
@@ -92,6 +92,12 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+	function calcUmur()  
+	{
+		var age = auto_calculate_umur($('#f_tlahir').attr('id'));
+		$('#d_umur').val(age+" tahun");
+	}
+	
 	function upperCase() 
 	{
 		var sijil = document.getElementById("f_sijil");
@@ -105,107 +111,66 @@
 	};
 
 	$("#btn_submit").click(function(e)
-	{
-		e.preventDefault();
-	
+	{	
 		var no_sijil = $.trim($("#f_sijil").val());
 		var nama = $.trim($("#f_nama").val());
 		var kadp = $.trim($("#f_kp").val());
 		var t_lahir = $.trim($('#f_tlahir').val());
 		var emel = $.trim($('#f_emel').val());
 		var no_tel = $.trim($('#f_telefon').val());
+		
+		e.preventDefault();
+		
+		var empty = false;
+		
+		$('#f_sijil, #f_nama, #f_kp, #f_tlahir, #f_emel, #f_telefon').css({"border":"","box-shadow":""});
 	
-		if (no_sijil.length == 0) 
+		if(no_sijil.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Sijil!',
-					confirm: function(){}
-				}
-			);
 			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-	
-		else if (nama.length == 0)
+		if (nama.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Nama Penuh!',
-					confirm: function(){}
-				}
-			);
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (kadp.length == 0 || kadp.length != 12)
+		if (kadp.length == 0 || kadp.length != 12)
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Kad Pengenalan sekurang-kurangnya 12 nombor',
-					confirm: function(){}
-				}
-			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (t_lahir.length == 0) 
+		if (t_lahir.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Tarikh Lahir!',
-					confirm: function(){}
-				}
-			);
 			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (emel.length == 0) 
+		if (emel.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan Emel!',
-					confirm: function(){}
-				}
-			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+			empty = true;
 		}
-		
-		else if(!ValidateEmail(emel))
+		if(!ValidateEmail(emel))
 		{
-				$.alert
-				(
-					{
-						title: 'Tukar ID Setiausahaa',
-						content: 'Sila Isikan Format Emel yang Betul!',
-						confirm: function(){}
-					}
-				);
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-	
-		else if (no_tel.length == 0) 
+		if (no_tel.length == 0) 
+		{
+			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Tukar ID Setiausaha',
-					content: 'Sila Isikan No Telefon!',
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
 					confirm: function(){}
 				}
 			);
-			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-	
 		else 
 		{
 			$.ajax
@@ -226,11 +191,6 @@
 					{
 						run_waitMe();
 					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
 					success:function(data)
 					{
 						console.log(data);
@@ -247,10 +207,10 @@
 									confirm: function()
 									{
 										$('body').waitMe('hide');
+										window.location.href = "index.html";
 									}
 								}
 							);
-							window.location.href = "index.html";
 						}
 						else if (json.status == 'error')
 						{
@@ -260,14 +220,12 @@
 								{
 									title: 'Tukar ID Setiausaha',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			);	
@@ -275,49 +233,58 @@
 			
 	});
 
-	$(function()
+	$(function () 
 	{
-		$.ajax
-		(
-			{
-				type: "GET",
-				url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-				dataType: "xml",
-				success: function(xml)
-				{
-					var xmlDoc = $.parseXML(xml),
-					$xml = $(xmlDoc);
-					$(xml).find("lk_pertubuhan_info").each(function()
-					{
-						console.log($(this).text());
-						var npertubuhan = $(this).find("nama_pertubuhan");
-						var no_sijil = $(this).find("no_sijil");
-								
-						$( "#f_sijil" ).keyup(function() 
-						{
-							var input = $(this).val(); // We take the input value
-						
-							$.ajax
-							(
-								{
-									type: 'POST',
-									data: ({p : input}),
-									url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-									success: function(data) 
-									{
-										if ( input.length > 5 )
-										{		
-											$('#d_npertubuhan').val($(npertubuhan).text());
-										}
+		var minlength = 5;
 
-									}
+		$("#f_sijil").keyup(function () 
+		{
+			var that = this,
+			value = $(this).val();
+
+			if (value.length >= minlength )
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+						dataType: "xml",
+						data: 
+						{
+							value : value
+						},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_pertubuhan_info").each(function()
+							{
+								console.log($(this).text());
+								var npertubuhan = $(this).find("nama_pertubuhan");
+								var no_sijil = $(this).find("no_sijil");
+								
+								if (value == $(that).val()) 
+								{
+									$('#d_npertubuhan').val($(npertubuhan).text());
 								}
-							);
-						});
-					});
-				},
+								else
+								{
+									$.alert
+									(
+										{
+											title: 'Carian',
+											content: 'Tiada dalam rekod pangkalan data.',
+											confirm: function(){}
+										}
+									);
+								}
+							})
+						}
+					}
+				);
 			}
-		);
+		});
 	});
 	</script>
 	

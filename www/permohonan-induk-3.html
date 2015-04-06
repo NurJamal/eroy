@@ -10,6 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -28,228 +31,62 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="permohonan-induk-2.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="" onclick="goBack()">
+			<img src="img/back-icon.png" class="back_icon" align="left"/>
+		</a>
 	</div>	
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PERMOHONAN INDUK</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PERMOHONAN INDUK</h1>
+				</div>
 			</div>
 		</div>
+		<!-- end of header-title-->
 	
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- navbar -->
-		<div class="navbar">
+		<div id="content">
 		
-			<div align="center">
-		
-				<img src="img\numbering-ppb05-3.png" style="width:100%;height:auto"/>
-
-			
+			<!-- navbar -->
+			<div class="navbar">
+				<div align="center">
+					<img src="img\numbering-ppb05-3.png" style="width:100%;height:auto"/>
+				</div>
 			</div>
+			<!-- end of navbar -->
 		
-		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	<div>
-		<h5 id="_orange_title">Perlembagaan</h5><br/>
-	</div>
-	
-	<div>
-		<h5 id="_orange_title">Nama Pertubuhan</h5>
-		<h1 class="_dark_text">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h1>
-	</div>
-		
-	<h5 id="_orange_title_imal">
-		<table class="table_pindaan_maklumat" >
-		<tbody>
-		<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">
-			<td width="30px" id="edit_tooltip"><image src="img/pindaan-icon.png" width="25px" height="25px" ></td>
-			<td>
-				<input class="input_checkbox" id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-				<label/>
-			</td>
-			<td>
-			<label for="c_box1">Fasal 1 - Nama</label>
-			</td>
+			<!-- form -->
+			<form>
+				<div>
+					<h5 id="_orange_title">Perlembagaan</h5><br/>
+				</div>
 				
-		</tr>
-		
-		<tr class="checkbox" style="margin-bottom:10px;">
-		<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip"></td>
-		<td>
-			<input class="input_checkbox" id="c_box2" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label/>
-		</td>
-		<td >
-		<label for="c_box2">Fasal 2 - Alamat dan Tempat Urusan</label>
-		</td>
-			
-		</tr>
-		
-		<tr class="checkbox" style="margin-bottom:10px;">
-		<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px" ></td>
-		<td>
-			<input class="input_checkbox" id="c_box3" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label/>
-		</td>	
-		<td>
-		<label for="c_box3">Fasal 3 - Tafsiran</label>
-		</td>	
-		</tr>
-		
-		<tr class="checkbox" style="margin-bottom:3px;">
-		
-			<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-			<td>
-				<input class="input_checkbox" id="c_box4" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-				<label/>
-			</td>	
-			<td >
-			<label for="c_box4">Fasal 4 - Slogan dan Ikrar</label>
-			</td>
-			
-				
-		</tr>
-		
-					<tr class="checkbox" style="margin-bottom:3px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td>
-						<input class="input_checkbox" id="c_box4_1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box4_1">4.1 - Slogan</label>
-					</td>
-					</tr>
+				<div>
+					<h5 id="_orange_title">Nama Pertubuhan</h5>
+					<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1>
+				</div>
 					
-					<tr class="checkbox" style="margin-bottom:10px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td >
-						<input class="input_checkbox" id="c_box4_2" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box4_2">4.2 - Ikrar</label>
-					</td>
-					</tr>
-
-		
-		<tr class="checkbox" style="margin-bottom:3px;">
-		<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-		<td>
-			<input class="input_checkbox" id="c_box5" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label/>
-		</td>
-		<td>
-		<label for="c_box5">Fasal 5 - Lambang dan Bendera</label>
-		</td>		
-		</tr>
-		
-		<!--Nested List -->
-			<tr class="checkbox" style="margin-bottom:3px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td>
-						<input class="input_checkbox" id="c_box5_1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box5_1">5.1 - Lambang</label>
-					</td>
-					</tr>
+				<div class="checkbox">
+					<table class="table_pindaan_maklumat">
+						<tbody id="tablePindaan">
+						</tbody>
+					</table>
+				</div>
 					
-					<tr class="checkbox" style="margin-bottom:3px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td >
-						<input class="input_checkbox" id="c_box5_2" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box5_2">5.2 - Takrifan Lambang</label>
-					</td>
-					</tr>
-					
-					<tr class="checkbox" style="margin-bottom:10px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td >
-						<input class="input_checkbox" id="c_box5_3" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box5_3">5.3 - Bendera</label>
-					</td>
-					</tr>
-					
-		<tr class="checkbox" style="margin-bottom:3px;">
-		<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-		<td>
-			<input class="input_checkbox" id="c_box6" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label/>
-		</td>
-		<td>
-		<label for="c_box6">Fasal 6 - Tujuan</label>
-		</td>			
-		</tr>
-		<!--Nested List -->
-			<tr class="checkbox"  style="margin-bottom:3px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td>
-						<input class="input_checkbox" id="c_box5_1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box5_1">6.1 - Tujuan Umum</label>
-					</td>
-					</tr>
-					
-					<tr class="checkbox" style="margin-bottom:5px;">
-					<td width="30px"></td>
-					<td width="30px"><image src="img/pindaan-icon.png" width="25px" height="25px"></td>
-					<td >
-						<input class="input_checkbox" id="c_box5_2" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-						<label/>
-					</td>
-					<td>
-					<label for="c_box5_2">6.2 - Tujuan Khusus</label>
-					</td>
-					</tr>
-
-		</tbody>
-		</table>
-
-		</h5>
-		
-		<div class="default_button_holder">
-
-			<a href="#"><input class="default_button" type="button" value="PAPAR" id="btn_submit"></a>
-
-			<a href="permohonan-induk-4.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-		</div>
-		
-		
-	
-	</form>
-		
-	<!-- end of form -->
+				<div class="default_button_holder">
+					<a href="#">
+						<input class="default_button" type="button" value="PAPAR" id="btn">
+					</a>
+					<a href="permohonan-induk-4.html">
+						<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+					</a>
+				</div>
+			</form>
+		</div>	
+	</div>
+		<!-- end of form -->
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -263,6 +100,95 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+
+		/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
+		run_waitMe();
+		getFasal("#tablePindaan", 2);
+
+		$("#btn_submit").click(function(e){
+			var empty = false;
+			var countChecked = 0;
+			e.preventDefault();
+
+			var selectedFasal = [];
+			for(var i=1 ; i<count ; i++)
+			{
+				if($("#c_box"+i).is(":checked"))
+				{		
+					selectedFasal.push($("#c_box"+i).val());
+					countChecked++;
+				}
+			}
+
+			if(countChecked == 0)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Tandakan Fasal!',
+						confirm: function(){}
+					}
+				);
+			}else
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_3.php",
+					type:'POST',
+					data: {
+
+						selectedFasal : selectedFasal,
+						
+					},
+					beforeSend: function() {
+							run_waitMe();
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "permohonan-induk-4.html";
+									}
+								}
+							);
+						
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				});
+				
+			}
+		});
+	</script>
 		
   </body>
 </html>

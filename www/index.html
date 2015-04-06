@@ -15,16 +15,7 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
-		
-		<style>
-		#sbox
-		{
-			padding-left: 2.5%;
-			padding-right: 2%;
-		}
-		</style>
 		
 	</head>
 	<body>
@@ -75,10 +66,12 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
- <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>
@@ -87,20 +80,19 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	
-	
-      document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() 
+	{
       	var devicePlatform = cordova.platformId;
 		alert(devicePlatform);
- 
+	}
 	
 	$("#btn_submit").click(function(e)
 	{
-		e.preventDefault();			
-
 		var carian_nama = $.trim($('#n_carian').val());
 		
+		e.preventDefault();			
+
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
 			$.alert
@@ -113,7 +105,6 @@
 			);
 			$('#n_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
 		else
 		{
 			$.ajax
@@ -125,6 +116,10 @@
 					{
 						carian_nama : carian_nama
 					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -133,22 +128,8 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Halaman Utama',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
-							
-							//window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
-							window.location.href = "carian_asas_listing.html";
-							
+							window.localStorage['CARIAN_PERTUBUHAN'] = JSON.stringify(json);
+							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
 						{
@@ -158,14 +139,12 @@
 								{
 									title: 'Halaman Utama',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			)

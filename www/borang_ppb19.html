@@ -89,19 +89,50 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
+<<<<<<< HEAD
 	var nama = window.localStorage.getItem('NAMA');
 	var no_kp = window.localStorage.getItem('LOGIN');
 	
 	//alert(nama);
 	//alert(no_kp);
+=======
+	function upperCase() 
+	{
+		var x = document.getElementById("f_sijil");
+		x.value = x.value.toUpperCase();
+	}
+	
+	var nama = window.localStorage.getItem('NAMA');
+	var no_kp = window.localStorage.getItem('LOGIN');
+	var alamat = window.localStorage.getItem('ALAMAT');
+	
+	//alert(nama);
+	//alert(no_kp);
+	
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 	//window.localStorage.setItem("ALAMAT", "alamat tempat urusan");
+	
+	
+	
+	$("#d_nama").val(nama);
+	$("#d_kp").val(no_kp);
+	$("#d_alamat").val(alamat);
+	
+	//alert(alamat);
+	
+	//var jawatan = window.localStorage.getItem('JAWATAN');
+	//var no_tel = window.localStorage.getItem('NO TEL');
 	
 
 		//e.preventDefault();			
 
 		//var carian_nama = $.trim($('#n_carian').val());
+<<<<<<< HEAD
 		/*$(function()
 /*	$(function()
+=======
+		$(function()
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 	{
 		$.ajax
 		(
@@ -146,6 +177,7 @@
 				}
 			}
 		)
+<<<<<<< HEAD
 });*/
 
 	function upperCase() 
@@ -157,11 +189,10 @@
 	var nama = window.localStorage.getItem('NAMA');
 	var no_kp = window.localStorage.getItem('LOGIN');
 	var alamat = window.localStorage.getItem('ALAMAT');
+=======
+});
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 	
-	$("#d_nama").val(nama);
-	$("#d_kp").val(no_kp);
-	$("#d_alamat").val(alamat);
-
 	$("#btn_submit").click(function(e)
 	{
 		e.preventDefault();
@@ -207,7 +238,7 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							//window.location.href = "bayaran_ppb19.html";
+							window.location.href = "bayaran_ppb19.html";
 						}
 						else if (json.status == 'error')
 						{
@@ -233,6 +264,7 @@
 	});
 	
 	$(function () 
+<<<<<<< HEAD
 	{
 		var minlength = 5;
 
@@ -256,19 +288,27 @@
 						success: function(xml)
 						{
 	$( "#f_sijil" ).keyup(function() 
+=======
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 	{
-		var input = $('#f_sijil').val(); // We take the input value
-		if ( input.length > 5 ) {	
-			$(function()
+		var minlength = 5;
+
+		$("#f_sijil").keyup(function () 
+		{
+			var that = this,
+			value = $(this).val();
+
+			if (value.length >= minlength )
 			{
-				
-			
-				$.ajax({
+				$.ajax
+				(
+					{
 						type: "POST",
 						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
 						dataType: "xml",
-						data: {
-							nombor_sijil: input,
+						data: 
+						{
+							value : value
 						},
 						success: function(xml)
 						{
@@ -284,7 +324,11 @@
 								{
 									$('#d_npertubuhan').val($(npertubuhan).text());
 								}
+<<<<<<< HEAD
 								else if ( value != $(that).val())
+=======
+								else
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 								{
 									$.alert
 									(
@@ -295,6 +339,7 @@
 										}
 									);
 								}
+<<<<<<< HEAD
 								else{}
 							})
 						}
@@ -306,11 +351,14 @@
 								$('#d_npertubuhan').val($(npertubuhan).text());
 											
 							});
+=======
+							})
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 						}
-					});
-			});
-		
-		}
+					}
+				);
+			}
+		});
 	});
 	</script>
 	

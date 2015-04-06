@@ -148,84 +148,56 @@
 		
 		e.preventDefault();
 		
+<<<<<<< HEAD
 		if (nama.length == 0)
+=======
+		var empty = false;
+		
+		$('#f_nama, #f_emel, #sel_mberkenaan, #f_mesej, #f_captcha').css({"border":"","box-shadow":""});
+		
+		if (nama.length == 0) 
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 		{
-			$.alert
-			(
-				{
-					title: 'Hubungi Kami',
-					content: 'Sila Isikan Nama Penuh',
-					confirm: function(){}
-				}
-			);
 			$("#f_nama").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (emel.length == 0) 
+		if (emel.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Emel',
-					confirm: function(){}
-				}
-			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
+			empty = true;
 		}
-		
-		else if(!ValidateEmail(emel))
+		if(!ValidateEmail(emel))
 		{
-			$.alert
-			(
-				{
-					title: 'Daftar Pengguna',
-					content: 'Sila Isikan Format Emel yang Betul',
-					confirm: function(){ }
-				}
-			);
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
 		else if (mesej_berkenaan.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Hubungi Kami',
-					content: 'Sila Plih Mesej Berkenaan',
-					confirm: function(){}
-				}
-			);
 			$(".selection").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (mesej.length == 0)
+		if (mesej.length == 0)
 		{
-			$.alert
-			(
-				{
-					title: 'Hubungi Kami',
-					content: 'Sila Isikan Mesej',
-					confirm: function(){}
-				}
-			);
 			$("#f_mesej").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
-		
-		else if (captcha.length == 0)
+		if (captcha.length == 0)
+		{
+			$("#f_captcha").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Hubungi Kami',
-					content: 'Sila Isikan Captcha',
-					confirm: function(){}
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
 				}
 			);
-			$("#f_captcha").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-		
 		else 
 		{
 			$.ajax
@@ -238,6 +210,7 @@
 						nama : nama,
 						emel : emel,
 						mesej_berkenaan : mesej_berkenaan,
+<<<<<<< HEAD
 						mesej : mesej,
 						captcha : captcha
 					},
@@ -249,6 +222,14 @@
 					error: function(e) 
 					{
 						console.log(e);
+=======
+						mesej : mesej
+						//captcha : captcha
+					},	
+					beforeSend: function() 
+					{
+						run_waitMe();
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 					},
 					success:function(data)
 					{
@@ -266,10 +247,13 @@
 									confirm: function()
 									{
 										$('body').waitMe('hide');
+<<<<<<< HEAD
+=======
+										window.location.href = "index.html";
+>>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 									}
 								}
 							);
-							window.location.href = "index.html";
 						}
 						else if (json.status == 'error') 
 						{
@@ -284,6 +268,7 @@
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			);		

@@ -14,9 +14,8 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
-		
+
 		<style>
 			input.invalid {outline-color: #FF0000}
 			input.valid {background-color: white}
@@ -31,14 +30,11 @@
 	<div id="navigation"></div>
 	<!-- /slide menu right -->
 
-	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
 		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-			<!-- <img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
-			<a href="#" onclick="back();"><img src="img/back-icon.png" class="back_icon" align="left"/></a> -->
 	</div>		
 	<!-- end of header -->
 	
@@ -50,23 +46,19 @@
 					<h1 class="main_title">LOG MASUK</h1>
 				</div>
 			</div>
-		
 		</div>
 		<!-- end of header-title-->
 		
 		<div id="content">
-			<!-- form -->
 			<div class="_form">
 				<form id="login_form" action="" method="POST">
 					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="LOG MASUK" id="btn_submit">
 					</div>
 				</form>
 			</div>
-			<!-- end of form -->
 		
 			<div class="multi-links">
 				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
@@ -99,39 +91,39 @@
 	<script>
 	$("#btn_submit").click(function(e)
 	{
-		e.preventDefault();			
-	
 		var kadp = $.trim($('#f_kp').val());
 		var katalaluan = $.trim($('#f_katalaluan').val());
+		var empty = false;
 		
-		if (kadp.length == 0) 
+		$('#f_kp, #f_katalaluan').css({"border":"","box-shadow":""});
+		
+		e.preventDefault();			
+		
+		if(kadp.length == 0) 
 		{
-			$.alert
-			(
-				{
-					title: 'Log Masuk',
-					content: 'Sila Isikan No Kad Pengenalan!',
-					confirm: function(){}
-				}
-			);
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
 		}
 		
-		else if (katalaluan == 0)
+		if(katalaluan == 0)
+		{
+			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Log Masuk',
-					content: 'Sila Isikan Kata Laluan!',
-					confirm: function(){}
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
 				}
 			);
-			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 		else 
 		{
-		
 			$.ajax
 			(
 				{
@@ -141,11 +133,6 @@
 					{
 						kadp : kadp,
 						katalaluan : katalaluan
-					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
 					},
 					beforeSend: function() 
 					{
@@ -172,8 +159,7 @@
 								{
 									title: 'Log Masuk',
 									content: json.message,
-									confirm: function(){
-									}
+									confirm: function(){}
 								}
 							);
 						}
