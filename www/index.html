@@ -15,7 +15,6 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -117,7 +116,8 @@
 					{
 						carian_nama : carian_nama
 					},
-					beforeSend: function() {
+					beforeSend: function() 
+					{
 						run_waitMe();
 					},
 					success:function(data)
@@ -128,19 +128,7 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Halaman Utama',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
 							window.localStorage['CARIAN_PERTUBUHAN'] = JSON.stringify(json);
-							//window.localStorage['KOD_ID'] = JSON.stringify(json.details.kod_nama_pertubuhan);
 							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
@@ -151,14 +139,12 @@
 								{
 									title: 'Halaman Utama',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			)

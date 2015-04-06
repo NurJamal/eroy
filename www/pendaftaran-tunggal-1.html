@@ -41,7 +41,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
+				<h1 class="main_title" id="jenis_pendaftaran_tajuk">Pendaftaran Tunggal </h1>
 			</div>
 		</div>
 	
@@ -70,12 +70,9 @@
 		
 			<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
-					<form action="">
-					<!--<select id="sel_jenis_pertubuhan" name="sel_jenis_pertubuhan" class="_sel"> 
-						<option value="tunggal" selected>Tunggal</option>
-					</select>-->
-					<span>Tunggal</span>
-					<input type="hidden" value="tunggal" name="pertubuhan_tunggal" id="pertubuhan_tunggal">
+
+					<span id="jenis_pendaftaran_pertubuhan"></span>
+					<input type="hidden" value="1" name="jenis_pertubuhan" id="pertubuhan_tunggal">
 					</form>		
 			</div>
 				
@@ -83,9 +80,9 @@
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
 						<select id="sel_kategori" name="sel_kategori" class="_sel">
-						<option value="">Pilih Kategori</option>
-						<option value="1">Kelab Belia</option>
-						<option value="2">Youth Club</option>
+
+						<option value="" selected >Pilih Kategori</option>
+
 						</select>
 					</form>		
 			</div>
@@ -149,10 +146,13 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-
+		/*PAPARKAN NAMA PERSATUAN*/
 		window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", "KELAB APA-APA SAHAJA");
 
 		getCountry($('#sel_negeri').attr('id'));		
+		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"1");		
+		getKategoriPertubuhan($('#sel_kategori').attr('id'),"1");		
+
 		function getDaerahFromSelectedCountry()  
 		{
 			var selected_country = $('#sel_negeri').val();
@@ -175,8 +175,10 @@
 	
 		$("#btn_submit").click(function(e){
 		
+		redisplayHeader();
 		var empty = false;
 		e.preventDefault();
+		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
 		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
@@ -189,9 +191,9 @@
 		var sel_kategori = $("#sel_kategori").val();
 		var sel_negeri = $("#sel_negeri").val();
 		var sel_daerah = $("#sel_daerah").val();
-		var pertubuhan_tunggal = $("#pertubuhan_tunggal").val();
-
-
+		var jenis_pertubuhan = $("#pertubuhan_tunggal").val();
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
 		if (lokaliti.length == 0)
 		{
@@ -267,15 +269,14 @@
 					sel_kategori : sel_kategori,
 					sel_negeri : sel_negeri,
 					sel_daerah : sel_daerah,
-					pertubuhan_tunggal : pertubuhan_tunggal,
+					jenis_pertubuhan : jenis_pertubuhan,
+					kad_pengenalan : kad_pengenalan,
 				},
 				beforeSend: function() {
 						run_waitMe();
 					},
 				success:function(data){
-					console.log(data);
 					var json = $.xml2json(data);
-					console.log(json);
 					if (json.status == 'ok') {
 						
 						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);

@@ -15,7 +15,6 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>		
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -72,7 +71,6 @@
 	
 	<script>
 	var nama_pertubuhan = JSON.parse(localStorage['CARIAN_PERTUBUHAN']);
-	//var kod_nama = JSON.parse(localStorage['KOD_ID']);
 	
 	var pertubuhan = nama_pertubuhan.details;
 
@@ -82,85 +80,23 @@
 		{
 			var value = pertubuhan[i];
 					
-			$("<div id='kod_"+value.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+value.nama_pertubuhan+"</h2></div>")
+			$("<div id='"+value.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+value.nama_pertubuhan+"</h2></div>")
 			.appendTo('#content');	
 
 		}
 	}
 	else
 	{
-		$("<div id='kod_"+pertubuhan.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+pertubuhan.nama_pertubuhan+"</h2></div>")
+		$("<div id='"+pertubuhan.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+pertubuhan.nama_pertubuhan+"</h2></div>")
 		.appendTo('#content');
 	}
 	
-
-        $('.box').click(function()
-		{
-			//split kan kode (ko.d_)	
-			alert($(this).attr('id'));
-			window.localStorage['CARIAN_KOD_PERTUBUHAN'] = $(this).attr('id');
-
-        });
-	
-	$("#box").click(function(e)
+	$('.box').click(function()
 	{
-		e.preventDefault();			
-			
-		$.ajax
-		(
-			{
-				url:"http://eroy.me-tech.com.my/api/api_carian_papar.php",
-				type:'POST',
-				data:
-				{
-					npertubuhan : pertubuhan
-					
-				},
-				dataType:'xml',
-				error: function(e) 
-				{
-					console.log(e);
-				},
-				beforeSend: function() 
-				{
-					run_waitMe();
-				},
-				success:function(data)
-				{
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') 
-					{
-						console.log(json.status);
-						
-						window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
-						
-						//window.localStorage.setItem("NAMA", json.details.nama);
-						//window.localStorage.setItem("LOGIN", kadp);
-						
-						window.location.href = "carian_asas_papar.html";
-					}
-					else if (json.status == 'error') 
-					{
-						console.log(json.status);
-						$.alert
-						(
-							{
-								title: 'Carian',
-								content: json.message,
-								confirm: function()
-								{
-									$('body').waitMe('hide');
-								}
-							}
-						);
-					}
-					else{}
-					
-				}
-			}
-		);
+		//split kan kode (ko.d_)	
+		window.localStorage['CARIAN_ID_PERTUBUHAN'] = JSON.stringify($(this).attr('id'));
+		window.location.href = "carian_asas_papar.html";
+
 	});
 	
 	</script>
