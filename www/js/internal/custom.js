@@ -102,6 +102,12 @@
 
 		});
 	}
+	
+	/*Go Back History*/
+	function goBack()
+	{
+		window.history.back();
+	}
 		
 	/*Logout - remove localstorage*/
 	function logKeluar(){

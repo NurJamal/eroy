@@ -7,11 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
+		</div>		
+		<div id="loadingLayer"></div>
 		
 	</head>
 	<body>
@@ -26,7 +30,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="halaman_utama_pengguna_biasa.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>	
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -44,28 +48,48 @@
 	<div id="content">
 		<!-- list -->
 		<a href="borang_ppb19.html" style="text-decoration:none;">
-		<div id="box" id="btn_submit">
+		<div class="box">
 			<h2 class="title">Borang PPB19 - Carian Pemeriksaan Dokumen (24 Jam tanpa cetakan)</h2>
 		</div></a>
 		
 		<a href="borang_ppb20.html" style="text-decoration:none;">
-		<div id="box" id="btn_submit">
+		<div class="box">
 			<h2 class="title">Borang PPB20 - Carian Salinan Diperakui (Bercetak)</h2>
 		</div></a>
 		
 		<a href="status_carian.html" style="text-decoration:none;">
-		<div id="box">
+		<div class="box">
 			<h2 class="title">Status Carian</h2>
 		</div></a>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>	
+	$('.box').click(function()
+	{
+		var no_ic = window.localStorage.getItem('LOGIN');
+		var nama = window.localStorage.getItem('NAMA');
+	});
+	</script>
+	
 	</body>
 </html>
