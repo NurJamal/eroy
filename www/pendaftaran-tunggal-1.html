@@ -41,7 +41,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title" id="jenis_pendaftaran_tajuk">Pendaftaran Tunggal </h1>
+				<h1 class="main_title" id="jenis_pendaftaran_tajuk">PENDAFTARAN TUNGGAL</h1>
 			</div>
 		</div>
 	
@@ -109,9 +109,9 @@
 				<input type="text" style="margin-top:5px" name="f_lokaliti" id="f_lokaliti" placeholder="Lokaliti"><br/>
 				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" placeholder="Nama Ringkasan"><br/>
-				
+									
 			<div class="display">
-				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan" style="resize:none" disabled>Nama Penuh Pertubuhan</textarea>
+				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
 				<input type="email" style="margin-top:5px" name="f_emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
@@ -146,6 +146,7 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+				
 		/*PAPARKAN NAMA PERSATUAN*/
 		window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", "KELAB APA-APA SAHAJA");
 
@@ -171,6 +172,8 @@
 				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" ("+f_nama_ringkasan+")");
 			}
 		});
+		
+		
 		
 	
 		$("#btn_submit").click(function(e){
@@ -311,6 +314,7 @@
 			}
 		}
 	});
+	
 	
 
 	</script>
