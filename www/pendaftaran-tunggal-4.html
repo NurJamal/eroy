@@ -59,18 +59,26 @@
 			</div>
 		
 		</div>
-	
-		</br>
-	<center>
+	<!--<center>
 			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
 			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah
 			</h1><br/>
-	</center>
+	</center>-->
+		<!-- <a href="carian_papar_1.html" style="text-decoration:none;"> -->
+			<div id="box_icon_with_delete">
+				<h2 class="li1" id="nama">Ali</h2>
+				<h2 class="li2" id="no_kp">2777777</h2>
+				<h2 class="li2" id="jawatan">pengurusi</h2>
+				<h2 class="li2" id="no_fon">013442222</h2>
+				<h2 class="li2" id="emel">ali@gmail.com</h2>
+			</div>
+			<img src="img/pindaan-icon.png" id="imgEdit" width="30px" height="30px">
+		<!-- </a> -->
 
 	</div>	
 	<a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>
 	<div id="scrolladd">
-			<center><a href="pendaftaran-tunggal-4A.html"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
+			<center><a href="#" id="myLink"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
 	</div>
 	
@@ -85,6 +93,17 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<script>
+
+	$('#myLink').click(function(){ add_pemegang_jawatan(); return false; });
+
+	function add_pemegang_jawatan()
+	{
+		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "insert");
+		window.location.href = "pendaftaran-tunggal-4A.html";
+	}
+	</script>
 		
   </body>
 </html>

@@ -244,7 +244,6 @@
 							$xml = $(xmlDoc);
 							$(xml).find("lk_nama_bank").each(function()
 							{
-								console.log($(this).text());
 								var id = $(this).find("id");
 								var nama_bank = $(this).find("nama_bank");
 								

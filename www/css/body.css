@@ -510,6 +510,28 @@ h2._orange_text{
 	background-color: white;
 }
 
+#box_icon_with_delete{
+	width: 100%;
+	color: #696969;
+	background: white;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border: 1px solid #bcbcbc;
+	background: #ffffff;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-top: 5px;
+	padding-bottom: 25px;
+	padding-left: 10px;
+}
+
+#imgEdit {
+    position: absolute;
+    right: 65px;
+    top: 285px;
+    z-index: 1;
+}
+
 #box_no_icon{
 	width: 100%;
 	color: #696969;
