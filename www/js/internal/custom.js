@@ -471,7 +471,7 @@
 	var count = 1;
 		function getFasal(id, kodPertubuhan)
 		{
-			var kod_nama_pertubuhan = kodPertubuhan;
+			var id_pertubuhan = kodPertubuhan;
 			var fasal_id = id;
 			$(function() 
 			{
@@ -479,9 +479,9 @@
 				(
 					{
 						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/get_fasal.php",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_fasal.php",
 						data: {
-							kod_nama_pertubuhan : kod_nama_pertubuhan,
+							id_pertubuhan : id_pertubuhan,
 						},
 						dataType: "xml",
 						success: function(xml)
