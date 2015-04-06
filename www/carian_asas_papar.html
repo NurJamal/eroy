@@ -57,7 +57,7 @@
 		<h1 class="_dark_text" id="no_sijil"></h1>
 		
 		<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
-		<h1 class="_dark_text" id="tarikh_daftar"></h1>
+		<h1 class="_dark_text" id="tarikh_lulus_daftar"></h1>
 		
 		<h2 class="_orange_text">Status</h2>
 		<h1 class="_dark_text" id="status"></h1>
@@ -77,21 +77,28 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
+	//var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
+	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
+	
+	alert(kod_nama_pertubuhan);
 	
 	$(function() 
 	{
 		$.ajax
 		(
 			{
-				type: "GET",
+				type: "POST",
 				url:"http://eroy.me-tech.com.my/api/api_carian_papar.php",
 				dataType: "xml",
+				data : 
+				{
+					kod_nama_pertubuhan : kod_nama_pertubuhan
+				},
 				success: function(xml)
 				{
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("lk_carian").each(function()
+					$(xml).find("details").each(function()
 					{						
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var npertubuhan = $(this).find("nama_pertubuhan");
@@ -101,24 +108,23 @@
 						var alamat_pos = $(this).find("alamat_pos1");
 						var alamat_pos1 = $(this).find("alamat_pos2");
 						var alamat_pos2 = $(this).find("alamat_pos3");
-						
-						console.log($(this).text());						
-						
-						$('#nama_pertubuhan').append($(npertubuhan).text()+'<br/>');
-						$('#alamat_urusan').append($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+
-						' '+$(alamat_urusan2).text()+'<br/>');
-						$('#alamat_pos').append($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '
-						+$(alamat_pos2).text()+'<br/>');
+						var no_sijil = $(this).find("no_sijil");
+						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
+
+						alert(no_sijil.text());
+								
+						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
+						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
+						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+
+						$(alamat_pos2).text()+'<br/>');
+						$('#no_sijil').html($(no_sijil).text()+'<br/>');
+						$('#tarikh_lulus_daftar').html($(tarikh_sijil_lulus).text()+'<br/>');
 					});
-				},
-				error: function() 
-				{
-					console.log("An error occurred while processing XML file.");
 				}
 			}
 		);
-
 	});
+
 	</script>
 	
 	
