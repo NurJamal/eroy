@@ -225,8 +225,8 @@
 			var sel_negeripos = $("#sel_negeriPos").val();
 			var sel_daerahpos = $("#sel_daerahPos").val();
 			var poskod_pos= $("#poskodPos").val();
-
-
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+			var nama_pertubuhan = window.localStorage.getItem('NAMA_PENDAFTARAN_BERCAWANGAN');
 
 			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
 			if (alamat1.length == 0)
@@ -304,6 +304,8 @@
 						sel_negeripos : sel_negeripos,
 						sel_daerahpos : sel_daerahpos,
 						poskod_pos : poskod_pos,
+						kad_pengenalan : kad_pengenalan,
+						nama_pertubuhan : nama_pertubuhan,
 						
 					},
 					beforeSend: function() {
