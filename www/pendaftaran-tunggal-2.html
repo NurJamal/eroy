@@ -31,7 +31,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-1.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="#" onclick="goBack(); return false;"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
@@ -160,6 +160,55 @@
 	getCountry($('#sel_negeri').attr('id'));		
 	getCountry($('#sel_negeripos').attr('id'));
 
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_2.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+
+								$("#alamat1").val(json.details.alamat1);
+								$("#alamat2").val(json.details.alamat2);
+								$("#alamat3").val(json.details.alamat3);
+								$("#sel_negeri").val(json.details.negeri);
+								$("#sel_daerah").val(json.details.daerah);
+								$("#poskod").val(json.details.poskod);
+								getDaerah(json.details.negeri,$('#sel_daerah').attr('id'));	
+								$("#sel_daerah").val(json.details.daerah);
+								
+								$("#alamat_pos1").val(json.details.alamat_pos1);
+								$("#alamat_pos2").val(json.details.alamat_pos2);
+								$("#alamat_pos3").val(json.details.alamat_pos3);
+								$("#sel_negeripos").val(json.details.negeri_pos);
+								$("#poskod_pos").val(json.details.poskod_pos);
+								getDaerah(json.details.negeri_pos,$('#sel_daerahpos').attr('id'));	
+								$("#sel_daerahpos").val(json.details.daerah_pos);
+							
+								$('body').waitMe('hide');
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+	
 	function salinAlamat(f) 
 	{
 		if(f.alamat_sama.checked == true) 
@@ -214,6 +263,9 @@
 		
 		$('#alamat1,#alamat_pos1,#poskod,#poskod_pos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
 
+		var insertData = "TRUE";
+
+		var nama_pertubuhan= window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL");
 		var alamat1= $("#alamat1").val();
 		var alamat2 = $("#alamat2").val();
 		var alamat3 = $("#alamat3").val();
@@ -227,7 +279,7 @@
 		var sel_negeripos = $("#sel_negeripos").val();
 		var sel_daerahpos = $("#sel_daerahpos").val();
 		var poskod_pos= $("#poskod_pos").val();
-
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 
 
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
@@ -294,6 +346,7 @@
 				type:'POST',
 				data: {
 
+					nama_pertubuhan : nama_pertubuhan,
 					alamat1 : alamat1,
 					alamat2: alamat2,
 					alamat3 : alamat3,
@@ -306,7 +359,8 @@
 					sel_negeripos : sel_negeripos,
 					sel_daerahpos : sel_daerahpos,
 					poskod_pos : poskod_pos,
-					
+					insertData : insertData,
+					kad_pengenalan : kad_pengenalan,
 				},
 				beforeSend: function() {
 						run_waitMe();
@@ -315,7 +369,7 @@
 					console.log(data);
 					var json = $.xml2json(data);
 					console.log(json);
-					if (json.status == 'ok') {
+					if (json.status == 'INSERT_SUCCESS') {
 						
 						$.alert
 						(
@@ -329,7 +383,31 @@
 						);
 					
 					}
-					else if (json.status == 'error') {
+					else if (json.status == 'INSERT_ERROR') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else if (json.status == 'UPDATE_SUCCESS') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-tunggal-3.html";
+
+								}
+							}
+						);
+					}
+					else if (json.status == 'UPDATE_ERROR') {
 						$.alert
 						(
 							{

@@ -146,13 +146,56 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+			
 		/*PAPARKAN NAMA PERSATUAN*/
-		window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", "KELAB APA-APA SAHAJA");
 
 		getCountry($('#sel_negeri').attr('id'));		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"1");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"1");		
+		
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
 
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+								$("#f_lokaliti").val(json.details.lokaliti);
+								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+								$("#sel_negeri").val(json.details.id_negeri);
+								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								$("#sel_daerah").val(json.details.id_daerah);
+
+								$('body').waitMe('hide');
+
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+		
 		function getDaerahFromSelectedCountry()  
 		{
 			var selected_country = $('#sel_negeri').val();
@@ -182,6 +225,8 @@
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
 		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
+
+		var insertData = "TRUE";
 
 		var lokaliti= $("#f_lokaliti").val();
 		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
@@ -271,13 +316,14 @@
 					sel_daerah : sel_daerah,
 					jenis_pertubuhan : jenis_pertubuhan,
 					kad_pengenalan : kad_pengenalan,
+					insertData : insertData,
 				},
 				beforeSend: function() {
 						run_waitMe();
 					},
 				success:function(data){
 					var json = $.xml2json(data);
-					if (json.status == 'ok') {
+					if (json.status == 'INSERT_SUCCESS') {
 						
 						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
 
@@ -287,13 +333,25 @@
 								title: 'Status',
 								content: json.message,
 								confirm: function(){
-									window.location.href = "pendaftaran-tunggal-2.html";
+								window.location.href = "pendaftaran-tunggal-2.html";
 								}
 							}
 						);
 					
 					}
-					else if (json.status == 'error') {
+					else if (json.status == 'UPDATE_SUCCESS') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-tunggal-2.html";
+								}
+							}
+						);
+					}
+					else if (json.status == 'UPDATE_ERROR') {
 						$.alert
 						(
 							{
