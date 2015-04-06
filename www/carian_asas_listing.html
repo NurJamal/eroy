@@ -30,7 +30,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -79,7 +79,8 @@
 		for (var i = 0; i < pertubuhan.length; i++)
 		{
 			var value = pertubuhan[i];
-					
+			
+			
 			$("<div id='"+value.kod_nama_pertubuhan+"' class='box'><h2 class='title'>"+value.nama_pertubuhan+"</h2></div>")
 			.appendTo('#content');	
 
@@ -91,9 +92,11 @@
 		.appendTo('#content');
 	}
 	
-	$('.box').click(function()
+	$('.box').click(function(e)
 	{
-		//split kan kode (ko.d_)	
+	
+		e.preventDefault();
+		
 		window.localStorage['CARIAN_ID_PERTUBUHAN'] = JSON.stringify($(this).attr('id'));
 		window.location.href = "carian_asas_papar.html";
 

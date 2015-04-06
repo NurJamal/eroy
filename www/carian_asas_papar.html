@@ -25,7 +25,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="carian_asas_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 
@@ -65,7 +65,7 @@
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
 	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
@@ -76,14 +76,19 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
-	<script>
-	//var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
-	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 	
-	alert(kod_nama_pertubuhan);
+	<script>
+	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
 	
 	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -94,8 +99,14 @@
 				{
 					kod_nama_pertubuhan : kod_nama_pertubuhan
 				},
-				success: function(xml)
+				beforeSend: function() 
 				{
+					run_waitMe();
+				},
+				
+				success: function(xml, data)
+				{
+					
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
 					$(xml).find("details").each(function()
@@ -110,9 +121,8 @@
 						var alamat_pos2 = $(this).find("alamat_pos3");
 						var no_sijil = $(this).find("no_sijil");
 						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
-
-						alert(no_sijil.text());
-								
+						
+						$('#content').show();
 						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
 						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
 						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+

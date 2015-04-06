@@ -8,6 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		 <div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -35,7 +39,7 @@
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -64,24 +68,16 @@
 			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah
 			</h1><br/>
 	</center>-->
-		<!-- <a href="carian_papar_1.html" style="text-decoration:none;"> -->
-			<div id="box_icon_with_delete">
-				<h2 class="li1" id="nama">Ali</h2>
-				<h2 class="li2" id="no_kp">2777777</h2>
-				<h2 class="li2" id="jawatan">pengurusi</h2>
-				<h2 class="li2" id="no_fon">013442222</h2>
-				<h2 class="li2" id="emel">ali@gmail.com</h2>
-			</div>
-			<img src="img/pindaan-icon.png" id="imgEdit" width="30px" height="30px">
-		<!-- </a> -->
+		<div id="content-box">
 
+		</div>
 	</div>	
 	<a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>
 	<div id="scrolladd">
 			<center><a href="#" id="myLink"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
 	</div>
-	
+	</div>
 
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -94,10 +90,108 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+		<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
 	<script>
 
-	$('#myLink').click(function(){ add_pemegang_jawatan(); return false; });
+	$( document ).ready(function() {
+        run_waitMe();
+        get_kod_pertubuhan();
+    });
 
+	function get_kod_pertubuhan()
+	{
+		var kad_pengenalan = window.localStorage.getItem("LOGIN");
+        $(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_kod_pertubuhan.php",
+						data: {
+							kad_pengenalan : kad_pengenalan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("process_pendaftaran_pertubuhan").each(function()
+							{
+								var kod_nama_pertubuhan = $(this).find("kod_nama_pertubuhan");
+								get_pemegang_jawatan("#content-box", kod_nama_pertubuhan.text());
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	}
+
+	function get_pemegang_jawatan(id,kodPertubuhan)
+	{
+		var kod_pertubuhan = kodPertubuhan;
+		var pemegang_jawatan_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_4.php",
+						data: {
+							kod_pertubuhan : kod_pertubuhan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("tb_pemegang_jawatan").each(function()
+							{
+								//<id_jawatan>3</id_jawatan>
+
+								var id = $(this).find("id");
+								var nama = $(this).find("nama");
+								var no_KP = $(this).find("no_KP");
+								var NoTelBimbit = $(this).find("NoTelBimbit");
+								var emel = $(this).find("emel");
+
+								var div = '<div id="box_icon_with_delete">';
+								var nameSection = '<h2 class="li1" id="nama">'+nama.text()+'</h2>';
+								var no_kpSection = '<h2 class="li2" id="no_kp">'+no_KP.text()+'</h2>';
+								var jawatanSection = '<h2 class="li2" id="jawatan">pengurusi</h2>';
+								var no_fonSection = '<h2 class="li2" id="no_fon">'+NoTelBimbit.text()+'</h2>';
+								var emelSection = '<h2 class="li2" id="emel">'+emel.text()+'</h2>';
+								var closeDiv = '</div>';
+								var edit = '<a href="pendaftaran-tunggal-4A.html" style="text-decoration:none;"><img src="img/pindaan-icon.png" id="imgEdit" width="30px" height="30px"></a>';
+								var deletePemegang = '<a href="pendaftaran-tunggal-4A.html" style="text-decoration:none;"><img src="img/dustbin.png" id="imgDelete" width="30px" height="30px"></a>'; 
+
+								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);
+							});
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	};
+
+	$('#myLink').click(function(){ add_pemegang_jawatan(); return false; });
 	function add_pemegang_jawatan()
 	{
 		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "insert");

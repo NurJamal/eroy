@@ -1,4 +1,3 @@
-<script src="filedownloader.js"></script>
 <!-- slide menu right -->
 <nav class="menu slide-menu-right">
 		<ul>
@@ -15,5 +14,8 @@
 <script>
 	/* --- SET MENU FIX TO FALSE--- */
 	window.localStorage.setItem("_MENU_FIX", "FALSE");	
+	function downloadFile(URL){
+	window.open(URL, '_system', 'location=YES');
+	}
 </script>
 <!-- /slide menu right -->
