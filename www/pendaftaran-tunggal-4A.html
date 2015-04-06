@@ -270,6 +270,8 @@
 	/*IC CONTROL*/
 	ic_control($('#kad_pengenalan').attr('id'));
 	
+	var statusPemegang = window.localStorage.getItem("PEMEGANG_JAWATAN_STATUS");
+
 	function calcUmur()  
 	{
 		var age = auto_calculate_umur($('#t_lahir').attr('id'));
@@ -358,7 +360,8 @@
 		$('#alamat_pos1,#negeri_pos_selection,#daerah_pos_selection,#poskod_pos,#emel').css({"border":"","box-shadow":""});
 		
 		/*Alamat Asal*/
-		var kad_pengenalan= $("#kad_pengenalan").val();
+		var kad_pengenalanPemegang= $("#kad_pengenalan").val();
+		var kad_pengenalan = window.localStorage.getItem("LOGIN");
 		var jawatan = $("#jawatan").val();
 		var t_lahir = $("#t_lahir").val();
 		var umur = $("#umur").val();
@@ -516,7 +519,8 @@
 						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_4A.php",
 						type:'POST',
 						data: {
-
+							kad_pengenalanPemegang : kad_pengenalanPemegang,
+							kad_pengenalan : kad_pengenalan,
 							jawatan : jawatan,
 							t_lahir: t_lahir,
 							umur : umur,
@@ -548,7 +552,7 @@
 							no_tel_bimbit : no_tel_bimbit,
 							no_faks : no_faks,
 							emel : emel,
-
+							statusPemegang : statusPemegang,
 						},
 						beforeSend: function() {
 								run_waitMe();
