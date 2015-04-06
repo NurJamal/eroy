@@ -92,9 +92,12 @@
 		.appendTo('#content');
 	}
 	
-	$('.box').click(function()
+	$('.box').click(function(e)
 	{
-		alert(window.localStorage['CARIAN_ID_PERTUBUHAN'] = JSON.stringify($(this).attr('id')));
+	
+		e.preventDefault();
+		
+		window.localStorage['CARIAN_ID_PERTUBUHAN'] = JSON.stringify($(this).attr('id'));
 		window.location.href = "carian_asas_papar.html";
 
 	});

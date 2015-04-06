@@ -86,10 +86,9 @@
 	<script>
 	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
 	
-	//alert(kod_nama_pertubuhan);
-	
 	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -100,8 +99,14 @@
 				{
 					kod_nama_pertubuhan : kod_nama_pertubuhan
 				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				
 				success: function(xml, data)
 				{
+					
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
 					$(xml).find("details").each(function()
@@ -116,10 +121,8 @@
 						var alamat_pos2 = $(this).find("alamat_pos3");
 						var no_sijil = $(this).find("no_sijil");
 						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
-
-						//alert(no_sijil.text());
-						//alert(npertubuhan.text());
-								
+						
+						$('#content').show();
 						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
 						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
 						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+
