@@ -155,7 +155,7 @@
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
-								var id = $(this).find("kod_negeri");
+								var id = $(this).find("id");
 								var negeri = $(this).find("negeri");
 								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
 							});
