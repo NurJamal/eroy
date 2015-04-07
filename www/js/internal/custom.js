@@ -165,10 +165,10 @@
 							.find('option')
 							.remove()
 							.end();
-							$('#'+sel_id).append('<option value="">Sila Pilih Negeri</option>');
+							$('#'+sel_id).append('<option value="">Pilih Negeri</option>');
 
 
-							var xmlDoc = $.parseXML(xml),
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
@@ -214,9 +214,8 @@
 							.find('option')
 							.remove()
 							.end();
-				
 						
-							var xmlDoc = $.parseXML(xml),
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()
 							{
