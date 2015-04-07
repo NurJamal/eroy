@@ -554,7 +554,52 @@
 			});
 		};
 	
-	
+	//LIST JAWATAN
+	function getJawatan(id,selected)
+	{
+		var sel_id = id;
+		var set_selected = selected;
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "GET",
+						url: "http://eroy.me-tech.com.my/api/get_jawatan.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Sila Pilih Jawatan</option>');
+
+
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jawatan").each(function()
+							{
+								var id = $(this).find("id");
+								var jawatan = $(this).find("jawatan");
+								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(jawatan).text()+'</option>');
+							});
+
+						$('#'+sel_id).val(set_selected);
+
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	}
 	
 	
 	

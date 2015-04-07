@@ -75,8 +75,8 @@
 			</h2>
 			
 			<div class="default_button_holder">
-				<a href="bayaran_ppb19.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-			</div></a>
+				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+			</div>
 			<br/>
 		</div>
 	</div>
@@ -102,18 +102,15 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	//var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
-	//alert(kod_nama_pertubuhan);
-	
-	function upperCase() {
-		var x = document.getElementById("f_sijil");
-		x.value = x.value.toUpperCase();
-	}
-	
-	
 	var no_ic = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
 	
+	function upperCase() 
+	{
+		var x = document.getElementById("f_sijil");
+		x.value = x.value.toUpperCase();
+	}
+
 	$(function() 
 	{
 		$.ajax
@@ -125,6 +122,10 @@
 				data : 
 				{
 					no_ic : no_ic
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
 				},
 				success: function(xml, data)
 				{
@@ -141,6 +142,8 @@
 						var jawatan = $(this).find("jawatan");
 						var no_telefon = $(this).find("NoTelBimbit");
 						var tarikh_daftar = $(this).find("t_lulus");
+						
+						$('body').waitMe('hide');
 						
 						$('#d_nama').val($(nama).text());		
 						$('#d_kp').val($(kadp).text());
@@ -234,7 +237,7 @@
 			(
 				{
 					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
-					type:'GET',
+					type:'POST',
 					data:
 					{
 						no_sijil : no_sijil

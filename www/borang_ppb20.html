@@ -116,15 +116,30 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+	var no_ic = window.localStorage.getItem('LOGIN');
+	var nama = window.localStorage.getItem('NAMA');
+	
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
 	
-	
-	var no_ic = window.localStorage.getItem('LOGIN');
-	var nama = window.localStorage.getItem('NAMA');
+	$("#f_lain").hide();
+	$(document).ready(function()
+	{
+		$("#c_box5").on("change",function()
+		{
+			if($(this).is(":checked"))
+			{
+				$("#f_lain").show();
+			}
+			else
+			{
+				$("#f_lain").hide();
+			}
+		});
+	});
 	
 	$(function() 
 	{
@@ -222,11 +237,21 @@
 	
 	$("#btn_submit").click(function(e)
 	{
-
 		e.preventDefault();
 
 		var no_sijil = $("#f_sijil").val();
-
+		var box_lain = $("#f_lain").val();
+		var selectedChoice = [];
+		
+		for( var i = 1 ; i < 5 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedChoice.push($("#c_box"+i).val());
+			}
+		}
+		
+		
 		if (no_sijil.length == 0) 
 		{
 			$.alert
@@ -234,18 +259,37 @@
 				{
 					title: 'Carian',
 					content: 'Sila Masukkan No Sijil',
-					confirm: function()
-					{
-						$('body').waitMe('hide');
-					}
+					confirm: function(){}
 				}
 			);
 		} 
+		else if( selectedChoice.length <= 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Tandakan Satu Pilihan',
+					confirm: function(){}
+				}
+			);
+		}	
+		/*else if (box_lain.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Masukkan Nama Dokumen Carian',
+					confirm: function(){}
+				}
+			);
+		} */
 		else {
 		
 			$.ajax({
 				url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
-				type:'GET',
+				type:'POST',
 				data:
 				{
 					no_sijil : no_sijil
@@ -287,14 +331,12 @@
 								{
 									title: 'Carian',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 					}
 					else{}
+					$('body').waitMe('hide');
 				}
 			});
 		}

@@ -63,11 +63,12 @@
 			</div>
 		
 		</div>
-		<div id="content-box">
+		<div id="content-box_pemegang">
 
 		</div>
+
 	</div>	
-	<a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>
+	<!-- <a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a> -->
 	<div id="scrolladd">
 			<center><a href="#" onclick="add_pemegang_jawatan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
@@ -120,7 +121,7 @@
 							$(xml).find("process_pendaftaran_pertubuhan").each(function()
 							{
 								var kod_nama_pertubuhan = $(this).find("kod_nama_pertubuhan");
-								get_pemegang_jawatan("#content-box", kod_nama_pertubuhan.text());
+								get_pemegang_jawatan("#content-box_pemegang", kod_nama_pertubuhan.text());
 							});
 						},
 						error: function() 
@@ -156,24 +157,14 @@
 							$(xml).find("tb_pemegang_jawatan").each(function()
 							{
 								//<id_jawatan>3</id_jawatan>
-
-								var id = $(this).find("id");
-								var nama = $(this).find("nama");
-								var no_KP = $(this).find("no_KP");
-								var NoTelBimbit = $(this).find("NoTelBimbit");
-								var emel = $(this).find("emel");
-
-								var div = '<div id="box_icon_with_delete">';
-								var nameSection = '<h2 class="li1" id="nama">'+nama.text()+'</h2>';
-								var no_kpSection = '<h2 class="li2" id="no_kp">'+no_KP.text()+'</h2>';
-								var jawatanSection = '<h2 class="li2" id="jawatan">pengurusi</h2>';
-								var no_fonSection = '<h2 class="li2" id="no_fon">'+NoTelBimbit.text()+'</h2>';
-								var emelSection = '<h2 class="li2" id="emel">'+emel.text()+'</h2>';
-								var closeDiv = '</div>';
-								var edit = '<div class="imgEdit"><a href="#" onclick="editPemegang('+id.text()+')" style="text-decoration:none;"><img src="img/pindaan-icon.png" width="30px" height="30px"></a></div>&nbsp;&nbsp;&nbsp;';
-								var deletePemegang = '<div class="imgDelete"><a href="#" onclick="deleteAlert('+id.text()+')" style="text-decoration:none;"><img src="img/dustbin.png" width="30px" height="30px"></a></div>'; 
-
-								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);
+								
+								var jawatan = $(this).find("id_jawatan").text();
+								var id = $(this).find("id").text();
+								var nama = $(this).find("nama").text();
+								var no_KP = $(this).find("no_KP").text();
+								var NoTelBimbit = $(this).find("NoTelBimbit").text();
+								var emel = $(this).find("emel").text();
+								getJawatan(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id);
 								count++;
 							});
 							if(count == 1)
@@ -191,6 +182,64 @@
 
 			});
 	};
+
+	function getJawatan(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id)
+	{
+		var jawatan_id = jawatan;
+		var id = id;
+		var nama = nama;
+		var no_KP = no_KP;
+		var NoTelBimbit = NoTelBimbit;
+		var emel = emel;
+		var pemegang_jawatan_id = pemegang_jawatan_id;
+		var count = count;
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_jawatan_detail.php",
+						data: {
+							jawatan_id : jawatan_id,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$count = 0;
+							$(xml).find("jawatan_id").each(function()
+							{
+								var jawatan_title = $(this).find("jawatan").text();
+								var div = '<div id="box_icon_with_delete">';
+								var nameSection = '<h2 class="li1" id="nama">'+nama+'</h2>';
+								var no_kpSection = '<h2 class="li2" id="no_kp">'+no_KP+'</h2>';
+								var jawatanSection = '<h2 class="li2" id="jawatan">'+jawatan_title+'</h2>';
+								var no_fonSection = '<h2 class="li2" id="no_fon">'+NoTelBimbit+'</h2>';
+								var emelSection = '<h2 class="li2" id="emel">'+emel+'</h2>';
+								var closeDiv = '</div>';
+								var edit = '<div class="imgEdit"><a href="#" onclick="editPemegang('+id+')" style="text-decoration:none;"><img src="img/pindaan-icon.png" width="30px" height="30px"></a></div>&nbsp;&nbsp;&nbsp;';
+								var deletePemegang = '<div class="imgDelete"><a href="#" onclick="deleteAlert('+id+')" style="text-decoration:none;"><img src="img/dustbin.png" width="30px" height="30px"></a></div>'; 
+
+								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);	
+							});
+							if(count >= 7)
+							{
+								$(pemegang_jawatan_id).append('<div class="default_button_holder"><a href="pendaftaran-tunggal-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a></div>');
+							}
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});			
+	}
 
 	function editPemegang(id)
 	{

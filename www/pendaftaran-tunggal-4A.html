@@ -301,7 +301,8 @@
 							$(xml).find("tb_pemegang_jawatan").each(function()
 							{
 								$("#kad_pengenalan").val($(this).find("no_KP").text());
-								$("#jawatan").val($(this).find("id_jawatan").text());
+								//$("#jawatan").val($(this).find("id_jawatan").text());
+								getJawatan('jawatan',$(this).find("id_jawatan").text());
 								$("#nama_penuh").val($(this).find("nama").text());
 								$("#t_lahir").val($(this).find("t_lahir").text());
 								$("#umur").val($(this).find("umur").text());
@@ -388,7 +389,9 @@
 				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #daerah_pos,#negeri_pos').val('');
 			}
 	}
-	
+
+	getJawatan('jawatan','');
+
 	/*LIST Daerah*/
 	function getDaerahFromSelectedCountry()  
 	{
