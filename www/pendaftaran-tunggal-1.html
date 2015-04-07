@@ -149,7 +149,7 @@
 
 		/*PAPARKAN NAMA PERSATUAN*/
 
-		getCountry($('#sel_negeri').attr('id'));		
+		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"1");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"1");		
 		
@@ -179,8 +179,8 @@
 								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
 								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
 								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
-								$("#sel_negeri").val(json.details.id_negeri);
 								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri);
 								$("#sel_daerah").val(json.details.id_daerah);
 
 								$('body').waitMe('hide');
