@@ -299,11 +299,11 @@
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_jenis_bayaran").each(function()
+							$(xml).find("lk_bentuk_bayaran").each(function()
 							{
 								console.log($(this).text());
 								var id = $(this).find("id");
-								var jenis_bayaran = $(this).find("jenis_bayaran");
+								var jenis_bayaran = $(this).find("bentuk_bayaran");
 								
 								$('#'+jenis_bayaran_id).append('<option value="'+$(id).text()+'">'+$(jenis_bayaran).text()+'</option>');
 							});
@@ -323,10 +323,14 @@
 	
 	
 	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
-	function getJumlahBayaranMengikutPeringkat(id)
+	function getJumlahBayaranMengikutPeringkat(id,id1,id2)
 	{
 	
 		var jumlah_bayaran_id = id;
+		var id_bayaran = id1;
+
+		var peringkat_id = id2;
+
 		$(function() 
 			{
 				$.ajax
@@ -335,6 +339,9 @@
 						type: "POST",
 						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jumlah_bayaran_mengikut_peringkat.php",
 						dataType: "xml",
+						data:{
+							peringkat_id : peringkat_id,
+						},
 						success: function(xml)
 						{
 							var xmlDoc = $.parseXML(xml),
@@ -342,9 +349,14 @@
 							$(xml).find("lk_jumlah_bayaran").each(function()
 							{
 								console.log($(this).text());
-								var jumlah_bayaran = $(this).find("jumlah_bayaran");
+								var jumlah_bayaran = $(this).find("amaun_pembayaran");
+								var id = $(this).find("jenis_pembayaran");
+
+								$('#'+jumlah_bayaran_id).val('RM '+jumlah_bayaran.text());
+								$('#'+id_bayaran).val(id.text());
+
 								
-								$('#'+jumlah_bayaran_id).val(jumlah_bayaran);
+								
 							});
 						},
 						error: function() 
