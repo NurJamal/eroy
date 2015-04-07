@@ -63,18 +63,13 @@
 			</div>
 		
 		</div>
-	<!--<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah
-			</h1><br/>
-	</center>-->
 		<div id="content-box">
 
 		</div>
 	</div>	
 	<a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>
 	<div id="scrolladd">
-			<center><a href="#" id="myLink"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
+			<center><a href="#" onclick="add_pemegang_jawatan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
 	</div>
 	</div>
@@ -157,6 +152,7 @@
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
+							$count = 0;
 							$(xml).find("tb_pemegang_jawatan").each(function()
 							{
 								//<id_jawatan>3</id_jawatan>
@@ -174,11 +170,16 @@
 								var no_fonSection = '<h2 class="li2" id="no_fon">'+NoTelBimbit.text()+'</h2>';
 								var emelSection = '<h2 class="li2" id="emel">'+emel.text()+'</h2>';
 								var closeDiv = '</div>';
-								var edit = '<a href="pendaftaran-tunggal-4A.html" style="text-decoration:none;"><img src="img/pindaan-icon.png" id="imgEdit" width="30px" height="30px"></a>';
-								var deletePemegang = '<a href="pendaftaran-tunggal-4A.html" style="text-decoration:none;"><img src="img/dustbin.png" id="imgDelete" width="30px" height="30px"></a>'; 
+								var edit = '<div class="imgEdit"><a href="#" onclick="editPemegang('+id.text()+')" style="text-decoration:none;"><img src="img/pindaan-icon.png" width="30px" height="30px"></a></div>&nbsp;&nbsp;&nbsp;';
+								var deletePemegang = '<div class="imgDelete"><a href="#" onclick="deleteAlert('+id.text()+')" style="text-decoration:none;"><img src="img/dustbin.png" width="30px" height="30px"></a></div>'; 
 
 								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);
+								count++;
 							});
+							if(count == 1)
+							{
+								$(pemegang_jawatan_id).append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
+							}
 							$('body').waitMe('hide');
 						},
 						error: function() 
@@ -191,10 +192,86 @@
 			});
 	};
 
-	$('#myLink').click(function(){ add_pemegang_jawatan(); return false; });
+	function editPemegang(id)
+	{
+		var pemegang_jawatan_id = id;
+		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "FALSE");
+		window.localStorage.setItem("PEMEGANG_JAWATAN_ID", pemegang_jawatan_id);
+		window.location.href = "pendaftaran-tunggal-4A.html";
+	}
+
+	function deleteAlert(id)
+	{
+		$.confirm
+		(
+			{
+				title: 'Perhatian',
+				content: 'Anda pasti untuk buang maklumat?!',
+				confirm: function(){
+					deletePemegang(id);
+				},
+				cancel: function () {
+    			}
+			}
+		);
+	}
+
+	function deletePemegang(id)
+	{
+		var pemegang_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/delete_pemegang_jawatan.php",
+						data: {
+							pemegang_id : pemegang_id,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "pendaftaran-tunggal-4.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'error') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);
+			});
+	}
+
 	function add_pemegang_jawatan()
 	{
-		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "insert");
+		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "TRUE");
 		window.location.href = "pendaftaran-tunggal-4A.html";
 	}
 	</script>
