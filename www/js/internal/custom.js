@@ -144,9 +144,11 @@
 	};
 	
 	/*GET COUNTRY*/
-	function getCountry(id)
+	function getCountry(id,selected)
 	{
 		var sel_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -157,6 +159,15 @@
 						dataType: "xml",
 						success: function(xml)
 						{
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Sila Pilih Negeri</option>');
+
+
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
@@ -165,6 +176,9 @@
 								var negeri = $(this).find("negeri");
 								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
 							});
+
+						$('#'+sel_id).val(set_selected);
+
 						},
 						error: function() 
 						{
@@ -177,10 +191,12 @@
 	};
 	
 	/*GET DAERAH*/
-	function getDaerah(negeri,id)
+	function getDaerah(negeri,id,selected)
 	{
 	
 		var daerah_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -210,6 +226,9 @@
 								
 								$('#'+daerah_id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
 							});
+						
+							$('#'+daerah_id).val(set_selected);
+
 						},
 						error: function() 
 						{

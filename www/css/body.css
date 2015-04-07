@@ -521,20 +521,19 @@ h2._orange_text{
 	margin-top: 15px;
 	margin-bottom: 15px;
 	padding-top: 5px;
-	padding-bottom: 25px;
 	padding-left: 10px;
 }
 
-#imgEdit {
-    position: absolute;
-  margin-right: 10px;
-    z-index: 1;
+.imgEdit {
+    float: right;
+    margin-top: -17px;
+    margin-right: 60px;
 }
 
-#imgDelete {
-    position: inherit;
-  
-    z-index: 1;
+.imgDelete {
+    float: right;
+    margin-top: -17px;
+    margin-right: -80px;
 }
 
 #box_no_icon{
