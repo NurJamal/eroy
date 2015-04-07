@@ -63,11 +63,12 @@
 			</div>
 		
 		</div>
-		<div id="content-box">
+		<div id="content-box_pemegang">
 
 		</div>
+
 	</div>	
-	<a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a>
+	<!-- <a href="pendaftaran-tunggal-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a> -->
 	<div id="scrolladd">
 			<center><a href="#" onclick="add_pemegang_jawatan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
@@ -120,7 +121,7 @@
 							$(xml).find("process_pendaftaran_pertubuhan").each(function()
 							{
 								var kod_nama_pertubuhan = $(this).find("kod_nama_pertubuhan");
-								get_pemegang_jawatan("#content-box", kod_nama_pertubuhan.text());
+								get_pemegang_jawatan("#content-box_pemegang", kod_nama_pertubuhan.text());
 							});
 						},
 						error: function() 
@@ -176,6 +177,10 @@
 								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);
 								count++;
 							});
+							if(count > 7)
+							{
+								$(pemegang_jawatan_id).append('<div class="default_button_holder"><a href="pendaftaran-tunggal-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a></div>');
+							}
 							if(count == 1)
 							{
 								$(pemegang_jawatan_id).append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
