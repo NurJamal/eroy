@@ -116,6 +116,7 @@
 		$("#btn_submit").click(function(e){
 	    	var empty = false;
 			e.preventDefault();
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
 
 			if($('input[type=checkbox]:checked').length == 0) 
 			{
@@ -139,7 +140,7 @@
 					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_5.php",
 					type:'POST',
 					data: {
-						
+						kad_pengenalan : kad_pengenalan,
 					},
 					beforeSend: function() {
 							run_waitMe();

@@ -96,9 +96,11 @@
 			<input type="number" name="ahli_cina_lelaki" id="ahli_cina_lelaki" placeholder="Cina"><br/>
 			<input type="number" name="ahli_india_lelaki" id="ahli_india_lelaki" placeholder="India"><br/>
 			<input type="number" name="ahli_lain2_lelaki" id="ahli_lain2_lelaki" placeholder="Lain-lain"><br>
-
+			
+		<div class="display_number">
 			<input type="number" name="jumlah_lelaki" id="jumlah_lelaki" placeholder="Jumlah" disabled><br/>
-	
+		</div>
+		
 		<div>
 			<h5 id="_orange_title" style="margin-top:15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">Perempuan</h5>
@@ -110,8 +112,7 @@
 			<input type="number" name="ahli_lain2_perempuan" id="ahli_lain2_perempuan" placeholder="Lain-lain"><br>
 		
 		
-		<div class="display">
-				
+		<div class="display_number">
 			<input type="number" name="jumlah_perempuan" id="jumlah_perempuan" placeholder="Jumlah" disabled><br/>
 			<input type="number" name="jumlah_keseluruhan" id="jumlah_keseluruhan" placeholder="Jumlah Keseluruhan" disabled><br/></br>
 		</div>
@@ -189,6 +190,55 @@
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
 	
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$(function() 
+	{
+		$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_3.php",
+				type:'POST',
+				data: {
+					kad_pengenalan : kad_pengenalan,
+					insertData : "select"
+
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'SELECT') {
+						console.log(json.details);
+						$('#ahli_melayu_perempuan').val(json.details.bil_perempuan_melayu);
+						$('#ahli_cina_perempuan').val(json.details.bil_perempuan_cina);
+						$('#ahli_india_perempuan').val(json.details.bil_perempuan_india);
+						$('#ahli_lain2_perempuan').val(json.details.bil_perempuan_lain_lain);
+						$('#jumlah_perempuan').val(json.details.jumlah_perempuan);
+						$('#ahli_melayu_lelaki').val(json.details.bil_lelaki_melayu);
+						$('#ahli_cina_lelaki').val(json.details.bil_lelaki_cina);
+						$('#ahli_india_lelaki').val(json.details.bil_lelaki_india);
+						$('#ahli_lain2_lelaki').val(json.details.bil_lelaki_lain_lain);
+						$('#jumlah_lelaki').val(json.details.jumlah_lelaki);
+						$('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
+						$('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
+						$('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
+						$('#dengan_logo').val(json.details.dengan_lambang);
+						$('#bawah_akta').val(json.details.daftar_akta1966);	
+						$('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
+						//$('#logo').val(json.details.lambang);
+
+						$('body').waitMe('hide');
+					}
+					else if (json.status == 'VIEW') {
+					//Do nothing. Just display
+				}
+				
+				$('body').waitMe('hide');
+				}
+			});
+	});
+
 	/*Calc Jumlah ahli lelaki*/
 	$("#ahli_melayu_lelaki,#ahli_cina_lelaki,#ahli_india_lelaki,#ahli_lain2_lelaki").keyup(function() 
 	{
@@ -224,19 +274,25 @@
 		/*Clear all highlighted*/
 		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu,#logo').css({"border":"","box-shadow":""});
 		
+		var insertData = "TRUE";
 		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
 		var ahliCinaP = $('#ahli_cina_perempuan').val();
 		var ahliIndiaP = $('#ahli_india_perempuan').val();
 		var ahliLainP = $('#ahli_lain2_perempuan').val();
+		var jumlah_perempuan = $('#jumlah_perempuan').val();
 		var ahliMelayuL = $('#ahli_melayu_lelaki').val();
 		var ahliCinaL = $('#ahli_cina_lelaki').val();
 		var ahliIndiaL = $('#ahli_india_lelaki').val();
 		var ahliLainL = $('#ahli_lain2_lelaki').val();
+		var jumlah_lelaki = $('#jumlah_lelaki').val();
+		var jumlah_keseluruhan = $('#jumlah_keseluruhan').val();
 		var p_tmesyuarat = $('#p_tmesyuarat').val();
 		var bil_ahli = $('#bil_ahli').val();
 		var dengan_logo = $('#dengan_logo').val();
-		var bawah_akta = $('#bawah_akta').val();
-		var dengan_logo = $('#dengan_logo').val();
+		var bawah_akta = $('#bawah_akta').val();	
+		var logo = $('#logo').val();
+		var kad_pengenalan = window.localStorage.getItem("LOGIN");
+		var no_akta_dahulu = $('#no_akta_dahulu').val();
 		
 		empty = false;
 	
@@ -251,6 +307,7 @@
 			$('#bil_ahli').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
+
 		if(dengan_logo.length == 0)
 		{
 			$('#logo_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -294,64 +351,82 @@
 		}
 		else if(empty == false)
 		{
+			if(bil_ahli < 7)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Minimum bilangan yang hadir ialah 7 orang',
+						confirm: function(){ }
+					}
+				);
+				$('#bil_ahli').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}else
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_3.php",
+					type:'POST',
+					data: {
 
-		$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_3.php",
-				type:'POST',
-				data: {
-
-					ahliMelayuL : ahliMelayuL,
-					ahliCinaL: ahliCinaL,
-					ahliIndiaL : ahliIndiaL,
-					ahliLainL : ahliLainL,
-					ahliMelayuP : ahliMelayuP,
-					ahliCinaP : ahliCinaP,
-					ahliIndiaP : ahliIndiaP,
-					ahliLainP : ahliLainP,
-					p_tmesyuarat : p_tmesyuarat,
-					bil_ahli : bil_ahli,
-					dengan_logo : dengan_logo,
-					bawah_akta : bawah_akta,
-					no_akta_dahulu : no_akta_dahulu,
-					logo : logo,
-
-				},
-				beforeSend: function() {
-						run_waitMe();
+						ahliMelayuL : ahliMelayuL,
+						ahliCinaL: ahliCinaL,
+						ahliIndiaL : ahliIndiaL,
+						ahliLainL : ahliLainL,
+						ahliMelayuP : ahliMelayuP,
+						ahliCinaP : ahliCinaP,
+						ahliIndiaP : ahliIndiaP,
+						ahliLainP : ahliLainP,
+						p_tmesyuarat : p_tmesyuarat,
+						bil_ahli : bil_ahli,
+						dengan_logo : dengan_logo,
+						bawah_akta : bawah_akta,
+						no_akta_dahulu : no_akta_dahulu,
+						logo : logo,
+						jumlah_lelaki : jumlah_lelaki,
+						jumlah_perempuan : jumlah_perempuan,
+						jumlah_keseluruhan : jumlah_keseluruhan,
+						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
 					},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "pendaftaran-tunggal-4.html";
+									}
+								}
+							);
 						
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-									window.location.href = "pendaftaran-tunggal-4.html";
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
 								}
-							}
-						);
-					
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
 					}
-					else if (json.status == 'error') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-				}
-			});	
+				});	
+			}
+		
 			
 		}
 		

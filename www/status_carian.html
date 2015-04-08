@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -23,12 +24,8 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -45,7 +42,7 @@
 	<!-- end of header-title-->
 
 	<div id="content">	
-		<a href="carian_papar_1.html" style="text-decoration:none;">
+		<!-- <a href="carian_papar_1.html" style="text-decoration:none;">
 		<div id="box_icon">
 			<h2 class="li1" id="">PERSATUAN SILAT MALAYSIA</h2>
 			<h2 class="li2" id="">Tarikh Permohonan:<b> 23/07/2014</b></h2>
@@ -63,48 +60,47 @@
 			<h2 class="li1" id="">PERSATUAN SELSA MALAYSIA</h2>
 			<h2 class="li2" id="">Tarikh Permohonan:<b> 01/10/2014</b></h2>
 			<h2 class="li2" id="">Status:<b> Dalam Proses</b></h2><h2></h2>
-		</div>
+		</div> -->
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					//$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					//$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	var no_ic = window.localStorage.getItem('LOGIN');
+	var nama = window.localStorage.getItem('NAMA');
+	
+	/*$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>"+nama+
+	"<h2 class='li2'>Tarikh Permohonan: <b>"+nama+"</b></h2><h2 class='li2'>Status: <b>"+nama+"</b></h2><h2></h2></div>");*/
+	
+	$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR<h2 class='li2'>Tarikh Permohonan: <b>14/10/2014</b></h2><h2 class='li2'>Status: <b>Aktif</b></h2><h2></h2></div>");
+	
+	$('.box_icon').click(function(e)
+	{
+		e.preventDefault();
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var no_ic = window.localStorage.getItem('LOGIN');
+		window.location.href = "carian_papar_1.html";
 	});
-	</script> -->
 	
-	
+	</script>	
 	</body>
 </html>

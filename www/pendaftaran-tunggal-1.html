@@ -41,7 +41,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title" id="jenis_pendaftaran_tajuk">Pendaftaran Tunggal </h1>
+				<h1 class="main_title" id="jenis_pendaftaran_tajuk">PENDAFTARAN TUNGGAL</h1>
 			</div>
 		</div>
 	
@@ -109,9 +109,9 @@
 				<input type="text" style="margin-top:5px" name="f_lokaliti" id="f_lokaliti" placeholder="Lokaliti"><br/>
 				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" placeholder="Nama Ringkasan"><br/>
-				
+									
 			<div class="display">
-				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan" style="resize:none" disabled>Nama Penuh Pertubuhan</textarea>
+				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
 				<input type="email" style="margin-top:5px" name="f_emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
@@ -146,13 +146,55 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-		/*PAPARKAN NAMA PERSATUAN*/
-		window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", "KELAB APA-APA SAHAJA");
 
-		getCountry($('#sel_negeri').attr('id'));		
+		/*PAPARKAN NAMA PERSATUAN*/
+
+		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"1");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"1");		
+		
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
 
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+								$("#f_lokaliti").val(json.details.lokaliti);
+								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
+
+								$('body').waitMe('hide');
+
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+		
 		function getDaerahFromSelectedCountry()  
 		{
 			var selected_country = $('#sel_negeri').val();
@@ -161,16 +203,27 @@
 
 		$("#f_nama_pertubuhan,#f_nama_ringkasan,#f_lokaliti").keyup(function() 
 		{
+			var nama_ringkasan = "";
+			
 			var sel_kategori = $('#sel_kategori').val();
 			if(sel_kategori.length > 0){
 				var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
 				var sel_kategori_txt = $('#sel_kategori option:selected').text();
 				var f_nama_ringkasan = $('#f_nama_ringkasan').val();
 				var f_lokaliti = $('#f_lokaliti').val();
-
-				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" ("+f_nama_ringkasan+")");
+			
+				if(f_nama_ringkasan.length > 0)
+				{
+					var nama_ringkasan = "("+f_nama_ringkasan+")";
+				}
+				
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" "+nama_ringkasan);
 			}
+			
+
 		});
+		
+		
 		
 	
 		$("#btn_submit").click(function(e){
@@ -183,10 +236,12 @@
 		
 		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
 
+		var insertData = "TRUE";
+
 		var lokaliti= $("#f_lokaliti").val();
 		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
 		var nama_ringkasan = $("#f_nama_ringkasan").val();
-		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val();
+		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
 		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
 		var sel_kategori = $("#sel_kategori").val();
 		var sel_negeri = $("#sel_negeri").val();
@@ -271,15 +326,15 @@
 					sel_daerah : sel_daerah,
 					jenis_pertubuhan : jenis_pertubuhan,
 					kad_pengenalan : kad_pengenalan,
+					insertData : insertData,
 				},
 				beforeSend: function() {
 						run_waitMe();
 					},
 				success:function(data){
 					var json = $.xml2json(data);
-					if (json.status == 'ok') {
+					if (json.status == 'INSERT_SUCCESS') {
 						
-						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
 
 						$.alert
 						(
@@ -287,13 +342,27 @@
 								title: 'Status',
 								content: json.message,
 								confirm: function(){
-									window.location.href = "pendaftaran-tunggal-2.html";
+								window.location.href = "pendaftaran-tunggal-2.html";
 								}
 							}
 						);
-					
+						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
 					}
-					else if (json.status == 'error') {
+					else if (json.status == 'UPDATE_SUCCESS') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-tunggal-2.html";
+								}
+							}
+						);
+						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+
+					}
+					else if (json.status == 'UPDATE_ERROR') {
 						$.alert
 						(
 							{
@@ -306,11 +375,13 @@
 					}
 					else{}
 					$('body').waitMe('hide');
+
 				}
 			});
 			}
 		}
 	});
+	
 	
 
 	</script>

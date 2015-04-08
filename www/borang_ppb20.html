@@ -2,15 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -49,40 +54,41 @@
 		
 		<div class="display">
 			<form id="" action="" method="POST">
-				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" placeholder="Suffian Harun" disabled><br/>
-				<input type="text" id="d_kp" name="d_kp" placeholder="600626064444"  disabled><br/>
-				<textarea id="d_alamat_pos" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
-				<!-- <textarea id="d_alamat" name="d_alamat" placeholder="Suffian Harun" disabled></textarea> -->
-				<input type="text" id="d_jawatan" name="d_jawatan" placeholder="Pengerusi"  disabled><br/>
-				<input type="text" id="d_telefon" name="d_telefon" placeholder="0111234567"  disabled><br/>
-				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" placeholder="07/10/2014"  disabled><br/>
+				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" disabled><br/>
+				<input type="text" id="d_kp" name="d_kp"  disabled><br/>
+				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
+				<input type="text" id="d_jawatan" name="d_jawatan" disabled><br/>
+				<input type="text" id="d_telefon" name="d_telefon" disabled><br/>
+				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" disabled><br/>
 			</form>
 		</div>
 		
 		<h2 class="_orange_text">Carian Salinan Diperakui (Bercetak)</h2>
 		
 		<div class="inform">
-				<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperF()"><br/>
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()"><br/>
 		</div>
 		<div class="disp">
 				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
 		</div>
 		
 		<h2 class="_orange_text">Dokumen Yang Dipohon<br/><br/>
-		<div class="checkbox">
-			<input id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label for="c_box1">Maklumat Sijil Pendaftaran <span class="line2"> Pertubuhan Belia</span></label><br>
+		
+		<div class="checkboxClass">
+			<input class="checkboxClass" id="c_box1" type="checkbox" name="" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
+			<label for="c_box1">Maklumat Sijil Pendaftaran Pertubuhan Belia</label><br>
 			
-			<input id="c_box2" type="checkbox" name="senarai" value="Senarai Ahli Jawatankuasa" />
+			<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="1" />
 			<label for="c_box2">Senarai Ahli Jawatankuasa</label><br>
 			
-			<input id="c_box3" type="checkbox" name="senarai" value="Perlembagaan/Undang-undang Tubuh">
-			<label for="c_box3">Perlembagaan/Undang-<span class="line2">undang Tubuh</span></label><br>
+			<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="6" />
+			<label for="c_box4">Perlembagaan/Undang-undang Tubuh</label><br>
 			
-			<input id="c_box4" type="checkbox" name="senarai" value="Lain-Lain">
-			<label for="c_box4" style="margin-bottom:-15px">Lain-Lain</label>
+			<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="3" />
+			<label for="c_box5" style="margin-bottom:-5px">Lain-Lain</label><br>
 		</div><h2>
-			<input type="text" style="margin-top:-25px" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="_inform2"><br/>
+		
+		<input type="text" style="margin-top:-25px" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="_inform2"><br/>
 		
 		<div class="default_button_holder">
 			<a href="menu_carian.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
@@ -91,95 +97,249 @@
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
-	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
 	<script>
-	function upperF() {
+	var no_ic = window.localStorage.getItem('LOGIN');
+	var nama = window.localStorage.getItem('NAMA');
+	
+	function upperCase() 
+	{
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
 	
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_pengguna_info.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pengguna_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama = $(this).find("nama");
-					var no_kp = $(this).find("no_kp");
-					var alamat = $(this).find("alamat");
-					var jawatan = $(this).find("jawatan");
-					var no_telefon = $(this).find("no_telefon");
-					var tarikh_daftar = $(this).find("tarikh_daftar");
-					$('#d_nama').val($(nama).text());
-					$('#d_kp').val($(no_kp).text());
-					$('#d_alamat').val($(alamat).text());
-					$('#d_jawatan').val($(jawatan).text());
-					$('#d_telefon').val($(no_telefon).text());
-					$('#d_tarikh_daftar').val($(tarikh_daftar).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
+	$("#f_lain").hide();
+	$(document).ready(function()
+	{
+		$("#c_box5").on("change",function()
+		{
+			if($(this).is(":checked"))
+			{
+				$("#f_lain").show();
+			}
+			else
+			{
+				$("#f_lain").hide();
 			}
 		});
-
 	});
 	
-	
-	$("#btn_submit").click(function(e){
-
-			e.preventDefault();
-
-			var no_sijil = $("#f_sijil").val();
-
-			if (no_sijil.length == 0) {
-				alert('Sila lengkapkan borang tersebut!');
-			} 
-			else {
-			
-				$.ajax({
-					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
-					type:'GET',
-					data:{
-						no_sijil : no_sijil
-					},
-					dataType:'xml',
-					error: function(e) {
-						console.log(e);
-					},
-					success:function(data){
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') {
-							console.log(json.status);
-							alert('Permohonan anda akan diproses');
-							window.location.href = "menu_carian.html";
-						}
-						else if (json.status == 'error') {
-							console.log(json.status);
-							alert(json.message);
-						}
-						else{}
-					}
-				});
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_terperinci.php",
+				dataType: "xml",
+				data : 
+				{
+					no_ic : no_ic
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama = $(this).find("nama");
+						var kadp = $(this).find("no_KP");
+						var alamat_tetap1 = $(this).find("alamat_tetap_1");
+						var alamat_tetap2 = $(this).find("alamat_tetap_2");
+						var alamat_tetap3 = $(this).find("alamat_tetap_3");
+						var jawatan = $(this).find("jawatan");
+						var no_telefon = $(this).find("NoTelBimbit");
+						var tarikh_daftar = $(this).find("t_lulus");
+						
+						$('#d_nama').val($(nama).text());		
+						$('#d_kp').val($(kadp).text());
+						$('#d_alamat').val($(alamat_tetap1).text()+' '+$(alamat_tetap2).text()+' '+$(alamat_tetap3).text());
+						$('#d_jawatan').val($(jawatan).text());
+						$('#d_telefon').val($(no_telefon).text());
+						$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
+					});
+				}
 			}
+		);
+	});
 	
+	$(function () 
+	{
+		var minlength = 5;
+
+		$("#f_sijil").keyup(function () 
+		{
+			var that = this,
+			value = $(this).val();
+
+			if (value.length >= minlength )
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+						dataType: "xml",
+						data: 
+						{
+							value : value
+						},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_pertubuhan_info").each(function()
+							{
+								console.log($(this).text());
+								var npertubuhan = $(this).find("nama_pertubuhan");
+								var no_sijil = $(this).find("no_sijil");
+								
+								if (value == $(that).val()) 
+								{
+									$('#d_npertubuhan').val($(npertubuhan).text());
+								}
+								else
+								{
+									$.alert
+									(
+										{
+											title: 'Carian',
+											content: 'Tiada dalam rekod pangkalan data.',
+											confirm: function(){}
+										}
+									);
+								}
+							})
+						}
+					}
+				);
+			}
+		});
+	});
+	
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();
+
+		var no_sijil = $("#f_sijil").val();
+		var box_lain = $("#f_lain").val();
+		var selectedChoice = [];
+		
+		for( var i = 1 ; i < 5 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedChoice.push($("#c_box"+i).val());
+			}
+		}
+		
+		
+		if (no_sijil.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Carian',
+					content: 'Sila Masukkan No Sijil',
+					confirm: function(){}
+				}
+			);
+		} 
+		else if( selectedChoice.length <= 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Tandakan Satu Pilihan',
+					confirm: function(){}
+				}
+			);
+		}	
+		/*else if (box_lain.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Masukkan Nama Dokumen Carian',
+					confirm: function(){}
+				}
+			);
+		} */
+		else {
+		
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
+				type:'POST',
+				data:
+				{
+					no_sijil : no_sijil
+				},
+				dataType:'xml',
+				error: function(e) {
+					console.log(e);
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success:function(data)
+				{
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') 
+					{
+						console.log(json.status);
+						$.alert
+						(
+							{
+								title: 'Carian',
+								content: 'Permohonan Anda Akan Diproses',
+								confirm: function()
+								{
+									$('body').waitMe('hide');
+									window.location.href = "menu_carian.html";
+								}
+							}
+						);	
+					}
+					else if (json.status == 'error') 
+					{
+						console.log(json.status);
+						$.alert
+							(
+								{
+									title: 'Carian',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			});
+		}
 	});
 	</script>
 	

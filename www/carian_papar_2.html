@@ -2,15 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -24,71 +29,121 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="carian_papar_1.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN MAKLUMAT</h1>
-			</div>
-		</div>
-	
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
-
-		
-	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-				<img src="img\numbering-carian-02.png" style="width:100%;height:auto"/>
-			
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN MAKLUMAT</h1>
+				</div>
 			</div>
 		
 		</div>
-	<!-- end of navbar -->
+		<!-- end of header-title-->
 	
-	<div class="display">
-	
-		<h2 class="_orange_text" style="margin-top:-18px">No. Sijil</h2>
+		<div id="content">
+			<!-- navbar -->
+			<div class="navbar">
+				<div align="center">
+					<img src="img\numbering-carian-02.png" style="width:100%;height:auto"/>
+				</div>
+			</div>
+			<!-- end of navbar -->
 		
-		<input type="text" style="margin-top:0px" id="d_no_sijil" name="d_no_sijil"  placeholder="PPBM 5436/13" disabled><br/>
-		
-		<h2 class="_orange_text" style="margin-top:0px">No. Fail</h2>
-		
-		<input type="text" style="margin-top:0px" id="d_nama" name="d_nama" placeholder="ABB347-099" disabled><br/>
-		
-		<h2 class="_orange_text" style="margin-top:0px">Tarikh Sijil Lulus</h2>
-		
-		<input type="text" style="margin-top:0px" id="d_nama_ringkas" name="d_nama_ringkas" placeholder="13/12/2014" disabled><br/>
-		
-		<div class="default_button_holder">
-				<a href="carian_papar_3.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
+			<div class="display">
+				<h2 class="_orange_text" style="margin-top:-18px">No. Sijil</h2>
+				<input type="text" style="margin-top:0px" id="d_no_sijil" name="d_no_sijil" disabled><br/>
+				<h2 class="_orange_text" style="margin-top:0px">No. Fail</h2>
+				<input type="text" style="margin-top:0px" id="d_no_fail" name="d_no_fail" placeholder="ABB347-099" disabled><br/>
+				<h2 class="_orange_text" style="margin-top:0px">Tarikh Sijil Lulus</h2>
+				<input type="text" style="margin-top:0px" id="d_tarikh_sijil_lulus" name="d_tarikh_sijil_lulus" disabled><br/>
+				
+				<div class="default_button_holder">
+						<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+				</div>
+			</div>
 		</div>
-	</div>
-	
-	
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	var no_ic = window.localStorage.getItem('LOGIN');
+	
+	$(function() 
+	{
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_terperinci_paparan.php",
+				dataType: "xml",
+				data : 
+				{
+					no_ic : no_ic
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						//var no_fail = $(this).find("no_fail");
+						var t_sijil_lulus = $(this).find("t_sijil_lulus");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$('#d_no_sijil').val($(no_sijil).text());		
+						//$('#d_no_fail').val($(no_fail).text());
+						$('#d_tarikh_sijil_lulus').val($(t_sijil_lulus).text());		
+					});
+				}
+			}
+		);
+	});
+	
+	$('.default_button').click(function(e)
+	{
+		e.preventDefault();
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var no_ic = window.localStorage.getItem('LOGIN');
+		window.location.href = "carian_papar_3.html";
+	});
+	
+	//alert(no_ic);
+	
+	</script>
 		
   </body>
 </html>
