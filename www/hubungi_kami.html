@@ -148,15 +148,12 @@
 		
 		e.preventDefault();
 		
-<<<<<<< HEAD
 		if (nama.length == 0)
-=======
 		var empty = false;
 		
 		$('#f_nama, #f_emel, #sel_mberkenaan, #f_mesej, #f_captcha').css({"border":"","box-shadow":""});
 		
 		if (nama.length == 0) 
->>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 		{
 			$("#f_nama").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
@@ -210,7 +207,6 @@
 						nama : nama,
 						emel : emel,
 						mesej_berkenaan : mesej_berkenaan,
-<<<<<<< HEAD
 						mesej : mesej,
 						captcha : captcha
 					},
@@ -222,14 +218,12 @@
 					error: function(e) 
 					{
 						console.log(e);
-=======
 						mesej : mesej
 						//captcha : captcha
 					},	
 					beforeSend: function() 
 					{
 						run_waitMe();
->>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 					},
 					success:function(data)
 					{
@@ -247,10 +241,7 @@
 									confirm: function()
 									{
 										$('body').waitMe('hide');
-<<<<<<< HEAD
-=======
 										window.location.href = "index.html";
->>>>>>> c34a1b9b7eb07ef8f0437b97de2cb098fc5e5766
 									}
 								}
 							);
