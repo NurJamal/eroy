@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
@@ -42,7 +42,7 @@
 	<!-- end of header-title-->
 
 	<div id="content">	
-		<a href="carian_papar_1.html" style="text-decoration:none;">
+		<!-- <a href="carian_papar_1.html" style="text-decoration:none;">
 		<div id="box_icon">
 			<h2 class="li1" id="">PERSATUAN SILAT MALAYSIA</h2>
 			<h2 class="li2" id="">Tarikh Permohonan:<b> 23/07/2014</b></h2>
@@ -60,7 +60,7 @@
 			<h2 class="li1" id="">PERSATUAN SELSA MALAYSIA</h2>
 			<h2 class="li2" id="">Tarikh Permohonan:<b> 01/10/2014</b></h2>
 			<h2 class="li2" id="">Status:<b> Dalam Proses</b></h2><h2></h2>
-		</div>
+		</div> -->
 	</div>
 	
 	<!-- js for slide menu -->
@@ -83,35 +83,22 @@
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
 	
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					//$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					//$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
+	<script>
+	var no_ic = window.localStorage.getItem('LOGIN');
+	var nama = window.localStorage.getItem('NAMA');
+	
+	$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>"+nama+
+	"<h2 class='li2'>Tarikh Permohonan: <b>"+nama+"</b></h2><h2 class='li2'>Status: <b>"+nama+"</b></h2><h2></h2></div>");
+	
+	$('.box_icon').click(function(e)
+	{
+		e.preventDefault();
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var no_ic = window.localStorage.getItem('LOGIN');
+		window.location.href = "carian_papar_1.html";
 	});
-	</script> -->
 	
-	
+	</script>	
 	</body>
 </html>

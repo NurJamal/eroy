@@ -149,7 +149,7 @@
 
 		/*PAPARKAN NAMA PERSATUAN*/
 
-		getCountry($('#sel_negeri').attr('id'));		
+		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"1");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"1");		
 		
@@ -179,9 +179,8 @@
 								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
 								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
 								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
-								$("#sel_negeri").val(json.details.id_negeri);
 								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
-								$("#sel_daerah").val(json.details.id_daerah);
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
 
 								$('body').waitMe('hide');
 
@@ -204,15 +203,24 @@
 
 		$("#f_nama_pertubuhan,#f_nama_ringkasan,#f_lokaliti").keyup(function() 
 		{
+			var nama_ringkasan = "";
+			
 			var sel_kategori = $('#sel_kategori').val();
 			if(sel_kategori.length > 0){
 				var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
 				var sel_kategori_txt = $('#sel_kategori option:selected').text();
 				var f_nama_ringkasan = $('#f_nama_ringkasan').val();
 				var f_lokaliti = $('#f_lokaliti').val();
-
-				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" ("+f_nama_ringkasan+")");
+			
+				if(f_nama_ringkasan.length > 0)
+				{
+					var nama_ringkasan = "("+f_nama_ringkasan+")";
+				}
+				
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" "+nama_ringkasan);
 			}
+			
+
 		});
 		
 		
@@ -233,7 +241,7 @@
 		var lokaliti= $("#f_lokaliti").val();
 		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
 		var nama_ringkasan = $("#f_nama_ringkasan").val();
-		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val();
+		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
 		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
 		var sel_kategori = $("#sel_kategori").val();
 		var sel_negeri = $("#sel_negeri").val();
@@ -327,7 +335,6 @@
 					var json = $.xml2json(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						
-						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
 
 						$.alert
 						(
@@ -339,7 +346,7 @@
 								}
 							}
 						);
-					
+						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
 					}
 					else if (json.status == 'UPDATE_SUCCESS') {
 						$.alert
@@ -352,6 +359,8 @@
 								}
 							}
 						);
+						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+
 					}
 					else if (json.status == 'UPDATE_ERROR') {
 						$.alert
@@ -366,6 +375,7 @@
 					}
 					else{}
 					$('body').waitMe('hide');
+
 				}
 			});
 			}

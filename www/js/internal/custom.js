@@ -144,9 +144,11 @@
 	};
 	
 	/*GET COUNTRY*/
-	function getCountry(id)
+	function getCountry(id,selected)
 	{
 		var sel_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -157,7 +159,16 @@
 						dataType: "xml",
 						success: function(xml)
 						{
-							var xmlDoc = $.parseXML(xml),
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Pilih Negeri</option>');
+
+
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
@@ -165,6 +176,9 @@
 								var negeri = $(this).find("negeri");
 								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
 							});
+
+						$('#'+sel_id).val(set_selected);
+
 						},
 						error: function() 
 						{
@@ -177,10 +191,12 @@
 	};
 	
 	/*GET DAERAH*/
-	function getDaerah(negeri,id)
+	function getDaerah(negeri,id,selected)
 	{
 	
 		var daerah_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -198,9 +214,8 @@
 							.find('option')
 							.remove()
 							.end();
-				
 						
-							var xmlDoc = $.parseXML(xml),
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()
 							{
@@ -210,6 +225,9 @@
 								
 								$('#'+daerah_id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
 							});
+						
+							$('#'+daerah_id).val(set_selected);
+
 						},
 						error: function() 
 						{
@@ -280,11 +298,11 @@
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_jenis_bayaran").each(function()
+							$(xml).find("lk_bentuk_bayaran").each(function()
 							{
 								console.log($(this).text());
 								var id = $(this).find("id");
-								var jenis_bayaran = $(this).find("jenis_bayaran");
+								var jenis_bayaran = $(this).find("bentuk_bayaran");
 								
 								$('#'+jenis_bayaran_id).append('<option value="'+$(id).text()+'">'+$(jenis_bayaran).text()+'</option>');
 							});
@@ -304,10 +322,14 @@
 	
 	
 	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
-	function getJumlahBayaranMengikutPeringkat(id)
+	function getJumlahBayaranMengikutPeringkat(id,id1,id2)
 	{
 	
 		var jumlah_bayaran_id = id;
+		var id_bayaran = id1;
+
+		var peringkat_id = id2;
+
 		$(function() 
 			{
 				$.ajax
@@ -316,6 +338,9 @@
 						type: "POST",
 						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jumlah_bayaran_mengikut_peringkat.php",
 						dataType: "xml",
+						data:{
+							peringkat_id : peringkat_id,
+						},
 						success: function(xml)
 						{
 							var xmlDoc = $.parseXML(xml),
@@ -323,9 +348,14 @@
 							$(xml).find("lk_jumlah_bayaran").each(function()
 							{
 								console.log($(this).text());
-								var jumlah_bayaran = $(this).find("jumlah_bayaran");
+								var jumlah_bayaran = $(this).find("amaun_pembayaran");
+								var id = $(this).find("jenis_pembayaran");
+
+								$('#'+jumlah_bayaran_id).val('RM '+jumlah_bayaran.text());
+								$('#'+id_bayaran).val(id.text());
+
 								
-								$('#'+jumlah_bayaran_id).val(jumlah_bayaran);
+								
 							});
 						},
 						error: function() 
@@ -543,7 +573,52 @@
 			});
 		};
 	
-	
+	//LIST JAWATAN
+	function getJawatan(id,selected)
+	{
+		var sel_id = id;
+		var set_selected = selected;
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "GET",
+						url: "http://eroy.me-tech.com.my/api/get_jawatan.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Sila Pilih Jawatan</option>');
+
+
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jawatan").each(function()
+							{
+								var id = $(this).find("id");
+								var jawatan = $(this).find("jawatan");
+								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(jawatan).text()+'</option>');
+							});
+
+						$('#'+sel_id).val(set_selected);
+
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	}
 	
 	
 	

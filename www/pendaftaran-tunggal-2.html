@@ -228,14 +228,18 @@
 				var negeri = $("#sel_negeri").val();
 				$("#sel_negeripos").val(negeri);
 				
+				var daerah = $("#sel_daerah").val();
 				//if copy address from main address. auto retrieve daerah
-				getDaerahFromSelectedCountry2(); 
-				
+				getDaerah(negeri,$('#sel_daerahpos').attr('id'),daerah);	
+
 				
 			}
 			
 		else{
 				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #sel_negeripos, #sel_daerahpos').val('');
+				$('#sel_daerahpos').find('option').remove().end();
+				$('#sel_daerahpos').append('<option value="" selected>Pilih Daerah</option>');
+
 			}
 	}
 	
@@ -250,9 +254,6 @@
 	{
 		var selected_country2 = $('#sel_negeripos').val();
 		getDaerah(selected_country2,$('#sel_daerahpos').attr('id'));	
-		
-		var daerah = $("#sel_daerah").val();
-		$("#sel_daerahpos").val(daerah);
 	}
 	
 	$("#btn_submit").click(function(e){

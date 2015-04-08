@@ -271,18 +271,92 @@
 	ic_control($('#kad_pengenalan').attr('id'));
 	
 	var statusPemegang = window.localStorage.getItem("PEMEGANG_JAWATAN_STATUS");
+	var pemegangId = window.localStorage.getItem("PEMEGANG_JAWATAN_ID");
+	/*LIST Negeri*/
+	getCountry($('#n_kelahiran').attr('id'),'');	
+	getCountry($('#negeri_menetap').attr('id'),'');		
+	getCountry($('#negeri_pos').attr('id'),'');		
+	getCountry($('#negeri_majikan').attr('id'),'');
+
+	if(statusPemegang == "FALSE")
+	{
+		$(function() 
+		{
+			$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_pemegang_jawatan_detail.php",
+						data: {
+							pemegangId : pemegangId,
+						},
+						dataType: "xml",
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("tb_pemegang_jawatan").each(function()
+							{
+								$("#kad_pengenalan").val($(this).find("no_KP").text());
+								//$("#jawatan").val($(this).find("id_jawatan").text());
+								getJawatan('jawatan',$(this).find("id_jawatan").text());
+								$("#nama_penuh").val($(this).find("nama").text());
+								$("#t_lahir").val($(this).find("t_lahir").text());
+								$("#umur").val($(this).find("umur").text());
+								getCountry($('#n_kelahiran').attr('id'),$(this).find("KodNegeriTempatLahir").text());	
+								getDaerah($(this).find("KodNegeriTempatLahir").text(),$('#d_kelahiran').attr('id'),$(this).find("id_daerah_kelahiran").text());
+								$("#jantina").val($(this).find("kod_jantina").text());
+								$("#alamat_tetap1").val($(this).find("alamat_tetap_1").text());
+								$("#alamat_tetap2").val($(this).find("alamat_tetap_2").text());
+								$("#alamat_tetap3").val($(this).find("alamat_tetap_3").text());
+								$("#poskod_tetap").val($(this).find("poskod").text());
+								getCountry($('#negeri_menetap').attr('id'),$(this).find("kod_negeri").text());	
+								getDaerah($(this).find("kod_negeri").text(),$('#daerah_menetap').attr('id'),$(this).find("kod_daerah").text());
+								
+								/*Alamat Pos*/
+								$("#alamat_pos1").val($(this).find("alamat_pos_1").text());
+								$("#alamat_pos2").val($(this).find("alamat_pos_2").text());
+								$("#alamat_pos3").val($(this).find("alamat_pos_3").text());
+								$("#poskod_pos").val($(this).find("alamat_pos_poskod").text());
+								getCountry($('#negeri_pos').attr('id'),$(this).find("id_alamat_pos_negeri").text());
+								getDaerah($(this).find("id_alamat_pos_negeri").text(),$('#daerah_pos').attr('id'),$(this).find("id_alamat_pos_daerah").text());
+								
+
+								/*Alamat Majikan*/
+								$("#n_majikan").val($(this).find("nama_majikan").text());
+								$("#alamat_majikan1").val($(this).find("alamat_majikan_1").text());
+								$("#alamat_majikan2").val($(this).find("alamat_majikan_2").text());
+								$("#alamat_majikan3").val($(this).find("alamat_majikan_3").text());
+								$("#poskod_majikan").val($(this).find("alamat_majikan_poskod").text());
+								getCountry($('#negeri_majikan').attr('id'),$(this).find("id_alamat_majikan_negeri").text());
+								getDaerah($(this).find("id_alamat_majikan_daerah").text(),$('#daerah_majikan').attr('id'),$(this).find("id_alamat_majikan_daerah").text());
+
+								/*Contact*/
+								$("#no_tel_rumah").val($(this).find("NoTel").text());
+								$("#no_tel_pej").val($(this).find("NoTelPej").text());
+								$("#no_tel_bimbit").val($(this).find("NoTelBimbit").text());
+								$("#no_faks").val($(this).find("NoFaks").text());
+								$("#emel").val($(this).find("emel").text());
+							});
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+		});
+	}
 
 	function calcUmur()  
 	{
 		var age = auto_calculate_umur($('#t_lahir').attr('id'));
 		$('#umur').val(age+" tahun");
-	}
-
-	/*LIST Negeri*/
-	getCountry($('#n_kelahiran').attr('id'));	
-	getCountry($('#negeri_menetap').attr('id'));		
-	getCountry($('#negeri_pos').attr('id'));		
-	getCountry($('#negeri_majikan').attr('id'));		
+	}		
 
 	function salinAlamat(f) 
 	{
@@ -315,7 +389,9 @@
 				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #daerah_pos,#negeri_pos').val('');
 			}
 	}
-	
+
+	getJawatan('jawatan','');
+
 	/*LIST Daerah*/
 	function getDaerahFromSelectedCountry()  
 	{
@@ -553,6 +629,7 @@
 							no_faks : no_faks,
 							emel : emel,
 							statusPemegang : statusPemegang,
+							pemegangId : pemegangId,
 						},
 						beforeSend: function() {
 								run_waitMe();
