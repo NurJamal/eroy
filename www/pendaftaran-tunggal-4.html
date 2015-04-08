@@ -156,19 +156,22 @@
 							$count = 0;
 							$(xml).find("tb_pemegang_jawatan").each(function()
 							{
-								//<id_jawatan>3</id_jawatan>
-								
 								var jawatan = $(this).find("id_jawatan").text();
 								var id = $(this).find("id").text();
 								var nama = $(this).find("nama").text();
 								var no_KP = $(this).find("no_KP").text();
 								var NoTelBimbit = $(this).find("NoTelBimbit").text();
 								var emel = $(this).find("emel").text();
-								getJawatan(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id);
+								getJawatanList(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id);
 								count++;
 							});
 							if(count == 1)
 							{
+								$(pemegang_jawatan_id)
+								.find('center')
+								.remove()
+								.end();
+								
 								$(pemegang_jawatan_id).append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
 							}
 							$('body').waitMe('hide');
@@ -183,7 +186,7 @@
 			});
 	};
 
-	function getJawatan(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id)
+	function getJawatanList(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id)
 	{
 		var jawatan_id = jawatan;
 		var id = id;
@@ -193,6 +196,11 @@
 		var emel = emel;
 		var pemegang_jawatan_id = pemegang_jawatan_id;
 		var count = count;
+
+		$(pemegang_jawatan_id)
+		.find('center')
+		.remove()
+		.end();
 
 		$(function() 
 			{
