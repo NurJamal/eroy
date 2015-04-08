@@ -7,11 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -29,38 +33,40 @@
 	</div>	
 	<!-- end of header -->
 
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<!-- list -->
-	<div id="content">
-		<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-		<h1 class="_dark_text" id="nama_pertubuhan"></h1>
+		<!-- list -->
+		<div id="content">
+			<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
+			<h1 class="_dark_text" id="nama_pertubuhan"></h1>
 
-		<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-		<h1 class="_dark_text" id="alamat_urusan"></h1>
-		
-		<h2 class="_orange_text">Alamat Pos</h2>
-		<h1 class="_dark_text" id="alamat_pos"></h1>
-		
-		<h2 class="_orange_text">Peringkat Pertubuhan</h2>
-		<h1 class="_dark_text" id="peringkat"></h1>
-		
-		<h2 class="_orange_text">No Daftar/No Sijil</h2>
-		<h1 class="_dark_text" id="no_sijil"></h1>
-		
-		<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
-		<h1 class="_dark_text" id="tarikh_lulus_daftar"></h1>
-		
-		<h2 class="_orange_text">Status</h2>
-		<h1 class="_dark_text" id="status"></h1>
+			<h2 class="_orange_text">Alamat Tempat Urusan</h2>
+			<h1 class="_dark_text" id="alamat_urusan"></h1>
+			
+			<h2 class="_orange_text">Alamat Pos</h2>
+			<h1 class="_dark_text" id="alamat_pos"></h1>
+			
+			<h2 class="_orange_text">Peringkat Pertubuhan</h2>
+			<h1 class="_dark_text" id="peringkat"></h1>
+			
+			<h2 class="_orange_text">No Daftar/No Sijil</h2>
+			<h1 class="_dark_text" id="no_sijil"></h1>
+			
+			<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
+			<h1 class="_dark_text" id="tarikh_lulus_daftar"></h1>
+			
+			<h2 class="_orange_text">Status</h2>
+			<h1 class="_dark_text" id="status"></h1>
+		</div>
 	</div>
 	
 	<!-- js for slide menu -->
@@ -103,7 +109,6 @@
 				{
 					run_waitMe();
 				},
-				
 				success: function(xml, data)
 				{
 					
