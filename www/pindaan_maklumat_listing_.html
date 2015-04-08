@@ -29,7 +29,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
 	</div>	
 	<!-- end of header -->
 	
@@ -37,15 +37,29 @@
 		<!-- header title -->
 		<div class="content_title">
 			<div class="input-group add-on search-box">
-
 				<div class="input-group-btn">
-					<h1 class="main_title">STATUS CARIAN</h1>
+					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
 				</div>
 			</div>
 		</div>
 		<!-- end of header-title-->
-
-		<div id="content"></div>
+	
+		<div id="content">	
+			<!-- <a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			<div class="box_icon">
+				<h2 class="li1">KELAB SELSA MALAYSIA</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> J09732</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a> 
+			
+			<a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			<div class="box_icon">
+				<h2 class="li1">PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> A14321</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a>  -->
+		</div>
+		<!-- <div id="content2" style="padding: 5px 3%; height: 100%;"></div> -->
 	</div>
 	
 	<!-- js for slide menu -->
@@ -69,8 +83,9 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
-	var nama = window.localStorage.getItem('NAMA');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	
+	//alert(kad_pengenalan);
 	
 	$(function() 
 	{
@@ -79,11 +94,11 @@
 		(
 			{
 				type: "POST",
-				url:"http://eroy.me-tech.com.my/api/api_status_carian.php",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_listing.php",
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -91,33 +106,35 @@
 				},
 				success: function(xml, data)
 				{
+					
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
 					$(xml).find("details").each(function()
 					{						
-						//var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-						//var tarikh_permohonan = $(this).find("created_date");
-						//var status = $(this).find("status");
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var status = $(this).find("status");
 						
 						$('body').waitMe('hide');
 						$('#content').show();
-						
-						$("#content").append("<div class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
+
+						$("#content").append("<div id='"+kod_id.text()+"' class='box_icon'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
 					});
 				}
 			}
 		);
-	});
+	});	
 	
-
 	$("div").click(function(e)
+	//$(".box_icon").on('click', function(e)
 	{
 		e.preventDefault();
+		//alert("TEST");
 		
 		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		var no_ic = window.localStorage.getItem('LOGIN');
-		window.location.href = "carian_papar_1.html";
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		window.location.href = "pindaan_maklumat_pilihan.html";
 	});
 	
 	</script>	

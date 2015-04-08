@@ -19,7 +19,6 @@
 	</head>
 	<body>
 	
-
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -28,7 +27,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
 	</div>	
 	<!-- end of header -->
 	
@@ -37,45 +36,59 @@
 		<div class="content_title">
 			<div class="input-group add-on search-box">
 				<div class="input-group-btn">
-					<h1 class="main_title">PINDAAN CAWANGAN</h1>
+					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
 				</div>
 			</div>
 		</div>
 		<!-- end of header-title-->
 
 		<div id="content">	
-			<div id="first">
+			
 				<table>
 					<tr>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Pindaan hanya boleh dibuat dalam tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</h5></td>
 					</tr>
-				</table>			
+				</table>
+
 				<div class="inform">
-					<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"   placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+					<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
 				</div>
-			</div>
 				
-			<div id="second">
+			<div id="pindaan_nama">
 				<table>
 					<tr>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Setiap pindaan mestilah disertakan tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></h5></td>
 					</tr>
 				</table>
-				
+			
 				<div class="inform">
 					<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
 					
-					<h2 class="_orange_text">Nama Pertubuhan</h2>
-					<h1 class="_dark_text" id="nama_pertubuhan"></h1>
+					<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
+					<h1 class="_dark_text" id="d_npertubuhan"></h1>
 					
-					<h2 class="_orange_text">Alamat Pendaftaran Baru</h2>
-					<input type="text" name="pinda_alamat1" id="pinda_alamat1" placeholder="Alamat 1"><br/>
-					<input type="text" name="pinda_alamat2" id="pinda_alamat2" placeholder="Alamat 2"><br/>
-					<input type="text" name="pinda_alamat3" id="pinda_alamat3" placeholder="Alamat 3"><br/>
+					<h2 class="_orange_text">No Daftar/Sijil</h2>
+					<h1 class="_dark_text" id="d_no_sijil"></h1>
+					
+					<input type="text" name="p_npertubuhan" id="p_npertubuhan" placeholder="Nama Pertubuhan"><br/>
+					<input type="text" name="p_nringkasan" id="p_nringkasan" placeholder="Nama Ringkasan"><br/>
+					<input type="text" name="p_emel_pertubuhan" id="p_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
 				</div>
+			</div>
 				
+			<div id="pindaan_alamat">	
+				<div class="inform">	
+					<h2 class="_orange_text">Alamat Tempat Urusan</h2>
+					<h1 class="_dark_text" id="d_alamat"></h1>
+					
+					<h2 class="_orange_text">Pindaan Alamat Tempat Urusan</h2>
+					<input type="text" name="p_alamat1" id="p_alamat1" placeholder="Alamat 1"><br/>
+					<input type="text" name="p_alamat2" id="p_alamat2" placeholder="Alamat 2"><br/>
+					<input type="text" name="p_alamat3" id="p_alamat3" placeholder="Alamat 3"><br/>
+				</div>
+			
 				<div class="selection_no_icon">
 					<h5 id="_orange_title">Negeri</h5>
 					<span id="d_pertubuhan_negeri"></span>
@@ -85,9 +98,29 @@
 					<h5 id="_orange_title">Daerah</h5>
 					<span id="d_pertubuhan_daerah"></span>
 				</div>
+			</div>
+			
+			<div id="pindaan_logo">
+				<h2 class="_orange_text">Pindaan Lambang/Logo/Lencana /Bendera</h2>
+				<h5 id="H5" style="margin-left:5px;">Logo Sedia Ada</h5>
+				<img src="img/logo_bolasepak.png" style="max-height:20%;max-width:25%"/>
 				
+				
+				<h5 id="H5" style="margin-left:5px;">Logo Baru</h5>
+				<div class="inform">
+						<input type="text" style="margin-top: 0px" name="p_logo" id="p_logo" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat naik" class="_upload"><br/>
+				</div>
+			</div>
+			
+			<div id="btn1">
 				<div class="default_button_holder">
-					<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+					<a href="pindaan_maklumat_pembayaran.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
+				</div>
+			</div>
+			
+			<div id="btn2">
+				<div class="default_button_holder">
+					<a href="pindaan_maklumat_perlembagaan.html"><input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit"></a>
 				</div>
 			</div>
 		</div>
@@ -95,30 +128,69 @@
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
 	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-
+	
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
-	
-	<!--Loading Indicator. -->
+	 
+	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
 	
 	<script>
 	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	var jenis_id = JSON.parse(localStorage['ID_JENIS_PINDAAN']);
 	
-	$('#second :input').prop('disabled', true);
+	$('#pindaan_nama').hide();
+	$('#pindaan_alamat').hide();
+	$('#pindaan_logo').hide();
+	
+	$('#pindaan_nama :input').prop('disabled', true);
+	$('#pindaan_alamat :input').prop('disabled', true);
+	$('#pindaan_logo :input').prop('disabled', true);
+	$('#btn1 :input').prop('disabled', true);
+	$('#btn2 :input').prop('disabled', true);
 
+	for (i = 0; i < jenis_id.length ; i++)
+	{
+		var temp_id = jenis_id[i];
+
+		if(temp_id == "0")
+		{	
+			$('#pindaan_nama').show();
+			$('#btn2').hide();
+		}
+		else if(temp_id == "1")
+		{
+			$('#pindaan_alamat').show();
+			$('#btn2').hide();
+		}
+		else if(temp_id == "2")
+		{
+			$('#btn1').hide();
+			$('#btn2').show();
+		}
+		else if(temp_id == "3")
+		{
+			$('#pindaan_logo').show();
+			if(jenis_id[i-1] != "2")
+			{
+				$('#btn2').hide();
+			}
+		}
+		else{}
+	}
+	
 	$('#p_tmesyuarat').on('change', function()
 	{
 		var selectedDate = $.trim($("#p_tmesyuarat").val());
@@ -132,11 +204,19 @@
 
 		if(Date.parse(selectedDate) <= Date.parse(targetDate))
 		{
-			$('#second :input').prop('disabled', false);
+			$('#pindaan_nama :input').prop('disabled', false);
+			$('#pindaan_alamat :input').prop('disabled', false);
+			$('#pindaan_logo :input').prop('disabled', false);
+			$('#btn1 :input').prop('disabled', false);
+			$('#btn2 :input').prop('disabled', false);
 		}
 		else 
 		{
-			$('#second :input').prop('disabled', true);
+			$('#pindaan_nama :input').prop('disabled', true);
+			$('#pindaan_alamat :input').prop('disabled', true);
+			$('#pindaan_logo :input').prop('disabled', true);
+			$('#btn1 :input').prop('disabled', true);
+			$('#btn2 :input').prop('disabled', true);
 			$.alert
 			(
 				{
@@ -148,14 +228,14 @@
 			$('#p_tmesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
 	});
-	
+
 	$(function() 
 	{
 		$.ajax
 		(
 			{
 				type: "POST",
-				url:"http://eroy.me-tech.com.my/api/api_pindaan_cawangan_alamat.php",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_induk.php",
 				dataType: "xml",
 				data : 
 				{
@@ -165,7 +245,6 @@
 				{
 					run_waitMe();
 				},
-
 				success: function(xml, data)
 				{
 					
@@ -175,12 +254,19 @@
 					{						
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var alamat1 = $(this).find("alamat1");
+						var alamat2 = $(this).find("alamat2");
+						var alamat3 = $(this).find("alamat3");
 						var negeri = $(this).find("negeri");
 						var daerah = $(this).find("Keterangan");
 						
 						$('body').waitMe('hide');
 						
-						$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
+						$('#d_npertubuhan').html($(nama_penuh_pertubuhan).text());
+						$('#d_no_sijil').html($(no_sijil).text());
+						$('#d_no_sijil').html($(no_sijil).text());
+						$('#d_alamat').html($(alamat1).text()+', '+$(alamat2).text()+', '+$(alamat3).text());
 						$('#d_pertubuhan_negeri').html($(negeri).text());
 						$('#d_pertubuhan_daerah').html($(daerah).text());
 					});
@@ -188,103 +274,6 @@
 			}
 		);
 	});
-	
-	$("#btn_submit").click(function(e)
-	{		
-		var uploadfile = $.trim($("#p_min_mesyuarat").val());
-		var alamat = $.trim($("#pinda_alamat1").val());
-		var empty = false;
-		
-		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css*/
-		$('#pinda_alamat1, #p_min_mesyuarat').css({"border":"","box-shadow":""});
-		
-		e.preventDefault();
-		
-		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill*/
-		if(alamat.length == 0) 
-		{
-			$('#pinda_alamat1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(uploadfile.length == 0) 
-		{
-			$('#p_min_mesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(empty == true)
-		{
-			$.alert
-			(
-				{
-					title: 'Perhatian',
-					content: 'Sila Isikan Tempat Kosong!',
-					confirm: function(){				
-					}
-				}
-			);
-		}
-		else 
-			{
-				$.ajax
-				(
-					{
-						url:"http://eroy.me-tech.com.my/api/api_temp_stored_pindaan_bercawangan.php",
-						type:'POST',
-						data:
-						{
-							uploadfile : uploadfile,
-							alamat : alamat
-						},
-						beforeSend: function() 
-						{
-							run_waitMe();
-						},
-						success:function(data)
-						{
-							console.log(data);
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'ok') 
-							{
-								console.log(json.status);
-								$.alert
-								(
-									{
-										title: 'Pindaan Maklumat',
-										content: 'Sila Buat Pembayaran Untuk Teruskan Pindaan. Terima Kasih.',
-										confirm: function()
-										{
-											$('body').waitMe('hide');
-											window.location.href = "pindaan_cawangan_bayaran.html";
-										}
-									}
-								);								
-							}
-							else if (json.status == 'error') 
-							{
-								console.log(json.status);
-								$.alert
-								(
-									{
-										title: 'Pindaan Maklumat',
-										content: json.message,
-										confirm: function(){}
-									}
-								);
-							}
-							else{}
-							$('body').waitMe('hide');
-						}
-					}
-				);	
-			}
-
-		
-	
-	});
-	
-	
-	
 	</script>
 	</body>
 </html>
