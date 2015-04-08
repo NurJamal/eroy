@@ -165,10 +165,10 @@
 							.find('option')
 							.remove()
 							.end();
-							$('#'+sel_id).append('<option value="">Sila Pilih Negeri</option>');
+							$('#'+sel_id).append('<option value="">Pilih Negeri</option>');
 
 
-							var xmlDoc = $.parseXML(xml),
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
@@ -214,9 +214,8 @@
 							.find('option')
 							.remove()
 							.end();
-				
 						
-							var xmlDoc = $.parseXML(xml),
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()
 							{
@@ -523,7 +522,12 @@
 						dataType: "xml",
 						success: function(xml)
 						{
-							var xmlDoc = $.parseXML(xml),
+
+							var json = $.xml2json(xml);
+							console.log(json);
+							console.log('here');
+
+							/*var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
 							$(xml).find("tb_perlembagaan").each(function()
 							{
@@ -541,8 +545,22 @@
 
 								$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
 
-								count++;
-							});
+								count++;*/
+		$.each(data.laporan_negeri, function (index, value) {
+			/*Mengikut Zon*/
+			$.each(value, function (zon_index, per_zone) {
+					/*Mengikut Negeri*/
+					$.each(per_zone.negeri, function (index, per_state) {
+					
+				
+				});
+			 });
+
+		});	
+
+
+
+						
 							$('body').waitMe('hide');
 						},
 						error: function() 

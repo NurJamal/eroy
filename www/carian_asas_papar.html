@@ -122,7 +122,9 @@
 						var no_sijil = $(this).find("no_sijil");
 						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
 						
+						$('body').waitMe('hide');
 						$('#content').show();
+						
 						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
 						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
 						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+
