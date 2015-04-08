@@ -68,10 +68,11 @@
 					<h5 id="_orange_title">Peringkat</h5>
 					<form action="">
 						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
-						<option value=""></option>
-						<option value="Kebangsaan">Kebangsaan</option>
+						<option value="">Pilih Peringkat</option>
+						<option value="1">Kebangsaan</option>
 						</select>
 						<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_bercawangan">
+						<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
 					</form>		
 				</div>
 				
@@ -79,12 +80,12 @@
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
 						<select id="sel_pertubuhan" name="sel_pertubuhan" class="_sel">
-						<option value=""></option>
-						<option value="Persatuan">Persatuan</option>
-						<option value="Gerakan">Gerakan</option>
-						<option value="Angkatan">Angkatan</option>
-						<option value="Gabungan">Gabungan</option>
-						<option value="Junior">Junior</option>
+						<option value="">Pilih Kategori Pertubuhan</option>
+						<option value="1">Persatuan</option>
+						<option value="2">Gerakan</option>
+						<option value="3">Angkatan</option>
+						<option value="4">Gabungan</option>
+						<option value="5">Junior</option>
 						</select>
 					</form>		
 			</div>
@@ -135,6 +136,47 @@
 
 		window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", "KELAB APA-APA SAHAJA");
 
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								$("#id_pertubuhan").val(json.details.id);
+								$("#sel_peringkat").val(json.details.id_peringkat_pertubuhan);
+								$("#sel_pertubuhan").val(json.details.id_kategori_pertubuhan);
+								$("#nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#paparan_nama_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#nama_per").val(json.details.nama);
+								$("#nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#emel_pertubuhan").val(json.details.emel_pertubuhan);
+
+								$('body').waitMe('hide');
+
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+
 		$("#sel_pertubuhan, #sel_peringkat").change(function(){
 			var peringkat = $("#sel_peringkat").val().toUpperCase();
 			var pertubuhan = $("#sel_pertubuhan").val().toUpperCase();
@@ -143,53 +185,101 @@
 			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
 			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
 
-			if(peringkat == "KEBANGSAAN")
+			if(peringkat == "1")
 			{
 				peringkat = "MALAYSIA";
 			}
 
 			if( peringkat.length > 0 )
 			{
-				if( namaPertubuhan.length > 0 )
+				if( pertubuhan.length > 0 )
 				{
-					if( namaPer.length > 0 )
+					if( namaPertubuhan.length > 0 )
 					{
-						if(namaRingkasan.length > 0)
+						if( namaPer.length > 0 )
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+							}
 						}else
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+							}
 						}
 					}else
 					{
-						if(namaRingkasan.length > 0)
+						if( namaPer.length > 0 )
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
+							}
 						}else
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat);
+							}
 						}
 					}
 				}else
 				{
-					if( namaPer.length > 0 )
+					if( namaPertubuhan.length > 0 )
 					{
-						if(namaRingkasan.length > 0)
+						if( namaPer.length > 0 )
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
+							}
 						}else
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat);
+							}
 						}
 					}else
 					{
-						if(namaRingkasan.length > 0)
+						if( namaPer.length > 0 )
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat+' ['+namaRingkasan+']');
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat);
+							}
 						}else
 						{
-							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat);
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(peringkat);
+							}
 						}
 					}
 				}
@@ -249,7 +339,7 @@
 			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
 			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
 
-			if(peringkat == "KEBANGSAAN")
+			if(peringkat == "1")
 			{
 				peringkat = "MALAYSIA";
 			}
@@ -342,6 +432,8 @@
 		
 			$('#sel_peringkat,#sel_pertubuhan,#nama_pertubuhan,#nama_ringkasan,#paparan_nama_pertubuhan,#emel_pertubuhan').css({"border":"","box-shadow":""});
 
+			var insertData = "TRUE";
+			var id_pertubuhan = $("#id_pertubuhan").val();
 			var peringkat = $("#sel_peringkat").val();
 			var pertubuhan = $("#sel_pertubuhan").val();
 			var namaPertubuhan = $("#nama_pertubuhan").val();
@@ -350,27 +442,6 @@
 			var namaRingkasan = $("#nama_ringkasan").val();
 			var emelPertubuhan = $("#emel_pertubuhan").val();
 			var jenisPertubuhan = $("#pertubuhan_bercawangan").val();
-			var kad_pengenalan = window.localStorage.getItem('LOGIN');
-			
-			// if (peringkat.length == 0)
-			// {
-			// 	$('#peringkat_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			// 	empty = true;
-			// }
-
-			// if(pertubuhan.length == 0)
-			// {
-			// 	$('#pertubuhan_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			// 	empty = true;
-
-			// }
-
-			if(namaPertubuhan.length == 0)
-			{
-				$('#nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-				empty = true;
-
-			}
 
 			if(namaPer.length == 0)
 			{
@@ -433,6 +504,8 @@
 						emelPertubuhan : emelPertubuhan,
 						jenisPertubuhan : jenisPertubuhan,
 						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
+						id_pertubuhan : id_pertubuhan,
 					},
 					beforeSend: function() {
 							run_waitMe();
