@@ -75,9 +75,50 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	
-	alert(no_ic);
+	alert(kad_pengenalan);
+	
+	$(function() 
+	{
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_listing.php",
+				dataType: "xml",
+				data : 
+				{
+					kad_pengenalan : kad_pengenalan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_pertubuhan = $(this).find("nama_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var alamat_urusan = $(this).find("alamat1");
+						var alamat_urusan1 = $(this).find("alamat2");
+						var alamat_urusan2 = $(this).find("alamat3");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$("#content").html("<div id='"+kad_pengenalan+"'class='box_icon'><h2 class='li1'>"+nama_pertubuhan+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil+"</b></h2><h2 class='li2'>Status: <b>"+status+"</b></h2><h2></h2></div>");
+					});
+				}
+			}
+		);
+	});
 	
 	
 	</script>
