@@ -120,8 +120,9 @@
 	<script>
 	var no_ic = window.localStorage.getItem('LOGIN');
 	
-	/*$(function() 
+	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -151,14 +152,15 @@
 						var alamat_pos3 = $(this).find("alamat_pos3");
 
 						$('body').waitMe('hide');
+						$('#content').show();
 							
-						$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
-						$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
+						//$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
+						//$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
 					});
 				}
 			}
 		);
-	});*/
+	});
 	
 	$('.default_button').click(function(e)
 	{

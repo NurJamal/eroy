@@ -94,6 +94,7 @@
 	
 	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -120,6 +121,7 @@
 						var t_sijil_lulus = $(this).find("t_sijil_lulus");
 						
 						$('body').waitMe('hide');
+						$('#content').show();
 						
 						$('#d_no_sijil').val($(no_sijil).text());		
 						//$('#d_no_fail').val($(no_fail).text());

@@ -108,6 +108,7 @@
 	
 	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -135,6 +136,7 @@
 						var emel_pertubuhan = $(this).find("emel_pertubuhan");
 						
 						$('body').waitMe('hide');
+						$('#content').show();
 						
 						$('#d_nama_pertubuhan').val($(nama_pertubuhan).text());		
 						$('#d_nama_ringkasan').val($(nama_ringkasan).text());
