@@ -197,6 +197,11 @@
 		var pemegang_jawatan_id = pemegang_jawatan_id;
 		var count = count;
 
+		$(pemegang_jawatan_id)
+		.find('center')
+		.remove()
+		.end();
+
 		$(function() 
 			{
 				$.ajax
