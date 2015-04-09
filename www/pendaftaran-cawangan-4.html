@@ -2,23 +2,31 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
-		<div id="scrollTop" >
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
+		 <div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+	
+		</head>
 
+		</div> 
+		
 	</head>
+
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
-	<!-- slide menu right -->
+	<!-- slide menu right. -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
 	
@@ -31,7 +39,7 @@
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -46,37 +54,27 @@
 	<div id="content">
 	
 	<!-- navbar -->
-		<div class="navbar">
+	<div class="navbar">
 		
 			<div align="center">
-
+		
 				<img src="img\numbering4.png" style="width:100%;height:auto"/>
-
+			
 			</div>
 		
 		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	</br>
-	<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah
-			</h1><br/>
-	</center>
-	</form>
-	
+		<div id="content-box_pemegang">
+
+		</div>
+
 	</div>	
-	
+	<!-- <a href="pendaftaran-cawangan-5.html"><img src="img/add_icon.png" class="scrolladd_icon"></a> -->
 	<div id="scrolladd">
-			<center><a href="pendaftaran-cawangan-4A.html"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
+			<center><a href="#" onclick="add_pemegang_jawatan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
+			
 	</div>
-		
-	<!-- end of form -->
-	
+	</div>
+
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -85,8 +83,258 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>	
+		<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+
+	$( document ).ready(function() {
+        run_waitMe();
+        get_kod_pertubuhan();
+    });
+
+	function get_kod_pertubuhan()
+	{
+		var kad_pengenalan = window.localStorage.getItem("LOGIN");
+        $(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_kod_pertubuhan.php",
+						data: {
+							kad_pengenalan : kad_pengenalan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("process_pendaftaran_pertubuhan").each(function()
+							{
+								var kod_nama_pertubuhan = $(this).find("kod_nama_pertubuhan");
+								get_pemegang_jawatan("#content-box_pemegang", kod_nama_pertubuhan.text());
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	}
+
+	function get_pemegang_jawatan(id,kodPertubuhan)
+	{
+		var kod_pertubuhan = kodPertubuhan;
+		var pemegang_jawatan_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_4.php",
+						data: {
+							kod_pertubuhan : kod_pertubuhan,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$count = 0;
+							$(xml).find("tb_pemegang_jawatan").each(function()
+							{
+								var jawatan = $(this).find("id_jawatan").text();
+								var id = $(this).find("id").text();
+								var nama = $(this).find("nama").text();
+								var no_KP = $(this).find("no_KP").text();
+								var NoTelBimbit = $(this).find("NoTelBimbit").text();
+								var emel = $(this).find("emel").text();
+								getJawatanList(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id);
+								count++;
+							});
+							if(count == 1)
+							{
+								$(pemegang_jawatan_id)
+								.find('center')
+								.remove()
+								.end();
+								
+								$(pemegang_jawatan_id).append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
+							}
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	};
+
+	function getJawatanList(jawatan,id,nama,no_KP,NoTelBimbit,emel,count,pemegang_jawatan_id)
+	{
+		var jawatan_id = jawatan;
+		var id = id;
+		var nama = nama;
+		var no_KP = no_KP;
+		var NoTelBimbit = NoTelBimbit;
+		var emel = emel;
+		var pemegang_jawatan_id = pemegang_jawatan_id;
+		var count = count;
+
+		$(pemegang_jawatan_id)
+		.find('center')
+		.remove()
+		.end();
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_jawatan_detail.php",
+						data: {
+							jawatan_id : jawatan_id,
+						},
+						dataType: "xml",
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("jawatan_id").each(function()
+							{
+								var jawatan_title = $(this).find("jawatan").text();
+								var div = '<div id="box_icon_with_delete">';
+								var nameSection = '<h2 class="li1" id="nama">'+nama+'</h2>';
+								var no_kpSection = '<h2 class="li2" id="no_kp">'+no_KP+'</h2>';
+								var jawatanSection = '<h2 class="li2" id="jawatan">'+jawatan_title+'</h2>';
+								var no_fonSection = '<h2 class="li2" id="no_fon">'+NoTelBimbit+'</h2>';
+								var emelSection = '<h2 class="li2" id="emel">'+emel+'</h2>';
+								var closeDiv = '</div>';
+								var edit = '<div class="imgEdit"><a href="#" onclick="editPemegang('+id+')" style="text-decoration:none;"><img src="img/pindaan-icon.png" width="30px" height="30px"></a></div>&nbsp;&nbsp;&nbsp;';
+								var deletePemegang = '<div class="imgDelete"><a href="#" onclick="deleteAlert('+id+')" style="text-decoration:none;"><img src="img/dustbin.png" width="30px" height="30px"></a></div>'; 
+
+								$(pemegang_jawatan_id).append(div+nameSection+no_kpSection+jawatanSection+no_fonSection+emelSection+edit+deletePemegang+closeDiv);	
+							});
+							if(count >= 7)
+							{
+								$(pemegang_jawatan_id)
+								.find('center')
+								.remove()
+								.end();
+								$(pemegang_jawatan_id).append('<center><div class="default_button_holder"><a href="pendaftaran-cawangan-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a></div></center>');
+							}
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});			
+	}
+
+	function editPemegang(id)
+	{
+		var pemegang_jawatan_id = id;
+		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "FALSE");
+		window.localStorage.setItem("PEMEGANG_JAWATAN_ID", pemegang_jawatan_id);
+		window.location.href = "pendaftaran-cawangan-4A.html";
+	}
+
+	function deleteAlert(id)
+	{
+		$.confirm
+		(
+			{
+				title: 'Perhatian',
+				content: 'Anda pasti untuk buang maklumat?!',
+				confirm: function(){
+					deletePemegang(id);
+				},
+				cancel: function () {
+    			}
+			}
+		);
+	}
+
+	function deletePemegang(id)
+	{
+		var pemegang_id = id;
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/delete_pemegang_jawatan.php",
+						data: {
+							pemegang_id : pemegang_id,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "pendaftaran-cawangan-4.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'error') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);
+			});
+	}
+
+	function add_pemegang_jawatan()
+	{
+		window.localStorage.setItem("PEMEGANG_JAWATAN_STATUS", "TRUE");
+		window.location.href = "pendaftaran-cawangan-4A.html";
+	}
+	</script>
 		
   </body>
 </html>

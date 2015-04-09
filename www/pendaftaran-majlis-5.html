@@ -2,20 +2,25 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
 	
 	<body>
 	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -29,6 +34,7 @@
 	</div>	
 	<!-- end of header -->
 	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -55,107 +61,115 @@
 	
 	<!-- form -->
 	
-	<form>
 	
 	<div class="_form">
 	
 		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">MAJLIS BELIA MALAYSIA</h1><br/>
+			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_majlis"></h1><br/>
 		</div>
-		
-		
+
 		<div>
-			<h5 id="_orange_title">Wang diterima semenjak ditubuhkan</h5>
+			<h5 id="_orange_title" style="margin-top:-20px">Wang diterima semenjak ditubuhkan</h5>
 		</div>
 		
 		<div class="inform">
-			<input type="text" name="wang_terima" id="wang_terima" placeholder="RM 0.00"></br><br/>
+			<input type="number" name="wang_terima" id="wang_terima" placeholder="RM 0.00"></br><br/>
 		</div>
-		
-		
+
 		<div>
-			<h5 id="_orange_title">Wang dibelanjakan semenjak ditubuhkan</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Wang dibelanjakan semenjak ditubuhkan</h5>
 		</div>
 		
 		<div class="inform">
-			<input type="text" name="wang_belanja" id="wang_belanja" placeholder="RM 0.00"></br><br/>
+			<input type="number" name="wang_belanja" id="wang_belanja" placeholder="RM 0.00"></br><br/>
 		</div>
-		
-		
+	
 		<div>
-			<h5 id="_orange_title">Wang yang merupakan baki di tangan</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di tangan</h5>
 		</div>
 		
 		<div class="inform">
-			<input type="text" name="wang_baki" id="wang_baki" placeholder="RM 0.00"></br><br/>
+			<input type="number" name="wang_baki" id="wang_baki" placeholder="RM 0.00"></br><br/>
 		</div>
 		
-		
 		<div>
-			<h5 id="_orange_title">Wang yang merupakan baki di bank</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di bank</h5>
 		</div>
 		
 		<div class="inform">
-			<input type="text" name="wang_bank" id="wang_bank" placeholder="RM 0.00"></br><br/>
+			<input type="number" name="wang_bank" id="wang_bank" placeholder="RM 0.00"></br><br/>
 		</div>
 		
 		<div>
-			<h5 id="_orange_title">Akaun Pertubuhan</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Akaun Pertubuhan</h5>
 		</div>
 		
-		<div class="selection">
+		<div class="selection" id="bank_selection">
 					<h5 id="_orange_title">Nama Bank</h5>
-					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+				
+						<select id="nama_bank" name="nama_bank" class="_sel">
+						<option value="" selected>Pilih Bank</option>
 						</select>
-					</form>		
+						
 		</div>
 		
 		<div>
-		<input type="text" name="no_akaun" id="no_akaun" placeholder="Nombor Akaun"></br><br/>
+		<input type="text" style="margin-top:3px" name="no_akaun" id="no_akaun" placeholder="Nombor Akaun"></br><br/>
 		</div>
 		
 		<div>
-			<h5 id="_orange_title">Tarikh tahun kewangan bermula</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Tarikh tahun kewangan bermula</h5>
 		</div>
+		
+</div>
+		
+
 		
 		<div class="inform">
-			<input type="text" name="t_mesyuarat" id="t_mesyuarat" placeholder="hh/bb/tttt" class="_datepick"></br><br/>
+			<input type="text" id="tarikh_kewangan" name="tarikh_kewangan" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" class="_datepick"><br/></br>
+			
 		</div>
 		
+<div class="_form">
+
 		<div>
-			<h5 id="_orange_title">Butir-butir syer, debentur, amanah saham atau pelaburan lain yang serupa dipegang</h5>
-			<h5 id="_dark_text">Pilih YA jika terdapat butir-butir untuk ditambah</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Butir-butir syer, debentur, amanah saham atau pelaburan lain yang serupa dipegang</h5>
+			<h5 id="_dark_text">Pilih YA jika terdapat butir-butir untuk ditambah</h5></br>
 		</div>
 		
-		<h5 id="_dark_text">
-		<td class="table8" line-width="5pt">
-			<input type="radio" name="radio1" value="Ya">Ya <input type="radio" name="radio1" value="" checked>Tidak<br>
+		<h5 id="_orange_title" style="margin-top:-30px">
+		<td class="table8" line-width="5pt"> 
+			<input type="radio" id="butir_ditambah" name="butir_ditambah" value="1">&nbsp;Ya &nbsp;&nbsp;<input type="radio"  id="butir_ditambah" name="butir_ditambah" value="0" checked>&nbsp;Tidak</br>
 		</td></h5>
 		
 		<div>
 			<input type="text" name="jenis_butir" id="jenis_butir" placeholder="Jenis"><br/>
 			<input type="text" name="syarikat" id="syarikat" placeholder="Syarikat/Dana"><br/>
-			<input type="text" name="amaun" id="amaun" placeholder="Amaun"><br/></br>
+			<input type="number" name="amaun" id="amaun" placeholder="Amaun"><br/></br>
 		</div>
+	
 		
 		<div>
-			<h5 id="_orange_title">Dipegang sejak</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Dipegang sejak</h5>
 		</div>
+		
+</div>
 		
 		<div class="inform">
-			<input type="text" name="t_mesyuarat" id="t_mesyuarat" placeholder="hh/bb/tttt" class="_datepick"></br><br/>
+			<input type="text" name="dipegang_sejak" onfocus="(this.type='date')" onblur="(this.type='text')"  id="dipegang_sejak" class="_datepick"><br/></br>
+			
 		</div>
+		
+<div class="_form">
 		
 		<div>
-			<h5 id="_orange_title">Butir-butir mengenai harta tak alih yang dipunyai dan/atau yang dipajak/dipajak kecil</h5>
+			<h5 id="_orange_title" style="margin-top:-15px">Butir-butir mengenai harta tak alih yang dipunyai dan/atau yang dipajak/dipajak kecil</h5></br/>
 		</div>
 		
-		<h5 id="_dark_text">
+		<h5 id="_orange_title" style="margin-top:-20px">
 		<td class="table8">
-			<input type="radio" name="radio2" value="Ya">Ya <input type="radio" name="radio2" value="" checked>Tidak<br>
+			<input type="radio" id="butir_harta" name="butir_harta" value="1">&nbsp;Ya &nbsp;&nbsp;<input id="butir_harta" type="radio" name="butir_harta" value="0" checked>&nbsp;Tidak<br/>
 		</td></h5>
 	
 	
@@ -163,13 +177,13 @@
 			<input type="text" name="tempat" id="tempat" placeholder="Tempat"><br/>
 			<input type="text" name="maksud_harta" id="maksud_harta" placeholder="Maksud Harta Digunakan"><br/>
 			<input type="text" name="no_hak_milik" id="no_hak_milik" placeholder="No. Hak Milik"></br>
-		</div>				
-								
-		<div class="default_button_holder">
-			<a href="pendaftaran-majlis-6.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 		</div>
-		</form>
-	</form>
+	
+		<div class="default_button_holder">
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+		</div>
+	</div>
+	</div>
 		
 	<!-- end of form -->
 	
@@ -177,12 +191,258 @@
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+		
+	<script>
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_majlis').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"))
+	
+	getNamaBank($('#nama_bank').attr('id'));
+	
+	
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_majlis_5.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+
+								$("#wang_belanja").val(json.details.wang_belanja);
+								$("#wang_terima").val(json.details.wang_diterima);
+								$("#wang_bank").val(json.details.wang_dibank);
+								$("#wang_baki").val(json.details.wang_baki_ditangan);
+								$("#nama_bank").val(json.details.id_nama_bank);
+								$("#no_akaun").val(json.details.no_akaun_bank);
+								$("#tarikh_kewangan").val(json.details.tarikh_kewangan_bermula);
+								$("#jenis_butir").val(json.details.jenis_butir);
+								$("#syarikat").val(json.details.syarikat_dana);
+								$("#amaun").val(json.details.amaun);
+								$("#dipegang_sejak").val(json.details.dipegang_sejak);
+								
+								$("#tempat").val(json.details.tempat);
+								$("#maksud_harta").val(json.details.maksud_harta_digunakan);
+								$("#no_hak_milik").val(json.details.no_hak_milik);
+								
+								$('input[name=butir_ditambah][value="' + json.details.butir_syer_dibentur + '"]').prop('checked', true);
+								$('input[name=butir_harta][value="' + json.details.butir_harta_tak_alih + '"]').prop('checked', true);
+
+								//USE PLACEHOLDER IF VALUE EQUAL TO ZERO
+								if(json.details.wang_belanja == 0)
+								{
+									$("#wang_belanja").val('');
+								}
+								if(json.details.wang_diterima == 0)
+								{
+									$("#wang_terima").val('');
+								}	
+								if(json.details.wang_dibank == 0)
+								{
+									$("#wang_bank").val('');
+								}	
+								if(json.details.wang_baki_ditangan == 0)
+								{
+									$("#wang_baki").val('');
+								}
+								if(json.details.dipegang_sejak == "0000-00-00")
+								{
+									$("#dipegang_sejak").val('');
+								}
+								if(json.details.tarikh_kewangan_bermula == "0000-00-00")
+								{
+									$("#tarikh_kewangan").val('');
+								}
+								if(json.details.amaun == 0)
+								{
+									$("#amaun").val('');
+								}
+								
+								$('body').waitMe('hide');
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+		
+	
+		
+	$("#btn_submit").click(function(e){
+		
+		redisplayHeader();
+		var empty = false;
+		e.preventDefault();
+		
+		/*Alamat Asal*/
+		var wang_belanja= $("#wang_belanja").val();
+		var wang_terima = $("#wang_terima").val();
+		var wang_bank = $("#wang_bank").val();
+		var wang_baki = $("#wang_baki").val();
+		var nama_bank = $("#nama_bank").val();
+		var no_akaun= $("#no_akaun").val();
+		var tarikh_kewangan= $("#tarikh_kewangan").val();
+		var jenis_butir= $("#jenis_butir").val();
+		var syarikat= $("#syarikat").val();
+		var amaun= $("#amaun").val();
+		var dipegang_sejak= $("#dipegang_sejak").val();
+		var tempat= $("#tempat").val();
+		var maksud_harta= $("#maksud_harta").val();
+		var no_hak_milik= $("#no_hak_milik").val();
+	
+		var butir_ditambah = $('input[name=butir_ditambah]:checked').val();
+		var butir_harta= $('input[name=butir_harta]:checked').val();
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		var insertData = "TRUE";
+		
+			
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_majlis_5.php",
+				type:'POST',
+				data: {
+
+					wang_belanja : wang_belanja,
+					wang_terima: wang_terima,
+					wang_bank : wang_bank,
+					wang_baki : wang_baki,
+					nama_bank : nama_bank,
+					no_akaun : no_akaun,
+					tarikh_kewangan : tarikh_kewangan,
+					jenis_butir : jenis_butir,
+					syarikat : syarikat,
+					amaun : amaun,
+					dipegang_sejak : dipegang_sejak,
+					butir_harta : butir_harta,
+					tempat : tempat,
+					maksud_harta : maksud_harta,
+					no_hak_milik : no_hak_milik,
+					butir_ditambah : butir_ditambah,
+
+					insertData : insertData,
+					kad_pengenalan : kad_pengenalan,
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'INSERT_SUCCESS') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										window.location.href = "pendaftaran-majlis-6.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'INSERT_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else if (json.status == 'UPDATE_SUCCESS') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "pendaftaran-majlis-6.html";
+										}
+									}
+								);
+							}
+							else if (json.status == 'UPDATE_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							
+							$('body').waitMe('hide');
+						}
+					});
+				
+			});
+
+	/*RADIO BUTTON CONTROL INPUT*/
+	$(function(){	
+		  $('input[name=butir_ditambah]').click(function(){
+			if ($(this).val() == 1)
+			{
+		
+			}
+			else
+			{
+			 	$("#jenis_butir").val('');
+				$("#syarikat").val('');
+				$("#amaun").val('');
+				$("#dipegang_sejak").val('');
+				
+			}
+		  });
+	});
+	
+	$(function(){
+	 $('input[name=butir_harta]').click(function(){
+			if ($(this).val() == 1)
+			{
+				
+			}
+			else
+			{
+				$("#tempat").val('');
+				$("#maksud_harta").val('');
+				$("#no_hak_milik").val('');
+			}
+		  });	
+	});
+	
+	</script>	
 		
   </body>
 </html>

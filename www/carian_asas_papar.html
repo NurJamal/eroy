@@ -47,7 +47,7 @@
 		<!-- list -->
 		<div id="content">
 			<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-			<h1 class="_dark_text" id="nama_pertubuhan"></h1>
+			<h1 class="_dark_text" id="nama_pertubuhan" style="text-transform: uppercase"></h1>
 
 			<h2 class="_orange_text">Alamat Tempat Urusan</h2>
 			<h1 class="_dark_text" id="alamat_urusan"></h1>
@@ -56,7 +56,7 @@
 			<h1 class="_dark_text" id="alamat_pos"></h1>
 			
 			<h2 class="_orange_text">Peringkat Pertubuhan</h2>
-			<h1 class="_dark_text" id="peringkat"></h1>
+			<h1 class="_dark_text" id="peringkat_pertubuhan"></h1>
 			
 			<h2 class="_orange_text">No Daftar/No Sijil</h2>
 			<h1 class="_dark_text" id="no_sijil"></h1>
@@ -65,7 +65,7 @@
 			<h1 class="_dark_text" id="tarikh_lulus_daftar"></h1>
 			
 			<h2 class="_orange_text">Status</h2>
-			<h1 class="_dark_text" id="status"></h1>
+			<h1 class="_dark_text" id="status_keaktifan">-</h1>
 		</div>
 	</div>
 	
@@ -124,8 +124,12 @@
 						var alamat_pos = $(this).find("alamat_pos1");
 						var alamat_pos1 = $(this).find("alamat_pos2");
 						var alamat_pos2 = $(this).find("alamat_pos3");
+						var peringkat_pertubuhan = $(this).find("dummy_peringkat_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
 						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
+						
+						/*REFER MYKD*/
+						//var status_keaktifan = $(this).find("status");
 						
 						$('body').waitMe('hide');
 						$('#content').show();
@@ -134,10 +138,24 @@
 						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
 						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+
 						$(alamat_pos2).text()+'<br/>');
+						$('#peringkat_pertubuhan').html($(peringkat_pertubuhan).text()+'<br/>');
 						$('#no_sijil').html($(no_sijil).text()+'<br/>');
 						$('#tarikh_lulus_daftar').html($(tarikh_sijil_lulus).text()+'<br/>');
+						//$('#status_keaktifan').html($(status_keaktifan).text()+'<br/>');
 					});
 				}
+				/*error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+					$.alert
+					(
+						{
+							title: 'Carian',
+							content: 'Data Tidak Ditemui',
+							confirm: function(){}
+						}
+					);
+				}*/
 			}
 		);
 	});

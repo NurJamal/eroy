@@ -2,15 +2,21 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
 	<body>
 	
@@ -29,7 +35,7 @@
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -57,27 +63,24 @@
 	
 	<!-- form -->
 	
-	<form>
-	
+
 	<div class="_form">
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">PERSATUAN BELIA CEMERLANG DAERAH BERA (PBC)</h1>
+			<h1 class="_dark_text" id="nama_pendaftaran_gabungan" style="margin-top:5px;"></h1><br/>
 		</div>
 	
-		<div class="selection">
+		<div class="selection" id="jenis_bayaran_selection">
 					<h5 id="_orange_title">Bentuk Bayaran</h5>
-					<form action="">
-						<select id="bayaran" name="bayaran" class="_sel">
-						<option value="none"></option>
+					
+						<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
+						<option value="" selected>Pilih Bentuk Bayaran</option>
 						</select>
-					</form>
-
 		</div>
 		
 		<div>
-			<input type="text" name="wang_pos" id="wang_pos" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
+			<input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
 		</div>
 		
 		<div>
@@ -85,29 +88,208 @@
 		</div>
 			
 		<div class="display">
-			<input type="text" name="wang_pos" id="wang_pos" placeholder="RM 30.00" disabled></br>
+			<input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" disabled></br>
+			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
 		<div class="default_button_holder">
-			<a href="pendaftaran-gabungan-9.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 		</div>
 		
-		
-	
-	</form>
-		
+	</div>
+	</div>
+	</div>
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
 		
+	<script>
+	
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_gabungan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_GABUNGAN"));
+	
+	getJenisBayaran($('#jenis_bayaran').attr('id'));
+	getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
+
+	
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_8.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+
+								$("#jenis_bayaran").val(json.details.id_bentuk_bayaran);
+								getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
+								$("#wang_tidak_online").val(json.details.no_wangpos_bankdraf);
+
+								$('body').waitMe('hide');
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display				
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+	
+	
+	$("#btn_submit").click(function(e){
+		 
+		$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
+
+		 
+		redisplayHeader();
+		var empty = false;
+		e.preventDefault();
+		
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		var insertData = "TRUE";
+		var id_amaun_bayaran = $('#id_amaun_bayaran').val();
+
+		$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
+
+		
+
+		var jenis_bayaran = $("#jenis_bayaran").val();
+		if (jenis_bayaran.length == 0)
+		{
+			$('#jenis_bayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+			
+			
+		}
+		
+		if(jenis_bayaran == "1")
+			{
+				var no_wang_pos = $("#wang_tidak_online").val();
+				if(no_wang_pos.length == 0)
+				{
+					$('#wang_tidak_online').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+					empty = true;
+				}
+			}
+		
+		if(empty == true)
+		{
+			$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila isikan tempat kosong!',
+						confirm: function(){				
+						}
+					}
+				);
+		}
+		else
+		{
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_8.php",
+				type:'POST',
+				data: {
+
+					id_bentuk_bayaran : jenis_bayaran,
+					no_wang_pos: no_wang_pos,
+					id_amaun_bayaran: id_amaun_bayaran,
+					kad_pengenalan : kad_pengenalan,
+					insertData : insertData,
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'INSERT_SUCCESS') {
+						
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+									window.location.href = "pendaftaran-gabungan-9.html";
+								}
+							}
+						);
+					
+					}
+					else if (json.status == 'INSERT_ERROR') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else if (json.status == 'UPDATE_ERROR') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else if (json.status == 'UPDATE_SUCCESS') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-gabungan-9.html";
+								}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			});
+		}
+		
+	});
+	
+	</script>
   </body>
 </html>

@@ -32,6 +32,7 @@
 		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
+	
 	<div class="containerBlock">
 		<!-- header title -->
 		<div class="content_title">
@@ -172,21 +173,22 @@
 				(
 					{
 						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+						url: "http://eroy.me-tech.com.my/api/get_nama_pertubuhan.php",
 						dataType: "xml",
 						data: 
 						{
 							value : value
 						},
-						success: function(xml)
+						success: function(xml, data)
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_pertubuhan_info").each(function()
+							$(xml).find("lk_nama_pertubuhan").each(function()
 							{
-								console.log($(this).text());
 								var npertubuhan = $(this).find("nama_pertubuhan");
 								var no_sijil = $(this).find("no_sijil");
+								
+								console.log($(this).text());
 								
 								if (value == $(that).val()) 
 								{
@@ -233,15 +235,28 @@
 		} 
 		else 
 		{
-			$.ajax
+			$.alert
 			(
 				{
-					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
-					type:'POST',
-					data:
+					title: 'Perhatian',
+					content: 'Sila Membuat Pembayaran. Terima Kasih',
+					confirm: function()
 					{
-						no_sijil : no_sijil
-					},
+						$('body').waitMe('hide');
+						window.location.href = "bayaran_ppb19.html";
+					}
+				}
+			);
+		}
+	
+	});
+	
+	
+	/*$.ajax
+			(
+				{
+					//url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
+					type:'POST',
 					dataType:'xml',
 					error: function(e) 
 					{
@@ -277,10 +292,7 @@
 						$('body').waitMe('hide');
 					}
 				}
-			);
-		}
-	
-	});
+			);*/
 	</script>
 	
 	

@@ -2,19 +2,26 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/autoEnterCurrentDate.js"></script>
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -56,23 +63,29 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-	
-	<form>
-	
+
 	<div class="_form">
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">MAJLIS BELIA MALAYSIA</h1>
+			<h1 class="_dark_text" id="nama_pendaftaran_majlis" style="margin-top:5px;"></h1>
 		</div></br>
 	
 			<h5 id="_orange_title">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label></br><br/>
+			<table><tr>
+			<td><input type="checkbox" name="checking" id="check" class="checkboxClass"/><label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
+			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label> </td>
+			<td>
+			</td>
+			</tr></table>
+			
+		
+			
+			</br><br/>
 		</h5>
 		
 		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2">05/06/2014</span></p></br>
+			 <p class="perakuan1">Bertarikh : <span class="perakuan2" id="tDate"></span></p></br>
 		</div>
 		
 		
@@ -82,17 +95,19 @@
 		</div>
 		
 		<div style="line-height:0.5em;">
-			<p class="perakuan1">Nama : <span class="perakuan2">Rahmah Binti Umar</span> </p>
-			<p class="perakuan1">No Kad Pengenalan : <span class="perakuan2">760112015432</span> </p>
+			<p class="perakuan1">Nama : <span id="nama_perakuan" class="_dark_text"></span></p>
+			<p class="perakuan1">No Kad Pengenalan : <span id="kp_perakuan" class="_dark_text"></span></p>
 		</div>
 		
 		
 		<div class="default_button_holder">
-			<a href="pendaftaran-majlis-8.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 		</div>
-		</form>
 	
+		
+		
 	</form>
+
 		
 	<!-- end of form -->
 	
@@ -100,12 +115,48 @@
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-		
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>	
+	
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_majlis').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"));
+	
+	/*PAPARKAN NAMA & KAD PENGENALAN*/
+	$('#nama_perakuan').html(window.localStorage.getItem("NAMA"));
+	$('#kp_perakuan').html(window.localStorage.getItem("LOGIN"));
+	
+	$("#btn_submit").click(function(e){
+		if($('#check').is(':checked'))
+		{
+			window.location.href = "pendaftaran-majlis-8.html";
+		}
+		else
+		{
+			$.alert	
+				(
+					{
+						title: 'Perhatian',
+						content: "Sila tandakan pengesahan perakuan",
+						confirm: function(){
+						}
+					}
+				);
+		}
+	});
+
+	
+	</script>
   </body>
 </html>
