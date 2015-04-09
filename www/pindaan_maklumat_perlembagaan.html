@@ -68,7 +68,7 @@
 		
 		<h5 id="_orange_title_imal">
 		<table class="table_pindaan_maklumat" >
-		<tbody>
+		<tbody id="appendPerlembagaan">
 		<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">
 			<td width="30px" id="edit_tooltip"><image src="img/pindaan-icon.png" width="25px" height="25px" ></td>
 			<td>
@@ -255,36 +255,38 @@
 	<script>
 	
 	// Create the tooltips only when document ready
+	
+	
 	$( document ).ready(function() {
 		$('#edit_tooltip').qtip({
 		content: {
 			text: "<table width='220' height='30'><tr align='center'><td width='10' class='ccc'></td><td><img src='img/addbottom-icon.png' width='28px' height='35px'></td><td><img src='img/addtop-icon.png' width='28px' height='35px'/></td><td><img src='img/add-icon.png' width='28px' height='35px' /></td><td><img src='img/pindaan-icon.png' width='28px' height='35px'/></td><td width='10'></td></tr></table>",
-			//text: '<table width="220" height="30"><tr align="center"><td id="hehe"><img src="img/add-icon.png" width="28px" height="35px" /></td></tr></table>',
-			//text: '<div id="huhu"><label id="hehe">test</div>',
 
-
-		   button: true
+			button: false,
 				
 		},
 		 style: {
 			width: 230, 
-			height: 43,
+			height: 53,
 			classes: 'qtip-rounded'
 		 },   
 			
 		show: {
-		 effect: function(offset) {
-				$(this).slideDown(100); // "this" refers to the tooltip
-			},
+		 //effect: function(offset) {
+		//		$(this).slideDown(100); // "this" refers to the tooltip
+		//	},
 			event: 'click',
 			solo: true,
 			
 	   
 		},
-		hide:false,
+
+		hide:'unfocus',
 		events: {
 			visible: function(event, api) {
 				$('#transparent_layer').show();
+
+				
 				$("body").css("overflow-y", "hidden");
 			},
 			 hide: function(event, api) {
@@ -295,10 +297,10 @@
 		},
 		 position: {
 			my: 'bottom left',
-			 at: 'top left'
+			at: 'top left'
 		}
 	});
-
+		getFasal('appendPerlembagaan', '1');
 	});
 
 	</script>
