@@ -53,16 +53,11 @@
 			</div>
 			<!-- end of navbar -->
 		
-			<div class="display">
-				<!-- <h2 class="_orange_text" style="margin-top:-18px">Alamat Tempat Urusan</h2>
-				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
-				<h2 class="_orange_text" style="margin-top:5px">Alamat Pos</h2>
-				<textarea id="d_alamat_pos" name="d_alamat_pos" disabled></textarea> -->
-				
+			<div class="display">				
 				<h2 class="_orange_text" style="margin-top:-18px">Alamat Tempat Urusan</h2>
-				<textarea  style="margin-top:0px" id="d_alamat"name="d_alamat" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
+				<textarea  style="margin-top:0px" id="d_alamat"name="d_alamat" disabled></textarea>
 				<h2 class="_orange_text" style="margin-top:5px">Alamat Pos</h2>
-				<textarea id="d_alamat_pos" style="margin-top:0px" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
+				<textarea id="d_alamat_pos" style="margin-top:0px" name="d_alamat_pos" disabled></textarea>
 				
 				<div class="default_button_holder">
 						<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
@@ -96,7 +91,7 @@
 	
 	$(function() 
 	{
-		$('#content').hide();
+		//$('#content').hide();
 		$.ajax
 		(
 			{
@@ -128,8 +123,8 @@
 						$('body').waitMe('hide');
 						$('#content').show();
 							
-						//$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
-						//$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
+						$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
+						$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
 					});
 				}
 			}
