@@ -620,14 +620,36 @@
 			});
 	}
 	
+
+	//LIST JAWATAN
+	function getStatusIcon(statusId,idToAppend)
+	{
+		var statusId = statusId;
+		var idToAppend = idToAppend;
+		var imgPath;
+		
+		if(statusId == '1')//AKTIF
+		{
+			imgPath = "../../img/aktif_icon.png";
+		}
+		else if (statusId == '2')//TIDAK AKTIF
+		{
+			imgPath = "../../img/tidak_aktif_icon.png";
+		}
+		else if (statusId == '3')//GANTUNG
+		{
+			imgPath = "../../img/gantung_icon.png";
+		}
+		else if (statusId == '4')//BATAL
+		{
+			imgPath = "../../img/batal_icon.png";
+		}
+		else{}
+
+		$('#keaktifan_'+idToAppend).append('<div style="height:45px;width:45px;"><img style="display: block;" width="auto" height="90%" src="'+imgPath+'" /></div>');
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
