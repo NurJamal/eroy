@@ -2,15 +2,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />			<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				<link rel="stylesheet" href="css/bootstrap.min.css">
+
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+
 	</head>
 	<body>
 	
@@ -23,12 +30,10 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="halaman_utama_pengguna_biasa.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="" onclick="goBack()">
+			<img src="img/back-icon.png" class="back_icon" align="left"/>
+		</a>
 	</div>	
 	<!-- end of header -->
 	
@@ -73,7 +78,7 @@
 		</div></a>
 </div>
 	
-	<!-- js for slide menu -->
+		<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
@@ -81,26 +86,42 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
 	
-	<!-- <script>
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+
+	var kad_pengenalan = window.localStorage.getItem("LOGIN");
 	$(function() {
 
 		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
+			type: "POST",
+			url: "http://eroy.me-tech.com.my/api/get_semakan_permohonan.php",
 			dataType: "xml",
+			data: 
+			{
+				kad_pengenalan : kad_pengenalan,		
+			},
 			success: function(xml){
 				var xmlDoc = $.parseXML(xml),
 				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
+				$(xml).find("process_pendaftaran_pertubuhan").each(function(){
 					console.log($(this).text());
-					var id = $(this).find("id");
+					/*var id = $(this).find("id");
 					var nama_pertubuhan = $(this).find("nama_pertubuhan");
 					var tarikh_mohon = $(this).find("tarikh_mohon");
 					var status = $(this).find("status");
 					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
 					$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					$('#status').append($(status).text());
+					$('#status').append($(status).text());*/
 				});
 			},
 			error: function() {
@@ -109,7 +130,7 @@
 		});
 
 	});
-	</script> -->
+	</script>
 	
 	
 	</body>
