@@ -112,11 +112,12 @@
 		);
 	});
 	
-	$('.box_icon').click(function(e)
+		$('.box_icon').click(function(e)
 	{
 		e.preventDefault();
 		
-		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var no_ic = window.localStorage.getItem('LOGIN');
 		window.location.href = "carian_papar_1.html";
 	});
 	
