@@ -29,7 +29,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -63,6 +63,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		window.localStorage.setItem("_MENU_FIX", "TRUE");
+	</script>
+	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -257,6 +262,9 @@
 			}
 		}
 	});
+	
+	/*Set current menu to fix*/
+	window.localStorage.setItem("_MENU_FIX", "TRUE");
 	</script>
 	</body>
 </html>
