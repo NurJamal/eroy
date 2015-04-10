@@ -87,7 +87,7 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	
 	$(function() 
 	{
@@ -100,7 +100,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -136,7 +136,7 @@
 		e.preventDefault();
 		
 		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		var no_ic = window.localStorage.getItem('LOGIN');
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		window.location.href = "carian_papar_4.html";
 	});
 	
