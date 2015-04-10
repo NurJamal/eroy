@@ -2,16 +2,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div> 
-		</head>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
+	</head>
+	
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
@@ -25,10 +31,10 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="pendaftaran-induk-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
 	</div>	
 	<!-- end of header -->
+
+	<div class="containerBlock">
 	
 	<!-- header title -->
 	<div class="content_title">
@@ -57,42 +63,42 @@
 	
 	<!-- form -->
 	
-	<form>
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h1>
-		</div>
-	</div>
-	
-		<div class="inform">
-			<input type="text" style="margin-top:0px" name="muat_naik" id="muat_naik" placeholder="No. Kad Pengenalan" class="_searching"><br/></br>
-		</div>
-		
-			
-	<div class="_form">
-	
-		<div class="selection" style="margin-top:-20px">
-					<h5 id="_orange_title">Jawatan</h5>
-					<form action="">
-						<select id="bayaran" name="bayaran" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>
 
-		</div>
-		
+	
+	<div class="_form">
+	
 		<div>
-			<input type="text" style="margin-top:3px" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
+			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_induk"></h1>
 		</div>
 	</div>
-		
+	
 		<div class="inform">
-			<input type="text" name="t_lahir" onfocus="(this.type='date')" onblur="(this.type='text')"  id="t_lahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
-			<!--<input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">-->
+			<input type="text" style="margin-top:0px" name="kad_pengenalan" id="kad_pengenalan" maxlength="14" placeholder="No. Kad Pengenalan" ><br/></br>
 		</div>
+		
+	<div class="_form">
+	
+		<div class="selection" style="margin-top:-20px" id="jawatan_selection">
+					<h5 id="_orange_title">Jawatan</h5>
+					
+						<select id="jawatan" name="jawatan" class="_sel">
+						<option value="">Pilih Jawatan</option>
+						<option value="1">Pengerusi</option>
+						<option value="2">Naib Pengerusi</option>
+						<option value="3">Setiausaha</option>
+						<option value="4">Penolong Setiausaha</option>
+						</select>
+		</div>
+		
+	<div>
+		<input type="text" style="margin-top:3px" name="nama_penuh" id="nama_penuh" placeholder="Nama Penuh">
+	</div>
+	</div>
+		
+	<div class="inform">
+		<input type="text" name="t_lahir" onfocus="(this.type='date')" onblur="(this.type='text')"  onchange="calcUmur()" id="t_lahir" placeholder="Tarikh Lahir" class="_datepick"><br/>
+	</div>
 	
 	<div class="_form">
 			
@@ -100,58 +106,62 @@
 			<input type="text" style="margin-top:9px" name="umur" id="umur" placeholder="Umur" disabled><br/>
 		</div>
 		
-		<div class="selection" style="margin-top:6px">
+		<div class="selection" style="margin-top:6px" id="negeri_selection">
 					<h5 id="_orange_title">Negeri Kelahiran</h5>
 					<form action="">
-						<select id="n_kelahiran" name="n_kelahiran" class="_sel">
-						<option value="none"></option>
+						<select id="n_kelahiran" name="n_kelahiran" class="_sel" onchange="getDaerahFromSelectedCountry()">
+						<option value="">Pilih Negeri Kelahiran</option>
 						</select>
 					</form>
 
 		</div>
 		
-		<div class="selection" style="margin-top:15px">
+		<div class="selection" style="margin-top:15px" id="daerah_selection">
 					<h5 id="_orange_title">Daerah Kelahiran</h5>
 					<form action="">
 						<select id="d_kelahiran" name="d_kelahiran" class="_sel">
-						<option value="none"></option>
+						<option value="">Pilih Daerah Kelahiran</option>
 						</select>
 					</form>
 
 		</div>
 		
-		<div class="selection" style="margin-top:15px">
+		<div class="selection" style="margin-top:15px" id="jantina_selection">
 					<h5 id="_orange_title">Jantina</h5>
-					<form action="">
+				
 						<select id="jantina" name="jantina" class="_sel">
-						<option value="none"></option>
+						<option value="">Pilih Jantina</option>
+						<option value="L">Lelaki</option>
+						<option value="P">Perempuan</option>
+
 						</select>
-					</form>
+					
 
 		</div></br>
-		
+
+
 		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tetap</h5>
-			<form id="" action="" method="POST">
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
-			</form>
 			
-			<div class="selection">
+				<input type="text" name="alamat_tetap1" id="alamat_tetap1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_tetap2" id="alamat_tetap2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_tetap3" id="alamat_tetap3" placeholder="Alamat 3"><br/>
+				<input type="number" name="poskod_tetap" id="poskod_tetap" placeholder="Poskod"><br/>
+
+
+			<div class="selection" id="negeri_tetap_selection">
 					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+					
+						<select id="negeri_menetap" name="negeri_menetap" class="_sel" onchange="getDaerahFromSelectedCountry2()">
+						<option value="">Pilih Negeri</option>
 						</select>
-					</form>		
+						
 			</div>
 			
-			<div class="selection" style="margin-top:14px">
+			<div class="selection" style="margin-top:14px" id="daerah_tetap_selection">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+						<select id="daerah_menetap" name="daerah_menetap" class="_sel">
+						<option value="">Pilih Daerah</option>
 						</select>
 					</form>		
 			</div><br/>
@@ -159,86 +169,511 @@
 			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
 			<form id="" action="" method="POST">
 			<h5 id="H5" style="margin-top:0px">
-			<input type="checkbox" name="klik" id="c_box1"> <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 			
-				<input type="text" style="margin-top:0px" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+			<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)"> 
+			<label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
+			
+				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
+				<input type="number" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
 			</form>
 			
-			<div class="selection">
+			<div class="selection" id="negeri_pos_selection">
 					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+					
+						<select id="negeri_pos" name="negeri_pos" class="_sel" onchange="getDaerahFromSelectedCountry5()">
+						<option value="">Pilih Negeri</option>
 						</select>
-					</form>		
+					
 			</div>
 			
-			<div class="selection" style="margin-top:14px">
+			<div class="selection" style="margin-top:14px" id="daerah_pos_selection">
 					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+					
+						<select id="daerah_pos" name="daerah_pos" class="_sel">
+						<option value="">Pilih Daerah</option>
 						</select>
-					</form>		
+					
 			</div>
 			
 			<h5 id="_orange_title" style="margin-top:15px">Majikan</h5>
 			<form id="" action="" method="POST">
 				<input type="text" name="n_majikan" id="n_majikan" placeholder="Nama Majikan"><br/>
-				<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+				<input type="text" name="alamat_majikan1" id="alamat_majikan1" placeholder="Alamat 1"><br/>
+				<input type="text" name="alamat_majikan2" id="alamat_majikan2" placeholder="Alamat 2"><br/>
+				<input type="text" name="alamat_majikan3" id="alamat_majikan3" placeholder="Alamat 3"><br/>
+				<input type="number" name="poskod_majikan" id="poskod_majikan" placeholder="Poskod"><br/>
 			</form>
 			
 			<div class="selection">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+						<select id="negeri_majikan" name="negeri_majikan" class="_sel" onchange="getDaerahFromSelectedCountry4()">
+						<option value="">Pilih Negeri</option>
 						</select>
 					</form>		
 			</div>
 			
 			<div class="selection" style="margin-top:14px">
 					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+					
+						<select id="daerah_majikan" name="daerah_majikan" class="_sel">
+						<option value="">Pilih Daerah</option>
 						</select>
-					</form>		
+					
 			</div>
-			
-				<input type="text" style="margin-top:5px" name="no_tel_rumah" id="no_tel_rumah" placeholder="No Telefon Rumah"><br/>
-				<input type="text" name="no_tel_pej" id="no_tel_pej" placeholder="No Telefon Pejabat"><br/>
-				<input type="text" name="no_tel_bimbit" id="no_tel_bimbit" placeholder="No Telefon Bimbit"><br/>
-				<input type="text" name="no_faks" id="no_faks" placeholder="No Faksimili"><br/>
+				<br/>
+				<input type="number" style="margin-top:5px" name="no_tel_rumah" id="no_tel_rumah" placeholder="No Telefon Rumah"><br/>
+				<input type="number" name="no_tel_pej" id="no_tel_pej" placeholder="No Telefon Pejabat"><br/>
+				<input type="number" name="no_tel_bimbit" id="no_tel_bimbit" placeholder="No Telefon Bimbit"><br/>
+				<input type="number" name="no_faks" id="no_faks" placeholder="No Faksimili"><br/>
 				<input type="text" name="emel" id="emel" placeholder="Emel"><br/>
 		
-		</div>
 		
 	
 	<div class="default_button_holder">
-			<a href="pendaftaran-induk-5.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-tunggal-5.html"></a>
-		</div>
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+	</div>
 	
-	</form>
-		
+		</div>
+	</div>
+	</div>
+	
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+		
+	<script>
+	
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_induk').html(window.localStorage.getItem("NAMA_PENDAFTARAN_INDUK"));
+	
+	/*IC CONTROL*/
+	ic_control($('#kad_pengenalan').attr('id'));
+	
+	var statusPemegang = window.localStorage.getItem("PEMEGANG_JAWATAN_STATUS");
+	var pemegangId = window.localStorage.getItem("PEMEGANG_JAWATAN_ID");
+	/*LIST Negeri*/
+	getCountry($('#n_kelahiran').attr('id'),'');	
+	getCountry($('#negeri_menetap').attr('id'),'');		
+	getCountry($('#negeri_pos').attr('id'),'');		
+	getCountry($('#negeri_majikan').attr('id'),'');
+
+	if(statusPemegang == "FALSE")
+	{
+		$(function() 
+		{
+			$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_pemegang_jawatan_detail.php",
+						data: {
+							pemegangId : pemegangId,
+						},
+						dataType: "xml",
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("tb_pemegang_jawatan").each(function()
+							{
+								$("#kad_pengenalan").val($(this).find("no_KP").text());
+								//$("#jawatan").val($(this).find("id_jawatan").text());
+								getJawatan('jawatan',$(this).find("id_jawatan").text());
+								$("#nama_penuh").val($(this).find("nama").text());
+								$("#t_lahir").val($(this).find("t_lahir").text());
+								$("#umur").val($(this).find("umur").text());
+								getCountry($('#n_kelahiran').attr('id'),$(this).find("KodNegeriTempatLahir").text());	
+								getDaerah($(this).find("KodNegeriTempatLahir").text(),$('#d_kelahiran').attr('id'),$(this).find("id_daerah_kelahiran").text());
+								$("#jantina").val($(this).find("kod_jantina").text());
+								$("#alamat_tetap1").val($(this).find("alamat_tetap_1").text());
+								$("#alamat_tetap2").val($(this).find("alamat_tetap_2").text());
+								$("#alamat_tetap3").val($(this).find("alamat_tetap_3").text());
+								$("#poskod_tetap").val($(this).find("poskod").text());
+								getCountry($('#negeri_menetap').attr('id'),$(this).find("kod_negeri").text());	
+								getDaerah($(this).find("kod_negeri").text(),$('#daerah_menetap').attr('id'),$(this).find("kod_daerah").text());
+								
+								/*Alamat Pos*/
+								$("#alamat_pos1").val($(this).find("alamat_pos_1").text());
+								$("#alamat_pos2").val($(this).find("alamat_pos_2").text());
+								$("#alamat_pos3").val($(this).find("alamat_pos_3").text());
+								$("#poskod_pos").val($(this).find("alamat_pos_poskod").text());
+								getCountry($('#negeri_pos').attr('id'),$(this).find("id_alamat_pos_negeri").text());
+								getDaerah($(this).find("id_alamat_pos_negeri").text(),$('#daerah_pos').attr('id'),$(this).find("id_alamat_pos_daerah").text());
+								
+
+								/*Alamat Majikan*/
+								$("#n_majikan").val($(this).find("nama_majikan").text());
+								$("#alamat_majikan1").val($(this).find("alamat_majikan_1").text());
+								$("#alamat_majikan2").val($(this).find("alamat_majikan_2").text());
+								$("#alamat_majikan3").val($(this).find("alamat_majikan_3").text());
+								$("#poskod_majikan").val($(this).find("alamat_majikan_poskod").text());
+								getCountry($('#negeri_majikan').attr('id'),$(this).find("id_alamat_majikan_negeri").text());
+								getDaerah($(this).find("id_alamat_majikan_daerah").text(),$('#daerah_majikan').attr('id'),$(this).find("id_alamat_majikan_daerah").text());
+
+								/*Contact*/
+								$("#no_tel_rumah").val($(this).find("NoTel").text());
+								$("#no_tel_pej").val($(this).find("NoTelPej").text());
+								$("#no_tel_bimbit").val($(this).find("NoTelBimbit").text());
+								$("#no_faks").val($(this).find("NoFaks").text());
+								$("#emel").val($(this).find("emel").text());
+							});
+							$('body').waitMe('hide');
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+		});
+	}
+
+	function calcUmur()  
+	{
+		var age = auto_calculate_umur($('#t_lahir').attr('id'));
+		$('#umur').val(age+" tahun");
+	}		
+
+	function salinAlamat(f) 
+	{
+		if(f.alamat_sama.checked == true) 
+			{	
+				var alamat1 = $("#alamat_tetap1").val();
+				$("#alamat_pos1").val(alamat1);
+				
+				var alamat2 = $("#alamat_tetap2").val();
+				$("#alamat_pos2").val(alamat2);
+				
+				var alamat3 = $("#alamat_tetap3").val();
+				$("#alamat_pos3").val(alamat3);
+				
+				var poskod = $("#poskod_tetap").val();
+				$("#poskod_pos").val(poskod);
+				
+				var negeri = $("#negeri_menetap").val();
+				$("#negeri_pos").val(negeri);
+				
+				var daerah = $("#daerah_menetap").val();
+				$("#daerah_pos").val(daerah);
+				
+				//if copy address from main address. auto retrieve daerah
+				getDaerahFromSelectedCountry3(); 
+
+			}
+			
+		else{
+				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #daerah_pos,#negeri_pos').val('');
+			}
+	}
+
+	getJawatan('jawatan','');
+
+	/*LIST Daerah*/
+	function getDaerahFromSelectedCountry()  
+	{
+		var selected_country = $('#n_kelahiran').val();
+		getDaerah(selected_country,$('#d_kelahiran').attr('id'));	
+	}
+	
+	function getDaerahFromSelectedCountry2()  
+	{
+		var selected_country = $('#negeri_menetap').val();
+		getDaerah(selected_country,$('#daerah_menetap').attr('id'));	
+	}
+	
+	function getDaerahFromSelectedCountry3()  
+	{
+		var selected_country = $('#negeri_menetap').val();
+		var status = getDaerah(selected_country,$('#daerah_pos').attr('id'));	
+		
+		var daerah = $("#daerah_menetap").val();
+		$("#daerah_pos").val(daerah);
+	}
+	
+	function getDaerahFromSelectedCountry4()  
+	{
+		var selected_country = $('#negeri_majikan').val();
+		getDaerah(selected_country,$('#daerah_majikan').attr('id'));	
+	}
+	
+	function getDaerahFromSelectedCountry5()  
+	{
+		var selected_country = $('#negeri_pos').val();
+		getDaerah(selected_country,$('#daerah_pos').attr('id'));	
+	}
+	
+	
+	$("#btn_submit").click(function(e){
+		
+		var empty = false;
+		e.preventDefault();
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		$('#kad_pengenalan,#jawatan_selection,#nama_penuh,#t_lahir,#negeri_selection,#daerah_selection,#jantina_selection,#alamat_tetap1,#poskod_tetap,#negeri_tetap_selection,#daerah_tetap_selection').css({"border":"","box-shadow":""});
+		$('#alamat_pos1,#negeri_pos_selection,#daerah_pos_selection,#poskod_pos,#emel').css({"border":"","box-shadow":""});
+		
+		/*Alamat Asal*/
+		var kad_pengenalanPemegang= $("#kad_pengenalan").val();
+		var kad_pengenalan = window.localStorage.getItem("LOGIN");
+		var jawatan = $("#jawatan").val();
+		var t_lahir = $("#t_lahir").val();
+		var umur = $("#umur").val();
+		var n_kelahiran = $("#n_kelahiran").val();
+		var d_kelahiran= $("#d_kelahiran").val();
+		var jantina= $("#jantina").val();
+		var alamat_tetap1= $("#alamat_tetap1").val();
+		var alamat_tetap2= $("#alamat_tetap2").val();
+		var alamat_tetap3= $("#alamat_tetap3").val();
+		var poskod_tetap= $("#poskod_tetap").val();
+		var negeri_menetap= $("#negeri_menetap").val();
+		var daerah_menetap= $("#daerah_menetap").val();
+		var nama_penuh= $("#nama_penuh").val();
+		
+		/*Alamat Pos*/
+		var alamat_pos1= $("#alamat_pos1").val();
+		var alamat_pos2 = $("#alamat_pos2").val();
+		var alamat_pos3 = $("#alamat_pos3").val();
+		var negeri_pos = $("#negeri_pos").val();
+		var daerah_pos = $("#daerah_pos").val();
+		var poskod_pos= $("#poskod_pos").val();
+		
+		/*Alamat Majikan*/
+		var n_majikan= $("#n_majikan").val();
+		var alamat_majikan1 = $("#alamat_majikan1").val();
+		var alamat_majikan2 = $("#alamat_majikan2").val();
+		var alamat_majikan3 = $("#alamat_majikan3").val();
+		var poskod_majikan = $("#poskod_majikan").val();
+		var negeri_majikan = $("#negeri_majikan").val();
+		var daerah_majikan = $("#daerah_majikan").val();
+
+		/*Contact*/
+		var no_tel_rumah= $("#no_tel_rumah").val();
+		var no_tel_pej = $("#no_tel_pej").val();
+		var no_tel_bimbit = $("#no_tel_bimbit").val();
+		var no_faks = $("#no_faks").val();
+		var emel = $("#emel").val();
+		
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
+		if (kad_pengenalan.length == 0)
+		{
+			$('#kad_pengenalan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(jawatan.length == 0)
+		{
+			$('#jawatan_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(nama_penuh.length == 0)
+		{
+			$('#nama_penuh').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(t_lahir.length == 0)
+		{
+			$('#t_lahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+	
+		if(n_kelahiran.length == 0)
+		{
+			$('#negeri_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(d_kelahiran.length == 0)
+		{
+			$('#daerah_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(jantina.length == 0)
+		{
+			$('#jantina_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(alamat_tetap1.length == 0)
+		{
+			$('#alamat_tetap1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(poskod_tetap.length == 0)
+		{
+			$('#poskod_tetap').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(negeri_menetap.length == 0)
+		{
+			$('#negeri_tetap_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(daerah_menetap.length == 0)
+		{
+			$('#daerah_tetap_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+
+		if(alamat_pos1.length == 0)
+		{
+			$('#alamat_pos1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(negeri_pos.length == 0)
+		{
+			$('#negeri_pos_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}		
+		if(daerah_pos.length == 0)
+		{
+			$('#daerah_pos_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}		
+		if(poskod_pos.length == 0)
+		{
+			$('#poskod_pos').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(emel.length == 0)
+		{
+			$('#emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		
+		
+		if(empty == true)
+		{
+		$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
+				}
+			);
+		}
+		else if(empty == false)
+		{
+			if(!ValidateEmail(emel))
+			{
+				$.alert
+				(
+					{
+						title: 'Daftar Pengguna',
+						content: 'Sila Isikan Format Emel yang Betul',
+						confirm: function(){ }
+					}
+				);
+				$('#emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else
+			{
+
+					$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_4A.php",
+						type:'POST',
+						data: {
+							kad_pengenalanPemegang : kad_pengenalanPemegang,
+							kad_pengenalan : kad_pengenalan,
+							jawatan : jawatan,
+							t_lahir: t_lahir,
+							umur : umur,
+							n_kelahiran : n_kelahiran,
+							d_kelahiran : d_kelahiran,
+							jantina : jantina,
+							alamat_tetap1 : alamat_tetap1,
+							alamat_tetap2 : alamat_tetap2,
+							alamat_tetap3 : alamat_tetap3,
+							poskod_tetap : poskod_tetap,
+							negeri_menetap : negeri_menetap,
+							daerah_menetap : daerah_menetap,
+							nama_penuh : nama_penuh,
+							alamat_pos1 : alamat_pos1,
+							alamat_pos2 : alamat_pos2,
+							alamat_pos3 : alamat_pos3,
+							negeri_pos : negeri_pos,
+							daerah_pos : daerah_pos,
+							poskod_pos : poskod_pos,
+							n_majikan : n_majikan,
+							alamat_majikan1 : alamat_majikan1,
+							alamat_majikan2 : alamat_majikan2,
+							alamat_majikan3 : alamat_majikan3,
+							poskod_majikan : poskod_majikan,
+							negeri_majikan : negeri_majikan,
+							daerah_majikan : daerah_majikan,
+							no_tel_rumah : no_tel_rumah,
+							no_tel_pej : no_tel_pej,
+							no_tel_bimbit : no_tel_bimbit,
+							no_faks : no_faks,
+							emel : emel,
+							statusPemegang : statusPemegang,
+							pemegangId : pemegangId,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										window.location.href = "pendaftaran-induk-4.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'error') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					});
+				
+			}
+		}
+	});
+	
+	</script>	
+		
 		
   </body>
 </html>

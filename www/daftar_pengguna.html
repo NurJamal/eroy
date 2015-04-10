@@ -155,7 +155,7 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila isikan tempat kosong!',
+					content: 'Sila Isikan Tempat Kosong!',
 					confirm: function(){				
 					}
 				}
@@ -175,14 +175,14 @@
 				);
 				$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			}
-			else if(!ValidateEmail(emel_pertubuhan))
+			else if(!ValidateEmail(emel))
 			{
 				$.alert
 				(
 					{
 						title: 'Perhatian',
 						content: 'Sila Isikan Format Emel yang Betul',
-						confirm: function(){ }
+						confirm: function(){}
 					}
 				);
 				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -194,7 +194,7 @@
 					{
 						title: 'Perhatian',
 						content: 'Sila Isikan Format Kata Laluan yang Betul',
-						confirm: function(){ }
+						confirm: function(){}
 					}
 				);
 				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
