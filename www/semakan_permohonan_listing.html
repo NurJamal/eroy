@@ -36,46 +36,20 @@
 		</a>
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 		<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
+		<div class="content_title">
+			<div class="input-group add-on search-box">
 
-			<div class="input-group-btn">
-				<h1 class="main_title">SEMAKAN PERMOHONAN</h1>
+				<div class="input-group-btn">
+					<h1 class="main_title">SEMAKAN PERMOHONAN</h1>
+				</div>
 			</div>
+
 		</div>
+		<!-- end of header-title-->
 
-	</div>
-	<!-- end of header-title-->
-
-	<div id="content">	
-		<!-- <div id="box_no_icon">
-			<h2 class="li1" id="nama_pertubuhan">PERSATUAN BELIA CEMERLANG DAERAH BERA</h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: 12/01/2014</h2>
-			<h2 class="li2" id="status">Status: Permohonan Diterima</h2><h2></h2>
-		</div></a>
-		
-		<a href="pendaftaran-cawangan-1.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="nama_pertubuhan">PERSATUAN BELIA 4B CAWANGAN TAMAN U BATU PAHAT</h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: 12/01/2014</h2>
-			<h2 class="li2" id="status">Status: Kebenaran Menubuh Cawangan</h2><h2></h2>
-		</div></a>
-		
-		<a href="pendaftaran-induk-1.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="nama_pertubuhan">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: 12/01/2014</h2>
-			<h2 class="li2" id="status">Status: Permohonan Lengkap</h2><h2></h2>
-		</div></a>
-		
-		<a href="" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="nama_pertubuhan">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: 12/01/2014</h2>
-			<h2 class="li2" id="status">Status: Lulus Bersyarat</h2><h2></h2>
-		</div></a> -->
+		<div id="content"> </div>
 	</div>
 	
 		<!-- js for slide menu -->
@@ -121,11 +95,8 @@
 					var status = $(this).find('status_process').text();
 					var created_date = $(this).find('created_date').text();
 					var update_date = $(this).find('update_date').text();
-					if(status != "Pending")
-					{
-						getSenaraiPermohonan(id, kod_nama_pertubuhan, jenis_pertubuhan, status, created_date, update_date);
-					}
-					
+						
+					getSenaraiPermohonan(id, kod_nama_pertubuhan, jenis_pertubuhan, status, created_date, update_date);
 				});
 			},
 			error: function() {
@@ -158,8 +129,8 @@
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
 					$(xml).find("tb_nama_pertubuhan").each(function(){
-						var kod_nama_pertubuhan = $(this).find('nama_penuh_pertubuhan').text();
-						getStatus(id, kod_nama_pertubuhan, jenis_pertubuhan, kod_status, created_date, update_date);
+						var nama_pertubuhan = $(this).find('nama_penuh_pertubuhan').text();
+						getStatus(id, nama_pertubuhan, kod_nama_pertubuhan, jenis_pertubuhan, kod_status, created_date, update_date);
 					});
 				},
 				error: function() {
@@ -170,10 +141,11 @@
 		});
 	}
 
-	function getStatus(id, kod_nama_pertubuhan, jenis_pertubuhan, kod_status, created_date, update_date)
+	function getStatus(id, nama_pertubuhan, kod_nama_pertubuhan, jenis_pertubuhan, kod_status, created_date, update_date)
 	{
 		var id = id;
 		var kod_nama_pertubuhan = kod_nama_pertubuhan;
+		var nama_pertubuhan = nama_pertubuhan;
 		var kod_status = kod_status;
 		var jenis_pertubuhan = jenis_pertubuhan;
 		var created_date = created_date;
@@ -193,9 +165,15 @@
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
 					$(xml).find("lk_status_permohonan").each(function(){
-						if(jenis_pertubuhan == '2')
+						if(kod_status == '4') //lulus bersyarat
+						{
+							$('#content').append('<a href="#" onclick=lulusBersyarat('+kod_nama_pertubuhan+') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+kod_nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
+						}else if(kod_status == '3') //kuiri
 						{
 							$('#content').append('<div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+kod_nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div>');
+						}else if(kod_status == '6') //draft
+						{
+							$('#content').append('<a href="#" onclick="editPermohonan('+jenis_pertubuhan+')" style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+kod_nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
 						}else
 						{
 							$('#content').append('<div id="box_icon_with_delete"><h2 class="li1" id="nama_pertubuhan">'+kod_nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div>');
@@ -210,6 +188,23 @@
 		});
 	}
 
+	function editPermohonan(jenis_pertubuhan)
+	{
+		if(jenis_pertubuhan == '2')
+		{
+			window.location.href = "permohonan-induk-1.html";
+		}else if(jenis_pertubuhan == '1')
+		{
+			window.location.href = "pendaftaran-tunggal-1.html";
+		}
+		//alert(jenis_pertubuhan);
+	}
+
+	function lulusBersyarat(kod_nama_pertubuhan)
+	{
+		window.localStorage.setItem("KOD_PERTUBUHAN", kod_nama_pertubuhan);
+		window.location.href = "penambahan-cawangan-1.html";
+	}
 	</script>
 	
 	
