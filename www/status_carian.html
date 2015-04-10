@@ -29,38 +29,21 @@
 	</div>	
 	<!-- end of header -->
 	
+	<div class="containerBlock">
 		<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
+		<div class="content_title">
+			<div class="input-group add-on search-box">
 
-			<div class="input-group-btn">
-				<h1 class="main_title">STATUS CARIAN</h1>
+				<div class="input-group-btn">
+					<h1 class="main_title">STATUS CARIAN</h1>
+				</div>
 			</div>
+
 		</div>
+		<!-- end of header-title-->
 
-	</div>
-	<!-- end of header-title-->
-
-	<div id="content">	
-		<!-- <a href="carian_papar_1.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="">PERSATUAN SILAT MALAYSIA</h2>
-			<h2 class="li2" id="">Tarikh Permohonan:<b> 23/07/2014</b></h2>
-			<h2 class="li2" id="">Status:<b> Papar</b></h2><h2></h2>
-		</div></a>
-	
-		<a href="bayaran_ppb20.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="nama_pertubuhan"></h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Permohonan:<b> 14/09/2014</b></h2>
-			<h2 class="li2" id="status">Status:<b> Lulus dan Bayar</b></h2><h2></h2>
-		</div></a>
-		
-		<div id="box_no_icon">
-			<h2 class="li1" id="">PERSATUAN SELSA MALAYSIA</h2>
-			<h2 class="li2" id="">Tarikh Permohonan:<b> 01/10/2014</b></h2>
-			<h2 class="li2" id="">Status:<b> Dalam Proses</b></h2><h2></h2>
-		</div> -->
+		<!-- list-->
+		<div id="content"></div>
 	</div>
 	
 	<!-- js for slide menu -->
@@ -92,11 +75,56 @@
 	
 	$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'><h2 class='li2'>Tarikh Permohonan: <b></b></h2><h2 class='li2'>Status: <b></b></h2><h2></h2></div>");
 	
+	$(function() 
+	{
+		//$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_terperinci_paparan.php",
+				dataType: "xml",
+				data : 
+				{
+					no_ic : no_ic
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var peringkat_pertubuhan = $(this).find("dummy_peringkat_pertubuhan");
+						var nama_pertubuhan = $(this).find("nama_pertubuhan");
+						var nama_ringkasan = $(this).find("nama_ringkasan");
+						var emel_pertubuhan = $(this).find("emel_pertubuhan");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$('#d_peringkat_pertubuhan').val($(peringkat_pertubuhan).text());
+						$('#d_nama_pertubuhan').val($(nama_pertubuhan).text());		
+						$('#d_nama_ringkasan').val($(nama_ringkasan).text());
+						$('#d_emel_pertubuhan').val($(emel_pertubuhan).text());		
+					});
+				}
+			}
+		);
+	});
+	
+	
+	
+	
+	
 	$('.box_icon').click(function(e)
 	{
 		e.preventDefault();
 		
-		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
 		var no_ic = window.localStorage.getItem('LOGIN');
 		window.location.href = "carian_papar_1.html";
 	});
