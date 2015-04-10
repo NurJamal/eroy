@@ -241,9 +241,13 @@
 					
 				var negeri = $("#sel_negeri").val();
 				$("#sel_negeriPos").val(negeri);
+
+				var daerah = $("#sel_daerah").val();
+				//if copy address from main address. auto retrieve daerah
+				getDaerah(negeri,$('#sel_daerahPos').attr('id'),daerah);
 				
 				//if copy address from main address. auto retrieve daerah
-				getDaerahFromSelectedCountryPos(); 		
+				//getDaerahFromSelectedCountryPos(); 		
 					
 			}	
 			else

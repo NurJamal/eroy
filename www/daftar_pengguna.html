@@ -29,7 +29,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -63,6 +63,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		window.localStorage.setItem("_MENU_FIX", "TRUE");
+	</script>
+	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -124,31 +129,16 @@
 			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		/*if(!cekPass(katalaluan))
-		{
-			$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}*/
 		if (sah_katalaluan.length == 0)
 		{
 			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		/*if (sah_katalaluan != katalaluan)
-		{
-			$('#f_sah_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}*/
 		if (emel.length == 0) 
 		{
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 			empty = true;
 		}
-		/*if(!cekEmel(emel))
-		{
-			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}*/
 		if(empty == true)
 		{
 			$.alert
@@ -272,6 +262,9 @@
 			}
 		}
 	});
+	
+	/*Set current menu to fix*/
+	window.localStorage.setItem("_MENU_FIX", "TRUE");
 	</script>
 	</body>
 </html>
