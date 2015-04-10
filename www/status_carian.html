@@ -2,16 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -68,15 +72,45 @@
 	var no_ic = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
 	
-	/*$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>"+nama+
-	"<h2 class='li2'>Tarikh Permohonan: <b>"+nama+"</b></h2><h2 class='li2'>Status: <b>"+nama+"</b></h2><h2></h2></div>");*/
-	
-	$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR<h2 class='li2'>Tarikh Permohonan: <b>14/10/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
-	
-	
+	$(function() 
+	{
+		//$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_status_carian.php",
+				dataType: "xml",
+				data : 
+				{
+					no_ic : no_ic
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						//var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						//var tarikh_permohonan = $(this).find("created_date");
+						//var status = $(this).find("status");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$("#content").append("<div id='"+no_ic+"' class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
+					});
+				}
+			}
+		);
+	});
 	
 
-	
 	$('.box_icon').click(function(e)
 	{
 		e.preventDefault();
