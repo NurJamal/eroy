@@ -359,23 +359,25 @@ select._sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 21px;
+	width: 96%;
+	height: 24px;
 	outline: none;
 	margin-left: -3px;
+	margin-top: -20px;
 }
 
 select.sel{
 	-webkit-appearance: none;  /* REMOVES DEFAULT CHROME & SAFARI STYLE */
 	-moz-appearance: none;  /* REMOVES DEFAULT FIREFOX STYLE */
 	border: none !important;  /* REMOVES BORDER */
+	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 21px;
+	width: 96%;
+	height: 24px;
 	outline: none;
 	margin-left: -3px;
-	background-color: white;
+	margin-top: -20px;
 }
 
 ._cari{
@@ -430,8 +432,8 @@ select.sel{
 #_orange_title{
 	font-size: 18px;
 	color:  #F9690E;
-	margin-top: -8px;
-	margin-bottom: 3px;
+	margin-top: -9px;
+	margin-bottom: 2px;
 }
 
 #_text{
