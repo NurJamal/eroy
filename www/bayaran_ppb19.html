@@ -2,17 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-	
-	<div id="scrollTop" >
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
+		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>		
+		<div id="loadingLayer"></div>
 	</div>
 	</head>
 	<body>
@@ -26,50 +29,121 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="borang_ppb19.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN MAKLUMAT</h1>
+				</div>
 			</div>
 		</div>
-	
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<div id="content">
-		<h2 class="_orange_text" style="margin-top:13px">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
-		
-		<div class="dis_selection">
-				<h6 id="_orange_title">Bentuk Bayaran</h6>	
-				<h2 id="_text">Atas Talian</h2>
-				
+		<div id="content">
+			<h2 class="_orange_text" style="margin-top:13px">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+			
+			<div class="dis_selection">
+					<h6 id="_orange_title">Bentuk Bayaran</h6>	
+					<h2 id="_text">Atas Talian</h2>
+					
+			</div>
+			
+			<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+			
+			<div class="display">
+				<input type="text" style="margin-top:-2px" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
+			</div>
+			
+			<div class="default_button_holder">
+				<input class="default_button" type="button" value="BAYAR" id="btn_submit">
+			</div>
 		</div>
-		
-		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
-		
-		<div class="display">
-			<input type="text" style="margin-top:-2px" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
-		</div>
-		
-		<div class="default_button_holder">
-			<a href="menu_carian.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
-		</div></a>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	/*$('#btn_submit').click(function(e)
+	{
+		e.preventDefault();
+		
+		$.ajax
+		(
+			{
+				url:"http://eroy.me-tech.com.my/api/api_log_masuk.php",
+				type:'POST',
+				data:
+				{
+					kadp : kadp,
+					katalaluan : katalaluan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success:function(data)
+				{
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') 
+					{
+						console.log(json.status);
+						
+						var no_ic = window.localStorage.getItem('LOGIN');
+						window.location.href = "menu_carian.html";
+					}
+					else if (json.status == 'error') 
+					{
+						console.log(json.status);
+						$.alert
+						(
+							{
+								title: 'Carian',
+								content: json.message,
+								confirm: function(){}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+				}
+			}
+		);		
+	});*/
+	
+	$('#btn_submit').click(function(e)
+	{
+		e.preventDefault();
+		
+		//var no_ic = window.localStorage.getItem('LOGIN');
+		window.location.href = "menu_carian.html";
+	});
+	
+	</script>
 	</body>
 </html>

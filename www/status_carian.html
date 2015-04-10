@@ -7,11 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -67,13 +71,8 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
-	
-	/*$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'>"+nama+
-	"<h2 class='li2'>Tarikh Permohonan: <b>"+nama+"</b></h2><h2 class='li2'>Status: <b>"+nama+"</b></h2><h2></h2></div>");*/
-	
-	$("#content").html("<div id='"+no_ic+"'class='box_icon'><h2 class='li1'><h2 class='li2'>Tarikh Permohonan: <b></b></h2><h2 class='li2'>Status: <b></b></h2><h2></h2></div>");
 	
 	$(function() 
 	{
@@ -86,7 +85,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -98,24 +97,20 @@
 					$xml = $(xmlDoc);
 					$(xml).find("details").each(function()
 					{						
-						//var kod_id = $(this).find("kod_nama_pertubuhan");
+						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-						var tarikh_permohonan = $(this).find("created_date");
+						//var tarikh_permohonan = $(this).find("created_date");
 						//var status = $(this).find("status");
 						
 						$('body').waitMe('hide');
 						$('#content').show();
 						
-						$("#content").html("<div class='box_icon'><h2 class='li1'>"+nama_pertubuhan+"<h2 class='li2'>Tarikh Permohonan: <b>"+tarikh_permohonan+"</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
+						$("#content").html("<div id='"+kad_pengenalan+"'class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
 					});
 				}
 			}
 		);
 	});
-	
-	
-	
-	
 	
 	$('.box_icon').click(function(e)
 	{
