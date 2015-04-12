@@ -56,10 +56,10 @@
 			</div>	
 			<p><a href="#" onclick="window.open('http://www.google.com', '_blank', 'location=yes'); return false;">_blank</a></p>
 			<p><a href="#" onclick="window.open('http://www.google.com', '_system', 'location=yes'); return false;">_system</a></p>
-			<p><a href="#" onclick="window.open('http://www.google.com', '_self', 'location=yes'); return false;">_self</a></p>
+			<p><a href="#" onclick="test()">_self</a></p>
 			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
 		
-			<form method="post" target="_blank"  action="http://payment.telcowin.com/payment.php">
+			<form method="post" target="_system"  action="http://payment.telcowin.com/payment.php">
 			<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
 			<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
 			<INPUT type="hidden" name="Amount" value="300">
@@ -105,6 +105,14 @@
 		alert(devicePlatform);
 		StatusBar.overlaysWebView(false);
 	}
+	
+	function onDeviceReady() 
+	{
+      	alert("TEST");
+		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
+	}
+
+	
 	
 	$("#btn_submit").click(function(e)
 	{
