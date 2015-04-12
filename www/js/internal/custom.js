@@ -693,8 +693,8 @@
 
 	function openDeviceBrowser(externalLinkToOpen)
 	{	
-		//window.open(externalLinkToOpen, '_system', 'location=no');
-		navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
+		window.open(externalLinkToOpen, '_system', 'location=no');
+		//navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
 	}
 	
 	
