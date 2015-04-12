@@ -104,7 +104,7 @@
 					$(xml).find("details").each(function()
 					{						
 						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama_pertubuhan = $(this).find("nama_pertubuhan");
+						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
 						var alamat_urusan = $(this).find("alamat1");
 						var alamat_urusan1 = $(this).find("alamat2");
@@ -113,7 +113,9 @@
 						$('body').waitMe('hide');
 						$('#content').show();
 						
-						$("#content").html("<div id='"+kad_pengenalan+"'class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
+						$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
+						
+						//$("#content").html("<div id='"+kad_pengenalan+"'class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
 					});
 				}
 			}
