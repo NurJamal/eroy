@@ -58,7 +58,7 @@
 				<h2 class="_orange_text" style="margin-top:-18px">No. Sijil</h2>
 				<input type="text" style="margin-top:0px" id="d_no_sijil" name="d_no_sijil" disabled><br/>
 				<h2 class="_orange_text" style="margin-top:0px">No. Fail</h2>
-				<input type="text" style="margin-top:0px" id="d_no_fail" name="d_no_fail" placeholder="ABB347-099" disabled><br/>
+				<input type="text" style="margin-top:0px" id="d_no_fail" name="d_no_fail" disabled><br/>
 				<h2 class="_orange_text" style="margin-top:0px">Tarikh Sijil Lulus</h2>
 				<input type="text" style="margin-top:0px" id="d_tarikh_sijil_lulus" name="d_tarikh_sijil_lulus" disabled><br/>
 				
@@ -90,11 +90,11 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	
 	$(function() 
 	{
-		$('#content').hide();
+		//$('#content').hide();
 		$.ajax
 		(
 			{
@@ -103,7 +103,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -117,14 +117,14 @@
 					{						
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
-						//var no_fail = $(this).find("no_fail");
+						var no_fail = $(this).find("no_fail");
 						var t_sijil_lulus = $(this).find("t_sijil_lulus");
 						
 						$('body').waitMe('hide');
 						$('#content').show();
 						
 						$('#d_no_sijil').val($(no_sijil).text());		
-						//$('#d_no_fail').val($(no_fail).text());
+						$('#d_no_fail').val($(no_fail).text());
 						$('#d_tarikh_sijil_lulus').val($(t_sijil_lulus).text());		
 					});
 				}
@@ -137,7 +137,7 @@
 		e.preventDefault();
 		
 		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		var no_ic = window.localStorage.getItem('LOGIN');
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		window.location.href = "carian_papar_3.html";
 	});
 	

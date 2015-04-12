@@ -505,10 +505,13 @@
 	}
 
 	var count = 1;
-		function getFasal(id, kodPertubuhan)
-		{
+	function getFasal(id1, kodPertubuhan)
+	{
 			var id_pertubuhan = kodPertubuhan;
-			var fasal_id = id;
+			var fasal_id = id1;
+			
+			
+			
 			$(function() 
 			{
 				$.ajax
@@ -522,46 +525,82 @@
 						dataType: "xml",
 						success: function(xml)
 						{
-
-							var json = $.xml2json(xml);
-							console.log(json);
-							console.log('here');
-
-							/*var xmlDoc = $.parseXML(xml),
-							$xml = $(xmlDoc);
-							$(xml).find("tb_perlembagaan").each(function()
-							{
-								console.log($(this).text());
+							//var fasal = $(this).find("fasal");
+							//console.log(xml);
+							//var xmlDoc = $.parseXML(xml),
+							//$xml = $(xmlDoc);
+							//$(xml).find("fasal_list").each(function(index, val)
+							//{
+								
+								//var data = JSON.stringify(xml);
+								//console.log(data);
+								
+								//console.log(val.length);
+								//$.each(data.laporan_negeri, function (index, value) {
+									/*Mengikut Zon*/
+								//	$.each(value, function (zon_index, per_zone) {
+								//		/*Mengikut Negeri*/
+								//		$.each(per_zone.negeri, function (index, per_state) {
+								/*var x;
+								
 								var id = $(this).find("id");
-								var noFasal = $(this).find("no_fasal");
+
+								var sub_level = $(this).find("sub_level");
 								var fasal = $(this).find("fasal");
-
-								var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
-								var td = '<td width="30px" valign="top">';
-								var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
-								var tdClose = '</td>';
-								var tdOpen = '<td>';
-								var trClose = '</tr>';
-
-								$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
-
-								count++;*/
-		$.each(data.laporan_negeri, function (index, value) {
-			/*Mengikut Zon*/
-			$.each(value, function (zon_index, per_zone) {
-					/*Mengikut Negeri*/
-					$.each(per_zone.negeri, function (index, per_state) {
-					
+								var level = $(this).find("level");
+								
+								//$.each(val, function(index, valLevel) {
+								//	console.log(valLevel);
+								//}
+								$(val).find("level").each(function(indexx, value)
+								{
+									console.log(value);
+									if(value == 1)
+									{
+										alert("test");
 				
-				});
-			 });
+									}
+								});
+								
+								//if(val.level == '1')
+								//{
+								//	alert("TEST");
+								//}
+								//$.each($(this).find("level"), function(index, val) {
+									
+								//	if(level.text() == '1')
+								//	{
+										//alert(level.text());
+								//	
+								//		$('#'+fasal_id).append('<table><tr><td></td><td id="fasal_'+id.text()+'"></td><tr></table>');
+								//		$('#fasal_'+id.text()).append(fasal.text());
+//
+								//	}
+								//});
+								//var code_level = $(this).find("code_level");
+								//var ref_level = $(this).find("ref_level");
+								//alert(sub_level.text());
+								//alert(sub_level.text()+'-'+code_level.text()+'-'+ref_level.text());
+								//alert(level.text());
+								*/
+							//});
+							/*var id = $(this).find("id");
+							var noFasal = $(this).find("no_fasal");
+							var fasal = $(this).find("fasal");
 
-		});	
+							var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
+							var td = '<td width="30px" valign="top">';
+							var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
+							var tdClose = '</td>';
+							var tdOpen = '<td>';
+							var trClose = '</tr>';
 
-
-
+							$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
+							count++;
+							*/
+							//$('body').waitMe('hide');
 						
-							$('body').waitMe('hide');
+							//alert(fasal.text());
 						},
 						error: function() 
 						{
@@ -571,7 +610,9 @@
 				);
 
 			});
-		};
+			
+
+	};
 	
 	//LIST JAWATAN
 	function getJawatan(id,selected)
@@ -620,17 +661,40 @@
 			});
 	}
 	
+
+	//LIST JAWATAN
+	function getStatusIcon(statusId,idToAppend)
+	{
+		var statusId = statusId;
+		var idToAppend = idToAppend;
+		var imgPath;
+		
+		if(statusId == '1')//AKTIF
+		{
+			imgPath = "../../img/aktif_icon.png";
+		}
+		else if (statusId == '2')//TIDAK AKTIF
+		{
+			imgPath = "../../img/tidak_aktif_icon.png";
+		}
+		else if (statusId == '3')//GANTUNG
+		{
+			imgPath = "../../img/gantung_icon.png";
+		}
+		else if (statusId == '4')//BATAL
+		{
+			imgPath = "../../img/batal_icon.png";
+		}
+		else{}
+
+		$('#keaktifan_'+idToAppend).append('<div style="height:45px;width:45px;"><img style="display: block;" width="auto" height="90%" src="'+imgPath+'" /></div>');
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	function openDeviceBrowser(externalLinkToOpen)
+	{	
+		window.open(externalLinkToOpen, '_system', 'location=no');
+	}
 	
 	
 	
