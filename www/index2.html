@@ -49,8 +49,7 @@
 		</div>
 		
 		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
-		<a href="#" onclick="openDeviceBrowser('http://www.google.com/')">Link 1A</a>
-	<a onclick="navigator.app.loadUrl('https://google.com/', { openExternal:true });">Link 2B</a>
+		
 		<div class="display">
 			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 10.00" disabled><br/>
 		</div>
@@ -64,10 +63,11 @@
 		<!-- Payment Parameter-->	
 		<!--<form method="post" action="https://stgpay.malaysia.gov.my/mampupg/AgencyPaymentGateway.aspx">-->
 		
-		<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
+		
 		<!--<input type="hidden" id="amount" value="10"/>-->
 		
 		<form method="post" target="_blank"  action="http://payment.telcowin.com/payment.php">
+		<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
 		<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
 		<INPUT type="hidden" name="Amount" value="300">
 		<INPUT type="hidden" name="BuyerAccNo" value="Yuran Pindaan Maklumat ">
