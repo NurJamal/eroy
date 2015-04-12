@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>    
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="True">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>	
+		<div id="loadingLayer"></div>
+		
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+
+	<!-- slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu rasdight -->
+ 
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>	
+	</div>	
+	<!-- end of header -->
+
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+					<input type="text" class="form-control" placeholder="Carian Nama Pertubuhan" name="n_carian" id="n_carian">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit" id="btn_submit"><i class="glyphicon glyphicon-search icon">
+						</i></button>
+					</div>
+				</div>
+		</div>
+		<!-- end of header-title-->
+
+		<div id="content">
+			<h1 class="text1" style="margin-top:15px"><b>Aplikasi Pendaftaran Pertubuhan Belia</b></h1>
+			<h1 class="text2">Kementerian Belia dan Sukan Malaysia</h1>
+			<img src="img/jata.png" class="logo2"/>
+			<div class="default_button_holder">
+				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
+
+			</div>	
+			<p><a href="#" onclick="window.open('http://www.google.com', '_blank', 'location=yes');">_blank</a></p>
+			<p><a href="#" onclick="window.open('http://www.google.com', '_system', 'location=yes');">_system</a></p>
+			<p><a href="#" onclick="window.open('http://www.google.com', '_self', 'location=yes');">_self</a></p>
+			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
+		</div>
+	</div>
+
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() 
+	{
+      	var devicePlatform = cordova.platformId;
+		alert(devicePlatform);
+		StatusBar.overlaysWebView(false);
+	}
+	
+	$("#btn_submit").click(function(e)
+	{
+		var carian_nama = $.trim($('#n_carian').val());
+		
+		e.preventDefault();			
+
+		if (carian_nama.length == 0 || carian_nama.length < 10) 
+		{
+			$.alert
+			(
+				{
+					title: 'Halaman Utama',
+					content: 'Sila masukkan sekurang-kurangnya 10 aksara untuk semak nama pertubuhan',
+					confirm: function(){}
+				}
+			);
+			$('#n_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/api_carian_asas.php",
+					type:'POST',
+					data:
+					{
+						carian_nama : carian_nama
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							window.localStorage['CARIAN_PERTUBUHAN'] = JSON.stringify(json);
+							window.location.href = "carian_asas_listing.html";	
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Halaman Utama',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				}
+			)
+		}
+
+	});	
+
+    </script>
+
+	</body>
+</html>
