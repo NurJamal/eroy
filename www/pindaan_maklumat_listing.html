@@ -45,13 +45,14 @@
 		<!-- end of header-title-->
 	
 		<div id="content">	
-			<a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			 <a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
 			<div id="box_icon">
-				<h2 class="li1" id="nama_pertubuhan">KELAB SELSA MALAYSIA</h2>
-				<h2 class="li2" id="tarikh_permohonan">No Sijil/Daftar:<b> J09732</b></h2>
-				<h2 class="li2" id="status">Status: -</h2><h2></h2>
-			</div></a>
+				<h2 class="li1">KELAB SELSA MALAYSIA</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> J09732</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a> 
 		</div>
+		<div id="content2" style="padding: 5px 3%; height: 100%;"></div>
 	</div>
 	
 	<!-- js for slide menu -->
@@ -106,53 +107,28 @@
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
-						var alamat_urusan = $(this).find("alamat1");
-						var alamat_urusan1 = $(this).find("alamat2");
-						var alamat_urusan2 = $(this).find("alamat3");
+						var status = $(this).find("status");
 						
 						$('body').waitMe('hide');
 						$('#content').show();
 						
-						$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
-						
-						//$("#content").html("<div id='"+kad_pengenalan+"'class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
+						$("#content2").html("<div class='box_icon'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
 					});
 				}
 			}
 		);
 	});	
 	
-	</script>
-	
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
+	$('.box_icon').click(function(e)
+	{
+		e.preventDefault();
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		window.location.href = "pindaan_maklumat_pilihan.html";
 	});
-	</script> -->
 	
 	
+	</script>	
 	</body>
 </html>
