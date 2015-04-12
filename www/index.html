@@ -28,6 +28,7 @@
 	</div>
 	<!-- end of header -->
 	<a href="#" onclick="openDeviceBrowser('http://www.google.com/')">Link</a>
+	
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -97,7 +98,7 @@
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<script>
-	
+	navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
 	/*$("#btn_submit").click(function(e){
 
 		e.preventDefault();			
