@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="pindaan_maklumat_perlembagaan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>	
+	</div>
+	<!-- end of header -->
+	
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<div id="content">
+		<h2 class="_orange_text">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+		
+		<div class="dis_selection">
+				<h6 id="_orange_title">Bentuk Bayaran</h6>	
+				<h2 id="_text">Atas Talian</h2>
+				
+		</div>
+		
+		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+		
+		<div class="display">
+			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 10.00" disabled><br/>
+		</div>
+		<!--<p><a href="#" onclick="window.open('http://www.nhl.com', '_blank', 'location=yes');">_blank</a></p> 
+		<p><a href="#" onclick="window.open('http://www.nhl.com', '_system', 'location=yes');">_system</a></p> 
+		<p><a href="#" onclick="window.open('http://www.nhl.com', '_self', 'location=yes');">_self</a></p>-->
+		<div class="default_button_holder">
+		<!--<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>-->
+		
+		</div>
+		<!-- Payment Parameter-->	
+		<!--<form method="post" action="https://stgpay.malaysia.gov.my/mampupg/AgencyPaymentGateway.aspx">-->
+		
+		
+		<!--<input type="hidden" id="amount" value="10"/>-->
+		
+		<form method="post" target="_system"  action="http://payment.telcowin.com/payment.php">
+		<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
+		<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
+		<INPUT type="hidden" name="Amount" value="300">
+		<INPUT type="hidden" name="BuyerAccNo" value="Yuran Pindaan Maklumat ">
+		<INPUT type="hidden" name="ItemName" id="itemName" value="Pindaan Maklumat"/>
+		<INPUT type="hidden" name="Key" id="Key" value="E-ROY"/>
+
+		<div class="default_button_holder">
+		<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
+			<input class="default_button" type="submit" value="BAYAR" id="btn_submit">
+		</div>
+		</form>
+		<!--<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
+		</div></a>
+		
+		
+		<div class="default_button_holder"> -->
+		
+
+		
+		
+	</div>
+	
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
+	/*$("#btn_submit").click(function(e){
+
+		e.preventDefault();			
+	
+		var itemName = $.trim($('#itemName').val());
+		var channel = $.trim($('#channel').val());
+		var amount = $.trim($('#amount').val());
+
+			
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/payment/payment.php",
+				type:'POST',
+				data:{
+						 itemName : itemName,
+						 channel : channel,
+						 amount : amount
+				},
+				dataType:'xml',
+				error: function(e) {
+					console.log(e);
+				},
+				beforeSend: function() {
+					alert("LOADING");
+				},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'ok') {
+						console.log(json.status);
+						alert("PEMBAYARAN BERJAYA");
+						window.location.href = "pindaan_maklumat_listing.html";
+					}
+					else if (json.status == 'error') {
+						console.log(json.status);
+						//alert(json.message);
+						alert("PEMBAYARAN TIDAK BERJAYA");
+					}
+					
+					else{}
+				}
+			})
+			.done(function( html ) {
+				alert("FINISH");
+			});
+	
+	});*/
+	//window.open("https://www.facebook.com/");
+	//window.open('https://stgpay.malaysia.gov.my/mampupg/AgencyPaymentGateway.aspx/', '_blank', 'location=yes');
+	//window.open('http://intranet.me-tech.com.my/', '_blank', 'location=yes');
+	
+	</script>
+	
+	
+	</body>
+</html>
