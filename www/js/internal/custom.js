@@ -525,6 +525,8 @@
 						dataType: "xml",
 						success: function(xml)
 						{
+
+							var convert = xml;
 							//var fasal = $(this).find("fasal");
 							//console.log(xml);
 							//var xmlDoc = $.parseXML(xml),
@@ -601,6 +603,11 @@
 							//$('body').waitMe('hide');
 						
 							//alert(fasal.text());
+		var json = $.xml2json(xml);
+		var data  = JSON.stringify(json);
+		//var data = JSON.parse(localStorage['FASAL']);
+		console.log(JSON.parse(data));
+		
 						},
 						error: function() 
 						{
