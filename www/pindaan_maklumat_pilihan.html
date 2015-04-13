@@ -54,21 +54,23 @@
 		</div>
 		
 		<div class="checkbox">
-			<input id="c_box1" class="checkboxClass" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
+			<input id="c_box1" class="checkboxClass" type="checkbox" name="senarai" value="0"/>
 			<label for="c_box1">Pindaan Nama</label><br>
 			
-			<input id="c_box2" class="checkboxClass" type="checkbox" name="senarai" value="Senarai Ahli Jawatankuasa" />
+			<input id="c_box2" class="checkboxClass" type="checkbox" name="senarai" value="1"/>
 			<label for="c_box2">Pindaan Alamat Tempat <span class="line2">Urusan</span></label><br>
 			
-			<input id="c_box3" class="checkboxClass" type="checkbox" name="senarai" value="Perlembagaan/Undang-undang Tubuh">
+			<input id="c_box3" class="checkboxClass" type="checkbox" name="senarai" value="2">
 			<label for="c_box3">Pindaan Perlembagaan</label><br>
 			
-			<input id="c_box4" class="checkboxClass" type="checkbox" name="senarai" value="Lain-Lain">
+			<input id="c_box4" class="checkboxClass" type="checkbox" name="senarai" value="3">
 			<label for="c_box4">Pindaan Lambang/Logo/ <span class="line2">Lencana/Bendera</span></label>
 		</div><h2>
 		
+		<!-- <div id="result"></div> -->
+		
 		<div class="default_button_holder">
-			<a href="pindaan_maklumat_pertubuhan.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
+			<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
 		</div>
 	</div>
 	
@@ -93,8 +95,22 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	
-	
+	function jenisPindaanArray()
+	{
+		var arr = [];
+		$('.checkbox input[type="checkbox"]:checked').each(function()
+		{
+			arr.push($(this).val());
+		});
+		return arr; 
+	}
+
+	$('#btn_submit').click(function () 
+	{
+		//$('#result').html(jenisPindaanArray());
+		window.localStorage['ID_JENIS_PINDAAN'] = JSON.stringify(jenisPindaanArray());
+		window.location.href = "pindaan_maklumat_form.html";
+	});
 	
 	</script>
 	
