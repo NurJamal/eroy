@@ -605,9 +605,73 @@
 							//alert(fasal.text());
 		var json = $.xml2json(xml);
 		var data  = JSON.stringify(json);
-		//var data = JSON.parse(localStorage['FASAL']);
+		var parseData = JSON.parse(data);
 		console.log(JSON.parse(data));
 		
+		$.each(parseData.fasal_template, function (index_1, value) {
+						/*Mengikut Zon*/
+						$.each(value, function (index_2, fasal_list) {
+						
+								var editorImg = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
+								var checkBox = '<td><input class="checkboxClass" id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+								
+								//First Lvl
+								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
+								$('#fasal_'+fasal_list.id).append('<label for="c_box1">'+fasal_list.fasal+'</label>');
+								
+								if(fasal_list.sub_fasal != null)
+								{
+									if (Array.isArray(fasal_list.sub_fasal))
+									{
+											$.each(fasal_list.sub_fasal, function (index_3, sub_fasal_list) {
+												//Second Lvl
+												if(sub_fasal_list.ref_level == fasal_list.code_level)
+												{
+													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
+													$('#fasal_'+sub_fasal_list.id).append('<label for="c_box1">'+sub_fasal_list.fasal+'</label>');										
+													
+													var arrayCode = [];
+
+													$.each(fasal_list.sub_fasal, function (index_4_1, sub_fasal_nested_list_1)
+														{ 
+															var currentCode = sub_fasal_nested_list_1.code_level;
+														
+															$.each(fasal_list.sub_fasal, function (index_4_2, sub_fasal_nested_list)
+																{ 
+																	if(currentCode == sub_fasal_nested_list.ref_level && !(jQuery.inArray(currentCode,arrayCode) !== -1))
+																	{
+																		var appendTD;
+																		for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
+																		{
+																			appendTD += '<td width="30px"></td>';
+																		}
+																		
+																		$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">'+appendTD+'<td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+sub_fasal_nested_list.id+'"></td></tr>');
+																		$('#fasal_'+sub_fasal_nested_list.id).append('<label for="c_box1">'+sub_fasal_nested_list.fasal+'</label>');										
+																																		arrayCode.push(currentCode)
+																		arrayCode.push(currentCode)
+	
+																	}
+																});	
+																
+														});	
+														
+												}
+												//Third Lvl and above
+											});
+									}
+									else
+									{
+										if(fasal_list.sub_fasal.ref_level == fasal_list.code_level)
+										{
+											$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+fasal_list.sub_fasal.id+'"></td></tr>');
+											$('#fasal_'+fasal_list.sub_fasal.id).append('<label for="c_box1">'+fasal_list.sub_fasal.fasal+'</label>');										
+										}
+									}
+								}							
+							});
+						});
+	
 						},
 						error: function() 
 						{
