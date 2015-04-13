@@ -133,27 +133,7 @@
 		
 			<input type="text" style="margin-top:0px" name="no_akta_dahulu" id="no_akta_dahulu"><br/></br>
 		</div>
-
-		
-		<h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
 			
-		<div class="selection" id="logo_selection">
-					<select id="dengan_logo" name="dengan_logo" class="_sel">
-					<option value="">Pilih</option>
-					<option value="Y">Ya</option>
-					<option value="N">Tidak</option>
-					</select>
-		</div>
-		</div>
-		
-		<div>
-			<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
-		</div>
-		
-		<div class="inform">
-			<input id="logo" type="file"  name="muat_naik" onfocus="(this.type='file')" onblur="(this.type='file')" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
-		</div>
-
 		<div class="default_button_holder">
 			<input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-cawangan-4.html">
 		</div>
@@ -221,7 +201,7 @@
 	$("#btn_submit").click(function(e){
 		
 		/*Clear all highlighted*/
-		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu,#logo').css({"border":"","box-shadow":""});
+		$('#p_tmesyuarat,#bil_ahli,#akta_selection,#no_akta_dahulu').css({"border":"","box-shadow":""});
 		
 		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
 		var ahliCinaP = $('#ahli_cina_perempuan').val();
@@ -233,9 +213,8 @@
 		var ahliLainL = $('#ahli_lain2_lelaki').val();
 		var p_tmesyuarat = $('#p_tmesyuarat').val();
 		var bil_ahli = $('#bil_ahli').val();
-		var dengan_logo = $('#dengan_logo').val();
 		var bawah_akta = $('#bawah_akta').val();
-		var dengan_logo = $('#dengan_logo').val();
+		
 		
 		empty = false;
 	
@@ -248,11 +227,6 @@
 		if(bil_ahli.length == 0)
 		{
 			$('#bil_ahli').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(dengan_logo.length == 0)
-		{
-			$('#logo_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
 		if(bawah_akta.length == 0)
@@ -269,15 +243,7 @@
 					empty = true;
 				}
 		}
-		if(dengan_logo == 'Y')
-		{
-				var logo = $('#logo').val();
-				if(logo.length == 0)	{
-						
-					$('#logo').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-					empty = true;
-				}
-		}
+		
 		
 		if(empty == true)
 		{
@@ -309,11 +275,9 @@
 					ahliLainP : ahliLainP,
 					p_tmesyuarat : p_tmesyuarat,
 					bil_ahli : bil_ahli,
-					dengan_logo : dengan_logo,
 					bawah_akta : bawah_akta,
 					no_akta_dahulu : no_akta_dahulu,
-					logo : logo,
-
+					
 				},
 				beforeSend: function() {
 						run_waitMe();
