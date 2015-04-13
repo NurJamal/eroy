@@ -158,11 +158,6 @@
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 			empty = true;
 		}
-		if(!ValidateEmail(emel))
-		{
-			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
 		else if (mesej_berkenaan.length == 0)
 		{
 			$(".selection").css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -190,65 +185,79 @@
 				}
 			);
 		}
-		else 
+		else if(empty == false)
 		{
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/api_hubungi_kami.php",
-					type:'POST',
-					data: 
+			if(!ValidateEmail(emel))
+			{
+				$.alert
+				(
 					{
-						nama : nama,
-						emel : emel,
-						mesej_berkenaan : mesej_berkenaan,
-						mesej : mesej
-						//captcha : captcha
-					},	
-					beforeSend: function() 
-					{
-						run_waitMe();
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Hubungi Kami',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-										window.location.href = "index.html";
-									}
-								}
-							);
-						}
-						else if (json.status == 'error') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Hubungi Kami',
-									content: json.message,
-									confirm: function(){}
-								}
-							);
-						}
-						else{}
-						$('body').waitMe('hide');
+						title: 'Perhatian',
+						content: 'Sila Isikan Format Emel yang Betul',
+						confirm: function(){}
 					}
-				}
-			);		
-		}
-				
+				);
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else 
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/api_hubungi_kami.php",
+						type:'POST',
+						data: 
+						{
+							nama : nama,
+							emel : emel,
+							mesej_berkenaan : mesej_berkenaan,
+							mesej : mesej
+							//captcha : captcha
+						},	
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success:function(data)
+						{
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Hubungi Kami',
+										content: json.message,
+										confirm: function()
+										{
+											$('body').waitMe('hide');
+											window.location.href = "index.html";
+										}
+									}
+								);
+							}
+							else if (json.status == 'error') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Hubungi Kami',
+										content: json.message,
+										confirm: function(){}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);		
+			}
+		}	
 	});
 	
 	/*Set current menu to fix*/
