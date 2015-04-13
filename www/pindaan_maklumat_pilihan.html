@@ -105,11 +105,34 @@
 		return arr; 
 	}
 
-	$('#btn_submit').click(function () 
+	$('#btn_submit').click(function() 
 	{
-		//$('#result').html(jenisPindaanArray());
-		window.localStorage['ID_JENIS_PINDAAN'] = JSON.stringify(jenisPindaanArray());
-		window.location.href = "pindaan_maklumat_form.html";
+		var selectedChoice = [];
+		
+		for( var i = 0 ; i < 4 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedChoice.push($("#c_box"+i).val());
+			}
+		}
+		if( selectedChoice.length <= 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Tandakan Satu Pilihan',
+					confirm: function(){}
+				}
+			);
+		}	
+		else
+		{
+			//$('#result').html(jenisPindaanArray());
+			window.localStorage['ID_JENIS_PINDAAN'] = JSON.stringify(jenisPindaanArray());
+			window.location.href = "pindaan_maklumat_form.html";
+		}
 	});
 	
 	</script>
