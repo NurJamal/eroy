@@ -24,93 +24,86 @@
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
-	
+ 	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-	<div class="containerBlock">
-		<!-- header title -->
-		<div class="content_title">
-			<div class="input-group add-on search-box">
-				<div class="input-group-btn">
-					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
-				</div>
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PINDAAN CAWANGAN</h1>
 			</div>
 		</div>
-		<!-- end of header-title-->
-	
-		<div id="content">	
-			<a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
-			<div id="box_icon">
-				<h2 class="li1" id="nama_pertubuhan">KELAB SELSA MALAYSIA</h2>
-				<h2 class="li2" id="tarikh_permohonan">No Sijil/Daftar:<b> J09732</b></h2>
-				<h2 class="li2" id="status">Status: -</h2><h2></h2>
-			</div></a>
+	</div>
+	<!-- end of header-title-->
+
+	<div id="content">
+		<h2 class="_orange_text" style="margin-top:13px">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+		
+		<div class="dis_selection">
+				<h6 id="_orange_title">Bentuk Bayaran</h6>	
+				<h2 id="_text">Atas Talian</h2>	
+		</div>
+		
+		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+		
+		<div class="display">
+			<input type="text" style="margin-top:-2px" name="nama penuh" id="frm_nama" placeholder="RM 2.00" disabled><br/>
+		</div>
+		
+		<div class="default_button_holder">
+			<input class="default_button" type="button" value="BAYAR" id="btn_submit">
 		</div>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>	
+	<script src="js/nav.js"></script>
 	
 	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	
+
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
-	 
-	<!--Loading Indicator -->
+	
+	<!--Loading Indicator. -->
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();
+
+		$.alert
+		(
+			{
+				title: 'Perhatian',
+				content: 'Payment is Under Construction',
+				confirm: function()
+				{
+					$('body').waitMe('hide');
+					//window.location.href = "";
+				}
+			}
+		);
 	
-	//alert(kad_pengenalan);
+	});
+	
 	
 	
 	</script>
-	
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
-			}
-		});
-
-	});
-	</script> -->
-	
-	
 	</body>
 </html>
