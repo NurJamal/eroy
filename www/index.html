@@ -96,25 +96,24 @@
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-	
+	<script src="phonegap.js"></script> 
+	<script src="cordova.js"></script> 
+	<script src="cordova_plugins.js"></script>
 	<script>
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() 
 	{
       	var devicePlatform = cordova.platformId;
 		alert(devicePlatform);
-		StatusBar.overlaysWebView(false);
+		//StatusBar.overlaysWebView(false);
 	}
 	
-	function onDeviceReady() 
-	{
-      	alert("TEST");
-		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
-	}
-	
+
 	function test() 
 	{
       	alert("TEST");
+		//window.open('http://www.google.com', '_system', 'location=yes');
+		return false;
 		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
 	}
 
