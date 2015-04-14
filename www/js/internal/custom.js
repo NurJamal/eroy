@@ -214,7 +214,7 @@
 							.find('option')
 							.remove()
 							.end();
-						
+							$('#'+id).append('<option value="">Pilih Daerah</option>');
 							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()

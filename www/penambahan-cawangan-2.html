@@ -8,6 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -29,7 +33,7 @@
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -53,26 +57,29 @@
 			<div class="selection">
 					<h5 id="_orange_title">Peringkat</h5>
 					<form action="">
-						<select id="peringkat" name="peringkat" class="_sel">
-						<option value="none"></option>
+						<select id="peringkat" name="peringkat" class="_sel" onchange="getPeringkat()">
+						<option value="">Pilih Peringkat</option>
+						<option value="1">Negeri</option>
+						<option value="2">Daerah</option>
+						<option value="3">Cawangan</option>
 						</select>
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" id="negeri_sel">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="negeri" name="negeri" class="_sel">
-						<option value="none"></option>
+						<select id="negeri" name="negeri" class="_sel" onchange="getDaerahFromSelectedCountry()">
+						<option value="">Pilih Negeri</option>
 						</select>
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" id="daerah_sel">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
 						<select id="daerah" name="daerah" class="_sel">
-						<option value="none"></option>
+						<option value="">Pilih Daerah</option>
 						</select>
 					</form>		
 			</div>
@@ -81,11 +88,14 @@
 				<input type="text" name="lokaliti" id="lokaliti" placeholder="Lokaliti">
 				
 			<div class="display">
-				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan">			
-				<input type="text" name="n_pertubuhan" id="n_pertubuhan" placeholder="Nama Penuh Pertubuhan">
+				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan" disabled>			
+				<input type="text" name="n_pertubuhan" id="n_pertubuhan" placeholder="Nama Penuh Pertubuhan" disabled>
 			</div>
 			
-				<input type="text" name="no_kp" id="no_kp" placeholder="No. Kad Pengenalan">
+				
+				<div class="searchIcon" id="search" onclick="getIC()"></div><!-- <img src="img/carian-icon.png" height="30" width="30"> -->
+					<input type="text" name="no_kp" id="no_kp" placeholder="No. Kad Pengenalan" style=" width: 85%;">
+				
 				<input type="text" name="n_setiausaha" id="n_setiausaha" placeholder="Nama Setiausaha">
 				<input type="text" name="emel_setiausaha" id="emel_setiausaha" placeholder="Emel Setiausaha">
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan">
@@ -98,7 +108,7 @@
 			
 			</div>		
 	</form>
-		
+		</div>
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
@@ -111,6 +121,319 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator. -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+		$('#negeri_sel').hide();
+		$('#daerah_sel').hide();
+		$('#lokaliti').hide();
+		getCountry($('#negeri').attr('id'),'');	
+
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kod_nama_pertubuhan = window.localStorage.getItem('KOD_PERTUBUHAN');
+		var no_kad_pendaftar = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/get_nama_penuh_pertubuhan.php",
+						type:'POST',
+						data: {
+							kod_nama_pertubuhan : kod_nama_pertubuhan,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var xmlDoc = $.parseXML(data),
+							$xml = $(xmlDoc);
+							$(data).find("tb_nama_pertubuhan").each(function(){
+								$("#nama_ringkasan").val($(this).find('nama_ringkasan').text());
+							});
+						$('body').waitMe('hide');
+						}
+					});
+		});
+
+		function getDaerahFromSelectedCountry()  
+		{
+			var selected_country = $('#negeri').val();
+			getDaerah(selected_country,$('#daerah').attr('id'));	
+		}
+
+		function getPeringkat()
+		{
+			$('#n_pertubuhan').val("");
+			$('#negeri').val("");
+			$('#daerah')
+			.find('option')
+			.remove()
+			.end();
+			$('#daerah').append('<option value="">Pilih Daerah</option>');
+
+			if($('#peringkat').val() == "1")
+			{
+				$('#negeri_sel').show();
+				$('#daerah_sel').hide();
+				$('#lokaliti').hide();
+			}else if($('#peringkat').val() == "2")
+			{
+				$('#negeri_sel').show();
+				$('#daerah_sel').show();
+				$('#lokaliti').hide();
+			}else if($('#peringkat').val() == "3")
+			{
+				$('#negeri_sel').show();
+				$('#daerah_sel').show();
+				$('#lokaliti').show();
+			}else
+			{
+				$('#negeri_sel').hide();
+				$('#daerah_sel').hide();
+				$('#lokaliti').hide();
+			}
+		}
+
+		$("#lokaliti").keyup(function() 
+		{
+			var sel_peringkat = $('#peringkat').val();
+			if(sel_peringkat == 3){
+				//var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
+				//var sel_kategori_txt = $('#sel_kategori option:selected').text();
+				var f_negeri = $('#negeri option:selected').text();
+				var f_daerah = $('#daerah option:selected').text()
+				var f_nama_ringkasan = $('#nama_ringkasan').val();
+				var f_lokaliti = $('#lokaliti').val();
+			
+				if(f_nama_ringkasan.length > 0)
+				{
+					var nama_ringkasan = f_nama_ringkasan;
+				}
+				
+				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+f_daerah);
+			}
+		});
+
+		$("#negeri, #daerah").change(function(){
+			var sel_peringkat = $('#peringkat').val();
+			var f_negeri = $('#negeri option:selected').text();
+			var f_daerah = $('#daerah option:selected').text();
+			var f_daerahVal = $('#daerah').val();
+			var f_nama_ringkasan = $('#nama_ringkasan').val();
+			var f_lokaliti = $('#lokaliti').val();
+
+			if(f_daerahVal != "")
+			{
+				var daerah = f_daerah;
+			}else
+			{
+				var daerah = "";
+			}
+			if(f_nama_ringkasan.length > 0)
+			{
+				var nama_ringkasan = f_nama_ringkasan;
+			}
+			
+			if(sel_peringkat == 1){
+				$('#n_pertubuhan').val(nama_ringkasan);
+			}else if(sel_peringkat == 2){
+				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+daerah);
+			}else if(sel_peringkat == 3){
+				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+daerah);
+			}
+		});
+
+		$("#btn_submit").click(function(e){
+			redisplayHeader();
+			var empty = false;
+			e.preventDefault();
+
+			$('#no_kp,#n_setiausaha,#emel_setiausaha,#emel_pertubuhan,#no_tel').css({"border":"","box-shadow":""});
+
+			var peringkat = $('#peringkat').val();
+			var negeri = $("#negeri").val();
+			var daerah = $("#daerah").val();
+			var lokaliti = $("#lokaliti").val();
+			var no_kp = $("#no_kp").val();
+			var n_setiausaha = $("#n_setiausaha").val();
+			var emel_setiausaha = $("#emel_setiausaha").val();
+			var emel_pertubuhan = $("#emel_pertubuhan").val();
+			var no_tel = $("#no_tel").val();
+			var nama_ringkasan = $("#nama_ringkasan").val();
+			var n_pertubuhan = $('#n_pertubuhan').val();
+
+			if( no_kp.length == 0 )
+			{
+				$('#no_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if( n_setiausaha.length == 0 )
+			{
+				$('#n_setiausaha').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if( emel_setiausaha.length == 0 )
+			{
+				$('#emel_setiausaha').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if( emel_pertubuhan.length == 0 )
+			{
+				$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if( no_tel.length == 0 )
+			{
+				$('#no_tel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+			}
+
+			if(empty == true)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila isikan tempat kosong!',
+						confirm: function(){				
+						}
+					}
+				);
+			}
+			else if(empty == false)
+			{
+				if(!ValidateEmail(emel_pertubuhan))
+				{
+					$.alert
+					(
+						{
+							title: 'Perhatian',
+							content: 'Sila Isikan Format Emel yang Betul',
+							confirm: function(){ }
+						}
+					);
+					$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				} else if(!ValidateEmail(emel_setiausaha))
+				{
+					$.alert
+					(
+						{
+							title: 'Perhatian',
+							content: 'Sila Isikan Format Emel yang Betul',
+							confirm: function(){ }
+						}
+					);
+					$('#emel_setiausaha').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				} else
+				{
+					$(function() 
+					{
+						$.ajax({
+								url:"http://eroy.me-tech.com.my/api/penambahan_cawangan.php",
+								type:'POST',
+								data: {
+									peringkat : peringkat,
+									negeri : negeri,
+									daerah : daerah,
+									lokaliti : lokaliti,
+									no_kp : no_kp,
+									kod_nama_pertubuhan : kod_nama_pertubuhan,
+									emel_pertubuhan : emel_pertubuhan,
+									no_kad_pendaftar : no_kad_pendaftar,
+									nama_ringkasan : nama_ringkasan,
+									n_pertubuhan : n_pertubuhan,
+								},
+								beforeSend: function() {
+										run_waitMe();
+									},
+								success:function(data){
+									var json = $.xml2json(data);
+									console.log(json);
+									if (json.status == 'ok') {
+										$.alert
+										(
+											{
+												title: 'Status',
+												content: json.message,
+												confirm: function(){
+													window.location.href = "penambahan-cawangan-1.html";
+												}
+											}
+										);
+									
+									}
+									else if (json.status == 'error') {
+										$.alert
+										(
+											{
+												title: 'Status',
+												content: json.message,
+												confirm: function(){
+												}
+											}
+										);
+									}
+									else{}
+									$('body').waitMe('hide');
+								}
+							});
+					});
+				}
+			}
+		});
+
+		function getIC()
+		{
+			var ic = $("#no_kp").val();
+
+			if(ic.length > 0)
+			{
+				$(function() 
+				{
+					$.ajax({
+							url:"http://eroy.me-tech.com.my/api/get_setiausaha.php",
+							type:'POST',
+							data: {
+								ic : ic,
+							},
+							beforeSend: function() {
+									run_waitMe();
+								},
+							success:function(data){
+								var xmlDoc = $.parseXML(data),
+								$xml = $(xmlDoc);
+								$(data).find("tb_profile").each(function(){
+									$("#n_setiausaha").val($(this).find('nama').text());
+									$("#emel_setiausaha").val($(this).find('emel').text());
+									$("#no_tel").val($(this).find('no_tel').text());
+								});
+								$(data).find("status").each(function(){
+									$.alert
+									(
+										{
+											title: 'Status',
+											content: 'No Kad Pengenalan tidak dijumpai',
+											confirm: function(){}
+										}
+									);
+								});
+							$('body').waitMe('hide');
+							}
+						});
+				});
+			}
+		}
+
+	</script>
 		
   </body>
 </html>
