@@ -655,14 +655,14 @@ input[type=checkbox] {
  .checkbox label{
 	color: #f9690e;
 	font-size: 18px;
-	margin-right: 15px; 
+	margin-right: 5px; 
 	word-wrap:break-word;
 }
 
 .checkbox2 label{
 	color: #3f3f3f;
 	font-size: 18px;
-	margin-right: 15px; 
+	margin-right: 5px; 
 	word-wrap:break-word;
 }
  
