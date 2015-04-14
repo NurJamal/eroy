@@ -8,10 +8,14 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
+
 	</head>
 	<body>
 	
@@ -25,45 +29,49 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="" onclick="goBack()"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="" onclick="goBack()">
+			<img src="img/back-icon.png" class="back_icon" align="left"/>
+		</a>
 	</div>	
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PENAMBAHAN CAWANGAN</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PENAMBAHAN CAWANGAN</h1>
+				</div>
 			</div>
+		
 		</div>
-	
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
+		<!-- end of header-title-->
 		
-	<!-- form -->
-	
-	<form>
-	
-	</br>
-	
-	
-	<center>
-			<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-			<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
-	</center>
-	</form>
+		<div id="content">
 		
-	<div id="scrolladd">
-			<center><a href="#" onclick="addCawangan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
 			
+		<!-- form -->
+		
+		<form>
+		
+		</br>
+		<div id="content-senarai">
+			<table style="margin-top:10px" width = "100%">
+				<tbody id="table_senarai">
+				</tbody>
+			</table>
+		</div>
+		<!-- <center>
+				<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
+				<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
+		</center> -->
+		</form>
+			
+		<div id="scrolladd">
+				<center><a href="#" onclick="addCawangan()"><img src="img/add_icon.png" class="scrolladd_icon"></a></center>	
+				
+		</div>
+		<!-- end of form -->
 	</div>
-	<!-- end of form -->
-	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -75,7 +83,77 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 		
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator. -->
+	<script src="js/waitMe.js"></script>
+
 	<script>
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/get_senarai_cawangan.php",
+						type:'POST',/*
+						data: {
+							kod_nama_pertubuhan : kod_nama_pertubuhan,
+						},*/
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							if (json.status == 'ok') 
+							{
+								$.each(json.laporan_negeri, function (index, value) {
+
+									/*Mengikut Negeri*/
+									$.each(value, function (zon_index, per_zone) {
+										$('#table_senarai').append('<tr><td><font color="#F9690E">Negeri</font> - '+per_zone.nama_zon+'</td></tr>');
+										/*Mengikut Daerah*/
+										$.each(per_zone.negeri, function (state_index, per_state) {
+											$('#table_senarai').append('<tr><td class="indentDaerah"><font color="#F9690E">Daerah</font> - '+per_state.nama_negeri+'</td></tr>');
+											/*Mengikut Cawangan*/
+											$.each(per_state.cawangan, function (index, per_cawangan) {
+												console.log(zon_index);
+												if(index == 0)
+												{
+													$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_cawangan.nama_cawangan+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass"><label for="c_box1"></label><img src="img/pelaporan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></td></tr>');
+												}else
+												{
+													$('#table_senarai').append('<tr><td class="indentCawangan2">'+per_cawangan.nama_cawangan+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass"><label for="c_box1"></label><img src="img/pelaporan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></td></tr>');
+												}
+												
+											});
+										});
+										$('#table_senarai').append('<tr><td>&nbsp;</td></tr>');
+									});
+									$('#table_senarai').append('<tr><td>Nota : Bayaran telah dijelaskan</td></tr>');
+									$('#content-senarai').append('<br><br><input class="default_button" type="button" value="BAYAR" id="btn_submit">');
+
+								});
+
+							}
+							else if (json.status == 'error') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Perhatian',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					});
+		});
+
 		function addCawangan()
 		{
 			window.location.href = "penambahan-cawangan-2.html";

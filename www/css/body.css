@@ -15,8 +15,12 @@ body{
 
 }
 
-#content-box_pemegang {
+#content- {
   padding-bottom: 80px;
+}
+
+#content-senarai {
+	padding-bottom: 80px;
 }
 
 #content {
@@ -547,6 +551,20 @@ h2._orange_text{
 	padding-left: 10px;
 }
 
+.searchIcon{
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	background-image: url("img/carian-icon.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+	height: 50px;
+	width: 15%;
+	float: right;
+	margin-top: 8px;
+}
 .imgEdit {
     float: right;
     margin-top: -17px;
@@ -917,4 +935,16 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .inputWrapper.clicked {
     background-color: #A66;
+}
+
+.indentDaerah{
+    padding-left: 10px;
+}
+
+.indentCawangan{
+    padding-left: 20px;
+}
+
+.indentCawangan2{
+    padding-left: 122px;
 }
