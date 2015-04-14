@@ -704,7 +704,18 @@
 		//navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
 	}
 	
-	
+function highlightID(id)
+{
+	var div_id = id;
+	var colour_id = '#f4f4f4';
+
+	$('#'+div_id).click(function() {
+   		$(this).css("backgroundColor", colour_id); 
+	});
+
+}
+
+
 	
 	
 	
