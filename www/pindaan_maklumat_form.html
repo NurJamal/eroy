@@ -67,10 +67,10 @@
 					<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
 					
 					<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-					<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
+					<h1 class="_dark_text" id="d_npertubuhan"></h1>
 					
 					<h2 class="_orange_text">No Daftar/Sijil</h2>
-					<h1 class="_dark_text">T45678</h1>
+					<h1 class="_dark_text" id="d_no_sijil"></h1>
 					
 					<input type="text" name="p_npertubuhan" id="p_npertubuhan" placeholder="Nama Pertubuhan"><br/>
 					<input type="text" name="p_nringkasan" id="p_nringkasan" placeholder="Nama Ringkasan"><br/>
@@ -81,7 +81,7 @@
 			<div id="pindaan_alamat">	
 				<div class="inform">	
 					<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-					<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
+					<h1 class="_dark_text" id="d_alamat"></h1>
 					
 					<h2 class="_orange_text">Pindaan Alamat Tempat Urusan</h2>
 					<input type="text" name="p_alamat1" id="p_alamat1" placeholder="Alamat 1"><br/>
@@ -155,13 +155,14 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	var jenis_id = JSON.parse(localStorage['ID_JENIS_PINDAAN']);
+	
 	$('#pindaan_nama').hide();
 	$('#pindaan_alamat').hide();
 	$('#pindaan_logo').hide();
-	
-	var jenis_id = JSON.parse(localStorage['ID_JENIS_PINDAAN']);
-	
-	
+
 	for (i = 0; i < jenis_id.length ; i++)
 	{
 		var temp_id = jenis_id[i];
@@ -228,6 +229,49 @@
 		}
 	});
 
+	
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_induk.php",
+				dataType: "xml",
+				data : 
+				{
+					kad_pengenalan : kad_pengenalan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var alamat1 = $(this).find("alamat1");
+						var alamat2 = $(this).find("alamat2");
+						var alamat3 = $(this).find("alamat3");
+						
+						$('body').waitMe('hide');
+						
+						$('#d_npertubuhan').html($(nama_penuh_pertubuhan).text());
+						$('#d_no_sijil').html($(no_sijil).text());
+						$('#d_no_sijil').html($(no_sijil).text());
+						$('#d_alamat').html($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
+					});
+				}
+			}
+		);
+	});
 	</script>
 	</body>
 </html>
