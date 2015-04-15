@@ -151,7 +151,7 @@
 	{
 		var selectedChoice = [];
 		
-		for( var i = 0 ; i < 3 ; i++ )
+		for( var i = 0 ; i < 5 ; i++ )
 		{
 			if($("#c_box"+i).is(":checked"))
 			{		
@@ -171,7 +171,7 @@
 		}	
 		else
 		{
-			//$('#result').html(jenisPindaanArray());
+			//alert(jenisPindaanArray());
 			window.localStorage['ID_JENIS_PINDAAN'] = JSON.stringify(jenisPindaanArray());
 			window.location.href = "pindaan_maklumat_form.html";
 		}

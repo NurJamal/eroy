@@ -114,7 +114,7 @@
 			
 			<div id="btn1">
 				<div class="default_button_holder">
-					<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+					<a href="pindaan_maklumat_pembayaran.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
 				</div>
 			</div>
 			
@@ -154,6 +154,12 @@
 	$('#pindaan_nama').hide();
 	$('#pindaan_alamat').hide();
 	$('#pindaan_logo').hide();
+	
+	$('#pindaan_nama :input').prop('disabled', true);
+	$('#pindaan_alamat :input').prop('disabled', true);
+	$('#pindaan_logo :input').prop('disabled', true);
+	$('#btn1 :input').prop('disabled', true);
+	$('#btn2 :input').prop('disabled', true);
 
 	for (i = 0; i < jenis_id.length ; i++)
 	{
@@ -182,12 +188,6 @@
 		else{}
 	}
 	
-	$('#pindaan_nama :input').prop('disabled', true);
-	$('#pindaan_alamat :input').prop('disabled', true);
-	$('#pindaan_logo :input').prop('disabled', true);
-	$('#btn1 :input').prop('disabled', true);
-	$('#btn2 :input').prop('disabled', true);
-
 	$('#p_tmesyuarat').on('change', function()
 	{
 		var selectedDate = $.trim($("#p_tmesyuarat").val());
