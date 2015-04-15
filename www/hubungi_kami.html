@@ -11,7 +11,6 @@
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
-		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -64,14 +63,9 @@
 					<input type="text" name="f_mesej" id="f_mesej" placeholder="Mesej" class="mesej"><br/>
 					
 					<h5 id="H5" style="margin-left:5px;">Untuk mengelak dari <i>SPAM</i>, sila nyatakan perkataan di bawah: </h5>
-					
-					<img id="captcha_code" src="http://eroy.me-tech.com.my/api/captcha_code.php" width="120" height="45" style="margin-left:5px" />
-					
-					<img id="captcha_code" src="img/reload_icon.png"  style="padding: 10px; width: 40px; height:auto;" onClick="refreshCaptcha();" />
-					
-					<input type="text" name="f_captcha" id="f_captcha"  >
-					
-					
+					<span id="txtCaptchaDiv" style="background-color:#FFF;color:#000;padding:5px"></span>
+					<input type="hidden" id="txtCaptcha" />
+					<input type="text" name="f_captcha" id="f_captcha" size="15" />					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="HANTAR" id="btn_submit">
 					</div>
@@ -186,8 +180,21 @@
 			);
 		}
 		else if(empty == false)
-		{
-			if(!ValidateEmail(emel))
+		{	
+			if(!checkform(captcha))
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila semak Captcha anda',
+						confirm: function(){}
+					}
+				);
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			
+			else if(!ValidateEmail(emel))
 			{
 				$.alert
 				(
@@ -262,6 +269,44 @@
 	
 	/*Set current menu to fix*/
 	window.localStorage.setItem("_MENU_FIX", "TRUE");
+
+ 	//Generates the captcha function
+ 	var a = Math.ceil(Math.random() * 9)+ '';
+ 	var b = Math.ceil(Math.random() * 9)+ '';
+ 	var c = Math.ceil(Math.random() * 9)+ '';
+ 	var d = Math.ceil(Math.random() * 9)+ '';
+ 	var e = Math.ceil(Math.random() * 9)+ '';
+
+ 	var code = a + b + c + d + e;
+ 	document.getElementById("txtCaptcha").value = code;
+ 	document.getElementById("txtCaptchaDiv").innerHTML = code;
+	
+ 	function checkform(captcha) {
+ 	if(captcha != "") {
+ 		if(ValidCaptcha(captcha) == false) {
+ 			return false
+ 		}
+		return true;
+ 	}
+ 	}
+
+ 	/*Captcha validation function*/
+ 	function ValidCaptcha() {
+ 		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+ 		var str2 = removeSpaces(document.getElementById('f_captcha').value);
+ 		if (str1 == str2) {
+ 		return true;
+ 		}
+ 		else
+ 		{
+ 		return false;
+ 		}
+ 	}
+
+ 	// Remove the spaces from the entered and generated code
+ 	function removeSpaces(string) {
+ 		return string.split(' ').join('');
+ 	}
 	
 	</script>
   </body>
