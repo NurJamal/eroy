@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -185,11 +186,11 @@
 				(
 					{
 						title: 'Perhatian',
-						content: 'Sila semak Captcha anda',
+						content: 'Sila semak Captcha Anda',
 						confirm: function(){}
 					}
 				);
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				$('#f_captcha').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			}
 			
 			else if(!ValidateEmail(emel))
@@ -217,7 +218,6 @@
 							emel : emel,
 							mesej_berkenaan : mesej_berkenaan,
 							mesej : mesej
-							//captcha : captcha
 						},	
 						beforeSend: function() 
 						{
@@ -279,13 +279,16 @@
  	document.getElementById("txtCaptcha").value = code;
  	document.getElementById("txtCaptchaDiv").innerHTML = code;
 	
- 	function checkform(captcha) {
- 	if(captcha != "") {
- 		if(ValidCaptcha(captcha) == false) {
- 			return false
- 		}
-		return true;
- 	}
+ 	function checkform(captcha) 
+	{
+		if(captcha != "") 
+		{
+			if(ValidCaptcha(captcha) == false) 
+			{
+				return false
+			}
+			return true;
+		}
  	}
 
  	/*Captcha validation function*/
@@ -302,10 +305,10 @@
  	}
 
  	// Remove the spaces from the entered and generated code
- 	function removeSpaces(string) {
+ 	function removeSpaces(string) 
+	{
  		return string.split(' ').join('');
  	}
-	
 	</script>
   </body>
 </html>
