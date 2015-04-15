@@ -124,7 +124,7 @@
 						var alamat_pos = $(this).find("alamat_pos1");
 						var alamat_pos1 = $(this).find("alamat_pos2");
 						var alamat_pos2 = $(this).find("alamat_pos3");
-						var peringkat_pertubuhan = $(this).find("dummy_peringkat_pertubuhan");
+						var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
 						var no_sijil = $(this).find("no_sijil");
 						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
 						
@@ -135,8 +135,8 @@
 						$('#content').show();
 						
 						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
-						$('#alamat_urusan').html($(alamat_urusan).text()+' '+$(alamat_urusan1).text()+' '+$(alamat_urusan2).text()+'<br/>');
-						$('#alamat_pos').html($(alamat_pos).text()+' '+$(alamat_pos1).text()+' '+
+						$('#alamat_urusan').html($(alamat_urusan).text()+', '+$(alamat_urusan1).text()+', '+$(alamat_urusan2).text()+'<br/>');
+						$('#alamat_pos').html($(alamat_pos).text()+', '+$(alamat_pos1).text()+', '+
 						$(alamat_pos2).text()+'<br/>');
 						$('#peringkat_pertubuhan').html($(peringkat_pertubuhan).text()+'<br/>');
 						$('#no_sijil').html($(no_sijil).text()+'<br/>');
