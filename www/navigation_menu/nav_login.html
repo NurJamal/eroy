@@ -22,10 +22,14 @@
 	<script>
 	function openPDF() {
 		window.open('https://drive.google.com/file/d/0B7yl9kUZSHAWQURGTl9TR1NqVnM/view?usp=sharing', '_system', 'location=yes')
-}
+	}
 		/* --- SET USERNAME --- */
 		$("#nav_nama").html(window.localStorage.getItem("NAMA"));
 		
 		/* --- SET MENU FIX TO FALSE--- */
 		window.localStorage.setItem("_MENU_FIX", "FALSE");	
+
+
+	highlight($('.menu').attr('class'),'red');
+
 	</script>
