@@ -58,7 +58,6 @@
 				<h2 class="li2">No Sijil/Daftar:<b> A14321</b></h2>
 				<h2 class="li2">Status: -</h2><h2></h2>
 			</div></a>  -->
-			<div id="test">TEST</div>
 		</div>
 		<div id="content2" style="padding: 5px 3%; height: 100%;"></div>
 	</div>
@@ -90,7 +89,7 @@
 	
 	$(function() 
 	{
-		//$('#content').hide();
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -118,39 +117,28 @@
 						var status = $(this).find("status");
 						
 						$('body').waitMe('hide');
-						//$('#content').show();
+						$('#content').show();
 						
-						$("#content2").html("<div class='box_icon'>TEST</div>");
+						//$("#content2").html("<div class='box_icon'>TEST</div>");
 						
 						
-						//$("#content2").html("<div class='box_icon'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
+						$("#content2").html("<div class='box_icon'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
 					});
 				}
 			}
 		);
 	});	
 	
-	$('.box_icon').click(function(e)
+	$("div").click(function(e)
+	//$(".box_icon").on('click', function (e)
 	{
 		e.preventDefault();
-		alert("TEST");
+		//alert("TEST");
 		
 		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		//var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		//window.location.href = "pindaan_maklumat_pilihan.html";
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		window.location.href = "pindaan_maklumat_pilihan.html";
 	});
-	
-	$('#test').click(function(e)
-	{
-		e.preventDefault();
-		
-		alert("TEST");
-		
-		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		//var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		//window.location.href = "pindaan_maklumat_pilihan.html";
-	});
-	
 	
 	</script>	
 	</body>
