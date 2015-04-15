@@ -183,7 +183,10 @@
 		else if(temp_id == "3")
 		{
 			$('#pindaan_logo').show();
-			$('#btn2').hide();
+			if(jenis_id[i-1] != "2")
+			{
+				$('#btn2').hide();
+			}
 		}
 		else{}
 	}
