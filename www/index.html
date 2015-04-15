@@ -54,9 +54,9 @@
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
 
 			</div>	
-			<p><a href="#" onclick="window.open('http://www.google.com', '_blank', 'location=yes'); return false;">_blank</a></p>
-			<p><a href="#" onclick="window.open('http://www.google.com', '_system', 'location=yes'); return false;">_system</a></p>
-			<p><a href="#" onclick="test()">_self</a></p>
+			<p><span onclick="window.open('http://www.google.com', '_blank', ''); return false;">_blank</span></p>
+			<p><span rel="external" onclick="window.open('http://www.google.com', '_system', ''); return false;">_system</span></p>
+			<p><span onclick="test()">_self</span></p>
 			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
 		
 			<form method="post" target="_system"  action="http://payment.telcowin.com/payment.php">
@@ -96,7 +96,9 @@
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-	
+	<script src="phonegap.js"></script> 
+	<script src="cordova.js"></script> 
+	<script src="cordova_plugins.js"></script>
 	<script>
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() 
@@ -109,12 +111,17 @@
 	{
       	alert("TEST");
 		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
+		//StatusBar.overlaysWebView(false);
 	}
 	
+
 	function test() 
 	{
       	alert("TEST");
+		//window.open('http://www.google.com', '_system', 'location=yes');
 		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
+		return false;
+
 	}
 
 
@@ -125,6 +132,9 @@
 		
 		e.preventDefault();			
 
+		
+		
+		
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
 			$.alert
