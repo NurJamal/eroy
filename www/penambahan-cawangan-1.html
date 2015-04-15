@@ -55,7 +55,7 @@
 		
 		</br>
 		<div id="content-senarai">
-			<table style="margin-top:10px" width = "100%">
+			<table style="margin-top:10px" width = "100%" border=1>
 				<tbody id="table_senarai">
 				</tbody>
 			</table>
@@ -109,7 +109,7 @@
 								$.each(json.laporan_negeri, function (index, value) {
 									/*Mengikut Negeri*/
 									$.each(value, function (negeri_index, per_negeri) {
-										$('#table_senarai').append('<tr><td><font color="#F9690E">Negeri</font> - '+per_negeri.nama_negeri+'</td></tr>');
+										$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+per_negeri.nama_negeri+'</td></tr>');
 								
 										if (typeof per_negeri.daerah === "undefined") {
 										    /*Nothing To Do*/
@@ -122,7 +122,7 @@
 												    /*Nothing To Do*/
 												}else
 												{
-												 	$('#table_senarai').append('<tr><td class="indentDaerah"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
+												 	$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
 												 
 												 	if (typeof per_daerah.cawangan === "undefined") {
 													    if(per_daerah.lokaliti.length != 0)
@@ -158,10 +158,10 @@
 													}
 												}
 											});
-											 $('#table_senarai').append('<tr><td>&nbsp;</td></tr>');
+											 $('#table_senarai').append('<tr><td colspan="2">&nbsp;</td></tr>');
 										}
 									});
-									 $('#table_senarai').append('<tr><td>Nota : Bayaran telah dijelaskan</td></tr>');
+									 $('#table_senarai').append('<tr><td colspan="2">Nota : Bayaran telah dijelaskan</td></tr>');
 									 $('#content-senarai').append('<br><br><input class="default_button" type="button" value="BAYAR" id="btn_submit">');
 								});
 
