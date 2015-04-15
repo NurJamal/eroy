@@ -89,22 +89,14 @@
 					<input type="text" name="p_alamat3" id="p_alamat3" placeholder="Alamat 3"><br/>
 				</div>
 			
-				<div class="selection">
+				<div class="selection_no_icon">
 					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="sel_negeri" name="sel_negeri" class="sel">
-						<option value="none"></option>
-						</select>
-					</form>		
+					<span id="d_pertubuhan_negeri"></span>
 				</div>
-			
-				<div class="selection">
+				
+				<div class="selection_no_icon" style="margin-top:13px">
 					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="sel_daerah" name="sel_daerah" class="sel">
-						<option value="none"></option>
-						</select>
-					</form>		
+					<span id="d_pertubuhan_daerah"></span>
 				</div>
 			</div>
 			
@@ -128,7 +120,7 @@
 			
 			<div id="btn2">
 				<div class="default_button_holder">
-					<input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit">
+					<a href="pindaan_maklumat_perlembagaan.html"><input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit"></a>
 				</div>
 			</div>
 		</div>
@@ -170,21 +162,22 @@
 		if(temp_id == "0")
 		{	
 			$('#pindaan_nama').show();
-			//$('#content').show();
+			$('#btn2').hide();
 		}
 		else if(temp_id == "1")
 		{
 			$('#pindaan_alamat').show();
-			//$('#content').show();
+			$('#btn2').hide();
 		}
 		else if(temp_id == "2")
 		{
-			window.location.href = "pindaan_maklumat_perlembagaan.html";
+			$('#btn1').hide();
+			$('#btn2').show();
 		}
 		else if(temp_id == "3")
 		{
 			$('#pindaan_logo').show();
-			//$('#content').show();
+			$('#btn2').hide();
 		}
 		else{}
 	}
@@ -211,12 +204,16 @@
 			$('#pindaan_nama :input').prop('disabled', false);
 			$('#pindaan_alamat :input').prop('disabled', false);
 			$('#pindaan_logo :input').prop('disabled', false);
+			$('#btn1 :input').prop('disabled', false);
+			$('#btn2 :input').prop('disabled', false);
 		}
 		else 
 		{
 			$('#pindaan_nama :input').prop('disabled', true);
 			$('#pindaan_alamat :input').prop('disabled', true);
 			$('#pindaan_logo :input').prop('disabled', true);
+			$('#btn1 :input').prop('disabled', true);
+			$('#btn2 :input').prop('disabled', true);
 			$.alert
 			(
 				{
@@ -229,8 +226,6 @@
 		}
 	});
 
-	
-	
 	$(function() 
 	{
 		$.ajax
@@ -260,13 +255,17 @@
 						var alamat1 = $(this).find("alamat1");
 						var alamat2 = $(this).find("alamat2");
 						var alamat3 = $(this).find("alamat3");
+						var negeri = $(this).find("negeri");
+						var daerah = $(this).find("Keterangan");
 						
 						$('body').waitMe('hide');
 						
 						$('#d_npertubuhan').html($(nama_penuh_pertubuhan).text());
 						$('#d_no_sijil').html($(no_sijil).text());
 						$('#d_no_sijil').html($(no_sijil).text());
-						$('#d_alamat').html($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
+						$('#d_alamat').html($(alamat1).text()+', '+$(alamat2).text()+', '+$(alamat3).text());
+						$('#d_pertubuhan_negeri').html($(negeri).text());
+						$('#d_pertubuhan_daerah').html($(daerah).text());
 					});
 				}
 			}
