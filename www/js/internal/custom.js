@@ -638,8 +638,16 @@
 														
 															$.each(fasal_list.sub_fasal, function (index_4_2, sub_fasal_nested_list)
 																{ 
-																	if(currentCode == sub_fasal_nested_list.ref_level && !(jQuery.inArray(currentCode,arrayCode) !== -1))
-																	{
+	if(currentCode == sub_fasal_nested_list.ref_level && !($.inArray(sub_fasal_nested_list.ref_level,arrayCode) !== -1))
+	{
+
+		alert(arrayCode);
+
+		alert(currentCode);
+
+
+
+
 																		var appendTD;
 																		for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
 																		{
@@ -649,7 +657,7 @@
 																		$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">'+appendTD+'<td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+sub_fasal_nested_list.id+'"></td></tr>');
 																		$('#fasal_'+sub_fasal_nested_list.id).append('<label for="c_box1">'+sub_fasal_nested_list.fasal+'</label>');										
 																																		arrayCode.push(currentCode)
-																		arrayCode.push(currentCode)
+											arrayCode.push(sub_fasal_nested_list.ref_level)
 	
 																	}
 																});	
