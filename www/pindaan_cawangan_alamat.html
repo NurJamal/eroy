@@ -164,6 +164,7 @@
 				{
 					run_waitMe();
 				},
+
 				success: function(xml, data)
 				{
 					
@@ -193,12 +194,12 @@
 		var alamat = $.trim($("#pinda_alamat1").val());
 		var empty = false;
 		
-		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css*/
 		$('#pinda_alamat1, #p_min_mesyuarat').css({"border":"","box-shadow":""});
 		
 		e.preventDefault();
 		
-		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
+		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill*/
 		if(alamat.length == 0) 
 		{
 			$('#pinda_alamat1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
