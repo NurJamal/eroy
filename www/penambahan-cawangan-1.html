@@ -60,10 +60,7 @@
 				</tbody>
 			</table>
 		</div>
-		<!-- <center>
-				<h1 class="_dark_text">Tiada Rekod Dijumpai</h1>
-				<h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/>
-		</center> -->
+		<!-- -->
 		</form>
 			
 		<div id="scrolladd">
@@ -91,14 +88,20 @@
 	<script src="js/waitMe.js"></script>
 
 	<script>
+		var count = 0;
+		var kod_pertubuhan = window.localStorage.getItem("KOD_PERTUBUHAN");
 		$(function() 
 			{
 				$.ajax({
 						url:"http://eroy.me-tech.com.my/api/get_senarai_cawangan.php",
-						type:'POST',/*
+						type:'POST',
 						data: {
-							kod_nama_pertubuhan : kod_nama_pertubuhan,
-						},*/
+							kod_pertubuhan : kod_pertubuhan,
+						},
+						error: function(e) 
+						{
+							console.log(e);
+						},
 						beforeSend: function() {
 								run_waitMe();
 							},
@@ -107,46 +110,173 @@
 							if (json.status == 'ok') 
 							{
 								$.each(json.laporan_negeri, function (index, value) {
-
 									/*Mengikut Negeri*/
-									$.each(value, function (zon_index, per_zone) {
-										$('#table_senarai').append('<tr><td><font color="#F9690E">Negeri</font> - '+per_zone.nama_zon+'</td></tr>');
-										/*Mengikut Daerah*/
-										$.each(per_zone.negeri, function (state_index, per_state) {
-											$('#table_senarai').append('<tr><td class="indentDaerah"><font color="#F9690E">Daerah</font> - '+per_state.nama_negeri+'</td></tr>');
-											/*Mengikut Cawangan*/
-											$.each(per_state.cawangan, function (index, per_cawangan) {
-												console.log(zon_index);
-												if(index == 0)
+									if(Array.isArray(value))
+									{
+										$.each(value, function (negeri_index, per_negeri) {
+											
+											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+per_negeri.nama_negeri+'</td></tr>');
+											
+											if(per_negeri.peringkat !=1)
+											{
+												if(Array.isArray(per_negeri.daerah))
 												{
-													$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_cawangan.nama_cawangan+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass"><label for="c_box1"></label><img src="img/pelaporan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></td></tr>');
+
+													$.each(per_negeri.daerah, function (daerah_index, per_daerah) {
+												
+														if(per_daerah.peringkat == 2)
+														{
+															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
+														}else
+														{
+															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
+															if(Array.isArray(per_daerah.cawangan))
+															{
+																var countCawangan = per_daerah.cawangan.length;
+																for (var i = 0; i < countCawangan; i++) {
+																	if(i==0)
+																	{
+																		$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																		count++;
+																	}else
+																	{
+																		$('#table_senarai').append('<tr><td class="indentCawangan2">'+per_daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																		count++;
+																	}
+																}
+															}else
+															{
+																$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_daerah.cawangan.lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_daerah.cawangan.id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_daerah.cawangan.id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																count++;
+															}
+														}
+
+													});
 												}else
 												{
-													$('#table_senarai').append('<tr><td class="indentCawangan2">'+per_cawangan.nama_cawangan+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass"><label for="c_box1"></label><img src="img/pelaporan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></td></tr>');
-												}
-												
-											});
-										});
-										$('#table_senarai').append('<tr><td>&nbsp;</td></tr>');
-									});
-									$('#table_senarai').append('<tr><td>Nota : Bayaran telah dijelaskan</td></tr>');
-									$('#content-senarai').append('<br><br><input class="default_button" type="button" value="BAYAR" id="btn_submit">');
+					
+													if(per_negeri.daerah.peringkat == 2)
+													{
+														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
+													}else
+													{
+														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
+														if(Array.isArray(per_negeri.daerah.cawangan))
+														{
+															var countCawangan = per_negeri.daerah.cawangan.length;
 
+															for (var i = 0; i < countCawangan; i++) {
+																if(i == 0)
+																{
+																	$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_negeri.daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_negeri.daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_negeri.daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																	count++;
+																}else
+																{
+																	$('#table_senarai').append('<tr><td class="indentCawangan2">'+per_negeri.daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_negeri.daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_negeri.daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																	count++;
+																}
+															};
+														}else
+														{
+															$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+per_negeri.daerah.cawangan.lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+per_negeri.daerah.cawangan.id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+per_negeri.daerah.cawangan.id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																count++;
+
+														}
+													}
+												}
+											}
+											
+										});
+									}else
+									{
+										
+										if(value.peringkat == 1)
+										{
+											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
+										}else
+										{
+											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
+											
+											if(Array.isArray(value.daerah))
+											{
+												$.each(value.daerah, function(daerah_index, daerah_value){
+													
+													$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+daerah_value.nama_daerah+'</td></tr>');
+
+													if(daerah_value.peringkat != 2)
+													{
+														if(Array.isArray(daerah_value.cawangan))
+														{
+															var countTemp = daerah_value.cawangan.length;
+
+															for (var i = 0; i < countTemp; i++) {
+																if(i==0)
+																{
+																	$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+daerah_value.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+daerah_value.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+daerah_value.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																count++;
+																}else
+																{
+																	$('#table_senarai').append('<tr><td class="indentCawangan2">'+daerah_value.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+daerah_value.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+daerah_value.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																	count++;
+																}
+															};
+														}else
+														{
+															$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+daerah_value.cawangan.lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+daerah_value.cawangan.id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+daerah_value.cawangan.id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+													 		count++;
+														}
+													}
+												});
+											}else
+											{
+												$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+value.daerah.nama_daerah+'</td></tr>');
+
+												if(value.daerah.peringkat != 2)
+												{
+													if(Array.isArray(value.daerah.cawangan))
+													{
+														var countTemp = value.daerah.cawangan.length;
+
+														for (var i = 0; i < countTemp; i++) {
+															if(i == 0)
+															{
+																$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+value.daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+value.daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+value.daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																count++;
+															}else
+															{
+																$('#table_senarai').append('<tr><td class="indentCawangan2">'+value.daerah.cawangan[i].lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+value.daerah.cawangan[i].id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+value.daerah.cawangan[i].id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+																count++;
+															}
+														};
+													}else
+													{
+														$('#table_senarai').append('<tr><td class="indentCawangan"><font color="#F9690E">Cawangan</font> - '+value.daerah.cawangan.lokaliti+'</td><td><input type="checkbox" name="checkPerakuan" id="c_box'+count+'" class="checkboxClass" value="'+value.daerah.cawangan.id+'"><label for="c_box'+count+'"></label><a href="#" onclick="editMaklumat(\''+value.daerah.cawangan.id+'\')"><img src="img/pindaan-icon.png" width=25 height=25 style="margin-bottom: -8px;"></a></td></tr>');
+													 	count++;
+													}
+												}
+
+											}
+										}
+									}
+									console.log(count);
+									if(value.length == 1 && value.length>0)
+									{
+										$('#content-senarai').append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
+									}else
+									{
+										if(count != 0)
+										{
+											$('#table_senarai').append('<tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2">Nota : <img src="img/bayaran-jelas-icon.png" width=25 height=25 style="margin-bottom: -6px;"> Bayaran telah dijelaskan</td></tr>');
+									 		$('#table_senarai').append('<tr><td colspan="2"><div class="default_button_holder"><a href="#" onclick="test()"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a></div></td></tr>');
+										}
+									}
+									 
 								});
 
 							}
 							else if (json.status == 'error') 
 							{
-								console.log(json.status);
-								$.alert
-								(
-									{
-										title: 'Perhatian',
-										content: json.message,
-										confirm: function(){
-										}
-									}
-								);
+								$('#content-senarai').append('<center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1><h1 class="_dark_text">Sila tambah rekod dengan menekan butang "Tambah" di bawah</h1><br/></center>');
 							}
 							else{}
 							$('body').waitMe('hide');
@@ -154,9 +284,49 @@
 					});
 		});
 
+		function editMaklumat(id)
+		{
+			var ids = id;
+			window.localStorage.setItem("EDIT_MAKLUMAT_CAWANGAN", ids);
+			window.localStorage.setItem("MAKLUMAT_CAWANGAN", 'update');
+			window.location.href = "penambahan-cawangan-2.html";
+		}
+
 		function addCawangan()
 		{
+			window.localStorage.setItem("MAKLUMAT_CAWANGAN", 'add');
 			window.location.href = "penambahan-cawangan-2.html";
+		}
+
+		function test()
+		{
+			var selectedCawangan = [];
+		
+			for( var i = 0 ; i < count ; i++ )
+			{
+				if($("#c_box"+i).is(":checked"))
+				{		
+					selectedCawangan.push($("#c_box"+i).val());
+				}
+			}
+
+			if(selectedCawangan.length == 0)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila tandakan cawangan!',
+						confirm: function(){				
+						}
+					}
+				);
+			}else
+			{
+				window.localStorage.setItem("CAWANGAN_ARRAY", selectedCawangan);
+				window.location.href = "penambahan-cawangan-3.html";
+			}
+			
 		}
 	</script>
   </body>

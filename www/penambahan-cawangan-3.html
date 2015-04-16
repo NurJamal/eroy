@@ -8,6 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -29,58 +33,61 @@
 		
 	</div>	
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PENAMBAHAN CAWANGAN</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PENAMBAHAN CAWANGAN</h1>
+				</div>
 			</div>
+		
 		</div>
-	
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
+		<!-- end of header-title-->
 		
-	<!-- form -->
-	
-	<form>
-	
-		<div class="_form">
-	
-			<div class="selection">
-					<h5 id="_orange_title">Bentuk Bayaran</h5>
-					<form action="">
-						<select id="bayaran" name="bayaran" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-			</div>
+		<div id="content">
+		
 			
-						
-			<form id="" action="" method="POST">
-				<input type="text" name="wang_pos" id="wang_pos" placeholder="No. Wang Pos/Bank Draf"></br><br/>
-			
-			<h5 id="_orange_title">Jumlah wang yang perlu dibayar</h5>
-			
-			<div class="display">
-				<input type="text" name="jumlah_bayar" id="jumlah_bayar" placeholder="RM 30.00" disabled>			
-			</div>
+		<!-- form -->
+		
+		<form>
+		
+			<div class="_form">
+		
+				<div class="selection">
+						<h5 id="_orange_title">Bentuk Bayaran</h5>
+						<form action="">
+							<select id="bayaran" name="bayaran" class="_sel">
+							<option value="">Pilih Bayaran</option>
+							<option value="Bank_Draf">Bank Draf</option>
+							<option value="Wang_Pos">Wang Pos</option>
+							<option value="Bayaran_Atas_Talian">Bayaran Atas Talian</option>
+							</select>
+						</form>		
+				</div>
 				
-			</form>
+							
+				<form id="" action="" method="POST">
+					<input type="text" name="wang_pos" id="wang_pos" placeholder="No. Wang Pos/Bank Draf"></br><br/>
+				
+				<h5 id="_orange_title">Jumlah wang yang perlu dibayar</h5>
+				
+				<div class="display">
+					<input type="text" name="jumlah_bayar" id="jumlah_bayar" placeholder="" disabled>			
+				</div>
+					
+				</form>
+				
+				<div class="default_button_holder">
+					<a href="halaman_utama_pengguna_pendaftar.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
+				</div>
+				
+			</div>	
 			
-			<div class="default_button_holder">
-				<a href="halaman_utama_pengguna_pendaftarhtml"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
-			</div>
+		</form>
 			
-		</div>	
-		
-	</form>
-		
-	<!-- end of form -->
-	
+		<!-- end of form -->
+	</div>
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -91,6 +98,25 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator. -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+		var cawangan = window.localStorage.getItem('CAWANGAN_ARRAY');
+		$( document ).ready(function() {
+			var res = cawangan.split(",");
+			$('#jumlah_bayar').val("RM "+res.length+"0.00");
+		});
+
+		$('#btn_submit').click(function(e){
+
+		});
+	</script>
 		
   </body>
 </html>
