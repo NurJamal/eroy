@@ -54,12 +54,13 @@
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
 
 			</div>	
-			<p><span onclick="window.open('http://www.google.com', '_blank', ''); return false;">_blank</span></p>
-			<p><span rel="external" onclick="window.open('http://www.google.com', '_system', ''); return false;">_system</span></p>
+			<p><span onclick="window.open('http://www.google.com', '_blank',); return false;">_blank</span></p>
+			<p><span rel="external" onclick="window.open('http://www.google.com', '_system',); return false;">_system</span></p>
 			<p><span onclick="test()">_self</span></p>
 			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
-		
-			<form method="post" target="_system"  action="http://payment.telcowin.com/payment.php">
+			<a href="pindaan_maklumat_perlembagaan.html">Perlembagaan</a>
+			
+			<form method="post" onsubmit="test();" id="paymentForm">
 			<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
 			<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
 			<INPUT type="hidden" name="Amount" value="300">
@@ -111,11 +112,9 @@
 
 	function test() 
 	{
-      	alert("TEST");
-		//window.open('http://www.google.com', '_system', 'location=yes');
-		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
+		//$('#paymentForm').submit();
+		navigator.app.loadUrl('http://payment.telcowin.com/payment.php', { openExternal:true } );
 		return false;
-
 	}
 
 

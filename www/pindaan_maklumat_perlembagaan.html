@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-	<head>
+
+
+		<head>
 		<meta charset="utf-8">
 		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -8,25 +10,14 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+	<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-	
-		
-		
-		<!--Load to Local Later-->
-		<!--<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    
-		<!-- CSS file -->
-		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
-
-		
-
-</head>
-
-		
+	</head>
 		
 	
 	<body>
@@ -236,7 +227,24 @@
 			<a href="pindaan_maklumat_pembayaran.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
 		</div>
 	</div>
+	<style>
+		.tooltiptext{
+		display: none;
+	}
+	</style>
 	
+	<div class="tooltiptext">
+	   <table width="220" height="30">
+	   <tr align="center">
+	   <td width="5px"></td>
+	   <td><img src="img/addbottom-icon.png" width="28px" height="35px" id="addBottomToolTip"></td>
+	   <td><img src="img/addtop-icon.png" width="28px" height="35px" id="addTopToolTip"/></td>
+	   <td><img src="img/add-icon.png" width='28px' height="35px" id="addNewToolTip"/></td>
+	   <td><img src="img/pindaan-icon.png" width="28px" height="35px" id="editToolTip" /></td>
+	   <td width="5px"></td>
+	   </tr>
+	   </table>
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -265,52 +273,112 @@
 	
 	// Create the tooltips only when document ready
 	
+	//$( document ).ready(function() {
+		
+		$("#appendPerlembagaan").delegate(".xx", "click", function (){
+
+		var currentSelectedId = $(this).attr('id');
+		var arr = currentSelectedId.split('_');
+		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
+		var currentID = localStorage['selected_id_perlembagaan'];
 	
-	$( document ).ready(function() {
-		$('#edit_tooltip').qtip({
-		content: {
-			text: "<table width='220' height='30'><tr align='center'><td width='10' class='ccc'></td><td><img src='img/addbottom-icon.png' width='28px' height='35px'></td><td><img src='img/addtop-icon.png' width='28px' height='35px'/></td><td><img src='img/add-icon.png' width='28px' height='35px' /></td><td><img src='img/pindaan-icon.png' width='28px' height='35px'/></td><td width='10'></td></tr></table>",
-
-			button: false,
-				
-		},
-		 style: {
-			width: 230, 
-			height: 53,
-			classes: 'qtip-rounded'
-		 },   
-			
-		show: {
-		 //effect: function(offset) {
-		//		$(this).slideDown(100); // "this" refers to the tooltip
-		//	},
-			event: 'click',
-			solo: true,
-			
-	   
-		},
-
-		hide:'unfocus',
-		events: {
-			visible: function(event, api) {
-				$('#transparent_layer').show();
-
-				
-				$("body").css("overflow-y", "hidden");
+		$(this).qtip({
+		overwrite: false, 
+		//$('#'+$(this).attr('id')).qtip({
+			content: {
+				text: $('.tooltiptext'),
+				button: false,
+					
 			},
-			 hide: function(event, api) {
-				$('#transparent_layer').hide();
-				$("body").css("overflow-y", "visible");
-			
+			 style: {
+				width: 230, 
+				height: 53,
+				classes: 'qtip-rounded'
+			 },   
+				
+			show: {
+			 //effect: function(offset) {
+			//		$(this).slideDown(100); // "this" refers to the tooltip
+			//	},
+				event: 'click',
+				solo: true,
+				
+		   
+			},
+
+			hide:'unfocus',
+			events: {
+				visible: function(event, api) {
+					$('#transparent_layer').show();
+					$("body").css("overflow-y", "hidden");
+					$('#added_'+currentID).remove();
+				},
+				 hide: function(event, api) {
+					$('#transparent_layer').hide();
+					$("body").css("overflow-y", "visible");
+				
+				}
+			},
+			 position: {
+				my: 'bottom left',
+				at: 'top left'
 			}
-		},
-		 position: {
-			my: 'bottom left',
-			at: 'top left'
-		}
+		});
 	});
-		getFasal('appendPerlembagaan', '1');
+		
+	//Get Fasal Template
+	getFasal('appendPerlembagaan', '1');
+		
+	//Add Top
+	$('#addTopToolTip').click(function(e)
+	{
+		e.preventDefault();
+		var selected = localStorage.getItem('selected_id_perlembagaan');
+		alert(selected);
+		
 	});
+	
+	//Fasal Add Bottom
+	$('#addBottomToolTip').click(function(e)
+	{
+		e.preventDefault();
+		var selected = localStorage.getItem('selected_id_perlembagaan');
+		alert(selected);
+
+	});
+	
+	//Fasal Add New
+	$('#addNewToolTip').click(function(e)
+	{
+	
+		e.preventDefault();
+		var selected = localStorage.getItem('selected_id_perlembagaan');
+		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='100px'><input type='text' id='no_fasal_"+(selected+1)+"_added' disabled></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='display();'></div></td></tr></table></div>");										
+		$("div").qtip('hide');											
+	});
+	
+	//Fasal Edit
+	$('#editToolTip').click(function(e)
+	{
+		e.preventDefault();
+		var selected = localStorage.getItem('selected_id_perlembagaan');
+		
+	});
+	
+	function display()
+	{
+		var id = localStorage.getItem('selected_id_perlembagaan');
+
+		var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
+		var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+
+		$('#'+id).append('<tr><td width="30px">'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"></td><tr>');		
+		$('#fasal_added_'+(id+1)).append('<label for="checkbox'+id+'">'+$('#fasal_added_tr_1').val()+'</label>');										
+		
+		$('#added_'+id).remove();
+																								 
+	}
+		
 
 	</script>
 	</body>
