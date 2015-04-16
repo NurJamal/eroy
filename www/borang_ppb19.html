@@ -228,21 +228,29 @@
 								
 								console.log($(this).text());
 								
-								$('#d_npertubuhan').val($(npertubuhan).text());
-								
+								alert("0");
+								if(value == no_sijil.text())
+								{
+									$('#d_npertubuhan').val($(npertubuhan).text());
+								}
+								else if(value != no_sijil.text())
+								{
+									alert("1");
+									$.alert
+									(
+										{
+											title: 'Carian',
+											content: 'Tiada Dalam Rekod Pangkalan Data',
+											confirm: function(){}
+										}
+									);
+								}
+								else{}
 							})
 						},
 						error: function() 
 						{
 							console.log("An error occurred while processing XML file.");
-							/*$.alert
-							(
-								{
-									title: 'Carian',
-									content: 'Tiada Dalam Rekod Pangkalan Data',
-									confirm: function(){}
-								}
-							);*/
 						},
 					}
 				);

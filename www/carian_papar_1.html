@@ -56,7 +56,6 @@
 			<div class="display">
 				<h2 class="_orange_text" style="margin-top:-18px">Maklumat Pertubuhan</h2>
 				<h2 class="_orange_text" style="margin-top:-5px">Peringkat Pertubuhan</h2>
-				
 				<input type="text" style="margin-top:0px" id="d_peringkat_pertubuhan" name="d_peringkat_pertubuhan" disabled><br/>
 				
 				<h2 class="_orange_text" style="margin-top:0px">Nama Pertubuhan</h2>
@@ -127,7 +126,7 @@
 					$(xml).find("details").each(function()
 					{						
 						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var peringkat_pertubuhan = $(this).find("dummy_peringkat_pertubuhan");
+						var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
 						var nama_pertubuhan = $(this).find("nama_pertubuhan");
 						var nama_ringkasan = $(this).find("nama_ringkasan");
 						var emel_pertubuhan = $(this).find("emel_pertubuhan");
