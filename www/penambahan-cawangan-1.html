@@ -115,7 +115,7 @@
 									{
 										$.each(value, function (negeri_index, per_negeri) {
 											
-											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+per_negeri.nama_negeri+'</td></tr>');
+											$('#table_senarai').append('<tr><td colspan="2" width="90%"><font color="#F9690E">Negeri</font> - '+per_negeri.nama_negeri+'</td></tr>');
 											
 											if(per_negeri.peringkat !=1)
 											{
@@ -126,10 +126,10 @@
 												
 														if(per_daerah.peringkat == 2)
 														{
-															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
+															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
 														}else
 														{
-															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
+															$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+per_daerah.nama_daerah+'</td></tr>');
 															if(Array.isArray(per_daerah.cawangan))
 															{
 																var countCawangan = per_daerah.cawangan.length;
@@ -157,10 +157,10 @@
 					
 													if(per_negeri.daerah.peringkat == 2)
 													{
-														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
+														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
 													}else
 													{
-														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
+														$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+per_negeri.daerah.nama_daerah+'</td></tr>');
 														if(Array.isArray(per_negeri.daerah.cawangan))
 														{
 															var countCawangan = per_negeri.daerah.cawangan.length;
@@ -192,16 +192,16 @@
 										
 										if(value.peringkat == 1)
 										{
-											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
+											$('#table_senarai').append('<tr><td colspan="2" width="90%"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
 										}else
 										{
-											$('#table_senarai').append('<tr><td colspan="2"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
+											$('#table_senarai').append('<tr><td colspan="2" width="90%"><font color="#F9690E">Negeri</font> - '+value.nama_negeri+'</td></tr>');
 											
 											if(Array.isArray(value.daerah))
 											{
 												$.each(value.daerah, function(daerah_index, daerah_value){
 													
-													$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+daerah_value.nama_daerah+'</td></tr>');
+													$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+daerah_value.nama_daerah+'</td></tr>');
 
 													if(daerah_value.peringkat != 2)
 													{
@@ -229,7 +229,7 @@
 												});
 											}else
 											{
-												$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2"><font color="#F9690E">Daerah</font> - '+value.daerah.nama_daerah+'</td></tr>');
+												$('#table_senarai').append('<tr><td class="indentDaerah" colspan="2" width="90%"><font color="#F9690E">Daerah</font> - '+value.daerah.nama_daerah+'</td></tr>');
 
 												if(value.daerah.peringkat != 2)
 												{
@@ -266,8 +266,8 @@
 									{
 										if(count != 0)
 										{
-											$('#table_senarai').append('<tr><td colspan="2">&nbsp;</td></tr><tr><td colspan="2">Nota : <img src="img/bayaran-jelas-icon.png" width=25 height=25 style="margin-bottom: -6px;"> Bayaran telah dijelaskan</td></tr>');
-									 		$('#table_senarai').append('<tr><td colspan="2"><div class="default_button_holder"><a href="#" onclick="test()"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a></div></td></tr>');
+											$('#table_senarai').append('<tr><td colspan="2" width="90%">&nbsp;</td></tr><tr><td colspan="2" width="90%">Nota : <img src="img/bayaran-jelas-icon.png" width=25 height=25 style="margin-bottom: -6px;"> Bayaran telah dijelaskan</td></tr>');
+									 		$('#table_senarai').append('<tr><td colspan="2" width="90%"><div class="default_button_holder"><a href="#" onclick="test()"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a></div></td></tr>');
 										}
 									}
 									 
