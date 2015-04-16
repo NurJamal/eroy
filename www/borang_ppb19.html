@@ -198,15 +198,16 @@
 	
 	$(function() 
 	{
-		var minlength = 5;
+		var minlength = 6;
 
 		$("#f_sijil").keyup(function() 
 		{
 			var that = this,
 			value = $(this).val();
-
+			
 			if (value.length >= minlength )
 			{
+				
 				$.ajax
 				(
 					{
@@ -219,12 +220,14 @@
 						},
 						success: function(xml, data)
 						{
+							var found = false;
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
 							$(xml).find("lk_nama_pertubuhan").each(function()
 							{
 								var npertubuhan = $(this).find("nama_pertubuhan");
 								var no_sijil = $(this).find("no_sijil");
+								found = true;
 								
 								console.log($(this).text());
 								
@@ -247,10 +250,15 @@
 								}
 								else{}
 							})
+							if(!found)
+							{
+								alert("not found");
+							}
 						},
-						error: function() 
+						error: function()
 						{
 							console.log("An error occurred while processing XML file.");
+							alert("not found");
 						},
 					}
 				);
