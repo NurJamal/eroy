@@ -14,15 +14,22 @@
 			<li id="colored"><a href="menu_kelulusan.html"><img src="img/kelulusan-icon.png" class="menu-icon"/>Kelulusan</a></li>
 			<li class="title">Pengenalan</li>
 			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="daftar_pengguna.html"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li id="colored"><a href="#" onclick="openPDF()"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
 			<li></li>
 		</ul>
 </nav>
 	
 	<script>
+	function openPDF() {
+		window.open('https://drive.google.com/file/d/0B7yl9kUZSHAWQURGTl9TR1NqVnM/view?usp=sharing', '_system', 'location=yes')
+	}
 		/* --- SET USERNAME --- */
 		$("#nav_nama").html(window.localStorage.getItem("NAMA"));
 		
 		/* --- SET MENU FIX TO FALSE--- */
 		window.localStorage.setItem("_MENU_FIX", "FALSE");	
+
+
+	highlight($('.menu').attr('class'),'red');
+
 	</script>

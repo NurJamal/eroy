@@ -11,6 +11,14 @@
                         {
                             "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.sharinglabs.cordova.plugin.datepicker.DatePickerPlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -19,7 +27,13 @@
     },
     "installed_plugins": {
         "com.sharinglabs.cordova.plugin.datepicker": {
-            "PACKAGE_NAME": "com.phonegap.helloworad"
+            "PACKAGE_NAME": "com.phonegap.eroy"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.phonegap.eroy"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.phonegap.eroy"
         }
     },
     "dependent_plugins": {}

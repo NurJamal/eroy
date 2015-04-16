@@ -66,14 +66,11 @@
 		}
 	}
 
-	function redisplayHeader()
-	{
+	function redisplayHeader() {
 		$("#head").animate({opacity: '1'},"fast");	
 		$("#scrollTop").css("visibility","hidden");
-
 	}
 	
-
 	/*Set Payment Transaction Code*/
 	 function SetTransactionCode() {
             var dtDate = new Date();
@@ -82,9 +79,7 @@
             strAmount = strAmount.replace(".", "");
             strTransactionCode = strTransactionCode.rpad("0", 27) + "001" + strAmount.rpad("0", 10);
             document.forms[0].TransactionCode.value = strTransactionCode;
-        }
-		
-
+     }
 		
 //});		
 		
@@ -101,6 +96,12 @@
 			source: 'img.svg'
 
 		});
+	}
+	
+	/*Go Back History*/
+	function goBack()
+	{
+		window.history.back();
 	}
 		
 	/*Logout - remove localstorage*/
@@ -138,9 +139,11 @@
 	};
 	
 	/*GET COUNTRY*/
-	function getCountry(id)
+	function getCountry(id,selected)
 	{
 		var sel_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -151,7 +154,16 @@
 						dataType: "xml",
 						success: function(xml)
 						{
-							var xmlDoc = $.parseXML(xml),
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Pilih Negeri</option>');
+
+
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_negeri").each(function()
 							{
@@ -159,6 +171,9 @@
 								var negeri = $(this).find("negeri");
 								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(negeri).text()+'</option>');
 							});
+
+						$('#'+sel_id).val(set_selected);
+
 						},
 						error: function() 
 						{
@@ -171,10 +186,12 @@
 	};
 	
 	/*GET DAERAH*/
-	function getDaerah(negeri,id)
+	function getDaerah(negeri,id,selected)
 	{
 	
 		var daerah_id = id;
+		var set_selected = selected;
+
 		$(function() 
 			{
 				$.ajax
@@ -192,9 +209,8 @@
 							.find('option')
 							.remove()
 							.end();
-				
-						
-							var xmlDoc = $.parseXML(xml),
+							$('#'+id).append('<option value="">Pilih Daerah</option>');
+							var xmlDoc = $.parseXML(xml);
 							$xml = $(xmlDoc);
 							$(xml).find("lk_kod_daerah").each(function()
 							{
@@ -204,6 +220,9 @@
 								
 								$('#'+daerah_id).append('<option value="'+$(kodDaerah).text()+'">'+$(keterangan).text()+'</option>');
 							});
+						
+							$('#'+daerah_id).val(set_selected);
+
 						},
 						error: function() 
 						{
@@ -238,7 +257,6 @@
 							$xml = $(xmlDoc);
 							$(xml).find("lk_nama_bank").each(function()
 							{
-								console.log($(this).text());
 								var id = $(this).find("id");
 								var nama_bank = $(this).find("nama_bank");
 								
@@ -275,11 +293,11 @@
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_jenis_bayaran").each(function()
+							$(xml).find("lk_bentuk_bayaran").each(function()
 							{
 								console.log($(this).text());
 								var id = $(this).find("id");
-								var jenis_bayaran = $(this).find("jenis_bayaran");
+								var jenis_bayaran = $(this).find("bentuk_bayaran");
 								
 								$('#'+jenis_bayaran_id).append('<option value="'+$(id).text()+'">'+$(jenis_bayaran).text()+'</option>');
 							});
@@ -299,10 +317,14 @@
 	
 	
 	/*GET JUMLAH BAYARAN MENGIKUT PERINGKAT*/
-	function getJumlahBayaranMengikutPeringkat(id)
+	function getJumlahBayaranMengikutPeringkat(id,id1,id2)
 	{
 	
 		var jumlah_bayaran_id = id;
+		var id_bayaran = id1;
+
+		var peringkat_id = id2;
+
 		$(function() 
 			{
 				$.ajax
@@ -311,6 +333,9 @@
 						type: "POST",
 						url: "http://eroy.me-tech.com.my/api/lookup_table/get_jumlah_bayaran_mengikut_peringkat.php",
 						dataType: "xml",
+						data:{
+							peringkat_id : peringkat_id,
+						},
 						success: function(xml)
 						{
 							var xmlDoc = $.parseXML(xml),
@@ -318,9 +343,14 @@
 							$(xml).find("lk_jumlah_bayaran").each(function()
 							{
 								console.log($(this).text());
-								var jumlah_bayaran = $(this).find("jumlah_bayaran");
+								var jumlah_bayaran = $(this).find("amaun_pembayaran");
+								var id = $(this).find("jenis_pembayaran");
+
+								$('#'+jumlah_bayaran_id).val('RM '+jumlah_bayaran.text());
+								$('#'+id_bayaran).val(id.text());
+
 								
-								$('#'+jumlah_bayaran_id).val(jumlah_bayaran);
+								
 							});
 						},
 						error: function() 
@@ -470,44 +500,181 @@
 	}
 
 	var count = 1;
-		function getFasal(id, kodPertubuhan)
-		{
-			var kod_nama_pertubuhan = kodPertubuhan;
-			var fasal_id = id;
+	function getFasal(id1, kodPertubuhan)
+	{
+			var id_pertubuhan = kodPertubuhan;
+			var fasal_id = id1;
+			
+			
+			
 			$(function() 
 			{
 				$.ajax
 				(
 					{
 						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/get_fasal.php",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_fasal.php",
 						data: {
-							kod_nama_pertubuhan : kod_nama_pertubuhan,
+							id_pertubuhan : id_pertubuhan,
 						},
 						dataType: "xml",
 						success: function(xml)
 						{
-							var xmlDoc = $.parseXML(xml),
-							$xml = $(xmlDoc);
-							$(xml).find("tb_perlembagaan").each(function()
-							{
-								console.log($(this).text());
+
+							var convert = xml;
+							//var fasal = $(this).find("fasal");
+							//console.log(xml);
+							//var xmlDoc = $.parseXML(xml),
+							//$xml = $(xmlDoc);
+							//$(xml).find("fasal_list").each(function(index, val)
+							//{
+								
+								//var data = JSON.stringify(xml);
+								//console.log(data);
+								
+								//console.log(val.length);
+								//$.each(data.laporan_negeri, function (index, value) {
+									/*Mengikut Zon*/
+								//	$.each(value, function (zon_index, per_zone) {
+								//		/*Mengikut Negeri*/
+								//		$.each(per_zone.negeri, function (index, per_state) {
+								/*var x;
+								
 								var id = $(this).find("id");
-								var noFasal = $(this).find("no_fasal");
+
+								var sub_level = $(this).find("sub_level");
 								var fasal = $(this).find("fasal");
+								var level = $(this).find("level");
+								
+								//$.each(val, function(index, valLevel) {
+								//	console.log(valLevel);
+								//}
+								$(val).find("level").each(function(indexx, value)
+								{
+									console.log(value);
+									if(value == 1)
+									{
+										alert("test");
+				
+									}
+								});
+								
+								//if(val.level == '1')
+								//{
+								//	alert("TEST");
+								//}
+								//$.each($(this).find("level"), function(index, val) {
+									
+								//	if(level.text() == '1')
+								//	{
+										//alert(level.text());
+								//	
+								//		$('#'+fasal_id).append('<table><tr><td></td><td id="fasal_'+id.text()+'"></td><tr></table>');
+								//		$('#fasal_'+id.text()).append(fasal.text());
+//
+								//	}
+								//});
+								//var code_level = $(this).find("code_level");
+								//var ref_level = $(this).find("ref_level");
+								//alert(sub_level.text());
+								//alert(sub_level.text()+'-'+code_level.text()+'-'+ref_level.text());
+								//alert(level.text());
+								*/
+							//});
+							/*var id = $(this).find("id");
+							var noFasal = $(this).find("no_fasal");
+							var fasal = $(this).find("fasal");
 
-								var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
-								var td = '<td width="30px" valign="top">';
-								var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
-								var tdClose = '</td>';
-								var tdOpen = '<td>';
-								var trClose = '</tr>';
+							var tr = '<tr class="checkbox" style="margin-bottom:10px;">';
+							var td = '<td width="30px" valign="top">';
+							var img = '<image src="img/pindaan-icon.png" width="25px" height="25px" id="edit_tooltip">';
+							var tdClose = '</td>';
+							var tdOpen = '<td>';
+							var trClose = '</tr>';
 
-								$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
+							$(fasal_id).append(tr+td+img+tdClose+tdOpen+'<input class="checkboxClass" id="c_box'+count+'" type="checkbox" name="senarai" value="'+id.text()+'" /><label for="c_box'+count+'">Fasal '+count+' - '+fasal.text()+'</label>'+tdClose+trClose);
+							count++;
+							*/
+							//$('body').waitMe('hide');
+						
+							//alert(fasal.text());
+		var json = $.xml2json(xml);
+		var data  = JSON.stringify(json);
+		var parseData = JSON.parse(data);
+		console.log(JSON.parse(data));
+		
+		$.each(parseData.fasal_template, function (index_1, value) {
+						/*Mengikut Zon*/
+						$.each(value, function (index_2, fasal_list) {
+						
+								var editorImg = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
+								var checkBox = '<td><input class="checkboxClass" id="c_box1" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+								
+								//First Lvl
+								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
+								$('#fasal_'+fasal_list.id).append('<label for="c_box1">'+fasal_list.fasal+'</label>');
+								
+								if(fasal_list.sub_fasal != null)
+								{
+									if (Array.isArray(fasal_list.sub_fasal))
+									{
+											$.each(fasal_list.sub_fasal, function (index_3, sub_fasal_list) {
+												//Second Lvl
+												if(sub_fasal_list.ref_level == fasal_list.code_level)
+												{
+													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
+													$('#fasal_'+sub_fasal_list.id).append('<label for="c_box1">'+sub_fasal_list.fasal+'</label>');										
+													
+													var arrayCode = [];
 
-								count++;
+													$.each(fasal_list.sub_fasal, function (index_4_1, sub_fasal_nested_list_1)
+														{ 
+															var currentCode = sub_fasal_nested_list_1.code_level;
+														
+															$.each(fasal_list.sub_fasal, function (index_4_2, sub_fasal_nested_list)
+																{ 
+	if(currentCode == sub_fasal_nested_list.ref_level && !($.inArray(sub_fasal_nested_list.ref_level,arrayCode) !== -1))
+	{
+
+		alert(arrayCode);
+
+		alert(currentCode);
+
+
+
+
+																		var appendTD;
+																		for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
+																		{
+																			appendTD += '<td width="30px"></td>';
+																		}
+																		
+																		$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">'+appendTD+'<td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+sub_fasal_nested_list.id+'"></td></tr>');
+																		$('#fasal_'+sub_fasal_nested_list.id).append('<label for="c_box1">'+sub_fasal_nested_list.fasal+'</label>');										
+																																		arrayCode.push(currentCode)
+											arrayCode.push(sub_fasal_nested_list.ref_level)
+	
+																	}
+																});	
+																
+														});	
+														
+												}
+												//Third Lvl and above
+											});
+									}
+									else
+									{
+										if(fasal_list.sub_fasal.ref_level == fasal_list.code_level)
+										{
+											$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImg+'</td><td>'+checkBox+'</td><td id="fasal_'+fasal_list.sub_fasal.id+'"></td></tr>');
+											$('#fasal_'+fasal_list.sub_fasal.id).append('<label for="c_box1">'+fasal_list.sub_fasal.fasal+'</label>');										
+										}
+									}
+								}							
 							});
-							$('body').waitMe('hide');
+						});
+	
 						},
 						error: function() 
 						{
@@ -517,23 +684,105 @@
 				);
 
 			});
-		};
+			
+
+	};
 	
+	//LIST JAWATAN
+	function getJawatan(id,selected)
+	{
+		var sel_id = id;
+		var set_selected = selected;
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "GET",
+						url: "http://eroy.me-tech.com.my/api/get_jawatan.php",
+						dataType: "xml",
+						success: function(xml)
+						{
+
+
+							$('#'+id)
+							.find('option')
+							.remove()
+							.end();
+							$('#'+sel_id).append('<option value="">Sila Pilih Jawatan</option>');
+
+
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_jawatan").each(function()
+							{
+								var id = $(this).find("id");
+								var jawatan = $(this).find("jawatan");
+								$('#'+sel_id).append('<option value="'+$(id).text()+'">'+$(jawatan).text()+'</option>');
+							});
+
+						$('#'+sel_id).val(set_selected);
+
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+	}
 	
+
+	//LIST JAWATAN
+	function getStatusIcon(statusId,idToAppend)
+	{
+		var statusId = statusId;
+		var idToAppend = idToAppend;
+		var imgPath;
+		
+		if(statusId == '1')//AKTIF
+		{
+			imgPath = "../../img/aktif_icon.png";
+		}
+		else if (statusId == '2')//TIDAK AKTIF
+		{
+			imgPath = "../../img/tidak_aktif_icon.png";
+		}
+		else if (statusId == '3')//GANTUNG
+		{
+			imgPath = "../../img/gantung_icon.png";
+		}
+		else if (statusId == '4')//BATAL
+		{
+			imgPath = "../../img/batal_icon.png";
+		}
+		else{}
+
+		$('#keaktifan_'+idToAppend).append('<div style="height:45px;width:45px;"><img style="display: block;" width="auto" height="90%" src="'+imgPath+'" /></div>');
+	}
 	
+
+	function openDeviceBrowser(externalLinkToOpen)
+	{	
+		window.open(externalLinkToOpen, '_system', 'location=no');
+		//navigator.app.loadUrl('http://www.google.com', { openExternal:true } ); 
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+function highlightID(id)
+{
+	var div_id = id;
+	var colour_id = '#f4f4f4';
+
+	$('#'+div_id).click(function() {
+   		$(this).css("backgroundColor", colour_id); 
+	});
+
+}
+
+
 	
 	
 	

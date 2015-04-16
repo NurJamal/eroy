@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
@@ -42,11 +42,9 @@
 					<h1 class="main_title">STATUS CARIAN</h1>
 				</div>
 			</div>
-
 		</div>
 		<!-- end of header-title-->
 
-		<!-- list-->
 		<div id="content"></div>
 	</div>
 	
@@ -111,13 +109,13 @@
 			}
 		);
 	});
-	
-		$('.box_icon').click(function(e)
+
+	$('.box_icon').click(function(e)
 	{
 		e.preventDefault();
 		
 		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
-		var no_ic = window.localStorage.getItem('LOGIN');
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		window.location.href = "carian_papar_1.html";
 	});
 	

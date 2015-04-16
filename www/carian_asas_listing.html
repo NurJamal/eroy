@@ -93,10 +93,12 @@
 	{
 		e.preventDefault();
 		
+		highlightID($(this).attr('id'));
 		window.localStorage['CARIAN_ID_PERTUBUHAN'] = JSON.stringify($(this).attr('id'));
 		window.location.href = "carian_asas_papar.html";
 	});
 	
+
 	</script>
 	
 	</body>

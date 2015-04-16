@@ -161,18 +161,66 @@
 		/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
 
-		getCountry($('#sel_negeri').attr('id'));
-		getCountry($('#sel_negeriPos').attr('id'));
+		getCountry($('#sel_negeri').attr('id'),'');
+		getCountry($('#sel_negeriPos').attr('id'),'');
+
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								$("#alamat1").val(json.details.alamat1);
+								$("#alamat2").val(json.details.alamat2);
+								$("#alamat3").val(json.details.alamat3);
+								$("#poskod").val(json.details.poskod);
+
+								getCountry($('#sel_negeri').attr('id'),json.details.negeri);	
+								getDaerah(json.details.negeri,$('#sel_daerah').attr('id'),json.details.negeri);	
+								
+								$("#alamat1Pos").val(json.details.alamat_pos1);
+								$("#alamat2Pos").val(json.details.alamat_pos2);
+								$("#alamat3Pos").val(json.details.alamat_pos3);
+								$("#poskodPos").val(json.details.poskod_pos);
+
+								getCountry($('#sel_negeriPos').attr('id'),json.details.negeri_pos);	
+								getDaerah(json.details.negeri_pos,$('#sel_daerahPos').attr('id'),json.details.negeri_pos);	
+
+								$('body').waitMe('hide');
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+
 		function getDaerahFromSelectedCountry()  
 		{
 			var selected_country = $('#sel_negeri').val();
-			getDaerah(selected_country,$('#sel_daerah').attr('id'));	
+			getDaerah(selected_country,$('#sel_daerah').attr('id'),'');	
 		}
 
 		function getDaerahFromSelectedCountryPos()  
 		{
 			var selected_country = $('#sel_negeriPos').val();
-			getDaerah(selected_country,$('#sel_daerahPos').attr('id'));	
+			getDaerah(selected_country,$('#sel_daerahPos').attr('id'),'');	
 		}
 
 		function salinAlamat(f) 
@@ -193,9 +241,13 @@
 					
 				var negeri = $("#sel_negeri").val();
 				$("#sel_negeriPos").val(negeri);
+
+				var daerah = $("#sel_daerah").val();
+				//if copy address from main address. auto retrieve daerah
+				getDaerah(negeri,$('#sel_daerahPos').attr('id'),daerah);
 				
 				//if copy address from main address. auto retrieve daerah
-				getDaerahFromSelectedCountryPos(); 		
+				//getDaerahFromSelectedCountryPos(); 		
 					
 			}	
 			else
@@ -209,7 +261,6 @@
 			var empty = false;
 			e.preventDefault();
 			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
-			
 			$('#alamat1,#alamat1Pos,#poskod,#poskodPos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
 
 			var alamat1= $("#alamat1").val();
@@ -218,13 +269,14 @@
 			var sel_negeri = $("#sel_negeri").val();
 			var sel_daerah = $("#sel_daerah").val();
 			var poskod= $("#poskod").val();
-			
+			var nama_pertubuhan = window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN");
 			var alamat_pos1= $("#alamat1Pos").val();
 			var alamat_pos2 = $("#alamat2Pos").val();
 			var alamat_pos3 = $("#alamat3Pos").val();
 			var sel_negeripos = $("#sel_negeriPos").val();
 			var sel_daerahpos = $("#sel_daerahPos").val();
 			var poskod_pos= $("#poskodPos").val();
+			var insertData = "TRUE";
 
 
 
@@ -304,7 +356,9 @@
 						sel_negeripos : sel_negeripos,
 						sel_daerahpos : sel_daerahpos,
 						poskod_pos : poskod_pos,
-						
+						insertData : insertData,
+						kad_pengenalan : kad_pengenalan,
+						nama_pertubuhan : nama_pertubuhan,
 					},
 					beforeSend: function() {
 							run_waitMe();

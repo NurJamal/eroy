@@ -190,6 +190,55 @@
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
 	
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$(function() 
+	{
+		$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_3.php",
+				type:'POST',
+				data: {
+					kad_pengenalan : kad_pengenalan,
+					insertData : "select"
+
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'SELECT') {
+						console.log(json.details);
+						$('#ahli_melayu_perempuan').val(json.details.bil_perempuan_melayu);
+						$('#ahli_cina_perempuan').val(json.details.bil_perempuan_cina);
+						$('#ahli_india_perempuan').val(json.details.bil_perempuan_india);
+						$('#ahli_lain2_perempuan').val(json.details.bil_perempuan_lain_lain);
+						$('#jumlah_perempuan').val(json.details.jumlah_perempuan);
+						$('#ahli_melayu_lelaki').val(json.details.bil_lelaki_melayu);
+						$('#ahli_cina_lelaki').val(json.details.bil_lelaki_cina);
+						$('#ahli_india_lelaki').val(json.details.bil_lelaki_india);
+						$('#ahli_lain2_lelaki').val(json.details.bil_lelaki_lain_lain);
+						$('#jumlah_lelaki').val(json.details.jumlah_lelaki);
+						$('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
+						$('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
+						$('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
+						$('#dengan_logo').val(json.details.dengan_lambang);
+						$('#bawah_akta').val(json.details.daftar_akta1966);	
+						$('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
+						//$('#logo').val(json.details.lambang);
+
+						$('body').waitMe('hide');
+					}
+					else if (json.status == 'VIEW') {
+					//Do nothing. Just display
+				}
+				
+				$('body').waitMe('hide');
+				}
+			});
+	});
+
 	/*Calc Jumlah ahli lelaki*/
 	$("#ahli_melayu_lelaki,#ahli_cina_lelaki,#ahli_india_lelaki,#ahli_lain2_lelaki").keyup(function() 
 	{
@@ -225,6 +274,7 @@
 		/*Clear all highlighted*/
 		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu,#logo').css({"border":"","box-shadow":""});
 		
+		var insertData = "TRUE";
 		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
 		var ahliCinaP = $('#ahli_cina_perempuan').val();
 		var ahliIndiaP = $('#ahli_india_perempuan').val();
@@ -337,7 +387,7 @@
 						jumlah_perempuan : jumlah_perempuan,
 						jumlah_keseluruhan : jumlah_keseluruhan,
 						kad_pengenalan : kad_pengenalan,
-
+						insertData : insertData,
 					},
 					beforeSend: function() {
 							run_waitMe();
