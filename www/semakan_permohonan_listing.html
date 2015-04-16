@@ -88,7 +88,6 @@
 				var xmlDoc = $.parseXML(xml),
 				$xml = $(xmlDoc);
 				$(xml).find("process_pendaftaran_pertubuhan").each(function(){
-					console.log($(this).text());
 					var id = $(this).find('ID').text();
 					var kod_nama_pertubuhan = $(this).find('kod_nama_pertubuhan').text();
 					var jenis_pertubuhan = $(this).find('jenis_pertubuhan').text();
@@ -97,6 +96,10 @@
 					var update_date = $(this).find('update_date').text();
 						
 					getSenaraiPermohonan(id, kod_nama_pertubuhan, jenis_pertubuhan, status, created_date, update_date);
+				});
+				$(xml).find("status").each(function(){
+					$('#content').append('<br><br><center><h1 class="_dark_text">Tiada Rekod Dijumpai</h1></center>');
+					$('body').waitMe('hide');
 				});
 			},
 			error: function() {
@@ -167,7 +170,7 @@
 					$(xml).find("lk_status_permohonan").each(function(){
 						if(kod_status == '4') //lulus bersyarat
 						{
-							$('#content').append('<a href="#" onclick=lulusBersyarat('+kod_nama_pertubuhan+') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
+							$('#content').append('<a href="#" onclick=lulusBersyarat(\''+kod_nama_pertubuhan+'\') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
 						}else if(kod_status == '3') //kuiri
 						{
 							$('#content').append('<div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div>');
@@ -197,7 +200,6 @@
 		{
 			window.location.href = "pendaftaran-tunggal-1.html";
 		}
-		//alert(jenis_pertubuhan);
 	}
 
 	function lulusBersyarat(kod_nama_pertubuhan)
