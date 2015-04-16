@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQM Complex Demo</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>    
+</head>
+<body>
+    <div data-role="page" id="index">
+        <div data-theme="a" data-role="header">
+            <h3>
+                First Page
+            </h3>
+        </div>
+
+        <div data-role="content">
+            <a href="#" data-role="button" id="change-page-button">Open next page to see a result</a>
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div> 
+    <div data-role="page" id="second">
+        <div data-theme="a" data-role="header">
+            <a href="#index" class="ui-btn-left">Back</a>            
+            <h3>
+                Second Page
+            </h3>
+            <a href="#third" class="ui-btn-right">Next</a>            
+        </div>
+
+        <div data-role="content">
+
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>
+    <div data-role="page" id="third">
+        <div data-theme="a" data-role="header">
+            <h3>
+                Third Page
+            </h3>
+            <a href="#second" class="ui-btn-left">Back</a>
+        </div>
+
+        <div data-role="content">
+
+        </div>
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+        </div>
+    </div>   
+
+	<script>
+	$(document).on('pagebeforeshow', '#index', function(){       
+    $(document).on('click', '#change-page-button', function(){     
+        // store some data
+        if(typeof(Storage)!=="undefined") {
+              localStorage.firstname="Dragan";
+              localStorage.lastname="Gaic";            
+        }
+        // Change page
+        $.mobile.changePage("#second");
+    });    
+});
+
+$(document).on('pagebeforeshow', '#second', function(){       
+    alert('My name is ' + localStorage.firstname + ' ' + localStorage.lastname);
+    // Lets change localStorage data before we go to the next page
+    localStorage.firstname="NewFirstNeme";
+    localStorage.lastname="NewLastName";    
+});
+
+$(document).on('pagebeforeshow', '#third', function(){       
+    alert('My name is ' + localStorage.firstname + ' ' + localStorage.lastname);
+});
+	</script>
+	
+</body>
+</html>   

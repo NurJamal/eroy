@@ -1,17 +1,15 @@
-* {
+* 
+{
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  
 }
 body
 {
 	font-family: "Arial", regular, sans-serif !important;
 	font-size: 18px;
 	background-color: #F2F1EF;
-
 }
-
 #content-box_pemegang
 {
 	padding-bottom: 80px;
@@ -21,6 +19,18 @@ body
 	padding-bottom: 80px;
 }
 
+#content-senarai 
+{
+	padding-bottom: 80px;
+}
+#content-box_pemegang 
+{
+  padding-bottom: 80px;
+}
+#content 
+{
+  padding-bottom: 80px;
+}
 #content-senarai 
 {
 	padding-bottom: 80px;
@@ -42,6 +52,7 @@ body
 }
 .text1 
 {
+
 	font-size: 18px;
 	color: #464646;
 	text-align: center;
@@ -90,7 +101,9 @@ input.double_button
 	-webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
 	box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
 }
-._form input[type=text], input[type=password], input[type=date], input[type=email], input[type=tel], input[type=number]{
+
+._form input[type=text], input[type=password], input[type=date], input[type=email], input[type=tel], input[type=number]
+{
 	height: 50px;
 	width: 100%;
 	margin-top: 8px;
@@ -203,8 +216,8 @@ input.double_button
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
-._inform2
- {
+._inform2 
+{
 	font-family: "Arial", regular, sans-serif !important;
 	font-size: 18px;
 	height: 50px;
@@ -337,7 +350,6 @@ a:hover
 	background-position: 97% 50%;
 	background-size: 25px 25px;
 	background-color: white;
-
 }
 /* update */
 .dis_selection 
@@ -567,8 +579,8 @@ h2._orange_text
 	float: right;
 	margin-top: 8px;
 }
-.imgEdit
- {
+.imgEdit 
+{
     float: right;
     margin-top: -17px;
     margin-right: 60px;
@@ -650,14 +662,14 @@ img.right-icon
 	text-overflow: ellipsis;
 
 }
-input[type=checkbox] 
+input[type=checkbox]
 { 
 	display: none; 
 	overflow: hidden; 
 	margin-left: 20px;
 }  
-.checkboxClass:checked + label:before
- { 
+.checkboxClass:checked + label:before 
+{ 
 	content: "\2713"; 
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
 	color: #f9690e; 
@@ -668,7 +680,7 @@ input[type=checkbox]
 	padding: 1px 2px; 
 	/*margin-right: 10px;*/
 	font-weight: bold; 
-} 
+}  
 .checkboxClass + label:before 
 {  
 	content: "\2003"; 
@@ -682,8 +694,8 @@ input[type=checkbox]
 	/*margin-right: 10px; */
 	/*  font-weight: bold; */
 } 
- .checkbox label
- {
+.checkbox label
+{
 	color: #f9690e;
 	font-size: 18px;
 	margin-right: 5px;
@@ -743,7 +755,8 @@ input[type=checkbox]
 	margin-left: 37px;
 }
 /* update - pelaporan */
-#left{
+#left
+{
 	width: 55%;
     height: 100%;
     float: left;
@@ -859,8 +872,8 @@ h2._white_text
 	font-size: 18px;
 	color: #3f3f3f;
 }
-#transparent_layer
- {
+#transparent_layer 
+{
 	position: absolute; 
 	top: 0; 
 	right: 0; 
@@ -878,7 +891,7 @@ h2._white_text
 	display: none;
 }
 /* untuk perakuan sahaja */
-p.perakuan1 
+p.perakuan1
 { 
 	color:#F9690E;
 	font-family:"Arial", regular, sans-serif;
@@ -891,10 +904,17 @@ span.perakuan2
 	font-family:"Arial", regular, sans-serif;
 	font-size:18px
 	line-height:1 
+}	
+span.perakuan2
+{ 
+	color:#3f3f3f;
+	font-family:"Arial", regular, sans-serif;
+	font-size:18px;
+	line-height:1;
 }
 /* placeholder color */
 input::-webkit-input-placeholder
- { 
+{ 	
 	/* WebKit browsers */
     color:    #989898;
 }
@@ -903,7 +923,7 @@ input:-moz-placeholder
 	/* Mozilla Firefox 4 to 18 */
     color:    #989898;
 }
-input::-moz-placeholder 
+input::-moz-placeholder
 { 
 	/* Mozilla Firefox 19+ */
     color:    #989898;
@@ -932,8 +952,8 @@ input:-ms-input-placeholder
     /*This makes the button huge so that it can be clicked on*/
     font-size:50px;
 }
-.hidden 
-{
+.hidden
+ {
     /*Opacity settings for all browsers*/
     opacity: 0;
     -moz-opacity: 0;
@@ -946,6 +966,14 @@ input:-ms-input-placeholder
 }
 .inputWrapper.clicked
  {
+    background-color: #A66;
+}
+.inputWrapper:hover 
+{
+    background-color: #FDD;
+}
+.inputWrapper.clicked 
+{
     background-color: #A66;
 }
 .indentDaerah
