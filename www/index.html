@@ -83,6 +83,7 @@
 	<script src="cordova_plugins.js"></script>
 	<script>
     document.addEventListener("deviceready", onDeviceReady, false);
+	
     function onDeviceReady() 
 	{
       	var devicePlatform = cordova.platformId;
@@ -147,6 +148,10 @@
 						}
 						else{}
 						$('body').waitMe('hide');
+					},
+					error : function()
+					{
+						console.log("An error occurred while processing XML file.");
 					}
 				}
 			)

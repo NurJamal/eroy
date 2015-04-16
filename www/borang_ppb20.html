@@ -72,13 +72,13 @@
 			<h2 class="_orange_text">Dokumen Yang Dipohon<br/><br/>
 		
 			<div class="checkboxClass">
-				<input class="checkboxClass" id="c_box1" type="checkbox" name="" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
+				<input class="checkboxClass" id="c_box1" type="checkbox" name="" value="0" />
 				<label for="c_box1">Maklumat Sijil Pendaftaran Pertubuhan Belia</label><br>
 			
 				<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="1" />
 				<label for="c_box2">Senarai Ahli Jawatankuasa</label><br>
 			
-				<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="6" />
+				<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="2" />
 				<label for="c_box4">Perlembagaan/Undang-undang Tubuh</label><br>
 			
 				<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="3" />
@@ -88,8 +88,8 @@
 			<input type="text" style="margin-top:-25px" name="f_lain" id="f_lain" placeholder="Sila Nyatakan" class="_inform2"><br/>
 		
 			<div class="default_button_holder">
-				<a href="menu_carian.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-			</div></a>
+				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+			</div>
 		</div>
 	</div>
 	
@@ -114,14 +114,51 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
-	var nama = window.localStorage.getItem('NAMA');
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
+	
+	function autoDate() 
+	{
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		
+		if( tMonth < 10) tMonth = "0"+tMonth;
+		if( tDate < 10) tDate = "0"+tDate;
+		$('#d_tarikh_daftar').val(tMonth+"/"+tDate+"/"+tDay.getFullYear());
+	}
+
+	function addLoadEvent(func)
+	{
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') 
+		{
+			window.onload = func;
+		}
+		else 
+		{
+			window.onload = function() 
+			{
+				if (oldonload) 
+				{
+					oldonload();
+				}
+				func();
+			}
+		}
+	}
+
+	addLoadEvent(function() 
+	{
+		autoDate();
+	});
+	
 	
 	$("#f_lain").hide();
 	$(document).ready(function()
@@ -149,7 +186,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -164,21 +201,23 @@
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var nama = $(this).find("nama");
 						var kadp = $(this).find("no_KP");
-						var alamat_tetap1 = $(this).find("alamat_tetap_1");
-						var alamat_tetap2 = $(this).find("alamat_tetap_2");
-						var alamat_tetap3 = $(this).find("alamat_tetap_3");
+						var alamat = $(this).find("alamat");
+						//var alamat_tetap1 = $(this).find("alamat_tetap_1");
+						//var alamat_tetap2 = $(this).find("alamat_tetap_2");
+						//var alamat_tetap3 = $(this).find("alamat_tetap_3");
 						var jawatan = $(this).find("jawatan");
-						var no_telefon = $(this).find("NoTelBimbit");
-						var tarikh_daftar = $(this).find("t_lulus");
+						var no_telefon = $(this).find("no_tel");
+						//var tarikh_daftar = $(this).find("t_lulus");
 						
 						$('body').waitMe('hide');
 						
 						$('#d_nama').val($(nama).text());		
 						$('#d_kp').val($(kadp).text());
-						$('#d_alamat').val($(alamat_tetap1).text()+' '+$(alamat_tetap2).text()+' '+$(alamat_tetap3).text());
+						$('#d_alamat').val($(alamat).text());
+						//$('#d_alamat').val($(alamat_tetap1).text()+', '+$(alamat_tetap2).text()+', '+$(alamat_tetap3).text());
 						$('#d_jawatan').val($(jawatan).text());
 						$('#d_telefon').val($(no_telefon).text());
-						$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
+						//$('#d_tarikh_daftar').val($(tarikh_daftar).text());			
 					});
 				}
 			}
@@ -248,15 +287,13 @@
 		var box_lain = $("#f_lain").val();
 		var selectedChoice = [];
 		
-		for( var i = 0 ; i < 5 ; i++ )
+		for( var i = 0 ; i < 6 ; i++ )
 		{
 			if($("#c_box"+i).is(":checked"))
 			{		
 				selectedChoice.push($("#c_box"+i).val());
 			}
 		}
-		
-		
 		if (no_sijil.length == 0) 
 		{
 			$.alert
@@ -304,9 +341,7 @@
 					}
 				}
 			);
-		}
-		
-			
+		}	
 	});
 	
 	

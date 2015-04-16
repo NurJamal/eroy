@@ -103,9 +103,45 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
-	var nama = window.localStorage.getItem('NAMA');
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	
+	function autoDate() 
+	{
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		
+		if( tMonth < 10) tMonth = "0"+tMonth;
+		if( tDate < 10) tDate = "0"+tDate;
+		$('#d_tarikh_daftar').val(tMonth+"/"+tDate+"/"+tDay.getFullYear());
+	}
+
+	function addLoadEvent(func)
+	{
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') 
+		{
+			window.onload = func;
+		}
+		else 
+		{
+			window.onload = function() 
+			{
+				if (oldonload) 
+				{
+					oldonload();
+				}
+				func();
+			}
+		}
+	}
+
+	addLoadEvent(function() 
+	{
+		autoDate();
+	});
+
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
@@ -122,7 +158,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -137,32 +173,34 @@
 						var kod_id = $(this).find("kod_nama_pertubuhan");
 						var nama = $(this).find("nama");
 						var kadp = $(this).find("no_KP");
-						var alamat_tetap1 = $(this).find("alamat_tetap_1");
-						var alamat_tetap2 = $(this).find("alamat_tetap_2");
-						var alamat_tetap3 = $(this).find("alamat_tetap_3");
+						var alamat = $(this).find("alamat");
+						//var alamat_tetap1 = $(this).find("alamat_tetap_1");
+						//var alamat_tetap2 = $(this).find("alamat_tetap_2");
+						//var alamat_tetap3 = $(this).find("alamat_tetap_3");
 						var jawatan = $(this).find("jawatan");
-						var no_telefon = $(this).find("NoTelBimbit");
-						var tarikh_daftar = $(this).find("t_lulus");
+						var no_telefon = $(this).find("no_tel");
+						//var tarikh_daftar = $(this).find("t_lulus");
 						
 						$('body').waitMe('hide');
 						
 						$('#d_nama').val($(nama).text());		
 						$('#d_kp').val($(kadp).text());
-						$('#d_alamat').val($(alamat_tetap1).text()+' '+$(alamat_tetap2).text()+' '+$(alamat_tetap3).text());
+						$('#d_alamat').val($(alamat).text());
+						//$('#d_alamat').val($(alamat_tetap1).text()+', '+$(alamat_tetap2).text()+', '+$(alamat_tetap3).text());
 						$('#d_jawatan').val($(jawatan).text());
 						$('#d_telefon').val($(no_telefon).text());
-						$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
+						//$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
 					});
 				}
 			}
 		);
 	});
 	
-	$(function () 
+	$(function() 
 	{
 		var minlength = 5;
 
-		$("#f_sijil").keyup(function () 
+		$("#f_sijil").keyup(function() 
 		{
 			var that = this,
 			value = $(this).val();
@@ -190,23 +228,22 @@
 								
 								console.log($(this).text());
 								
-								if (value == $(that).val()) 
-								{
-									$('#d_npertubuhan').val($(npertubuhan).text());
-								}
-								else
-								{
-									$.alert
-									(
-										{
-											title: 'Carian',
-											content: 'Tiada dalam rekod pangkalan data.',
-											confirm: function(){}
-										}
-									);
-								}
+								$('#d_npertubuhan').val($(npertubuhan).text());
+								
 							})
-						}
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+							/*$.alert
+							(
+								{
+									title: 'Carian',
+									content: 'Tiada Dalam Rekod Pangkalan Data',
+									confirm: function(){}
+								}
+							);*/
+						},
 					}
 				);
 			}
@@ -232,6 +269,7 @@
 					}
 				}
 			);
+			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		} 
 		else 
 		{

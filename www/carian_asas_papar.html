@@ -90,6 +90,8 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
 	
 	$(function() 
