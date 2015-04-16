@@ -66,14 +66,11 @@
 		}
 	}
 
-	function redisplayHeader()
-	{
+	function redisplayHeader() {
 		$("#head").animate({opacity: '1'},"fast");	
 		$("#scrollTop").css("visibility","hidden");
-
 	}
 	
-
 	/*Set Payment Transaction Code*/
 	 function SetTransactionCode() {
             var dtDate = new Date();
@@ -82,9 +79,7 @@
             strAmount = strAmount.replace(".", "");
             strTransactionCode = strTransactionCode.rpad("0", 27) + "001" + strAmount.rpad("0", 10);
             document.forms[0].TransactionCode.value = strTransactionCode;
-        }
-		
-
+     }
 		
 //});		
 		
