@@ -89,7 +89,7 @@
 				
 			<div class="display">
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan" disabled>			
-				<input type="text" name="n_pertubuhan" id="n_pertubuhan" placeholder="Nama Penuh Pertubuhan" disabled>
+				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Penuh Pertubuhan" disabled>
 			</div>
 			
 				
@@ -138,7 +138,12 @@
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kod_nama_pertubuhan = window.localStorage.getItem('KOD_PERTUBUHAN');
 		var no_kad_pendaftar = window.localStorage.getItem('LOGIN');
-		$(function() 
+		var status = window.localStorage.getItem('MAKLUMAT_CAWANGAN');
+		var kod_pertubuhan = window.localStorage.getItem('EDIT_MAKLUMAT_CAWANGAN');
+
+		if(status == "add")
+		{
+			$(function() 
 			{
 				$.ajax({
 						url:"http://eroy.me-tech.com.my/api/get_nama_penuh_pertubuhan.php",
@@ -158,17 +163,84 @@
 						$('body').waitMe('hide');
 						}
 					});
-		});
+			});
+		}else
+		{
+			$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/get_nama_penuh_pertubuhan.php",
+						type:'POST',
+						data: {
+							kod_nama_pertubuhan : kod_pertubuhan,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var xmlDoc = $.parseXML(data),
+							$xml = $(xmlDoc);
+							$(data).find("tb_nama_pertubuhan").each(function(){
+								var peringkat = $(this).find('id_peringkat_pertubuhan').text();
+								var negeri = $(this).find('id_negeri').text();
+								var daerah = $(this).find('id_daerah').text();
+								var lokaliti = $(this).find('lokaliti').text();
+								var nama_ringkasan = $(this).find('nama_ringkasan').text();
+								var nama_penuh_pertubuhan = $(this).find('nama_penuh_pertubuhan').text();
+								var emel_pertubuhan = $(this).find('emel_pertubuhan').text();
+
+								getICDetail(kod_pertubuhan);
+								$("#peringkat").val(peringkat);
+								getPeringkat();
+								getCountry($('#negeri').attr('id'),negeri);
+								getDaerah(negeri,$('#daerah').attr('id'),daerah);
+								$('#lokaliti').val(lokaliti);
+								$('#nama_ringkasan').val(nama_ringkasan);
+								$("#nama_pertubuhan").val(nama_penuh_pertubuhan);
+								$("#emel_pertubuhan").val(emel_pertubuhan);
+							});
+						}
+					});
+			});
+		}
+
+		function getICDetail(kod_pertubuhan)
+		{
+			$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/get_ic_detail.php",
+						type:'POST',
+						data: {
+							kod_nama_pertubuhan : kod_pertubuhan,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var xmlDoc = $.parseXML(data),
+							$xml = $(xmlDoc);
+							$(data).find("tb_penambahan_cawangan").each(function(){
+								$("#no_kp").val($(this).find('kad_pengenalan').text());
+								$("#n_setiausaha").val($(this).find('nama_setiausaha').text());
+								$("#emel_setiausaha").val($(this).find('emel_setiausaha').text());
+								$("#no_tel").val($(this).find('no_tel').text());
+							});
+						$('body').waitMe('hide');
+						}
+					});
+			});
+		}
 
 		function getDaerahFromSelectedCountry()  
 		{
 			var selected_country = $('#negeri').val();
-			getDaerah(selected_country,$('#daerah').attr('id'));	
+			getDaerah(selected_country,$('#daerah').attr('id'),'');	
 		}
 
 		function getPeringkat()
 		{
-			$('#n_pertubuhan').val("");
+			$('#nama_pertubuhan').val("");
 			$('#negeri').val("");
 			$('#daerah')
 			.find('option')
@@ -199,6 +271,51 @@
 			}
 		}
 
+		function getIC()
+		{
+			var ic = $("#no_kp").val();
+
+			if(ic.length > 0)
+			{
+				$(function() 
+				{
+					$.ajax({
+							url:"http://eroy.me-tech.com.my/api/get_setiausaha.php",
+							type:'POST',
+							data: {
+								ic : ic,
+							},
+							beforeSend: function() {
+									run_waitMe();
+								},
+							success:function(data){
+								var xmlDoc = $.parseXML(data),
+								$xml = $(xmlDoc);
+								$(data).find("status").each(function(){
+									if($(this).text() == "found")
+									{
+										if(status == "add")
+										{
+											$.alert
+											(
+												{
+													title: 'Status',
+													content: 'No Kad Pengenalan sudah wujud',
+													confirm: function(){}
+												}
+											);
+											return(false);
+										}
+									}
+									
+								});
+							$('body').waitMe('hide');
+							}
+						});
+				});
+			}
+		}
+
 		$("#lokaliti").keyup(function() 
 		{
 			var sel_peringkat = $('#peringkat').val();
@@ -215,7 +332,7 @@
 					var nama_ringkasan = f_nama_ringkasan;
 				}
 				
-				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+f_daerah);
+				$('#nama_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+f_daerah);
 			}
 		});
 
@@ -240,17 +357,18 @@
 			}
 			
 			if(sel_peringkat == 1){
-				$('#n_pertubuhan').val(nama_ringkasan);
+				$('#nama_pertubuhan').val(nama_ringkasan);
 			}else if(sel_peringkat == 2){
-				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+daerah);
+				$('#nama_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+daerah);
 			}else if(sel_peringkat == 3){
-				$('#n_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+daerah);
+				$('#nama_pertubuhan').val(nama_ringkasan+" "+$('#peringkat option:selected').text()+" "+f_lokaliti+" "+daerah);
 			}
 		});
 
 		$("#btn_submit").click(function(e){
 			redisplayHeader();
 			var empty = false;
+			var icExist = "N";
 			e.preventDefault();
 
 			$('#no_kp,#n_setiausaha,#emel_setiausaha,#emel_pertubuhan,#no_tel').css({"border":"","box-shadow":""});
@@ -265,7 +383,7 @@
 			var emel_pertubuhan = $("#emel_pertubuhan").val();
 			var no_tel = $("#no_tel").val();
 			var nama_ringkasan = $("#nama_ringkasan").val();
-			var n_pertubuhan = $('#n_pertubuhan').val();
+			var nama_pertubuhan = $('#nama_pertubuhan').val();
 
 			if( no_kp.length == 0 )
 			{
@@ -350,7 +468,12 @@
 									emel_pertubuhan : emel_pertubuhan,
 									no_kad_pendaftar : no_kad_pendaftar,
 									nama_ringkasan : nama_ringkasan,
-									n_pertubuhan : n_pertubuhan,
+									nama_pertubuhan : nama_pertubuhan,
+									status : status,
+									kod_pertubuhan : kod_pertubuhan,
+									no_tel : no_tel,
+									n_setiausaha : n_setiausaha,
+									emel_setiausaha : emel_setiausaha,
 								},
 								beforeSend: function() {
 										run_waitMe();
@@ -387,51 +510,10 @@
 								}
 							});
 					});
+					
 				}
 			}
 		});
-
-		function getIC()
-		{
-			var ic = $("#no_kp").val();
-
-			if(ic.length > 0)
-			{
-				$(function() 
-				{
-					$.ajax({
-							url:"http://eroy.me-tech.com.my/api/get_setiausaha.php",
-							type:'POST',
-							data: {
-								ic : ic,
-							},
-							beforeSend: function() {
-									run_waitMe();
-								},
-							success:function(data){
-								var xmlDoc = $.parseXML(data),
-								$xml = $(xmlDoc);
-								$(data).find("tb_profile").each(function(){
-									$("#n_setiausaha").val($(this).find('nama').text());
-									$("#emel_setiausaha").val($(this).find('emel').text());
-									$("#no_tel").val($(this).find('no_tel').text());
-								});
-								$(data).find("status").each(function(){
-									$.alert
-									(
-										{
-											title: 'Status',
-											content: 'No Kad Pengenalan tidak dijumpai',
-											confirm: function(){}
-										}
-									);
-								});
-							$('body').waitMe('hide');
-							}
-						});
-				});
-			}
-		}
 
 	</script>
 		
