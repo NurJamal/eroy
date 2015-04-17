@@ -90,23 +90,40 @@
 					run_waitMe();
 				},
 				success: function(xml, data)
-				{
+				{	
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						//var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-						//var tarikh_permohonan = $(this).find("created_date");
-						//var status = $(this).find("status");
-						
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{	
+							//var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							//var tarikh_permohonan = $(this).find("created_date");
+							//var status = $(this).find("status");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
+							
+							//$("#content").html("<div id='"+kad_pengenalan+"' class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
+							
+							$("#content").append("<div class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$.alert
+						(
+							{
+								title: 'Carian',
+								content: 'Tiada Dalam Rekod Pangkalan Data',
+								confirm: function(){}
+							}
+						);
 						$('body').waitMe('hide');
-						$('#content').show();
-						
-						//$("#content").html("<div id='"+kad_pengenalan+"' class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
-						
-						$("#content").append("<div class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
-					});
+					}
+					else{}
+					$('body').waitMe('hide');
 				}
 			}
 		);
