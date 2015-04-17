@@ -575,12 +575,14 @@
 						
 						$.each(value, function (index_2, fasal_list) {
 						
+								var fasal_index= 'Fasal '+(index_2+1);
+								
 								var editorImgFirstLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
 								var checkBoxFirstLvl = '<td><input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
 								
 								//First Lvl
 								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+fasal_list.id+'"><td width="30px" class="xx" id="edittooltip_'+fasal_list.id+'" >'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
-								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'">'+fasal_list.fasal+'</label>');
+								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index'+fasal_list.id+'">'+ fasal_index+'</span> - '+fasal_list.fasal+'</label>');
 								var arrayCode = [];
 								
 								if(fasal_list.sub_fasal != null)
