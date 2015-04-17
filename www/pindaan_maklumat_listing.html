@@ -104,22 +104,31 @@
 				},
 				success: function(xml, data)
 				{
-					
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-						var no_sijil = $(this).find("no_sijil");
-						var jenis_pertubuhan = $(this).find('jenis_pertubuhan');
-						//var status = $(this).find("status");
-						
-						$('body').waitMe('hide');
-						$('#content').show();
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							var no_sijil = $(this).find("no_sijil");
+							var jenis_pertubuhan = $(this).find('jenis_pertubuhan');
+							//var status = $(this).find("status");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
 
-						$("#content").append("<div class='box_icon' onclick='jenisPertubuhan(\""+jenis_pertubuhan.text()+"\")'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
-					});
+							$("#content").append("<div class='box_icon' onclick='jenisPertubuhan(\""+jenis_pertubuhan.text()+"\")'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
+
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$('body').waitMe('hide');
+					}
+					else{}
 				}
 			}
 		);
