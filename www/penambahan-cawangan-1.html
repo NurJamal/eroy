@@ -29,7 +29,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="" onclick="goBack()">
+		<a href="semakan_permohonan_listing.html">
 			<img src="img/back-icon.png" class="back_icon" align="left"/>
 		</a>
 	</div>	
@@ -271,7 +271,7 @@
 										if(count != 0)
 										{
 											$('#table_senarai').append('<tr><td colspan="2" width="90%">&nbsp;</td></tr><tr><td colspan="2" width="90%">Nota : <img src="img/bayaran-jelas-icon.png" width=25 height=25 style="margin-bottom: -6px;"> Bayaran telah dijelaskan</td></tr>');
-									 		$('#table_senarai').append('<tr><td colspan="2" width="90%"><div class="default_button_holder"><a href="#" onclick="test()"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a></div></td></tr>');
+									 		$('#table_senarai').append('<tr><td colspan="2" width="90%"><div class="default_button_holder"><a href="#" onclick="bayaran()"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a></div></td></tr>');
 										}
 									}
 									 
@@ -302,7 +302,7 @@
 			window.location.href = "penambahan-cawangan-2.html";
 		}
 
-		function test()
+		function bayaran()
 		{
 			var selectedCawangan = [];
 		
