@@ -142,7 +142,6 @@
 
 	$("#btn_submit").click(function(e)
 	{
-	
 		var dateFrom =  $.trim($("#tarikh_dari").val());
 		var dateTo =  $.trim($("#tarikh_hingga").val());
 		var jenisLaporan =  $.trim($("#jenis_laporan").val());
@@ -164,7 +163,7 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila Isikan Tarikh!',
+					content: 'Sila Pilih Tarikh',
 					confirm: function(){}
 				}
 			);
@@ -177,7 +176,7 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila Isikan Tarikh!',
+					content: 'Sila Pilih Tarikh',
 					confirm: function(){}
 				}
 			);
@@ -186,17 +185,16 @@
 		else if( selectedState.length <= 0)
 		{
 			$.alert
-				(
-					{
-						title: 'Perhatian',
-						content: 'Sila tandakan satu negeri!',
-						confirm: function(){}
-					}
-				);
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Sekurang-kurangnya Satu Negeri',
+					confirm: function(){}
+				}
+			);
 		}
 		else 
 		{
-		
 			$.ajax
 			(
 				{
