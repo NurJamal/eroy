@@ -536,10 +536,10 @@
 								var checkBoxFirstLvl = '<td><input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
 								
 								//First Lvl
-								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+fasal_list.id+'"><td width="30px" class="xx" id="edittooltip_'+fasal_list.id+'" >'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
-								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index'+fasal_list.id+'">'+ fasal_index+'</span> - '+fasal_list.fasal+'</label>');
+								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+fasal_list.id+'"><td width="30px" id="tooltipIcon" >'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
+								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+fasal_list.id+'">'+ fasal_index+'</span> - '+fasal_list.fasal+'</label>');
 								var arrayCode = [];
-								
+								//id="edittooltip_'+fasal_list.id+'"
 								if(fasal_list.sub_fasal != null)
 								{
 									if (Array.isArray(fasal_list.sub_fasal))

@@ -98,18 +98,16 @@
 	<!-- Optional: imagesLoaded script to better support images inside your tooltips -->
 	<!--<script type="text/javascript" src="js/jquery.imagesloaded.pkg.min.js"></script>-->
 	<script>
-	
 	// Create the tooltips only when document ready
 	
 	//$( document ).ready(function() {
 		
-		$("#appendPerlembagaan").delegate(".xx", "click", function (){
-
+		$("#appendPerlembagaan").delegate(".checkbox", "click", function (){
+		//tooltipIcon
 		var currentSelectedId = $(this).attr('id');
 		var arr = currentSelectedId.split('_');
 		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
 		var currentID = localStorage['selected_id_perlembagaan'];
-		
 		
 		var lol = '<table width="220" height="30">';
 		lol += '<tr align="center">';
@@ -189,22 +187,24 @@
 	{	
 		$('.inform').remove();
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		
-		//alert(selected);
-		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='display();'></div></td></tr></table></div>");										
+		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='display();'></div></td></tr></table></div>").insertAfter('#'+selected);
 		$("div").qtip('hide');				
+
+		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
+
 	
 		$('.fasal_label').each(function() {
 			var span_id = this.id;
 			var span_value = $('#'+span_id).html();
 			var addOne = parseInt(span_value.replace('Fasal ',''));
-			//PLUS ONE FOR ALL SPAN LABEL
-			if(addOne != selected.replace('tr_', ''))
-				{
-					var afterAdd = parseInt(addOne+1);
-					var fasal_index = 'Fasal '+afterAdd;
-					$('#'+span_id).html(fasal_index);
-				}
+			
+			if(addOne > selected.replace('tr_', ''))
+			{
+				var afterAdd = parseInt(addOne+1);
+				var fasal_index = 'Fasal '+afterAdd;
+				$('#'+span_id).html(fasal_index);	
+			}
+
 		});
 	}
 	
@@ -212,24 +212,84 @@
 	function editFasal()
 	{				
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		//alert(selected);			
 	}
 	
 	
 	
 	function display()
 	{			
+		/*FASAL LABEL INDEX*/
+		var dummyFasalLabelIndex = 1;
 	
 		var id = localStorage.getItem('selected_id_perlembagaan');
-
+		var thisID = id;
+		var fasal_index = localStorage.getItem('fasal_index');
+		var appendId = 'tr_'+(parseInt((id).replace('tr_', ''))+1);
+		
+		/*On click display - check if null*/
 		if($('#fasal_added_'+(id)).val() != "")
 		{
 			var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
 			var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-			$('#'+id).append('<tr><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"> Fasal - '+$('#fasal_added_'+(id)).val()+'</label></td><tr>');				
+			$('<tr class="checkbox" style="margin-bottom:10px;" id="new_added_'+appendId+'" ><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"><span class="fasal_label" id="fasal_index_'+appendId+'"> Fasal '+ fasal_index+'</span> - '+$('#fasal_added_'+(id)).val()+'</label></td></tr>').insertAfter($('#'+id));				
 		}
+		
 		$('#added_'+id).remove();
 		
+		/*Differentiate between <tr>*/
+		$('.checkbox').each(function() {
+			
+			var tr_id = this.id;
+			var tr_value =  $('#'+tr_id).attr('id');
+			var trAddOne = parseInt(tr_value.replace('tr_',''));
+
+			//if(trAddOne > id.replace('tr_',''))
+			if(trAddOne > id.replace('tr_',''))
+			{
+				var trAfterAdd = parseInt(trAddOne+1);
+				$('#'+tr_id).attr('id','tr_'+trAfterAdd);
+				
+			}
+		});
+		
+		$('#new_added_'+appendId).attr('id',appendId);
+		
+		rewriteID();
+		
+	}
+	
+	function rewriteID()
+	{
+		/* Re-write <TR NO> */
+		var index = 1;
+		$('.checkbox').each(function() {
+			var tr_id = this.id;
+			var tr_value =  $('#'+tr_id).attr('id');
+			$('#'+tr_value).attr('id','xx_'+index);
+			$('#fasal_index_'+tr_value).attr('id','xx_'+index);
+
+			index = parseInt(index+1);
+		});
+		
+		var indexx = 1;
+		$('.checkbox').each(function() {
+			$('#xx_'+indexx).attr('id','tr_'+indexx);
+			indexx = parseInt(indexx+1);
+		});
+
+	}
+
+	function reWriteFasalNumber()
+	{
+		//Re-write Id 
+		var index = 1;
+		$('.checkbox').each(function() {
+			var tr_id = this.id;
+			var tr_value =  $('#'+tr_id).attr('id');
+			$('#'+tr_value).attr('id','xx_'+index);
+
+			index = parseInt(index+1);
+		});
 	}
 		
 
