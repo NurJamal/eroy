@@ -207,11 +207,10 @@
 						title: 'Perhatian',
 						content: 'Sila semak Captcha anda',
 						confirm: function(){}
-					}
 				);
-				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				$('#f_captcha').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 			}
-			
+					
 			else if(!ValidateEmail(emel))
 			{
 				$.alert
@@ -304,7 +303,7 @@
 		{
 			if(ValidCaptcha(captcha) == false)
 			{
-				return false
+				return false;
 			}
 			return true;
 		}

@@ -47,7 +47,7 @@
 		<div id="content">
 			<form id="" action="" method="POST">
 				<div class="_form">
-					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()" onblur="alert(1);"><br/>
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()" onBlur="checkNoSijil()"><br/>
 				</div>	
 				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
@@ -170,7 +170,18 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila isikan tempat kosong!',
+					content: 'Sila Isikan Tempat Kosong!',
+					confirm: function(){}
+				}
+			);
+		}
+		else if (!checkNoSijil(no_sijil))
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Semak No Sijil Pertubuhan Anda',
 					confirm: function(){}
 				}
 			);
@@ -292,8 +303,49 @@
 		});
 	});
 	
-	/*Set current menu to fix*/
-	window.localStorage.setItem("_MENU_FIX", "TRUE");
+	function checkNoSijil()
+	{
+		$(document).ready(function()
+		{
+			var no_sijil = $.trim($("#f_sijil").val());
+
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/get_no_sijil.php",
+					type:'POST',
+					data: 
+					{
+						no_sijil: no_sijil
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Tukar ID Setiausaha',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+						}
+						else{}
+					}
+				}
+			);
+		});
+	}
 	</script>
 	
   </body>
