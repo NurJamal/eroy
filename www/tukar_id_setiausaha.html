@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
@@ -10,12 +10,12 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 		<div id="loadingLayer"></div>
-		
 	</head>
 	<body>
 	
@@ -47,7 +47,7 @@
 		<div id="content">
 			<form id="" action="" method="POST">
 				<div class="_form">
-					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()" onBlur="checkNoSijil()"><br/>
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()"><br/>
 				</div>	
 				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
@@ -84,7 +84,7 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
@@ -175,17 +175,6 @@
 				}
 			);
 		}
-		else if (!checkNoSijil(no_sijil))
-		{
-			$.alert
-			(
-				{
-					title: 'Perhatian',
-					content: 'Sila Semak No Sijil Pertubuhan Anda',
-					confirm: function(){}
-				}
-			);
-		}
 		else 
 		{
 			$.ajax
@@ -250,9 +239,9 @@
 
 	$(function () 
 	{
-		var minlength = 5;
+		var minlength = 6;
 
-		$("#f_sijil").keyup(function () 
+		$("#f_sijil").keyup(function() 
 		{
 			var that = this,
 			value = $(this).val();
@@ -273,79 +262,46 @@
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_nama_pertubuhan").each(function()
+							
+							if($(xml).find("status").text() == "ok")
 							{
-								var npertubuhan = $(this).find("nama_pertubuhan");
-								var no_sijil = $(this).find("no_sijil");
-								
-								console.log($(this).text());
-								
-								if (value == $(that).val()) 
+								$(xml).find("details").each(function()
 								{
+									var npertubuhan = $(this).find("nama_pertubuhan");
+									var no_sijil = $(this).find("no_sijil");
+									
+									console.log($(this).text());
+
 									$('#d_npertubuhan').val($(npertubuhan).text());
-								}
-								else
-								{
-									$.alert
-									(
-										{
-											title: 'Carian',
-											content: 'Tiada dalam rekod pangkalan data.',
-											confirm: function(){}
-										}
-									);
-								}
-							})
-						}
+								});
+							}
+							else if($(xml).find("status").text() == "error")
+							{
+								$.alert
+								(
+									{
+										title: 'Carian Maklumat',
+										content: 'Tiada Dalam Rekod Pangkalan Data',
+										confirm: function(){}
+									}
+								);
+								$('body').waitMe('hide');
+							}
+							else{}
+							$('body').waitMe('hide');
+						},
+						error: function(xml, data) 
+						{
+							console.log("An error occurred while processing XML file.");
+						},
 					}
 				);
 			}
 		});
 	});
 	
-	function checkNoSijil()
-	{
-		$(document).ready(function()
-		{
-			var no_sijil = $.trim($("#f_sijil").val());
-
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/get_no_sijil.php",
-					type:'POST',
-					data: 
-					{
-						no_sijil: no_sijil
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							
-						}
-						else if (json.status == 'error') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Tukar ID Setiausaha',
-									content: json.message,
-									confirm: function(){}
-								}
-							);
-						}
-						else{}
-					}
-				}
-			);
-		});
-	}
+	/*Set current menu to fix*/
+	window.localStorage.setItem("_MENU_FIX", "TRUE");
 	</script>
 	
   </body>

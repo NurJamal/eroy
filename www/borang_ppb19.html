@@ -150,6 +150,7 @@
 
 	$(function() 
 	{
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -168,30 +169,53 @@
 				{
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama = $(this).find("nama");
-						var kadp = $(this).find("no_KP");
-						var alamat = $(this).find("alamat");
-						//var alamat_tetap1 = $(this).find("alamat_tetap_1");
-						//var alamat_tetap2 = $(this).find("alamat_tetap_2");
-						//var alamat_tetap3 = $(this).find("alamat_tetap_3");
-						var jawatan = $(this).find("jawatan");
-						var no_telefon = $(this).find("no_tel");
-						//var tarikh_daftar = $(this).find("t_lulus");
-						
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama = $(this).find("nama");
+							var kadp = $(this).find("no_KP");
+							var alamat = $(this).find("alamat");
+							//var alamat_tetap1 = $(this).find("alamat_tetap_1");
+							//var alamat_tetap2 = $(this).find("alamat_tetap_2");
+							//var alamat_tetap3 = $(this).find("alamat_tetap_3");
+							var jawatan = $(this).find("jawatan");
+							var no_telefon = $(this).find("no_tel");
+							//var tarikh_daftar = $(this).find("t_lulus");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
+							
+							$('#d_nama').val($(nama).text());		
+							$('#d_kp').val($(kadp).text());
+							$('#d_alamat').val($(alamat).text());
+							//$('#d_alamat').val($(alamat_tetap1).text()+', '+$(alamat_tetap2).text()+', '+$(alamat_tetap3).text());
+							$('#d_jawatan').val($(jawatan).text());
+							$('#d_telefon').val($(no_telefon).text());
+							//$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$.alert
+						(
+							{
+								title: 'Carian Maklumat',
+								content: 'Tiada Dalam Rekod Pangkalan Data',
+								confirm: function(){}
+							}
+						);
 						$('body').waitMe('hide');
-						
-						$('#d_nama').val($(nama).text());		
-						$('#d_kp').val($(kadp).text());
-						$('#d_alamat').val($(alamat).text());
-						//$('#d_alamat').val($(alamat_tetap1).text()+', '+$(alamat_tetap2).text()+', '+$(alamat_tetap3).text());
-						$('#d_jawatan').val($(jawatan).text());
-						$('#d_telefon').val($(no_telefon).text());
-						//$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
-					});
-				}
+					}
+					else{}
+					$('body').waitMe('hide');
+				},
+				error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+				},
 			}
 		);
 	});

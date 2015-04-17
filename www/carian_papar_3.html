@@ -91,7 +91,7 @@
 	
 	$(function() 
 	{
-		//$('#content').hide();
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -110,23 +110,45 @@
 				{
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var alamat1 = $(this).find("alamat1");
-						var alamat2 = $(this).find("alamat2");
-						var alamat3 = $(this).find("alamat3");
-						var alamat_pos1 = $(this).find("alamat_pos1");
-						var alamat_pos2 = $(this).find("alamat_pos2");
-						var alamat_pos3 = $(this).find("alamat_pos3");
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var alamat1 = $(this).find("alamat1");
+							var alamat2 = $(this).find("alamat2");
+							var alamat3 = $(this).find("alamat3");
+							var alamat_pos1 = $(this).find("alamat_pos1");
+							var alamat_pos2 = $(this).find("alamat_pos2");
+							var alamat_pos3 = $(this).find("alamat_pos3");
 
+							$('body').waitMe('hide');
+							$('#content').show();
+								
+							$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
+							$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$.alert
+						(
+							{
+								title: 'Carian Maklumat',
+								content: 'Tiada Dalam Rekod Pangkalan Data',
+								confirm: function(){}
+							}
+						);
 						$('body').waitMe('hide');
-						$('#content').show();
-							
-						$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
-						$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
-					});
-				}
+					}
+					else{}
+					$('body').waitMe('hide');
+				},
+				error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+				},
 			}
 		);
 	});

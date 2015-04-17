@@ -177,6 +177,71 @@
 	 
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-		
-  </body>
+	
+	<script>
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	
+	/*$(function() 
+	{
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_terperinci_paparan.php",
+				dataType: "xml",
+				data : 
+				{
+					kad_pengenalan : kad_pengenalan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var no_sijil = $(this).find("no_sijil");
+							var no_fail = $(this).find("no_fail");
+							var t_sijil_lulus = $(this).find("t_sijil_lulus");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
+							
+							$('#d_no_sijil').val($(no_sijil).text());		
+							$('#d_no_fail').val($(no_fail).text());
+							$('#d_tarikh_sijil_lulus').val($(t_sijil_lulus).text());		
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$.alert
+						(
+							{
+								title: 'Carian Maklumat',
+								content: 'Tiada Dalam Rekod Pangkalan Data',
+								confirm: function(){}
+							}
+						);
+						$('body').waitMe('hide');
+					}
+					else{}
+					$('body').waitMe('hide');
+				},
+				error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+				},
+			}
+		);
+	});*/
+	</script>	
+	</body>
 </html>

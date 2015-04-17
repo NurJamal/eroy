@@ -104,7 +104,7 @@
 	
 	$(function() 
 	{
-		//$('#content').hide();
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -123,23 +123,45 @@
 				{
 					var xmlDoc = $.parseXML(xml),
 					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
-						var nama_pertubuhan = $(this).find("nama_pertubuhan");
-						var nama_ringkasan = $(this).find("nama_ringkasan");
-						var emel_pertubuhan = $(this).find("emel_pertubuhan");
-						
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
+							var nama_pertubuhan = $(this).find("nama_pertubuhan");
+							var nama_ringkasan = $(this).find("nama_ringkasan");
+							var emel_pertubuhan = $(this).find("emel_pertubuhan");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
+							
+							$('#d_peringkat_pertubuhan').val($(peringkat_pertubuhan).text());
+							$('#d_nama_pertubuhan').val($(nama_pertubuhan).text());		
+							$('#d_nama_ringkasan').val($(nama_ringkasan).text());
+							$('#d_emel_pertubuhan').val($(emel_pertubuhan).text());		
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$.alert
+						(
+							{
+								title: 'Carian Maklumat',
+								content: 'Tiada Dalam Rekod Pangkalan Data',
+								confirm: function(){}
+							}
+						);
 						$('body').waitMe('hide');
-						$('#content').show();
-						
-						$('#d_peringkat_pertubuhan').val($(peringkat_pertubuhan).text());
-						$('#d_nama_pertubuhan').val($(nama_pertubuhan).text());		
-						$('#d_nama_ringkasan').val($(nama_ringkasan).text());
-						$('#d_emel_pertubuhan').val($(emel_pertubuhan).text());		
-					});
-				}
+					}
+					else{}
+					$('body').waitMe('hide');
+				},
+				error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+				},
 			}
 		);
 	});
