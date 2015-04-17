@@ -15,9 +15,7 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
-		
 		<div id="loadingLayer"></div>
-		
 	</head>
 	<body>
 	
@@ -31,7 +29,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="log_masuk.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -48,32 +46,28 @@
 		<!-- end of header-title-->
 
 		<div id="content">
-		<!-- form -->
 			<div class="_form">
 				<form id="" action="" method="POST">
 					<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh" onkeyup="upperCase()"><br/>
-					
 					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
-					
 					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
-					
 					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-					
 					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Gabungan huruf (A-Z a-z), nombor (0-9), simbol (!@#$*?). Minimum 8 aksara</h5>
-					
 					<input type="password" name="f_sah_katalaluan" id="f_sah_katalaluan" 
 					placeholder="Sahkan Kata Laluan"><br/>
-					
 					<input type="email" name="f_emel" id="f_emel" placeholder="Emel"><br/>
-					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="DAFTAR" id="btn_submit">
 					</div>
 				</form>
 			</div>
 		</div>
-		<!-- end of form -->
 	</div>
+	
+	<script>
+		window.localStorage.setItem("_MENU_FIX", "TRUE");
+	</script>
+	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -176,9 +170,9 @@
 				$.alert
 				(
 					{
-						title: 'Perhatian',
+		title: 'Perhatian',
 						content: 'Sila Isikan Format Emel yang Betul',
-						confirm: function(){ }
+						confirm: function(){}
 					}
 				);
 				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -186,11 +180,10 @@
 			else if(!cekPass(katalaluan))
 			{
 				$.alert
-				(
-					{
-						title: 'Perhatian',
+				(					{
+	title: 'Perhatian',
 						content: 'Sila Isikan Format Kata Laluan yang Betul',
-						confirm: function(){ }
+						confirm: function(){}
 					}
 				);
 				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -198,10 +191,9 @@
 			else if(sah_katalaluan != katalaluan)
 			{
 				$.alert
-				(
-					{
-						title: 'Perhatian',
-						content: 'Sahkan Kata Laluan Tidak Sama Dengan Kata Laluan',
+				(					{
+	title: 'Perhatian',
+						content: 'Sahkan Kata Laluan tidak sama dengan Kata Laluan',
 						confirm: function(){ }
 					}
 				);
@@ -214,8 +206,7 @@
 					{
 						url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
 						type:'POST',
-						data:
-						{
+						data:						{
 							nama : nama,
 							kadp: kadp,
 							katalaluan : katalaluan,
@@ -268,7 +259,9 @@
 			}
 		}
 	});
-	</script>
 	
+	/*Set current menu to fix*/
+	window.localStorage.setItem("_MENU_FIX", "TRUE");
+	</script>
 	</body>
 </html>

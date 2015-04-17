@@ -7,11 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -25,47 +29,49 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="carian_asas_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<!-- list -->
-	<div id="content">
-		<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-		<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
-		
-		<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-		
-		<h2 class="_orange_text">Alamat Pos</h2>
-		<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-		
-		<h2 class="_orange_text">Peringkat Pertubuhan</h2>
-		<h1 class="_dark_text">Daerah</h1>
-		
-		<h2 class="_orange_text">No Daftar/No Sijil</h2>
-		<h1 class="_dark_text">T45678</h1>
-		
-		<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
-		<h1 class="_dark_text">20/10/2014</h1>
-		
-		<h2 class="_orange_text">Status</h2>
-		<h1 class="_dark_text">Aktif</h1>
+		<!-- list -->
+		<div id="content">
+			<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
+			<h1 class="_dark_text" id="nama_pertubuhan" style="text-transform: uppercase"></h1>
+
+			<h2 class="_orange_text">Alamat Tempat Urusan</h2>
+			<h1 class="_dark_text" id="alamat_urusan"></h1>
+			
+			<h2 class="_orange_text">Alamat Pos</h2>
+			<h1 class="_dark_text" id="alamat_pos"></h1>
+			
+			<h2 class="_orange_text">Peringkat Pertubuhan</h2>
+			<h1 class="_dark_text" id="peringkat_pertubuhan"></h1>
+			
+			<h2 class="_orange_text">No Daftar/No Sijil</h2>
+			<h1 class="_dark_text" id="no_sijil"></h1>
+			
+			<h2 class="_orange_text">Tarikh Lulus Daftar</h2>
+			<h1 class="_dark_text" id="tarikh_lulus_daftar"></h1>
+			
+			<h2 class="_orange_text">Status</h2>
+			<h1 class="_dark_text" id="status_keaktifan">-</h1>
+		</div>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
 	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
@@ -76,17 +82,84 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
 	<script>
-	var nama_pertubuhan = JSON.parse(localStorage['NAMA PERTUBUHAN']);
+	var kod_nama_pertubuhan = JSON.parse(localStorage['CARIAN_ID_PERTUBUHAN']);
 	
-	aler(nama_pertubuhan);
-	
-	/*$.each(nama_pertubuhan.details, function (index, value) 
+	$(function() 
 	{
-		console.log(value);
-		$("<div id='box'><h2 class='title' id='nama_pertubuhan'>"+value.nama_pertubuhan+"</h2></div>").appendTo('#content');
-	});	*/
-	
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_papar.php",
+				dataType: "xml",
+				data : 
+				{
+					kod_nama_pertubuhan : kod_nama_pertubuhan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var npertubuhan = $(this).find("nama_pertubuhan");
+						var alamat_urusan = $(this).find("alamat1");
+						var alamat_urusan1 = $(this).find("alamat2");
+						var alamat_urusan2 = $(this).find("alamat3");
+						var alamat_pos = $(this).find("alamat_pos1");
+						var alamat_pos1 = $(this).find("alamat_pos2");
+						var alamat_pos2 = $(this).find("alamat_pos3");
+						var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var tarikh_sijil_lulus = $(this).find("t_sijil_lulus");
+						
+						/*REFER MYKD*/
+						//var status_keaktifan = $(this).find("status");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$('#nama_pertubuhan').html($(npertubuhan).text()+'<br/>');
+						$('#alamat_urusan').html($(alamat_urusan).text()+', '+$(alamat_urusan1).text()+', '+$(alamat_urusan2).text()+'<br/>');
+						$('#alamat_pos').html($(alamat_pos).text()+', '+$(alamat_pos1).text()+', '+
+						$(alamat_pos2).text()+'<br/>');
+						$('#peringkat_pertubuhan').html($(peringkat_pertubuhan).text()+'<br/>');
+						$('#no_sijil').html($(no_sijil).text()+'<br/>');
+						$('#tarikh_lulus_daftar').html($(tarikh_sijil_lulus).text()+'<br/>');
+						//$('#status_keaktifan').html($(status_keaktifan).text()+'<br/>');
+					});
+				}
+				/*error: function(xml, data) 
+				{
+					console.log("An error occurred while processing XML file.");
+					$.alert
+					(
+						{
+							title: 'Carian',
+							content: 'Data Tidak Ditemui',
+							confirm: function(){}
+						}
+					);
+				}*/
+			}
+		);
+	});
+
 	</script>
 	
 	

@@ -1,0 +1,44 @@
+	<html>
+	<body>
+	<div id="content">
+	</div>
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<script>
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url:"http://eroy.me-tech.com.my/api/api_carian_papar.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_carian").each(function()
+					{
+						console.log($(this).text());
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var npertubuhan = $(this).find("nama_pertubuhan");
+						$('#content').append('<option value="'+$(kod_id).text()+'">'+$(npertubuhan).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	</script>
+	</body>
+	</html>

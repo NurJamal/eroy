@@ -14,9 +14,8 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
-		
+
 		<style>
 			input.invalid {outline-color: #FF0000}
 			input.valid {background-color: white}
@@ -31,14 +30,11 @@
 	<div id="navigation"></div>
 	<!-- /slide menu right -->
 
-	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
-		<a href="index.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-			<!-- <img src="img/menu-icon.png" align="right" class="toggle-slide-right menu_icon"/>
-			<a href="#" onclick="back();"><img src="img/back-icon.png" class="back_icon" align="left"/></a> -->
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>		
 	<!-- end of header -->
 	
@@ -50,23 +46,19 @@
 					<h1 class="main_title">LOG MASUK</h1>
 				</div>
 			</div>
-		
 		</div>
 		<!-- end of header-title-->
 		
 		<div id="content">
-			<!-- form -->
 			<div class="_form">
 				<form id="login_form" action="" method="POST">
 					<input type="number" style="margin-top:15px"  name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
-					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="LOG MASUK" id="btn_submit">
 					</div>
 				</form>
 			</div>
-			<!-- end of form -->
 		
 			<div class="multi-links">
 				<h5 align="center"><a href="daftar_pengguna.html">Daftar</a></h5>
@@ -123,11 +115,10 @@
 			$.alert
 			(
 				{
-					title: 'Perhatian',
-					content: 'Sila Isikan Tempat Kosong!',
+title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
 					confirm: function(){				
-					}
-				}
+					}				}
 			);
 		}
 		else 

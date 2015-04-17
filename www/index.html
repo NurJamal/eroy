@@ -15,16 +15,7 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
-		
-		<style>
-		#sbox
-		{
-			padding-left: 2.5%;
-			padding-right: 2%;
-		}
-		</style>
 		
 	</head>
 	<body>
@@ -33,7 +24,7 @@
 
 	<!-- slide menu right -->
 	<div id="navigation"></div>
-	<!-- end of slide menu right -->
+	<!-- end of slide menu rasdight -->
  
 	<!-- header -->
 	<div id="head">
@@ -63,6 +54,25 @@
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
 
 			</div>	
+			<p><span onclick="window.open('http://www.google.com', '_blank',); return false;">_blank</span></p>
+			<p><span rel="external" onclick="window.open('http://www.google.com', '_system',); return false;">_system</span></p>
+			<p><span onclick="test()">_self</span></p>
+			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
+			<a href="pindaan_maklumat_perlembagaan.html">Perlembagaan</a>
+			
+			<form method="post" onsubmit="test();" id="paymentForm">
+			<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
+			<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
+			<INPUT type="hidden" name="Amount" value="300">
+			<INPUT type="hidden" name="BuyerAccNo" value="Yuran Pindaan Maklumat ">
+			<INPUT type="hidden" name="ItemName" id="itemName" value="Pindaan Maklumat"/>
+			<INPUT type="hidden" name="Key" id="Key" value="E-ROY"/>
+
+			<div class="default_button_holder">
+			<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
+				<input class="default_button" type="submit" value="BAYAR" id="btn_submit">
+			</div>
+			</form>
 		</div>
 	</div>
 
@@ -75,31 +85,48 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
- <script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+	
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-	
+	<script src="phonegap.js"></script> 
+	<script src="cordova.js"></script> 
+	<script src="cordova_plugins.js"></script>
 	<script>
-	
-	
-      document.addEventListener("deviceready", onDeviceReady, false);
-      function onDeviceReady() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() 
+	{
       	var devicePlatform = cordova.platformId;
 		alert(devicePlatform);
- 
+		//StatusBar.overlaysWebView(false);
+	}
+	
+
+	function test() 
+	{
+		//$('#paymentForm').submit();
+		navigator.app.loadUrl('http://payment.telcowin.com/payment.php', { openExternal:true } );
+		return false;
+	}
+
+
 	
 	$("#btn_submit").click(function(e)
 	{
+		var carian_nama = $.trim($('#n_carian').val());
+		
 		e.preventDefault();			
 
-		var carian_nama = $.trim($('#n_carian').val());
+		
+		
 		
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
@@ -113,7 +140,6 @@
 			);
 			$('#n_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 		}
-
 		else
 		{
 			$.ajax
@@ -125,6 +151,10 @@
 					{
 						carian_nama : carian_nama
 					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
 					success:function(data)
 					{
 						console.log(data);
@@ -133,22 +163,8 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Halaman Utama',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-							window.localStorage['NAMA PERTUBUHAN'] = JSON.stringify(json);
-							
-							//window.localStorage.setItem("NAMA PERTUBUHAN", json.details.nama_pertubuhan);
-							window.location.href = "carian_asas_listing.html";
-							
+							window.localStorage['CARIAN_PERTUBUHAN'] = JSON.stringify(json);
+							window.location.href = "carian_asas_listing.html";	
 						}
 						else if (json.status == 'error') 
 						{
@@ -158,14 +174,12 @@
 								{
 									title: 'Halaman Utama',
 									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
+									confirm: function(){}
 								}
 							);
 						}
 						else{}
+						$('body').waitMe('hide');
 					}
 				}
 			)

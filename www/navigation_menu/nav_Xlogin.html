@@ -1,5 +1,5 @@
-
 <!-- slide menu right -->
+<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
 <nav class="menu slide-menu-right">
 		<ul>
 			<li class="title">Menu</li>
@@ -7,7 +7,7 @@
 			<li id="colored"><a href="tukar_id_setiausaha.html"><img src="img/id-icon.png" class="menu-icon"/>Tukar ID Setiausaha</a></li>
 			<li class="title">Pengenalan</li>
 			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
-			<li id="colored"><a href="#"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
+			<li id="colored"><a href="#" onclick="openPDF()"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
 			<li></li>
 		</ul>
 </nav>
@@ -15,5 +15,8 @@
 <script>
 	/* --- SET MENU FIX TO FALSE--- */
 	window.localStorage.setItem("_MENU_FIX", "FALSE");	
+	function openPDF() {
+		window.open('https://drive.google.com/file/d/0B7yl9kUZSHAWQURGTl9TR1NqVnM/view?usp=sharing', '_system', 'location=yes')
+}
 </script>
 <!-- /slide menu right -->

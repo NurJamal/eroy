@@ -15,7 +15,6 @@
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
-		
 		<div id="loadingLayer"></div>
 		
 	</head>
@@ -47,7 +46,6 @@
 		<!-- end of header-title-->
 	
 		<div id="content">
-			<!-- form -->
 			<div class="_form">
 				<form id="" action="" method="POST">
 					<input type="number" style="margin-top:15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
@@ -57,7 +55,6 @@
 					</div>
 				</form>
 			</div>
-			<!-- end of form -->
 		</div>	
 	</div>
 	
@@ -101,9 +98,8 @@
 			$.alert
 			(
 				{
-					title: 'Perhatian',
-					content: 'Sila Isikan Tempat Kosong!',
-					confirm: function(){}
+title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',					confirm: function(){}
 				}
 			);
 		}
@@ -114,18 +110,17 @@
 				$.alert
 				(
 					{
-						title: 'Perhatian',
+	title: 'Daftar Pengguna',
 						content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
 						confirm: function(){}
 					}
 				);
-				$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			}
 			else 
 			{
 				$.ajax
-				(
-					{
+				(					{
 						url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
 						type:'POST',
 						data: 

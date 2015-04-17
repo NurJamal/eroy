@@ -139,14 +139,13 @@
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(kadp.length == 0)
-		{
+if(kadp.length == 0)		{
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
 		if(t_lahir.length == 0) 
 		{
-			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
 		if(emel.length == 0) 
@@ -173,26 +172,20 @@
 					content: 'Sila Isikan Tempat Kosong!',
 					confirm: function(){}
 				}
-			);
+			);			empty = true;
 		}
-		else if(kadp.length != 12)
+		else if (emel.length == 0)		{
+			);			empty = true;
+		}
+		else if(!ValidateEmail(emel))		{
+			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
 		{
 			$.alert
 			(
 				{
-					title: 'Perhatian',
-					content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
-					confirm: function(){}
-				}
-			);
-		}
-		else if (!checkNoSijil(no_sijil))
-		{
-			$.alert
-			(
-				{
-					title: 'Perhatian',
-					content: 'Sila Semak No Sijil Pertubuhan Anda',
 					confirm: function(){}
 				}
 			);
@@ -299,46 +292,45 @@
 			}
 		});
 	});
-	
-	function checkNoSijil()
-	{
-		$(document).ready(function()
-		{
-			var no_sijil = $.trim($("#f_sijil").val());
 
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/get_no_sijil.php",
-					type:'POST',
-					data: 
-					{
-						no_sijil: no_sijil
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							return true;
-							
-						}
-						else if (json.status == 'error') 
-						{
-							console.log(json.status);
-						}
-						else{}
-					}
-				}
-			);
-		});
-	}
-	
 	/*Set current menu to fix*/
 	window.localStorage.setItem("_MENU_FIX", "TRUE");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</script>
 	
   </body>

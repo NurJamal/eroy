@@ -2,19 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />				<link rel="stylesheet" href="css/bootstrap.min.css">
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
-
+		</div>	
+		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -28,12 +29,12 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="menu_pendaftaran.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="" onclick="goBack()"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -63,20 +64,28 @@
 	<!-- form -->
 		<div class="_form">
 		
-			<div class="selection">
+			<div class="selection" id="peringkat_selection">
 					<h5 id="_orange_title">Peringkat</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
+						<option value="">Pilih Peringkat</option>
+						<option value="1">Kebangsaan</option>
 						</select>
+						<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_bercawangan">
+						<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
 					</form>		
 				</div>
 				
-			<div class="selection">
+			<div class="selection" id="pertubuhan_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_pertubuhan" name="sel_pertubuhan" class="_sel">
+						<option value="">Pilih Kategori Pertubuhan</option>
+						<option value="1">Persatuan</option>
+						<option value="2">Gerakan</option>
+						<option value="3">Angkatan</option>
+						<option value="4">Gabungan</option>
+						<option value="5">Junior</option>
 						</select>
 					</form>		
 			</div>
@@ -85,13 +94,14 @@
 			<form id="" action="" method="POST">
 				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="nama_per" id="nama_per" placeholder="Nama"><br/>
-				
+			</form>
 									
 			<form id="" action="" method="POST">
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
 				
+							
 			<div class="display">
-				<input type="text" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" placeholder="Nama Penuh Pertubuhan""><br/>
+				<textarea id="paparan_nama_pertubuhan" name="paparan_nama_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
@@ -103,7 +113,7 @@
 		</div>
 	</div>
 	<!-- end of form -->
-	
+	</div>
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -116,6 +126,429 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>
+
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+
+		window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", "KELAB APA-APA SAHAJA");
+
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								$("#id_pertubuhan").val(json.details.id);
+								$("#sel_peringkat").val(json.details.id_peringkat_pertubuhan);
+								$("#sel_pertubuhan").val(json.details.id_kategori_pertubuhan);
+								$("#nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#paparan_nama_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#nama_per").val(json.details.nama);
+								$("#nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#emel_pertubuhan").val(json.details.emel_pertubuhan);
+
+								$('body').waitMe('hide');
+
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+
+		$("#sel_pertubuhan, #sel_peringkat").change(function(){
+			var peringkat = $("#sel_peringkat").val().toUpperCase();
+			var pertubuhan = $("#sel_pertubuhan").val().toUpperCase();
+			var namaPertubuhan = $("#nama_pertubuhan").val().toUpperCase();
+			var namaPer = $("#nama_per").val().toUpperCase();
+			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
+			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
+
+			if(peringkat == "1")
+			{
+				peringkat = "MALAYSIA";
+			}
+
+			if( peringkat.length > 0 )
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if( namaPer.length > 0 )
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+							}
+						}else
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+							}
+						}
+					}else
+					{
+						if( namaPer.length > 0 )
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPer+' '+peringkat);
+							}
+						}else
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+peringkat);
+							}
+						}
+					}
+				}else
+				{
+					if( namaPertubuhan.length > 0 )
+					{
+						if( namaPer.length > 0 )
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
+							}
+						}else
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat);
+							}
+						}
+					}else
+					{
+						if( namaPer.length > 0 )
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(namaPer+' '+peringkat);
+							}
+						}else
+						{
+							if(namaRingkasan.length > 0)
+							{
+								$('#paparan_nama_pertubuhan').val(peringkat+' ['+namaRingkasan+']');
+							}else
+							{
+								$('#paparan_nama_pertubuhan').val(peringkat);
+							}
+						}
+					}
+				}
+			}else
+			{
+				if( namaPertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
+						}
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt);
+						}
+					}
+				}
+			}
+		});
+
+		$("#nama_pertubuhan,#nama_per,#nama_ringkasan").keyup(function(){
+			var peringkat = $("#sel_peringkat").val().toUpperCase();
+			var pertubuhan = $("#sel_pertubuhan").val().toUpperCase();
+			var namaPertubuhan = $("#nama_pertubuhan").val().toUpperCase();
+			var namaPer = $("#nama_per").val().toUpperCase();
+			var namaRingkasan = $("#nama_ringkasan").val().toUpperCase();
+			var sel_pertubuhan_txt = $('#sel_pertubuhan option:selected').text().toUpperCase();
+
+			if(peringkat == "1")
+			{
+				peringkat = "MALAYSIA";
+			}
+
+			if( peringkat.length > 0 )
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+peringkat);
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' '+peringkat);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+peringkat);
+						}
+					}
+				}
+			}else
+			{
+				if( pertubuhan.length > 0 )
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						$('#paparan_nama_pertubuhan').val(sel_pertubuhan_txt+' '+namaPertubuhan);
+					}
+				}else
+				{
+					if( namaPer.length > 0 )
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+namaPer);
+						}
+					}else
+					{
+						if(namaRingkasan.length > 0)
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan+' '+' ['+namaRingkasan+']');
+						}else
+						{
+							$('#paparan_nama_pertubuhan').val(namaPertubuhan);
+						}
+					}
+				}
+			}
+		});
+
+		$("#btn_submit").click(function(e){
+			var empty = false;
+			e.preventDefault();
+			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
+			$('#sel_peringkat,#sel_pertubuhan,#nama_pertubuhan,#nama_ringkasan,#paparan_nama_pertubuhan,#emel_pertubuhan').css({"border":"","box-shadow":""});
+
+			var insertData = "TRUE";
+			var id_pertubuhan = $("#id_pertubuhan").val();
+			var peringkat = $("#sel_peringkat").val();
+			var pertubuhan = $("#sel_pertubuhan").val();
+			var namaPertubuhan = $("#nama_pertubuhan").val();
+			var paparan_nama_pertubuhan = $("#paparan_nama_pertubuhan").val();
+			var namaPer = $("#nama_per").val();
+			var namaRingkasan = $("#nama_ringkasan").val();
+			var emelPertubuhan = $("#emel_pertubuhan").val();
+			var jenisPertubuhan = $("#pertubuhan_bercawangan").val();
+
+			if(namaPer.length == 0)
+			{
+				$('#nama_per').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(namaRingkasan.length == 0)
+			{
+				$('#nama_ringkasan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(emelPertubuhan.length == 0)
+			{
+				$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+
+			}
+
+			if(empty == true)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila isikan tempat kosong!',
+						confirm: function(){				
+						}
+					}
+				);
+			}else if(empty == false)
+			{
+				if(!ValidateEmail(emelPertubuhan))
+				{
+					$.alert
+					(
+						{
+							title: 'Daftar Pengguna',
+							content: 'Sila Isikan Format Emel yang Betul',
+							confirm: function(){ }
+						}
+					);
+					$('#emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				}
+				else
+				{
+					$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+					type:'POST',
+					data: {
+						peringkat : peringkat,
+						pertubuhan: pertubuhan,
+						namaPertubuhan : namaPertubuhan,
+						paparan_nama_pertubuhan : paparan_nama_pertubuhan,
+						namaPer : namaPer,
+						namaRingkasan : namaRingkasan,
+						emelPertubuhan : emelPertubuhan,
+						jenisPertubuhan : jenisPertubuhan,
+						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
+						id_pertubuhan : id_pertubuhan,
+					},
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", paparan_nama_pertubuhan);
+
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "permohonan-induk-2.html";
+									}
+								}
+							);
+						
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+					});
+				}
+			}
+		});
+	</script>
   </body>
 </html>

@@ -2,15 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -23,88 +28,98 @@
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
+	<div class="containerBlock">
 		<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
+		<div class="content_title">
+			<div class="input-group add-on search-box">
 
-			<div class="input-group-btn">
-				<h1 class="main_title">STATUS CARIAN</h1>
+				<div class="input-group-btn">
+					<h1 class="main_title">STATUS CARIAN</h1>
+				</div>
 			</div>
 		</div>
+		<!-- end of header-title-->
 
-	</div>
-	<!-- end of header-title-->
-
-	<div id="content">	
-		<a href="carian_papar_1.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="">PERSATUAN SILAT MALAYSIA</h2>
-			<h2 class="li2" id="">Tarikh Permohonan:<b> 23/07/2014</b></h2>
-			<h2 class="li2" id="">Status:<b> Papar</b></h2><h2></h2>
-		</div></a>
-	
-		<a href="bayaran_ppb20.html" style="text-decoration:none;">
-		<div id="box_icon">
-			<h2 class="li1" id="nama_pertubuhan"></h2>
-			<h2 class="li2" id="tarikh_permohonan">Tarikh Permohonan:<b> 14/09/2014</b></h2>
-			<h2 class="li2" id="status">Status:<b> Lulus dan Bayar</b></h2><h2></h2>
-		</div></a>
-		
-		<div id="box_no_icon">
-			<h2 class="li1" id="">PERSATUAN SELSA MALAYSIA</h2>
-			<h2 class="li2" id="">Tarikh Permohonan:<b> 01/10/2014</b></h2>
-			<h2 class="li2" id="">Status:<b> Dalam Proses</b></h2><h2></h2>
-		</div>
+		<div id="content"></div>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<!-- <script>
-	$(function() {
-
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					//$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					//$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	var no_ic = window.localStorage.getItem('LOGIN');
+	var nama = window.localStorage.getItem('NAMA');
+	
+	$(function() 
+	{
+		//$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_status_carian.php",
+				dataType: "xml",
+				data : 
+				{
+					no_ic : no_ic
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						//var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						//var tarikh_permohonan = $(this).find("created_date");
+						//var status = $(this).find("status");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+						
+						$("#content").append("<div id='"+no_ic+"' class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
+					});
+				}
 			}
-		});
-
+		);
 	});
-	</script> -->
 	
+
+	$('.box_icon').click(function(e)
+	{
+		e.preventDefault();
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var no_ic = window.localStorage.getItem('LOGIN');
+		window.location.href = "carian_papar_1.html";
+	});
 	
+	</script>	
 	</body>
 </html>

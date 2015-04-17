@@ -12,6 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -30,66 +33,63 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="permohonan-induk-4.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+		<a href="" onclick="goBack()"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
-	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
 
-				<h1 class="main_title">PERMOHONAN INDUK</h1>
+					<h1 class="main_title">PERMOHONAN INDUK</h1>
 
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
-	
-	<div id="content">
-	
-	<!-- navbar -->
-		<div class="navbar">
+		<!-- end of header-title-->
 		
-			<div align="center">
+		<div id="content">
 		
+			<!-- navbar -->
+			<div class="navbar">
+			
+				<div align="center">
+			
 
-				<img src="img\numbering-ppb05-5.png" style="width:100%;height:auto"/>
+					<img src="img\numbering-ppb05-5.png" style="width:100%;height:auto"/>
 
+				
+				</div>
 			
 			</div>
+			<!-- end of navbar -->
 		
+			<!-- form -->
+		
+			<form>
+				<div class="_form">
+			
+					<div>
+						<h5 id="_orange_title">Nama Pertubuhan</h5>
+						<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1></br>
+					</div>
+			
+					<h6 id="_orange_title">
+						<input type="checkbox" name="checkPerakuan" id="c_box1" class="checkboxClass">
+						<label for="c_box1">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label>
+					</h6>
+				
+					<div class="default_button_holder">
+						<a href="semakan_permohonan_listing.html">
+							<input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit">
+						</a>
+					</div>
+				</div>
+			</form>		
+			<!-- end of form -->
 		</div>
-	<!-- end of navbar -->
-	
-	<!-- form -->
-	
-	<form>
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">PERSATUAN BELIA 4B MALAYSIA [PB4B(M)]</h1></br>
-		</div>
-	
-		<h6 id="_orange_title">
-			<input type="checkbox" name="checking" id="check"> <label for="check">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label>
-		</h6>
-		
-		<div class="default_button_holder">
-
-			<a href="semakan_permohonan_listing.html"><input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit"></a>
-
-		</div>
-		
-		
-	
-	</form>
-		
-	<!-- end of form -->
+	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -103,6 +103,85 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
-		
+			<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+	<script>
+		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
+
+		$("#btn_submit").click(function(e){
+	    	var empty = false;
+			e.preventDefault();
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+
+			if($('input[type=checkbox]:checked').length == 0) 
+			{
+				empty = true;
+			}
+
+			if(empty == true)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila tandakan perakuan!',
+						confirm: function(){				
+						}
+					}
+				);
+			}else if(empty == false)
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_5.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kad_pengenalan,
+					},
+					beforeSend: function() {
+							run_waitMe();
+					},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') {
+							
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "semakan_permohonan_listing.html";
+									}
+								}
+							);
+						
+						}
+						else if (json.status == 'error') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				});
+				
+			}
+
+	    });
+	</script>
   </body>
 </html>

@@ -7,11 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -25,61 +29,64 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="menu_carian.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">CARIAN MAKLUMAT</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">CARIAN MAKLUMAT</h1>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<div id="content">
-		<h2 class="_orange_text" style="margin-top:13px">Permohonan Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
-		<h2 class="_orange_text">Maklumat Pemohon</h2>
-		
-		<div class="display">
-			<form id="" action="" method="POST">
-				<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" disabled><br/>
-				<input type="text" id="d_kp" name="d_kp" disabled><br/>
-				<textarea id="d_alamat" name="d_alamat" disabled></textarea>
-				<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
-				<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
-				<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" disabled><br/>
-			</form>
+		<div id="content">
+			<h2 class="_orange_text" style="margin-top:13px">Permohonan Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+			<h2 class="_orange_text">Maklumat Pemohon</h2>
+			
+			<div class="display">
+				<form id="" action="" method="POST">
+					<input type="text"  style="margin-top:-3px" id="d_nama" name="d_nama" disabled><br/>
+					<input type="text" id="d_kp" name="d_kp" disabled><br/>
+					<textarea id="d_alamat" name="d_alamat" disabled></textarea>
+					<input type="text" id="d_jawatan" name="d_jawatan"  disabled><br/>
+					<input type="text" id="d_telefon" name="d_telefon"  disabled><br/>
+					<input type="text" id="d_tarikh_daftar" name="d_tarikh_daftar" disabled><br/>
+				</form>
+			</div>
+			
+			<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+			
+			<div class="inform">
+				<input type="text" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()"><br/>
+			</div>
+			<div class="disp">
+				<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
+			</div>
+			
+			<h2 class="_orange_text">Dokumen Yang Dipohon</h2>
+			<h2 class="_orange_text">
+			1. Maklumat Sijil Pendaftaran Pertubuhan Belia<br/>
+			2. Senarai Ahli Jawatankuasa<br/>
+			3. Perlembagaan/Undang-undang Tubuh
+			</h2>
+			
+			<div class="default_button_holder">
+				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+			</div>
+			<br/>
 		</div>
-		
-		<h2 class="_orange_text">Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
-		
-		<div class="inform">
-			<input type="text" name="f_sijil" id="f_sijil" placeholder="T45678" onkeyup="upperCase()"><br/>
-		</div>
-		<div class="disp">
-			<input type="text" name="d_npertubuhan" id="d_npertubuhan" disabled ><br/>
-		</div>
-		
-		<h2 class="_orange_text">Dokumen Yang Dipohon</h2>
-		<h2 class="_orange_text">
-		1. Maklumat Sijil Pendaftaran Pertubuhan Belia<br/>
-		2. Senarai Ahli Jawatankuasa<br/>
-		3. Perlembagaan/Undang-undang Tubuh
-		</h2>
-		
-		<div class="default_button_holder">
-			<a href="bayaran_ppb19.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-		</div></a>
-		<br/>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
@@ -88,148 +95,74 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
 	<script>
+var no_ic = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
-	var no_kp = window.localStorage.getItem('LOGIN');
+
+
+
 	
-	//alert(nama);
-	//alert(no_kp);
-	//window.localStorage.setItem("ALAMAT", "alamat tempat urusan");
-	
-
-		//e.preventDefault();			
-
-		//var carian_nama = $.trim($('#n_carian').val());
-		/*$(function()
-/*	$(function()
-	{
-		$.ajax
-		(
-			{
-				url:"http://eroy.me-tech.com.my/api/api_carian_test.php",
-				type:'POST',
-				data:
-				{
-					kadp : no_kp
-					
-				}
-				success:function(data)
-				{
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') 
-					{
-						console.log(json);
-						window.localStorage['NAMA_PERTUBUHAN'] = JSON.stringify(json);
-						
-						//window.localStorage.setItem("ALAMAT", json.details.alamat_tetap_1);
-						//window.location.href = "carian_asas_listing.html";
-						
-					}
-					else if (json.status == 'error') 
-					{
-						console.log(json.status);
-						$.alert
-						(
-							{
-								title: 'Carian',
-								content: json.message,
-								confirm: function()
-								{
-									$('body').waitMe('hide');
-								}
-							}
-						);
-					}
-					else{}
-				}
-			}
-		)
-});*/
-
 	function upperCase() 
 	{
 		var x = document.getElementById("f_sijil");
 		x.value = x.value.toUpperCase();
 	}
-	
-	var nama = window.localStorage.getItem('NAMA');
-	var no_kp = window.localStorage.getItem('LOGIN');
-	var alamat = window.localStorage.getItem('ALAMAT');
-	
-	$("#d_nama").val(nama);
-	$("#d_kp").val(no_kp);
-	$("#d_alamat").val(alamat);
 
-	$("#btn_submit").click(function(e)
+$(function() 
+
+
+
 	{
-		e.preventDefault();
-
-		var no_sijil = $("#f_sijil").val();
-
-		if (no_sijil.length == 0) 
-		{
-			alert('Sila Isikan No Sijil');
-			$.alert
-			(
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_carian_terperinci.php",
+				dataType: "xml",
+				data : 
 				{
-					title: 'Carian',
-					content: 'Sila Masukkan No Sijil',
-					confirm: function()
-					{
+					no_ic : no_ic
+					
+				}
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama = $(this).find("nama");
+						var kadp = $(this).find("no_KP");
+						var alamat_tetap1 = $(this).find("alamat_tetap_1");
+						var alamat_tetap2 = $(this).find("alamat_tetap_2");
+						var alamat_tetap3 = $(this).find("alamat_tetap_3");
+						var jawatan = $(this).find("jawatan");
+						var no_telefon = $(this).find("NoTelBimbit");
+						var tarikh_daftar = $(this).find("t_lulus");
+						
 						$('body').waitMe('hide');
-					}
+						
+						$('#d_nama').val($(nama).text());		
+						$('#d_kp').val($(kadp).text());
+						$('#d_alamat').val($(alamat_tetap1).text()+' '+$(alamat_tetap2).text()+' '+$(alamat_tetap3).text());
+						$('#d_jawatan').val($(jawatan).text());
+						$('#d_telefon').val($(no_telefon).text());
+						$('#d_tarikh_daftar').val($(tarikh_daftar).text());				
+					});
 				}
-			);
-		} 
-		else 
-		{
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
-					type:'GET',
-					data:
-					{
-						no_sijil : no_sijil
-					},
-					dataType:'xml',
-					error: function(e) 
-					{
-						console.log(e);
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							//window.location.href = "bayaran_ppb19.html";
-						}
-						else if (json.status == 'error')
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Carian',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-									}
-								}
-							);
-						}
-						else{}
-					}
-				}
-			);
-		}
-	
+			}
+		);
 	});
 	
 	$(function () 
@@ -246,45 +179,29 @@
 				$.ajax
 				(
 					{
-						type: "GET",
-						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/get_nama_pertubuhan.php",
 						dataType: "xml",
 						data: 
 						{
 							value : value
 						},
-						success: function(xml)
-						{
-	$( "#f_sijil" ).keyup(function() 
-	{
-		var input = $('#f_sijil').val(); // We take the input value
-		if ( input.length > 5 ) {	
-			$(function()
-			{
-				
-			
-				$.ajax({
-						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
-						dataType: "xml",
-						data: {
-							nombor_sijil: input,
-						},
-						success: function(xml)
+						success: function(xml, data)
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							$(xml).find("lk_pertubuhan_info").each(function()
+							$(xml).find("lk_nama_pertubuhan").each(function()
 							{
-								console.log($(this).text());
 								var npertubuhan = $(this).find("nama_pertubuhan");
 								var no_sijil = $(this).find("no_sijil");
+								
+								console.log($(this).text());
 								
 								if (value == $(that).val()) 
 								{
 									$('#d_npertubuhan').val($(npertubuhan).text());
 								}
-								else if ( value != $(that).val())
+								else
 								{
 									$.alert
 									(
@@ -295,23 +212,182 @@
 										}
 									);
 								}
-								else{}
 							})
 						}
 					}
 				);
 			}
-		});
-							
-								$('#d_npertubuhan').val($(npertubuhan).text());
-											
-							});
-						}
-					});
-			});
-		
-		}
 	});
+	});
+
+
+
+
+
+	
+	$("#btn_submit").click(function(e)
+	{
+		e.preventDefault();
+
+		var no_sijil = $("#f_sijil").val();
+
+		if (no_sijil.length == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Masukkan No Sijil',
+					confirm: function()
+					{
+						$('body').waitMe('hide');
+					}
+				}
+			);
+		} 
+		else 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Membuat Pembayaran. Terima Kasih',
+					confirm: function()
+					{
+						$('body').waitMe('hide');
+						window.location.href = "bayaran_ppb19.html";
+					}
+				}
+			);
+		}
+	
+	});
+	
+	
+	/*$.ajax
+			(
+				{
+					//url:"http://eroy.me-tech.com.my/api/get_bayaran.php",
+					type:'POST',
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							window.location.href = "bayaran_ppb19.html";
+						}
+						else if (json.status == 'error')
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Carian',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				}
+	);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</script>
 	
 	

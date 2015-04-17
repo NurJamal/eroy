@@ -61,29 +61,26 @@
 		
 		<div class="_form">
 					
-			<div class="selection">
+			<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
-					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-				</div>
-				
-			<div class="selection">
+					<span id="jenis_pendaftaran_pertubuhan"></span>
+					<input type="hidden" value="3" name="jenis_pertubuhan" id="pertubuhan_gabungan">	
+			</div>
+							
+			<div class="selection" style="margin-top:14px" id="kategori_selection">
 					<h5 id="_orange_title">Peringkat Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
+						<option value="" selected >Pilih Peringkat</option>
 						</select>
 					</form>		
 			</div>
 				
-			<div class="selection">
+			<div class="selection" style="margin-top:14px" id="kategori_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_kategori" name="sel_kategori" class="_sel">
+						<option value="" selected >Pilih Kategori</option>
 						</select>
 					</form>		
 			</div>
@@ -92,27 +89,31 @@
 				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 			
 				
-			<div class="selection">
+			<div class="selection" style="margin-top:14px"  id="negeri_selection">
 					<h5 id="_orange_title">Negeri</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
+						<option value="" selected>Pilih Negeri</option>
 						</select>
 					</form>		
 			</div>
 			
-			<div class="selection">
+			<div class="selection" style="margin-top:14px" id="daerah_selection">
 					<h5 id="_orange_title">Daerah</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none"></option>
+						<select id="sel_daerah" name="sel_daerah" class="_sel">
+						<option value="" selected>Pilih Daerah</option>
 						</select>
 					</form>		
 			</div>
 		
 			<form id="" action="" method="POST">
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
-				<input type="text" name="paparan_nama_pertubuhan" id="paparan_nama_pertubuhan" disabled"><br/>
+				
+			<div class="display">
+				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
+			</div>
+			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
 				<input type="text" name="no_sijil" id="no_sijil" placeholder="No Sijil"><br/>
 				<input type="text" name="no_sijil" id="no_sijil" placeholder="No Sijil"><br/>
@@ -135,15 +136,304 @@
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
-		<script src="js/classie.js"></script>
-		<script src="js/nav.js"></script>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-		<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-		<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-		<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator. -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
 		
+		$('#negeri_selection').hide();
+		$('#daerah_selection').hide();
+		
+		var sel_peringkat = document.getElementById("sel_peringkat");
+	
+		/*PAPARKAN NAMA PERSATUAN*/
+
+		getCountry($('#sel_negeri').attr('id'),'');		
+		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"3");		
+		getKategoriPertubuhan($('#sel_kategori').attr('id'),"3");
+		getPeringkatPertubuhan($('#sel_peringkat').attr('id'),"3");	
+		
+		/* hide field */
+		
+		$('#sel_peringkat').change(function()
+		{ 
+			var selectedIndex = sel_peringkat.options[sel_peringkat.selectedIndex].value;
+		
+			if (selectedIndex == "2") 
+					
+			{ 
+			$('#negeri_selection').show();
+			}
+			
+			else if (selectedIndex == "3") 
+			
+			{ 
+			$('#daerah_selection').show();
+			}
+			
+			
+		});
+	
+		
+		
+		
+		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+								console.log(json);
+								$("#f_lokaliti").val(json.details.lokaliti);
+								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+								$("#sel_peringkat").val(json.details.peringkat_pertubuhan);
+								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
+
+								$('body').waitMe('hide');
+
+							}
+							else if (json.status == 'VIEW') {
+							//Do nothing. Just display
+							
+						}
+						
+						$('body').waitMe('hide');
+						}
+					});
+		});
+		
+		function getDaerahFromSelectedCountry()  
+		{
+			var selected_country = $('#sel_negeri').val();
+			getDaerah(selected_country,$('#sel_daerah').attr('id'));	
+		}
+
+		$("#f_nama_pertubuhan,#f_nama_ringkasan,#f_lokaliti").keyup(function() 
+		{
+			var nama_ringkasan = "";
+			
+			var sel_kategori = $('#sel_kategori').val();
+			if(sel_kategori.length > 0){
+				var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
+				var sel_kategori_txt = $('#sel_kategori option:selected').text();
+				var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+				var f_nama_ringkasan = $('#f_nama_ringkasan').val();
+				var f_lokaliti = $('#f_lokaliti').val();
+			
+				if(f_nama_ringkasan.length > 0)
+				{
+					var nama_ringkasan = "("+f_nama_ringkasan+")";
+				}
+				
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" "+nama_ringkasan);
+			}
+			
+
+		});
+		
+		
+		
+	
+		$("#btn_submit").click(function(e){
+		
+		redisplayHeader();
+		var empty = false;
+		e.preventDefault();
+		
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		
+		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#peringkat_selection,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
+
+		var insertData = "TRUE";
+
+		var lokaliti= $("#f_lokaliti").val();
+		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
+		var nama_ringkasan = $("#f_nama_ringkasan").val();
+		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
+		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
+		var sel_peringkat = $("#sel_peringkat").val();
+		var sel_kategori = $("#sel_kategori").val();
+		var sel_negeri = $("#sel_negeri").val();
+		var sel_daerah = $("#sel_daerah").val();
+		var jenis_pertubuhan = $("#pertubuhan_gabungan").val();
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
+		if (lokaliti.length == 0)
+		{
+			$('#f_lokaliti').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(nama_pertubuhan.length == 0)
+		{
+			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(emel_pertubuhan.length == 0)
+		{
+			$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		
+		if(sel_peringkat.length == 0)
+		{
+			$('#peringkat_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+	
+		if(sel_kategori.length == 0)
+		{
+			$('#kategori_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_negeri.length == 0)
+		{
+			$('#negeri_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_daerah.length == 0)
+		{
+			$('#daerah_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		
+		
+		if(empty == true)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
+				}
+			);
+		}
+		else if(empty == false)
+		{
+				if(!ValidateEmail(emel_pertubuhan))
+				{
+					$.alert
+					(
+						{
+							title: 'Perhatian',
+							content: 'Sila Isikan Format Emel yang Betul',
+							confirm: function(){ }
+						}
+					);
+					$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				}
+				else
+				{
+				$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+				type:'POST',
+				data: {
+					lokaliti : lokaliti,
+					nama_pertubuhan: nama_pertubuhan,
+					nama_ringkasan : nama_ringkasan,
+					nama_penuh_pertubuhan : nama_penuh_pertubuhan,
+					emel_pertubuhan : emel_pertubuhan,
+					sel_peringkat : sel_peringkat,
+					sel_kategori : sel_kategori,
+					sel_negeri : sel_negeri,
+					sel_daerah : sel_daerah,
+					jenis_pertubuhan : jenis_pertubuhan,
+					kad_pengenalan : kad_pengenalan,
+					insertData : insertData,
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					var json = $.xml2json(data);
+					if (json.status == 'INSERT_SUCCESS') {
+						
+
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-gabungan-2.html";
+								}
+							}
+						);
+						window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+					}
+					else if (json.status == 'UPDATE_SUCCESS') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								window.location.href = "pendaftaran-gabungan-2.html";
+								}
+							}
+						);
+						window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+
+					}
+					else if (json.status == 'UPDATE_ERROR') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else{}
+					$('body').waitMe('hide');
+
+				}
+			});
+			}
+		}
+	});
+	
+	
+
+	</script>
   </body>
 </html>

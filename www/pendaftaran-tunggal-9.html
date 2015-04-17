@@ -2,15 +2,21 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
 	<body>
 	
@@ -24,12 +30,12 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-tunggal-8.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="#" onclick="goBack(); return false;"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -56,39 +62,127 @@
 	
 	<!-- form -->
 	
-	<form>
+	
 	
 	<div class="_form">
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text">KELAB BELIA CEMERLANG KAMPUNG SEJAHTERA KOTA BHARU (KBSEL)</h1></br>
+			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1></br>
 		</div>
-	
 		<h6 id="_orange_title">
-			<input type="checkbox" name="checking" id="check" class="checkboxClass"> <label for="check">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label>
+		<table><tr>
+			<td><input type="checkbox" name="checking" id="check" class="checkboxClass"> <label for="check">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label> </td>
+		
+			</tr></table>
+
 		</h6>
 		
 		<div class="default_button_holder">
-			<a href="semakan_permohonan_listing.html"><input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit"></a>
+			<input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit">
 		</div>
 		
-		
-	
-	</form>
+		</div></div></div>
+
 		
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
-	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	<script>
+	
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	$("#btn_submit").click(function(e){
 		
+		redisplayHeader();
+		var empty = false;
+		e.preventDefault();
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+	
+		if($('#check').is(':checked'))
+		{
+			$.ajax({
+				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_9.php",
+				type:'POST',
+				data: {
+					kad_pengenalan : kad_pengenalan,
+				},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					console.log(data);
+					var json = $.xml2json(data);
+					console.log(json);
+					if (json.status == 'SEND_SUCCESS') {
+						
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+									window.location.href = "semakan_permohonan_listing.html";
+								}
+							}
+						);
+					
+					}
+					else if (json.status == 'SEND_ERROR') {
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					else{	
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: json.message,
+								confirm: function(){
+								}
+							}
+						);
+					}
+					$('body').waitMe('hide');
+				}
+			});
+		}
+		else
+		{
+			$.alert	
+				(
+					{
+						title: 'Perhatian',
+						content: "Sila tandakan pengesahan maklumat permohonan",
+						confirm: function(){
+						}
+					}
+				);
+		}
+	});
+	
+	</script>
   </body>
 </html>
