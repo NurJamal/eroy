@@ -156,14 +156,42 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-
+		
+		$('#negeri_selection').hide();
+		$('#daerah_selection').hide();
+		
+		var sel_peringkat = document.getElementById("sel_peringkat");
+	
 		/*PAPARKAN NAMA PERSATUAN*/
 
 		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"3");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"3");
+		getPeringkatPertubuhan($('#sel_peringkat').attr('id'),"3");	
+		
+		/* hide field */
+		
+		$('#sel_peringkat').change(function()
+		{ 
+			var selectedIndex = sel_peringkat.options[sel_peringkat.selectedIndex].value;
+		
+			if (selectedIndex == "2") 
+					
+			{ 
+			$('#negeri_selection').show();
+			}
+			
+			else if (selectedIndex == "3") 
+			
+			{ 
+			$('#daerah_selection').show();
+			}
+			
+			
+		});
 	
-	
+		
+		
 		
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');

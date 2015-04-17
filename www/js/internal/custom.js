@@ -455,6 +455,51 @@
 			
 		
 	};
+	
+	/*GET PERINGKAT PERTUBUHAN*/
+	function getPeringkatPertubuhan(id1,id2)
+	{
+		var peringkat_pertubuhan_id = id1;
+		var static_jenis_pertubuhan = id2;
+		
+		
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_peringkat_pertubuhan.php",
+						dataType: "xml",
+						data:{
+							static_peringkat_pertubuhan : static_jenis_pertubuhan,
+						},
+						success: function(xml)
+						
+						{ 
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							$(xml).find("lk_peringkat_pertubuhan").each(function()
+							{
+								var id = $(this).find("id");
+								var peringkat_pertubuhan = $(this).find("peringkat_pertubuhan");
+								var lang = $(this).find("lang");
+
+								$('#'+peringkat_pertubuhan_id).append('<option value="'+$(id).text()+'">'+$(peringkat_pertubuhan).text()+'</option>');
+							});
+						},
+						error: function() 
+						{
+						
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
 	/*Control IC - Input*/
 	function ic_control(ic_id)
 	{
