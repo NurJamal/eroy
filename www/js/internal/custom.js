@@ -787,6 +787,12 @@ function highlightID(id)
 
 }
 
+	function navigatorOpenExternal()
+	{
+		//navigator.app.loadUrl('http://eroy.me-tech.com.my/api/payment/payment_dummy.php?k=abc', { openExternal:true } );
+		window.open('http://eroy.me-tech.com.my/api/payment/payment_dummy.php?k=abc','_system')
+		return false;
+	}
 
 	
 	
