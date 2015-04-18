@@ -262,11 +262,12 @@
 	{
 		/* Re-write <TR NO> */
 		var index = 1;
+		var indexx = 1;
+
 		$('.checkbox').each(function() {
 			var tr_id = this.id;
 			var tr_value =  $('#'+tr_id).attr('id');
 			$('#'+tr_value).attr('id','xx_'+index);
-			$('#fasal_index_'+tr_value).attr('id','xx_'+index);
 
 			index = parseInt(index+1);
 		});
@@ -276,6 +277,32 @@
 			$('#xx_'+indexx).attr('id','tr_'+indexx);
 			indexx = parseInt(indexx+1);
 		});
+		/* End Re-write <TR NO> */
+
+		/* Re-write <FASAL LABEL NO/ID> */
+
+		var indexFasal = 1;
+		var indexFasalR = 1;
+
+		$('.fasal_label').each(function() {
+				
+			var tr_id = this.id;
+			var tr_value =  $('#'+tr_id).attr('id');
+			$('#'+tr_value).attr('id','xxx_'+indexFasal);
+			
+			indexFasal = parseInt(indexFasal+1);
+
+		});
+
+		$('.fasal_label').each(function() {
+			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
+			indexFasalR = parseInt(indexFasalR+1);
+		});
+		/* End re-write <FASAL LABEL NO/ID> */
+
+
+		
+
 
 	}
 
