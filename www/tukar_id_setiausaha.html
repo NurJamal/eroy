@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
@@ -10,12 +10,12 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 		<div id="loadingLayer"></div>
-		
 	</head>
 	<body>
 	
@@ -47,7 +47,7 @@
 		<div id="content">
 			<form id="" action="" method="POST">
 				<div class="_form">
-					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()"><br/>
+					<input type="text" style="margin-top:15px" name="f_sijil" id="f_sijil" placeholder="No Sijil" onkeyup="upperCase()" onBlur="checkNoSijil();"><br/>
 				</div>	
 				<div class="_dis" style="margin-top:5px; margin-bottom:-3px">
 					<input type="text" id="d_npertubuhan" name="d_npertubuhan"  placeholder="Nama Pertubuhan" disabled><br/>
@@ -84,7 +84,7 @@
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-	
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
@@ -134,22 +134,22 @@
 			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if (nama.length == 0)
+		if(nama.length == 0)
 		{
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if (kadp.length == 0 || kadp.length != 12)
+		if(kadp.length == 0 || kadp.length != 12)
 		{
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if (t_lahir.length == 0) 
+		if(t_lahir.length == 0) 
 		{
 			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if (emel.length == 0) 
+		if(emel.length == 0) 
 		{
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 			empty = true;
@@ -159,7 +159,7 @@
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if (no_tel.length == 0) 
+		if(no_tel.length == 0) 
 		{
 			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
@@ -170,7 +170,7 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila isikan tempat kosong!',
+					content: 'Sila Isikan Tempat Kosong!',
 					confirm: function(){}
 				}
 			);
@@ -241,7 +241,7 @@
 	{
 		var minlength = 5;
 
-		$("#f_sijil").keyup(function () 
+		$("#f_sijil").keyup(function() 
 		{
 			var that = this,
 			value = $(this).val();
@@ -268,23 +268,9 @@
 								var no_sijil = $(this).find("no_sijil");
 								
 								console.log($(this).text());
-								
-								if (value == $(that).val()) 
-								{
-									$('#d_npertubuhan').val($(npertubuhan).text());
-								}
-								else
-								{
-									$.alert
-									(
-										{
-											title: 'Carian',
-											content: 'Tiada dalam rekod pangkalan data.',
-											confirm: function(){}
-										}
-									);
-								}
-							})
+
+								$('#d_npertubuhan').val($(npertubuhan).text());
+							});
 						}
 					}
 				);

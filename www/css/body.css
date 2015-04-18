@@ -948,3 +948,18 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 .indentCawangan2{
     padding-left: 122px;
 }
+
+/*IMAL Perlembagaan*/
+.okIcon{
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	background-image: url("img/tick_icon.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+	height: 50px;
+	width: 50%;
+	margin-top:3px;
+}
