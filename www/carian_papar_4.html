@@ -54,46 +54,11 @@
 			<!-- end of navbar -->
 		
 			<div class="display">
-			
 				<h2 class="_orange_text" style="margin-top:-18px">Senarai Pemegang Jawatan</h2>
-				
-				<div id="extra_box">
-					<h2 class="title"><b>Ali Bin Abu</b></h2>
-					<h2 style="font-size:18px; margin-top:-3px">
-					760110041990<br/>
-					Presiden<br/>
-					0124567890<br/>
-					ali@gmail.com
-					</h2>
-				</div>
-				
-				<div id="extra_box">
-					<h2 class="title"><b>Hasan Bin Husin</b></h2>
-					<h2 style="font-size:18px; margin-top:-3px">
-					831225114569<br/>
-					Setiausaha Agong<br/>
-					0124567890<br/>
-					hasanhusin@gmail.com
-					</h2>
-				</div>
-				
-				<div id="extra_box">
-					<h2 class="title"><b>Fatimah Binti Husin</b></h2>
-					<h2 style="font-size:18px; margin-top:-3px">
-					861225114569<br/>
-					Setiausaha Agong<br/>
-					0124567890<br/>
-					fatimah@gmail.com
-					</h2>
-				</div>
-				
-				<!-- <input type="text" style="margin-top:0px; height: 120px;" id="" name="" disabled><br/>
-				<input type="text" style="margin-top:7px; height: 120px;" id="" name=""  placeholder="" disabled><br/> -->
-				
-				<div class="default_button_holder">
-					<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-				</div>
 			</div>	
+			<div class="default_button_holder">
+				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+			</div>
 		</div>
 	</div>
 	
@@ -147,18 +112,16 @@
 						$(xml).find("details").each(function()
 						{						
 							var kod_id = $(this).find("kod_nama_pertubuhan");
-							var alamat1 = $(this).find("alamat1");
-							var alamat2 = $(this).find("alamat2");
-							var alamat3 = $(this).find("alamat3");
-							var alamat_pos1 = $(this).find("alamat_pos1");
-							var alamat_pos2 = $(this).find("alamat_pos2");
-							var alamat_pos3 = $(this).find("alamat_pos3");
+							var nama = $(this).find("nama");
+							var no_KP = $(this).find("no_KP");
+							var jawatan = $(this).find("jawatan");
+							var noTel = $(this).find("NoTelBimbit");
+							var emel = $(this).find("emel");
 
 							$('body').waitMe('hide');
 							$('#content').show();
-								
-							//$('#d_alamat').val($(alamat1).text()+' '+$(alamat2).text()+' '+$(alamat3).text());
-							//$('#d_alamat_pos').val($(alamat_pos1).text()+' '+$(alamat_pos2).text()+' '+$(alamat_pos3).text());	
+														
+							$(".display").append("<div id='extra_box'><h2 class='title'><b>"+nama.text()+"</b></h2><h2 style='font-size:18px; margin-top:-3px'>"+no_KP.text()+"<br/>"+jawatan.text()+"<br/>"+noTel.text()+"<br/>"+emel.text()+"</h2></div>");
 						});
 					}
 					else if($(xml).find("status").text() == "error")
