@@ -53,40 +53,24 @@
 		<div class="display">
 			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 10.00" disabled><br/>
 		</div>
-		<!--<p><a href="#" onclick="window.open('http://www.nhl.com', '_blank', 'location=yes');">_blank</a></p> 
-		<p><a href="#" onclick="window.open('http://www.nhl.com', '_system', 'location=yes');">_system</a></p> 
-		<p><a href="#" onclick="window.open('http://www.nhl.com', '_self', 'location=yes');">_self</a></p>-->
+	
+		<div class="default_button_holder">
+		
+		</div>
+		
+		<INPUT type="hidden" name="Amount" id="amount" value="300">
+		<INPUT type="hidden" name="PaymentDesc" id="paymentDesc" value="Yuran Pindaan Maklumat ">
+		<INPUT type="hidden" name="PaymentItemName" id="paymentItemName" value="Pindaan Maklumat"/>
+		<INPUT type="hidden" name="Key" id="key" value="E-ROY"/>
+		<INPUT type="hidden" name="Channel" id="channel" value="02"/>
+		
 		<div class="default_button_holder">
 		<!--<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>-->
-		
+		<input class="default_button" type="button" value="BAYAR" id="btn_submit">
 		</div>
-		<!-- Payment Parameter-->	
-		<!--<form method="post" action="https://stgpay.malaysia.gov.my/mampupg/AgencyPaymentGateway.aspx">-->
-		
-		<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
-		<!--<input type="hidden" id="amount" value="10"/>-->
-		
-		<form method="post" target="_blank"  action="http://payment.telcowin.com/payment.php">
-		<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
-		<INPUT type="hidden" name="Amount" value="300">
-		<INPUT type="hidden" name="BuyerAccNo" value="Yuran Pindaan Maklumat ">
-		<INPUT type="hidden" name="ItemName" id="itemName" value="Pindaan Maklumat"/>
-		<INPUT type="hidden" name="Key" id="Key" value="E-ROY"/>
 
-		<div class="default_button_holder">
-		<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
-			<input class="default_button" type="submit" value="BAYAR" id="btn_submit">
-		</div>
-		</form>
-		<!--<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
-		</div></a>
-	
-		
-		
-		<div class="default_button_holder"> -->
-		
-
-		
+		<p><a href="#" id="convert">md5()</a></p>
+		<div id="test">Test</div>​
 		
 	</div>
 	
@@ -95,13 +79,38 @@
 	<script src="js/nav.js"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	
+	<script src="js/jQueryMd5.js"></script>
+
 	<script>
 	
-	/*$("#btn_submit").click(function(e){
+	$("#btn_submit").click(function(e){
 
 		e.preventDefault();			
+		
+		var amount = $.trim($('#amount').val());
+		var paymentDesc = $.trim($('#paymentDesc').val());
+		var paymentItemName = $.trim($('#paymentItemName').val());
+		var key = $.trim($('#key').val());
+		var channel = $.trim($('channel').val());
+
+		localStorage['PAYMENT_AMOUNT'] = amount;
+		localStorage['PAYMENT_DESC'] = paymentDesc;
+		localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
+		localStorage['PAYMENT_KEY'] = key;
+		localStorage['PAYMENT_CHANNEL'] = channel;
+		
+		window.location.href = "pindaan_maklumat_listing.html";
+		var $str = $('#test').text();
+		$('#test').text($.md5($str));
+		
+		return false;
+	});
 	
+	
+
+	
+	
+	/*
 		var itemName = $.trim($('#itemName').val());
 		var channel = $.trim($('#channel').val());
 		var amount = $.trim($('#amount').val());
@@ -145,10 +154,7 @@
 			});
 	
 	});*/
-	//window.open("https://www.facebook.com/");
-	//window.open('https://stgpay.malaysia.gov.my/mampupg/AgencyPaymentGateway.aspx/', '_blank', 'location=yes');
-	//window.open('http://intranet.me-tech.com.my/', '_blank', 'location=yes');
-	
+
 	</script>
 	
 	
