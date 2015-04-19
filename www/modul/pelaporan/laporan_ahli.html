@@ -50,20 +50,21 @@
 				<h5 id="_orange_title">Pilihan</h5>
 				<form action="">
 					<select id="sel_pilihan" name="sel_pilihan" class="sel">
-					<option value="none"></option>
+						<option value="" selected>Mengikut Nama Pertubuhan</option>
 					</select>
 				</form>		
 			</div>
 		
 			<div class="inform">
-				<input style="margin-top:1px" type="text" name="" id="" placeholder="Carian" class="_cari"><br/>
+				<input style="margin-top:1px" type="text" name="pertubuhan_carian" id="pertubuhan_carian" placeholder="Carian" class="_cari" onBlur="namaPertubuhanCarian()"><br/> 
 			</div>
+			
 		
 			<div class="selection">
 				<h5 id="_orange_title">Nama Pertubuhan</h5>
 				<form action="">
 					<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel">
-					<option value="none"></option>
+						<option value="" onChange="displayResult()" selected>Pilih</option>
 					</select>
 				</form>		
 			</div>
@@ -72,41 +73,149 @@
 		
 			<div class="display">
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Melayu</h5>
-				<input type="text" name="nama penuh" id="frm_nama" placeholder="20" disabled><br/>
+				<input type="text" name="bil_melayu" id="bil_melayu" disabled><br/>
 				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Cina</h5>
-				<input type="text" name="nama penuh" id="frm_nama" placeholder="15" disabled><br/>
+				<input type="text" name="bil_cina" id="bil_cina" disabled><br/>
 				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">India</h5>
-				<input type="text" name="nama penuh" id="frm_nama" placeholder="10" disabled><br/>
+				<input type="text" name="bil_india" id="bil_india" disabled><br/>
 				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Lain-lain</h5>
-				<input type="text" name="nama penuh" id="frm_nama" placeholder="5" disabled><br/>
+				<input type="text" name="bil_lain" id="bil_lain" disabled><br/>
 				
 				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Keseluruhan</h5>
-				<input type="text" name="nama penuh" id="frm_nama" placeholder="50" disabled><br/>
+				<input type="text" name="jumlah" id="jumlah" disabled><br/>
 			</div>	
 		</div>
 	</div>
 	
 	<!-- js for slide menu -->
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>	
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>	
 	
 	<!-- jquery js-->
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- alert box -->
-	<script src="js/jquery-confirm.js"></script>
-	<script src="js/jquery-confirm.min.js"></script>	
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
 	 
 	<!--Loading Indicator -->
-	<script src="js/waitMe.js"></script>
+	<script src="../../js/waitMe.js"></script>
+	
+	<script>
+	function namaPertubuhanCarian()
+	{
+		$(document).ready(function()
+		{
+			var carian_nama = $.trim($('#pertubuhan_carian').val());
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/get_nama_pertubuhan.php",
+					type:'POST',
+					data:
+					{
+						carian_nama : carian_nama
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						
+						if($(xml).find("status").text() == "ok")
+						{
+							$(xml).find("details").each(function()
+							{						
+								var kod_id = $(this).find("kod_nama_pertubuhan");
+								var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+								
+								$('body').waitMe('hide');
+								$('#content').show();
+
+								$('#sel_nama_pertubuhan').append('<option value="'+$(kod_id).text()+'">'+$(nama_penuh_pertubuhan).text()+'</option>');
+
+							});
+						}
+						else if($(xml).find("status").text() == "error")
+						{
+							$('body').waitMe('hide');
+						}
+						else{}
+					},
+					error: function()
+					{
+						console.log("An error occurred while processing XML file.");
+					},
+				}
+			)
+		});
+	}
+
+	function displayResult()
+	{
+		$(document).ready(function()
+		{
+			//var carian_nama = $.trim($('#pertubuhan_carian').val());
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/get_bilangan_ahli.php",
+					type:'POST',
+					data:
+					{
+						carian_nama : carian_nama
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						
+						if($(xml).find("status").text() == "ok")
+						{
+							$(xml).find("details").each(function()
+							{						
+								var kod_id = $(this).find("kod_nama_pertubuhan");
+								var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+								
+								$('body').waitMe('hide');
+								$('#content').show();
+
+								$('#sel_nama_pertubuhan').append('<option value="'+$(kod_id).text()+'">'+$(nama_penuh_pertubuhan).text()+'</option>');
+
+							});
+						}
+						else if($(xml).find("status").text() == "error")
+						{
+							$('body').waitMe('hide');
+						}
+						else{}
+					},
+					error: function()
+					{
+						console.log("An error occurred while processing XML file.");
+					},
+				}
+			)
+		});
+
+	}
+
+	</script>
 	</body>
 </html>
