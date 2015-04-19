@@ -62,6 +62,14 @@
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	<script src="../../js/waitMe.js"></script>
+	<script src="../../js/jQueryMd5.js"></script>
+
+	<!-- alert box -->
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
+	<script src="../../phonegap.js"></script> 
+	<script src="../../cordova.js"></script> 
+	<script src="../../cordova_plugins.js"></script>
 	
 	<script>
 	initiatePayment();
@@ -77,34 +85,66 @@
 			});
 		}
 		
-		setTimeout(function(){ paymentPost(); }, 8000);
+		setTimeout(function(){ paymentPost(); }, 5000);
 		
 		function paymentPost()
 		{
+			var paymentAmount = localStorage.getItem('PAYMENT_AMOUNT');
+			var paymentDesc	= localStorage.getItem('PAYMENT_DESC');
+			var paymentItemName	= localStorage.getItem('PAYMENT_ITEMNAME');
+			var paymentKey = localStorage.getItem('PAYMENT_KEY');
+			var paymentChannel = localStorage.getItem('PAYMENT_CHANNEL');
+			var redirect_url = localStorage.getItem('REDIRECT_URL');
+
+			var kad_pengenalan = localStorage.getItem('LOGIN');
+			
+			var time = new Date();
+			var outStr = time.getSeconds();
+			var encryptKP = $.md5($.trim(kad_pengenalan+""+outStr));
+			
 			var key = 'initialApp';
 			$.ajax({
-					url:"http://eroy.me-tech.com.my/api/payment/payment_dummy.php?k=a",
+					url:"http://eroy.me-tech.com.my/api/payment/payment_send_out.php",
 					type:'POST',
 					data: {
 						key : key,
+						encryptKP : encryptKP,
+						paymentAmount : paymentAmount,
+						paymentDesc : paymentDesc,
+						paymentItemName : paymentItemName,
+						paymentKey : paymentKey,
+						paymentChannel : paymentChannel,
+						kad_pengenalan : kad_pengenalan,
+						redirect_url : redirect_url,
+
 					},
 					beforeSend: function() {
 							run_waitMe();
 						},
 					success:function(data){
 						var json = $.xml2json(data);
+						console.log(data);
 						if (json.status == 'INSERT_SUCCESS') {
-						
-						alert(json.message);
-						navigatorOpenExternal();
+							//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+							navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
 
-						$('body').waitMe('hide');
 						}
-						else{}
+						else{
+
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: 'Pembayaran Tergendala. Sila cuba sebentar lagi',
+									confirm: function(){}
+								}
+							);
+						}
+						$('body').waitMe('hide');
 
 					}
 				});
-}
+		}
 
 	</script> 
 	

@@ -54,25 +54,11 @@
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
 
 			</div>	
-			<p><span onclick="window.open('http://www.google.com', '_blank',); return false;">_blank</span></p>
-			<p><span rel="external" onclick="window.open('http://www.google.com', '_system',); return false;">_system</span></p>
-			<p><span onclick="test()">_self</span></p>
-			<p><a href="http://www.google.com" target="_system">_targetSystem</a></p>
-			<a href="pindaan_maklumat_perlembagaan.html">Perlembagaan</a>
-			
-			<form method="post" onsubmit="test();" id="paymentForm">
-			<input type="hidden" id="channel" value="02"/><!-- Setup Channel Selection if available-->
-			<!--<INPUT type="hidden" name="TransactionCode" value="<?php echo $TransactionCode ?>">-->
-			<INPUT type="hidden" name="Amount" value="300">
-			<INPUT type="hidden" name="BuyerAccNo" value="Yuran Pindaan Maklumat ">
-			<INPUT type="hidden" name="ItemName" id="itemName" value="Pindaan Maklumat"/>
-			<INPUT type="hidden" name="Key" id="Key" value="E-ROY"/>
 
-			<div class="default_button_holder">
-			<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>
-				<input class="default_button" type="submit" value="BAYAR" id="btn_submit">
-			</div>
-			</form>
+			<br/><a href="pindaan_maklumat_pembayaran.html">TEST PAYMENT</a><br/>
+			<a href="pindaan_maklumat_perlembagaan.html">TEST PERLEMBAGAAN</a><br/>
+			<a href="#" onclick="test();">TEST POPUP</a>
+
 		</div>
 	</div>
 
@@ -105,14 +91,11 @@
     function onDeviceReady() 
 	{
       	var devicePlatform = cordova.platformId;
-		alert(devicePlatform);
-		//StatusBar.overlaysWebView(false);
 	}
 	
 
 	function test() 
 	{
-		//$('#paymentForm').submit();
 		navigator.app.loadUrl('http://payment.telcowin.com/payment.php', { openExternal:true } );
 		return false;
 	}

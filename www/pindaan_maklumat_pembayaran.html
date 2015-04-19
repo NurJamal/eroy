@@ -83,7 +83,6 @@
 	<script src="js/nav.js"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jQueryMd5.js"></script>
 
 	<script>
 	
@@ -95,69 +94,23 @@
 		var paymentDesc = $.trim($('#paymentDesc').val());
 		var paymentItemName = $.trim($('#paymentItemName').val());
 		var key = $.trim($('#key').val());
-		var channel = $.trim($('channel').val());
+		var channel = $.trim($('#channel').val());
+		var redirectUrl = "pindaan_maklumat_listing.html";
 
 		localStorage['PAYMENT_AMOUNT'] = amount;
 		localStorage['PAYMENT_DESC'] = paymentDesc;
 		localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
 		localStorage['PAYMENT_KEY'] = key;
 		localStorage['PAYMENT_CHANNEL'] = channel;
-		
-		//window.location.href = "pindaan_maklumat_listing.html";
-		var $str = $('#test').text();
-		$('#test').text($.md5($str));
-		
+		localStorage['REDIRECT_URL'] = redirectUrl;
+
+		window.location.href = "modul/pembayaran/pembayaran_startup.html";
+
 		return false;
 	});
 	
 	
 
-	
-	
-	/*
-		var itemName = $.trim($('#itemName').val());
-		var channel = $.trim($('#channel').val());
-		var amount = $.trim($('#amount').val());
-
-			
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/payment/payment.php",
-				type:'POST',
-				data:{
-						 itemName : itemName,
-						 channel : channel,
-						 amount : amount
-				},
-				dataType:'xml',
-				error: function(e) {
-					console.log(e);
-				},
-				beforeSend: function() {
-					alert("LOADING");
-				},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						console.log(json.status);
-						alert("PEMBAYARAN BERJAYA");
-						window.location.href = "pindaan_maklumat_listing.html";
-					}
-					else if (json.status == 'error') {
-						console.log(json.status);
-						//alert(json.message);
-						alert("PEMBAYARAN TIDAK BERJAYA");
-					}
-					
-					else{}
-				}
-			})
-			.done(function( html ) {
-				alert("FINISH");
-			});
-	
-	});*/
 
 	</script>
 	
