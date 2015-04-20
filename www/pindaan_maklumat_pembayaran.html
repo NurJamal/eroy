@@ -2,15 +2,21 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
 	<body>
 	
@@ -39,33 +45,37 @@
 	</div>
 	<!-- end of header-title-->
 
-	<div id="content">
+	<div id="content" class="_form">
 		<h2 class="_orange_text">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
-		<div class="dis_selection">
-				<h6 id="_orange_title">Bentuk Bayaran</h6>	
-				<h2 id="_text">Atas Talian</h2>
-				
+		<div class="selection" id="jenis_bayaran_selection">
+					<h5 id="_orange_title">Bentuk Bayaran</h5>
+					
+						<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
+						<option value="" selected>Pilih Bentuk Bayaran</option>
+						</select>
 		</div>
 		
-		<h2 class="_orange_text">Jumlah wang yang perlu dibayar</h2>
+
+		<div>
+			<input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
+		</div>
 		
+		<div>
+			<h5 id="_orange_title">Jumlah wang pendaftaran yang perlu dibayar</h5>
+		</div>
+			
 		<div class="display">
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="RM 10.00" disabled><br/>
-		</div>
-	
-		<div class="default_button_holder">
-		
+			<input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" disabled></br>
+			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
-		<INPUT type="hidden" name="Amount" id="amount" value="300">
 		<INPUT type="hidden" name="PaymentDesc" id="paymentDesc" value="Yuran Pindaan Maklumat ">
 		<INPUT type="hidden" name="PaymentItemName" id="paymentItemName" value="Pindaan Maklumat"/>
 		<INPUT type="hidden" name="Key" id="key" value="E-ROY"/>
 		<INPUT type="hidden" name="Channel" id="channel" value="02"/>
 		
 		<div class="default_button_holder">
-		<!--<a href="pindaan_maklumat_listing.html"><input class="default_button" type="button" value="BAYAR" id="btn_submit"></a>-->
 		<input class="default_button" type="button" value="BAYAR" id="btn_submit">
 		</div>
 
@@ -74,32 +84,161 @@
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
 	<script>
+	
+	getJenisBayaran($('#jenis_bayaran').attr('id'));
+	getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
+
 	
 	$("#btn_submit").click(function(e){
 
 		e.preventDefault();			
 		
-		var amount = $.trim($('#amount').val());
-		var paymentDesc = $.trim($('#paymentDesc').val());
-		var paymentItemName = $.trim($('#paymentItemName').val());
-		var key = $.trim($('#key').val());
-		var channel = $.trim($('#channel').val());
-		var redirectUrl = "pindaan_maklumat_listing.html";
+		
 
-		localStorage['PAYMENT_AMOUNT'] = amount;
-		localStorage['PAYMENT_DESC'] = paymentDesc;
-		localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
-		localStorage['PAYMENT_KEY'] = key;
-		localStorage['PAYMENT_CHANNEL'] = channel;
-		localStorage['REDIRECT_URL'] = redirectUrl;
+			$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
 
-		window.location.href = "modul/pembayaran/pembayaran_startup.html";
+			 
+			redisplayHeader();
+			var empty = false;
+			e.preventDefault();
+			
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+			var insertData = "TRUE";
+			var id_amaun_bayaran = $('#jumlah_perlu_dibayar').val();
 
-		return false;
+			$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
+
+			
+
+			var jenis_bayaran = $("#jenis_bayaran").val();
+			if (jenis_bayaran.length == 0)
+			{
+				$('#jenis_bayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+				
+				
+			}
+			
+			if(jenis_bayaran == "1")
+				{
+					var no_wang_pos = $("#wang_tidak_online").val();
+					if(no_wang_pos.length == 0)
+					{
+						$('#wang_tidak_online').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+						empty = true;
+					}
+				}
+			
+			if(empty == true)
+			{
+				$.alert
+					(
+						{
+							title: 'Perhatian',
+							content: 'Sila isikan tempat kosong!',
+							confirm: function(){				
+							}
+						}
+					);
+			}
+			
+			else
+			{
+			
+				if($('#jenis_bayaran').val() == 2)
+				{
+					
+					var amount = $.trim($('#jumlah_perlu_dibayar').val());
+					var paymentDesc = $.trim($('#paymentDesc').val());
+					var paymentItemName = $.trim($('#paymentItemName').val());
+					var key = $.trim($('#key').val());
+					var channel = $.trim($('#channel').val());
+					var redirectUrl = "pindaan_maklumat_listing.html";
+
+					localStorage['PAYMENT_AMOUNT'] = amount;
+					localStorage['PAYMENT_DESC'] = paymentDesc;
+					localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
+					localStorage['PAYMENT_KEY'] = key;
+					localStorage['PAYMENT_CHANNEL'] = channel;
+					localStorage['REDIRECT_URL'] = redirectUrl;
+
+					window.location.href = "modul/pembayaran/pembayaran_startup.html";
+
+					return false;
+				}
+				else
+				{
+					alert('Under Construction');
+					/*$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_8.php",
+						type:'POST',
+						data: {
+
+							id_bentuk_bayaran : jenis_bayaran,
+							no_wang_pos: no_wang_pos,
+							id_amaun_bayaran: id_amaun_bayaran,
+							kad_pengenalan : kad_pengenalan,
+							insertData : insertData,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'INSERT_SUCCESS') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "pendaftaran-cawangan-9.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'INSERT_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					});
+					
+					*/
+				}
+			}
+
 	});
 	
 	
