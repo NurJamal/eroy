@@ -136,7 +136,15 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
-	
+	function selectedState()
+	{
+		var arr = [];
+		$('.checkbox input[type="checkbox"]:checked').each(function()
+		{
+			arr.push($(this).val());
+		});
+		return arr; 
+	}
 	
 	</script>
 	</body>
