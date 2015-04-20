@@ -136,15 +136,126 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
-	function selectedState()
+	$("#btn_submit").click(function(e)
 	{
-		var arr = [];
-		$('.checkbox input[type="checkbox"]:checked').each(function()
+		var dateFrom =  $.trim($("#tarikh_dari").val());
+		var dateTo =  $.trim($("#tarikh_hingga").val());
+		var jenisLaporan =  $.trim($("#jenis_laporan").val());
+		var selectedState = [];
+		var empty = false;
+		
+		e.preventDefault();
+		
+		$('#tarikh_dari, #tarikh_dari').css({"border":"","box-shadow":""});
+		
+		for( var i = 2 ; i < 17 ; i++ )
 		{
-			arr.push($(this).val());
-		});
-		return arr; 
-	}
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedState.push($("#c_box"+i).val());
+			}
+		}
+		
+		/*Javascript Validation*/
+		if (dateFrom == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Tarikh',
+					confirm: function(){}
+				}
+			);
+			$('#tarikh_dari').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		else if (dateTo == 0) 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Tarikh',
+					confirm: function(){}
+				}
+			);
+			$('#tarikh_hingga').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		else if( selectedState.length <= 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Pilih Sekurang-kurangnya Satu Negeri',
+					confirm: function(){}
+				}
+			);
+		}
+		else 
+		{
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/laporan.php",
+					type:'POST',
+					data:
+					{				
+						dateFrom : dateFrom,
+						dateTo : dateTo,
+						jenisLaporan : jenisLaporan,
+						selectedState : selectedState
+					},
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							
+							//window.localStorage.setItem("LAPORAN", json);
+							//saving object to localStorage
+							window.localStorage['LAPORAN'] = JSON.stringify(json);
+
+							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
+							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
+							window.location.href = "statistik_laporan_mingguan.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Perhatian',
+									content: json.message,
+									confirm: function(){}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				}
+			);
+		}
+	});	
+
+	/*Will change Later*/
+	$("#navigation").load('../navigation_menu/nav_login.html');
 	
 	</script>
 	</body>
