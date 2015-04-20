@@ -67,7 +67,7 @@
 		
 			<!-- form -->
 		
-			<form>
+			<form action="" name="pendaftaran" id="pendaftaran">
 				<div class="_form">
 			
 					<div>
@@ -113,6 +113,30 @@
 	<script>
 		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
 
+		var status = window.localStorage.getItem('STATUS');
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+
+			for (var i = 0; i < formLength; i++) {
+				if(document.pendaftaran.elements[i].type != 'button')
+				{
+					document.pendaftaran.elements[i].setAttribute("disabled", "disabled"); 	
+				}
+
+				if(document.pendaftaran.elements[i].type == 'checkbox')
+				{
+					document.pendaftaran.elements[i].setAttribute("checked", "checked"); 
+				}
+			}
+
+		}else
+		{
+			var insertData = "true";
+		}
+		
 		$("#btn_submit").click(function(e){
 	    	var empty = false;
 			e.preventDefault();
@@ -141,6 +165,7 @@
 					type:'POST',
 					data: {
 						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
 					},
 					beforeSend: function() {
 							run_waitMe();
@@ -178,7 +203,7 @@
 						$('body').waitMe('hide');
 					}
 				});
-				
+						
 			}
 
 	    });

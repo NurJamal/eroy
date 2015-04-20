@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -65,72 +66,63 @@
 			<!-- form -->
 	
 			<div class="_form">
-				<div>
-					<h5 id="_orange_title">Nama Pertubuhan</h5>
-					<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1><br/>
-				</div>
+				<form action="" name="pendaftaran" id="pendaftaran">
+					<div>
+						<h5 id="_orange_title">Nama Pertubuhan</h5>
+						<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1><br/>
+						<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
+					</div>
 
-				<h5 id="_orange_title">Alamat Tempat Urusan</h5>
-				<form id="" action="" method="POST">
-					<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
-					<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
-					<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
-					<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
-				</form>
-				
-				<div class="selection" id="negeri_selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="sel_negeri" name="sel_negeri" class="_sel" onchange="getDaerahFromSelectedCountry()">
-							<option value="" selected>Pilih Negeri</option>
-						</select>
-					</form>		
-				</div>
-				
-				<div class="selection" id="daerah_selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="sel_daerah" name="sel_daerah" class="_sel">
-							<option value="" selected>Pilih Daerah</option>
-						</select>
-					</form>		
-				</div>
-				<br/>
-				
-				<h5 id="_orange_title">Alamat Pos</h5>
-				<form id="" action="" method="POST">
-					<h6>
-						<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)"> 
-						<label for="c_box1">Klik jika alamat sama seperti di atas.</label>
-					</h6>
-				
-					<input type="text" name="alamat1Pos" id="alamat1Pos" placeholder="Alamat 1"><br/>
-					<input type="text" name="alamat2Pos" id="alamat2Pos" placeholder="Alamat 2"><br/>
-					<input type="text" name="alamat3Pos" id="alamat3Pos" placeholder="Alamat 3"><br/>
-					<input type="text" name="poskodPos" id="poskodPos" placeholder="Poskod"><br/>
-				</form>
-				
-				<div class="selection" id="negeripos_selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="sel_negeriPos" name="sel_negeriPos" class="_sel" onchange="getDaerahFromSelectedCountryPos()">
-							<option value="">Pilih Negeri</option>
-						</select>
-					</form>		
-				</div>
-				
-				<div class="selection" id="daerahpos_selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="sel_daerahPos" name="sel_daerahPos" class="_sel">
-							<option value="">Pilih Daerah</option>
-						</select>
-					</form>		
-				</div>	
+					<h5 id="_orange_title">Alamat Tempat Urusan</h5>
+						<input type="text" name="alamat1" id="alamat1" placeholder="Alamat 1"><br/>
+						<input type="text" name="alamat2" id="alamat2" placeholder="Alamat 2"><br/>
+						<input type="text" name="alamat3" id="alamat3" placeholder="Alamat 3"><br/>
+						<input type="text" name="poskod" id="poskod" placeholder="Poskod"><br/>
+					
+					<div class="selection" id="negeri_selection">
+						<h5 id="_orange_title">Negeri</h5>
+							<select id="sel_negeri" name="sel_negeri" class="_sel" onchange="getDaerahFromSelectedCountry()">
+								<option value="" selected>Pilih Negeri</option>
+							</select>
+					</div>
+					
+					<div class="selection" id="daerah_selection">
+						<h5 id="_orange_title">Daerah</h5>
+							<select id="sel_daerah" name="sel_daerah" class="_sel">
+								<option value="" selected>Pilih Daerah</option>
+							</select>
+					</div>
+					<br/>
+					
+					<h5 id="_orange_title">Alamat Pos</h5>
+						<h6>
+							<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)"> 
+							<label for="c_box1">Klik jika alamat sama seperti di atas.</label>
+						</h6>
+					
+						<input type="text" name="alamat1Pos" id="alamat1Pos" placeholder="Alamat 1"><br/>
+						<input type="text" name="alamat2Pos" id="alamat2Pos" placeholder="Alamat 2"><br/>
+						<input type="text" name="alamat3Pos" id="alamat3Pos" placeholder="Alamat 3"><br/>
+						<input type="text" name="poskodPos" id="poskodPos" placeholder="Poskod"><br/>
+					
+					<div class="selection" id="negeripos_selection">
+						<h5 id="_orange_title">Negeri</h5>
+							<select id="sel_negeriPos" name="sel_negeriPos" class="_sel" onchange="getDaerahFromSelectedCountryPos()">
+								<option value="">Pilih Negeri</option>
+							</select>
+					</div>
+					
+					<div class="selection" id="daerahpos_selection">
+						<h5 id="_orange_title">Daerah</h5>
+							<select id="sel_daerahPos" name="sel_daerahPos" class="_sel">
+								<option value="">Pilih Daerah</option>
+							</select>	
+					</div>	
 
-				<div class="default_button_holder">
-					<a href="permohonan-induk-3.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-				</div>
+					<div class="default_button_holder">
+						<a href="permohonan-induk-3.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+					</div>
+				</form>
 			</div>
 
 			<!-- end of form -->
@@ -157,6 +149,8 @@
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
 
+	<script type="text/javascript" src="js/jquery.qtip.js"></script>
+
 	<script>
 		/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 		$('#nama_pendaftaran_bercawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_BERCAWANGAN"));
@@ -166,50 +160,119 @@
 
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		$(function() 
+		var status = window.localStorage.getItem('STATUS');
+
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+
+			$(function() 
 			{
 				$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
-						type:'POST',
-						data: {
-							kad_pengenalan : kad_pengenalan,
-							insertData : "select"
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kod_pertubuhan,
+						insertData : "kuiri"
 
-						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'SELECT') {
-								$("#alamat1").val(json.details.alamat1);
-								$("#alamat2").val(json.details.alamat2);
-								$("#alamat3").val(json.details.alamat3);
-								$("#poskod").val(json.details.poskod);
+					},
+					beforeSend: function() {
+							run_waitMe();
+					},
+					success:function(data){
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'SELECT') {
+							for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].type != 'button')
+								{
+									document.pendaftaran.elements[i].setAttribute("disabled", "disabled"); 	
+								}
 
-								getCountry($('#sel_negeri').attr('id'),json.details.negeri);	
-								getDaerah(json.details.negeri,$('#sel_daerah').attr('id'),json.details.negeri);	
-								
-								$("#alamat1Pos").val(json.details.alamat_pos1);
-								$("#alamat2Pos").val(json.details.alamat_pos2);
-								$("#alamat3Pos").val(json.details.alamat_pos3);
-								$("#poskodPos").val(json.details.poskod_pos);
+								if(document.pendaftaran.elements[i].type == 'checkbox')
+								{
+									document.pendaftaran.elements[i].setAttribute("checked", "checked"); 
+								}
+							};
+							$("#id_pertubuhan").val(json.details.kod_nama_pertubuhan);
+							$("#alamat1").val(json.details.alamat1);
+							$("#alamat2").val(json.details.alamat2);
+							$("#alamat3").val(json.details.alamat3);
+							$("#poskod").val(json.details.poskod);
 
-								getCountry($('#sel_negeriPos').attr('id'),json.details.negeri_pos);	
-								getDaerah(json.details.negeri_pos,$('#sel_daerahPos').attr('id'),json.details.daerah_pos);	
-
-								$('body').waitMe('hide');
-							}
-							else if (json.status == 'VIEW') {
-							//Do nothing. Just display
+							getCountry($('#sel_negeri').attr('id'),json.details.negeri);	
+							getDaerah(json.details.negeri,$('#sel_daerah').attr('id'),json.details.daerah);	
 							
+							$("#alamat1Pos").val(json.details.alamat_pos1);
+							$("#alamat2Pos").val(json.details.alamat_pos2);
+							$("#alamat3Pos").val(json.details.alamat_pos3);
+							$("#poskodPos").val(json.details.poskod_pos);
+
+							getCountry($('#sel_negeriPos').attr('id'),json.details.negeri_pos);	
+							getDaerah(json.details.negeri_pos,$('#sel_daerahPos').attr('id'),json.details.daerah_pos);	
+							checkKuiriPendaftaran(kod_pertubuhan,'2');
+
+							$('body').waitMe('hide');
 						}
+						else if (json.status == 'VIEW') {
+						//Do nothing. Just display
 						
-						$('body').waitMe('hide');
+					}
+					
+					$('body').waitMe('hide');
+					}
+				});
+			});
+		}else
+		{
+			var insertData = "TRUE";
+			$(function() 
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kad_pengenalan,
+						insertData : "select"
+
+					},
+					beforeSend: function() {
+							run_waitMe();
+					},
+					success:function(data){
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'SELECT') {
+							$("#alamat1").val(json.details.alamat1);
+							$("#alamat2").val(json.details.alamat2);
+							$("#alamat3").val(json.details.alamat3);
+							$("#poskod").val(json.details.poskod);
+
+							getCountry($('#sel_negeri').attr('id'),json.details.negeri);	
+							getDaerah(json.details.negeri,$('#sel_daerah').attr('id'),json.details.daerah);	
+							
+							$("#alamat1Pos").val(json.details.alamat_pos1);
+							$("#alamat2Pos").val(json.details.alamat_pos2);
+							$("#alamat3Pos").val(json.details.alamat_pos3);
+							$("#poskodPos").val(json.details.poskod_pos);
+
+							getCountry($('#sel_negeriPos').attr('id'),json.details.negeri_pos);	
+							getDaerah(json.details.negeri_pos,$('#sel_daerahPos').attr('id'),json.details.daerah_pos);	
+
+							$('body').waitMe('hide');
 						}
-					});
-		});
+						else if (json.status == 'VIEW') {
+						//Do nothing. Just display
+						
+					}
+					
+					$('body').waitMe('hide');
+					}
+				});
+			});
+		}
 
 		function getDaerahFromSelectedCountry()  
 		{
@@ -263,6 +326,7 @@
 			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 			$('#alamat1,#alamat1Pos,#poskod,#poskodPos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
 
+			var id_pertubuhan = $("#id_pertubuhan").val();
 			var alamat1= $("#alamat1").val();
 			var alamat2 = $("#alamat2").val();
 			var alamat3 = $("#alamat3").val();
@@ -276,9 +340,6 @@
 			var sel_negeripos = $("#sel_negeriPos").val();
 			var sel_daerahpos = $("#sel_daerahPos").val();
 			var poskod_pos= $("#poskodPos").val();
-			var insertData = "TRUE";
-
-
 
 			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
 			if (alamat1.length == 0)
@@ -338,65 +399,70 @@
 			}
 			else if(empty == false)
 			{
-					
-				$.ajax({
-					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
-					type:'POST',
-					data: {
+				if(id_pertubuhan == 'empty')
+				{
+					window.location.href = "permohonan-induk-3.html";
+				}else
+				{
+					$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_2.php",
+						type:'POST',
+						data: {
 
-						alamat1 : alamat1,
-						alamat2: alamat2,
-						alamat3 : alamat3,
-						sel_negeri : sel_negeri,
-						sel_daerah : sel_daerah,
-						poskod : poskod,
-						alamat_pos1 : alamat_pos1,
-						alamat_pos2 : alamat_pos2,
-						alamat_pos3 : alamat_pos3,
-						sel_negeripos : sel_negeripos,
-						sel_daerahpos : sel_daerahpos,
-						poskod_pos : poskod_pos,
-						insertData : insertData,
-						kad_pengenalan : kad_pengenalan,
-						nama_pertubuhan : nama_pertubuhan,
-					},
-					beforeSend: function() {
-							run_waitMe();
-					},
-					success:function(data){
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') {
+							alamat1 : alamat1,
+							alamat2: alamat2,
+							alamat3 : alamat3,
+							sel_negeri : sel_negeri,
+							sel_daerah : sel_daerah,
+							poskod : poskod,
+							alamat_pos1 : alamat_pos1,
+							alamat_pos2 : alamat_pos2,
+							alamat_pos3 : alamat_pos3,
+							sel_negeripos : sel_negeripos,
+							sel_daerahpos : sel_daerahpos,
+							poskod_pos : poskod_pos,
+							insertData : insertData,
+							kad_pengenalan : kad_pengenalan,
+							nama_pertubuhan : nama_pertubuhan,
+							id_pertubuhan : id_pertubuhan,
+						},
+						beforeSend: function() {
+								run_waitMe();
+						},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "permohonan-induk-3.html";
+										}
+									}
+								);
 							
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-										window.location.href = "permohonan-induk-3.html";
+							}
+							else if (json.status == 'error') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
 									}
-								}
-							);
-						
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
 						}
-						else if (json.status == 'error') {
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-									}
-								}
-							);
-						}
-						else{}
-						$('body').waitMe('hide');
-					}
-				});
-				
+					});
+				}
 			}
 		});
 	</script>
