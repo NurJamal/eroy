@@ -2,20 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.less" />
-		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
 		
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 		<div id="loadingLayer"></div>
+		
 	</head>
 	<body>
 	
@@ -27,9 +27,9 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>		
 	<!-- end of header -->
 	
@@ -72,28 +72,24 @@
 		</div>	
 	</div>
 	
-	<script>
-		window.localStorage.setItem("_MENU_FIX", "TRUE");
-	</script>
-	
 	<!-- js for slide menu -->
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
 	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- alert box -->
-	<script src="js/jquery-confirm.js"></script>
-	<script src="js/jquery-confirm.min.js"></script>
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>
 	
 	<!--Loading Indicator -->
-	<script src="js/waitMe.js"></script>
+	<script src="../../js/waitMe.js"></script>
 	
 	<script>
 	function calcUmur()  
@@ -134,32 +130,27 @@
 			$('#f_sijil').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(nama.length == 0)
+		if (nama.length == 0)
 		{
 			$('#f_nama').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(kadp.length == 0 || kadp.length != 12)
+		if (kadp.length == 0)
 		{
 			$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(t_lahir.length == 0) 
+		if (t_lahir.length == 0) 
 		{
 			$('#f_tlahir').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(emel.length == 0) 
+		if (emel.length == 0) 
 		{
 			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});	
 			empty = true;
 		}
-		if(!ValidateEmail(emel))
-		{
-			$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(no_tel.length == 0) 
+		if (no_tel.length == 0) 
 		{
 			$('#f_telefon').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
@@ -175,73 +166,99 @@
 				}
 			);
 		}
-		else 
+		else if(empty == false)
 		{
-			$.ajax
-			(
-				{
-					url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
-					type:'POST',
-					data: 
+			if(!ValidateEmail(emel))
+			{
+				$.alert
+				(
 					{
-						no_sijil : no_sijil,
-						nama : nama,
-						kadp: kadp,
-						t_lahir : t_lahir,
-						emel : emel,
-						no_tel : no_tel
-					},
-					beforeSend: function()
-					{
-						run_waitMe();
-					},
-					success:function(data)
-					{
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') 
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Tukar ID Setiausaha',
-									content: json.message,
-									confirm: function()
-									{
-										$('body').waitMe('hide');
-										window.location.href = "index.html";
-									}
-								}
-							);
-						}
-						else if (json.status == 'error')
-						{
-							console.log(json.status);
-							$.alert
-							(
-								{
-									title: 'Tukar ID Setiausaha',
-									content: json.message,
-									confirm: function(){}
-								}
-							);
-						}
-						else{}
-						$('body').waitMe('hide');
+						title: 'Perhatian',
+						content: 'Sila Isikan Format Emel yang Betul',
+						confirm: function(){ }
 					}
-				}
-			);	
+				);
+				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else if(kadp.length != 12)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
+						confirm: function(){}
+					}
+				);
+				$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else 
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/api_tukar_id_setiausaha.php",
+						type:'POST',
+						data: 
+						{
+							no_sijil : no_sijil,
+							nama : nama,
+							kadp: kadp,
+							t_lahir : t_lahir,
+							emel : emel,
+							no_tel : no_tel
+						},
+						beforeSend: function()
+						{
+							run_waitMe();
+						},
+						success:function(data)
+						{
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Tukar ID Setiausaha',
+										content: json.message,
+										confirm: function()
+										{
+											$('body').waitMe('hide');
+											window.location.href = "index.html";
+										}
+									}
+								);
+							}
+							else if (json.status == 'error')
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Tukar ID Setiausaha',
+										content: json.message,
+										confirm: function(){}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);	
+			}
 		}
-			
 	});
 
 	$(function () 
 	{
-		var minlength = 6;
+		var minlength = 5;
 
-		$("#f_sijil").keyup(function() 
+		$("#f_sijil").keyup(function () 
 		{
 			var that = this,
 			value = $(this).val();
@@ -252,56 +269,44 @@
 				(
 					{
 						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/get_nama_pertubuhan.php",
+						url: "http://eroy.me-tech.com.my/api/get_pertubuhan_info.php",
 						dataType: "xml",
 						data: 
 						{
 							value : value
 						},
-						success: function(xml, data)
+						success: function(xml)
 						{
 							var xmlDoc = $.parseXML(xml),
 							$xml = $(xmlDoc);
-							
-							if($(xml).find("status").text() == "ok")
+							$(xml).find("lk_pertubuhan_info").each(function()
 							{
-								$(xml).find("details").each(function()
+								console.log($(this).text());
+								var npertubuhan = $(this).find("nama_pertubuhan");
+								var no_sijil = $(this).find("no_sijil");
+								
+								if (value == $(that).val()) 
 								{
-									var npertubuhan = $(this).find("nama_pertubuhan");
-									var no_sijil = $(this).find("no_sijil");
-									
-									console.log($(this).text());
-
 									$('#d_npertubuhan').val($(npertubuhan).text());
-								});
-							}
-							else if($(xml).find("status").text() == "error")
-							{
-								$.alert
-								(
-									{
-										title: 'Carian Maklumat',
-										content: 'Tiada Dalam Rekod Pangkalan Data',
-										confirm: function(){}
-									}
-								);
-								$('body').waitMe('hide');
-							}
-							else{}
-							$('body').waitMe('hide');
-						},
-						error: function(xml, data) 
-						{
-							console.log("An error occurred while processing XML file.");
-						},
+								}
+								else
+								{
+									$.alert
+									(
+										{
+											title: 'Carian',
+											content: 'Tiada dalam rekod pangkalan data.',
+											confirm: function(){}
+										}
+									);
+								}
+							})
+						}
 					}
 				);
 			}
 		});
 	});
-	
-	/*Set current menu to fix*/
-	window.localStorage.setItem("_MENU_FIX", "TRUE");
 	</script>
 	
   </body>

@@ -103,8 +103,11 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+var no_ic = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
+
+
+
 	
 	function upperCase() 
 	{
@@ -112,7 +115,10 @@
 		x.value = x.value.toUpperCase();
 	}
 
-	$(function() 
+$(function() 
+
+
+
 	{
 		$.ajax
 		(
@@ -123,7 +129,8 @@
 				data : 
 				{
 					no_ic : no_ic
-				},
+					
+				}
 				beforeSend: function() 
 				{
 					run_waitMe();
@@ -210,8 +217,13 @@
 					}
 				);
 			}
-		});
 	});
+	});
+
+
+
+
+
 	
 	$("#btn_submit").click(function(e)
 	{
@@ -292,7 +304,90 @@
 						$('body').waitMe('hide');
 					}
 				}
-			);*/
+	);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</script>
 	
 	

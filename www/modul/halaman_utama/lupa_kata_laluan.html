@@ -2,18 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.less" />
-		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
 		
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 		<div id="loadingLayer"></div>
 		
@@ -28,9 +27,9 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -39,18 +38,16 @@
 		<div class="content_title">
 			<div class="input-group add-on search-box">
 				<div class="input-group-btn">
-					<h1 class="main_title">EMEL PENGAKTIFAN</h1>
+					<h1 class="main_title">LUPA KATA LALUAN</h1>
 				</div>
 			</div>
 		</div>
 		<!-- end of header-title-->
-
+	
 		<div id="content">
 			<div class="_form">
 				<form id="" action="" method="POST">
-					<h5 id="H5" style="margin-top: 15px"><font color="#3f3f3f">PANDUAN:<br/>
-					Mohon semak terlebih dahulu di dalam akuan emel, sekiranya emel pengaktifan akaun tiada di dalam <i>Folder INBOX</i>, sila semak di dalam <i>Folder SPAM/JUNK</i>.</font></h5>
-					<input type="number" style="margin-top: 15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
+					<input type="number" style="margin-top:15px" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 					
 					<div class="default_button_holder">
 						<input class="default_button" type="submit" value="HANTAR" id="btn_submit">
@@ -58,30 +55,31 @@
 				</form>
 			</div>
 		</div>	
-	</div>	
-		
-	<!-- js for slide menu -->
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	</div>
 	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<!-- js for slide menu -->
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
+	
+	<!-- jquery js-->
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- alert box -->
-	<script src="js/jquery-confirm.js"></script>
-	<script src="js/jquery-confirm.min.js"></script>
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>
 	
 	<!--Loading Indicator -->
-	<script src="js/waitMe.js"></script>
+	<script src="../../js/waitMe.js"></script>
 	
 	<script>
 	$("#btn_submit").click(function(e)
-	{	
+	{
 		var kadp = $.trim($("#f_kp").val());
 		var empty = false;
 		
@@ -100,7 +98,7 @@
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila isikan tempat kosong!',
+					content: 'Sila Isikan Tempat Kosong!',
 					confirm: function(){}
 				}
 			);
@@ -112,19 +110,19 @@
 				$.alert
 				(
 					{
-						title: 'Daftar Pengguna',
+						title: 'Perhatian',
 						content: 'Sila Isikan No Kad Pengenalan Sekurang-kurangnya 12 Nombor',
 						confirm: function(){}
 					}
 				);
-				$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				$('#f_kp').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			}
 			else 
 			{
 				$.ajax
 				(
 					{
-						url:"http://eroy.me-tech.com.my/api/api_sahkan_emel_keaktifan.php",
+						url:"http://eroy.me-tech.com.my/api/api_lupa_kata_laluan.php",
 						type:'POST',
 						data: 
 						{
@@ -145,7 +143,7 @@
 								$.alert
 								(
 									{
-										title: 'Pengesahan Emel Pengaktifan',
+										title: 'Lupa Kata Laluan',
 										content: json.message,
 										confirm: function()
 										{
@@ -161,7 +159,7 @@
 								$.alert
 								(
 									{
-										title: 'Pengesahan Emel Pengaktifan',
+										title: 'Lupa Kata Laluan',
 										content: json.message,
 										confirm: function(){}
 									}
@@ -174,10 +172,10 @@
 				);
 			
 			}
-		}
+	}
 	});
 	</script>
-  
-  </body>
+
+	</body>
 </html>
 

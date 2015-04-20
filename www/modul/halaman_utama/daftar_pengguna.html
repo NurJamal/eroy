@@ -3,17 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.css" />
-		<link rel="stylesheet" href="css/jquery-confirm.less" />
-		<link rel="stylesheet" type="text/css"  href="css/waitMe.css">
-		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
+
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
 		<div id="loadingLayer"></div>
 	</head>
@@ -27,9 +26,9 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
@@ -48,7 +47,7 @@
 		<div id="content">
 			<div class="_form">
 				<form id="" action="" method="POST">
-					<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh" onkeyup="upperCase()"><br/>
+					<input type="text" style="margin-top:15px" name="f_nama" id="f_nama" placeholder="Nama Penuh"><br/>
 					<input type="number" name="f_kp" id="f_kp" placeholder="No Kad Pengenalan"><br/>
 					<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Tidak termasuk simbol '-'</h5>
 					<input type="password" name="f_katalaluan" id="f_katalaluan" placeholder="Kata Laluan"><br/>
@@ -64,29 +63,25 @@
 		</div>
 	</div>
 	
-	<script>
-		window.localStorage.setItem("_MENU_FIX", "TRUE");
-	</script>
-	
-	
 	<!-- js for slide menu -->
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
 	
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
-	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	<!-- jquery js-->
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
 	
 	<!-- alert box -->
-	<script src="js/jquery-confirm.js"></script>
-	<script src="js/jquery-confirm.min.js"></script>	
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>
 	
 	<!--Loading Indicator -->
-	<script src="js/waitMe.js"></script>
+	<script src="../../js/waitMe.js"></script>
 	
  	<script>	
 	function cekEmel(email) 
@@ -170,9 +165,9 @@
 				$.alert
 				(
 					{
-		title: 'Perhatian',
+						title: 'Perhatian',
 						content: 'Sila Isikan Format Emel yang Betul',
-						confirm: function(){}
+						confirm: function(){ }
 					}
 				);
 				$('#f_emel').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -180,10 +175,11 @@
 			else if(!cekPass(katalaluan))
 			{
 				$.alert
-				(					{
-	title: 'Perhatian',
+				(
+					{
+						title: 'Perhatian',
 						content: 'Sila Isikan Format Kata Laluan yang Betul',
-						confirm: function(){}
+						confirm: function(){ }
 					}
 				);
 				$('#f_katalaluan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
@@ -191,9 +187,10 @@
 			else if(sah_katalaluan != katalaluan)
 			{
 				$.alert
-				(					{
-	title: 'Perhatian',
-						content: 'Sahkan Kata Laluan tidak sama dengan Kata Laluan',
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sahkan Kata Laluan Tidak Sama Dengan Kata Laluan',
 						confirm: function(){ }
 					}
 				);
@@ -206,7 +203,8 @@
 					{
 						url:"http://eroy.me-tech.com.my/api/api_daftar_pengguna.php",
 						type:'POST',
-						data:						{
+						data:
+						{
 							nama : nama,
 							kadp: kadp,
 							katalaluan : katalaluan,
@@ -259,9 +257,6 @@
 			}
 		}
 	});
-	
-	/*Set current menu to fix*/
-	window.localStorage.setItem("_MENU_FIX", "TRUE");
 	</script>
 	</body>
 </html>
