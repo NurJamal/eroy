@@ -95,6 +95,7 @@
 			var paymentKey = localStorage.getItem('PAYMENT_KEY');
 			var paymentChannel = localStorage.getItem('PAYMENT_CHANNEL');
 			var redirect_url = localStorage.getItem('REDIRECT_URL');
+			var paymentItemCode = localStorage.getItem("PAYMENT_REF_CODE");
 
 			var kad_pengenalan = localStorage.getItem('LOGIN');
 			
@@ -116,6 +117,7 @@
 						paymentChannel : paymentChannel,
 						kad_pengenalan : kad_pengenalan,
 						redirect_url : redirect_url,
+						paymentItemCode : paymentItemCode,
 
 					},
 					beforeSend: function() {

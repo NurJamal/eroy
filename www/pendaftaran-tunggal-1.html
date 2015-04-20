@@ -333,7 +333,9 @@
 					var json = $.xml2json(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						
-
+						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+						
 						$.alert
 						(
 							{
@@ -344,7 +346,7 @@
 								}
 							}
 						);
-						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+						
 					}
 					else if (json.status == 'UPDATE_SUCCESS') {
 						$.alert
