@@ -126,8 +126,17 @@
 						console.log(data);
 						if (json.status == 'INSERT_SUCCESS') {
 							//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
-							navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
-
+							if(localStorage.getItem('DEVICE_PLATFORM') == 'android')
+							{
+								navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+							}
+							else if(localStorage.getItem('DEVICE_PLATFORM')  == 'ios')
+							{
+								window.open('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', '_system');
+							}
+							
+							window.location.replace('../../'+redirect_url);
+							
 						}
 						else{
 

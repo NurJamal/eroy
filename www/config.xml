@@ -58,6 +58,7 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
+	
 	<plugin name="InAppBrowser" gap:platform="android" value="org.apache.cordova.InAppBrowser" />
 	<plugin name="InAppBrowser" gap:platform="ios"  value="CDVInAppBrowser" />
 	<plugin name="InAppBrowser" gap:platform="winphone" />

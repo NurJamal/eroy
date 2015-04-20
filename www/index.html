@@ -91,6 +91,8 @@
     function onDeviceReady() 
 	{
       	var devicePlatform = cordova.platformId;
+		localStorage['DEVICE_PLATFORM'] = devicePlatform;
+		alert(devicePlatform);
 	}
 	
 
