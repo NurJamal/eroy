@@ -331,6 +331,7 @@
 					},
 				success:function(data){
 					var json = $.xml2json(data);
+					console.log(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						
 						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);

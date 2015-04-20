@@ -30,7 +30,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-majlis-7.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="pendaftaran-tunggal-7.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
@@ -40,7 +40,7 @@
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN MAJLIS</h1>
+				<h1 class="main_title">PENDAFTARAN TUNGGAL</h1>
 			</div>
 		</div>
 	
@@ -68,7 +68,7 @@
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" id="nama_pendaftaran_majlis" style="margin-top:5px;"></h1><br/>
+			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
 		</div>
 	
 		<div class="selection" id="jenis_bayaran_selection">
@@ -91,6 +91,11 @@
 			<input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" disabled></br>
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
+		
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
+		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
+		<input type="hidden" name="Key" id="key" value="E-ROY"/>
+		<input type="hidden" name="Channel" id="channel" value="02"/>
 		
 		<div class="default_button_holder">
 			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
@@ -123,8 +128,10 @@
 		
 	<script>
 	
+
+	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
-	$('#nama_pendaftaran_majlis').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"));
+	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"));
 	
 	getJenisBayaran($('#jenis_bayaran').attr('id'));
 	getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
@@ -167,126 +174,156 @@
 	
 	
 	$("#btn_submit").click(function(e){
-		 
-		$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
 
-		 
-		redisplayHeader();
-		var empty = false;
-		e.preventDefault();
-		
-		var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		var insertData = "TRUE";
-		var id_amaun_bayaran = $('#id_amaun_bayaran').val();
+			$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
 
-		$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
-
-		
-
-		var jenis_bayaran = $("#jenis_bayaran").val();
-		if (jenis_bayaran.length == 0)
-		{
-			$('#jenis_bayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
+			 
+			redisplayHeader();
+			var empty = false;
+			e.preventDefault();
 			
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+			var insertData = "TRUE";
+			var id_amaun_bayaran = $('#jumlah_perlu_dibayar').val();
+
+			$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
+
 			
-		}
-		
-		if(jenis_bayaran == "1")
+
+			var jenis_bayaran = $("#jenis_bayaran").val();
+			if (jenis_bayaran.length == 0)
 			{
-				var no_wang_pos = $("#wang_tidak_online").val();
-				if(no_wang_pos.length == 0)
+				$('#jenis_bayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				empty = true;
+				
+				
+			}
+			
+			if(jenis_bayaran == "1")
 				{
-					$('#wang_tidak_online').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-					empty = true;
+					var no_wang_pos = $("#wang_tidak_online").val();
+					if(no_wang_pos.length == 0)
+					{
+						$('#wang_tidak_online').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+						empty = true;
+					}
+				}
+			
+			if(empty == true)
+			{
+				$.alert
+					(
+						{
+							title: 'Perhatian',
+							content: 'Sila isikan tempat kosong!',
+							confirm: function(){				
+							}
+						}
+					);
+			}
+			
+			else
+			{
+			
+				if($('#jenis_bayaran').val() == 2)
+				{
+					
+					var amount = $.trim($('#jumlah_perlu_dibayar').val().replace('RM', ''));
+					var paymentDesc = $.trim($('#paymentDesc').val());
+					var paymentItemName = $.trim($('#paymentItemName').val());
+					var key = $.trim($('#key').val());
+					var channel = $.trim($('#channel').val());
+					var redirectUrl = "pendaftaran-tunggal-9.html";
+					var pertubuhanRefCode = localStorage.getItem("PAYMENT_REF_CODE");
+					
+					/* LocalStorage - Make sure to overwrite all var each time make payment */
+					localStorage['PAYMENT_AMOUNT'] = amount;
+					localStorage['PAYMENT_DESC'] = paymentDesc;
+					localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
+					localStorage['PAYMENT_KEY'] = key;
+					localStorage['PAYMENT_CHANNEL'] = channel;
+					localStorage['REDIRECT_URL'] = redirectUrl;
+					localStorage['PAYMENT_REF_CODE'] = pertubuhanRefCode;
+
+					window.location.href = "modul/pembayaran/pembayaran_startup.html";
+
+					return false;
+				}
+				else
+				{
+
+					$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_majlis_8.php",
+						type:'POST',
+						data: {
+
+							id_bentuk_bayaran : jenis_bayaran,
+							no_wang_pos: no_wang_pos,
+							id_amaun_bayaran: id_amaun_bayaran,
+							kad_pengenalan : kad_pengenalan,
+							insertData : insertData,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'INSERT_SUCCESS') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "pendaftaran-majlis-9.html";
+										}
+									}
+								);
+							
+							}
+							else if (json.status == 'INSERT_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else if (json.status == 'UPDATE_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else if (json.status == 'UPDATE_SUCCESS') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										window.location.href = "pendaftaran-majlis-9.html";
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					});
 				}
 			}
-		
-		if(empty == true)
-		{
-			$.alert
-				(
-					{
-						title: 'Perhatian',
-						content: 'Sila isikan tempat kosong!',
-						confirm: function(){				
-						}
-					}
-				);
-		}
-		else
-		{
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_majlis_8.php",
-				type:'POST',
-				data: {
-
-					id_bentuk_bayaran : jenis_bayaran,
-					no_wang_pos: no_wang_pos,
-					id_amaun_bayaran: id_amaun_bayaran,
-					kad_pengenalan : kad_pengenalan,
-					insertData : insertData,
-				},
-				beforeSend: function() {
-						run_waitMe();
-					},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'INSERT_SUCCESS') {
-						
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-									window.location.href = "pendaftaran-majlis-9.html";
-								}
-							}
-						);
-					
-					}
-					else if (json.status == 'INSERT_ERROR') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else if (json.status == 'UPDATE_ERROR') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else if (json.status == 'UPDATE_SUCCESS') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								window.location.href = "pendaftaran-majlis-9.html";
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-				}
-			});
-		}
 		
 	});
 	
