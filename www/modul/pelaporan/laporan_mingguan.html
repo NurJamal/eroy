@@ -16,7 +16,6 @@
 	</head>
 	<body>
 	
-	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -25,11 +24,9 @@
 	<div id="head">
 		<img src="../../img/logo-atas.png" class="logo"/>
 		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="menu_pelaporan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>	
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
 	</div>	
 	<!-- end of header -->
-
-	
 
 	<!-- list -->
 	<div class="containerBlock">
@@ -40,9 +37,9 @@
 					<h1 class="main_title">PELAPORAN</h1>
 				</div>
 			</div>
-		
 		</div>
 	<!-- end of header-title-->
+	
 	<div id="content">
 		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
 		<input type="hidden" id="jenis_laporan" value="laporan_mingguan">
@@ -115,7 +112,7 @@
 		</div>
 		
 		<div class="default_button_holder">
-			<!--<a href="statistik_laporan_mingguan.html">--><input class="default_button" type="button" value="HANTAR" id="btn_submit"><!-- </a> -->
+			<input class="default_button" type="button" value="HANTAR" id="btn_submit">
 		</div>
 
 	</div>
@@ -229,8 +226,6 @@
 							//saving object to localStorage
 							window.localStorage['LAPORAN'] = JSON.stringify(json);
 
-							
-							
 							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
 							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
 							window.location.href = "statistik_laporan_mingguan.html";
