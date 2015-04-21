@@ -593,14 +593,21 @@
 											
 											$.each(fasal_list.sub_fasal, function (index_3, sub_fasal_list) {
 												//Second Lvl
-												
+
 												var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-												var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+sub_fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+
+												var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+sub_fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+sub_fasal_list.id+'"></label></td>';
 
 												if(sub_fasal_list.ref_level == fasal_list.code_level )
 												{
-													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" class="tooltip" id="edit_tooltip">'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
-													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'">'+sub_fasal_list.fasal+'</label>');										
+													
+
+													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+sub_fasal_list.id+'"><td width="30px"> &nbsp;</td><td width="30px" id="tooltipIcon_tr_'+sub_fasal_list.id+'">'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
+
+
+													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+sub_fasal_list.id+'">'+ sub_fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_list.id+'_text"> '+sub_fasal_list.fasal+'</span></label>');
+
+														
 													
 													
 													//Third Lvl and above
