@@ -225,11 +225,12 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-							
-							//window.localStorage.setItem("LAPORAN", json);
+					
 							//saving object to localStorage
-							window.localStorage['LAPORAN'] = JSON.stringify(json);
-
+							//window.localStorage['LAPORAN'] = JSON.stringify(json);
+							
+							
+							window.localStorage.setItem('TARIKH_DARI', dateFrom);
 							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
 							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
 							
