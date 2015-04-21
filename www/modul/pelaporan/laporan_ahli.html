@@ -49,7 +49,7 @@
 			<div class="selection">
 				<h5 id="_orange_title">Pilihan</h5>
 				<form action="">
-					<select id="sel_pilihan" name="sel_pilihan" class="sel">
+					<select id="sel_pilihan" name="sel_pilihan" class="sel" onchange="disabledTextField();">
 					</select>
 				</form>		
 			</div>
@@ -129,17 +129,6 @@
 						var pilihan = $(this).find("pilihan");
 						
 						$('#sel_pilihan').append('<option value="'+$(id).text()+'">'+$(pilihan).text()+'</option>');
-						
-						if(id.text() == '2')
-						{
-							$('#pertubuhan_carian :input').prop('disabled', true);
-							$('#sel_nama_pertubuhan :input').prop('disabled', true);
-						}
-						else
-						{
-							$('#pertubuhan_carian :input').prop('disabled', false);
-							$('#sel_nama_pertubuhan :input').prop('disabled', false);
-						}
 					});
 				},
 				error: function() 
@@ -151,6 +140,24 @@
 
 	});
 	
+	
+	function disabledTextField()
+	{
+		var a = $('#sel_pilihan option:selected').text();
+		
+		if(a == 'Keseluruhan')
+		{
+			alert('1');
+			$("#pertubuhan_carian :input").attr('disabled',true);
+			$('#pertubuhan_carian :input').disable = true;
+			$('#sel_nama_pertubuhan option:selected').disable = true;;
+		}
+		else
+		{
+			$('#pertubuhan_carian :input').disable = false;
+			$('#sel_nama_pertubuhan option:selected').disable = false;
+		}
+	}
 	
 	function namaPertubuhanCarian()
 	{
