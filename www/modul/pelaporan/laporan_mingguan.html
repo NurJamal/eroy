@@ -136,25 +136,51 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
+	function selectedState()
+	{
+		var arr = [];
+		$('.checkbox input[type="checkbox"]:checked').each(function()
+		{
+			arr.push($(this).val());
+		});
+		return arr; 
+	}
+	
+	function selectedDateFrom()
+	{
+		var dateFrom = [];
+		$('#tarikh_dari').each(function()
+		{
+			dateFrom.push($(this).val());
+		});
+		return dateFrom; 
+	}
+	
+	function selectedDateTo()
+	{
+		var dateTo = [];
+		$('#tarikh_hingga').each(function()
+		{
+			dateTo.push($(this).val());
+		});
+		return dateTo; 
+	}
+	
+	
+	
+	
+	
+	
 	$("#btn_submit").click(function(e)
 	{
 		var dateFrom =  $.trim($("#tarikh_dari").val());
 		var dateTo =  $.trim($("#tarikh_hingga").val());
 		var jenisLaporan =  $.trim($("#jenis_laporan").val());
-		var selectedState = [];
 		var empty = false;
 		
 		e.preventDefault();
 		
 		$('#tarikh_dari, #tarikh_dari').css({"border":"","box-shadow":""});
-		
-		for( var i = 2 ; i < 17 ; i++ )
-		{
-			if($("#c_box"+i).is(":checked"))
-			{		
-				selectedState.push($("#c_box"+i).val());
-			}
-		}
 
 		/*Javascript Validation*/
 		if(dateFrom == 0) 
@@ -183,7 +209,7 @@
 			$('#tarikh_hingga').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		else if( selectedState.length <= 0)
+		else if( selectedState().length <= 0)
 		{
 			$.alert
 			(
@@ -227,12 +253,17 @@
 							console.log(json.status);
 					
 							//saving object to localStorage
-							window.localStorage['LAPORAN'] = JSON.stringify(json.data);
+							window.localStorage['LAPORAN'] = JSON.stringify(json);
+							
+							window.localStorage['SELECTED_STATE'] = JSON.stringify(selectedState());
+							window.localStorage['TARIKH_DARI'] = JSON.stringify(selectedDateFrom());
+							window.localStorage['TARIKH_HINGGA'] = JSON.stringify(selectedDateTo());
+							
+							window.location.href = "statistik_laporan_mingguan.html";
+							
 					
 							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
 							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
-							
-							window.location.href = "statistik_laporan_mingguan.html";
 						}
 						else if (json.status == 'error') 
 						{
