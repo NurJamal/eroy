@@ -183,7 +183,7 @@
 						}else if(kod_status == '3') //kuiri
 						{
 							$('#content').append('<a href="#" onclick=kuiri(\''+kod_nama_pertubuhan+'\') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div><a>');
-						}else if(kod_status == '6') //draft
+						}else if(kod_status == '6' || kod_status == 'Pending') //draft
 						{
 							$('#content').append('<a href="#" onclick="editPermohonan('+jenis_pertubuhan+')" style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
 						}else
@@ -240,7 +240,9 @@
 
 						if(jenis_pertubuhan == 1)
 						{
-							alert(jenis_pertubuhan);
+							window.localStorage.setItem("KUIRI_KOD_PERTUBUHAN", kod_nama_pertubuhan);
+							window.localStorage.setItem("STATUS", 'kuiri');
+							window.location.href = "pendaftaran-tunggal-1.html";
 						}else if(jenis_pertubuhan == 2)
 						{
 							window.localStorage.setItem("KUIRI_KOD_PERTUBUHAN", kod_nama_pertubuhan);

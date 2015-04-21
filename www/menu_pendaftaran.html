@@ -40,7 +40,7 @@
 	
 	<div id="content">
 		<!-- list -->
-		<a href="pendaftaran-tunggal-1.html" style="text-decoration:none;">
+		<a href="#" onclick="pushToTunggal()" style="text-decoration:none;">
 		<div id="box">
 			<h2 class="title">Tunggal</h2>
 		</div></a>
@@ -79,6 +79,12 @@
 		{
 			window.localStorage.setItem("STATUS", 'add');
 			window.location.href = "permohonan-induk-1.html";
+		}
+
+		function pushToTunggal()
+		{
+			window.localStorage.setItem("STATUS", 'add');
+			window.location.href = "pendaftaran-tunggal-1.html";
 		}
 	</script>
 	</body>
