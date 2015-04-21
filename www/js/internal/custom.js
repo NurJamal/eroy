@@ -575,14 +575,16 @@
 						
 						$.each(value, function (index_2, fasal_list) {
 						
+								var div = '<div></div>';
+						
 								var fasal_index= 'Fasal '+(index_2+1);
-								
-								var editorImgFirstLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-								var checkBoxFirstLvl = '<td><input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+fasal_list.id+'"></label></td>';
+		
+								var editorImgFirstLvl = '<image class="openToolTip" id="tr_'+fasal_list.id+'_img" style="margin-bottom:-7px;" src="img/pindaan-icon.png" width="25px" height="25px" ><span >';
+								var checkBoxFirstLvl = '<input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+fasal_list.id+'"></label>';
 								
 								//First Lvl
-								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+fasal_list.id+'"><td width="30px" id="tooltipIcon_tr_'+fasal_list.id+'">'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
-								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+fasal_list.id+'">'+ fasal_index+'</span> - <span class="fasal_label_text" id="fasal_index_'+fasal_list.id+'_text"> '+fasal_list.fasal+'</span></label>');
+								$('#'+fasal_id).append('<div class="checkbox" id="tr_'+fasal_list.id+'"><div width="30px" id="level_'+fasal_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+fasal_list.id+'"></span></div></div>');
+								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+fasal_list.id+'"> Fasal '+ fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+fasal_list.id+'_text"> '+fasal_list.fasal+'</span></label>');
 								var arrayCode = [];
 								
 								if(fasal_list.sub_fasal != null)
@@ -594,20 +596,15 @@
 											$.each(fasal_list.sub_fasal, function (index_3, sub_fasal_list) {
 												//Second Lvl
 
-												var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-
-												var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+sub_fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+sub_fasal_list.id+'"></label></td>';
+												var editorImgSecondLvl = '<image class="openToolTip" id="tr_'+sub_fasal_list.id+'_img" style="margin-bottom:-7px;" src="img/pindaan-icon.png" width="25px" height="25px" >';
+												var checkBoxSecondLvl = '<input class="checkboxClass" id="checkbox'+sub_fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+sub_fasal_list.id+'"></label>';
 
 												if(sub_fasal_list.ref_level == fasal_list.code_level )
 												{
-													
+												
 
-													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+sub_fasal_list.id+'"><td width="30px"> &nbsp;</td><td width="30px" id="tooltipIcon_tr_'+sub_fasal_list.id+'">'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
-
-
-													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+sub_fasal_list.id+'">'+ sub_fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_list.id+'_text"> '+sub_fasal_list.fasal+'</span></label>');
-
-														
+													$('#tr_'+fasal_list.id).append('<div class="checkbox" style="margin-left:30px;" id="tr_'+sub_fasal_list.id+'"><div width="30px" id="level_'+sub_fasal_list.level+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<span id="fasal_'+sub_fasal_list.id+'"></span></div>');
+													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'"><span class="sub_fasal_label" id="fasal_index_'+sub_fasal_list.id+'">'+ sub_fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_list.id+'_text"> '+sub_fasal_list.fasal+'</span></label>');
 													
 													
 													//Third Lvl and above
@@ -625,14 +622,19 @@
 																			{
 																				
 																				
-																				var appendTD;
-																				for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
+																				var marginLeftPX = 0;
+																				if(sub_fasal_nested_list.level > 1)
 																				{
-																					appendTD += '<td width="30px"></td>';
+																					marginLeftPX = '30';
 																				}
+																				
+																				//for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
+																				//{
+																				//	marginLeftPX = parseInt(marginLeftPX+30);
+																				//}
 																																					
-																				$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">'+appendTD+'<td width="30px" id="edit_tooltip">'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+sub_fasal_nested_list.id+'"></td></tr>');
-																				$('#fasal_'+sub_fasal_nested_list.id).append('<label for="checkbox'+sub_fasal_nested_list.id+'">'+sub_fasal_nested_list.fasal+'</label>');										
+																				$('#tr_'+sub_fasal_nested_list_1.id).append('<div class="checkbox" style="margin-left:'+marginLeftPX+'px;" id="tr_'+sub_fasal_nested_list.id+'"><div id="level_'+sub_fasal_nested_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+sub_fasal_nested_list.id+'"></span></div>');
+																				$('#fasal_'+sub_fasal_nested_list.id).append('<label for="checkbox'+sub_fasal_nested_list.id+'"><span class="sub_fasal_label" id="fasal_index_'+sub_fasal_nested_list.id+'">'+ sub_fasal_nested_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_nested_list.id+'_text"> '+sub_fasal_nested_list.fasal+'</span></label>');										
 																				
 																				if((index_4_2+1) == (fasal_list.sub_fasal).length){
 																					//arrayCode = arrayCode2;
@@ -650,18 +652,20 @@
 									}
 									else
 									{
-										var editorImgNotArray = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-										var checkBoxNotArray = '<td><input class="checkboxClass" id="checkbox'+fasal_list.sub_fasal.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-
-									
+										var editorImgNotArray = '<image src="img/pindaan-icon.png" width="25px" height="25px" style="margin-bottom:-7px;">';
+										var checkBoxNotArray = '<input class="checkboxClass" id="checkbox'+fasal_list.sub_fasal.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+								
 										if(fasal_list.sub_fasal.ref_level == fasal_list.code_level)
 										{
-											$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImgNotArray+'</td><td>'+checkBoxNotArray+'</td><td id="fasal_'+fasal_list.sub_fasal.id+'"></td></tr>');
-											$('#fasal_'+fasal_list.sub_fasal.id).append('<label for="checkbox'+fasal_list.sub_fasal.id+'">'+fasal_list.sub_fasal.fasal+'</label>');										
+											$('#tr_'+fasal_list.id).append('<div class="checkbox" style="margin-left:30px" id="tr_'+fasal_list.id+'"><div id="level_'+fasal_list.level+'">'+editorImgNotArray+' '+checkBoxNotArray+'<span id="fasal_'+fasal_list.sub_fasal.id+'"></span></div>');
+											$('#fasal_'+fasal_list.sub_fasal.id).append('<label for="checkbox'+fasal_list.sub_fasal.id+'"><span class="sub_fasal_label" id="fasal_index_'+fasal_list.id+'">'+ fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+fasal_list.id+'_text"> '+fasal_list.fasal+'</span></label>');										
 										}
 									}
-								}							
+								}						
 							});
+							
+							
+							
 						});
 						
 						

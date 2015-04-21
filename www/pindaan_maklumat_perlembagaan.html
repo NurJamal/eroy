@@ -57,12 +57,9 @@
 		<h1 class="_dark_text_imal">PERSATUAN SELSA MALAYSIA</h1>
 		
 		<h5 id="_orange_title_imal">
-		<table class="table_pindaan_maklumat" >
-		<tbody id="appendPerlembagaan">
+		<div id="appendPerlembagaan" >
+		</div >
 
-
-		</tbody>
-		</table>
 
 		</h5>
 		
@@ -99,16 +96,18 @@
 	<script>
 	// Create the tooltips only when document ready
 	
-	//$( document ).ready(function() {
+	
+		//$(document).ready(function() {
+		 
+		// });
 		
-		$("#appendPerlembagaan").delegate(".checkbox", "click", function (){
-		//tooltipIcon
+		$("#appendPerlembagaan").delegate(".openToolTip", "click", function (){
+		
+		rewriteID();
 		var currentSelectedId = $(this).attr('id');
 		var arr = currentSelectedId.split('_');
 		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
 		var currentID = localStorage['selected_id_perlembagaan'];
-		//alert();
-		
 		var lol = '<table width="220" height="30">';
 		lol += '<tr align="center">';
 		lol += '<td width="10px"></td>';
@@ -119,10 +118,9 @@
 		lol += '</tr>';
 		lol += '</table>';
 		
-		$('#tooltipIcon_'+currentID).qtip({
+		$('#'+currentSelectedId).qtip({
 		overwrite: false, 
 			content: {
-				//text: $('#tooltiptext'),
 				text: lol,
 				button: false,
 					
@@ -165,8 +163,6 @@
 		
 	//Get Fasal Template
 	getFasal('appendPerlembagaan', '1');
-		
-
 
 	//Add Bottom
 	function addBottom()
@@ -192,7 +188,6 @@
 	function addTop()
 	{
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-
 		var nextID = $("#"+selected).next().attr('id');
 		
 		divSelected = $('#'+selected);
@@ -212,11 +207,16 @@
 	function addFasal()
 	{	
 		var selected = localStorage.getItem('selected_id_perlembagaan');
+		
+		
+		var levelID = $('#'+(selected)).children().attr('id');
+		
 		$('.inform').remove();
 		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
 		$("div").qtip('hide');				
 
 		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
+		localStorage['level_id'] = levelID.replace('level_','');
 
 	
 		$('.fasal_label').each(function() {
@@ -231,6 +231,24 @@
 				$('#'+span_id).html(fasal_index);	
 			}
 
+		});
+		
+		var zz = 1;
+		var zzz = 1;
+		
+		$('.fasal_label').each(function() {
+			var tr_id = this.id;
+			var arr = tr_id.split('_');
+			var tr_value =  $.trim("fasal_index_"+arr[2]);
+			
+			$('#'+tr_value).attr('id','xxxxx_'+zz);
+			zz = parseInt(zz+1);
+
+		});
+
+		$('.fasal_label').each(function() {
+			$('#xxxxx_'+zzz).attr('id','fasal_index_'+zzz);
+			zzz = parseInt(zzz+1);
 		});
 	}
 	
@@ -275,12 +293,34 @@
 		var fasal_index = localStorage.getItem('fasal_index');
 		var appendId = 'tr_'+(parseInt((id).replace('tr_', ''))+1);
 		
+		/*SET MARGIN FOR EACH FASAL LEVEL*/
+		var loopForMarginLeftValue = localStorage.getItem('level_id');
+		var label_class;
+		var label_text;
+		
+		if(loopForMarginLeftValue > 1)
+		{
+			label_class = 'sub_fasal_label';
+			label_text = 'PerPuluhan';
+			
+		}
+		else
+		{
+			label_class = 'fasal_label';
+			label_text = 'Fasal '+ fasal_index;
+		}
+		var marginLeftPX = 0;
+		for(var x = 1; x < loopForMarginLeftValue ; x++)
+		{
+			marginLeftPX = parseInt(marginLeftPX+30);
+		}
+
 		/*On click display - check if null*/
 		if($('#fasal_added_'+(id)).val() != "")
 		{
-			var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-			var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-			$('<tr class="checkbox" style="margin-bottom:10px;" id="new_added_'+appendId+'" ><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"><span class="fasal_label" id="fasal_index_'+appendId+'"> Fasal '+ fasal_index+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></td></tr>').insertAfter($('#'+id));				
+			var editorImgSecondLvl = '<image class="openToolTip" id="'+appendId+'_img" style="margin-bottom:-7px;" src="img/pindaan-icon.png" width="25px" height="25px" >';
+			var checkBoxSecondLvl = '<input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
+			$('<div class="checkbox" id="new_added_'+appendId+'" style="margin-left:'+marginLeftPX+'px;" ><div width="30px" class="xx" id="level_'+loopForMarginLeftValue+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<label id="fasal_added_'+(id+1)+'" for="checkbox'+id+'"><span class="'+label_class+'" id="fasal_index_'+appendId+'">'+label_text+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></div></div>').insertAfter($('#'+id));				
 		}
 		
 		$('#added_'+id).remove();
@@ -323,10 +363,9 @@
 			$('#xx_'+indexx).attr('id','tr_'+indexx);
 			indexx = parseInt(indexx+1);
 		});
-		/* End Re-write <TR NO> */
+	
 
 		/* Re-write <FASAL LABEL NO/ID> */
-
 		var indexFasal = 1;
 		var indexFasalR = 1;
 
@@ -342,11 +381,31 @@
 
 		$('.fasal_label').each(function() {
 			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
-			
 			$('#fasal_index_'+indexFasalR).html('Fasal'+' '+indexFasalR);
+			
 			indexFasalR = parseInt(indexFasalR+1);
 		});
-		/* End re-write <FASAL LABEL NO/ID> */
+		
+		
+		/* Re-write <Img ID> */
+		var indexFasalXX = 1;
+		var indexFasalRXX = 1;
+
+		$('.openToolTip').each(function() {
+			var tr_id = this.id;
+			var arr = tr_id.split('_');
+			var tr_value =  $.trim("tr_"+arr[1]);
+			
+			$('#'+tr_value+'_img').attr('id','xxx_'+indexFasalXX);
+			indexFasalXX = parseInt(indexFasalXX+1);
+
+		});
+
+		$('.openToolTip').each(function() {
+			$('#xxx_'+indexFasalRXX).attr('id','tr_'+indexFasalRXX+'_img');
+			indexFasalRXX = parseInt(indexFasalRXX+1);
+		});
+
 	}
 
 	</script>
