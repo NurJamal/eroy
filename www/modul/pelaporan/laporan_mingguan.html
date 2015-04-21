@@ -199,7 +199,7 @@
 			$.ajax
 			(
 				{
-					url:"http://eroy.me-tech.com.my/api/laporan/pelaporan.php",
+					url:"http://eroy.me-tech.com.my/api/laporan/test.php",
 					type:'POST',
 					data:
 					{				
@@ -227,10 +227,8 @@
 							console.log(json.status);
 					
 							//saving object to localStorage
-							//window.localStorage['LAPORAN'] = JSON.stringify(json);
-							
-							
-							window.localStorage.setItem('TARIKH_DARI', dateFrom);
+							window.localStorage['LAPORAN'] = JSON.stringify(json.data);
+					
 							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
 							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
 							
@@ -253,8 +251,8 @@
 					}
 				}
 			);
-		}
-	});		
+		}	
+	});	
 	</script>
 	</body>
 </html>

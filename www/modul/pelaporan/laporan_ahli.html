@@ -50,7 +50,6 @@
 				<h5 id="_orange_title">Pilihan</h5>
 				<form action="">
 					<select id="sel_pilihan" name="sel_pilihan" class="sel">
-						<option value="" selected>Mengikut Nama Pertubuhan</option>
 					</select>
 				</form>		
 			</div>
@@ -111,6 +110,36 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
+	$(document).ready(function()
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/laporan/get_statistik_ahli_pilihan.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_pilihan").each(function()
+					{
+						console.log($(this).text());
+						var id = $(this).find("id");
+						var pilihan = $(this).find("pilihan");
+						$('#sel_pilihan').append('<option value="'+$(id).text()+'">'+$(pilihan).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	
+	
 	function namaPertubuhanCarian()
 	{
 		$(document).ready(function()
