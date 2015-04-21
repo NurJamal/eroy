@@ -239,7 +239,6 @@
 
 		var insertData = "TRUE";
 
-		var lokaliti= $("#f_lokaliti").val();
 		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
 		var nama_ringkasan = $("#f_nama_ringkasan").val();
 		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
@@ -252,11 +251,7 @@
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
-		if (lokaliti.length == 0)
-		{
-			$('#f_lokaliti').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
+	
 		if(nama_pertubuhan.length == 0)
 		{
 			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});

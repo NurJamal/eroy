@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
-	<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -23,7 +23,6 @@
 	<body>
 	<div id="transparent_layer" ></div>
 	
-
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -108,6 +107,7 @@
 		var arr = currentSelectedId.split('_');
 		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
 		var currentID = localStorage['selected_id_perlembagaan'];
+		//alert();
 		
 		var lol = '<table width="220" height="30">';
 		lol += '<tr align="center">';
@@ -119,7 +119,7 @@
 		lol += '</tr>';
 		lol += '</table>';
 		
-		$(this).qtip({
+		$('#tooltipIcon_'+currentID).qtip({
 		overwrite: false, 
 			content: {
 				//text: $('#tooltiptext'),
@@ -172,22 +172,48 @@
 	function addBottom()
 	{				
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		alert(selected);			
+
+		var prevID = $("#"+selected).prev().attr('id');
+		
+		divSelected = $('#'+selected);
+		divprev = $('#'+prevID);
+
+		tdiv1 = divSelected.clone();
+		tdiv2 = divprev.clone();
+
+		divSelected.replaceWith(tdiv2);
+		divprev.replaceWith(tdiv1);
+		$("div").qtip('hide');
+		
+		rewriteID();
 	}
 	
 	//Add Top
 	function addTop()
 	{
 		var selected = localStorage.getItem('selected_id_perlembagaan');
+
+		var nextID = $("#"+selected).next().attr('id');
 		
+		divSelected = $('#'+selected);
+		divNext = $('#'+nextID);
+
+		tdiv1 = divSelected.clone();
+		tdiv2 = divNext.clone();
+
+		divSelected.replaceWith(tdiv2);
+		divNext.replaceWith(tdiv1);
+		$("div").qtip('hide');				
+
+		rewriteID();
 	}
 	
 	//Add Bottom
 	function addFasal()
 	{	
-		$('.inform').remove();
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='display();'></div></td></tr></table></div>").insertAfter('#'+selected);
+		$('.inform').remove();
+		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
 		$("div").qtip('hide');				
 
 		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
@@ -208,15 +234,38 @@
 		});
 	}
 	
-	//Add Bottom
+	//Edit Fasal
 	function editFasal()
 	{				
 		var selected = localStorage.getItem('selected_id_perlembagaan');
+		var IDselected = selected.replace('tr_', '');
+		
+		$('.inform').remove();
+		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', '')))+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
+		$("div").qtip('hide');
+		
+		/*FASAL LABEL INDEX*/
+		var dummyFasalLabelIndex = 1;
 	}
 	
+	function editDisplay()
+	{
+		var id = localStorage.getItem('selected_id_perlembagaan');
+		var IDselected = id.replace('tr_', '');
+
+		/*On click display - check if null*/
+		if($('#fasal_added_'+(id)).val() != "")
+		{
+			var editedFasalText = $('#fasal_added_'+id).val();
+			$('#fasal_index_'+IDselected+'_text').text(editedFasalText);
+		}
+		
+		$('#added_'+id).remove();
+
+	}
+
 	
-	
-	function display()
+	function addDisplay()
 	{			
 		/*FASAL LABEL INDEX*/
 		var dummyFasalLabelIndex = 1;
@@ -231,7 +280,7 @@
 		{
 			var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
 			var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-			$('<tr class="checkbox" style="margin-bottom:10px;" id="new_added_'+appendId+'" ><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"><span class="fasal_label" id="fasal_index_'+appendId+'"> Fasal '+ fasal_index+'</span> - '+$('#fasal_added_'+(id)).val()+'</label></td></tr>').insertAfter($('#'+id));				
+			$('<tr class="checkbox" style="margin-bottom:10px;" id="new_added_'+appendId+'" ><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"><span class="fasal_label" id="fasal_index_'+appendId+'"> Fasal '+ fasal_index+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></td></tr>').insertAfter($('#'+id));				
 		}
 		
 		$('#added_'+id).remove();
@@ -243,19 +292,16 @@
 			var tr_value =  $('#'+tr_id).attr('id');
 			var trAddOne = parseInt(tr_value.replace('tr_',''));
 
-			//if(trAddOne > id.replace('tr_',''))
 			if(trAddOne > id.replace('tr_',''))
 			{
 				var trAfterAdd = parseInt(trAddOne+1);
 				$('#'+tr_id).attr('id','tr_'+trAfterAdd);
-				
 			}
 		});
 		
 		$('#new_added_'+appendId).attr('id',appendId);
 		
 		rewriteID();
-		
 	}
 	
 	function rewriteID()
@@ -296,29 +342,12 @@
 
 		$('.fasal_label').each(function() {
 			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
+			
+			$('#fasal_index_'+indexFasalR).html('Fasal'+' '+indexFasalR);
 			indexFasalR = parseInt(indexFasalR+1);
 		});
 		/* End re-write <FASAL LABEL NO/ID> */
-
-
-		
-
-
 	}
-
-	function reWriteFasalNumber()
-	{
-		//Re-write Id 
-		var index = 1;
-		$('.checkbox').each(function() {
-			var tr_id = this.id;
-			var tr_value =  $('#'+tr_id).attr('id');
-			$('#'+tr_value).attr('id','xx_'+index);
-
-			index = parseInt(index+1);
-		});
-	}
-		
 
 	</script>
 	</body>
