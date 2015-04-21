@@ -110,7 +110,7 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
-	$(document).ready(function()
+	$(function()
 	{
 		$.ajax
 		(
@@ -127,16 +127,18 @@
 						console.log($(this).text());
 						var id = $(this).find("id");
 						var pilihan = $(this).find("pilihan");
+						
 						$('#sel_pilihan').append('<option value="'+$(id).text()+'">'+$(pilihan).text()+'</option>');
 						
-						if(id.text() == 2)
+						if(id.text() == '2')
 						{
 							$('#pertubuhan_carian :input').prop('disabled', true);
 							$('#sel_nama_pertubuhan :input').prop('disabled', true);
 						}
 						else
 						{
-							
+							$('#pertubuhan_carian :input').prop('disabled', false);
+							$('#sel_nama_pertubuhan :input').prop('disabled', false);
 						}
 					});
 				},
