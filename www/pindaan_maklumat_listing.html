@@ -45,12 +45,19 @@
 		<!-- end of header-title-->
 	
 		<div id="content">	
+			<!-- <a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			<div class="box_icon">
+				<h2 class="li1">KELAB SELSA MALAYSIA</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> J09732</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a> 
+			
 			<a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
-			<div id="box_icon">
-				<h2 class="li1" id="nama_pertubuhan">KELAB SELSA MALAYSIA</h2>
-				<h2 class="li2" id="tarikh_permohonan">No Sijil/Daftar:<b> J09732</b></h2>
-				<h2 class="li2" id="status">Status: -</h2><h2></h2>
-			</div></a>
+			<div class="box_icon">
+				<h2 class="li1">PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> A14321</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a>  -->
 		</div>
 	</div>
 	
@@ -75,42 +82,71 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var kad_pengenalan = window.localStorage.getItem('LOGIN');
-	
-	//alert(kad_pengenalan);
-	
-	
-	</script>
-	
-	<!-- <script>
-	$(function() {
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');	
 
-		$.ajax({
-			type: "GET",
-			url: "http://eroy.me-tech.com.my/api/get_senarai_carian.php",
-			dataType: "xml",
-			success: function(xml){
-				var xmlDoc = $.parseXML(xml),
-				$xml = $(xmlDoc);
-				$(xml).find("lk_pertubuhan_info").each(function(){
-					console.log($(this).text());
-					var id = $(this).find("id");
-					var nama_pertubuhan = $(this).find("nama_pertubuhan");
-					var tarikh_mohon = $(this).find("tarikh_mohon");
-					var status = $(this).find("status");
-					$('#nama_pertubuhan').append($(nama_pertubuhan).text());
-					$('#tarikh_permohonan').append($(tarikh_mohon).text());
-					$('#status').append($(status).text());
-				});
-			},
-			error: function() {
-				console.log("An error occurred while processing XML file.");
+	$(function() 
+	{
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_listing.php",
+				dataType: "xml",
+				data : 
+				{
+					kad_pengenalan : kad_pengenalan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					
+					if($(xml).find("status").text() == "ok")
+					{
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							var no_sijil = $(this).find("no_sijil");
+							var jenis_pertubuhan = $(this).find('jenis_pertubuhan');
+							//var status = $(this).find("status");
+							
+							$('body').waitMe('hide');
+							$('#content').show();
+
+							$("#content").append("<div class='box_icon' onclick='jenisPertubuhan(\""+jenis_pertubuhan.text()+"\")'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");
+
+						});
+					}
+					else if($(xml).find("status").text() == "error")
+					{
+						$('body').waitMe('hide');
+					}
+					else{}
+				}
 			}
-		});
-
+		);
 	});
-	</script> -->
 	
-	
+	function jenisPertubuhan(jenis_pertubuhan)
+	{
+		if(jenis_pertubuhan == 'Tunggal' || jenis_pertubuhan == 'Gabungan' || jenis_pertubuhan == 'Majlis')
+		{
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+			window.location.href = "pindaan_maklumat_pilihan.html";
+		}
+		else if(jenis_pertubuhan == 'Bercawangan')
+		{
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
+			window.location.href = "pindaan_cawangan_alamat.html";
+		}
+	}	
+	</script>	
 	</body>
 </html>

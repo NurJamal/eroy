@@ -363,9 +363,7 @@ select._sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
@@ -377,9 +375,8 @@ select.sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;
+	height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
