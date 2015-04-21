@@ -117,7 +117,7 @@
 		if(status == "kuiri")
 		{
 			var insertData = "kuiriUpdate";
-			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
 			formLength = document.pendaftaran.elements.length;
 
 			for (var i = 0; i < formLength; i++) {
@@ -135,12 +135,13 @@
 		}else
 		{
 			var insertData = "true";
+			var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		}
 		
 		$("#btn_submit").click(function(e){
+			redisplayHeader();
 	    	var empty = false;
 			e.preventDefault();
-			var kad_pengenalan = window.localStorage.getItem('LOGIN');
 
 			if($('input[type=checkbox]:checked').length == 0) 
 			{
@@ -161,7 +162,7 @@
 			}else if(empty == false)
 			{
 				$.ajax({
-					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_5.php",
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/temp_pendaftaran_5.php",
 					type:'POST',
 					data: {
 						kad_pengenalan : kad_pengenalan,
