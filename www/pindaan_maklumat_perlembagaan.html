@@ -213,17 +213,29 @@
 	{	
 		var selected = localStorage.getItem('selected_id_perlembagaan');
 		var levelID = $('#'+(selected)).children().attr('id');
+		var selectedFasalTxtShow;
 		
-		//get current fasal & plus one
-		var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
-		selectedFasalTxtShow = (parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
-	
-		$('.inform').remove();
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
-		$("div").qtip('hide');				
+		var levelIDShow = levelID.replace('level_','');
 		
 		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
-		localStorage['level_id'] = levelID.replace('level_','');
+		localStorage['level_id'] = levelIDShow;
+		
+		//get current fasal & plus one
+		if(levelIDShow < 2){
+			var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
+			selectedFasalTxtShow = 'Fasal'+(parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
+		}
+		else
+		{
+			var selectedFasalTxt = $('#'+(selected)+' .sub_fasal_label').html();;
+			selectedFasalTxtShow = selectedFasalTxt;
+		}
+		
+		$('.inform').remove();
+		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='"+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>");
+		$("div").qtip('hide');				
+		
+	
 
 	
 		$('.fasal_label').each(function() {
@@ -263,15 +275,24 @@
 	function editFasal()
 	{				
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		//var selectedTextID = $('#'+(selected)).children().attr('id');
-		//alert(selectedTextID);
 		var IDselected = selected.replace('tr_', '');
+		var levelID = $('#'+(selected)).children().attr('id');
+		var levelIDShow = levelID.replace('level_','');
+		
+		//get current fasal 
+		if(levelIDShow < 2){
+			var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
+			selectedFasalTxtShow = selectedFasalTxt;
+		}
+		else
+		{
+			var selectedFasalTxt = $('#'+(selected)+' .sub_fasal_label').html();;
+			selectedFasalTxtShow = selectedFasalTxt;
+		}
 		
 		$('.inform').remove();
 		
-		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', '')))+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>");
-
-		///$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' //id='//no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))//)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' //id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input><///td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr><///table></div>").insertAfter('#'+selected);
+		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='"+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>");
 		$("div").qtip('hide');
 		
 		/*FASAL LABEL INDEX*/

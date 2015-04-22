@@ -16,13 +16,7 @@
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
 		<div id="loadingLayer"></div>
-		<script>
-			function handleOpenURL(url) {
-		 		setTimeout(function() {
-				alert('TEST');
-				 }, 4000);
-			}
-		</script>
+		
 	</head>
 	<body onload="onDeviceReady()">
 	
@@ -89,6 +83,10 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
+	
+	
+
+	
 	
 	var devicePlatform = cordova.platformId;
 	localStorage['DEVICE_PLATFORM'] = devicePlatform;

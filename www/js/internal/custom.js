@@ -1,12 +1,18 @@
+/*
+EROY GLOBAL FUNCTION
+PLEASE PUT COMMENT IF NECESSARY
+TQ
+*/
 
-	//var ajaxTimeout = 1000 * 10;
 
-	/*On Ready Event*/
-	/*Click To Top*/
-	//$( document ).ready(function() {
 
-	
-	
+		/*Payment Get URL From Native*/
+		function handleOpenURL(url) {
+			setTimeout(function() {
+				//localStorage['PAYMENT_REDIRECT_URL'] = url;
+				paymentRedirect(url);
+			 }, 3000);
+		}
 	
 		$("#scrollTop").click(function() {
 		  $("html, body").animate({ scrollTop: 0 }, "100");

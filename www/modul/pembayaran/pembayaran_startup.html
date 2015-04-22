@@ -73,93 +73,126 @@
 	
 	<script>
 	initiatePayment();
-		function initiatePayment(){
-			$('body').waitMe({
-				effect: "orbit",
-				text: 'Menghubungi gerbang \n pembayaran atas talian...',
-				bg: 'rgba(0,0,0,0.2)',
-				color:'#000',
-				sizeW:'',
-				sizeH:'',
-				source: 'img.svg'
+	function initiatePayment(){
+		$('body').waitMe({
+			effect: "orbit",
+			text: 'Menghubungi gerbang \n pembayaran atas talian...',
+			bg: 'rgba(0,0,0,0.2)',
+			color:'#000',
+			sizeW:'',
+			sizeH:'',
+			source: 'img.svg'
+		});
+	}
+		
+	setTimeout(function(){ paymentPost(); }, 5000);
+	
+	function paymentPost()
+	{
+		var paymentAmount = localStorage.getItem('PAYMENT_AMOUNT');
+		var paymentDesc	= localStorage.getItem('PAYMENT_DESC');
+		var paymentItemName	= localStorage.getItem('PAYMENT_ITEMNAME');
+		var paymentKey = localStorage.getItem('PAYMENT_KEY');
+		var paymentChannel = localStorage.getItem('PAYMENT_CHANNEL');
+		var redirect_url = localStorage.getItem('REDIRECT_URL');
+		var paymentItemCode = localStorage.getItem("PAYMENT_REF_CODE");
+
+		var kad_pengenalan = localStorage.getItem('LOGIN');
+		
+		var time = new Date();
+		var outStr = time.getSeconds();
+		var encryptKP = $.md5($.trim(kad_pengenalan+""+outStr));
+		
+		var key = 'initialApp';
+		$.ajax({
+				url:"http://eroy.me-tech.com.my/api/payment/payment_send_out.php",
+				type:'POST',
+				data: {
+					key : key,
+					encryptKP : encryptKP,
+					paymentAmount : paymentAmount,
+					paymentDesc : paymentDesc,
+					paymentItemName : paymentItemName,
+					paymentKey : paymentKey,
+					paymentChannel : paymentChannel,
+					kad_pengenalan : kad_pengenalan,
+					redirect_url : redirect_url,
+					paymentItemCode : paymentItemCode,
+					},
+				beforeSend: function() {
+						run_waitMe();
+					},
+				success:function(data){
+					var json = $.xml2json(data);
+					console.log(data);
+					if (json.status == 'INSERT_SUCCESS') {
+						//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+						if(localStorage.getItem('DEVICE_PLATFORM') == 'android')
+						{
+							navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+						}
+						else if(localStorage.getItem('DEVICE_PLATFORM')  == 'ios')
+						{
+							window.open('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', '_system');
+						}
+						
+						//get data from url.(success or failed to do the redirect)
+						//window.location.replace('../../'+redirect_url);
+						
+					}
+					else{
+						$.alert
+						(
+							{
+								title: 'Status',
+								content: 'Pembayaran Tergendala. Sila cuba sebentar lagi',
+								confirm: function(){}
+							}
+						);
+					}
+					$('body').waitMe('hide');
+					}
 			});
 		}
+	
+	/*DO REDIRECT AFTER PAYMENT SUCCESS*/
+	function paymentRedirect(url)
+	{
+		var redirect_url_after_payment = localStorage.getItem('REDIRECT_URL');
+		var arr = url.split('://');
+		var status =  $.trim(arr[1]);
 		
-		setTimeout(function(){ paymentPost(); }, 5000);
-		
-		function paymentPost()
-		{
-			var paymentAmount = localStorage.getItem('PAYMENT_AMOUNT');
-			var paymentDesc	= localStorage.getItem('PAYMENT_DESC');
-			var paymentItemName	= localStorage.getItem('PAYMENT_ITEMNAME');
-			var paymentKey = localStorage.getItem('PAYMENT_KEY');
-			var paymentChannel = localStorage.getItem('PAYMENT_CHANNEL');
-			var redirect_url = localStorage.getItem('REDIRECT_URL');
-			var paymentItemCode = localStorage.getItem("PAYMENT_REF_CODE");
-
-			var kad_pengenalan = localStorage.getItem('LOGIN');
+		if(status == '1'){
 			
-			var time = new Date();
-			var outStr = time.getSeconds();
-			var encryptKP = $.md5($.trim(kad_pengenalan+""+outStr));
-			
-			var key = 'initialApp';
-			$.ajax({
-					url:"http://eroy.me-tech.com.my/api/payment/payment_send_out.php",
-					type:'POST',
-					data: {
-						key : key,
-						encryptKP : encryptKP,
-						paymentAmount : paymentAmount,
-						paymentDesc : paymentDesc,
-						paymentItemName : paymentItemName,
-						paymentKey : paymentKey,
-						paymentChannel : paymentChannel,
-						kad_pengenalan : kad_pengenalan,
-						redirect_url : redirect_url,
-						paymentItemCode : paymentItemCode,
-
-					},
-					beforeSend: function() {
-							run_waitMe();
-						},
-					success:function(data){
-						var json = $.xml2json(data);
-						console.log(data);
-						if (json.status == 'INSERT_SUCCESS') {
-							//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
-							//alert(localStorage.getItem('DEVICE_PLATFORM'));
-							if(localStorage.getItem('DEVICE_PLATFORM') == 'android')
-							{
-								navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
-							}
-							else if(localStorage.getItem('DEVICE_PLATFORM')  == 'ios')
-							{
-								window.open('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', '_system');
-							}
-							
-							window.location.replace('../../'+redirect_url);
-							
+			$.alert
+				(
+					{
+						title: 'Status',
+						content: 'Pembayaran Berjaya.',
+						confirm: function(){
+							window.location.replace('../../'+redirect_url_after_payment);
 						}
-						else{
-
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: 'Pembayaran Tergendala. Sila cuba sebentar lagi',
-									confirm: function(){}
-								}
-							);
-						}
-						$('body').waitMe('hide');
-
 					}
-				});
+				);
+				//window.location.replace('../../'+redirect_url_after_payment);
 		}
-
+		else
+		{
+			$.alert
+				(
+					{
+						title: 'Status',
+						content: 'Pembayaran Tidak Berjaya.(will have a proper message later)',
+						confirm: function(){
+							window.location.replace('../../index.html');
+						}
+					}
+				);	
+				//window.location.replace('../../index.html');
+		}
+	}
 	</script> 
-	
-	
+
+
 	</body>
 </html>
