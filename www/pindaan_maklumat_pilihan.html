@@ -99,6 +99,16 @@
 	<script>
 	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	var id_pertubuhan = window.localStorage.getItem('ID_PERTUBUHAN');
+	var status = window.localStorage.getItem('STATUS');
+
+	if(status == 'kuiri')
+	{
+
+	}else
+	{
+
+	}
 	
 	function jenisPindaanArray()
 	{
@@ -120,7 +130,7 @@
 				dataType: "xml",
 				data : 
 				{
-					kad_pengenalan : kad_pengenalan
+					kod_pertubuhan : id_pertubuhan
 				},
 				beforeSend: function() 
 				{
