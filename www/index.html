@@ -16,9 +16,15 @@
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
 		<div id="loadingLayer"></div>
-		
+		<script>
+			function handleOpenURL(url) {
+		 		setTimeout(function() {
+				alert('TEST');
+				 }, 4000);
+			}
+		</script>
 	</head>
-	<body>
+	<body onload="onDeviceReady()">
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
@@ -56,7 +62,8 @@
 			</div>	
 		</div>
 	</div>
-
+	
+	<a href="pindaan_maklumat_pembayaran.html">XXX</a>
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -82,6 +89,17 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
+	
+	var devicePlatform = cordova.platformId;
+	localStorage['DEVICE_PLATFORM'] = devicePlatform;
+	
+
+	function onDeviceReady()
+	{
+		alert(devicePlatform);
+	}
+	
+	
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());

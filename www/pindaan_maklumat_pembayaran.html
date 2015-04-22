@@ -70,6 +70,7 @@
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
+		<INPUT type="hidden" name="Amount" id="amount"></br>
 		<INPUT type="hidden" name="PaymentDesc" id="paymentDesc" value="Yuran Pindaan Maklumat ">
 		<INPUT type="hidden" name="PaymentItemName" id="paymentItemName" value="Pindaan Maklumat"/>
 		<INPUT type="hidden" name="Key" id="key" value="E-ROY"/>
@@ -166,7 +167,7 @@
 				if($('#jenis_bayaran').val() == 2)
 				{
 					
-					var amount = $.trim($('#jumlah_perlu_dibayar').val());
+					var amount = $.trim($('#amount').val());
 					var paymentDesc = $.trim($('#paymentDesc').val());
 					var paymentItemName = $.trim($('#paymentItemName').val());
 					var key = $.trim($('#key').val());
@@ -180,8 +181,8 @@
 					localStorage['PAYMENT_CHANNEL'] = channel;
 					localStorage['REDIRECT_URL'] = redirectUrl;
 
-					window.location.href = "modul/pembayaran/pembayaran_startup.html";
-
+					window.location.replace("modul/pembayaran/pembayaran_startup.html");
+					
 					return false;
 				}
 				else

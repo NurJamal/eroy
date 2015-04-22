@@ -207,14 +207,16 @@
 	function addFasal()
 	{	
 		var selected = localStorage.getItem('selected_id_perlembagaan');
-		
-		
 		var levelID = $('#'+(selected)).children().attr('id');
 		
+		//get current fasal & plus one
+		var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
+		selectedFasalTxtShow = (parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
+	
 		$('.inform').remove();
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
+		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
 		$("div").qtip('hide');				
-
+		
 		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
 		localStorage['level_id'] = levelID.replace('level_','');
 

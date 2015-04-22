@@ -5,6 +5,9 @@
 	/*Click To Top*/
 	//$( document ).ready(function() {
 
+	
+	
+	
 		$("#scrollTop").click(function() {
 		  $("html, body").animate({ scrollTop: 0 }, "100");
 		  return false;
@@ -348,6 +351,7 @@
 
 								$('#'+jumlah_bayaran_id).val('RM '+jumlah_bayaran.text());
 								$('#'+id_bayaran).val(id.text());
+								$('#amount').val(jumlah_bayaran.text());
 
 								
 								

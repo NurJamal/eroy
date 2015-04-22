@@ -128,6 +128,7 @@
 						console.log(data);
 						if (json.status == 'INSERT_SUCCESS') {
 							//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+							//alert(localStorage.getItem('DEVICE_PLATFORM'));
 							if(localStorage.getItem('DEVICE_PLATFORM') == 'android')
 							{
 								navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
