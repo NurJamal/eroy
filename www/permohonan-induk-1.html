@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -21,6 +22,7 @@
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
+	<div id="transparent_layer" ></div>
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -62,52 +64,42 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-		<div class="_form">
-		
-			<div class="selection" id="peringkat_selection">
+		<div class="_form" id="form_content">
+			<form action="" name="pendaftaran" id="pendaftaran">
+				<div class="selection" id="peringkat_selection">
 					<h5 id="_orange_title">Peringkat</h5>
-					<form action="">
-						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
+					<select id="sel_peringkat" name="sel_peringkat" class="_sel">
 						<option value="">Pilih Peringkat</option>
 						<option value="1">Kebangsaan</option>
-						</select>
-						<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_bercawangan">
-						<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
-					</form>		
+					</select>
+					<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_bercawangan">
+					<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">	
 				</div>
-				
-			<div class="selection" id="pertubuhan_selection">
+					
+				<div class="selection" id="pertubuhan_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
-					<form action="">
-						<select id="sel_pertubuhan" name="sel_pertubuhan" class="_sel">
+					<select id="sel_pertubuhan" name="sel_pertubuhan" class="_sel">
 						<option value="">Pilih Kategori Pertubuhan</option>
 						<option value="1">Persatuan</option>
 						<option value="2">Gerakan</option>
 						<option value="3">Angkatan</option>
 						<option value="4">Gabungan</option>
 						<option value="5">Junior</option>
-						</select>
-					</form>		
-			</div>
-				
-						
-			<form id="" action="" method="POST">
+					</select>
+				</div>
+
 				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="nama_per" id="nama_per" placeholder="Nama"><br/>
-			</form>
-									
-			<form id="" action="" method="POST">
 				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
+								
+				<div class="display">
+					<textarea id="paparan_nama_pertubuhan" name="paparan_nama_pertubuhan"  style="text-transform: uppercase;resize:none" disabled="disabled">Nama Penuh Pertubuhan</textarea>
+				</div>
 				
-							
-			<div class="display">
-				<textarea id="paparan_nama_pertubuhan" name="paparan_nama_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
-			</div>
-			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
-																			
+																				
 				<div class="default_button_holder">
-					<a href="permohonan-induk-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+					<a href="permohonan-induk-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit" name="btn_submit"></a>
 				</div>
 			</form>
 		</div>
@@ -133,50 +125,102 @@
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
 
+	<script type="text/javascript" src="js/jquery.qtip.js"></script>
+
 	<script>
 
 		window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", "KELAB APA-APA SAHAJA");
 
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		$(function() 
+		var status = window.localStorage.getItem('STATUS');
+
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+			$(function() 
 			{
 				$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
-						type:'POST',
-						data: {
-							kad_pengenalan : kad_pengenalan,
-							insertData : "select"
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kod_pertubuhan,
+						insertData : "kuiri"
 
+					},
+					beforeSend: function() {
+							run_waitMe();
 						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'SELECT') {
-								$("#id_pertubuhan").val(json.details.id);
-								$("#sel_peringkat").val(json.details.id_peringkat_pertubuhan);
-								$("#sel_pertubuhan").val(json.details.id_kategori_pertubuhan);
-								$("#nama_pertubuhan").val(json.details.nama_pertubuhan);
-								$("#paparan_nama_pertubuhan").val(json.details.nama_penuh_pertubuhan);
-								$("#nama_per").val(json.details.nama);
-								$("#nama_ringkasan").val(json.details.nama_ringkasan);
-								$("#emel_pertubuhan").val(json.details.emel_pertubuhan);
+					success:function(data)
+					{
+						var json = $.xml2json(data);
+						if (json.status == 'SELECT') {
 
-								$('body').waitMe('hide');
+							for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].type != 'button')
+								{
+									document.pendaftaran.elements[i].setAttribute("disabled", "disabled"); 	
+								}
+							};
+							$("#id_pertubuhan").val(json.details.kod_nama_pertubuhan);
+							$("#sel_peringkat").val(json.details.id_peringkat_pertubuhan);
+							$("#sel_pertubuhan").val(json.details.id_kategori_pertubuhan);
+							$("#nama_pertubuhan").val(json.details.nama_pertubuhan);
+							$("#paparan_nama_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+							$("#nama_per").val(json.details.nama);
+							$("#nama_ringkasan").val(json.details.nama_ringkasan);
+							$("#emel_pertubuhan").val(json.details.emel_pertubuhan);
+							checkKuiriPendaftaran(kod_pertubuhan,'1');
+							//$('body').waitMe('hide');
 
-							}
-							else if (json.status == 'VIEW') {
-							//Do nothing. Just display
-							
+						}
+					}
+				});
+			});
+		}else
+		{
+			var insertData = "TRUE";
+			$(function() 
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kad_pengenalan,
+						insertData : "select"
+
+					},
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data)
+					{
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'SELECT') {
+							$("#id_pertubuhan").val(json.details.id);
+							$("#sel_peringkat").val(json.details.id_peringkat_pertubuhan);
+							$("#sel_pertubuhan").val(json.details.id_kategori_pertubuhan);
+							$("#nama_pertubuhan").val(json.details.nama_pertubuhan);
+							$("#paparan_nama_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+							$("#nama_per").val(json.details.nama);
+							$("#nama_ringkasan").val(json.details.nama_ringkasan);
+							$("#emel_pertubuhan").val(json.details.emel_pertubuhan);
+
+							$('body').waitMe('hide');
+
+						}else if (json.status == 'VIEW') 
+						{
+							//Do nothing. Just display	
 						}
 						
 						$('body').waitMe('hide');
-						}
-					});
-		});
+					}
+				});
+			});
+		}
 
 		$("#sel_pertubuhan, #sel_peringkat").change(function(){
 			var peringkat = $("#sel_peringkat").val().toUpperCase();
@@ -427,13 +471,13 @@
 		});
 
 		$("#btn_submit").click(function(e){
+			redisplayHeader();
 			var empty = false;
 			e.preventDefault();
 			//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
 			$('#sel_peringkat,#sel_pertubuhan,#nama_pertubuhan,#nama_ringkasan,#paparan_nama_pertubuhan,#emel_pertubuhan').css({"border":"","box-shadow":""});
 
-			var insertData = "TRUE";
 			var id_pertubuhan = $("#id_pertubuhan").val();
 			var peringkat = $("#sel_peringkat").val();
 			var pertubuhan = $("#sel_pertubuhan").val();
@@ -492,60 +536,67 @@
 				}
 				else
 				{
-					$.ajax({
-					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
-					type:'POST',
-					data: {
-						peringkat : peringkat,
-						pertubuhan: pertubuhan,
-						namaPertubuhan : namaPertubuhan,
-						paparan_nama_pertubuhan : paparan_nama_pertubuhan,
-						namaPer : namaPer,
-						namaRingkasan : namaRingkasan,
-						emelPertubuhan : emelPertubuhan,
-						jenisPertubuhan : jenisPertubuhan,
-						kad_pengenalan : kad_pengenalan,
-						insertData : insertData,
-						id_pertubuhan : id_pertubuhan,
-					},
-					beforeSend: function() {
-							run_waitMe();
-						},
-					success:function(data){
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') {
-							
-							window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", paparan_nama_pertubuhan);
+					if(id_pertubuhan == 'empty')
+					{
+						window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", paparan_nama_pertubuhan);
+						window.location.href = "permohonan-induk-2.html";
+					}else
+					{
+						$.ajax({
+							url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+							type:'POST',
+							data: {
+								peringkat : peringkat,
+								pertubuhan: pertubuhan,
+								namaPertubuhan : namaPertubuhan,
+								paparan_nama_pertubuhan : paparan_nama_pertubuhan,
+								namaPer : namaPer,
+								namaRingkasan : namaRingkasan,
+								emelPertubuhan : emelPertubuhan,
+								jenisPertubuhan : jenisPertubuhan,
+								kad_pengenalan : kad_pengenalan,
+								insertData : insertData,
+								id_pertubuhan : id_pertubuhan,
+							},
+							beforeSend: function() {
+									run_waitMe();
+								},
+							success:function(data){
+								console.log(data);
+								var json = $.xml2json(data);
+								console.log(json);
+								if (json.status == 'ok') {
+									
+									window.localStorage.setItem("NAMA_PENDAFTARAN_BERCAWANGAN", paparan_nama_pertubuhan);
 
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-										window.location.href = "permohonan-induk-2.html";
-									}
+									$.alert
+									(
+										{
+											title: 'Status',
+											content: json.message,
+											confirm: function(){
+												window.location.href = "permohonan-induk-2.html";
+											}
+										}
+									);
+								
 								}
-							);
-						
-						}
-						else if (json.status == 'error') {
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-									}
+								else if (json.status == 'error') {
+									$.alert
+									(
+										{
+											title: 'Status',
+											content: json.message,
+											confirm: function(){
+											}
+										}
+									);
 								}
-							);
-						}
-						else{}
-						$('body').waitMe('hide');
+								else{}
+								$('body').waitMe('hide');
+							}
+						});
 					}
-					});
 				}
 			}
 		});

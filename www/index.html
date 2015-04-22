@@ -82,6 +82,28 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
+<<<<<<< HEAD
+=======
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() 
+	{
+      	var devicePlatform = cordova.platformId;
+		alert(devicePlatform);
+		StatusBar.overlaysWebView(false);	}
+	
+
+	function test() 
+	{
+      	alert("TEST");
+		//window.open('http://www.google.com', '_system', 'location=yes');
+		navigator.app.loadUrl('http://www.google.com', { openExternal:true } );
+		return false;
+
+	}
+
+
+	
+>>>>>>> feature/pindaan_maklumat
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());

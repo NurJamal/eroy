@@ -40,13 +40,13 @@
 	
 	<div id="content">
 		<!-- list -->
-		<a href="pendaftaran-tunggal-1.html" style="text-decoration:none;">
+		<a href="#" onclick="pushToTunggal()" style="text-decoration:none;">
 		<div id="box">
 			<h2 class="title">Tunggal</h2>
 		</div></a>
 		
 
-		<a href="permohonan-induk-1.html" style="text-decoration:none;">
+		<a href="#" onclick="pushToCawangan()" style="text-decoration:none;">
 
 		<div id="box">
 			<h2 class="title">Bercawangan</h2>
@@ -73,5 +73,19 @@
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<script>
+		function pushToCawangan()
+		{
+			window.localStorage.setItem("STATUS", 'add');
+			window.location.href = "permohonan-induk-1.html";
+		}
+
+		function pushToTunggal()
+		{
+			window.localStorage.setItem("STATUS", 'add');
+			window.location.href = "pendaftaran-tunggal-1.html";
+		}
+	</script>
 	</body>
 </html>
