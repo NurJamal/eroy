@@ -43,31 +43,18 @@
 		<!-- end of header-title-->
 
 		<div id="content">	
-<<<<<<< HEAD
-			<div id="pindaan_nama">
-=======
-			
->>>>>>> feature/pindaan_maklumat
 				<table>
 					<tr>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Pindaan hanya boleh dibuat dalam tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</h5></td>
 					</tr>
 				</table>
-<<<<<<< HEAD
-			
-				<div class="inform">
-					<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
-				</div>
-
-=======
 
 				<div class="inform">
 					<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
 				</div>
 				
 			<div id="pindaan_nama">
->>>>>>> feature/pindaan_maklumat
 				<table>
 					<tr>
 						<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
@@ -79,17 +66,10 @@
 					<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
 					
 					<h2 class="_orange_text">Nama Pertubuhan Belia</h2>
-<<<<<<< HEAD
-					<h1 class="_dark_text">PERSATUAN SENI SILAT DAERAH KERIAN</h1>
-					
-					<h2 class="_orange_text">No Daftar/Sijil</h2>
-					<h1 class="_dark_text">T45678</h1>
-=======
 					<h1 class="_dark_text" id="d_npertubuhan"></h1>
 					
 					<h2 class="_orange_text">No Daftar/Sijil</h2>
 					<h1 class="_dark_text" id="d_no_sijil"></h1>
->>>>>>> feature/pindaan_maklumat
 					
 					<input type="text" name="p_npertubuhan" id="p_npertubuhan" placeholder="Nama Pertubuhan"><br/>
 					<input type="text" name="p_nringkasan" id="p_nringkasan" placeholder="Nama Ringkasan"><br/>
@@ -100,36 +80,12 @@
 			<div id="pindaan_alamat">	
 				<div class="inform">	
 					<h2 class="_orange_text">Alamat Tempat Urusan</h2>
-<<<<<<< HEAD
-					<h1 class="_dark_text">C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</h1>
-=======
 					<h1 class="_dark_text" id="d_alamat"></h1>
->>>>>>> feature/pindaan_maklumat
 					
 					<h2 class="_orange_text">Pindaan Alamat Tempat Urusan</h2>
 					<input type="text" name="p_alamat1" id="p_alamat1" placeholder="Alamat 1"><br/>
 					<input type="text" name="p_alamat2" id="p_alamat2" placeholder="Alamat 2"><br/>
 					<input type="text" name="p_alamat3" id="p_alamat3" placeholder="Alamat 3"><br/>
-<<<<<<< HEAD
-				</div>
-			
-				<div class="selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="sel_negeri" name="sel_negeri" class="sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-				</div>
-			
-				<div class="selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="sel_daerah" name="sel_daerah" class="sel">
-						<option value="none"></option>
-						</select>
-					</form>		
-=======
 					<input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
 				</div>
 			
@@ -141,7 +97,6 @@
 				<div class="selection_no_icon" style="margin-top:13px">
 					<h5 id="_orange_title">Daerah</h5>
 					<span id="d_pertubuhan_daerah"></span>
->>>>>>> feature/pindaan_maklumat
 				</div>
 			</div>
 			
@@ -159,21 +114,13 @@
 			
 			<div id="btn1">
 				<div class="default_button_holder">
-<<<<<<< HEAD
-					<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-=======
 					<a href="pindaan_maklumat_pembayaran.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
->>>>>>> feature/pindaan_maklumat
 				</div>
 			</div>
 			
 			<div id="btn2">
 				<div class="default_button_holder">
-<<<<<<< HEAD
-					<input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit">
-=======
 					<a href="pindaan_maklumat_perlembagaan.html"><input class="default_button" type="button" value="PINDAAN PERLEMBAGAAN" id="btn_submit"></a>
->>>>>>> feature/pindaan_maklumat
 				</div>
 			</div>
 		</div>
@@ -200,72 +147,42 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-<<<<<<< HEAD
-	//$('#content').hide();
-=======
 	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	var jenis_id = JSON.parse(localStorage['ID_JENIS_PINDAAN']);
 	
->>>>>>> feature/pindaan_maklumat
 	$('#pindaan_nama').hide();
 	$('#pindaan_alamat').hide();
 	$('#pindaan_logo').hide();
 	
-<<<<<<< HEAD
-	var jenis_id = JSON.parse(localStorage['ID_JENIS_PINDAAN']);
-	
-=======
 	$('#pindaan_nama :input').prop('disabled', true);
 	$('#pindaan_alamat :input').prop('disabled', true);
 	$('#pindaan_logo :input').prop('disabled', true);
 	$('#btn1 :input').prop('disabled', true);
 	$('#btn2 :input').prop('disabled', true);
 
->>>>>>> feature/pindaan_maklumat
 	for (i = 0; i < jenis_id.length ; i++)
 	{
 		var temp_id = jenis_id[i];
 
-<<<<<<< HEAD
-		if(temp_id =="0")
-		{	
-			$('#pindaan_nama').show();
-			//$('#content').show();
-=======
 		if(temp_id == "0")
 		{	
 			$('#pindaan_nama').show();
 			$('#btn2').hide();
->>>>>>> feature/pindaan_maklumat
 		}
 		else if(temp_id == "1")
 		{
 			$('#pindaan_alamat').show();
-<<<<<<< HEAD
-			//$('#content').show();
-		}
-		else if(temp_id == "2")
-		{
-			window.location.href = "pindaan_maklumat_perlembagaan.html";
-=======
 			$('#btn2').hide();
 		}
 		else if(temp_id == "2")
 		{
 			$('#btn1').hide();
 			$('#btn2').show();
->>>>>>> feature/pindaan_maklumat
 		}
 		else if(temp_id == "3")
 		{
 			$('#pindaan_logo').show();
-<<<<<<< HEAD
-			//$('#content').show();
-		}
-		else{}
-	}
-=======
 			if(jenis_id[i-1] != "2")
 			{
 				$('#btn2').hide();
@@ -357,7 +274,6 @@
 			}
 		);
 	});
->>>>>>> feature/pindaan_maklumat
 	</script>
 	</body>
 </html>
