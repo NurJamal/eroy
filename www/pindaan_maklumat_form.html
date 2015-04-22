@@ -158,112 +158,15 @@
 	var id_pertubuhan = window.localStorage.getItem('ID_PERTUBUHAN');
 	var status = window.localStorage.getItem('STATUS');
 
-	if(status == 'kuiri')
-	{
-		var formLength = document.pendaftaran.elements.length;
-		$(function() 
-		{
-			$.ajax
-			(
-				{
-					type: "POST",
-					url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_induk.php",
-					dataType: "xml",
-					data : 
-					{
-						kod_pertubuhan : id_pertubuhan
-					},
-					beforeSend: function() 
-					{
-						run_waitMe();
-					},
-					success: function(xml, data)
-					{
-						
-						var xmlDoc = $.parseXML(xml),
-						$xml = $(xmlDoc);
-						$(xml).find("details").each(function()
-						{			
-							for (var i = 0; i < formLength; i++) {
-								if(document.pendaftaran.elements[i].type != 'button')
-								{
-									document.pendaftaran.elements[i].setAttribute("disabled","disabled");
-								}
-							};			
-							var kod_id = $(this).find("kod_nama_pertubuhan");
-							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-							var no_sijil = $(this).find("no_sijil");
-							var alamat1 = $(this).find("alamat1");
-							var alamat2 = $(this).find("alamat2");
-							var alamat3 = $(this).find("alamat3");
-							var negeri = $(this).find("negeri");
-							var daerah = $(this).find("Keterangan");
-							
-							//$('body').waitMe('hide');
-							
-							$('#d_npertubuhan').html($(nama_penuh_pertubuhan).text());
-							$('#d_no_sijil').html($(no_sijil).text());
-							$('#d_no_sijil').html($(no_sijil).text());
-							$('#d_alamat').html($(alamat1).text()+', '+$(alamat2).text()+', '+$(alamat3).text());
-							$('#d_pertubuhan_negeri').html($(negeri).text());
-							$('#d_pertubuhan_daerah').html($(daerah).text());
-							checkKuiriPindaan(id_pertubuhan);
-						});
-					}
-				}
-			);
-		});
-	}else
-	{
-		$('#pindaan_nama').hide();
-		$('#pindaan_alamat').hide();
-		$('#pindaan_logo').hide();
-		
-		$('#pindaan_nama :input').prop('disabled', true);
-		$('#pindaan_alamat :input').prop('disabled', true);
-		$('#pindaan_logo :input').prop('disabled', true);
-		$('#btn1 :input').prop('disabled', true);
-		$('#btn2 :input').prop('disabled', true);
+	$('#pindaan_nama').hide();
+	$('#pindaan_alamat').hide();
+	$('#pindaan_logo').hide();
+	
+	$('#pindaan_nama :input').prop('disabled', true);
+	$('#pindaan_alamat :input').prop('disabled', true);
+	$('#pindaan_logo :input').prop('disabled', true);
 
-		$('#p_tmesyuarat').on('change', function()
-		{
-			var selectedDate = $.trim($("#p_tmesyuarat").val());
-			var today = new Date(); 
-			var targetDate= new Date();
-			
-			targetDate.setDate(today.getDate()+ 60);
-			targetDate.setHours(0);
-			targetDate.setMinutes(0);
-			targetDate.setSeconds(0);
-
-			if(Date.parse(selectedDate) <= Date.parse(targetDate))
-			{
-				$('#pindaan_nama :input').prop('disabled', false);
-				$('#pindaan_alamat :input').prop('disabled', false);
-				$('#pindaan_logo :input').prop('disabled', false);
-				$('#btn1 :input').prop('disabled', false);
-				$('#btn2 :input').prop('disabled', false);
-			}
-			else 
-			{
-				$('#pindaan_nama :input').prop('disabled', true);
-				$('#pindaan_alamat :input').prop('disabled', true);
-				$('#pindaan_logo :input').prop('disabled', true);
-				$('#btn1 :input').prop('disabled', true);
-				$('#btn2 :input').prop('disabled', true);
-				$.alert
-				(
-					{
-						title: 'Perhatian',
-						content: 'Tarikh Mesyuarat Mestilah Dalam Tempoh 60 Hari.',
-						confirm: function(){}
-					}
-				);
-				$('#p_tmesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			}
-		});
-
-		for (i = 0; i < jenis_id.length ; i++)
+	for (i = 0; i < jenis_id.length ; i++)
 	{
 		var temp_id = jenis_id[i];
 
@@ -293,6 +196,104 @@
 		else{}
 	}
 
+	if(status == 'kuiri')
+	{
+		var formLength = document.pendaftaran.elements.length;
+
+		$(function() 
+		{
+			$.ajax
+			(
+				{
+					type: "POST",
+					url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_induk.php",
+					dataType: "xml",
+					data : 
+					{
+						kod_pertubuhan : id_pertubuhan
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						$(xml).find("details").each(function()
+						{			
+							for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].type != 'button')
+								{
+									document.pendaftaran.elements[i].setAttribute("disabled","disabled");
+								}else
+								{
+									alert(document.pendaftaran.elements[i].type);
+								}
+							};			
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							var no_sijil = $(this).find("no_sijil");
+							var alamat1 = $(this).find("alamat1");
+							var alamat2 = $(this).find("alamat2");
+							var alamat3 = $(this).find("alamat3");
+							var negeri = $(this).find("negeri");
+							var daerah = $(this).find("Keterangan");
+							
+							//$('body').waitMe('hide');
+							
+							$('#d_npertubuhan').html($(nama_penuh_pertubuhan).text());
+							$('#d_no_sijil').html($(no_sijil).text());
+							$('#d_no_sijil').html($(no_sijil).text());
+							$('#d_alamat').html($(alamat1).text()+', '+$(alamat2).text()+', '+$(alamat3).text());
+							$('#d_pertubuhan_negeri').html($(negeri).text());
+							$('#d_pertubuhan_daerah').html($(daerah).text());
+							checkKuiriPindaan(id_pertubuhan);
+						});
+					}
+				}
+			);
+		});
+	}else
+	{
+		$('#p_tmesyuarat').on('change', function()
+	{
+		var selectedDate = $.trim($("#p_tmesyuarat").val());
+		var today = new Date(); 
+		var targetDate= new Date();
+		
+		targetDate.setDate(today.getDate()+ 60);
+		targetDate.setHours(0);
+		targetDate.setMinutes(0);
+		targetDate.setSeconds(0);
+
+		if(Date.parse(selectedDate) <= Date.parse(targetDate))
+		{
+			$('#pindaan_nama :input').prop('disabled', false);
+			$('#pindaan_alamat :input').prop('disabled', false);
+			$('#pindaan_logo :input').prop('disabled', false);
+			$('#btn1 :input').prop('disabled', false);
+			$('#btn2 :input').prop('disabled', false);
+		}
+		else 
+		{
+			$('#pindaan_nama :input').prop('disabled', true);
+			$('#pindaan_alamat :input').prop('disabled', true);
+			$('#pindaan_logo :input').prop('disabled', true);
+			$('#btn1 :input').prop('disabled', true);
+			$('#btn2 :input').prop('disabled', true);
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Tarikh Mesyuarat Mestilah Dalam Tempoh 60 Hari.',
+					confirm: function(){}
+				}
+			);
+			$('#p_tmesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+	});
 		$(function() 
 		{
 			$.ajax
@@ -339,8 +340,6 @@
 			);
 		});
 	}
-
-	
 
 	</script>
 	</body>
