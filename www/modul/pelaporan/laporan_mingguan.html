@@ -166,16 +166,11 @@
 		return dateTo; 
 	}
 	
-	
-	
-	
-	
-	
 	$("#btn_submit").click(function(e)
 	{
 		var dateFrom =  $.trim($("#tarikh_dari").val());
 		var dateTo =  $.trim($("#tarikh_hingga").val());
-		var jenisLaporan =  $.trim($("#jenis_laporan").val());
+		//var jenisLaporan =  $.trim($("#jenis_laporan").val());
 		var empty = false;
 		
 		e.preventDefault();
@@ -231,7 +226,7 @@
 					{				
 						dateFrom : dateFrom,
 						dateTo : dateTo,
-						jenisLaporan : jenisLaporan,
+						//jenisLaporan : jenisLaporan,
 						selectedState : selectedState
 					},
 					dataType:'xml',
@@ -253,7 +248,7 @@
 							console.log(json.status);
 					
 							//saving object to localStorage
-							window.localStorage['LAPORAN'] = JSON.stringify(json);
+							//window.localStorage['LAPORAN'] = JSON.stringify(json);
 							
 							window.localStorage['SELECTED_STATE'] = JSON.stringify(selectedState());
 							window.localStorage['TARIKH_DARI'] = JSON.stringify(selectedDateFrom());
