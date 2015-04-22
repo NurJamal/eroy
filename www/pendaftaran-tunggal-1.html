@@ -52,7 +52,7 @@
 	
 
 		
-	<!-- navbar -->
+		<!-- navbar -->
 		<div class="navbar">
 		
 			<div align="center">
@@ -62,65 +62,55 @@
 			</div>
 		
 		</div>
-	<!-- end of navbar -->
-	
+		<!-- end of navbar -->
 		
-	<!-- form -->
+			
+		<!-- form -->
 		<div class="_form">
-		
-			<div class="selection_no_icon" style="margin-top:-10px">
+			<form action="" name="pendaftaran" id="pendaftaran">
+				<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
 					<span id="jenis_pendaftaran_pertubuhan"></span>
 					<input type="hidden" value="1" name="jenis_pertubuhan" id="pertubuhan_tunggal">	
-			</div>
-				
-			<div class="selection" style="margin-top:14px" id="kategori_selection">
+				</div>
+					
+				<div class="selection" style="margin-top:14px" id="kategori_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
-					<form action="">
-						<select id="sel_kategori" name="sel_kategori" class="_sel">
-
+					<select id="sel_kategori" name="sel_kategori" class="_sel">
 						<option value="" selected >Pilih Kategori</option>
-
-						</select>
-					</form>		
-			</div>
-				
-			<div class="selection" style="margin-top:14px"  id="negeri_selection">
+					</select>
+				</div>
+					
+				<div class="selection" style="margin-top:14px"  id="negeri_selection">
 					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
-						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
+					<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
 						<option value="" selected>Pilih Negeri</option>
-						</select>
-					</form>		
-			</div>
-			
-			<div class="selection" style="margin-top:14px" id="daerah_selection">
+					</select>
+				</div>
+				
+				<div class="selection" style="margin-top:14px" id="daerah_selection">
 					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
-						<select id="sel_daerah" name="sel_daerah" class="_sel">
+					<select id="sel_daerah" name="sel_daerah" class="_sel">
 						<option value="" selected>Pilih Daerah</option>
-						</select>
-					</form>		
-			</div>
-		
-			<form id="" action="" method="POST">
+					</select>
+				</div>
+			
 				<input type="text" style="margin-top:5px" name="f_lokaliti" id="f_lokaliti" placeholder="Lokaliti"><br/>
 				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" placeholder="Nama Ringkasan"><br/>
-									
-			<div class="display">
-				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
-			</div>
-			
+										
+				<div class="display">
+					<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
+				</div>
+				
 				<input type="email" style="margin-top:5px" name="f_emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
 				<div class="default_button_holder">
-				<a href="pendaftaran-tunggal-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+					<a href="pendaftaran-tunggal-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
-			
 			</form>
 		</div>
 	</div>
-	</div>
+</div>
 	<!-- end of form -->
 	
 	<!-- js for slide menu -->
@@ -153,45 +143,94 @@
 		
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		$(function() 
+		var status = window.localStorage.getItem('STATUS');
+
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+			$(function() 
 			{
 				$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
-						type:'POST',
-						data: {
-							kad_pengenalan : kad_pengenalan,
-							insertData : "select"
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kad_pengenalan,
+						insertData : "select"
 
+					},
+					beforeSend: function() {
+							run_waitMe();
 						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							var json = $.xml2json(data);
+					success:function(data){
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'SELECT') {
 							console.log(json);
-							if (json.status == 'SELECT') {
-								console.log(json);
-								$("#f_lokaliti").val(json.details.lokaliti);
-								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
-								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
-								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
-								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
-								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
-								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
-								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
+							$("#f_lokaliti").val(json.details.lokaliti);
+							$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+							$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+							$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+							$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+							$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+							getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'),json.details.id_daerah);	
+							getCountry($('#sel_negeri').attr('id'),json.details.id_negeri);
 
-								$('body').waitMe('hide');
+							$('body').waitMe('hide');
 
-							}
-							else if (json.status == 'VIEW') {
-							//Do nothing. Just display
-							
 						}
+						else if (json.status == 'VIEW') {
+						//Do nothing. Just display
 						
-						$('body').waitMe('hide');
+					}
+					
+					$('body').waitMe('hide');
+					}
+				});
+			});
+		}else
+		{
+			$(function() 
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kad_pengenalan,
+						insertData : "select"
+
+					},
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'SELECT') {
+							console.log(json);
+							$("#f_lokaliti").val(json.details.lokaliti);
+							$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+							$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+							$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+							$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+							$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+							getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'),json.details.id_daerah);	
+							getCountry($('#sel_negeri').attr('id'),json.details.id_negeri);
+
+							$('body').waitMe('hide');
+
 						}
-					});
-		});
+						else if (json.status == 'VIEW') {
+						//Do nothing. Just display
+						
+					}
+					
+					$('body').waitMe('hide');
+					}
+				});
+			});
+		}
 		
 		function getDaerahFromSelectedCountry()  
 		{

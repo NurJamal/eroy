@@ -799,7 +799,229 @@ function highlightID(id)
 		return false;
 	}
 
+function checkKuiriPendaftaran(kod_pertubuhan,lvl)
+{
+	var kod_pertubuhan = kod_pertubuhan;
+	var level = lvl
+	formLength = document.pendaftaran.elements.length;
+	$(function() 
+	{
+		$.ajax({
+			url:"http://eroy.me-tech.com.my/api/kuiri/check_kuiri_pendaftaran.php",
+			type:'POST',
+			data: {
+				kod_pertubuhan : kod_pertubuhan,
+				level : level,
+			},
+			success:function(data)
+			{
+				var json = $.xml2json(data);
+				if (json.status == 'SELECT') {
+
+				 	console.log(Array.isArray(json.details));
+				 	if(Array.isArray(json.details))
+				 	{
+				 		for (var j = 0; j < json.details.length; j++) {
+				 			for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].name == json.details[j].id_label_pendaftaran)
+								{
+									var sel = json.details[j].id_label_pendaftaran.split('_');
+									if(sel[0] == "sel")
+									{
+										var newId = sel[1]+'_selection';
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+										$(div).insertBefore('#'+newId);
+										$("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+										$("#"+json.details[j].id_label_pendaftaran+"_div").css('margin-top','0px');
+										$('#'+newId).css('width','85%');
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									}else
+									{
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+										$(div).insertAfter('#'+json.details[j].id_label_pendaftaran);
+										$("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+										document.pendaftaran.elements[i].style.width = "85%";
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									} 
+								}
+							};					
+						};
+				 	}else
+				 	{
+				 		for (var i = 0; i < formLength; i++) {
+							if(document.pendaftaran.elements[i].name == json.details.id_label_pendaftaran)
+							{
+								var sel = json.details.id_label_pendaftaran.split('_');
+								if(sel[0] == "sel")
+								{
+									var newId = sel[1]+'_selection';
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pendaftaran+'_div"></div>';
+									$(div).insertBefore('#'+newId);
+									$("#"+json.details.id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pendaftaran+"\')");
+									$("#"+json.details.id_label_pendaftaran+"_div").css('margin-top','0px');
+									$('#'+newId).css('width','85%');
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								}else
+								{
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pendaftaran+'_div"></div>';
+									$(div).insertAfter('#'+json.details.id_label_pendaftaran);
+									$("#"+json.details.id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pendaftaran+"\')");
+									document.pendaftaran.elements[i].style.width = "85%";
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								} 
+							}
+							
+						};
+				 	}
+					$('body').waitMe('hide');
+
+				}else if (json.status == 'EMPTY')
+				{
+					//alert("empty");
+					$('#id_pertubuhan').val("empty");
+					$('body').waitMe('hide');
+				}
+			}
+		});
+	});
+}
+
+function checkKuiriPindaan(id_pertubuhan)
+{
+	var kod_pertubuhan = id_pertubuhan;
+	formLength = document.pendaftaran.elements.length;
+	$(function() 
+	{
+		$.ajax({
+			url:"http://eroy.me-tech.com.my/api/kuiri/check_kuiri_pindaan.php",
+			type:'POST',
+			data: {
+				kod_pertubuhan : kod_pertubuhan,
+			},
+			success:function(data)
+			{
+				var json = $.xml2json(data);
+				
+				if (json.status == 'SELECT') {
+				 	if(Array.isArray(json.details))
+				 	{
+				 		for (var j = 0; j < json.details.length; j++) {
+				 			for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].name == json.details[j].id_label_pindaan)
+								{
+									var sel = json.details[j].id_label_pindaan.split('_');
+									if(sel[0] == "sel")
+									{
+										var newId = sel[1]+'_selection';
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pindaan+'_div"></div>';
+										$(div).insertBefore('#'+newId);
+										$("#"+json.details[j].id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pindaan+"\')");
+										$("#"+json.details[j].id_label_pindaan+"_div").css('margin-top','0px');
+										$('#'+newId).css('width','85%');
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									}else
+									{
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pindaan+'_div"></div>';
+										$(div).insertAfter('#'+json.details[j].id_label_pindaan);
+										$("#"+json.details[j].id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pindaan+"\')");
+										document.pendaftaran.elements[i].style.width = "85%";
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									} 
+								}
+							};					
+						};
+				 	}else
+				 	{
+				 		for (var i = 0; i < formLength; i++) {
+							if(document.pendaftaran.elements[i].name == json.details.id_label_pindaan)
+							{
+								var sel = json.details.id_label_pindaan.split('_');
+								console.log(sel[0]);
+								if(sel[0] == "sel")
+								{
+									var newId = sel[1]+'_selection';
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pindaan+'_div"></div>';
+									$(div).insertBefore('#'+newId);
+									$("#"+json.details.id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pindaan+"\')");
+									$("#"+json.details.id_label_pindaan+"_div").css('margin-top','0px');
+									$('#'+newId).css('width','85%');
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								}else
+								{
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pindaan+'_div"></div>';
+									$(div).insertAfter('#'+json.details.id_label_pindaan);
+									$("#"+json.details.id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pindaan+"\')");
+									document.pendaftaran.elements[i].style.width = "85%";
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								} 
+							}
+							
+						};
+				 	}
+					$('body').waitMe('hide');
+
+				}else if (json.status == 'EMPTY')
+				{
+					//alert("empty");
+					$('#id_pertubuhan').val("empty");
+					$('body').waitMe('hide');
+				}
+			}
+		});
+	});
+}
+
+function getInfo(msg,id)
+{
+	var currentSelectedId = $('#'+id+'_div');
 	
+	var lol = '<table width="100%" height="20">';
+	lol += '<tr align="center">';
+	lol += '<td width="40px">'+msg+'</td>';
+	lol += '</tr>';
+	lol += '</table>';
+	
+	currentSelectedId.qtip({
+	overwrite: false, 
+		content: {
+			//text: $('#tooltiptext'),
+			text: lol,
+			button: false,
+				
+		},
+		 style: {
+			width: '100%', 
+			height: 30,
+			classes: 'qtip-cream'
+		 },   
+			
+		show: {
+		 //effect: function(offset) {
+		//		$(this).slideDown(100); // "this" refers to the tooltip
+		//	},
+			event: 'click',
+			solo: true,
+			
+	   
+		},
+
+		hide:'unfocus',
+		events: {
+			visible: function(event, api) {
+				//$('#transparent_layer').show();
+				$("body").css("overflow-y", "hidden");
+			},
+			 hide: function(event, api) {
+				//$('#transparent_layer').hide();
+				$("body").css("overflow-y", "visible");
+			}
+		},
+		 position: {
+			my: 'bottom right',
+			at: 'top left'
+		}
+	});
+}
 	
 	
 	

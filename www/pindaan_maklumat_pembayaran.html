@@ -2,21 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />	
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
-
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
-		
+		</div>		
 		<div id="loadingLayer"></div>
-
 	</head>
 	<body>
 	
@@ -30,33 +29,34 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pindaan_maklumat_perlembagaan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>	
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
 	</div>
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+				</div>
 			</div>
-		</div>
-	
-	</div>
-	<!-- end of header-title-->
-
-	<div id="content" class="_form">
-		<h2 class="_orange_text">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 		
+		</div>
+		<!-- end of header-title-->
+
+		<div id="content">
+			<div class="_form">
+		<h2 class="_orange_text">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
+			
 		<div class="selection" id="jenis_bayaran_selection">
-					<h5 id="_orange_title">Bentuk Bayaran</h5>
+				<h5 id="_orange_title">Bentuk Bayaran</h5>
 					
-						<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
-						<option value="" selected>Pilih Bentuk Bayaran</option>
+					<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
+				<option value="" selected>Pilih Bentuk Bayaran</option>
 						</select>
 		</div>
 		
-
 		<div>
 			<input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
 		</div>
@@ -70,28 +70,30 @@
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
-		<INPUT type="hidden" name="Amount" id="amount"></br>
-		<INPUT type="hidden" name="PaymentDesc" id="paymentDesc" value="Yuran Pindaan Maklumat ">
-		<INPUT type="hidden" name="PaymentItemName" id="paymentItemName" value="Pindaan Maklumat"/>
-		<INPUT type="hidden" name="Key" id="key" value="E-ROY"/>
-		<INPUT type="hidden" name="Channel" id="channel" value="02"/>
+		<input type="hidden" name="Amount" id="amount" />
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal"/>
+		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
+		<input type="hidden" name="Key" id="key" value="E-ROY"/>
+		<input type="hidden" name="Channel" id="channel" value="02"/>
 		
 		<div class="default_button_holder">
-		<input class="default_button" type="button" value="BAYAR" id="btn_submit">
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 		</div>
-
+		</div>
+		</div>
+		
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
 	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
-
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
 
@@ -99,9 +101,13 @@
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
 	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-
+	
 	<script>
 	
 	getJenisBayaran($('#jenis_bayaran').attr('id'));
@@ -188,7 +194,7 @@
 				else
 				{
 					alert('Under Construction');
-					/*$.ajax({
+					$.ajax({
 						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_8.php",
 						type:'POST',
 						data: {
@@ -236,7 +242,7 @@
 						}
 					});
 					
-					*/
+					
 				}
 			}
 

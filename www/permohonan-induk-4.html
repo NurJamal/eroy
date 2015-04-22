@@ -59,9 +59,9 @@
 		
 			<!-- form -->
 		
-			<form>	
-				<div class="_form">
 				
+			<div class="_form">
+				<form action="" name="pendaftaran" id="pendaftaran">
 					<div>
 						<h5 id="_orange_title">Nama Pertubuhan</h5>
 						<h1 class="_dark_text" id="nama_pendaftaran_bercawangan"></h1>
@@ -93,9 +93,9 @@
 							<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 						</a>
 					</div>
-
-				</div>	
-			</form>
+				</form>
+			</div>	
+			
 		</div>
 	</div>
 	<!-- end of form -->
@@ -124,23 +124,73 @@
 		$('#nama').html(window.localStorage.getItem("NAMA"));
 		$('#kadp').html(window.localStorage.getItem("LOGIN"));
 
-		var today = new Date();
-	    var dd = today.getDate();
-	    var mm = today.getMonth()+1; //January is 0!
+		var status = window.localStorage.getItem('STATUS');
 
-	    var yyyy = today.getFullYear();
-	    if(dd<10){
-	        dd='0'+dd
-	    } 
-	    if(mm<10){
-	        mm='0'+mm
-	    } 
-	    var today = dd+'/'+mm+'/'+yyyy;
-	    $("#date").html(today);
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+			$(function() 
+			{
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+					type:'POST',
+					data: {
+						kad_pengenalan : kod_pertubuhan,
+						insertData : "kuiri"
+
+					},
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data)
+					{
+						var json = $.xml2json(data);
+						if (json.status == 'SELECT') {
+
+							for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].type != 'button')
+								{
+									document.pendaftaran.elements[i].setAttribute("disabled", "disabled"); 	
+								}
+
+								if(document.pendaftaran.elements[i].type == 'checkbox')
+								{
+									document.pendaftaran.elements[i].setAttribute("checked", "checked"); 
+								}
+
+								var date = json.details.created_date.split(' ');
+								var newDate = date[0].split('-');
+								var arrangeDate = newDate[2]+'/'+newDate[1]+'/'+newDate[0];
+								$("#date").html(arrangeDate);
+							};
+							$('body').waitMe('hide');
+						}
+					}
+				});
+			});
+		}else
+		{
+			var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth()+1; //January is 0!
+
+		    var yyyy = today.getFullYear();
+		    if(dd<10){
+		        dd='0'+dd
+		    } 
+		    if(mm<10){
+		        mm='0'+mm
+		    } 
+		    var today = dd+'/'+mm+'/'+yyyy;
+		    $("#date").html(today);
+		}
 
 	    $('#c_box1').css({"border":"","box-shadow":""});
 
 	    $("#btn_submit").click(function(e){
+	    	redisplayHeader();
 	    	var empty = false;
 			e.preventDefault();
 
@@ -162,49 +212,54 @@
 				);
 			}else if(empty == false)
 			{
-				$.ajax({
-					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_4.php",
-					type:'POST',
-					data: {
-						
-					},
-					beforeSend: function() {
-							run_waitMe();
-					},
-					success:function(data){
-						console.log(data);
-						var json = $.xml2json(data);
-						console.log(json);
-						if (json.status == 'ok') {
+				if(insertData == "kuiriUpdate")
+				{
+					window.location.href = "permohonan-induk-5.html";
+				}else
+				{
+					$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_4.php",
+						type:'POST',
+						data: {
 							
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-										window.location.href = "permohonan-induk-5.html";
+						},
+						beforeSend: function() {
+								run_waitMe();
+						},
+						success:function(data){
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') {
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+											window.location.href = "permohonan-induk-5.html";
+										}
 									}
-								}
-							);
-						
-						}
-						else if (json.status == 'error') {
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
+								);
+							
+							}
+							else if (json.status == 'error') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
 									}
-								}
-							);
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
 						}
-						else{}
-						$('body').waitMe('hide');
-					}
-				});
-				
+					});
+				}	
 			}
 
 	    });

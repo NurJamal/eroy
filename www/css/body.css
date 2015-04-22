@@ -363,9 +363,7 @@ select._sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
@@ -377,9 +375,8 @@ select.sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;
+	height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
@@ -565,6 +562,22 @@ h2._orange_text{
 	float: right;
 	margin-top: 8px;
 }
+
+.kuiriIcon{
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	background-image: url("../img/batal_icon.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+	height: 50px;
+	width: 15%;
+	float: right;
+	margin-top: 8px;
+}
+
 .imgEdit {
     float: right;
     margin-top: -17px;

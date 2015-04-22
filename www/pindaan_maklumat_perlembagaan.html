@@ -4,22 +4,32 @@
 
 		<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
-		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
-	</head>
-		
+		</div>		
+		<div id="loadingLayer"></div>
 	
+		
+		
+		<!--Load to Local Later-->
+		<!--<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+		<!-- CSS file -->
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+</head>
+
 	<body>
 	<div id="transparent_layer" ></div>
 	
@@ -27,13 +37,11 @@
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
 	
-	
-	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pindaan_maklumat_pertubuhan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -49,10 +57,6 @@
 	<!-- end of header-title-->
 
 	<div id="content">	
-	
-		 <!--<h2 class="demoHeaders">
-  <span id='tooltipClick' title='This is a tooltip that appears on click...'>Tooltip on Click</span>
-</h2>-->
 		<h5 id="_orange_title_imal">Nama Pertubuhan</h5>
 		<h1 class="_dark_text_imal">PERSATUAN SELSA MALAYSIA</h1>
 		
