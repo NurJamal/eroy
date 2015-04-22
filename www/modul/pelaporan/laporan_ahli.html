@@ -146,7 +146,7 @@
 		
 		if(a == 'Keseluruhan')
 		{
-			$('#pertubuhan_carian').find('input').reset();
+			//$('#pertubuhan_carian').find('input').reset();
 			$('#pertubuhan_carian').attr('disabled',true);
 			$('#sel_nama_pertubuhan').attr('disabled',true);
 			
@@ -240,7 +240,7 @@
 		$(document).ready(function()
 		{
 			
-			//var carian_nama = $.trim($('#pertubuhan_carian').val());
+			var kod_nama_pertubuhan = namaPertubuhanCarian(kod_id);
 			$.ajax
 			(
 				{

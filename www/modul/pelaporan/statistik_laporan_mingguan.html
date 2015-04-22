@@ -220,56 +220,8 @@
 		$("#tarikh_dari").val(dateFrom);
 		$("#tarikh_hingga").val(dateTo);
 		
-		$.each(laporan_negeri, function(index, value)
-		{ 
-			/*Mengikut Zon*/
-			$.each(value, function(zon_index, per_zone) 
-			{ 
-				/*Mengikut Negeri*/
-				$.each(per_zone.negeri, function(index, per_state)
-				{	
-					if(index == 0)
-					{
-						$('#table_laporan')
-						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+per_zone.nama_zon+'</h2></td></tr>');
-					}
-					else
-					{
-						$('#table_laporan')
-						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td></td><td></td></tr>');
-					}
-					
-					$('#'+per_zone.nama_zon+''+(index+1)+'')
-					.append('<td id="'+per_state.nama_negeri+''+(index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_state.nama_negeri+'</h2></td>')
-					
-					$('#'+per_state.nama_negeri+''+(index+1)+'')
-					.append('<div class="white_wrap"><table><tr id="data_'+per_state.nama_negeri+''+(index+1)+'"></tr></table></div>')
-
-					$('#data_'+per_state.nama_negeri+''+(index+1)+'')
-					.append('<td width="38px">'+per_state.permohonan+'</td>')
-					.append('<td width="38px">'+per_state.kelulusan+'</td>')
-					.append('<td width="38px">'+per_state.semakan+'</td>')
-					.append('<td width="38px">'+per_state.kuiri+'</td>')
-					.append('<td width="38px">'+per_state.penolakan+'</td>')
-				});
-			 });
-
-		});
-		
-		$.each(data.jumlah, function (index, value) 
-		{
-			$('#jumlah_')
-			.append('<td width="38px">'+value+'</td>')
-		});
-		
-
-		$.each(data.peratusan, function (index, value)
-		{
-			$('#peratusan_')
-			.append('<td width="38px">'+value+'</td>')
-
-		});
-		
+		alert(selectedState);
+			
 	});	
 	</script>
 	</body>
