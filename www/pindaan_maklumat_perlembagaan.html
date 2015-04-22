@@ -170,15 +170,20 @@
 		var selected = localStorage.getItem('selected_id_perlembagaan');
 
 		var prevID = $("#"+selected).prev().attr('id');
-		
-		divSelected = $('#'+selected);
-		divprev = $('#'+prevID);
+	
+		//If prev id == 'level'. Do nothing. 
+		var arr = prevID.split('_');
+		var val =  $.trim(arr[0]);
+		if(val != 'level'){
+			divSelected = $('#'+selected);
+			divprev = $('#'+prevID);
 
-		tdiv1 = divSelected.clone();
-		tdiv2 = divprev.clone();
+			tdiv1 = divSelected.clone();
+			tdiv2 = divprev.clone();
 
-		divSelected.replaceWith(tdiv2);
-		divprev.replaceWith(tdiv1);
+			divSelected.replaceWith(tdiv2);
+			divprev.replaceWith(tdiv1);
+		}
 		$("div").qtip('hide');
 		
 		rewriteID();
@@ -256,10 +261,15 @@
 	function editFasal()
 	{				
 		var selected = localStorage.getItem('selected_id_perlembagaan');
+		//var selectedTextID = $('#'+(selected)).children().attr('id');
+		//alert(selectedTextID);
 		var IDselected = selected.replace('tr_', '');
 		
 		$('.inform').remove();
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', '')))+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
+		
+		$('#'+selected).append("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', '')))+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>");
+
+		///$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' //id='//no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))//)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' //id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input><///td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr><///table></div>").insertAfter('#'+selected);
 		$("div").qtip('hide');
 		
 		/*FASAL LABEL INDEX*/
@@ -270,7 +280,6 @@
 	{
 		var id = localStorage.getItem('selected_id_perlembagaan');
 		var IDselected = id.replace('tr_', '');
-
 		/*On click display - check if null*/
 		if($('#fasal_added_'+(id)).val() != "")
 		{
@@ -320,7 +329,7 @@
 		{
 			var editorImgSecondLvl = '<image class="openToolTip" id="'+appendId+'_img" style="margin-bottom:-7px;" src="img/pindaan-icon.png" width="25px" height="25px" >';
 			var checkBoxSecondLvl = '<input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-			$('<div class="checkbox" id="new_added_'+appendId+'" style="margin-left:'+marginLeftPX+'px;" ><div width="30px" class="xx" id="level_'+loopForMarginLeftValue+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<label id="fasal_added_'+(id+1)+'" for="checkbox'+id+'"><span class="'+label_class+'" id="fasal_index_'+appendId+'">'+label_text+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></div></div>').insertAfter($('#'+id));				
+			$('<div class="checkbox" id="new_added_'+appendId+'" style="margin-left:'+marginLeftPX+'px;" ><div width="30px" class="xx" id="level_'+loopForMarginLeftValue+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<label id="fasal_added_'+(id+1)+'" for="checkbox'+id+'"><span class="'+label_class+'" id="fasal_index_'+appendId+'">'+label_text+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId.replace('tr_', '')+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></div></div>').insertAfter($('#'+id));				
 		}
 		
 		$('#added_'+id).remove();
@@ -373,17 +382,48 @@
 				
 			var tr_id = this.id;
 			var tr_value =  $('#'+tr_id).attr('id');
+
+			var arr = tr_value.split('_');
+			var label_text_no = $.trim(arr[2]);
+
 			$('#'+tr_value).attr('id','xxx_'+indexFasal);
-			
+			$('#fasal_index_'+label_text_no+'_text').attr('id','tmp_'+indexFasal);
+
+	
 			indexFasal = parseInt(indexFasal+1);
 
 		});
 
 		$('.fasal_label').each(function() {
 			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
+			$('#tmp_'+indexFasalR).attr('id','fasal_index_'+indexFasalR+'_text');
+
 			$('#fasal_index_'+indexFasalR).html('Fasal'+' '+indexFasalR);
 			
 			indexFasalR = parseInt(indexFasalR+1);
+		});
+
+		/// Fasal Label Text ///
+
+		var indexFasalSS = 1;
+		var indexFasalRSS = 1;
+
+		$('.fasal_label_text').each(function() {
+				
+			var tr_id = this.id;
+			var tr_value = tr_id.replace('tr_','')
+
+			$('#'+tr_value).attr('id','tempxx_'+indexFasalSS);
+	
+			indexFasalSS = parseInt(indexFasalSS+1);
+
+		});
+
+		$('.fasal_label_text').each(function() {
+			
+			$('#tempxx_'+indexFasalRSS).attr('id','fasal_index_'+indexFasalRSS+'_text');			
+			indexFasalRSS = parseInt(indexFasalRSS+1);
+
 		});
 		
 		
