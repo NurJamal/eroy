@@ -94,29 +94,22 @@
 	<script type="text/javascript" src="js/jquery.qtip.js"></script>
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
+
 	<!-- Perlembagaan JS -->
 	<script src="js/internal/perlembagaan.js" type="text/javascript" language="javascript"></script>
-	
-	
+
+
+	<script type="text/javascript" src="js/jquery.qtip.js"></script>
+	<!-- Optional: imagesLoaded script to better support images inside your tooltips -->
+	<!--<script type="text/javascript" src="js/jquery.imagesloaded.pkg.min.js"></script>-->
 	<script>
+
+
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pertubuhan').html('PERSATUAN SELSA MALAYSIA');
 	
-	/*Get Fasal Template*/
 	getFasal('appendPerlembagaan', 1);
-	
-	function underConstruction()
-	{
-		$.alert
-			(
-				{
-					title: 'Status',
-					content: json.message,
-					confirm: function(){
-					}
-				}
-			);
-	}
+		
 
 	</script>
 	</body>

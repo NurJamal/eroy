@@ -567,7 +567,7 @@ h2._orange_text{
 	border: 1px solid;
 	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
 	border-radius: 5px;
-	background-image: url("../img/batal_icon.png");
+	background-image: url("../img/alert.png");
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-size: 25px 25px;
@@ -591,6 +591,19 @@ h2._orange_text{
 }
 
 #box_no_icon{
+	width: 100%;
+	color: #696969;
+	background: white;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border: 1px solid #bcbcbc;
+	background: #ffffff;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+.box_no_icon{
 	width: 100%;
 	color: #696969;
 	background: white;
