@@ -16,6 +16,7 @@
 	</head>
 	<body>
 	
+	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -24,9 +25,11 @@
 	<div id="head">
 		<img src="../../img/logo-atas.png" class="logo"/>
 		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
+		<a href="menu_pelaporan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>	
 	</div>	
 	<!-- end of header -->
+
+	
 
 	<!-- list -->
 	<div class="containerBlock">
@@ -37,9 +40,9 @@
 					<h1 class="main_title">PELAPORAN</h1>
 				</div>
 			</div>
+		
 		</div>
 	<!-- end of header-title-->
-	
 	<div id="content">
 		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
 		<input type="hidden" id="jenis_laporan" value="laporan_mingguan">
@@ -50,69 +53,69 @@
 		</div>
 				
 		<h5 id="H5" style="margin-top: 15px">
-			<input type="checkbox"  class="checkboxClass" id="c_box1"> <label for="c_box1">Pilih Semua Zon</label>
+			<input type="checkbox"  class="checkboxClass" name="" id="c_box1"> <label for="c_box1">Pilih Semua Zon</label>
 		</h5>
 		
 		<div class="checkbox">
 			<div id="left" style="margin-top:-15px">			
 				<h2 class="_orange_text">Zon Utara</h2>
-				<input class="checkboxClass" id="c_box2" type="checkbox" value="0" />
+				<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="2" />
 				<label for="c_box2">Kedah</label><br>
 				
-				<input class="checkboxClass" id="c_box3" type="checkbox" value="1" />
+				<input class="checkboxClass" id="c_box3" type="checkbox" name="" value="8" />
 				<label for="c_box3">Perlis</label><br>
 				
-				<input class="checkboxClass" id="c_box4" type="checkbox" value="2" />
+				<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="9" />
 				<label for="c_box4">P.Pinang</label><br>
 				
 				<h2 class="_orange_text">Zon Tengah</h2>
-				<input class="checkboxClass" id="c_box5" type="checkbox" value="3" />
+				<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="7" />
 				<label for="c_box5">Perak</label><br>
 				
-				<input class="checkboxClass" id="c_box6" type="checkbox" value="4" />
+				<input class="checkboxClass" id="c_box6" type="checkbox" name="" value="12" />
 				<label for="c_box6">Selangor</label><br>
 				
-				<input class="checkboxClass" id="c_box7" type="checkbox" value="5" />
+				<input class="checkboxClass" id="c_box7" type="checkbox" name="" value="14" />
 				<label for="c_box7">W.Persekutuan</label><br>
 				
 				<h2 class="_orange_text">Zon Sabah</h2>
-				<input class="checkboxClass" id="c_box8" type="checkbox" value="6" />
+				<input class="checkboxClass" id="c_box8" type="checkbox" name="" value="10" />
 				<label for="c_box8">Sabah</label><br>
 				
 				<h2 class="_orange_text">Ibu Pejabat</h2>
-				<input class="checkboxClass" id="c_box9" type="checkbox" value="7" />
+				<input class="checkboxClass" id="c_box9" type="checkbox" name="" value="00" />
 				<label for="c_box9">Ibu Pejabat</label><br>
 			</div>
 			
 			<div id="right" style="margin-top:-15px">
 				<h2 class="_orange_text">Zon Selatan</h2>
-				<input class="checkboxClass" id="c_box10" type="checkbox" value="8" />
+				<input class="checkboxClass" id="c_box10" type="checkbox" name="" value="4" />
 				<label for="c_box10">Melaka</label><br>
 				
-				<input class="checkboxClass" id="c_box11" type="checkbox" value="9" />
+				<input class="checkboxClass" id="c_box11" type="checkbox" name="" value="1" />
 				<label for="c_box11">Johor</label><br>
 				
-				<input class="checkboxClass" id="c_box12" type="checkbox" value="10" />
+				<input class="checkboxClass" id="c_box12" type="checkbox" name="" value="5" />
 				<label for="c_box12">N.Sembilan</label><br>
 				
 				<h2 class="_orange_text">Zon Timur</h2>
-				<input class="checkboxClass" id="c_box13" type="checkbox" value="11" />
+				<input class="checkboxClass" id="c_box13" type="checkbox" name="" value="6" />
 				<label for="c_box13">Pahang</label><br>
 				
-				<input class="checkboxClass" id="c_box14" type="checkbox" value="12" />
+				<input class="checkboxClass" id="c_box14" type="checkbox" name="" value="3" />
 				<label for="c_box14">Kelantan</label><br>
 				
-				<input class="checkboxClass" id="c_box15" type="checkbox" value="13" />
+				<input class="checkboxClass" id="c_box15" type="checkbox" name="" value="13" />
 				<label for="c_box15">Terengganu</label><br>
 				
 				<h2 class="_orange_text">Zon Sarawak</h2>
-				<input class="checkboxClass" id="c_box16" type="checkbox" value="14" />
+				<input class="checkboxClass" id="c_box16" type="checkbox" name="" value="11" />
 				<label for="c_box16">Sarawak</label><br>
 			</div>
 		</div>
 		
 		<div class="default_button_holder">
-			<input class="default_button" type="button" value="HANTAR" id="btn_submit">
+			<!--<a href="statistik_laporan_mingguan.html">--><input class="default_button" type="button" value="HANTAR" id="btn_submit"><!-- </a> -->
 		</div>
 
 	</div>
@@ -135,82 +138,63 @@
 	<!--Loading Indicator -->
 	<script src="../../js/waitMe.js"></script>
 	
-	<script>
-	function selectedState()
-	{
-		var arr = [];
-		$('.checkbox input[type="checkbox"]:checked').each(function()
-		{
-			arr.push($(this).val());
-		});
-		return arr; 
-	}
-	
-	function selectedDateFrom()
-	{
-		var dateFrom = [];
-		$('#tarikh_dari').each(function()
-		{
-			dateFrom.push($(this).val());
-		});
-		return dateFrom; 
-	}
-	
-	function selectedDateTo()
-	{
-		var dateTo = [];
-		$('#tarikh_hingga').each(function()
-		{
-			dateTo.push($(this).val());
-		});
-		return dateTo; 
-	}
-	
+	<script type="text/javascript">
+
 	$("#btn_submit").click(function(e)
 	{
+	
 		var dateFrom =  $.trim($("#tarikh_dari").val());
 		var dateTo =  $.trim($("#tarikh_hingga").val());
-		//var jenisLaporan =  $.trim($("#jenis_laporan").val());
+		var jenisLaporan =  $.trim($("#jenis_laporan").val());
 		var empty = false;
+		var selectedState = [];
 		
 		e.preventDefault();
 		
-		$('#tarikh_dari, #tarikh_dari').css({"border":"","box-shadow":""});
-
+		$('#tarikh_dari, #tarikh_hingga').css({"border":"","box-shadow":""});
+		
+		for( var i = 2 ; i < 17 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedState.push($("#c_box"+i).val());
+			}
+		}
+		
 		/*Javascript Validation*/
-		if(dateFrom == 0) 
+		if (dateFrom == 0) 
 		{
 			$.alert
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila Pilih Tarikh',
+					content: 'Sila Isikan Tarikh',
 					confirm: function(){}
 				}
 			);
 			$('#tarikh_dari').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		else if(dateTo == 0) 
+		else if (dateTo == 0) 
 		{
 			$.alert
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila Pilih Tarikh',
+					content: 'Sila Isikan Tarikh',
 					confirm: function(){}
 				}
 			);
 			$('#tarikh_hingga').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		else if( selectedState().length <= 0)
+		else if( selectedState.length <= 0)
 		{
 			$.alert
 			(
 				{
 					title: 'Perhatian',
-					content: 'Sila Pilih Sekurang-kurangnya Satu Negeri',
+					content: 'Sila Tandakan Satu Negeri',
 					confirm: function(){}
 				}
 			);
@@ -220,14 +204,14 @@
 			$.ajax
 			(
 				{
-					url:"http://eroy.me-tech.com.my/api/laporan/test.php",
+					url:"http://eroy.me-tech.com.my/api/laporan/laporan.php",
 					type:'POST',
 					data:
 					{				
 						dateFrom : dateFrom,
 						dateTo : dateTo,
-						//jenisLaporan : jenisLaporan,
-						selectedState : selectedState
+						jenisLaporan : jenisLaporan,
+						selectedState : selectedState,
 					},
 					dataType:'xml',
 					error: function(e) 
@@ -246,19 +230,14 @@
 						if (json.status == 'ok') 
 						{
 							console.log(json.status);
-					
+							
+							//window.localStorage.setItem("LAPORAN", json);
 							//saving object to localStorage
-							//window.localStorage['LAPORAN'] = JSON.stringify(json);
-							
-							window.localStorage['SELECTED_STATE'] = JSON.stringify(selectedState());
-							window.localStorage['TARIKH_DARI'] = JSON.stringify(selectedDateFrom());
-							window.localStorage['TARIKH_HINGGA'] = JSON.stringify(selectedDateTo());
-							
-							window.location.href = "statistik_laporan_mingguan.html";
-							
-					
+							window.localStorage['LAPORAN'] = JSON.stringify(json);
+
 							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
 							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
+							window.location.href = "statistik_laporan_mingguan.html";
 						}
 						else if (json.status == 'error') 
 						{
@@ -277,8 +256,14 @@
 					}
 				}
 			);
-		}	
+		}
+
+		
 	});	
+
+	/*Will change Later*/
+	//$("#navigation").load('../navigation_menu/nav_login.html');
+	
 	</script>
 	</body>
 </html>

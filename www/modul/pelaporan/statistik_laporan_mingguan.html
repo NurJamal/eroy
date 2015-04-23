@@ -17,6 +17,7 @@
 	</head>
 	<body>
 	
+	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
@@ -25,7 +26,7 @@
 	<div id="head">
 		<img src="../../img/logo-atas.png" class="logo"/>
 		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
+		<a href="laporan_mingguan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 
@@ -46,8 +47,8 @@
 		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
 		
 		<div class="inform">
-			<input type="text" name="tarikh_dari" id="tarikh_dari" disabled><br/>
-			<input type="text" name="tarikh_hingga" id="tarikh_hingga" disabled><br/>
+			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="12/10/2014"><br/>
+			<input type="text" name="tarikh_hingga" id="tarikh_hingga" placeholder="22/10/2014"><br/>
 		</div>
 		
 		<div class="grey_wrap">
@@ -203,31 +204,25 @@
 	
 	<script>
 	run_waitMe();
-	$(document).ready(function() 
+	$( document ).ready(function() 
 	{
 		$('body').waitMe('hide');
 		
 		//fetching object from localStorage
-		//var data = JSON.parse(localStorage['LAPORAN']);
+		var data = JSON.parse(localStorage['LAPORAN']);
 		
-		//$("#tarikh_dari").val(data.tarikh_dari);
-		//$("#tarikh_hingga").val(data.tarikh_hingga);
+		$("#tarikh_dari").val(data.tarikh_dari);
+		$("#tarikh_hingga").val(data.tarikh_hingga);
 		
-		var selectedState = JSON.parse(localStorage['SELECTED_STATE']);
-		var dateFrom = JSON.parse(localStorage['TARIKH_DARI']);
-		var dateTo = JSON.parse(localStorage['TARIKH_HINGGA']);
-	
-		$("#tarikh_dari").val(dateFrom);
-		$("#tarikh_hingga").val(dateTo);
-		
-		$.each(data.laporan_negeri, function(index, value)
-		{ 
+		$.each(data.laporan_negeri, function (index, value)
+		{
 			/*Mengikut Zon*/
-			$.each(value, function(zon_index, per_zone) 
-			{ 
+			$.each(value, function (zon_index, per_zone)
+			{
 				/*Mengikut Negeri*/
-				$.each(per_zone.negeri, function(index, per_state)
-				{	
+				$.each(per_zone.negeri, function (index, per_state) 
+				{
+				
 					if(index == 0)
 					{
 						$('#table_laporan')
@@ -238,7 +233,7 @@
 						$('#table_laporan')
 						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td></td><td></td></tr>');
 					}
-					
+				
 					$('#'+per_zone.nama_zon+''+(index+1)+'')
 					.append('<td id="'+per_state.nama_negeri+''+(index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_state.nama_negeri+'</h2></td>')
 					
@@ -252,25 +247,28 @@
 					.append('<td width="38px">'+per_state.kuiri+'</td>')
 					.append('<td width="38px">'+per_state.penolakan+'</td>')
 				});
-			 });
+			});
 
 		});
 		
+		/*Jumlah - Access tag value*/
 		$.each(data.jumlah, function (index, value) 
 		{
 			$('#jumlah_')
 			.append('<td width="38px">'+value+'</td>')
 		});
 		
-
+		/*Peratusan - Access tag value*/
 		$.each(data.peratusan, function (index, value)
-		{
+		{	
 			$('#peratusan_')
 			.append('<td width="38px">'+value+'</td>')
 
 		});
-			
-	});	
+
+	});		
 	</script>
+	
+	
 	</body>
 </html>
