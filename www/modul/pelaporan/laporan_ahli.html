@@ -239,7 +239,6 @@
 	{
 		$(document).ready(function()
 		{
-			
 			var kod_pertubuhan =  $('#sel_nama_pertubuhan').val();
 			$.ajax
 			(
@@ -291,7 +290,6 @@
 								$('#bil_india').val(total_india);
 								$('#bil_lain').val(total_lain);	
 								$('#jumlah').val(total);	
-
 							});
 						}
 						else if($(xml).find("status").text() == "error")
