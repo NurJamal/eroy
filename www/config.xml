@@ -53,6 +53,9 @@
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
 	<preference name="android-windowSoftInputMode" value="stateHidden" />
 	<preference name="fullscreen"    value="false" />  
+	<preference name="StatusBarOverlaysWebView" value="false" />
+	<preference name="StatusBarBackgroundColor" value="#000000" />
+	<preference name="StatusBarStyle" value="blackopaque" />
     <!-- Plugins can also be added here. -->
     <!--
         <gap:plugin name="Example" />
@@ -62,6 +65,7 @@
 	<plugin name="InAppBrowser" gap:platform="android" value="org.apache.cordova.InAppBrowser" />
 	<plugin name="InAppBrowser" gap:platform="ios"  value="CDVInAppBrowser" />
 	<plugin name="InAppBrowser" gap:platform="winphone" />
+	<gap:plugin name="com.phonegap.plugin.statusbar" />
     <!-- Define app icon for each platform. -->
 	<icon src="res/icon-512.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"    gap:platform="android" gap:qualifier="ldpi"/>
@@ -97,18 +101,23 @@
     <icon src="res/icon/ios/Icon-50.png" gap:platform="ios" width="50" height="50" />
     <icon src="res/icon/ios/Icon-Small-50@2x.png" gap:platform="ios" width="100" height="100" />
     <!-- Define app splassh screen for each platform. -->
-    <gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:qualifier="port-ldpi"/>
-    <gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:qualifier="port-mdpi"/>
-    <gap:splash src="res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:qualifier="port-hdpi"/>
+    <gap:splash src="res/screen/android/screen-ldpi-portrait.png" gap:platform="android" gap:qualifier="port-ldpi"/>
+	<gap:splash src="res/screen/android/screen-ldpi-landscape.png" gap:platform="android" gap:qualifier="land-ldpi"/>
+    <gap:splash src="res/screen/android/screen-mdpi-portrait.png" gap:platform="android" gap:qualifier="port-mdpi"/>
+	<gap:splash src="res/screen/android/screen-mhdpi-landscape.png" gap:platform="android" gap:qualifier="land-mhdpi"/>
+    <gap:splash src="res/screen/android/screen-hdpi-portrait.png" gap:platform="android" gap:qualifier="port-hdpi"/>
+	<gap:splash src="res/screen/android/screen-hdpi-landscape.png" gap:platform="android" gap:qualifier="land-hdpi"/>
     <gap:splash src="res/screen/android/screen-xhdpi-portrait.png" gap:platform="android" gap:qualifier="port-xhdpi"/>
-    <gap:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
+	<gap:splash src="res/screen/android/screen-xhdpi-landscape.png" gap:platform="android" gap:qualifier="land-xhdpi"/>
+   <!-- <gap:splash src="res/screen/android/screen-xxhdpi-portrait.png" gap:platform="android" gap:qualifier="port-xxhdpi"/> -->
+	
+	<gap:splash src="res/screen/blackberry/screen-225.png"         gap:platform="blackberry" />
 	<!-- images are determined by width and height. The following are supported -->
     <gap:splash src="res/screen/ios/screen-iphone-portrait.png" gap:platform="ios" width="320" height="480"/>
     <gap:splash src="res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios" width="640" height="960"/>
 	<gap:splash src="res/screen/ios/screen-iphone-portrait-568h-2x.png" gap:platform="ios" width="640" height="1136"/>
     <gap:splash src="res/screen/ios/Default-Portrait-ipad.png" gap:platform="ios" width="768" height="1024"/>
 	<gap:splash src="res/screen/ios/Default-Portrait@2x-ipad.png" gap:platform="ios" width="1536" height="2048"/>
-	
 	<gap:splash src="res/screen/ios/Default-Landscape-ipad.png" gap:platform="ios" width="1024" height="768"/>
     
 
