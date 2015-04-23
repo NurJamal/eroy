@@ -86,32 +86,45 @@
 					</form>		
 			</div>
 							
-			<form id="" action="" method="POST">
-				<input type="text" name="nama_pertubuhan" id="nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
-				<input type="text" name="nama_ringkasan" id="nama_ringkasan" placeholder="Nama Ringkasan"><br/>
+			
+				
+				
+			<div class="selection" style="margin-top:14px"  id="negeri_selection">
+					<h5 id="_orange_title">Negeri</h5>
+					
+						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
+						<option value="" selected>Pilih Negeri</option>
+						</select>
+					
+			</div>
+			
+			<div class="selection" style="margin-top:14px" id="daerah_selection">
+					<h5 id="_orange_title">Daerah</h5>
+					
+						<select id="sel_daerah" name="sel_daerah" class="_sel" onchange="copy_nama">
+						<option value="" selected>Pilih Daerah</option>
+						</select>
+						
+			</div>
+			
+				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" onblur="copy_nama()" placeholder="Nama Pertubuhan"><br/>
+			
+				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" onblur="copy_nama()" placeholder="Nama Ringkasan"><br/>
 				
 			<div class="display">
 				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
-				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
-
-			<form id="" action="" method="POST">
-				<input type="text" name="no_sijil_1" id="no_sijil_1" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_2" id="no_sijil_2" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_3" id="no_sijil_3" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_4" id="no_sijil_4" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_5" id="no_sijil_5" placeholder="No Sijil Gabungan"><br/>
-			</form>
-			
+				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>		
+				<input type="text" name="no_sijil_1" id="no_sijil" placeholder="No Sijil Gabungan"><br/>
+				<input type="text" name="no_sijil_2" id="no_sijil" placeholder="No Sijil Gabungan"><br/>								
 		</div>
-
-		
-			<div class="inform">
-				<input type="text" style="margin-top:0px" name="no_sijil" id="no_sijil" placeholder="No Sijil Gabungan" class="_add_sijil"><br/>
-			</div>
+    
+				<div class="inform" style="margin-top:8px">
+					<input type="text" style="margin-top:0px" name="no_sijil" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
+				</div>
 				
-				
+	
 				<div class="default_button_holder">
 					<a href="pendaftaran-majlis-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
@@ -142,6 +155,97 @@
 	
 	<script>
 		
+		$('#negeri_selection').hide();
+		$('#daerah_selection').hide();
+		
+		function tambah_field()
+		{			
+			
+			$('._form').append('<input type="text" name="no_sijil_gabungan" id="no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>');
+		} 
+		
+		function copy_nama()
+		{
+		 
+		var nama_ringkasan = "";
+	
+			
+			var sel_kategori = $('#sel_kategori').val();
+			if(sel_kategori.length > 0){
+			
+				var f_nama_pertubuhan = $('#f_nama_pertubuhan').val();
+				var sel_kategori_txt = $('#sel_kategori option:selected').text();
+				var sel_peringkat_txt = $('#sel_peringkat option:selected').text();
+				var sel_negeri_txt = $('#sel_negeri option:selected').text();
+				var sel_daerah_txt = $('#sel_daerah option:selected').text();
+				var f_nama_ringkasan = $('#f_nama_ringkasan').val();
+				
+			
+				if(f_nama_ringkasan.length > 0)
+				{
+					var f_nama_ringkasan = "("+f_nama_ringkasan+")";
+				}
+				
+				if(sel_peringkat_txt == "Daerah")
+				{
+				if(sel_daerah_txt != "Pilih Daerah")
+				{
+				
+					var sel_peringkat_txt = sel_peringkat_txt+" "+sel_daerah_txt;
+				
+				}
+				}
+				
+				if(sel_peringkat_txt == "Negeri")
+				{
+				if(sel_negeri_txt != "Pilih Negeri")
+				{
+				
+					var sel_peringkat_txt = sel_peringkat_txt+" "+sel_negeri_txt;
+				
+				}
+				}
+				
+				if(sel_peringkat_txt == "Kebangsaan")
+				{	
+					var sel_peringkat_txt = "Malaysia";
+				}
+
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+sel_peringkat_txt+" "+f_nama_ringkasan);
+			}
+		
+		
+		}
+		
+		/* tambah field */
+		
+		$(document).ready(function () 
+		{
+		 
+			$("#no_sijil_gabungan").on('click', '#add', function () 
+			{	
+				alert ("1")
+				var intId = $("#no_sijil_gabungan div").length + 1;
+				var inform = $("<div class=\"inform\" name=\"field" + intId + "\" id=\"field" + intId + "\"/>");
+				var no_sijil = $("<input type=\"text\" name=\"name\" class=\"no_sijil\" id=\"no_sijil" + intId + "_1\"/>");
+				var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+
+				var addButton = $("<input type=\"button\" class=\"add\" id=\"add\" value=\"+\" />")
+				removeButton.click(function () 
+				{
+					$(this).parent().remove();
+				});
+				
+				inform.append(no_sijil_gabungan);
+				inform.append(removeButton);
+				inform.append(addButton);
+				$(this).remove();
+				$("#no_sijil_gabungan").append(inform);
+
+			});
+
+		});
+		
 		var sel_peringkat = document.getElementById("sel_peringkat");
 	
 		/*PAPARKAN NAMA PERSATUAN*/
@@ -149,7 +253,7 @@
 		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"4");		
 		getKategoriPertubuhan($('#sel_kategori').attr('id'),"4");
-		getPeringkatPertubuhan($('#sel_peringkat').attr('id'),"3");	
+		getPeringkatPertubuhan($('#sel_peringkat').attr('id'),"4");	
 		
 						
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
@@ -222,6 +326,26 @@
 			}
 			
 
+		});
+		
+		$('#sel_peringkat').change(function()
+		{ 
+			var selectedIndex = sel_peringkat.options[sel_peringkat.selectedIndex].value;
+		
+			if (selectedIndex == "10") 
+					
+			{ 
+			$('#negeri_selection').show();
+			}
+			
+			else if (selectedIndex == "11") 
+			
+			{ 
+			$('#negeri_selection').show();
+			$('#daerah_selection').show();
+			}
+			
+			
 		});
 		
 		
