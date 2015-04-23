@@ -78,7 +78,6 @@
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
 						<select id="sel_kategori" name="sel_kategori" class="_sel">
-
 						<option value="" selected >Pilih Kategori</option>
 
 						</select>
@@ -215,7 +214,12 @@
 					var nama_ringkasan = "("+f_nama_ringkasan+")";
 				}
 				
-				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" "+nama_ringkasan);
+				if(f_lokaliti.length > 0)
+				{	
+					var lokaliti_txt = "Cawangan";
+				}
+				
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+lokaliti_txt+" "+f_lokaliti+" "+nama_ringkasan);
 			}
 			
 

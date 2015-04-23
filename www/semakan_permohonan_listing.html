@@ -180,13 +180,24 @@
 						if(kod_status == '4') //lulus bersyarat
 						{
 							$('#content').append('<a href="#" onclick=lulusBersyarat(\''+kod_nama_pertubuhan+'\') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
-						}else if(kod_status == '3') //kuiri
+						}
+						else if(kod_status == '3') //kuiri
 						{
 							$('#content').append('<a href="#" onclick=kuiri(\''+kod_nama_pertubuhan+'\') style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div><a>');
-						}else if(kod_status == '6' || kod_status == 'Pending') //draft
+						}
+						else if(kod_status == '6' || kod_status == 'Pending') //draft
 						{
 							$('#content').append('<a href="#" onclick="editPermohonan('+jenis_pertubuhan+')" style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
-						}else
+						}
+						else if(kod_status == '12' || kod_status == 'Permohonan Lengkap') 
+						{
+							$('#content').append('<a href="#" onclick="editPermohonanLengkap('+kod_nama_pertubuhan+')" style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
+						}
+						else if(kod_status == '13' || kod_status == 'Kebenaran Menubuh Cawangan') 
+						{
+							$('#content').append('<a href="#" onclick="editKebenaranCawangan('+kod_nama_pertubuhan+')" style="text-decoration:none;"><div id="box_icon"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div></a>');
+						}
+						else
 						{
 							$('#content').append('<div id="box_icon_with_delete"><h2 class="li1" id="nama_pertubuhan">'+nama_pertubuhan+'</h2><h2 class="li2" id="tarikh_permohonan">Tarikh Akhir Kemaskini: '+created_date[0]+'</h2><h2 class="li2" id="status">Status: '+$(this).find('nama_status').text()+'</h2><h2></h2></div>');
 						}
@@ -205,17 +216,36 @@
 		if(jenis_pertubuhan == '2')
 		{
 			window.location.href = "permohonan-induk-1.html";
-		}else if(jenis_pertubuhan == '1')
+			window.localStorage.setItem("STATUS", 'add');
+		}
+		else if(jenis_pertubuhan == '1')
 		{
 			window.location.href = "pendaftaran-tunggal-1.html";
+			window.localStorage.setItem("STATUS", 'add');
 		}
 	}
 
 	function lulusBersyarat(kod_nama_pertubuhan)
 	{
 		window.localStorage.setItem("KOD_PERTUBUHAN", kod_nama_pertubuhan);
-		window.location.href = "penambahan-cawangan-1.html";
+		window.location.href = "pendaftaran-cawangan-1.html";
 	}
+	
+	function editPermohonanLengkap (kod_nama_pertubuhan)
+	{
+		window.localStorage.setItem("KOD_PERTUBUHAN_LENGKAP", kod_nama_pertubuhan);
+		window.location.href = "pendaftaran-induk-1.html";
+	
+	}
+	
+	function editKebenaranCawangan (kod_nama_pertubuhan)
+	{
+		window.localStorage.setItem("KOD_KEBENARAN_CAWANGAN", kod_nama_pertubuhan);
+		window.location.href = "pendaftaran-cawangan-1.html";
+	
+	}
+	
+	
 
 	function kuiri(kod_nama_pertubuhan)
 	{
