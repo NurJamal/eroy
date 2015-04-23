@@ -826,7 +826,16 @@ function checkKuiriPendaftaran(kod_pertubuhan,lvl)
 								if(document.pendaftaran.elements[i].name == json.details[j].id_label_pendaftaran)
 								{
 									var sel = json.details[j].id_label_pendaftaran.split('_');
-									if(sel[0] == "sel")
+                                    if(document.pendaftaran.elements[i].type == "file")
+                                    {
+                                        var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+                                        $(div).insertBefore('#'+json.details[j].id_label_pendaftaran);
+                                        $("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+                                        $("#"+json.details[j].id_label_pendaftaran+"_div").css('margin-top','0px');
+                                        document.pendaftaran.elements[i].style.width = "85%";
+                                        document.pendaftaran.elements[i].removeAttribute("disabled");
+                                    }
+									else if(sel[0] == "sel")
 									{
 										var newId = sel[1]+'_selection';
 										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';

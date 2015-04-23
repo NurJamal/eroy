@@ -63,50 +63,37 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1>
-		</div></br>
-	
-			<h5 id="_orange_title">
-			<table><tr>
-			<td><input type="checkbox" name="checking" id="check" class="checkboxClass"/><label for="check">Saya memperakui bahawa sepanjang pengetahuan dan 
-			kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label> </td>
-			<td>
-			</td>
-			</tr></table>
-			
-		
-			
-			</br><br/>
-		</h5>
-		
-		<div>	
-			 <p class="perakuan1">Bertarikh : <span class="perakuan2" id="tDate"></span></p></br>
-		</div>
-		
-		
-		
-		<div>
-			<h5 id="_orange_title">Saya,</h5></br>
-		</div>
-		
-		<div style="line-height:0.5em;">
-			<p class="perakuan1">Nama : <span id="nama_perakuan" class="_dark_text"></span></p>
-			<p class="perakuan1">No Kad Pengenalan : <span id="kp_perakuan" class="_dark_text"></span></p>
-		</div>
-		
-		
-		<div class="default_button_holder">
-			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
-		</div>
-	
-		
-		
+    <form action="" name="pendaftaran" id="pendaftaran">
+        <div class="_form">
+            <div>
+                <h5 id="_orange_title">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1>
+            </div></br>
+            <h5 id="_orange_title">
+                <table><tr>
+                <td><input type="checkbox" name="checking" id="check" class="checkboxClass"/><label for="check">Saya memperakui bahawa sepanjang pengetahuan dan
+                kepercayaan kami maklumat yang diberikan adalah benar dan betul dalam tiap-tiap butir-butir</label> </td>
+                <td>
+                </td>
+                </tr></table>
+                </br><br/>
+            </h5>
+            <div>
+                 <p class="perakuan1">Bertarikh : <span class="perakuan2" id="date"></span></p></br>
+            </div>
+            <div>
+                <h5 id="_orange_title">Saya,</h5></br>
+            </div>
+            <div style="line-height:0.5em;">
+                <p class="perakuan1">Nama : <span id="nama_perakuan" class="_dark_text"></span></p>
+                <p class="perakuan1">No Kad Pengenalan : <span id="kp_perakuan" class="_dark_text"></span></p>
+            </div>
+            <div class="default_button_holder">
+                <input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+            </div>
+        </div>
 	</form>
+    </div>
 
 		
 	<!-- end of form -->
@@ -136,7 +123,69 @@
 	/*PAPARKAN NAMA & KAD PENGENALAN*/
 	$('#nama_perakuan').html(window.localStorage.getItem("NAMA"));
 	$('#kp_perakuan').html(window.localStorage.getItem("LOGIN"));
-	
+    var status = window.localStorage.getItem('STATUS');
+
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kod_pertubuhan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+        $(function()
+        {
+            $.ajax({
+                url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_bercawangan_1.php",
+                type:'POST',
+                data: {
+                    kad_pengenalan : kod_pertubuhan,
+                    insertData : "kuiri"
+
+                },
+                beforeSend: function() {
+                    run_waitMe();
+                },
+                success:function(data)
+                {
+                    var json = $.xml2json(data);
+                    if (json.status == 'SELECT') {
+
+                        for (var i = 0; i < formLength; i++) {
+                            if(document.pendaftaran.elements[i].type != 'button')
+                            {
+                                document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+                            }
+
+                            if(document.pendaftaran.elements[i].type == 'checkbox')
+                            {
+                                document.pendaftaran.elements[i].setAttribute("checked", "checked");
+                            }
+
+                            var date = json.details.created_date.split(' ');
+                            var newDate = date[0].split('-');
+                            var arrangeDate = newDate[2]+'/'+newDate[1]+'/'+newDate[0];
+                            $("#date").html(arrangeDate);
+                        };
+                        $('body').waitMe('hide');
+                    }
+                }
+            });
+        });
+    }
+    else
+    {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        var today = dd+'/'+mm+'/'+yyyy;
+        $("#date").html(today);
+    }
 	$("#btn_submit").click(function(e){
 		if($('#check').is(':checked'))
 		{
