@@ -72,14 +72,14 @@
             <input type="text" name="alamat_3" id="alamat_3" placeholder="Alamat 3"><br/>
             <input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
 
-            <div class="selection" id="negeri_selection">
+            <div class="selection" id="negeri_selection" style="margin-top: 0px">
                 <h5 id="_orange_title">Negeri</h5>
                 <select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry1()">
                 <option value="" selected>Pilih Negeri</option>
                 </select>
             </div>
 
-            <div class="selection" style="margin-top:14px" id="daerah_selection">
+            <div class="selection" id="daerah_selection">
                 <h5 id="_orange_title">Daerah</h5>
                 <select id="sel_daerah" name="sel_daerah" class="_sel">
                 <option value="" selected>Pilih Daerah</option>
@@ -93,19 +93,19 @@
             <input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)">
             <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
 
-                <input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
+                <input type="text" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
                 <input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
                 <input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
                 <input type="number" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
 
-            <div class="selection" id="negeripos_selection">
+            <div class="selection" id="negeripos_selection" style="margin-top: 0px">
                 <h5 id="_orange_title">Negeri</h5>
                 <select id="sel_negeripos" name="sel_negeripos" class="_sel" onChange="getDaerahFromSelectedCountry2()">
                 <option value="" selected>Pilih Negeri</option>
                 </select>
             </div>
 
-            <div class="selection" style="margin-top:14px" id="daerahpos_selection">
+            <div class="selection" id="daerahpos_selection" >
                 <h5 id="_orange_title">Daerah</h5>
                 <select id="sel_daerahpos" name="sel_daerahpos" class="_sel">
                 <option value="" selected>Pilih Daerah</option>

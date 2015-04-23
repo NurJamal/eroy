@@ -122,8 +122,8 @@
 		        <input type="text" name="no_akta_dahulu" id="no_akta_dahulu"><br/></br>
 		    </div>
             <h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
-            <div class="selection" id="logo_selection">
-                <select id="dengan_logo" name="dengan_logo" class="_sel">
+            <div class="selection" id="logo_selection" style="margin-top: 0px">
+                <select id="sel_logo" name="sel_logo" class="_sel">
                 <option value="">Pilih</option>
                 <option value="Y">Ya</option>
                 <option value="N">Tidak</option>
@@ -215,7 +215,7 @@
                         $('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
                         $('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
                         $('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
-                        $('#dengan_logo').val(json.details.dengan_lambang);
+                        $('#sel_logo').val(json.details.dengan_lambang);
                         $('#sel_akta').val(json.details.daftar_akta1966);
                         $('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
                         //$('#logo').val(json.details.lambang);
@@ -265,7 +265,7 @@
                         $('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
                         $('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
                         $('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
-                        $('#dengan_logo').val(json.details.dengan_lambang);
+                        $('#sel_logo').val(json.details.dengan_lambang);
                         $('#sel_akta').val(json.details.daftar_akta1966);
                         $('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
                         //$('#logo').val(json.details.lambang);
@@ -329,7 +329,7 @@
 		var jumlah_keseluruhan = $('#jumlah_keseluruhan').val();
 		var p_tmesyuarat = $('#p_tmesyuarat').val();
 		var bil_ahli = $('#bil_ahli').val();
-		var dengan_logo = $('#dengan_logo').val();
+		var sel_logo = $('#sel_logo').val();
 		var sel_akta = $('#sel_akta').val();
 		var logo = $('#logo').val();
 		var no_akta_dahulu = $('#no_akta_dahulu').val();
@@ -348,7 +348,7 @@
 			empty = true;
 		}
 
-		if(dengan_logo.length == 0)
+		if(sel_logo.length == 0)
 		{
 			$('#logo_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
@@ -367,7 +367,7 @@
 					empty = true;
 				}
 		}
-		if(dengan_logo == 'Y')
+		if(sel_logo == 'Y')
 		{
 				var logo = $('#logo').val();
 				if(logo.length == 0)	{
@@ -426,7 +426,7 @@
                             ahliLainP: ahliLainP,
                             p_tmesyuarat: p_tmesyuarat,
                             bil_ahli: bil_ahli,
-                            dengan_logo: dengan_logo,
+                            dengan_logo: sel_logo,
                             bawah_akta: sel_akta,
                             no_akta_dahulu: no_akta_dahulu,
                             logo: logo,
