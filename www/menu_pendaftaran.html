@@ -52,12 +52,12 @@
 			<h2 class="title">Bercawangan</h2>
 		</div></a>
 		
-		<a href="pendaftaran-gabungan-1.html" style="text-decoration:none;">
+		<a href="#" onclick="pushToGabungan()" style="text-decoration:none;">
 		<div id="box">
 			<h2 class="title">Gabungan</h2>
 		</div></a>
 		
-		<a href="pendaftaran-majlis-1.html" style="text-decoration:none;">
+		<a href="#" onclick="pushToMajlis()" style="text-decoration:none;">
 		<div id="box">
 			<h2 class="title">Majlis</h2>
 		</div></a>
@@ -85,6 +85,18 @@
 		{
 			window.localStorage.setItem("STATUS", 'add');
 			window.location.href = "pendaftaran-tunggal-1.html";
+		}
+
+		function pushToMajlis()
+		{
+			window.localStorage.setItem("STATUS", 'add');
+			window.location.href = "pendaftaran-majlis-1.html";
+		}
+
+		function pushToGabungan()
+		{
+			window.localStorage.setItem("STATUS", 'add');
+			window.location.href = "pendaftaran-gabungan-1.html";
 		}
 	</script>
 	</body>
