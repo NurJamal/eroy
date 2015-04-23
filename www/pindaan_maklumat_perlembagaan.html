@@ -99,11 +99,7 @@
 	<!--<script type="text/javascript" src="js/jquery.imagesloaded.pkg.min.js"></script>-->
 	<script>
 	// Create the tooltips only when document ready
-	
-	
-		//$(document).ready(function() {
-		 
-		// });
+			 
 		
 		$("#appendPerlembagaan").delegate(".openToolTip", "click", function (){
 		
@@ -167,6 +163,7 @@
 		
 	//Get Fasal Template
 	getFasal('appendPerlembagaan', '1');
+	setAllChecked();
 
 	//Add Bottom
 	function addBottom()
@@ -227,7 +224,7 @@
 		//get current fasal & plus one
 		if(levelIDShow < 2){
 			var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
-			selectedFasalTxtShow = 'Fasal'+(parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
+			selectedFasalTxtShow = 'Fasal '+(parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
 		}
 		else
 		{
@@ -247,7 +244,11 @@
 			var span_value = $('#'+span_id).html();
 			var addOne = parseInt(span_value.replace('Fasal ',''));
 			
-			if(addOne > selected.replace('tr_', ''))
+			var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
+
+			alert(addOne +'-'+ selectedFasalTxt);
+			/*FIX HERE*/
+			if(addOne > selectedFasalTxt.replace('Fasal ', ''))
 			{
 				var afterAdd = parseInt(addOne+1);
 				var fasal_index = 'Fasal '+afterAdd;
@@ -425,7 +426,7 @@
 			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
 			$('#tmp_'+indexFasalR).attr('id','fasal_index_'+indexFasalR+'_text');
 
-			$('#fasal_index_'+indexFasalR).html('Fasal'+' '+indexFasalR);
+			$('#fasal_index_'+indexFasalR).html('Fasal '+' '+indexFasalR);
 			
 			indexFasalR = parseInt(indexFasalR+1);
 		});
