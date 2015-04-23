@@ -62,8 +62,8 @@
 			<div class="selection">
 				<h5 id="_orange_title">Nama Pertubuhan</h5>
 				<form action="">
-					<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel">
-						<option value="" onChange="displayResult();" selected>Pilih</option>
+					<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel" onchange="displayResult();">
+						<option value=""  selected>Pilih</option>
 					</select>
 				</form>		
 			</div>
@@ -146,7 +146,8 @@
 		
 		if(a == 'Keseluruhan')
 		{
-			//$('#pertubuhan_carian').find('input').reset();
+			$('#pertubuhan_carian').val("");
+			$('#sel_nama_pertubuhan').val("");
 			$('#pertubuhan_carian').attr('disabled',true);
 			$('#sel_nama_pertubuhan').attr('disabled',true);
 			
@@ -234,13 +235,12 @@
 		});
 	}
 
-	function displayResult(kod_id)
+	function displayResult()
 	{
-		alert($(kod_id).text());
 		$(document).ready(function()
 		{
 			
-			var kod_nama_pertubuhan = namaPertubuhanCarian(kod_id);
+			var kod_pertubuhan =  $('#sel_nama_pertubuhan').val();
 			$.ajax
 			(
 				{
@@ -248,7 +248,7 @@
 					type:'POST',
 					data:
 					{
-						kod_nama_pertubuhan : kod_nama_pertubuhan
+						kod_pertubuhan : kod_pertubuhan
 					},
 					beforeSend: function() 
 					{
@@ -261,8 +261,8 @@
 						
 						if($(xml).find("status").text() == "ok")
 						{
-							$(xml).find("nama_pertubuhan").each(function()
-							{						
+							$(xml).find("details").each(function()
+							{			
 								var kod_id = $(this).find("kod_nama_pertubuhan");
 								var bil_lelaki_melayu = $(this).find("bil_lelaki_melayu");
 								var bil_lelaki_cina = $(this).find("bil_lelaki_cina");
@@ -273,20 +273,24 @@
 								var bil_perempuan_india = $(this).find("bil_perempuan_india");
 								var bil_perempuan_lain_lain = $(this).find("bil_perempuan_lain_lain");
 								
-								var total_melayu = bil_lelaki_melayu.text() + bil_perempuan_melayu.text();
-								var total_cina = bil_lelaki_cina.text() + bil_perempuan_cina.text();
-								var total_india = bil_lelaki_india.text() + bil_perempuan_india.text();
-								var total_lain = bil_lelaki_lain_lain.text() + bil_perempuan_lain_lain.text();
+								var total_melayu = 
+								parseInt(bil_lelaki_melayu.text()) + parseInt(bil_perempuan_melayu.text());
+								var total_cina = 
+								parseInt(bil_lelaki_cina.text()) + parseInt(bil_perempuan_cina.text());
+								var total_india = 
+								parseInt(bil_lelaki_india.text()) + parseInt(bil_perempuan_india.text());
+								var total_lain = 
+								parseInt(bil_lelaki_lain_lain.text()) + parseInt(bil_perempuan_lain_lain.text());
 								var total = total_melayu + total_cina + total_india + total_lain;
 								
 								$('body').waitMe('hide');
 								$('#content').show();
-
-								$('#bil_melayu').val($(total_melayu).text());
-								$('#bil_cina').val($(total_cina).text());		
-								$('#bil_india').val($(total_india).text());
-								$('#bil_lain').val($(total_lain).text());	
-								$('#jumlah').val($(total).text());									
+									
+								$('#bil_melayu').val(total_melayu);
+								$('#bil_cina').val(total_cina);		
+								$('#bil_india').val(total_india);
+								$('#bil_lain').val(total_lain);	
+								$('#jumlah').val(total);									
 							});
 						}
 						else if($(xml).find("status").text() == "error")
