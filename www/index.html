@@ -83,17 +83,6 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
-	
-	var devicePlatform = cordova.platformId;
-	localStorage['DEVICE_PLATFORM'] = devicePlatform;
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() 
-	{
-      	//var devicePlatform = cordova.platformId;
-		StatusBar.overlaysWebView(false);	
-	}
-	
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());
