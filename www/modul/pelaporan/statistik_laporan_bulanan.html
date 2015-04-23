@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
+		<div id="scrollTop" >
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="laporan_mingguan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>
+	</div>	
+	<!-- end of header -->
+
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PELAPORAN</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<!-- list -->
+	<div id="content">
+		<h2 class="_orange_text">Statistik Laporan Bulanan</h2>
+		
+		<div class="inform">
+			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="JUN 2014"><br/>
+		</div>
+		
+		<div class="grey_wrap">
+			
+			<table>
+				
+				<tr>
+					<td width="35px"><h2 class="_orange_text2">NO.</h2></td>
+					<td width="75px"><h2 class="_orange_text2">ZON</h2></td>		
+					<td width="0px"><h2 class="_orange_text2">NEGERI</h2></td>
+				</tr>
+			</table>
+		</div>
+		
+		<table style="margin-right:-5px">
+				<tr>
+					<td width="30px"></td>
+					<td width="90px"></td>		
+					<td width="36px">
+						<div class="orange_wrap">
+						  <h5 class="vertical_text">
+						   P 
+						   E 
+					   	   R 
+						   M 
+					  	   O 
+						   H 
+					 	   O 
+						  N
+						   A 
+						  N
+						  </h5>
+						</div>
+					</td>
+					
+					<td width="36px">
+						<div class="orange_wrap">
+						  <h5 class="vertical_text">
+						   K 
+						   E 
+						   L 
+						   U 
+					 	   L 
+						   U 
+						   S 
+						  A
+						   N 
+						  </h5>
+						</div>
+					</td>
+					
+					<td width="36px">
+						<div class="orange_wrap">
+						  <h5 class="vertical_text">
+						   S 
+						   E 
+					           M 
+						   A 
+						   K 
+						   A 
+						   N 
+						  </h5>
+						</div>
+					</td>
+					
+					<td width="36px">
+						<div class="orange_wrap">
+						  <h5 class="vertical_text">
+						   K 
+						   U 
+						   I 
+						   R 
+					           I 
+						  </h5>
+						</div>
+					</td>
+					
+					<td width="36px">
+						<div class="orange_wrap">
+						  <h5 class="vertical_text">
+						   P 
+						   E 
+						   N 
+						   O 
+						   L 
+					          A
+						  K
+					          A
+						  N
+						  </h5>
+						</div>
+					</td>
+				</tr>
+		</table>
+		
+		<table style="margin-top:10px" style="width:120px;" >
+				<tbody id="table_laporan"></tbody>
+		</table>
+		
+		<table>
+				<tr>
+					<td VALIGN=TOP style="width:30px">
+						<div class="orange_wrap2">
+							<h2 class="_white_text">JUMLAH<br/>KESELURUHAN</h2>
+						</div>
+					</td>
+					<td style="width:45px">
+						<div class="white_wrap" style="width:185px">
+							<table>
+								<tr id="jumlah_">
+									
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td VALIGN=TOP style="width:30px">
+						<div class="orange_wrap2" style="height:24px">
+							<h2 class="_white_text">PERATUSAN</h2>
+						</div>
+					</td>
+					<td style="width:45px">
+						<div class="white_wrap" style="width:185px">
+							<table>
+								<tr id="peratusan_">
+								</tr>
+								
+							</table>
+						</div>
+					</td>
+				</tr>
+		</table>
+		
+	</div>
+	
+	
+	<!-- js for slide menu -->
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
+	
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/waitMe.js"></script>
+	
+	<script>
+	run_waitMe();
+	$( document ).ready(function() {
+		$('body').waitMe('hide');
+		
+		//fetching object from localStorage
+		var data = JSON.parse(localStorage['LAPORAN']);
+		$("#tarikh_dari").val(data.tarikh_dari);
+		$("#tarikh_hingga").val(data.tarikh_hingga);
+		
+		$.each(data.laporan_negeri, function (index, value) {
+			/*Mengikut Zon*/
+			$.each(value, function (zon_index, per_zone) {
+			
+					/*Mengikut Negeri*/
+					$.each(per_zone.negeri, function (index, per_state) {
+					
+					if(index == 0){
+						$('#table_laporan')
+						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+per_zone.nama_zon+'</h2></td></tr>');
+					}
+					else
+					{
+						$('#table_laporan')
+						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td></td><td></td></tr>');
+					}
+					
+					$('#'+per_zone.nama_zon+''+(index+1)+'')
+					.append('<td id="'+per_state.nama_negeri+''+(index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_state.nama_negeri+'</h2></td>')
+					
+					$('#'+per_state.nama_negeri+''+(index+1)+'')
+					.append('<div class="white_wrap"><table><tr id="data_'+per_state.nama_negeri+''+(index+1)+'"></tr></table></div>')
+
+					$('#data_'+per_state.nama_negeri+''+(index+1)+'')
+					.append('<td width="38px">'+per_state.permohonan+'</td>')
+					.append('<td width="38px">'+per_state.kelulusan+'</td>')
+					.append('<td width="38px">'+per_state.semakan+'</td>')
+					.append('<td width="38px">'+per_state.kuiri+'</td>')
+					.append('<td width="38px">'+per_state.penolakan+'</td>')
+				});
+			 });
+
+		});
+		
+		/*Jumlah - Access tag value*/
+		$.each(data.jumlah, function (index, value) {
+
+			$('#jumlah_')
+			.append('<td width="38px">'+value+'</td>')
+		});
+		
+		/*Peratusan - Access tag value*/
+		$.each(data.peratusan, function (index, value) {
+			
+			$('#peratusan_')
+			.append('<td width="38px">'+value+'</td>')
+
+		});
+
+	});		
+	</script>
+	</body>
+</html>

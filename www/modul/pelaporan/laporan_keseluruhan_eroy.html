@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
+		<div id="scrollTop" >
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>
+	</head>
+	<body>
+	
+	
+	<!-- slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<a href="menu_pelaporan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>	
+	</div>	
+	<!-- end of header -->
+
+	<!-- header title -->
+	<div class="content_title">
+		<div class="input-group add-on search-box">
+			<div class="input-group-btn">
+				<h1 class="main_title">PELAPORAN</h1>
+			</div>
+		</div>
+	
+	</div>
+	<!-- end of header-title-->
+
+	<!-- list -->
+	<div id="content">
+		<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
+		
+		<h5 id="H5" style="margin-top: 5px">
+			<input class="checkboxClass" type="checkbox" name="" id="c_box"> <label for="c_box">Keseluruhan</label>
+		</h5>
+		
+		<div class="display">
+			<form id="" action="" method="POST">
+				<input type="text" style="margin-top: -5px" id="dari" name="dari" placeholder="Dari" class="disable_datepick"><br/>
+				<input type="text" id="hingga" name="hingga" placeholder="Hingga" class="disable_datepick"><br/>
+			</form>
+		</div>
+				
+		<h5 id="H5" style="margin-top: 5px">
+			<input type="checkbox" name="" id="c_box1" class="checkboxClass"> <label for="c_box1">Pilih Semua Zon</label>
+		</h5>
+		
+		<div class="checkbox">
+			<div id="left" style="margin-top:-15px">			
+				<h2 class="_orange_text">Zon Utara</h2>
+				<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="Kedah" />
+				<label for="c_box2">Kedah</label><br>
+				
+				<input class="checkboxClass" id="c_box3" type="checkbox" name="" value="Perlis" />
+				<label for="c_box3">Perlis</label><br>
+				
+				<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="P.Pinang" />
+				<label for="c_box4">P.Pinang</label><br>
+				
+				<h2 class="_orange_text">Zon Tengah</h2>
+				<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="Perak" />
+				<label for="c_box5">Perak</label><br>
+				
+				<input class="checkboxClass" id="c_box6" type="checkbox" name="" value="Selangor" />
+				<label for="c_box6">Selangor</label><br>
+				
+				<input class="checkboxClass" id="c_box7" type="checkbox" name="" value="W.Persekutuan" />
+				<label for="c_box7">W.Persekutuan</label><br>
+				
+				<h2 class="_orange_text">Zon Sabah</h2>
+				<input class="checkboxClass" id="c_box8" type="checkbox" name="" value="Sabah" />
+				<label for="c_box8">Sabah</label><br>
+				
+				<h2 class="_orange_text">Ibu Pejabat</h2>
+				<input class="checkboxClass" id="c_box9" type="checkbox" name="" value="Ibu Pejabat" />
+				<label for="c_box9">Ibu Pejabat</label><br>
+			</div>
+			
+			<div id="right" style="margin-top:-15px">
+				<h2 class="_orange_text">Zon Selatan</h2>
+				<input class="checkboxClass" id="c_box10" type="checkbox" name="" value="Melaka" />
+				<label for="c_box10">Melaka</label><br>
+				
+				<input class="checkboxClass" id="c_box11" type="checkbox" name="" value="Johor" />
+				<label for="c_box11">Johor</label><br>
+				
+				<input class="checkboxClass" id="c_box12" type="checkbox" name="" value="N.Sembilan" />
+				<label for="c_box12">N.Sembilan</label><br>
+				
+				<h2 class="_orange_text">Zon Timur</h2>
+				<input class="checkboxClass" id="c_box13" type="checkbox" name="" value="Pahang" />
+				<label for="c_box13">Pahang</label><br>
+				
+				<input class="checkboxClass" id="c_box14" type="checkbox" name="" value="Kelantan" />
+				<label for="c_box14">Kelantan</label><br>
+				
+				<input class="checkboxClass" id="c_box15" type="checkbox" name="" value="Terengganu" />
+				<label for="c_box15">Terengganu</label><br>
+				
+				<h2 class="_orange_text">Zon Sarawak</h2>
+				<input class="checkboxClass" id="c_box16" type="checkbox" name="" value="Sarawak" />
+				<label for="c_box16">Sarawak</label><br>
+			</div>
+		</div>
+		
+		<div class="default_button_holder">
+			<!-- <a href="statistik_laporan_keseluruhan_eroy.html"> --><input class="default_button" type="button" value="HANTAR" id="btn_submit"><!-- </a> -->
+		</div>
+
+	</div>
+	
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>
+	
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
+	<!-- alert box -->
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
+	<!--Loading Indicator -->
+	<script src="../../js/waitMe.js"></script>
+	
+	<script type="text/javascript">
+	$("#btn_submit").click(function(e)
+	{
+	
+		var dateFrom =  $.trim($("#tarikh_dari").val());
+		var dateTo =  $.trim($("#tarikh_hingga").val());
+		var jenisLaporan =  $.trim($("#jenis_laporan").val());
+		var selectedState = [];
+		
+		for( var i = 2 ; i < 17 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedState.push($("#c_box"+i).val());
+			}
+		}
+		
+		/*Javascript Validation*/
+		if (dateFrom == 0) 
+		{
+
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Isikan Tarikh!',
+					confirm: function(){}
+				}
+			);
+			
+			$('#tarikh_dari').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if (dateTo == "") 
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Isikan Tarikh!',
+					confirm: function(){}
+				}
+			);
+			$('#tarikh_hingga').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+		}
+		else if( selectedState.length <= 0)
+		{
+			$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila tandakan satu negeri!',
+						confirm: function(){}
+					}
+				);
+		}
+		else 
+		{
+		
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/laporan.php",
+					type:'POST',
+					data:
+					{				
+						dateFrom : dateFrom,
+						dateTo : dateTo,
+						jenisLaporan : jenisLaporan,
+						selectedState : selectedState,
+					},
+					dataType:'xml',
+					error: function(e) 
+					{
+						console.log(e);
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success:function(data)
+					{
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'ok') 
+						{
+							console.log(json.status);
+							
+							//window.localStorage.setItem("LAPORAN", json);
+							//saving object to localStorage
+							window.localStorage['LAPORAN'] = JSON.stringify(json);
+
+							
+							
+							window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
+							window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
+							window.location.href = "statistik_laporan_mingguan.html";
+						}
+						else if (json.status == 'error') 
+						{
+							console.log(json.status);
+							$.alert
+							(
+								{
+									title: 'Perhatian',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
+					}
+				}
+			);
+		}
+
+		
+	});	
+
+	/*Will change Later*/
+	$("#navigation").load('../navigation_menu/nav_login.html');
+	
+	</script>
+	</body>
+</html>
