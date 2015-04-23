@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -62,47 +63,38 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-	
-
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
-		</div>
-	
-		<div class="selection" id="jenis_bayaran_selection">
-					<h5 id="_orange_title">Bentuk Bayaran</h5>
-					
-						<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
-						<option value="" selected>Pilih Bentuk Bayaran</option>
-						</select>
-		</div>
-		
-		<div>
-			<input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
-		</div>
-		
-		<div>
-			<h5 id="_orange_title">Jumlah wang pendaftaran yang perlu dibayar</h5>
-		</div>
-			
-		<div class="display">
-			<input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" disabled></br>
-			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
-		</div>
-		
-		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
-		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
-		<input type="hidden" name="Key" id="key" value="E-ROY"/>
-		<input type="hidden" name="Channel" id="channel" value="02"/>
-		
-		<div class="default_button_holder">
-			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
-		</div>
-		
-	</div>
-	</div>
+    <form action="" name="pendaftaran" id="pendaftaran">
+        <input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
+	    <div class="_form">
+            <div>
+                <h5 id="_orange_title">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
+            </div>
+		    <div class="selection" id="jenisbayaran_selection" style="margin-top: 0px;">
+				<h5 id="_orange_title">Bentuk Bayaran</h5>
+                <select id="sel_jenisbayaran" name="sel_jenisbayaran" class="_sel">
+                <option value="" selected>Pilih Bentuk Bayaran</option>
+                </select>
+		    </div>
+            <div>
+                <input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title">Jumlah wang pendaftaran yang perlu dibayar</h5>
+            </div>
+            <div class="display">
+                <input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" style="margin-top: 8px;" disabled></br>
+                <input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
+            </div>
+            <input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
+            <input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
+            <input type="hidden" name="Key" id="key" value="E-ROY"/>
+            <input type="hidden" name="Channel" id="channel" value="02"/>
+            <div class="default_button_holder">
+                <input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+            </div>
+	    </div>
+    </form>
 	</div>
 	<!-- end of form -->
 	
@@ -125,7 +117,9 @@
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-		
+
+    <script type="text/javascript" src="js/jquery.qtip.js"></script>
+
 	<script>
 	
 
@@ -133,20 +127,27 @@
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
 	
-	getJenisBayaran($('#jenis_bayaran').attr('id'));
+	getJenisBayaran($('#sel_jenisbayaran').attr('id'));
 	getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
 
 	
 	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
-	$(function() 
+    var status = window.localStorage.getItem('STATUS');
+
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+	    $(function()
 			{
 				$.ajax({
 						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_8.php",
 						type:'POST',
 						data: {
 							kad_pengenalan : kad_pengenalan,
-							insertData : "select"
+							insertData : "kuiri"
 						},
 						beforeSend: function() {
 								run_waitMe();
@@ -156,12 +157,17 @@
 							console.log(json);
 							if (json.status == 'SELECT') {
 								console.log(json);
-
-								$("#jenis_bayaran").val(json.details.id_bentuk_bayaran);
+                                for (var i = 0; i < formLength; i++) {
+                                    if(document.pendaftaran.elements[i].type != 'button')
+                                    {
+                                        document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+                                    }
+                                };
+								$("#sel_jenisbayaran").val(json.details.id_bentuk_bayaran);
 								getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
 								$("#wang_tidak_online").val(json.details.no_wangpos_bankdraf);
-
-								$('body').waitMe('hide');
+                                checkKuiriPendaftaran(kad_pengenalan,'8');
+								//$('body').waitMe('hide');
 							}
 							else if (json.status == 'VIEW') {
 							//Do nothing. Just display				
@@ -171,35 +177,70 @@
 						}
 					});
 		});
-	
+    }
+    else
+    {
+        var insertData = "TRUE";
+        var kad_pengenalan = window.localStorage.getItem('LOGIN');
+        $(function()
+        {
+            $.ajax({
+                url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_8.php",
+                type:'POST',
+                data: {
+                    kad_pengenalan : kad_pengenalan,
+                    insertData : "select"
+                },
+                beforeSend: function() {
+                    run_waitMe();
+                },
+                success:function(data){
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        console.log(json);
+
+                        $("#sel_jenisbayaran").val(json.details.id_bentuk_bayaran);
+                        getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
+                        $("#wang_tidak_online").val(json.details.no_wangpos_bankdraf);
+
+                        $('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
 	
 	$("#btn_submit").click(function(e){
 
-			$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
+			$('#sel_jenisbayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
 
 			 
 			redisplayHeader();
 			var empty = false;
 			e.preventDefault();
-			
-			var kad_pengenalan = window.localStorage.getItem('LOGIN');
-			var insertData = "TRUE";
+
 			var id_amaun_bayaran = $('#jumlah_perlu_dibayar').val();
 
-			$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
+			$('#wang_tidak_online,#jenisbayaran_selection').css({"border":"","box-shadow":""});
 
 			
 
-			var jenis_bayaran = $("#jenis_bayaran").val();
-			if (jenis_bayaran.length == 0)
+			var sel_jenisbayaran = $("#sel_jenisbayaran").val();
+			if (sel_jenisbayaran.length == 0)
 			{
-				$('#jenis_bayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+				$('#jenisbayaran_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 				empty = true;
 				
 				
 			}
 			
-			if(jenis_bayaran == "1")
+			if(sel_jenisbayaran == "1")
 				{
 					var no_wang_pos = $("#wang_tidak_online").val();
 					if(no_wang_pos.length == 0)
@@ -225,7 +266,7 @@
 			else
 			{
 			
-				if($('#jenis_bayaran').val() == 2)
+				if($('#sel_jenisbayaran').val() == 2)
 				{
 					
 					var amount = $.trim($('#jumlah_perlu_dibayar').val().replace('RM', ''));
@@ -251,78 +292,84 @@
 				}
 				else
 				{
+                    if (id_pertubuhan == 'empty')
+                    {
+                        window.location.href = "pendaftaran-tunggal-9.html";
+                    }
+                    else {
+                        $.ajax({
+                            url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_8.php",
+                            type: 'POST',
+                            data: {
 
-					$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_8.php",
-						type:'POST',
-						data: {
+                                id_bentuk_bayaran: sel_jenisbayaran,
+                                no_wang_pos: no_wang_pos,
+                                id_amaun_bayaran: id_amaun_bayaran,
+                                kad_pengenalan: kad_pengenalan,
+                                insertData: insertData,
+                            },
+                            beforeSend: function () {
+                                run_waitMe();
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                var json = $.xml2json(data);
+                                console.log(json);
+                                if (json.status == 'INSERT_SUCCESS') {
 
-							id_bentuk_bayaran : jenis_bayaran,
-							no_wang_pos: no_wang_pos,
-							id_amaun_bayaran: id_amaun_bayaran,
-							kad_pengenalan : kad_pengenalan,
-							insertData : insertData,
-						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							console.log(data);
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'INSERT_SUCCESS') {
-								
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-											window.location.href = "pendaftaran-tunggal-9.html";
-										}
-									}
-								);
-							
-							}
-							else if (json.status == 'INSERT_ERROR') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										}
-									}
-								);
-							}
-							else if (json.status == 'UPDATE_ERROR') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										}
-									}
-								);
-							}
-							else if (json.status == 'UPDATE_SUCCESS') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										window.location.href = "pendaftaran-tunggal-9.html";
-										}
-									}
-								);
-							}
-							else{}
-							$('body').waitMe('hide');
-						}
-					});
-				}
+                                    $.alert
+                                    (
+                                            {
+                                                title: 'Status',
+                                                content: json.message,
+                                                confirm: function () {
+                                                    window.location.href = "pendaftaran-tunggal-9.html";
+                                                }
+                                            }
+                                    );
+
+                                }
+                                else if (json.status == 'INSERT_ERROR') {
+                                    $.alert
+                                    (
+                                            {
+                                                title: 'Status',
+                                                content: json.message,
+                                                confirm: function () {
+                                                }
+                                            }
+                                    );
+                                }
+                                else if (json.status == 'UPDATE_ERROR') {
+                                    $.alert
+                                    (
+                                            {
+                                                title: 'Status',
+                                                content: json.message,
+                                                confirm: function () {
+                                                }
+                                            }
+                                    );
+                                }
+                                else if (json.status == 'UPDATE_SUCCESS') {
+                                    $.alert
+                                    (
+                                            {
+                                                title: 'Status',
+                                                content: json.message,
+                                                confirm: function () {
+                                                    window.location.href = "pendaftaran-tunggal-9.html";
+                                                }
+                                            }
+                                    );
+                                }
+                                else {
+                                }
+                                $('body').waitMe('hide');
+                            }
+                        });
+                    }
+                }
 			}
 		
 	});
