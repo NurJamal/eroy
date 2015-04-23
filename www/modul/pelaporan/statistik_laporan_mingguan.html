@@ -212,28 +212,22 @@
 	
 	<script>
 	run_waitMe();
-	$( document ).ready(function() 
-	{
+	$( document ).ready(function() {
 		$('body').waitMe('hide');
 		
 		//fetching object from localStorage
 		var data = JSON.parse(localStorage['LAPORAN']);
-		
 		$("#tarikh_dari").val(data.tarikh_dari);
 		$("#tarikh_hingga").val(data.tarikh_hingga);
 		
-		$.each(data.laporan_negeri, function (index, value)
-		{
-			alert('1');
+		$.each(data.laporan_negeri, function (index, value) {
 			/*Mengikut Zon*/
-			$.each(value, function (zon_index, per_zone)
-			{
-				alert('2');
-				/*Mengikut Negeri*/
-				$.each(per_zone.negeri, function (index, per_state) 
-				{
-					if(index == 0)
-					{
+			$.each(value, function (zon_index, per_zone) {
+			
+					/*Mengikut Negeri*/
+					$.each(per_zone.negeri, function (index, per_state) {
+					
+					if(index == 0){
 						$('#table_laporan')
 						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+per_zone.nama_zon+'</h2></td></tr>');
 					}
@@ -241,7 +235,8 @@
 					{
 						$('#table_laporan')
 						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td></td><td></td></tr>');
-					}				
+					}
+					
 					$('#'+per_zone.nama_zon+''+(index+1)+'')
 					.append('<td id="'+per_state.nama_negeri+''+(index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_state.nama_negeri+'</h2></td>')
 					
@@ -255,20 +250,20 @@
 					.append('<td width="38px">'+per_state.kuiri+'</td>')
 					.append('<td width="38px">'+per_state.penolakan+'</td>')
 				});
-			});
+			 });
 
 		});
 		
 		/*Jumlah - Access tag value*/
-		$.each(data.jumlah, function (index, value) 
-		{
+		$.each(data.jumlah, function (index, value) {
+
 			$('#jumlah_')
 			.append('<td width="38px">'+value+'</td>')
 		});
 		
 		/*Peratusan - Access tag value*/
-		$.each(data.peratusan, function (index, value)
-		{	
+		$.each(data.peratusan, function (index, value) {
+			
 			$('#peratusan_')
 			.append('<td width="38px">'+value+'</td>')
 
