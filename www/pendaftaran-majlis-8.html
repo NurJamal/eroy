@@ -68,7 +68,7 @@
 	
 		<div>
 			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
+			<h1 class="_dark_text" id="nama_pendaftaran_majlis" style="margin-top:5px;"></h1><br/>
 		</div>
 	
 		<div class="selection" id="jenis_bayaran_selection">
@@ -92,7 +92,8 @@
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
-		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
+		<input type="hidden" name="Amount" id="amount" />
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Majlis">
 		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
 		<input type="hidden" name="Key" id="key" value="E-ROY"/>
 		<input type="hidden" name="Channel" id="channel" value="02"/>
@@ -131,7 +132,7 @@
 
 	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
-	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"));
+	$('#nama_pendaftaran_majlis').html(window.localStorage.getItem("NAMA_PENDAFTARAN_MAJLIS"));
 	
 	getJenisBayaran($('#jenis_bayaran').attr('id'));
 	getJumlahBayaranMengikutPeringkat($('#jumlah_perlu_dibayar').attr('id'),$('#id_amaun_bayaran').attr('id'),1);
@@ -228,12 +229,12 @@
 				if($('#jenis_bayaran').val() == 2)
 				{
 					
-					var amount = $.trim($('#jumlah_perlu_dibayar').val().replace('RM', ''));
+					var amount = $.trim($('#amount').val());
 					var paymentDesc = $.trim($('#paymentDesc').val());
 					var paymentItemName = $.trim($('#paymentItemName').val());
 					var key = $.trim($('#key').val());
 					var channel = $.trim($('#channel').val());
-					var redirectUrl = "pendaftaran-tunggal-9.html";
+					var redirectUrl = "pendaftaran-majlis-9.html";
 					var pertubuhanRefCode = localStorage.getItem("PAYMENT_REF_CODE");
 					
 					/* LocalStorage - Make sure to overwrite all var each time make payment */

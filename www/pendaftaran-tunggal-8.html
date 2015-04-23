@@ -72,10 +72,10 @@
 		</div>
 	
 		<div class="selection" id="jenis_bayaran_selection">
-					<h5 id="_orange_title">Bentuk Bayaran</h5>
+				<h5 id="_orange_title">Bentuk Bayaran</h5>
 					
-						<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
-						<option value="" selected>Pilih Bentuk Bayaran</option>
+					<select id="jenis_bayaran" name="jenis_bayaran" class="_sel">
+				<option value="" selected>Pilih Bentuk Bayaran</option>
 						</select>
 		</div>
 		
@@ -92,7 +92,8 @@
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
-		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
+		<input type="hidden" name="Amount" id="amount" />
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal"/>
 		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
 		<input type="hidden" name="Key" id="key" value="E-ROY"/>
 		<input type="hidden" name="Channel" id="channel" value="02"/>
@@ -228,7 +229,7 @@
 				if($('#jenis_bayaran').val() == 2)
 				{
 					
-					var amount = $.trim($('#jumlah_perlu_dibayar').val().replace('RM', ''));
+					var amount = $.trim($('#amount').val());
 					var paymentDesc = $.trim($('#paymentDesc').val());
 					var paymentItemName = $.trim($('#paymentItemName').val());
 					var key = $.trim($('#key').val());

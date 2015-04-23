@@ -45,8 +45,8 @@
 		</div>
 		<!-- end of header-title-->
 
-		<div id="content">
-			<div class="_form">
+	<div id="content">
+	<div class="_form">
 		<h2 class="_orange_text">Pembayaran Carian Pemeriksaan Dokumen (24 Jam tanpa Cetak)</h2>
 			
 		<div class="selection" id="jenis_bayaran_selection">
@@ -79,8 +79,8 @@
 		<div class="default_button_holder">
 			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 		</div>
-		</div>
-		</div>
+	</div>
+	</div>
 		
 	</div>
 	
@@ -119,7 +119,6 @@
 		e.preventDefault();			
 		
 		
-
 			$('#jenis_bayaran,#id_amaun_bayaran').css({"border":"","box-shadow":""});
 
 			 
@@ -129,7 +128,7 @@
 			
 			var kad_pengenalan = window.localStorage.getItem('LOGIN');
 			var insertData = "TRUE";
-			var id_amaun_bayaran = $('#jumlah_perlu_dibayar').val();
+			var paymentAmount = $('#amount').val();
 
 			$('#wang_tidak_online,#jenis_bayaran_selection').css({"border":"","box-shadow":""});
 
@@ -193,15 +192,15 @@
 				}
 				else
 				{
-					alert('Under Construction');
+					//alert('Under Construction');
 					$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_8.php",
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pindaan_maklumat_pembayaran.php",
 						type:'POST',
 						data: {
 
 							id_bentuk_bayaran : jenis_bayaran,
 							no_wang_pos: no_wang_pos,
-							id_amaun_bayaran: id_amaun_bayaran,
+							paymentAmount: paymentAmount,
 							kad_pengenalan : kad_pengenalan,
 							insertData : insertData,
 						},

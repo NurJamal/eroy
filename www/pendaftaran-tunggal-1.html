@@ -208,7 +208,9 @@
 						var json = $.xml2json(data);
 						console.log(json);
 						if (json.status == 'SELECT') {
-							console.log(json);
+
+							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+
 							$("#f_lokaliti").val(json.details.lokaliti);
 							$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
 							$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
@@ -219,7 +221,6 @@
 							getCountry($('#sel_negeri').attr('id'),json.details.id_negeri);
 
 							$('body').waitMe('hide');
-
 						}
 						else if (json.status == 'VIEW') {
 						//Do nothing. Just display
@@ -400,7 +401,7 @@
 							}
 						);
 						window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
-
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 					}
 					else if (json.status == 'UPDATE_ERROR') {
 						$.alert

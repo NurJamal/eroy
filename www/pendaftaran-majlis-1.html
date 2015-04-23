@@ -171,7 +171,9 @@
 							var json = $.xml2json(data);
 							console.log(json);
 							if (json.status == 'SELECT') {
-								console.log(json);
+							
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+								
 								$("#f_lokaliti").val(json.details.lokaliti);
 								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
 								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
@@ -182,8 +184,7 @@
 								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
 								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
 
-								$('body').waitMe('hide');
-
+								$('body').waitMe('hide');	
 							}
 							else if (json.status == 'VIEW') {
 							//Do nothing. Just display
@@ -339,7 +340,9 @@
 					var json = $.xml2json(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						
-
+						window.localStorage.setItem("NAMA_PENDAFTARAN_MAJLIS", nama_penuh_pertubuhan);
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+						
 						$.alert
 						(
 							{
@@ -350,7 +353,8 @@
 								}
 							}
 						);
-						window.localStorage.setItem("NAMA_PENDAFTARAN_MAJLIS", nama_penuh_pertubuhan);
+					
+
 					}
 					else if (json.status == 'UPDATE_SUCCESS') {
 						$.alert
@@ -364,7 +368,7 @@
 							}
 						);
 						window.localStorage.setItem("NAMA_PENDAFTARAN_MAJLIS", nama_penuh_pertubuhan);
-
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 					}
 					else if (json.status == 'UPDATE_ERROR') {
 						$.alert

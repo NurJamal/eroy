@@ -86,13 +86,13 @@
 	
 	var devicePlatform = cordova.platformId;
 	localStorage['DEVICE_PLATFORM'] = devicePlatform;
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() 
-	{
-      	//var devicePlatform = cordova.platformId;
-		StatusBar.overlaysWebView(false);	
-	}
+	StatusBar.overlaysWebView(false);
+   
+//  document.addEventListener("deviceready", onDeviceReady, false);
+//  function onDeviceReady() 
+//	{
+//		var devicePlatform = cordova.platformId;		
+//	}
 	
 	$("#btn_submit").click(function(e)
 	{
