@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
 		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>
@@ -26,7 +27,7 @@
 	<div id="head">
 		<img src="../../img/logo-atas.png" class="logo"/>
 		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="laporan_mingguan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
 	</div>	
 	<!-- end of header -->
 
@@ -47,8 +48,8 @@
 		<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
 		
 		<div class="inform">
-			<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="12/10/2014"><br/>
-			<input type="text" name="tarikh_hingga" id="tarikh_hingga" placeholder="22/10/2014"><br/>
+			<input type="text" name="tarikh_dari" id="tarikh_dari" disabled><br/>
+			<input type="text" name="tarikh_hingga" id="tarikh_hingga" disabled><br/>
 		</div>
 		
 		<div class="grey_wrap">
@@ -200,6 +201,13 @@
 	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/CheckBoxPelaporan.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
+	
+	<!--Loading Indicator -->
 	<script src="../../js/waitMe.js"></script>
 	
 	<script>
@@ -216,13 +224,14 @@
 		
 		$.each(data.laporan_negeri, function (index, value)
 		{
+			alert('1');
 			/*Mengikut Zon*/
 			$.each(value, function (zon_index, per_zone)
 			{
+				alert('2');
 				/*Mengikut Negeri*/
 				$.each(per_zone.negeri, function (index, per_state) 
 				{
-				
 					if(index == 0)
 					{
 						$('#table_laporan')
@@ -232,8 +241,7 @@
 					{
 						$('#table_laporan')
 						.append('<tr id="'+per_zone.nama_zon+''+(index+1)+'"><td></td><td></td></tr>');
-					}
-				
+					}				
 					$('#'+per_zone.nama_zon+''+(index+1)+'')
 					.append('<td id="'+per_state.nama_negeri+''+(index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_state.nama_negeri+'</h2></td>')
 					
