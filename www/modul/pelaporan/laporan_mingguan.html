@@ -59,57 +59,57 @@
 			<div class="checkbox">
 				<div id="left" style="margin-top:-15px">			
 					<h2 class="_orange_text">Zon Utara</h2>
-					<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="01" />
+					<input class="checkboxClass" id="c_box2" type="checkbox" name="" value="02" />
 					<label for="c_box2">Kedah</label><br>
 					
-					<input class="checkboxClass" id="c_box3" type="checkbox" name="" value="02" />
+					<input class="checkboxClass" id="c_box3" type="checkbox" name="" value="09" />
 					<label for="c_box3">Perlis</label><br>
 					
-					<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="03" />
+					<input class="checkboxClass" id="c_box4" type="checkbox" name="" value="07" />
 					<label for="c_box4">P.Pinang</label><br>
 					
 					<h2 class="_orange_text">Zon Tengah</h2>
-					<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="04" />
+					<input class="checkboxClass" id="c_box5" type="checkbox" name="" value="08" />
 					<label for="c_box5">Perak</label><br>
 					
-					<input class="checkboxClass" id="c_box6" type="checkbox" name="" value="05" />
+					<input class="checkboxClass" id="c_box6" type="checkbox" name="" value="10" />
 					<label for="c_box6">Selangor</label><br>
 					
-					<input class="checkboxClass" id="c_box7" type="checkbox" name="" value="06" />
+					<input class="checkboxClass" id="c_box7" type="checkbox" name="" value="14" />
 					<label for="c_box7">W.Persekutuan</label><br>
 					
 					<h2 class="_orange_text">Zon Sabah</h2>
-					<input class="checkboxClass" id="c_box8" type="checkbox" name="" value="07" />
+					<input class="checkboxClass" id="c_box8" type="checkbox" name="" value="12" />
 					<label for="c_box8">Sabah</label><br>
 					
 					<h2 class="_orange_text">Ibu Pejabat</h2>
-					<input class="checkboxClass" id="c_box9" type="checkbox" name="" value="08" />
+					<input class="checkboxClass" id="c_box9" type="checkbox" name="" value="21" />
 					<label for="c_box9">Ibu Pejabat</label><br>
 				</div>
 				
 				<div id="right" style="margin-top:-15px">
 					<h2 class="_orange_text">Zon Selatan</h2>
-					<input class="checkboxClass" id="c_box10" type="checkbox" name="" value="09" />
+					<input class="checkboxClass" id="c_box10" type="checkbox" name="" value="04" />
 					<label for="c_box10">Melaka</label><br>
 					
-					<input class="checkboxClass" id="c_box11" type="checkbox" name="" value="10" />
+					<input class="checkboxClass" id="c_box11" type="checkbox" name="" value="01" />
 					<label for="c_box11">Johor</label><br>
 					
-					<input class="checkboxClass" id="c_box12" type="checkbox" name="" value="11" />
+					<input class="checkboxClass" id="c_box12" type="checkbox" name="" value="05" />
 					<label for="c_box12">N.Sembilan</label><br>
 					
 					<h2 class="_orange_text">Zon Timur</h2>
-					<input class="checkboxClass" id="c_box13" type="checkbox" name="" value="12" />
+					<input class="checkboxClass" id="c_box13" type="checkbox" name="" value="06" />
 					<label for="c_box13">Pahang</label><br>
 					
-					<input class="checkboxClass" id="c_box14" type="checkbox" name="" value="13" />
+					<input class="checkboxClass" id="c_box14" type="checkbox" name="" value="03" />
 					<label for="c_box14">Kelantan</label><br>
 					
-					<input class="checkboxClass" id="c_box15" type="checkbox" name="" value="14" />
+					<input class="checkboxClass" id="c_box15" type="checkbox" name="" value="11" />
 					<label for="c_box15">Terengganu</label><br>
 					
 					<h2 class="_orange_text">Zon Sarawak</h2>
-					<input class="checkboxClass" id="c_box16" type="checkbox" name="" value="15" />
+					<input class="checkboxClass" id="c_box16" type="checkbox" name="" value="13" />
 					<label for="c_box16">Sarawak</label><br>
 				</div>
 			</div>
@@ -138,6 +138,24 @@
 	<script src="../../js/waitMe.js"></script>
 	
 	<script type="text/javascript">
+	/*function selectedState()
+	{
+		var arr = [];
+		$('.checkbox input[type="checkbox"]:checked').each(function()
+		{
+			arr.push($(this).val());
+		});
+		return arr; 
+	}
+	
+	$('#btn_submit').click(function() 
+	{
+		window.localStorage['SELECTED_STATE'] = JSON.stringify(selectedState());
+
+		window.location.href = "statistik_laporan_mingguan.html";
+	});	*/
+	
+	
 
 	$("#btn_submit").click(function(e)
 	{
@@ -159,7 +177,7 @@
 			}
 		}
 		
-		/*Javascript Validation*/
+		window.localStorage['SELECTED_STATE'] = JSON.stringify(selectedState);
 		if (dateFrom == 0) 
 		{
 			$.alert
@@ -202,14 +220,14 @@
 			$.ajax
 			(
 				{
-					url:"http://eroy.me-tech.com.my/api/laporan/laporan.php",
+					url:"http://eroy.me-tech.com.my/api/laporan/pelaporan.php",
 					type:'POST',
 					data:
 					{				
 						dateFrom : dateFrom,
 						dateTo : dateTo,
 						jenisLaporan : jenisLaporan,
-						selectedState : selectedState,
+						selectedState : selectedState
 					},
 					dataType:'xml',
 					error: function(e) 
@@ -227,9 +245,8 @@
 						console.log(json);
 						if (json.status == 'ok') 
 						{
-							console.log(json.status);
+							console.log(json.laporan);
 							
-							//window.localStorage.setItem("LAPORAN", json);
 							//saving object to localStorage
 							window.localStorage['LAPORAN'] = JSON.stringify(json);
 
@@ -257,7 +274,7 @@
 		}
 
 		
-	});	
+	});
 
 	/*Will change Later*/
 	//$("#navigation").load('../navigation_menu/nav_login.html');

@@ -63,7 +63,7 @@
 				<h5 id="_orange_title">Nama Pertubuhan</h5>
 				<form action="">
 					<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel" onchange="displayResult();">
-						<option value=""  selected>Pilih</option>
+						<option value="" selected>Pilih</option>
 					</select>
 				</form>		
 			</div>
@@ -150,6 +150,71 @@
 			$('#sel_nama_pertubuhan').val("");
 			$('#pertubuhan_carian').attr('disabled',true);
 			$('#sel_nama_pertubuhan').attr('disabled',true);
+			
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/get_keseluruhan.php",
+					type:'POST',
+					data:
+					{
+						a : a
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						
+						if($(xml).find("status").text() == "ok")
+						{
+							$(xml).find("details").each(function()
+							{			
+								var kod_id = $(this).find("kod_nama_pertubuhan");
+								var bil_lelaki_melayu = $(this).find("bil_lelaki_melayu");
+								var bil_lelaki_cina = $(this).find("bil_lelaki_cina");
+								var bil_lelaki_india = $(this).find("bil_lelaki_india");
+								var bil_lelaki_lain_lain = $(this).find("bil_lelaki_lain_lain");
+								var bil_perempuan_melayu = $(this).find("bil_perempuan_melayu");
+								var bil_perempuan_cina = $(this).find("bil_perempuan_cina");
+								var bil_perempuan_india = $(this).find("bil_perempuan_india");
+								var bil_perempuan_lain_lain = $(this).find("bil_perempuan_lain_lain");
+								
+								var total_melayu = 
+								parseInt(bil_lelaki_melayu.text()) + parseInt(bil_perempuan_melayu.text());
+								var total_cina = 
+								parseInt(bil_lelaki_cina.text()) + parseInt(bil_perempuan_cina.text());
+								var total_india = 
+								parseInt(bil_lelaki_india.text()) + parseInt(bil_perempuan_india.text());
+								var total_lain = 
+								parseInt(bil_lelaki_lain_lain.text()) + parseInt(bil_perempuan_lain_lain.text());
+								var total = total_melayu + total_cina + total_india + total_lain;
+								
+								$('body').waitMe('hide');
+								$('#content').show();
+									
+								$('#bil_melayu').val(total_melayu);
+								$('#bil_cina').val(total_cina);		
+								$('#bil_india').val(total_india);
+								$('#bil_lain').val(total_lain);	
+								$('#jumlah').val(total);	
+							});
+						}
+						else if($(xml).find("status").text() == "error")
+						{
+							$('body').waitMe('hide');
+						}
+						else{}
+					},
+					error: function()
+					{
+						console.log("An error occurred while processing XML file.");
+					},
+				}
+			)
 			
 		}
 		else
