@@ -10,5 +10,19 @@
             "type": "registry",
             "id": "org.apache.cordova.statusbar"
         }
+    },
+    "com.sharinglabs.cordova.plugin.datepicker": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Sharinglabs/cordova-plugin-datepicker",
+            "subdir": "."
+        }
+    },
+    "org.apache.cordova.device": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git",
+            "subdir": "."
+        }
     }
 }
