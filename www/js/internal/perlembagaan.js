@@ -560,19 +560,36 @@
 			var arr = currentSubFasal.split('.');
 			var val =  $.trim(arr[0]);
 			var newSubFasalAdd = '';
-			var prevFasalTxtShow = '';
+			var prevFasalTxtShow = 0;
 
 			for(var arrLength = levelIDShow; arrLength<arr.length; arrLength++)
 			{
 				newSubFasalAdd += '.'+$.trim(arr[arrLength]);
 			}	
-
-			for(var arrLengthNoChange = 0; arrLengthNoChange<arr.length-levelIDShow; arrLengthNoChange++)
-			{
-				prevFasalTxtShow += parseInt(arr[arrLengthNoChange])+1;
+			for(var arrLengthNoChange = 0; arrLengthNoChange< levelIDShow; arrLengthNoChange++)
+			{			
+				prevFasalTxtShow = parseInt(arr[arrLengthNoChange])+1;
 			}
 
 			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);
 		});
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
