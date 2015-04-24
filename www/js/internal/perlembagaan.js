@@ -1,6 +1,7 @@
 
 	/*JAVASCRIPT PERLEMBAGAAN*/
-	
+	/*Need to clear all localStorage related perlembagaan first */
+
 		// Create the tooltips only when document ready
 		$("#appendPerlembagaan").delegate(".openToolTip", "click", function (){
 		
@@ -208,11 +209,12 @@
 	
 	//Add Bottom
 	function addBottom()
-	{				
-		var selected = localStorage.getItem('selected_id_perlembagaan');
+	{			
 
+		/*Get selected & previous id - switch place*/	
+		var selected = localStorage.getItem('selected_id_perlembagaan');
 		var prevID = $("#"+selected).prev().attr('id');
-	
+
 		//If prev id == 'level'. Do nothing. 
 		var arr = prevID.split('_');
 		var val =  $.trim(arr[0]);
@@ -228,15 +230,18 @@
 		}
 		$("div").qtip('hide');
 		
+		
+		rewriteSubFasal(selected,prevID);
 		rewriteID();
 	}
+
 	
 	//Add Top
 	function addTop()
 	{
 		var selected = localStorage.getItem('selected_id_perlembagaan');
 		var nextID = $("#"+selected).next().attr('id');
-		
+
 		divSelected = $('#'+selected);
 		divNext = $('#'+nextID);
 
@@ -247,6 +252,7 @@
 		divNext.replaceWith(tdiv1);
 		$("div").qtip('hide');				
 
+		rewriteSubFasal(nextID,selected);
 		rewriteID();
 	}
 	
@@ -510,6 +516,63 @@
 			$('#xxx_'+indexFasalRXX).attr('id','tr_'+indexFasalRXX+'_img');
 			indexFasalRXX = parseInt(indexFasalRXX+1);
 		});
+	}
 
+	function rewriteSubFasal(selected,prevID)
+	{
+		var idSelected = selected;
+		var idPrev = prevID;
+
+		/*Get current fasal text selected - plus one for switch with top*/
+		var selectedFasalTxt = $('#'+(idSelected)+' .fasal_label').html();
+		selectedFasalTxtShow = parseInt((selectedFasalTxt).replace('Fasal ', ''))-1;
+
+		$('#'+(idSelected)+' .sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			var currentSubFasal = $('#'+tr_id).html();
+			
+			var arr = currentSubFasal.split('.');
+			var val =  $.trim(arr[0]);
+			var newSubFasalMinus = '';
+			for(var arrLength = 1; arrLength<arr.length; arrLength++)
+			{
+				newSubFasalMinus += '.'+$.trim(arr[arrLength]);
+
+			}	
+
+			$('#'+tr_id).html(selectedFasalTxtShow+''+newSubFasalMinus);
+		});
+
+
+		/*Get prev fasal text - add one for switch with bottom*/
+		/* need to use level value to determine the no */
+		//var prevFasalTxt = $('#'+(idPrev)+' .fasal_label').html();
+		//prevFasalTxtShow = parseInt((prevFasalTxt).replace('Fasal ', ''))+1;
+
+		var levelID = $('#'+(idPrev)).children().attr('id');
+		levelIDShow = (levelID).replace('level_', '');
+
+
+		$('#'+(idPrev)+' .sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			var currentSubFasal = $('#'+tr_id).html();
+			
+			var arr = currentSubFasal.split('.');
+			var val =  $.trim(arr[0]);
+			var newSubFasalAdd = '';
+			var prevFasalTxtShow = '';
+
+			for(var arrLength = levelIDShow; arrLength<arr.length; arrLength++)
+			{
+				newSubFasalAdd += '.'+$.trim(arr[arrLength]);
+			}	
+
+			for(var arrLengthNoChange = 0; arrLengthNoChange<arr.length-levelIDShow; arrLengthNoChange++)
+			{
+				prevFasalTxtShow += parseInt(arr[arrLengthNoChange])+1;
+			}
+
+			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);
+		});
 	}
 
