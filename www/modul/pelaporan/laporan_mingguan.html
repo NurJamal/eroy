@@ -165,6 +165,8 @@
 		var empty = false;
 		var selectedState = [];
 		
+		window.localStorage.setItem("TARIKH_DARI", dateFrom);
+		window.localStorage.setItem("TARIKH_HINGGA", dateTo);
 		e.preventDefault();
 		
 		$('#tarikh_dari, #tarikh_hingga').css({"border":"","box-shadow":""});
@@ -250,8 +252,6 @@
 							//saving object to localStorage
 							window.localStorage['LAPORAN'] = JSON.stringify(json);
 
-							//window.localStorage.setItem("TARIKH_DARI", json.tarikh_dari);
-							//window.localStorage.setItem("TARIKH_HINGGA", json.tarikh_hingga);
 							window.location.href = "statistik_laporan_mingguan.html";
 						}
 						else if (json.status == 'error') 
