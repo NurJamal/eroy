@@ -524,7 +524,7 @@
 		var idPrev = prevID;
 
 		/*Get current fasal text selected - plus one for switch with top*/
-		var selectedFasalTxt = $('#'+(idSelected)+' .fasal_label').html();
+		/*var selectedFasalTxt = $('#'+(idSelected)+' .fasal_label').html();
 		selectedFasalTxtShow = parseInt((selectedFasalTxt).replace('Fasal ', ''))-1;
 
 		$('#'+(idSelected)+' .sub_fasal_label').each(function() {
@@ -569,6 +569,34 @@
 			for(var arrLengthNoChange = 0; arrLengthNoChange< levelIDShow; arrLengthNoChange++)
 			{			
 				prevFasalTxtShow = parseInt(arr[arrLengthNoChange])+1;
+			}
+
+			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);
+		});
+
+		var xx = $('#'+(idSelected)).children().attr('id');
+		var zz = (xx).replace('level_', '');
+		var yy = '';
+		if(zz > 1){ yy = 1; }
+		else{ yy = 0;}
+		$('#'+(idSelected)+' .sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			var currentSubFasal = $('#'+tr_id).html();
+			
+			var arr = currentSubFasal.split('.');
+			var val =  $.trim(arr[0]);
+			var newSubFasalAdd = '';
+			var prevFasalTxtShow = 0;
+			alert(zz);
+			alert(arr.length);
+			for(var arrLength = zz; arrLength<arr.length; arrLength++)
+			{
+				newSubFasalAdd += '.'+$.trim(arr[arrLength]);
+
+			}	
+			for(var arrLengthNoChange = 0; arrLengthNoChange< zz; arrLengthNoChange++)
+			{			
+				prevFasalTxtShow = parseInt(arr[arrLengthNoChange])-1;
 			}
 
 			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);

@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
@@ -48,9 +44,6 @@
         }
     },
     "installed_plugins": {
-        "com.sharinglabs.cordova.plugin.datepicker": {
-            "PACKAGE_NAME": "com.phonegap.eroy"
-        },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.phonegap.eroy"
         },
