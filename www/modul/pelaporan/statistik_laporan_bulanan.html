@@ -26,7 +26,7 @@
 	<div id="head">
 		<img src="../../img/logo-atas.png" class="logo"/>
 		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="laporan_mingguan.html"><img src="../../img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 
@@ -228,7 +228,7 @@
 						if(negeri_index == 0)
 						{
 							$('#table_laporan')
-							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+per_zon.nama_zon+'</h2></td></tr>');
+							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
 						}
 						else
 						{
@@ -239,7 +239,7 @@
 						if(split_negeri.length != 1)
 						{
 							$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-							.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_negeri.nama_negeri+'</h2></td>')
+							.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
 						
 							$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
 							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
@@ -247,7 +247,7 @@
 						else
 						{
 							$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-							.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_negeri.nama_negeri+'</h2></td>')
+							.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
 						
 							$('#'+split_negeri[0]+''+(negeri_index+1)+'')
 							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
@@ -361,12 +361,12 @@
 					var split_negeri = per_zon.negeri.nama_negeri.split(' ');
 					
 					$('#table_laporan')
-					.append('<tr id="'+split_id[0]+split_id[1]+''+(zon_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+per_zon.nama_zon+'</h2></td></tr>');
+					.append('<tr id="'+split_id[0]+split_id[1]+''+(zon_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
 					
 					if(split_negeri.length != 1)
 					{
 						$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
-						.append('<td id="_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_zon.negeri.nama_negeri+'</h2></td>')
+						.append('<td id="_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
 											
 						$('#_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
 						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'"></tr></table></div>')
@@ -374,7 +374,7 @@
 					else
 					{
 						$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
-						.append('<td id="_'+split_negeri[0]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_zon.negeri.nama_negeri+'</h2></td>')
+						.append('<td id="_'+split_negeri[0]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
 					
 						$('#_'+split_negeri[0]+''+(zon_index+1)+'')
 						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(zon_index+1)+'"></tr></table></div>')
@@ -497,7 +497,7 @@
 					if(negeri_index == 0)
 					{
 						$('#table_laporan')
-						.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
+						.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
 					}
 					else
 					{
@@ -508,7 +508,7 @@
 					if(split_negeri.length != 1)
 					{
 						$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-						.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_negeri.nama_negeri+'</h2></td>')
+						.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
 					
 						$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
 						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
@@ -516,7 +516,7 @@
 					else
 					{
 						$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-						.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2">'+per_negeri.nama_negeri+'</h2></td>')
+						.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
 					
 						$('#'+split_negeri[0]+''+(negeri_index+1)+'')
 						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
@@ -631,12 +631,12 @@
 				var split_negeri = data.laporan.zon.negeri.nama_negeri.split(' ');
 				
 				$('#table_laporan')
-				.append('<tr id="'+split_id[0]+split_id[1]+'1"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
+				.append('<tr id="'+split_id[0]+split_id[1]+'1"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
 				
 				if(split_negeri.length != 1)
 				{
 					$('#'+split_id[0]+split_id[1]+'1')
-					.append('<td id="'+split_negeri[0]+split_negeri[1]+'1" style="width:323px"><h2 class="_orange_text2">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
+					.append('<td id="'+split_negeri[0]+split_negeri[1]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
 				
 					$('#'+split_negeri[0]+split_negeri[1]+'1')
 					.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+'1"></tr></table></div>')
@@ -644,7 +644,7 @@
 				else
 				{
 					$('#'+split_id[0]+split_id[1]+'1')
-					.append('<td id="'+split_negeri[0]+'1" style="width:323px"><h2 class="_orange_text2">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
+					.append('<td id="'+split_negeri[0]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
 				
 					$('#'+split_negeri[0]+'1')
 					.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+'1"></tr></table></div>')
@@ -760,12 +760,14 @@
 		.append('<td width="38px">'+count3+'</td>')
 		.append('<td width="38px">'+count5+'</td>')
 
+		var total = count1 + count9 + count2 + count3 + count5;
+			
 		$('#peratusan_')
-		.append('<td width="38px">0</td>')
-		.append('<td width="38px">0</td>')
-		.append('<td width="38px">0</td>')
-		.append('<td width="38px">0</td>')
-		.append('<td width="38px">0</td>')
+		.append('<td width="38px">'+(count1/total*100).toFixed(1)+'</td>')
+		.append('<td width="38px">'+(count9/total*100).toFixed(1)+'</td>')
+		.append('<td width="38px">'+(count2/total*100).toFixed(1)+'</td>')
+		.append('<td width="38px">'+(count3/total*100).toFixed(1)+'</td>')
+		.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')
 	});		
 	</script>
 	</body>

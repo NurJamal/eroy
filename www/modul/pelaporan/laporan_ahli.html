@@ -174,14 +174,14 @@
 							$(xml).find("details").each(function()
 							{			
 								var kod_id = $(this).find("kod_nama_pertubuhan");
-								var bil_lelaki_melayu = $(this).find("bil_lelaki_melayu");
-								var bil_lelaki_cina = $(this).find("bil_lelaki_cina");
-								var bil_lelaki_india = $(this).find("bil_lelaki_india");
-								var bil_lelaki_lain_lain = $(this).find("bil_lelaki_lain_lain");
-								var bil_perempuan_melayu = $(this).find("bil_perempuan_melayu");
-								var bil_perempuan_cina = $(this).find("bil_perempuan_cina");
-								var bil_perempuan_india = $(this).find("bil_perempuan_india");
-								var bil_perempuan_lain_lain = $(this).find("bil_perempuan_lain_lain");
+								var bil_lelaki_melayu = $(this).find("bil_lmelayu");
+								var bil_lelaki_cina = $(this).find("bil_lcina");
+								var bil_lelaki_india = $(this).find("bil_lindia");
+								var bil_lelaki_lain_lain = $(this).find("bil_llain_lain");
+								var bil_perempuan_melayu = $(this).find("bil_pmelayu");
+								var bil_perempuan_cina = $(this).find("bil_pcina");
+								var bil_perempuan_india = $(this).find("bil_pindia");
+								var bil_perempuan_lain_lain = $(this).find("bil_plain_lain");
 								
 								var total_melayu = 
 								parseInt(bil_lelaki_melayu.text()) + parseInt(bil_perempuan_melayu.text());
@@ -221,6 +221,12 @@
 		{
 			$('#pertubuhan_carian').attr('disabled',false);
 			$('#sel_nama_pertubuhan').attr('disabled',false);
+			$('#bil_melayu').val("");
+			$('#bil_cina').val("");
+			$('#bil_india').val("");
+			$('#bil_lain').val("");
+			$('#jumlah').val("");
+			
 		}
 	}
 	
@@ -279,9 +285,6 @@
 									$('#content').show();
 									
 									$('#sel_nama_pertubuhan').append('<option value="'+$(kod_id).text()+'">'+$(nama_penuh_pertubuhan).text()+'</option>');
-									
-									//alert($(kod_id).text());
-
 								});
 							}
 							else if($(xml).find("status").text() == "error")
