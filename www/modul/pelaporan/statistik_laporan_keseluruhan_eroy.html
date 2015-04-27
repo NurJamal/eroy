@@ -217,7 +217,7 @@
 		
 		//fetching object from localStorage
 		var data = JSON.parse(localStorage['LAPORAN']);
-		var all_checked = JSON.parse(localStorage['SELECTED_ALL']);
+		var all_checked = window.localStorage.getItem('ALL_CHECKED');
 		$("#tarikh_dari").val(window.localStorage.getItem("TARIKH_DARI"));
 		$("#tarikh_hingga").val(window.localStorage.getItem("TARIKH_HINGGA"));
 		
@@ -227,37 +227,300 @@
 		var count3 = 0;
 		var count5 = 0;
 
-		if(all_checked == true)
+		if(all_checked == 'Keseluruhan')
 		{
-			alert('1');
-		}
-		else
-		{
-			alert('2');
-		}
-		
-		/*if(Array.isArray(data.laporan.zon))
-		{
-			$.each(data.laporan.zon, function (zon_index, per_zon) 
+			//alert('1');
+			if(Array.isArray(data.laporan.zon))
 			{
-				if(Array.isArray(per_zon.negeri))
+				$.each(data.laporan.zon, function (zon_index, per_zon) 
 				{
-					$.each(per_zon.negeri, function (negeri_index, per_negeri) 
-					{						
+					if(Array.isArray(per_zon.negeri))
+					{
+						$.each(per_zon.negeri, function (negeri_index, per_negeri) 
+						{						
+							var split_id = per_zon.nama_zon.split(' ');
+							var split_negeri = per_negeri.nama_negeri.split(' ');
+									
+							if(negeri_index == 0)
+							{
+								$('#table_laporan')
+								.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+							}
+							else
+							{
+								$('#table_laporan')
+								.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td></td><td></td></tr>');
+							}
+						
+							if(split_negeri.length != 1)
+							{
+								$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+								.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+							
+								$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+								.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
+							}
+							else
+							{
+								$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+								.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+							
+								$('#'+split_negeri[0]+''+(negeri_index+1)+'')
+								.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
+							}
+												
+							if(Array.isArray(per_negeri.status))
+							{
+								var status_length = per_negeri.status.length;
+								
+								for(i = 0; i < status_length; i++)
+								{
+									if(per_negeri.status[i].status == '1')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count1 += parseInt(per_negeri.status[i].count_status);
+										
+									}
+									else if(per_negeri.status[i].status == '9')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count9 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '2')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count2 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '3')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count3 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '5')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count5 += parseInt(per_negeri.status[i].count_status);
+									}
+								}				
+							}
+							else
+							{
+								if(split_negeri.length != 1)
+								{
+									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+								}
+								else
+								{
+									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+								}
+							}
+						});
+					}
+					else
+					{
 						var split_id = per_zon.nama_zon.split(' ');
+						var split_negeri = per_zon.negeri.nama_negeri.split(' ');
+						
+						$('#table_laporan')
+						.append('<tr id="'+split_id[0]+split_id[1]+''+(zon_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+						
+						if(split_negeri.length != 1)
+						{
+							$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
+							.append('<td id="_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
+												
+							$('#_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'"></tr></table></div>')
+						}
+						else
+						{
+							$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
+							.append('<td id="_'+split_negeri[0]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
+						
+							$('#_'+split_negeri[0]+''+(zon_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(zon_index+1)+'"></tr></table></div>')
+						}
+											
+						if(Array.isArray(per_zon.negeri.status))
+						{
+							console.log(per_zon.negeri.status.length);
+							var status_length = per_zon.negeri.status.length;
+								
+							for(i = 0; i < status_length; i++)
+							{
+								if(per_zon.negeri.status[i].status == '1')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count1 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '9')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count9 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '2')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count2 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '3')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count3 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '5')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count5 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+							}
+
+						}
+						else
+						{
+							if(split_negeri.length != 1)
+							{
+								$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
+							else
+							{
+								$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
+							
+						}
+					}
+				});
+			}
+			else
+			{		
+				if(Array.isArray(data.laporan.zon.negeri))
+				{			
+					$.each(data.laporan.zon.negeri, function (negeri_index, per_negeri) 
+					{			
+						var split_id = data.laporan.zon.nama_zon.split(' ');
 						var split_negeri = per_negeri.nama_negeri.split(' ');
- 								
+									
 						if(negeri_index == 0)
 						{
 							$('#table_laporan')
-							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
 						}
 						else
 						{
 							$('#table_laporan')
 							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td></td><td></td></tr>');
 						}
-					
+						
 						if(split_negeri.length != 1)
 						{
 							$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
@@ -274,7 +537,8 @@
 							$('#'+split_negeri[0]+''+(negeri_index+1)+'')
 							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
 						}
-											
+					
+								
 						if(Array.isArray(per_negeri.status))
 						{
 							var status_length = per_negeri.status.length;
@@ -294,7 +558,6 @@
 										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
 									}
 									count1 += parseInt(per_negeri.status[i].count_status);
-									
 								}
 								else if(per_negeri.status[i].status == '9')
 								{
@@ -374,422 +637,712 @@
 								.append('<td width="38px">0</td>')
 								.append('<td width="38px">0</td>')
 							}
+								
 						}
 					});
 				}
 				else
-				{
-					var split_id = per_zon.nama_zon.split(' ');
-					var split_negeri = per_zon.negeri.nama_negeri.split(' ');
+				{	
+					var split_id = data.laporan.zon.nama_zon.split(' ');
+					var split_negeri = data.laporan.zon.negeri.nama_negeri.split(' ');
 					
 					$('#table_laporan')
-					.append('<tr id="'+split_id[0]+split_id[1]+''+(zon_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+					.append('<tr id="'+split_id[0]+split_id[1]+'1"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
 					
 					if(split_negeri.length != 1)
 					{
-						$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
-						.append('<td id="_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
-											
-						$('#_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'"></tr></table></div>')
+						$('#'+split_id[0]+split_id[1]+'1')
+						.append('<td id="'+split_negeri[0]+split_negeri[1]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
+					
+						$('#'+split_negeri[0]+split_negeri[1]+'1')
+						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+'1"></tr></table></div>')
 					}
 					else
 					{
-						$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
-						.append('<td id="_'+split_negeri[0]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
+						$('#'+split_id[0]+split_id[1]+'1')
+						.append('<td id="'+split_negeri[0]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
 					
-						$('#_'+split_negeri[0]+''+(zon_index+1)+'')
-						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(zon_index+1)+'"></tr></table></div>')
+						$('#'+split_negeri[0]+'1')
+						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+'1"></tr></table></div>')
 					}
-										
-					if(Array.isArray(per_zon.negeri.status))
+					
+					if(Array.isArray(data.laporan.zon.negeri.status))
 					{
-						console.log(per_zon.negeri.status.length);
-						var status_length = per_zon.negeri.status.length;
+						var status_length = data.laporan.zon.negeri.status.length;
 							
-						for(i = 0; i < status_length; i++)
+							for(i = 0; i < status_length; i++)
+							{
+								if(data.laporan.zon.negeri.status[i].status == '1')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count1 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '9')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count9 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '2')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count2 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '3')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count3 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '5')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count5 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+							}
+						
+					}
+					else
+					{
+						if(split_negeri.length != 1)
 						{
-							if(per_zon.negeri.status[i].status == '1')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								count1 += parseInt(per_zon.negeri.status[i].count_status);
-							}
-							else if(per_zon.negeri.status[i].status == '9')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								count9 += parseInt(per_zon.negeri.status[i].count_status);
-							}
-							else if(per_zon.negeri.status[i].status == '2')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								count2 += parseInt(per_zon.negeri.status[i].count_status);
-							}
-							else if(per_zon.negeri.status[i].status == '3')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								count3 += parseInt(per_zon.negeri.status[i].count_status);
-							}
-							else if(per_zon.negeri.status[i].status == '5')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-									.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
-								}
-								count5 += parseInt(per_zon.negeri.status[i].count_status);
-							}
+							$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
 						}
+						else
+						{
+							$('#data_'+split_negeri[0]+'1')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+						}
+					}
+				}	
+			}
 
-					}
-					else
-					{
-						if(split_negeri.length != 1)
-						{
-							$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-						}
-						else
-						{
-							$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-						}
-						
-					}
-				}
-			});
-		}
-		else
-		{		
-			if(Array.isArray(data.laporan.zon.negeri))
-			{			
-				$.each(data.laporan.zon.negeri, function (negeri_index, per_negeri) 
-				{			
-					var split_id = data.laporan.zon.nama_zon.split(' ');
-					var split_negeri = per_negeri.nama_negeri.split(' ');
- 								
-					if(negeri_index == 0)
-					{
-						$('#table_laporan')
-						.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
-					}
-					else
-					{
-						$('#table_laporan')
-						.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td></td><td></td></tr>');
-					}
-					
-					if(split_negeri.length != 1)
-					{
-						$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-						.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
-					
-						$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
-					}
-					else
-					{
-						$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
-						.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
-					
-						$('#'+split_negeri[0]+''+(negeri_index+1)+'')
-						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
-					}
+			$('#jumlah_')
+			.append('<td width="38px">'+count1+'</td>')
+			.append('<td width="38px">'+count9+'</td>')
+			.append('<td width="38px">'+count2+'</td>')
+			.append('<td width="38px">'+count3+'</td>')
+			.append('<td width="38px">'+count5+'</td>')
+
+			var total = count1 + count9 + count2 + count3 + count5;
 				
-							
-					if(Array.isArray(per_negeri.status))
+			$('#peratusan_')
+			.append('<td width="38px">'+(count1/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count9/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count2/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count3/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')
+			
+		}
+		else if(all_checked != 'Keseluruhan')
+		{
+			if(Array.isArray(data.laporan.zon))
+			{
+				$.each(data.laporan.zon, function (zon_index, per_zon) 
+				{
+					if(Array.isArray(per_zon.negeri))
 					{
-						var status_length = per_negeri.status.length;
+						$.each(per_zon.negeri, function (negeri_index, per_negeri) 
+						{						
+							var split_id = per_zon.nama_zon.split(' ');
+							var split_negeri = per_negeri.nama_negeri.split(' ');
+									
+							if(negeri_index == 0)
+							{
+								$('#table_laporan')
+								.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+							}
+							else
+							{
+								$('#table_laporan')
+								.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td></td><td></td></tr>');
+							}
 						
-						for(i = 0; i < status_length; i++)
-						{
-							if(per_negeri.status[i].status == '1')
+							if(split_negeri.length != 1)
+							{
+								$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+								.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+							
+								$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+								.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
+							}
+							else
+							{
+								$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+								.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+							
+								$('#'+split_negeri[0]+''+(negeri_index+1)+'')
+								.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
+							}
+												
+							if(Array.isArray(per_negeri.status))
+							{
+								var status_length = per_negeri.status.length;
+								
+								for(i = 0; i < status_length; i++)
+								{
+									if(per_negeri.status[i].status == '1')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count1 += parseInt(per_negeri.status[i].count_status);
+										
+									}
+									else if(per_negeri.status[i].status == '9')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count9 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '2')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count2 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '3')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count3 += parseInt(per_negeri.status[i].count_status);
+									}
+									else if(per_negeri.status[i].status == '5')
+									{
+										if(split_negeri.length != 1)
+										{
+											$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										else
+										{
+											$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+											.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+										}
+										count5 += parseInt(per_negeri.status[i].count_status);
+									}
+								}				
+							}
+							else
 							{
 								if(split_negeri.length != 1)
 								{
 									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
 								}
 								else
 								{
 									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
+									.append('<td width="38px">0</td>')
 								}
-								count1 += parseInt(per_negeri.status[i].count_status);
 							}
-							else if(per_negeri.status[i].status == '9')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								count9 += parseInt(per_negeri.status[i].count_status);
-							}
-							else if(per_negeri.status[i].status == '2')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								count2 += parseInt(per_negeri.status[i].count_status);
-							}
-							else if(per_negeri.status[i].status == '3')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								count3 += parseInt(per_negeri.status[i].count_status);
-							}
-							else if(per_negeri.status[i].status == '5')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-									.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
-								}
-								count5 += parseInt(per_negeri.status[i].count_status);
-							}
-						}				
+						});
 					}
 					else
 					{
+						var split_id = per_zon.nama_zon.split(' ');
+						var split_negeri = per_zon.negeri.nama_negeri.split(' ');
+						
+						$('#table_laporan')
+						.append('<tr id="'+split_id[0]+split_id[1]+''+(zon_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">'+(zon_index+1)+'</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.nama_zon+'</h2></td></tr>');
+						
 						if(split_negeri.length != 1)
 						{
-							$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
+							$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
+							.append('<td id="_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
+												
+							$('#_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'"></tr></table></div>')
 						}
 						else
 						{
-							$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
-							.append('<td width="38px">0</td>')
+							$('#'+split_id[0]+split_id[1]+''+(zon_index+1)+'')
+							.append('<td id="_'+split_negeri[0]+''+(zon_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_zon.negeri.nama_negeri+'</h2></td>')
+						
+							$('#_'+split_negeri[0]+''+(zon_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(zon_index+1)+'"></tr></table></div>')
 						}
+											
+						if(Array.isArray(per_zon.negeri.status))
+						{
+							console.log(per_zon.negeri.status.length);
+							var status_length = per_zon.negeri.status.length;
+								
+							for(i = 0; i < status_length; i++)
+							{
+								if(per_zon.negeri.status[i].status == '1')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count1 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '9')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count9 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '2')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count2 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '3')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count3 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+								else if(per_zon.negeri.status[i].status == '5')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+										.append('<td width="38px">'+per_zon.negeri.status[i].count_status+'</td>')
+									}
+									count5 += parseInt(per_zon.negeri.status[i].count_status);
+								}
+							}
+
+						}
+						else
+						{
+							if(split_negeri.length != 1)
+							{
+								$('#data_'+split_negeri[0]+split_negeri[1]+''+(zon_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
+							else
+							{
+								$('#data_'+split_negeri[0]+''+(zon_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
 							
+						}
 					}
 				});
 			}
 			else
-			{	
-				var split_id = data.laporan.zon.nama_zon.split(' ');
-				var split_negeri = data.laporan.zon.negeri.nama_negeri.split(' ');
-				
-				$('#table_laporan')
-				.append('<tr id="'+split_id[0]+split_id[1]+'1"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
-				
-				if(split_negeri.length != 1)
-				{
-					$('#'+split_id[0]+split_id[1]+'1')
-					.append('<td id="'+split_negeri[0]+split_negeri[1]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
-				
-					$('#'+split_negeri[0]+split_negeri[1]+'1')
-					.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+'1"></tr></table></div>')
-				}
-				else
-				{
-					$('#'+split_id[0]+split_id[1]+'1')
-					.append('<td id="'+split_negeri[0]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
-				
-					$('#'+split_negeri[0]+'1')
-					.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+'1"></tr></table></div>')
-				}
-				
-				if(Array.isArray(data.laporan.zon.negeri.status))
-				{
-					var status_length = data.laporan.zon.negeri.status.length;
-						
-						for(i = 0; i < status_length; i++)
+			{		
+				if(Array.isArray(data.laporan.zon.negeri))
+				{			
+					$.each(data.laporan.zon.negeri, function (negeri_index, per_negeri) 
+					{			
+						var split_id = data.laporan.zon.nama_zon.split(' ');
+						var split_negeri = per_negeri.nama_negeri.split(' ');
+									
+						if(negeri_index == 0)
 						{
-							if(data.laporan.zon.negeri.status[i].status == '1')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								count1 += parseInt(data.laporan.zon.negeri.status[i].count_status);
-							}
-							else if(data.laporan.zon.negeri.status[i].status == '9')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								count9 += parseInt(data.laporan.zon.negeri.status[i].count_status);
-							}
-							else if(data.laporan.zon.negeri.status[i].status == '2')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								count2 += parseInt(data.laporan.zon.negeri.status[i].count_status);
-							}
-							else if(data.laporan.zon.negeri.status[i].status == '3')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								count3 += parseInt(data.laporan.zon.negeri.status[i].count_status);
-							}
-							else if(data.laporan.zon.negeri.status[i].status == '5')
-							{
-								if(split_negeri.length != 1)
-								{
-									$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								else
-								{
-									$('#data_'+split_negeri[0]+'1')
-									.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
-								}
-								count5 += parseInt(data.laporan.zon.negeri.status[i].count_status);
-							}
+							$('#table_laporan')
+							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
+						}
+						else
+						{
+							$('#table_laporan')
+							.append('<tr id="'+split_id[0]+split_id[1]+''+(negeri_index+1)+'"><td></td><td></td></tr>');
+						}
+						
+						if(split_negeri.length != 1)
+						{
+							$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+							.append('<td id="'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+						
+							$('#'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'"></tr></table></div>')
+						}
+						else
+						{
+							$('#'+split_id[0]+split_id[1]+''+(negeri_index+1)+'')
+							.append('<td id="'+split_negeri[0]+''+(negeri_index+1)+'" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+per_negeri.nama_negeri+'</h2></td>')
+						
+							$('#'+split_negeri[0]+''+(negeri_index+1)+'')
+							.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+''+(negeri_index+1)+'"></tr></table></div>')
 						}
 					
+								
+						if(Array.isArray(per_negeri.status))
+						{
+							var status_length = per_negeri.status.length;
+							
+							for(i = 0; i < status_length; i++)
+							{
+								if(per_negeri.status[i].status == '1')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									count1 += parseInt(per_negeri.status[i].count_status);
+								}
+								else if(per_negeri.status[i].status == '9')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									count9 += parseInt(per_negeri.status[i].count_status);
+								}
+								else if(per_negeri.status[i].status == '2')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									count2 += parseInt(per_negeri.status[i].count_status);
+								}
+								else if(per_negeri.status[i].status == '3')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									count3 += parseInt(per_negeri.status[i].count_status);
+								}
+								else if(per_negeri.status[i].status == '5')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+										.append('<td width="38px">'+per_negeri.status[i].count_status+'</td>')
+									}
+									count5 += parseInt(per_negeri.status[i].count_status);
+								}
+							}				
+						}
+						else
+						{
+							if(split_negeri.length != 1)
+							{
+								$('#data_'+split_negeri[0]+split_negeri[1]+''+(negeri_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
+							else
+							{
+								$('#data_'+split_negeri[0]+''+(negeri_index+1)+'')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+								.append('<td width="38px">0</td>')
+							}
+								
+						}
+					});
 				}
 				else
-				{
+				{	
+					var split_id = data.laporan.zon.nama_zon.split(' ');
+					var split_negeri = data.laporan.zon.negeri.nama_negeri.split(' ');
+					
+					$('#table_laporan')
+					.append('<tr id="'+split_id[0]+split_id[1]+'1"><td VALIGN=TOP width="25px" ><h2 class="_orange_text2" style="text-transform: uppercase">1</h2></td><td VALIGN=TOP VALIGN=TOP width="90px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.nama_zon+'</h2></td></tr>');
+					
 					if(split_negeri.length != 1)
 					{
-						$('#data_'+split_negeri[0]+split_negeri[1]+'1')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
+						$('#'+split_id[0]+split_id[1]+'1')
+						.append('<td id="'+split_negeri[0]+split_negeri[1]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
+					
+						$('#'+split_negeri[0]+split_negeri[1]+'1')
+						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+split_negeri[1]+'1"></tr></table></div>')
 					}
 					else
 					{
-						$('#data_'+split_negeri[0]+'1')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
-						.append('<td width="38px">0</td>')
+						$('#'+split_id[0]+split_id[1]+'1')
+						.append('<td id="'+split_negeri[0]+'1" style="width:323px"><h2 class="_orange_text2" style="text-transform: uppercase">'+data.laporan.zon.negeri.nama_negeri+'</h2></td>')
+					
+						$('#'+split_negeri[0]+'1')
+						.append('<div class="white_wrap"><table><tr id="data_'+split_negeri[0]+'1"></tr></table></div>')
 					}
-				}
-			}	
+					
+					if(Array.isArray(data.laporan.zon.negeri.status))
+					{
+						var status_length = data.laporan.zon.negeri.status.length;
+							
+							for(i = 0; i < status_length; i++)
+							{
+								if(data.laporan.zon.negeri.status[i].status == '1')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count1 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '9')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count9 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '2')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count2 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '3')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count3 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+								else if(data.laporan.zon.negeri.status[i].status == '5')
+								{
+									if(split_negeri.length != 1)
+									{
+										$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									else
+									{
+										$('#data_'+split_negeri[0]+'1')
+										.append('<td width="38px">'+data.laporan.zon.negeri.status[i].count_status+'</td>')
+									}
+									count5 += parseInt(data.laporan.zon.negeri.status[i].count_status);
+								}
+							}
+						
+					}
+					else
+					{
+						if(split_negeri.length != 1)
+						{
+							$('#data_'+split_negeri[0]+split_negeri[1]+'1')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+						}
+						else
+						{
+							$('#data_'+split_negeri[0]+'1')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+							.append('<td width="38px">0</td>')
+						}
+					}
+				}	
+			}
+
+			$('#jumlah_')
+			.append('<td width="38px">'+count1+'</td>')
+			.append('<td width="38px">'+count9+'</td>')
+			.append('<td width="38px">'+count2+'</td>')
+			.append('<td width="38px">'+count3+'</td>')
+			.append('<td width="38px">'+count5+'</td>')
+
+			var total = count1 + count9 + count2 + count3 + count5;
+				
+			$('#peratusan_')
+			.append('<td width="38px">'+(count1/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count9/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count2/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count3/total*100).toFixed(1)+'</td>')
+			.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')
 		}
-
-		$('#jumlah_')
-		.append('<td width="38px">'+count1+'</td>')
-		.append('<td width="38px">'+count9+'</td>')
-		.append('<td width="38px">'+count2+'</td>')
-		.append('<td width="38px">'+count3+'</td>')
-		.append('<td width="38px">'+count5+'</td>')
-
-		var total = count1 + count9 + count2 + count3 + count5;
-			
-		$('#peratusan_')
-		.append('<td width="38px">'+(count1/total*100).toFixed(1)+'</td>')
-		.append('<td width="38px">'+(count9/total*100).toFixed(1)+'</td>')
-		.append('<td width="38px">'+(count2/total*100).toFixed(1)+'</td>')
-		.append('<td width="38px">'+(count3/total*100).toFixed(1)+'</td>')
-		.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')*/
 	});	
 	</script>
 	

@@ -44,7 +44,7 @@
 		<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
 		<input type="hidden" id="jenis_laporan" value="laporan_keseluruhan">
 		<h5 id="H5" style="margin-top: 5px">
-			<input class="checkboxClass" type="checkbox" name="c_box" id="c_box" onClick="allChecked()"><label for="c_box">Keseluruhan</label>
+			<input class="checkboxClass" type="checkbox" name="c_box" id="c_box" value="Keseluruhan" onClick="allChecked()"><label for="c_box">Keseluruhan</label>
 		</h5>
 		
 		<div class="inform">
@@ -167,6 +167,7 @@
 			
 		}	
 	}
+	
 	$("#btn_submit").click(function(e)
 	{
 		var dateFrom =  $.trim($("#tarikh_dari").val());
@@ -183,6 +184,7 @@
 		
 		if($("#c_box").is(":checked"))
 		{
+			var selectedAll =  $.trim($("#c_box").val());
 			$.ajax
 			(
 				{
@@ -190,7 +192,7 @@
 					type:'POST',
 					data:
 					{				
-						jenisLaporan : jenisLaporan
+						selectedAll : selectedAll
 					},
 					dataType:'xml',
 					error: function(e) 
@@ -212,10 +214,9 @@
 							
 							//saving object to localStorage
 							window.localStorage['LAPORAN'] = JSON.stringify(json);
-							window.localStorage['SELECTED_ALL'] = JSON.stringify(allChecked());
-				
-							alert(allChecked());
-							//window.location.href = "statistik_laporan_keseluruhan_eroy.html";
+							window.localStorage.setItem("ALL_CHECKED", selectedAll);
+
+							window.location.href = "statistik_laporan_keseluruhan_eroy.html";
 						}
 						else if (json.status == 'error') 
 						{
@@ -317,7 +318,7 @@
 								
 								//saving object to localStorage
 								window.localStorage['LAPORAN'] = JSON.stringify(json);
-
+								window.localStorage.setItem("ALL_CHECKED", '');
 								window.location.href = "statistik_laporan_keseluruhan_eroy.html";
 							}
 							else if (json.status == 'error') 
