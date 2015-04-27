@@ -42,15 +42,15 @@
 	<!-- list -->
 	<div id="content">
 		<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
-		
+		<input type="hidden" id="jenis_laporan" value="laporan_keseluruhan">
 		<h5 id="H5" style="margin-top: 5px">
-			<input class="checkboxClass" type="checkbox" name="" id="c_box" onClick="allChecked()"> <label for="c_box">Keseluruhan</label>
+			<input class="checkboxClass" type="checkbox" name="c_box" id="c_box" onClick="allChecked()"><label for="c_box">Keseluruhan</label>
 		</h5>
 		
-		<div class="display">
+		<div class="inform">
 			<form id="" action="" method="POST">
-				<input type="text" style="margin-top: -5px" id="dari" name="dari" placeholder="Dari" class="disable_datepick" ><br/>
-				<input type="text" id="hingga" name="hingga" placeholder="Hingga" class="disable_datepick"><br/>
+				<input type="text" style="margin-top: -5px" id="tarikh_dari" name="tarikh_dari" placeholder="Dari" class="disable_datepick" onfocus="(this.type='date')" onblur="(this.type='text')"><br/>
+				<input type="text" id="tarikh_hingga" name="tarikh_hingga" placeholder="Hingga" class="disable_datepick" onfocus="(this.type='date')" onblur="(this.type='text')"><br/>
 			</form>
 		</div>
 				
@@ -150,8 +150,10 @@
 			{
 				$("#c_box"+i).prop('checked', true);
 			}
-			$("#dari").prop('disabled', true);
-			$("#hingga").prop('disabled', true);
+			$('#tarikh_dari').val("");
+			$('#tarikh_hingga').val("");
+			$("#tarikh_dari").prop('disabled', true);
+			$("#tarikh_hingga").prop('disabled', true);
 			
 		}
 		else
@@ -160,13 +162,11 @@
 			{
 				$("#c_box"+i).prop('checked', false);
 			}
-			$("#dari").prop('disabled', false);
-			$("#hingga").prop('disabled', false);
+			$("#tarikh_dari").prop('disabled', false);
+			$("#tarikh_hingga").prop('disabled', false);
 			
-		}
-		
+		}	
 	}
-	
 	$("#btn_submit").click(function(e)
 	{
 		var dateFrom =  $.trim($("#tarikh_dari").val());
@@ -186,14 +186,11 @@
 			$.ajax
 			(
 				{
-					url:"http://eroy.me-tech.com.my/api/laporan/pelaporan.php",
+					url:"http://eroy.me-tech.com.my/api/laporan/pelaporan_keseluruhan.php",
 					type:'POST',
 					data:
 					{				
-						dateFrom : dateFrom,
-						dateTo : dateTo,
-						jenisLaporan : jenisLaporan,
-						selectedState : selectedState
+						jenisLaporan : jenisLaporan
 					},
 					dataType:'xml',
 					error: function(e) 
@@ -215,8 +212,10 @@
 							
 							//saving object to localStorage
 							window.localStorage['LAPORAN'] = JSON.stringify(json);
-
-							window.location.href = "statistik_laporan_keseluruhan_eroy.html";
+							window.localStorage['SELECTED_ALL'] = JSON.stringify(allChecked());
+				
+							alert(allChecked());
+							//window.location.href = "statistik_laporan_keseluruhan_eroy.html";
 						}
 						else if (json.status == 'error') 
 						{

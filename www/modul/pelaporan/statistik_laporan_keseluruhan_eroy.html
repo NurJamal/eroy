@@ -45,7 +45,7 @@
 
 		<!-- list -->
 		<div id="content">
-			<h2 class="_orange_text">Statistik Laporan Mingguan</h2>
+			<h2 class="_orange_text">Statistik Status Pendaftaran</h2>
 			
 			<div class="display">
 				<input type="text" name="tarikh_dari" id="tarikh_dari" placeholder="-" disabled><br/>
@@ -217,6 +217,7 @@
 		
 		//fetching object from localStorage
 		var data = JSON.parse(localStorage['LAPORAN']);
+		var all_checked = JSON.parse(localStorage['SELECTED_ALL']);
 		$("#tarikh_dari").val(window.localStorage.getItem("TARIKH_DARI"));
 		$("#tarikh_hingga").val(window.localStorage.getItem("TARIKH_HINGGA"));
 		
@@ -226,7 +227,16 @@
 		var count3 = 0;
 		var count5 = 0;
 
-		if(Array.isArray(data.laporan.zon))
+		if(all_checked == true)
+		{
+			alert('1');
+		}
+		else
+		{
+			alert('2');
+		}
+		
+		/*if(Array.isArray(data.laporan.zon))
 		{
 			$.each(data.laporan.zon, function (zon_index, per_zon) 
 			{
@@ -779,7 +789,7 @@
 		.append('<td width="38px">'+(count9/total*100).toFixed(1)+'</td>')
 		.append('<td width="38px">'+(count2/total*100).toFixed(1)+'</td>')
 		.append('<td width="38px">'+(count3/total*100).toFixed(1)+'</td>')
-		.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')
+		.append('<td width="38px">'+(count5/total*100).toFixed(1)+'</td>')*/
 	});	
 	</script>
 	
