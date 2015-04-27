@@ -72,6 +72,7 @@
 	<script src="../../cordova_plugins.js"></script>
 	
 	<script>
+	
 	initiatePayment();
 	function initiatePayment(){
 		$('body').waitMe({
@@ -188,6 +189,15 @@
 						}
 					}
 				);
+				
+				localStorage.removeItem('PAYMENT_AMOUNT');
+				localStorage.removeItem('PAYMENT_DESC');
+				localStorage.removeItem('PAYMENT_ITEMNAME');
+				localStorage.removeItem('PAYMENT_KEY');
+				localStorage.removeItem('PAYMENT_CHANNEL');
+				localStorage.removeItem('REDIRECT_URL');
+				localStorage.removeItem('PAYMENT_REF_CODE');
+			
 				//window.location.replace('../../'+redirect_url_after_payment);
 		}
 		else

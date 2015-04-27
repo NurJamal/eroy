@@ -161,8 +161,6 @@ TQ
 						dataType: "xml",
 						success: function(xml)
 						{
-
-
 							$('#'+id)
 							.find('option')
 							.remove()

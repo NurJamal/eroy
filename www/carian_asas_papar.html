@@ -143,8 +143,8 @@
 						$('#tarikh_lulus_daftar').html($(tarikh_sijil_lulus).text()+'<br/>');
 						//$('#status_keaktifan').html($(status_keaktifan).text()+'<br/>');
 					});
-				}
-				/*error: function(xml, data) 
+				},
+				error: function(xml, data) 
 				{
 					console.log("An error occurred while processing XML file.");
 					$.alert
@@ -155,7 +155,7 @@
 							confirm: function(){}
 						}
 					);
-				}*/
+				},
 			}
 		);
 	});
