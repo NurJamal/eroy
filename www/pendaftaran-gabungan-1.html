@@ -2,21 +2,25 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
-	
+		</div>	
+		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -70,8 +74,7 @@
 			</div>
 							
 			<div class="selection" style="margin-top:14px" id="peringkat_selection" >
-					<h5 id="_orange_title">Peringkat Pertubuhan</h5>
-				
+					<h5 id="_orange_title">Peringkat Pertubuhan</h5>				
 						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
 						<option value="" selected >Pilih Peringkat</option>
 						</select>
@@ -79,36 +82,27 @@
 			</div>
 				
 			<div class="selection" style="margin-top:14px" id="kategori_selection">
-					<h5 id="_orange_title">Kategori Pertubuhan</h5>
-	
+					<h5 id="_orange_title">Kategori Pertubuhan</h5>	
 						<select id="sel_kategori" name="sel_kategori" class="_sel">
 						<option value="" selected >Pilih Kategori</option>
-						</select>
-							
+						</select>							
 			</div>
-			
-			
+						
 				<input type="text" name="nama_pertubuhan" onblur="copy_nama()" id="f_nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
-			
-				
+							
 			<div class="selection" style="margin-top:14px"  id="negeri_selection">
-					<h5 id="_orange_title">Negeri</h5>
-					
+					<h5 id="_orange_title">Negeri</h5>					
 						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
 						<option value="" selected>Pilih Negeri</option>
-						</select>
-					
+						</select>					
 			</div>
 			
 			<div class="selection" style="margin-top:14px" id="daerah_selection">
-					<h5 id="_orange_title">Daerah</h5>
-					
+					<h5 id="_orange_title">Daerah</h5>					
 						<select id="sel_daerah" name="sel_daerah" class="_sel" onchange="copy_nama">
 						<option value="" selected>Pilih Daerah</option>
-						</select>
-						
-			</div>
-		
+						</select>						
+			</div>		
 			
 				<input type="text" name="nama_ringkasan" onblur="copy_nama()" id="f_nama_ringkasan" placeholder="Nama Ringkasan"><br/>
 				
@@ -117,23 +111,21 @@
 			</div>
 			
 				<input type="text" name="emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
-				<input type="text" name="no_sijil_gabungan" id="no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_gabungan" id="no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
 			
 		</div>
 		
 			<div class="inform" style="margin-top:9px">
 				<input type="text" style="margin-top:0px" name="no_sijil_gabungan" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
-			</div>
-						
-			
+			</div>							
 				
-				<div class="default_button_holder">
-					<a href="pendaftaran-gabungan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-				</div>
+			<div class="default_button_holder">
+				<a href="pendaftaran-gabungan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
+			</div>
 
 			
-			</form>
+		</form>
 			</div>
 	</div>
 	
@@ -226,11 +218,7 @@
 			}
 		
 		
-		}
-		
-		
-		
-
+		}	
 		
 		var sel_peringkat = document.getElementById("sel_peringkat");
 	
@@ -328,11 +316,9 @@
 		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
-		$('#f_nama_pertubuhan,#f_emel_pertubuhan,#peringkat_selection,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
+		$('#f_nama_pertubuhan,#f_emel_pertubuhan,#peringkat_selection,#kategori_selection,#daerah_selection,#negeri_selection,#f_nama_ringkasan').css({"border":"","box-shadow":""});
 
 		var insertData = "TRUE";
-
-		
 		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
 		var nama_ringkasan = $("#f_nama_ringkasan").val();
 		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
@@ -341,6 +327,7 @@
 		var sel_kategori = $("#sel_kategori").val();
 		var sel_negeri = $("#sel_negeri").val();
 		var sel_daerah = $("#sel_daerah").val();
+		var no_sijil_gabungan = $("#f_no_sijil_gabungan").val();
 		var jenis_pertubuhan = $("#pertubuhan_gabungan").val();
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		
@@ -349,6 +336,18 @@
 		if(nama_pertubuhan.length == 0)
 		{
 			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(nama_ringkasan.length == 0)
+		{
+			$('#f_nama_ringkasan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(no_sijil_gabungan.length == 0)
+		{
+			$('#f_no_sijil_gabungan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 
 		}
@@ -413,7 +412,6 @@
 				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
 				type:'POST',
 				data: {
-					lokaliti : lokaliti,
 					nama_pertubuhan: nama_pertubuhan,
 					nama_ringkasan : nama_ringkasan,
 					nama_penuh_pertubuhan : nama_penuh_pertubuhan,

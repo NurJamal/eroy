@@ -2,15 +2,21 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -66,53 +72,39 @@
 				
 			<div class="selection" style="margin-top:14px" id="kategori_selection">
 					<h5 id="_orange_title">Peringkat Pertubuhan</h5>
-					<form action="">
 						<select id="sel_peringkat" name="sel_peringkat" class="_sel">
-
 						<option value="" selected >Pilih Peringkat</option>
-
 						</select>
-					</form>		
+					
 			</div>
 				
 			<div class="selection" style="margin-top:14px" id="kategori_selection">
-					<h5 id="_orange_title">Kategori Pertubuhan</h5>
-					<form action="">
+					<h5 id="_orange_title">Kategori Pertubuhan</h5>					
 						<select id="sel_kategori" name="sel_kategori" class="_sel">
-
 						<option value="" selected >Pilih Kategori</option>
-
-						</select>
-					</form>		
-			</div>
-							
-			
-				
-				
+						</select>				
+			</div>			
+											
 			<div class="selection" style="margin-top:14px"  id="negeri_selection">
-					<h5 id="_orange_title">Negeri</h5>
-					
+					<h5 id="_orange_title">Negeri</h5>					
 						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
 						<option value="" selected>Pilih Negeri</option>
-						</select>
-					
+						</select>					
 			</div>
 			
 			<div class="selection" style="margin-top:14px" id="daerah_selection">
-					<h5 id="_orange_title">Daerah</h5>
-					
+					<h5 id="_orange_title">Daerah</h5>					
 						<select id="sel_daerah" name="sel_daerah" class="_sel" onchange="copy_nama">
 						<option value="" selected>Pilih Daerah</option>
-						</select>
-						
+						</select>						
 			</div>
 			
-				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" onblur="copy_nama()" placeholder="Nama Pertubuhan"><br/>
-			
+				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" onblur="copy_nama()" placeholder="Nama Pertubuhan"><br/>			
 				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" onblur="copy_nama()" placeholder="Nama Ringkasan"><br/>
 				
 			<div class="display">
-				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
+				<textarea id="f_nama_penuh_pertubuhan" name="f_nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>
+				Nama Penuh Pertubuhan</textarea>
 			</div>
 			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>		
@@ -120,15 +112,14 @@
 				<input type="text" name="no_sijil_2" id="no_sijil" placeholder="No Sijil Gabungan"><br/>								
 		</div>
     
-				<div class="inform" style="margin-top:8px">
+				<div class="inform" style="margin-top:9px">
 					<input type="text" style="margin-top:0px" name="no_sijil" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
 				</div>
-				
-	
+					
 				<div class="default_button_holder">
 					<a href="pendaftaran-majlis-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
-			</form>
+			
 		</div>
 	</div>
 	<!-- end of form -->
@@ -217,35 +208,7 @@
 		
 		}
 		
-		/* tambah field */
-		
-		$(document).ready(function () 
-		{
-		 
-			$("#no_sijil_gabungan").on('click', '#add', function () 
-			{	
-				alert ("1")
-				var intId = $("#no_sijil_gabungan div").length + 1;
-				var inform = $("<div class=\"inform\" name=\"field" + intId + "\" id=\"field" + intId + "\"/>");
-				var no_sijil = $("<input type=\"text\" name=\"name\" class=\"no_sijil\" id=\"no_sijil" + intId + "_1\"/>");
-				var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
-
-				var addButton = $("<input type=\"button\" class=\"add\" id=\"add\" value=\"+\" />")
-				removeButton.click(function () 
-				{
-					$(this).parent().remove();
-				});
 				
-				inform.append(no_sijil_gabungan);
-				inform.append(removeButton);
-				inform.append(addButton);
-				$(this).remove();
-				$("#no_sijil_gabungan").append(inform);
-
-			});
-
-		});
-		
 		var sel_peringkat = document.getElementById("sel_peringkat");
 	
 		/*PAPARKAN NAMA PERSATUAN*/
@@ -276,7 +239,6 @@
 							console.log(json);
 							if (json.status == 'SELECT') {
 								console.log(json);
-								$("#f_lokaliti").val(json.details.lokaliti);
 								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
 								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
 								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);

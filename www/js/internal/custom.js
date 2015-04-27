@@ -510,6 +510,49 @@ TQ
 			
 		
 	};
+	
+	function getPeringkatInduk(id1,id2)
+	{		
+		var peringkat_pertubuhan_id = id1;
+		var static_jenis_pertubuhan = id2;
+								
+
+
+		$(function() 
+			{
+				$.ajax
+				(
+					{
+						type: "POST",
+						url: "http://eroy.me-tech.com.my/api/lookup_table/get_peringkat_induk.php",
+						dataType: "xml",
+						data:
+						{
+							static_jenis_pertubuhan : static_jenis_pertubuhan,
+						},
+						success: function(xml)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);							
+							$(xml).find("lk_peringkat_pertubuhan").each(function()
+							{	
+								/*SET JENIS PERTUBUHAN PADA ID BERIKUT*/
+								var nama_pertubuhan = $(this).find("peringkat_pertubuhan");
+								$('#'+peringkat_pertubuhan_id).html(nama_pertubuhan);					
+							
+							});
+						},
+						error: function() 
+						{
+							console.log("An error occurred while processing XML file.");
+						}
+					}
+				);
+
+			});
+			
+		
+	};
 	/*Control IC - Input*/
 	function ic_control(ic_id)
 	{
