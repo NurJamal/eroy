@@ -4,5 +4,18 @@
             "type": "registry",
             "id": "org.apache.cordova.inappbrowser"
         }
+    },
+    "org.apache.cordova.statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.statusbar"
+        }
+    },
+    "org.apache.cordova.device": {
+        "source": {
+            "type": "git",
+            "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git",
+            "subdir": "."
+        }
     }
 }

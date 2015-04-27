@@ -18,7 +18,7 @@
 		<div id="loadingLayer"></div>
 		
 	</head>
-	<body>
+	<body onload="onDeviceReady()">
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
@@ -56,6 +56,9 @@
 			</div>	
 		</div>
 	</div>
+	
+	<a href="pindaan_maklumat_pembayaran.html">PAYMENT</a><br/>
+	<a href="pindaan_maklumat_perlembagaan.html">PERLEMBAGAAN</a>
 
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -82,6 +85,19 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
+
+	
+	var devicePlatform = cordova.platformId;
+	localStorage['DEVICE_PLATFORM'] = devicePlatform;
+	StatusBar.overlaysWebView(false);
+   
+//  document.addEventListener("deviceready", onDeviceReady, false);
+//  function onDeviceReady() 
+//	{
+//		var devicePlatform = cordova.platformId;		
+//	}
+	
+
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());
@@ -97,7 +113,7 @@
 			(
 				{
 					title: 'Halaman Utama',
-					content: 'Sila masukkan sekurang-kurangnya 10 aksara untuk semak nama pertubuhan',
+					content: 'Sila Masukkan Sekurang-kurangnya 10 Aksara Untuk Semak Nama Pertubuhan',
 					confirm: function(){}
 				}
 			);

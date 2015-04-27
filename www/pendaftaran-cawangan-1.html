@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
+		<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
+		
+		<div id="loadingLayer"></div>
 
 	</head>
 	<body>
@@ -25,19 +27,21 @@
 	<!-- end of slide menu right -->
 	
 	<!-- header -->
-	<div id="head" >
+	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="menu_pendaftaran.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		
+		
 	</div>	
-	
 	<!-- end of header -->
-	
+		<div class="containerBlock">
+
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN CAWANGAN</h1>
+				<h1 class="main_title" id="jenis_pendaftaran_tajuk">PENDAFTARAN CAWANGAN</h1>
 			</div>
 		</div>
 	
@@ -45,31 +49,37 @@
 	<!-- end of header-title-->
 	
 	<div id="content">
+	
 
+		
 	<!-- navbar -->
-		<div class="navbar" >
+		<div class="navbar">
+		
 			<div align="center">
-			<img src="img\numbering1.png" style="width:100%;height:auto"/>
+		
+				<img src="img\numbering1.png" style="width:100%;height:auto"/>
+			
 			</div>
+		
 		</div>
 	<!-- end of navbar -->
 	
+		
 	<!-- form -->
 		<div class="_form">
-				
-				<div class="selection_no_icon" style="margin-top:-10px">
+		
+			<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
-
 					<span id="jenis_pendaftaran_pertubuhan"></span>
-					<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_bercawangan">
-						
+					<input type="hidden" value="2" name="jenis_pertubuhan" id="pertubuhan_cawangan">	
 			</div>
 				
-			<div class="selection">
+			<div class="selection" style="margin-top:14px" id="kategori_selection">
 					<h5 id="_orange_title">Kategori Pertubuhan</h5>
 					<form action="">
-						<select id="sel_mberkenaan" name="sel_mberkenaan" class="_sel">
-						<option value="none">Pilih Kategori</option>
+						<select id="sel_kategori" name="sel_kategori" class="_sel">
+						<option value="" selected >Pilih Kategori</option>
+
 						</select>
 					</form>		
 			</div>
@@ -102,16 +112,13 @@
 			</div>
 			
 				<input type="email" style="margin-top:5px" name="f_emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>	
-								
-						
-				
 				<div class="default_button_holder">
-				
-					<a href="pendaftaran-cawangan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-					
+				<a href="pendaftaran-cawangan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
+			
 			</form>
 		</div>
+	</div>
 	</div>
 	<!-- end of form -->
 	
@@ -135,14 +142,13 @@
 	<!--Loading Indicator. -->
 	<script src="js/waitMe.js"></script>
 	
-	
 	<script>
 
 		/*PAPARKAN NAMA PERSATUAN*/
 
 		getCountry($('#sel_negeri').attr('id'),'');		
 		getJenisPertubuhan($('#jenis_pendaftaran_tajuk').attr('id'),$('#jenis_pendaftaran_pertubuhan').attr('id'),"2");		
-		getKategoriPertubuhan($('#sel_kategori').attr('id'),"2");		
+		getKategoriPertubuhan($('#sel_kategori').attr('id'),"3");		
 		
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
@@ -174,6 +180,8 @@
 								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
 
 								$('body').waitMe('hide');
+								
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 
 							}
 							else if (json.status == 'VIEW') {
@@ -208,7 +216,12 @@
 					var nama_ringkasan = "("+f_nama_ringkasan+")";
 				}
 				
-				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+f_lokaliti+" "+nama_ringkasan);
+				if(f_lokaliti.length > 0)
+				{	
+					var lokaliti_txt = "Cawangan";
+				}
+				
+				$('#f_nama_penuh_pertubuhan').val(sel_kategori_txt+" "+f_nama_pertubuhan+" "+lokaliti_txt+" "+f_lokaliti+" "+nama_ringkasan);
 			}
 			
 
@@ -237,7 +250,7 @@
 		var sel_kategori = $("#sel_kategori").val();
 		var sel_negeri = $("#sel_negeri").val();
 		var sel_daerah = $("#sel_daerah").val();
-		var jenis_pertubuhan = $("#pertubuhan_tunggal").val();
+		var jenis_pertubuhan = $("#pertubuhan_cawangan").val();
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
 		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
@@ -324,11 +337,12 @@
 					},
 				success:function(data){
 					var json = $.xml2json(data);
+					console.log(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						
-							window.localStorage.setItem("NAMA_PENDAFTARAN_CAWANGAN", nama_penuh_pertubuhan);
-							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
-							
+						window.localStorage.setItem("NAMA_PENDAFTARAN_CAWANGAN", nama_penuh_pertubuhan);
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+						
 						$.alert
 						(
 							{
@@ -339,6 +353,7 @@
 								}
 							}
 						);
+						
 					}
 					else if (json.status == 'UPDATE_SUCCESS') {
 						$.alert
@@ -352,7 +367,7 @@
 							}
 						);
 						window.localStorage.setItem("NAMA_PENDAFTARAN_CAWANGAN", nama_penuh_pertubuhan);
-
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 					}
 					else if (json.status == 'UPDATE_ERROR') {
 						$.alert

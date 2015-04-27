@@ -92,6 +92,12 @@
 			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
 		</div>
 		
+		<input type="hidden" name="Amount" id="amount" />
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Majlis">
+		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
+		<input type="hidden" name="Key" id="key" value="E-ROY"/>
+		<input type="hidden" name="Channel" id="channel" value="02"/>
+		
 		<div class="default_button_holder">
 			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
 		</div>
@@ -216,76 +222,103 @@
 		}
 		else
 		{
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_8.php",
-				type:'POST',
-				data: {
+			if($('#jenis_bayaran').val() == 2)
+			{
+				
+				var amount = $.trim($('#amount').val());
+				var paymentDesc = $.trim($('#paymentDesc').val());
+				var paymentItemName = $.trim($('#paymentItemName').val());
+				var key = $.trim($('#key').val());
+				var channel = $.trim($('#channel').val());
+				var redirectUrl = "pendaftaran-induk-9.html";
+				var pertubuhanRefCode = localStorage.getItem("PAYMENT_REF_CODE");
+				
+				/* LocalStorage - Make sure to overwrite all var each time make payment */
+				localStorage['PAYMENT_AMOUNT'] = amount;
+				localStorage['PAYMENT_DESC'] = paymentDesc;
+				localStorage['PAYMENT_ITEMNAME'] = paymentItemName;
+				localStorage['PAYMENT_KEY'] = key;
+				localStorage['PAYMENT_CHANNEL'] = channel;
+				localStorage['REDIRECT_URL'] = redirectUrl;
+				localStorage['PAYMENT_REF_CODE'] = pertubuhanRefCode;
 
-					id_bentuk_bayaran : jenis_bayaran,
-					no_wang_pos: no_wang_pos,
-					id_amaun_bayaran: id_amaun_bayaran,
-					kad_pengenalan : kad_pengenalan,
-					insertData : insertData,
-				},
-				beforeSend: function() {
-						run_waitMe();
+				window.location.href = "modul/pembayaran/pembayaran_startup.html";
+				return false;
+			}
+			else
+			{
+			
+				$.ajax({
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_8.php",
+					type:'POST',
+					data: {
+
+						id_bentuk_bayaran : jenis_bayaran,
+						no_wang_pos: no_wang_pos,
+						id_amaun_bayaran: id_amaun_bayaran,
+						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
 					},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'INSERT_SUCCESS') {
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						console.log(data);
+						var json = $.xml2json(data);
+						console.log(json);
+						if (json.status == 'INSERT_SUCCESS') {
+							
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+										window.location.href = "pendaftaran-induk-9.html";
+									}
+								}
+							);
 						
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
+						}
+						else if (json.status == 'INSERT_ERROR') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else if (json.status == 'UPDATE_ERROR') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else if (json.status == 'UPDATE_SUCCESS') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
 									window.location.href = "pendaftaran-induk-9.html";
+									}
 								}
-							}
-						);
-					
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
 					}
-					else if (json.status == 'INSERT_ERROR') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else if (json.status == 'UPDATE_ERROR') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else if (json.status == 'UPDATE_SUCCESS') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								window.location.href = "pendaftaran-induk-9.html";
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-				}
-			});
+				});
+			}
 		}
 		
 	});

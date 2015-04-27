@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -44,48 +45,55 @@
 		<!-- end of header-title-->
 
 		<div id="content">	
-			<table>
-				<tr>
-					<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
-					<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Pindaan hanya boleh dibuat dalam tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</h5></td>
-				</tr>
-			</table>
-			
-			<div class="inform">
-				<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
-			</div>
-			<table>
-				<tr>
-					<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
-					<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Setiap pindaan mestilah disertakan tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></h5></td>
-				</tr>
-			</table>
-			
-			<div class="inform">
-				<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
-				
-				<h2 class="_orange_text">Nama Pertubuhan</h2>
-				<h1 class="_dark_text" id="nama_pertubuhan"></h1>
-				
-				<h2 class="_orange_text">Alamat Pendaftaran Baru</h2>
-				<input type="text" name="pinda_alamat1" id="pinda_alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="pinda_alamat2" id="pinda_alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="pinda_alamat3" id="pinda_alamat3" placeholder="Alamat 3"><br/>
-			</div>
-			
-			<div class="selection_no_icon">
-				<h5 id="_orange_title">Negeri</h5>
-				<span id="paparan_pertubuhan_negeri"></span>
-			</div>
-			
-			<div class="selection_no_icon" style="margin-top:13px">
-				<h5 id="_orange_title">Daerah</h5>
-				<span id="paparan_pertubuhan_daerah"></span>
-			</div>
-			
-			<div class="default_button_holder">
-				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
-			</div>
+			<form id="pendaftaran" name="pendaftaran">
+				<div id="first">
+					<table>
+						<tr>
+							<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
+							<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Pindaan hanya boleh dibuat dalam tempoh 60 hari setelah Mesyuarat Agong Tahunan atau Mesyuarat Agong Khas</h5></td>
+						</tr>
+					</table>			
+					<div class="inform">
+						<input type="text" name="p_tmesyuarat" id="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"   placeholder="Tarikh Mesyuarat" class="_datepick"><br/>
+					</div>
+				</div>
+					
+				<div id="second">
+					<table>
+						<tr>
+							<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Nota:</h5></td>
+							<td valign="top"><h5 id="H5" style="margin-left:5px; margin-top:15px">Setiap pindaan mestilah disertakan tempoh minit Mesyuarat Agong Tahunan atau Minit Mesyuarat Agong Khas.<font font size="1.5">(format .jpg)</font></h5></td>
+						</tr>
+					</table>
+					
+					<div class="inform">
+						<input type="text" name="p_min_mesyuarat" id="p_min_mesyuarat" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik Minit Mesyuarat" class="_upload"><br/>
+						
+						<h2 class="_orange_text">Nama Pertubuhan</h2>
+						<h1 class="_dark_text" id="nama_pertubuhan"></h1>
+						
+						<h2 class="_orange_text">Alamat Pendaftaran Baru</h2>
+						<input type="text" name="pinda_alamat1" id="pinda_alamat1" placeholder="Alamat 1"><br/>
+						<input type="text" name="pinda_alamat2" id="pinda_alamat2" placeholder="Alamat 2"><br/>
+						<input type="text" name="pinda_alamat3" id="pinda_alamat3" placeholder="Alamat 3"><br/>
+						<input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
+					</div>
+					
+					<div class="selection_no_icon">
+						<h5 id="_orange_title">Negeri</h5>
+						<span id="d_pertubuhan_negeri"></span>
+					</div>
+					
+					<div class="selection_no_icon" style="margin-top:13px">
+						<h5 id="_orange_title">Daerah</h5>
+						<span id="d_pertubuhan_daerah"></span>
+					</div>
+					
+					<div class="default_button_holder">
+						<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	
@@ -108,72 +116,230 @@
 	
 	<!--Loading Indicator. -->
 	<script src="js/waitMe.js"></script>
+
+	<script type="text/javascript" src="js/jquery.qtip.js"></script>
 	
 	<script>
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
-	
-	//alert(kad_pengenalan);
-	
-	$(function() 
+	var id_pertubuhan = window.localStorage.getItem('ID_PERTUBUHAN');
+	var status = window.localStorage.getItem('STATUS');
+
+	if(status == 'kuiri')
 	{
-		$.ajax
-		(
-			{
-				type: "POST",
-				url:"http://eroy.me-tech.com.my/api/api_pindaan_cawangan_alamat.php",
-				dataType: "xml",
-				data : 
+		var formLength = document.pendaftaran.elements.length;
+		$(function() 
+		{
+			$.ajax
+			(
 				{
-					kad_pengenalan : kad_pengenalan
-				},
-				beforeSend: function() 
-				{
-					run_waitMe();
-				},
-				success: function(xml, data)
-				{
-					
-					var xmlDoc = $.parseXML(xml),
-					$xml = $(xmlDoc);
-					$(xml).find("details").each(function()
-					{						
-						var kod_id = $(this).find("kod_nama_pertubuhan");
-						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
-						var negeri = $(this).find("negeri");
-						var daerah = $(this).find("daerah");
+					type: "POST",
+					url:"http://eroy.me-tech.com.my/api/api_pindaan_cawangan_alamat.php",
+					dataType: "xml",
+					data : 
+					{
+						kod_pertubuhan : id_pertubuhan
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+
+					success: function(xml, data)
+					{
 						
-						$('body').waitMe('hide');
-						
-						$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
-						$('#paparan_pertubuhan_negeri').html($(negeri).text());
-						//$('#paparan_pertubuhan_daerah').html($(daerah).text());
-						$( '#paparan_pertubuhan_daerah' ).html( "Sepang" );
-					});
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						$(xml).find("details").each(function()
+						{						
+							for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].type != 'button')
+								{
+									document.pendaftaran.elements[i].setAttribute("disabled","disabled");
+								}
+							};
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							var negeri = $(this).find("negeri");
+							var daerah = $(this).find("Keterangan");
+							
+							//$('body').waitMe('hide');
+							
+							$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
+							$('#d_pertubuhan_negeri').html($(negeri).text());
+							$('#d_pertubuhan_daerah').html($(daerah).text());
+
+							checkKuiriPindaan(id_pertubuhan);
+						});
+					}
 				}
+			);
+		});
+	}else
+	{
+		$('#second :input').prop('disabled', true);
+
+		$('#p_tmesyuarat').on('change', function()
+		{
+			var selectedDate = $.trim($("#p_tmesyuarat").val());
+			var today = new Date(); 
+			var targetDate= new Date();
+			
+			targetDate.setDate(today.getDate()+ 60);
+			targetDate.setHours(0);
+			targetDate.setMinutes(0);
+			targetDate.setSeconds(0);
+
+			if(Date.parse(selectedDate) <= Date.parse(targetDate))
+			{
+				$('#second :input').prop('disabled', false);
 			}
-		);
-	});
+			else 
+			{
+				$('#second :input').prop('disabled', true);
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Tarikh Mesyuarat Mestilah Dalam Tempoh 60 Hari.',
+						confirm: function(){}
+					}
+				);
+				$('#p_tmesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+		});
+		
+		$(function() 
+		{
+			$.ajax
+			(
+				{
+					type: "POST",
+					url:"http://eroy.me-tech.com.my/api/api_pindaan_cawangan_alamat.php",
+					dataType: "xml",
+					data : 
+					{
+						kod_pertubuhan : id_pertubuhan
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+
+					success: function(xml, data)
+					{
+						
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						$(xml).find("details").each(function()
+						{						
+							var kod_id = $(this).find("kod_nama_pertubuhan");
+							var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+							var negeri = $(this).find("negeri");
+							var daerah = $(this).find("Keterangan");
+							
+							$('body').waitMe('hide');
+							
+							$('#nama_pertubuhan').html($(nama_penuh_pertubuhan).text());
+							$('#d_pertubuhan_negeri').html($(negeri).text());
+							$('#d_pertubuhan_daerah').html($(daerah).text());
+						});
+					}
+				}
+			);
+		});
+	}
 	
 	$("#btn_submit").click(function(e)
-	{
+	{		
+		var uploadfile = $.trim($("#p_min_mesyuarat").val());
+		var alamat = $.trim($("#pinda_alamat1").val());
+		var empty = false;
+		
+		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css*/
+		$('#pinda_alamat1, #p_min_mesyuarat').css({"border":"","box-shadow":""});
+		
 		e.preventDefault();
-
-		$.alert
-		(
-			{
-				title: 'Perhatian',
-				content: 'Sila Buat Pembayaran Untuk Teruskan Pindaan. Terima Kasih.',
-				confirm: function()
+		
+		/*NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill*/
+		if(alamat.length == 0) 
+		{
+			$('#pinda_alamat1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(uploadfile.length == 0) 
+		{
+			$('#p_min_mesyuarat').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(empty == true)
+		{
+			$.alert
+			(
 				{
-					$('body').waitMe('hide');
-					window.location.href = "pindaan_cawangan_bayaran.html";
+					title: 'Perhatian',
+					content: 'Sila Isikan Tempat Kosong!',
+					confirm: function(){				
+					}
 				}
+			);
+		}
+		else 
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/api_temp_stored_pindaan_bercawangan.php",
+						type:'POST',
+						data:
+						{
+							uploadfile : uploadfile,
+							alamat : alamat
+						},
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success:function(data)
+						{
+							console.log(data);
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'ok') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Pindaan Maklumat',
+										content: 'Sila Buat Pembayaran Untuk Teruskan Pindaan. Terima Kasih.',
+										confirm: function()
+										{
+											$('body').waitMe('hide');
+											window.location.href = "pindaan_cawangan_bayaran.html";
+										}
+									}
+								);								
+							}
+							else if (json.status == 'error') 
+							{
+								console.log(json.status);
+								$.alert
+								(
+									{
+										title: 'Pindaan Maklumat',
+										content: json.message,
+										confirm: function(){}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+						}
+					}
+				);	
 			}
-		);
-	
 	});
-	
-	
 	
 	</script>
 	</body>

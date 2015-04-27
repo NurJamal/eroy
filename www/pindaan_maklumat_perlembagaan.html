@@ -4,22 +4,32 @@
 
 		<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
-		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
-	</head>
-		
+		</div>		
+		<div id="loadingLayer"></div>
 	
+		
+		
+		<!--Load to Local Later-->
+		<!--<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+		<!-- CSS file -->
+		<link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+</head>
+
 	<body>
 	<div id="transparent_layer" ></div>
 	
@@ -27,13 +37,11 @@
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
 	
-	
-	
 	<!-- header -->
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pindaan_maklumat_pertubuhan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
@@ -49,20 +57,13 @@
 	<!-- end of header-title-->
 
 	<div id="content">	
-	
-		 <!--<h2 class="demoHeaders">
-  <span id='tooltipClick' title='This is a tooltip that appears on click...'>Tooltip on Click</span>
-</h2>-->
 		<h5 id="_orange_title_imal">Nama Pertubuhan</h5>
-		<h1 class="_dark_text_imal">PERSATUAN SELSA MALAYSIA</h1>
+		<h1 class="_dark_text_imal" id="nama_pertubuhan"></h1>
 		
 		<h5 id="_orange_title_imal">
-		<table class="table_pindaan_maklumat" >
-		<tbody id="appendPerlembagaan">
+		<div id="appendPerlembagaan" >
+		</div >
 
-
-		</tbody>
-		</table>
 
 		</h5>
 		
@@ -89,265 +90,26 @@
 	<!-- alert box -->
 	<script src="js/jquery-confirm.js"></script>
 	<script src="js/jquery-confirm.min.js"></script>	
-	
+	<!-- 	qtip --->
+	<script type="text/javascript" src="js/jquery.qtip.js"></script>
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
+
+	<!-- Perlembagaan JS -->
+	<script src="js/internal/perlembagaan.js" type="text/javascript" language="javascript"></script>
+
 
 	<script type="text/javascript" src="js/jquery.qtip.js"></script>
 	<!-- Optional: imagesLoaded script to better support images inside your tooltips -->
 	<!--<script type="text/javascript" src="js/jquery.imagesloaded.pkg.min.js"></script>-->
 	<script>
-	// Create the tooltips only when document ready
+
+
+	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
+	$('#nama_pertubuhan').html('PERSATUAN SELSA MALAYSIA');
 	
-	//$( document ).ready(function() {
+	getFasal('appendPerlembagaan', 1);
 		
-		$("#appendPerlembagaan").delegate(".checkbox", "click", function (){
-		//tooltipIcon
-		var currentSelectedId = $(this).attr('id');
-		var arr = currentSelectedId.split('_');
-		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
-		var currentID = localStorage['selected_id_perlembagaan'];
-		//alert();
-		
-		var lol = '<table width="220" height="30">';
-		lol += '<tr align="center">';
-		lol += '<td width="10px"></td>';
-		lol += '<td width="40px"><img src="img/addbottom-icon.png" width="40px" height="45px"  onclick="addTop()"></td>';
-		lol += '<td width="40px"><img src="img/addtop-icon.png" width="40px" height="45px" onclick="addBottom()"></td>';
-		lol += '<td width="40px"><img src="img/add-icon.png" width="40px" height="45px" onclick="addFasal()"></td>';
-		lol += '<td width="40px"><img src="img/pindaan-icon.png" width="40px" height="45px" onclick="editFasal()"></td>';
-		lol += '</tr>';
-		lol += '</table>';
-		
-		$('#tooltipIcon_'+currentID).qtip({
-		overwrite: false, 
-			content: {
-				//text: $('#tooltiptext'),
-				text: lol,
-				button: false,
-					
-			},
-			 style: {
-				width: 260, 
-				height: 63,
-				classes: 'qtip-rounded'
-			 },   
-				
-			show: {
-			 //effect: function(offset) {
-			//		$(this).slideDown(100); // "this" refers to the tooltip
-			//	},
-				event: 'click',
-				solo: false,
-				
-		   
-			},
-
-			hide:'unfocus',
-			events: {
-				visible: function(event, api) {
-					$('#transparent_layer').show();
-					$("body").css("overflow-y", "hidden");
-					$('#added_'+currentID).remove();
-				},
-				 hide: function(event, api) {
-					$('#transparent_layer').hide();
-					$("body").css("overflow-y", "visible");
-				
-				}
-			},
-			 position: {
-				my: 'bottom left',
-				at: 'top left'
-			}
-		});
-	});
-		
-	//Get Fasal Template
-	getFasal('appendPerlembagaan', '1');
-		
-
-
-	//Add Bottom
-	function addBottom()
-	{				
-		var selected = localStorage.getItem('selected_id_perlembagaan');
-
-		var prevID = $("#"+selected).prev().attr('id');
-		
-		divSelected = $('#'+selected);
-		divprev = $('#'+prevID);
-
-		tdiv1 = divSelected.clone();
-		tdiv2 = divprev.clone();
-
-		divSelected.replaceWith(tdiv2);
-		divprev.replaceWith(tdiv1);
-		$("div").qtip('hide');
-		
-		rewriteID();
-	}
-	
-	//Add Top
-	function addTop()
-	{
-		var selected = localStorage.getItem('selected_id_perlembagaan');
-
-		var nextID = $("#"+selected).next().attr('id');
-		
-		divSelected = $('#'+selected);
-		divNext = $('#'+nextID);
-
-		tdiv1 = divSelected.clone();
-		tdiv2 = divNext.clone();
-
-		divSelected.replaceWith(tdiv2);
-		divNext.replaceWith(tdiv1);
-		$("div").qtip('hide');				
-
-		rewriteID();
-	}
-	
-	//Add Bottom
-	function addFasal()
-	{	
-		var selected = localStorage.getItem('selected_id_perlembagaan');
-		$('.inform').remove();
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', ''))+1)+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
-		$("div").qtip('hide');				
-
-		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
-
-	
-		$('.fasal_label').each(function() {
-			var span_id = this.id;
-			var span_value = $('#'+span_id).html();
-			var addOne = parseInt(span_value.replace('Fasal ',''));
-			
-			if(addOne > selected.replace('tr_', ''))
-			{
-				var afterAdd = parseInt(addOne+1);
-				var fasal_index = 'Fasal '+afterAdd;
-				$('#'+span_id).html(fasal_index);	
-			}
-
-		});
-	}
-	
-	//Edit Fasal
-	function editFasal()
-	{				
-		var selected = localStorage.getItem('selected_id_perlembagaan');
-		var IDselected = selected.replace('tr_', '');
-		
-		$('.inform').remove();
-		$("<div class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected)+"_added' placeholder='Fasal "+(parseInt((selected).replace('tr_', '')))+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"' value='"+$('#fasal_index_'+IDselected+'_text').text()+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='editDisplay();'></div></td></tr></table></div>").insertAfter('#'+selected);
-		$("div").qtip('hide');
-		
-		/*FASAL LABEL INDEX*/
-		var dummyFasalLabelIndex = 1;
-	}
-	
-	function editDisplay()
-	{
-		var id = localStorage.getItem('selected_id_perlembagaan');
-		var IDselected = id.replace('tr_', '');
-
-		/*On click display - check if null*/
-		if($('#fasal_added_'+(id)).val() != "")
-		{
-			var editedFasalText = $('#fasal_added_'+id).val();
-			$('#fasal_index_'+IDselected+'_text').text(editedFasalText);
-		}
-		
-		$('#added_'+id).remove();
-
-	}
-
-	
-	function addDisplay()
-	{			
-		/*FASAL LABEL INDEX*/
-		var dummyFasalLabelIndex = 1;
-	
-		var id = localStorage.getItem('selected_id_perlembagaan');
-		var thisID = id;
-		var fasal_index = localStorage.getItem('fasal_index');
-		var appendId = 'tr_'+(parseInt((id).replace('tr_', ''))+1);
-		
-		/*On click display - check if null*/
-		if($('#fasal_added_'+(id)).val() != "")
-		{
-			var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-			var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-			$('<tr class="checkbox" style="margin-bottom:10px;" id="new_added_'+appendId+'" ><td width="30px" class="xx" id="edittooltip_'+id.replace('tr_', '')+'" >'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_added_'+(id+1)+'"><label for="checkbox'+id+'"><span class="fasal_label" id="fasal_index_'+appendId+'"> Fasal '+ fasal_index+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></td></tr>').insertAfter($('#'+id));				
-		}
-		
-		$('#added_'+id).remove();
-		
-		/*Differentiate between <tr>*/
-		$('.checkbox').each(function() {
-			
-			var tr_id = this.id;
-			var tr_value =  $('#'+tr_id).attr('id');
-			var trAddOne = parseInt(tr_value.replace('tr_',''));
-
-			if(trAddOne > id.replace('tr_',''))
-			{
-				var trAfterAdd = parseInt(trAddOne+1);
-				$('#'+tr_id).attr('id','tr_'+trAfterAdd);
-			}
-		});
-		
-		$('#new_added_'+appendId).attr('id',appendId);
-		
-		rewriteID();
-	}
-	
-	function rewriteID()
-	{
-		/* Re-write <TR NO> */
-		var index = 1;
-		var indexx = 1;
-
-		$('.checkbox').each(function() {
-			var tr_id = this.id;
-			var tr_value =  $('#'+tr_id).attr('id');
-			$('#'+tr_value).attr('id','xx_'+index);
-
-			index = parseInt(index+1);
-		});
-		
-		var indexx = 1;
-		$('.checkbox').each(function() {
-			$('#xx_'+indexx).attr('id','tr_'+indexx);
-			indexx = parseInt(indexx+1);
-		});
-		/* End Re-write <TR NO> */
-
-		/* Re-write <FASAL LABEL NO/ID> */
-
-		var indexFasal = 1;
-		var indexFasalR = 1;
-
-		$('.fasal_label').each(function() {
-				
-			var tr_id = this.id;
-			var tr_value =  $('#'+tr_id).attr('id');
-			$('#'+tr_value).attr('id','xxx_'+indexFasal);
-			
-			indexFasal = parseInt(indexFasal+1);
-
-		});
-
-		$('.fasal_label').each(function() {
-			$('#xxx_'+indexFasalR).attr('id','fasal_index_'+indexFasalR);
-			
-			$('#fasal_index_'+indexFasalR).html('Fasal'+' '+indexFasalR);
-			indexFasalR = parseInt(indexFasalR+1);
-		});
-		/* End re-write <FASAL LABEL NO/ID> */
-	}
 
 	</script>
 	</body>

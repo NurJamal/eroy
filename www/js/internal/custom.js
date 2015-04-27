@@ -1,10 +1,17 @@
+/*
+EROY GLOBAL FUNCTION
+PLEASE PUT COMMENT IF NECESSARY
+TQ
+*/
 
-	//var ajaxTimeout = 1000 * 10;
-
-	/*On Ready Event*/
-	/*Click To Top*/
-	//$( document ).ready(function() {
-
+		/*Payment Get URL From Native*/
+		function handleOpenURL(url) {
+			setTimeout(function() {
+				//localStorage['PAYMENT_REDIRECT_URL'] = url;
+				paymentRedirect(url);
+			 }, 3000);
+		}
+	
 		$("#scrollTop").click(function() {
 		  $("html, body").animate({ scrollTop: 0 }, "100");
 		  return false;
@@ -154,8 +161,6 @@
 						dataType: "xml",
 						success: function(xml)
 						{
-
-
 							$('#'+id)
 							.find('option')
 							.remove()
@@ -348,6 +353,7 @@
 
 								$('#'+jumlah_bayaran_id).val('RM '+jumlah_bayaran.text());
 								$('#'+id_bayaran).val(id.text());
+								$('#amount').val(jumlah_bayaran.text());
 
 								
 								
@@ -545,137 +551,6 @@
 	}
 
 	var count = 1;
-	function getFasal(id1, kodPertubuhan)
-	{
-			var id_pertubuhan = kodPertubuhan;
-			var fasal_id = id1;
-			
-			
-			
-			$(function() 
-			{
-				$.ajax
-				(
-					{
-						type: "POST",
-						url: "http://eroy.me-tech.com.my/api/lookup_table/get_fasal.php",
-						data: {
-							id_pertubuhan : id_pertubuhan,
-						},
-						dataType: "xml",
-						success: function(xml)
-						{
-							var json = $.xml2json(xml);
-							var data  = JSON.stringify(json);
-							var parseData = JSON.parse(data);
-							console.log(parseData);
-							
-					$.each(parseData.fasal_template, function (index_1, value) {
-						
-						
-						$.each(value, function (index_2, fasal_list) {
-						
-								var fasal_index= 'Fasal '+(index_2+1);
-								
-								var editorImgFirstLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-								var checkBoxFirstLvl = '<td><input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+fasal_list.id+'"></label></td>';
-								
-								//First Lvl
-								$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tr_'+fasal_list.id+'"><td width="30px" id="tooltipIcon_tr_'+fasal_list.id+'">'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+fasal_list.id+'"></td></tr>');
-								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+fasal_list.id+'">'+ fasal_index+'</span> - <span class="fasal_label_text" id="fasal_index_'+fasal_list.id+'_text"> '+fasal_list.fasal+'</span></label>');
-								var arrayCode = [];
-								
-								if(fasal_list.sub_fasal != null)
-								{
-									if (Array.isArray(fasal_list.sub_fasal))
-									{
-											var arrayCode2 = [];
-											
-											$.each(fasal_list.sub_fasal, function (index_3, sub_fasal_list) {
-												//Second Lvl
-												
-												var editorImgSecondLvl = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-												var checkBoxSecondLvl = '<td><input class="checkboxClass" id="checkbox'+sub_fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-
-												if(sub_fasal_list.ref_level == fasal_list.code_level )
-												{
-													$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" class="tooltip" id="edit_tooltip">'+editorImgSecondLvl+'</td><td>'+checkBoxSecondLvl+'</td><td id="fasal_'+sub_fasal_list.id+'"></td></tr>');
-													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'">'+sub_fasal_list.fasal+'</label>');										
-													
-													
-													//Third Lvl and above
-													$.each(fasal_list.sub_fasal, function (index_4_1, sub_fasal_nested_list_1)
-														{ 
-															$.each(fasal_list.sub_fasal, function (index_4_2, sub_fasal_nested_list)
-																{
-																
-																		arrayCode2.push(sub_fasal_nested_list.ref_level);		
-																		if(sub_fasal_nested_list_1.code_level == sub_fasal_nested_list.ref_level && arrayCode.indexOf(sub_fasal_nested_list.ref_level) <= 0 )
-																		{
-																		
-																			//Per sec0nd Lvl. -_-
-																			if(sub_fasal_nested_list.main_sub_level == sub_fasal_list.code_level )
-																			{
-																				
-																				
-																				var appendTD;
-																				for(var x = 1 ; x < sub_fasal_nested_list.level ; x ++)
-																				{
-																					appendTD += '<td width="30px"></td>';
-																				}
-																																					
-																				$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here">'+appendTD+'<td width="30px" id="edit_tooltip">'+editorImgFirstLvl+'</td><td>'+checkBoxFirstLvl+'</td><td id="fasal_'+sub_fasal_nested_list.id+'"></td></tr>');
-																				$('#fasal_'+sub_fasal_nested_list.id).append('<label for="checkbox'+sub_fasal_nested_list.id+'">'+sub_fasal_nested_list.fasal+'</label>');										
-																				
-																				if((index_4_2+1) == (fasal_list.sub_fasal).length){
-																					//arrayCode = arrayCode2;
-																				}
-																			}	
-																		}
-																	
-																});	
-																
-														});	
-														
-												}
-												
-											});
-									}
-									else
-									{
-										var editorImgNotArray = '<image src="img/pindaan-icon.png" width="25px" height="25px" >';
-										var checkBoxNotArray = '<td><input class="checkboxClass" id="checkbox'+fasal_list.sub_fasal.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
-
-									
-										if(fasal_list.sub_fasal.ref_level == fasal_list.code_level)
-										{
-											$('#'+fasal_id).append('<tr class="checkbox" style="margin-bottom:10px;" id="tooltips_here"><td width="30px"></td><td width="30px" id="edit_tooltip">'+editorImgNotArray+'</td><td>'+checkBoxNotArray+'</td><td id="fasal_'+fasal_list.sub_fasal.id+'"></td></tr>');
-											$('#fasal_'+fasal_list.sub_fasal.id).append('<label for="checkbox'+fasal_list.sub_fasal.id+'">'+fasal_list.sub_fasal.fasal+'</label>');										
-										}
-									}
-								}							
-							});
-						});
-						
-						
-		
-								
-								
-						},
-						error: function() 
-						{
-							console.log("An error occurred while processing XML file.");
-						}
-					}
-				);
-
-				
-				
-				
-			});
-			
-
-	};
 	
 	//LIST JAWATAN
 	function getJawatan(id,selected)
@@ -778,7 +653,238 @@ function highlightID(id)
 		return false;
 	}
 
+function checkKuiriPendaftaran(kod_pertubuhan,lvl)
+{
+	var kod_pertubuhan = kod_pertubuhan;
+	var level = lvl
+	formLength = document.pendaftaran.elements.length;
+	$(function() 
+	{
+		$.ajax({
+			url:"http://eroy.me-tech.com.my/api/kuiri/check_kuiri_pendaftaran.php",
+			type:'POST',
+			data: {
+				kod_pertubuhan : kod_pertubuhan,
+				level : level,
+			},
+			success:function(data)
+			{
+				var json = $.xml2json(data);
+				if (json.status == 'SELECT') {
+
+				 	console.log(Array.isArray(json.details));
+				 	if(Array.isArray(json.details))
+				 	{
+				 		for (var j = 0; j < json.details.length; j++) {
+				 			for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].name == json.details[j].id_label_pendaftaran)
+								{
+									var sel = json.details[j].id_label_pendaftaran.split('_');
+                                    if(document.pendaftaran.elements[i].type == "file")
+                                    {
+                                        var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+                                        $(div).insertBefore('#'+json.details[j].id_label_pendaftaran);
+                                        $("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+                                        $("#"+json.details[j].id_label_pendaftaran+"_div").css('margin-top','0px');
+                                        document.pendaftaran.elements[i].style.width = "85%";
+                                        document.pendaftaran.elements[i].removeAttribute("disabled");
+                                    }
+									else if(sel[0] == "sel")
+									{
+										var newId = sel[1]+'_selection';
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+										$(div).insertBefore('#'+newId);
+										$("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+										$("#"+json.details[j].id_label_pendaftaran+"_div").css('margin-top','0px');
+										$('#'+newId).css('width','85%');
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									}else
+									{
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pendaftaran+'_div"></div>';
+										$(div).insertAfter('#'+json.details[j].id_label_pendaftaran);
+										$("#"+json.details[j].id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pendaftaran+"\')");
+										document.pendaftaran.elements[i].style.width = "85%";
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									} 
+								}
+							};					
+						};
+				 	}else
+				 	{
+				 		for (var i = 0; i < formLength; i++) {
+							if(document.pendaftaran.elements[i].name == json.details.id_label_pendaftaran)
+							{
+								var sel = json.details.id_label_pendaftaran.split('_');
+								if(sel[0] == "sel")
+								{
+									var newId = sel[1]+'_selection';
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pendaftaran+'_div"></div>';
+									$(div).insertBefore('#'+newId);
+									$("#"+json.details.id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pendaftaran+"\')");
+									$("#"+json.details.id_label_pendaftaran+"_div").css('margin-top','0px');
+									$('#'+newId).css('width','85%');
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								}else
+								{
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pendaftaran+'_div"></div>';
+									$(div).insertAfter('#'+json.details.id_label_pendaftaran);
+									$("#"+json.details.id_label_pendaftaran+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pendaftaran+"\')");
+									document.pendaftaran.elements[i].style.width = "85%";
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								} 
+							}
+							
+						};
+				 	}
+					$('body').waitMe('hide');
+
+				}else if (json.status == 'EMPTY')
+				{
+					//alert("empty");
+					$('#id_pertubuhan').val("empty");
+					$('body').waitMe('hide');
+				}
+			}
+		});
+	});
+}
+
+function checkKuiriPindaan(id_pertubuhan)
+{
+	var kod_pertubuhan = id_pertubuhan;
+	formLength = document.pendaftaran.elements.length;
+	$(function() 
+	{
+		$.ajax({
+			url:"http://eroy.me-tech.com.my/api/kuiri/check_kuiri_pindaan.php",
+			type:'POST',
+			data: {
+				kod_pertubuhan : kod_pertubuhan,
+			},
+			success:function(data)
+			{
+				var json = $.xml2json(data);
+				
+				if (json.status == 'SELECT') {
+				 	if(Array.isArray(json.details))
+				 	{
+				 		for (var j = 0; j < json.details.length; j++) {
+				 			for (var i = 0; i < formLength; i++) {
+								if(document.pendaftaran.elements[i].name == json.details[j].id_label_pindaan)
+								{
+									var sel = json.details[j].id_label_pindaan.split('_');
+									if(sel[0] == "sel")
+									{
+										var newId = sel[1]+'_selection';
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pindaan+'_div"></div>';
+										$(div).insertBefore('#'+newId);
+										$("#"+json.details[j].id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pindaan+"\')");
+										$("#"+json.details[j].id_label_pindaan+"_div").css('margin-top','0px');
+										$('#'+newId).css('width','85%');
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									}else
+									{
+										var div = '<div class="kuiriIcon" id="'+json.details[j].id_label_pindaan+'_div"></div>';
+										$(div).insertAfter('#'+json.details[j].id_label_pindaan);
+										$("#"+json.details[j].id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details[j].kuiri+"\',\'"+json.details[j].id_label_pindaan+"\')");
+										document.pendaftaran.elements[i].style.width = "85%";
+										document.pendaftaran.elements[i].removeAttribute("disabled");
+									} 
+								}
+							};					
+						};
+				 	}else
+				 	{
+				 		for (var i = 0; i < formLength; i++) {
+							if(document.pendaftaran.elements[i].name == json.details.id_label_pindaan)
+							{
+								var sel = json.details.id_label_pindaan.split('_');
+								console.log(sel[0]);
+								if(sel[0] == "sel")
+								{
+									var newId = sel[1]+'_selection';
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pindaan+'_div"></div>';
+									$(div).insertBefore('#'+newId);
+									$("#"+json.details.id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pindaan+"\')");
+									$("#"+json.details.id_label_pindaan+"_div").css('margin-top','0px');
+									$('#'+newId).css('width','85%');
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								}else
+								{
+									var div = '<div class="kuiriIcon" id="'+json.details.id_label_pindaan+'_div"></div>';
+									$(div).insertAfter('#'+json.details.id_label_pindaan);
+									$("#"+json.details.id_label_pindaan+"_div").attr("onclick","getInfo(\'"+json.details.kuiri+"\',\'"+json.details.id_label_pindaan+"\')");
+									document.pendaftaran.elements[i].style.width = "85%";
+									document.pendaftaran.elements[i].removeAttribute("disabled");
+								} 
+							}
+							
+						};
+				 	}
+					$('body').waitMe('hide');
+
+				}else if (json.status == 'EMPTY')
+				{
+					//alert("empty");
+					$('#id_pertubuhan').val("empty");
+					$('body').waitMe('hide');
+				}
+			}
+		});
+	});
+}
+
+function getInfo(msg,id)
+{
+	var currentSelectedId = $('#'+id+'_div');
 	
+	var lol = '<table width="100%" height="20">';
+	lol += '<tr align="center">';
+	lol += '<td width="40px">'+msg+'</td>';
+	lol += '</tr>';
+	lol += '</table>';
+	
+	currentSelectedId.qtip({
+	overwrite: false, 
+		content: {
+			//text: $('#tooltiptext'),
+			text: lol,
+			button: false,
+				
+		},
+		 style: {
+			width: '100%', 
+			height: 30,
+			classes: 'qtip-cream'
+		 },   
+			
+		show: {
+		 //effect: function(offset) {
+		//		$(this).slideDown(100); // "this" refers to the tooltip
+		//	},
+			event: 'click',
+			solo: true,
+			
+	   
+		},
+
+		hide:'unfocus',
+		events: {
+			visible: function(event, api) {
+				//$('#transparent_layer').show();
+				$("body").css("overflow-y", "hidden");
+			},
+			 hide: function(event, api) {
+				//$('#transparent_layer').hide();
+				$("body").css("overflow-y", "visible");
+			}
+		},
+		 position: {
+			my: 'bottom right',
+			at: 'top left'
+		}
+	});
+}
 	
 	
 	

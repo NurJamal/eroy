@@ -2,15 +2,20 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
 		<link rel="stylesheet" type="text/css" href="css/body.css" />
 		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -21,65 +26,167 @@
 	<!-- end of slide menu right -->
 	
 	<!-- header -->
-
-	
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pindaan_maklumat_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-	<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
 
-			<div class="input-group-btn">
-				<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+				<div class="input-group-btn">
+					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+				</div>
 			</div>
+
 		</div>
+		<!-- end of header-title-->
 
-	</div>
-	<!-- end of header-title-->
-
-	<div id="content">	
-
-		<div class="display">
-			<form id="" action="" method="POST">
-				<input type="text" style="margin-top:15px" id="d_npertubuhan" name="d_npertubuhan" placeholder="KELAB SELSA MALAYSIA" disabled><br/>
-				<input type="text" id="d_nsijil" name="d_nsijil"  placeholder="J09732" disabled><br/>
-			</form>
-		</div>
-		
-		<div class="checkbox">
-			<input id="c_box1" class="checkboxClass" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" />
-			<label for="c_box1">Pindaan Nama</label><br>
+		<div id="content">	
+			<div class="display">
+				<form id="" action="" method="POST">
+					<input type="text" style="margin-top:15px" id="d_npertubuhan" name="d_npertubuhan" disabled><br/>
+					<input type="text" id="d_no_sijil" name="d_no_sijil" disabled><br/>
+				</form>
+			</div>
 			
-			<input id="c_box2" class="checkboxClass" type="checkbox" name="senarai" value="Senarai Ahli Jawatankuasa" />
-			<label for="c_box2">Pindaan Alamat Tempat <span class="line2">Urusan</span></label><br>
+			<div class="checkbox">
+				<input id="c_box1" class="checkboxClass" type="checkbox" name="senarai" value="0"/>
+				<label for="c_box1">Pindaan Nama</label><br>
+				
+				<input id="c_box2" class="checkboxClass" type="checkbox" name="senarai" value="1"/>
+				<label for="c_box2">Pindaan Alamat Tempat <span class="line2">Urusan</span></label><br>
+				
+				<input id="c_box3" class="checkboxClass" type="checkbox" name="senarai" value="2">
+				<label for="c_box3">Pindaan Perlembagaan</label><br>
+				
+				<input id="c_box4" class="checkboxClass" type="checkbox" name="senarai" value="3">
+				<label for="c_box4">Pindaan Lambang/Logo/ <span class="line2">Lencana/Bendera</span></label>
+			</div><h2>
 			
-			<input id="c_box3" class="checkboxClass" type="checkbox" name="senarai" value="Perlembagaan/Undang-undang Tubuh">
-			<label for="c_box3">Pindaan Perlembagaan</label><br>
+			<!-- <div id="result"></div> -->
 			
-			<input id="c_box4" class="checkboxClass" type="checkbox" name="senarai" value="Lain-Lain">
-			<label for="c_box4">Pindaan Lambang/Logo/ <span class="line2">Lencana/Bendera</span></label>
-		</div><h2>
-		
-		<div class="default_button_holder">
-			<a href="pindaan_maklumat_pertubuhan.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
+			<div class="default_button_holder">
+				<input class="default_button" type="button" value="TERUSKAN" id="btn_submit">
+			</div>
 		</div>
 	</div>
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="js/nav.js"></script>	
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	var id_pertubuhan = window.localStorage.getItem('ID_PERTUBUHAN');
+	var status = window.localStorage.getItem('STATUS');
+
+	if(status == 'kuiri')
+	{
+
+	}else
+	{
+
+	}
+	
+	function jenisPindaanArray()
+	{
+		var arr = [];
+		$('.checkbox input[type="checkbox"]:checked').each(function()
+		{
+			arr.push($(this).val());
+		});
+		return arr; 
+	}
+	
+	$(function() 
+	{
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_induk.php",
+				dataType: "xml",
+				data : 
+				{
+					kod_pertubuhan : id_pertubuhan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						
+						$('body').waitMe('hide');
+						
+						$('#d_npertubuhan').val($(nama_penuh_pertubuhan).text());
+						$('#d_no_sijil').val($(no_sijil).text());
+					});
+				}
+			}
+		);
+	});
+	
+	$('#btn_submit').click(function() 
+	{
+		var selectedChoice = [];
+		
+		for( var i = 0 ; i < 5 ; i++ )
+		{
+			if($("#c_box"+i).is(":checked"))
+			{		
+				selectedChoice.push($("#c_box"+i).val());
+			}
+		}
+		if( selectedChoice.length <= 0)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila Tandakan Satu Pilihan',
+					confirm: function(){}
+				}
+			);
+		}	
+		else
+		{
+			window.localStorage['ID_JENIS_PINDAAN'] = JSON.stringify(jenisPindaanArray());
+			window.location.href = "pindaan_maklumat_form.html";
+		}
+	});
+	
+	</script>
 	
 	</body>
 </html>

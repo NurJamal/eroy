@@ -69,12 +69,12 @@
 	<script src="js/waitMe.js"></script>
 	
 	<script>
-	var no_ic = window.localStorage.getItem('LOGIN');
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
 	var nama = window.localStorage.getItem('NAMA');
 	
 	$(function() 
 	{
-		//$('#content').hide();
+		$('#content').hide();
 		$.ajax
 		(
 			{
@@ -83,7 +83,7 @@
 				dataType: "xml",
 				data : 
 				{
-					no_ic : no_ic
+					kad_pengenalan : kad_pengenalan
 				},
 				beforeSend: function() 
 				{
@@ -103,7 +103,7 @@
 						$('body').waitMe('hide');
 						$('#content').show();
 						
-						$("#content").append("<div id='"+no_ic+"' class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
+						$("#content").append("<div class='box_icon'><h2 class='li1'>"+nama_pertubuhan.text()+"<h2 class='li2'>Tarikh Permohonan: <b>12/03/2014</b></h2><h2 class='li2'>Status: <b>-</b></h2><h2></h2></div>");						
 					});
 				}
 			}
@@ -111,7 +111,7 @@
 	});
 	
 
-	$('.box_icon').click(function(e)
+	$("div").click(function(e)
 	{
 		e.preventDefault();
 		

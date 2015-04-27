@@ -363,9 +363,7 @@ select._sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
@@ -377,9 +375,8 @@ select.sel{
 	background-color: white;
 	font-size: 18px;
 	color: #a1a1a1;
-	width: 93%;
-	height: 24px;
-	outline: none;
+width: 93%;
+	height: 24px;	outline: none;
 	margin-left: -3px;
 	margin-top: -20px;
 }
@@ -565,6 +562,22 @@ h2._orange_text{
 	float: right;
 	margin-top: 8px;
 }
+
+.kuiriIcon{
+	border: 1px solid;
+	border-color: #c2c2c2 #d1d1d1 #d4d4d4;
+	border-radius: 5px;
+	background-image: url("../img/alert.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 25px 25px;
+	background-color: white;
+	height: 50px;
+	width: 15%;
+	float: right;
+	margin-top: 8px;
+}
+
 .imgEdit {
     float: right;
     margin-top: -17px;
@@ -578,6 +591,19 @@ h2._orange_text{
 }
 
 #box_no_icon{
+	width: 100%;
+	color: #696969;
+	background: white;
+	border: 1px solid;
+	border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+	border: 1px solid #bcbcbc;
+	background: #ffffff;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+.box_no_icon{
 	width: 100%;
 	color: #696969;
 	background: white;
@@ -801,7 +827,8 @@ h2._white_text{
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.orange_wrap{
+.orange_wrap
+{
 	width: 20%;
 	height: 185px;
 	/* margin-top: 5px; */
@@ -814,11 +841,14 @@ h2._white_text{
 	-moz-outline-radius: 3px;
 }
 
-.vertical_text{
+.vertical_text
+{
 	white-space: pre;
 	text-align: center;
 	font-size: 16px;
 	margin: -20px;
+	  margin-right: -10px;
+	/* margin-right: -45px; */
 	margin-left: -245px;
 }
 

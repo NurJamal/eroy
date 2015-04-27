@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+		<link rel="stylesheet" type="text/css" href="css/body.css" />
+		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" href="css/style.css" />	
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+		
+		<div id="scrollTop" >
+			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>		
+		<div id="loadingLayer"></div>
+	</head>
+	<body>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	
+	<!-- slide menu right -->
+	<div id="navigation"></div>
+	<!-- end of slide menu right -->
+	
+	<!-- header -->
+	<div id="head">
+		<img src="img/logo-atas.png" class="logo"/>
+		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>	
+	</div>	
+	<!-- end of header -->
+	
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PINDAAN MAKLUMAT</h1>
+				</div>
+			</div>
+		</div>
+		<!-- end of header-title-->
+	
+		<div id="content">	
+			<!-- <a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			<div class="box_icon">
+				<h2 class="li1">KELAB SELSA MALAYSIA</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> J09732</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a> 
+			
+			<a href="pindaan_cawangan_alamat.html" style="text-decoration:none;">
+			<div class="box_icon">
+				<h2 class="li1">PERSATUAN SENI SILAT GAYONG PONTIAN JOHOR</h2>
+				<h2 class="li2">No Sijil/Daftar:<b> A14321</b></h2>
+				<h2 class="li2">Status: -</h2><h2></h2>
+			</div></a>  -->
+		</div>
+		<!-- <div id="content2" style="padding: 5px 3%; height: 100%;"></div> -->
+	</div>
+	
+	<!-- js for slide menu -->
+	<script src="js/classie.js"></script>
+	<script src="js/nav.js"></script>	
+	
+	<!-- jquery js-->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
+	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+	
+	<script>
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+	
+	//alert(kad_pengenalan);
+	
+	$(function() 
+	{
+		$('#content').hide();
+		$.ajax
+		(
+			{
+				type: "POST",
+				url:"http://eroy.me-tech.com.my/api/api_pindaan_maklumat_listing.php",
+				dataType: "xml",
+				data : 
+				{
+					kad_pengenalan : kad_pengenalan
+				},
+				beforeSend: function() 
+				{
+					run_waitMe();
+				},
+				success: function(xml, data)
+				{
+					
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("details").each(function()
+					{						
+						var kod_id = $(this).find("kod_nama_pertubuhan");
+						var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+						var no_sijil = $(this).find("no_sijil");
+						var status = $(this).find("status");
+						
+						$('body').waitMe('hide');
+						$('#content').show();
+
+						$("#content").append("<div id='"+kod_id.text()+"' class='box_icon'><h2 class='li1'>"+nama_penuh_pertubuhan.text()+"<h2 class='li2'>No Sijil/Daftar: <b>"+no_sijil.text()+"</b></h2><h2 class='li2'>Status: <b>"+status.text()+"</b></h2><h2></h2></div>");
+					});
+				}
+			}
+		);
+	});	
+	
+	$("div").click(function(e)
+	//$(".box_icon").on('click', function(e)
+	{
+		e.preventDefault();
+		//alert("TEST");
+		
+		//window.localStorage['ID_STATUS_CARIAN'] = JSON.stringify($(this).attr('id'));
+		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		window.location.href = "pindaan_maklumat_pilihan.html";
+	});
+	
+	</script>	
+	</body>
+</html>

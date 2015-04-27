@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
 		<link rel="stylesheet" href="css/jquery-confirm.less" />
 		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
 
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
@@ -60,129 +61,95 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-	
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_tunggal"></h1><br/>
-		</div>
-
-		<div>
-			<h5 id="_orange_title" style="margin-top:-20px">Wang diterima semenjak ditubuhkan</h5>
-		</div>
-		
-		<div class="inform">
-			<input type="number" name="wang_terima" id="wang_terima" placeholder="RM 0.00"></br><br/>
-		</div>
-
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Wang dibelanjakan semenjak ditubuhkan</h5>
-		</div>
-		
-		<div class="inform">
-			<input type="number" name="wang_belanja" id="wang_belanja" placeholder="RM 0.00"></br><br/>
-		</div>
-	
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di tangan</h5>
-		</div>
-		
-		<div class="inform">
-			<input type="number" name="wang_baki" id="wang_baki" placeholder="RM 0.00"></br><br/>
-		</div>
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di bank</h5>
-		</div>
-		
-		<div class="inform">
-			<input type="number" name="wang_bank" id="wang_bank" placeholder="RM 0.00"></br><br/>
-		</div>
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Akaun Pertubuhan</h5>
-		</div>
-		
-		<div class="selection" id="bank_selection">
-					<h5 id="_orange_title">Nama Bank</h5>
-				
-						<select id="nama_bank" name="nama_bank" class="_sel">
-						<option value="" selected>Pilih Bank</option>
-						</select>
-						
-		</div>
-		
-		<div>
-		<input type="text" style="margin-top:3px" name="no_akaun" id="no_akaun" placeholder="Nombor Akaun"></br><br/>
-		</div>
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Tarikh tahun kewangan bermula</h5>
-		</div>
-		
-</div>
-		
-
-		
+    <form action="" name="pendaftaran" id="pendaftaran">
+        <input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
+    	<div class="_form">
+            <div>
+                <h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_tunggal"></h1><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-20px">Wang diterima semenjak ditubuhkan</h5>
+            </div>
+            <div class="inform">
+                <input type="number" name="wang_terima" id="wang_terima" placeholder="RM 0.00"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Wang dibelanjakan semenjak ditubuhkan</h5>
+            </div>
+            <div class="inform">
+                <input type="number" name="wang_belanja" id="wang_belanja" placeholder="RM 0.00"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di tangan</h5>
+            </div>
+            <div class="inform">
+                <input type="number" name="wang_baki" id="wang_baki" placeholder="RM 0.00"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Wang yang merupakan baki di bank</h5>
+            </div>
+            <div class="inform">
+                <input type="number" name="wang_bank" id="wang_bank" placeholder="RM 0.00"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Akaun Pertubuhan</h5>
+            </div>
+            <div class="selection" id="bank_selection" style="margin-top: 0px;">
+                <h5 id="_orange_title">Nama Bank</h5>
+                <select id="sel_bank" name="sel_bank" class="_sel">
+                <option value="" selected>Pilih Bank</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" name="no_akaun" id="no_akaun" placeholder="Nombor Akaun"></br><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Tarikh tahun kewangan bermula</h5>
+            </div>
+        </div>
 		<div class="inform">
 			<input type="text" id="tarikh_kewangan" name="tarikh_kewangan" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" class="_datepick"><br/></br>
-			
 		</div>
-		
-<div class="_form">
-
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Butir-butir syer, debentur, amanah saham atau pelaburan lain yang serupa dipegang</h5>
-			<h5 id="_dark_text">Pilih YA jika terdapat butir-butir untuk ditambah</h5></br>
-		</div>
-		
-		<h5 id="_orange_title" style="margin-top:-30px">
-		<td class="table8" line-width="5pt"> 
-			<input type="radio" id="butir_ditambah" name="butir_ditambah" value="1">&nbsp;Ya &nbsp;&nbsp;<input type="radio"  id="butir_ditambah" name="butir_ditambah" value="0" checked>&nbsp;Tidak</br>
-		</td></h5>
-		
-		<div>
-			<input type="text" name="jenis_butir" id="jenis_butir" placeholder="Jenis"><br/>
-			<input type="text" name="syarikat" id="syarikat" placeholder="Syarikat/Dana"><br/>
-			<input type="number" name="amaun" id="amaun" placeholder="Amaun"><br/></br>
-		</div>
-	
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Dipegang sejak</h5>
-		</div>
-		
-</div>
-		
+        <div class="_form">
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Butir-butir syer, debentur, amanah saham atau pelaburan lain yang serupa dipegang</h5>
+                <h5 id="_dark_text">Pilih YA jika terdapat butir-butir untuk ditambah</h5></br>
+            </div>
+            <h5 id="_orange_title" style="margin-top:-30px">
+            <td class="table8" line-width="5pt">
+                <input type="radio" id="butir_ditambah" name="butir_ditambah" value="1">&nbsp;Ya &nbsp;&nbsp;<input type="radio"  id="butir_ditambah" name="butir_ditambah" value="0" checked>&nbsp;Tidak</br>
+            </td></h5>
+            <div>
+                <input type="text" name="jenis_butir" id="jenis_butir" placeholder="Jenis"><br/>
+                <input type="text" name="syarikat" id="syarikat" placeholder="Syarikat/Dana"><br/>
+                <input type="number" name="amaun" id="amaun" placeholder="Amaun"><br/></br>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Dipegang sejak</h5>
+            </div>
+        </div>
 		<div class="inform">
 			<input type="text" name="dipegang_sejak" onfocus="(this.type='date')" onblur="(this.type='text')"  id="dipegang_sejak" class="_datepick"><br/></br>
-			
 		</div>
-		
-<div class="_form">
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Butir-butir mengenai harta tak alih yang dipunyai dan/atau yang dipajak/dipajak kecil</h5></br/>
-		</div>
-		
-		<h5 id="_orange_title" style="margin-top:-20px">
-		<td class="table8">
-			<input type="radio" id="butir_harta" name="butir_harta" value="1">&nbsp;Ya &nbsp;&nbsp;<input id="butir_harta" type="radio" name="butir_harta" value="0" checked>&nbsp;Tidak<br/>
-		</td></h5>
-	
-	
-		<div>
-			<input type="text" name="tempat" id="tempat" placeholder="Tempat"><br/>
-			<input type="text" name="maksud_harta" id="maksud_harta" placeholder="Maksud Harta Digunakan"><br/>
-			<input type="text" name="no_hak_milik" id="no_hak_milik" placeholder="No. Hak Milik"></br>
-		</div>
-	
-		<div class="default_button_holder">
-			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
-		</div>
-	</div>
+		<div class="_form">
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Butir-butir mengenai harta tak alih yang dipunyai dan/atau yang dipajak/dipajak kecil</h5></br/>
+            </div>
+            <h5 id="_orange_title" style="margin-top:-20px">
+            <td class="table8">
+                <input type="radio" id="butir_harta" name="butir_harta" value="1">&nbsp;Ya &nbsp;&nbsp;<input id="butir_harta" type="radio" name="butir_harta" value="0" checked>&nbsp;Tidak<br/>
+            </td></h5>
+            <div>
+                <input type="text" name="tempat" id="tempat" placeholder="Tempat"><br/>
+                <input type="text" name="maksud_harta" id="maksud_harta" placeholder="Maksud Harta Digunakan"><br/>
+                <input type="text" name="no_hak_milik" id="no_hak_milik" placeholder="No. Hak Milik"></br>
+            </div>
+            <div class="default_button_holder">
+                <input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+            </div>
+	    </div>
+    </form>
 	</div>
 		
 	<!-- end of form -->
@@ -203,94 +170,173 @@
 	<script src="js/jquery-confirm.min.js"></script>	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-		
+    <script type="text/javascript" src="js/jquery.qtip.js"></script>
+
 	<script>
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"))
 	
-	getNamaBank($('#nama_bank').attr('id'));
-	
+	getNamaBank($('#sel_bank').attr('id'));
 	
 	var kad_pengenalan = window.localStorage.getItem('LOGIN');
-	$(function() 
-			{
-				$.ajax({
-						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_5.php",
-						type:'POST',
-						data: {
-							kad_pengenalan : kad_pengenalan,
-							insertData : "select"
-						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'SELECT') {
-								console.log(json);
+    var status = window.localStorage.getItem('STATUS');
 
-								$("#wang_belanja").val(json.details.wang_belanja);
-								$("#wang_terima").val(json.details.wang_diterima);
-								$("#wang_bank").val(json.details.wang_dibank);
-								$("#wang_baki").val(json.details.wang_baki_ditangan);
-								$("#nama_bank").val(json.details.id_nama_bank);
-								$("#no_akaun").val(json.details.no_akaun_bank);
-								$("#tarikh_kewangan").val(json.details.tarikh_kewangan_bermula);
-								$("#jenis_butir").val(json.details.jenis_butir);
-								$("#syarikat").val(json.details.syarikat_dana);
-								$("#amaun").val(json.details.amaun);
-								$("#dipegang_sejak").val(json.details.dipegang_sejak);
-								
-								$("#tempat").val(json.details.tempat);
-								$("#maksud_harta").val(json.details.maksud_harta_digunakan);
-								$("#no_hak_milik").val(json.details.no_hak_milik);
-								
-								$('input[name=butir_ditambah][value="' + json.details.butir_syer_dibentur + '"]').prop('checked', true);
-								$('input[name=butir_harta][value="' + json.details.butir_harta_tak_alih + '"]').prop('checked', true);
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_5.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "kuiri"
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        console.log(json);
+                        for (var i = 0; i < formLength; i++) {
+                            if(document.pendaftaran.elements[i].type != 'button')
+                            {
+                                document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+                            }
+                        };
+                        $("#wang_belanja").val(json.details.wang_belanja);
+                        $("#wang_terima").val(json.details.wang_diterima);
+                        $("#wang_bank").val(json.details.wang_dibank);
+                        $("#wang_baki").val(json.details.wang_baki_ditangan);
+                        $("#sel_bank").val(json.details.id_sel_bank);
+                        $("#no_akaun").val(json.details.no_akaun_bank);
+                        $("#tarikh_kewangan").val(json.details.tarikh_kewangan_bermula);
+                        $("#jenis_butir").val(json.details.jenis_butir);
+                        $("#syarikat").val(json.details.syarikat_dana);
+                        $("#amaun").val(json.details.amaun);
+                        $("#dipegang_sejak").val(json.details.dipegang_sejak);
 
-								//USE PLACEHOLDER IF VALUE EQUAL TO ZERO
-								if(json.details.wang_belanja == 0)
-								{
-									$("#wang_belanja").val('');
-								}
-								if(json.details.wang_diterima == 0)
-								{
-									$("#wang_terima").val('');
-								}	
-								if(json.details.wang_dibank == 0)
-								{
-									$("#wang_bank").val('');
-								}	
-								if(json.details.wang_baki_ditangan == 0)
-								{
-									$("#wang_baki").val('');
-								}
-								if(json.details.dipegang_sejak == "0000-00-00")
-								{
-									$("#dipegang_sejak").val('');
-								}
-								if(json.details.tarikh_kewangan_bermula == "0000-00-00")
-								{
-									$("#tarikh_kewangan").val('');
-								}
-								if(json.details.amaun == 0)
-								{
-									$("#amaun").val('');
-								}
-								
-								$('body').waitMe('hide');
-							}
-							else if (json.status == 'VIEW') {
-							//Do nothing. Just display
-							
-						}
-						
-						$('body').waitMe('hide');
-						}
-					});
-		});
-		
+                        $("#tempat").val(json.details.tempat);
+                        $("#maksud_harta").val(json.details.maksud_harta_digunakan);
+                        $("#no_hak_milik").val(json.details.no_hak_milik);
+
+                        $('input[name=butir_ditambah][value="' + json.details.butir_syer_dibentur + '"]').prop('checked', true);
+                        $('input[name=butir_harta][value="' + json.details.butir_harta_tak_alih + '"]').prop('checked', true);
+
+                        //USE PLACEHOLDER IF VALUE EQUAL TO ZERO
+                        if (json.details.wang_belanja == 0) {
+                            $("#wang_belanja").val('');
+                        }
+                        if (json.details.wang_diterima == 0) {
+                            $("#wang_terima").val('');
+                        }
+                        if (json.details.wang_dibank == 0) {
+                            $("#wang_bank").val('');
+                        }
+                        if (json.details.wang_baki_ditangan == 0) {
+                            $("#wang_baki").val('');
+                        }
+                        if (json.details.dipegang_sejak == "0000-00-00") {
+                            $("#dipegang_sejak").val('');
+                        }
+                        if (json.details.tarikh_kewangan_bermula == "0000-00-00") {
+                            $("#tarikh_kewangan").val('');
+                        }
+                        if (json.details.amaun == 0) {
+                            $("#amaun").val('');
+                        }
+                        checkKuiriPendaftaran(kad_pengenalan,'5');
+                        //$('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
+    else
+    {
+        var insertData = "TRUE";
+        var kad_pengenalan = window.localStorage.getItem('LOGIN');
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_5.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "select"
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        console.log(json);
+
+                        $("#wang_belanja").val(json.details.wang_belanja);
+                        $("#wang_terima").val(json.details.wang_diterima);
+                        $("#wang_bank").val(json.details.wang_dibank);
+                        $("#wang_baki").val(json.details.wang_baki_ditangan);
+                        $("#sel_bank").val(json.details.id_sel_bank);
+                        $("#no_akaun").val(json.details.no_akaun_bank);
+                        $("#tarikh_kewangan").val(json.details.tarikh_kewangan_bermula);
+                        $("#jenis_butir").val(json.details.jenis_butir);
+                        $("#syarikat").val(json.details.syarikat_dana);
+                        $("#amaun").val(json.details.amaun);
+                        $("#dipegang_sejak").val(json.details.dipegang_sejak);
+
+                        $("#tempat").val(json.details.tempat);
+                        $("#maksud_harta").val(json.details.maksud_harta_digunakan);
+                        $("#no_hak_milik").val(json.details.no_hak_milik);
+
+                        $('input[name=butir_ditambah][value="' + json.details.butir_syer_dibentur + '"]').prop('checked', true);
+                        $('input[name=butir_harta][value="' + json.details.butir_harta_tak_alih + '"]').prop('checked', true);
+
+                        //USE PLACEHOLDER IF VALUE EQUAL TO ZERO
+                        if (json.details.wang_belanja == 0) {
+                            $("#wang_belanja").val('');
+                        }
+                        if (json.details.wang_diterima == 0) {
+                            $("#wang_terima").val('');
+                        }
+                        if (json.details.wang_dibank == 0) {
+                            $("#wang_bank").val('');
+                        }
+                        if (json.details.wang_baki_ditangan == 0) {
+                            $("#wang_baki").val('');
+                        }
+                        if (json.details.dipegang_sejak == "0000-00-00") {
+                            $("#dipegang_sejak").val('');
+                        }
+                        if (json.details.tarikh_kewangan_bermula == "0000-00-00") {
+                            $("#tarikh_kewangan").val('');
+                        }
+                        if (json.details.amaun == 0) {
+                            $("#amaun").val('');
+                        }
+
+                        $('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
 	
 		
 	$("#btn_submit").click(function(e){
@@ -304,7 +350,7 @@
 		var wang_terima = $("#wang_terima").val();
 		var wang_bank = $("#wang_bank").val();
 		var wang_baki = $("#wang_baki").val();
-		var nama_bank = $("#nama_bank").val();
+		var sel_bank = $("#sel_bank").val();
 		var no_akaun= $("#no_akaun").val();
 		var tarikh_kewangan= $("#tarikh_kewangan").val();
 		var jenis_butir= $("#jenis_butir").val();
@@ -317,97 +363,101 @@
 	
 		var butir_ditambah = $('input[name=butir_ditambah]:checked').val();
 		var butir_harta= $('input[name=butir_harta]:checked').val();
-		var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		var insertData = "TRUE";
-		
-			
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_5.php",
-				type:'POST',
-				data: {
 
-					wang_belanja : wang_belanja,
-					wang_terima: wang_terima,
-					wang_bank : wang_bank,
-					wang_baki : wang_baki,
-					nama_bank : nama_bank,
-					no_akaun : no_akaun,
-					tarikh_kewangan : tarikh_kewangan,
-					jenis_butir : jenis_butir,
-					syarikat : syarikat,
-					amaun : amaun,
-					dipegang_sejak : dipegang_sejak,
-					butir_harta : butir_harta,
-					tempat : tempat,
-					maksud_harta : maksud_harta,
-					no_hak_milik : no_hak_milik,
-					butir_ditambah : butir_ditambah,
 
-					insertData : insertData,
-					kad_pengenalan : kad_pengenalan,
+        if (id_pertubuhan == 'empty')
+        {
+            window.location.href = "pendaftaran-tunggal-6.html";
+        }
+        else {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_5.php",
+                type: 'POST',
+                data: {
 
-						},
-						beforeSend: function() {
-								run_waitMe();
-							},
-						success:function(data){
-							console.log(data);
-							var json = $.xml2json(data);
-							console.log(json);
-							if (json.status == 'INSERT_SUCCESS') {
-								
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										window.location.href = "pendaftaran-tunggal-6.html";
-										}
-									}
-								);
-							
-							}
-							else if (json.status == 'INSERT_ERROR') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										}
-									}
-								);
-							}
-							else if (json.status == 'UPDATE_SUCCESS') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-											window.location.href = "pendaftaran-tunggal-6.html";
-										}
-									}
-								);
-							}
-							else if (json.status == 'UPDATE_ERROR') {
-								$.alert
-								(
-									{
-										title: 'Status',
-										content: json.message,
-										confirm: function(){
-										}
-									}
-								);
-							}
-							
-							$('body').waitMe('hide');
-						}
-					});
-				
-			});
+                    wang_belanja: wang_belanja,
+                    wang_terima: wang_terima,
+                    wang_bank: wang_bank,
+                    wang_baki: wang_baki,
+                    nama_bank: sel_bank,
+                    no_akaun: no_akaun,
+                    tarikh_kewangan: tarikh_kewangan,
+                    jenis_butir: jenis_butir,
+                    syarikat: syarikat,
+                    amaun: amaun,
+                    dipegang_sejak: dipegang_sejak,
+                    butir_harta: butir_harta,
+                    tempat: tempat,
+                    maksud_harta: maksud_harta,
+                    no_hak_milik: no_hak_milik,
+                    butir_ditambah: butir_ditambah,
+
+                    insertData: insertData,
+                    kad_pengenalan: kad_pengenalan,
+
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    console.log(data);
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'INSERT_SUCCESS') {
+
+                        $.alert
+                        (
+                                {
+                                    title: 'Status',
+                                    content: json.message,
+                                    confirm: function () {
+                                        window.location.href = "pendaftaran-tunggal-6.html";
+                                    }
+                                }
+                        );
+
+                    }
+                    else if (json.status == 'INSERT_ERROR') {
+                        $.alert
+                        (
+                                {
+                                    title: 'Status',
+                                    content: json.message,
+                                    confirm: function () {
+                                    }
+                                }
+                        );
+                    }
+                    else if (json.status == 'UPDATE_SUCCESS') {
+                        $.alert
+                        (
+                                {
+                                    title: 'Status',
+                                    content: json.message,
+                                    confirm: function () {
+                                        window.location.href = "pendaftaran-tunggal-6.html";
+                                    }
+                                }
+                        );
+                    }
+                    else if (json.status == 'UPDATE_ERROR') {
+                        $.alert
+                        (
+                                {
+                                    title: 'Status',
+                                    content: json.message,
+                                    confirm: function () {
+                                    }
+                                }
+                        );
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        }
+    });
+
 
 	/*RADIO BUTTON CONTROL INPUT*/
 	$(function(){	
