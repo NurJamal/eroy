@@ -2,15 +2,19 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
-		<link rel="stylesheet" href="css/style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/body.css">
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/jquery-confirm.css" />
+		<link rel="stylesheet" href="../../css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="../../css/waitMe.css">
+		
 		<div id="scrollTop" >
-			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>	
+			<img src="../../img/up_arrow.png" class="scrolltop_arrow"/>		
+		</div>		
+		<div id="loadingLayer"></div>
 	</head>
 	<body>
 	
@@ -22,77 +26,356 @@
 	
 	<!-- header -->
 	<div id="head">
-		<img src="img/logo-atas.png" class="logo"/>
-		
-			<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-			<a href="menu_pelaporan.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
-		
+		<img src="../../img/logo-atas.png" class="logo"/>
+		<img src="../../img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
+		<img src="../../img/back-icon.png" onclick="goBack()" class="back_icon" align="left"/>
 	</div>	
 	<!-- end of header -->
 	
-<!-- header title -->
-	<div class="content_title">
-		<div class="input-group add-on search-box">
-			<div class="input-group-btn">
-				<h1 class="main_title">PELAPORAN</h1>
+	<div class="containerBlock">
+		<!-- header title -->
+		<div class="content_title">
+			<div class="input-group add-on search-box">
+				<div class="input-group-btn">
+					<h1 class="main_title">PELAPORAN</h1>
+				</div>
 			</div>
 		</div>
-	
-	</div>
-	<!-- end of header-title-->
+		<!-- end of header-title-->
 
-	<div id="content">
-		<h2 class="_orange_text">Statistik Ahli</h2>
-		
-		<div class="selection">
-			<h5 id="_orange_title">Pilihan</h5>
-			<form action="">
-				<select id="sel_pilihan" name="sel_pilihan" class="sel">
-				<option value="none"></option>
-				</select>
-			</form>		
-		</div>
-		
-		<div class="inform">
-			<input style="margin-top:1px" type="text" name="" id="" placeholder="Carian" class="_cari"><br/>
-		</div>
-		
-		<div class="selection">
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<form action="">
-				<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel">
-				<option value="none"></option>
-				</select>
-			</form>		
-		</div>
-		
-		<h2 class="_orange_text">Jumlah bilangan ahli dalam daftar keanggotaan</h2>
-		
-		<div class="display">
-			<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Melayu</h5>
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="20" disabled><br/>
+		<div id="content">
+			<h2 class="_orange_text">Statistik Ahli</h2>
 			
-			<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Cina</h5>
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="15" disabled><br/>
-			
-			<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">India</h5>
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="10" disabled><br/>
-			
-			<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Lain-lain</h5>
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="5" disabled><br/>
-			
-			<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Keseluruhan</h5>
-			<input type="text" name="nama penuh" id="frm_nama" placeholder="50" disabled><br/>
-		</div>
+			<div class="selection">
+				<h5 id="_orange_title">Pilihan</h5>
+				<form action="">
+					<select id="sel_pilihan" name="sel_pilihan" class="sel" onChange="disabledTextField();">
+					</select>
+				</form>		
+			</div>
 		
+			<div class="inform">
+				<input style="margin-top:1px" type="text" name="pertubuhan_carian" id="pertubuhan_carian" placeholder="Carian" class="_cari" onBlur="namaPertubuhanCarian();"><br/> 
+			</div>
+			
+		
+			<div class="selection">
+				<h5 id="_orange_title">Nama Pertubuhan</h5>
+				<form action="">
+					<select id="sel_nama_pertubuhan" name="sel_nama_pertubuhan" class="sel" onchange="displayResult();">
+						<option value="" selected>Pilih</option>
+					</select>
+				</form>		
+			</div>
+		
+			<h2 class="_orange_text">Jumlah bilangan ahli dalam daftar keanggotaan</h2>
+		
+			<div class="display">
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Melayu</h5>
+				<input type="text" name="bil_melayu" id="bil_melayu" disabled><br/>
+				
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Cina</h5>
+				<input type="text" name="bil_cina" id="bil_cina" disabled><br/>
+				
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">India</h5>
+				<input type="text" name="bil_india" id="bil_india" disabled><br/>
+				
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Lain-lain</h5>
+				<input type="text" name="bil_lain" id="bil_lain" disabled><br/>
+				
+				<h5 id="H5" style="margin-left:5px; margin-bottom:1px; margin-top:3px">Keseluruhan</h5>
+				<input type="text" name="jumlah" id="jumlah" disabled><br/>
+			</div>	
+		</div>
 	</div>
 	
 	<!-- js for slide menu -->
-	<script src="js/classie.js"></script>
-	<script src="js/nav.js"></script>
+	<script src="../../js/classie.js"></script>
+	<script src="../../js/nav.js"></script>	
+	
+	<!-- jquery js-->
+	<script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+	
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
-	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	<script src="../../js/internal/custom.js" type="text/javascript" language="javascript"></script>
+	
+	<!-- alert box -->
+	<script src="../../js/jquery-confirm.js"></script>
+	<script src="../../js/jquery-confirm.min.js"></script>	
+	 
+	<!--Loading Indicator -->
+	<script src="../../js/waitMe.js"></script>
+	
+	<script>
+	$(function()
+	{
+		$.ajax
+		(
+			{
+				type: "GET",
+				url: "http://eroy.me-tech.com.my/api/laporan/get_statistik_ahli_pilihan.php",
+				dataType: "xml",
+				success: function(xml)
+				{
+					var xmlDoc = $.parseXML(xml),
+					$xml = $(xmlDoc);
+					$(xml).find("lk_pilihan").each(function()
+					{
+						console.log($(this).text());
+						var id = $(this).find("id");
+						var pilihan = $(this).find("pilihan");
+						
+						$('#sel_pilihan').append('<option value="'+$(id).text()+'">'+$(pilihan).text()+'</option>');
+					});
+				},
+				error: function() 
+				{
+					console.log("An error occurred while processing XML file.");
+				}
+			}
+		);
+
+	});
+	
+	function disabledTextField()
+	{
+		var a = $('#sel_pilihan option:selected').text();
+		
+		if(a == 'Keseluruhan')
+		{
+			$('#pertubuhan_carian').val("");
+			$('#sel_nama_pertubuhan').val("");
+			$('#pertubuhan_carian').attr('disabled',true);
+			$('#sel_nama_pertubuhan').attr('disabled',true);
+			
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/get_keseluruhan.php",
+					type:'POST',
+					data:
+					{
+						a : a
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						
+						if($(xml).find("status").text() == "ok")
+						{
+							$(xml).find("details").each(function()
+							{			
+								var kod_id = $(this).find("kod_nama_pertubuhan");
+								var bil_lelaki_melayu = $(this).find("bil_lmelayu");
+								var bil_lelaki_cina = $(this).find("bil_lcina");
+								var bil_lelaki_india = $(this).find("bil_lindia");
+								var bil_lelaki_lain_lain = $(this).find("bil_llain_lain");
+								var bil_perempuan_melayu = $(this).find("bil_pmelayu");
+								var bil_perempuan_cina = $(this).find("bil_pcina");
+								var bil_perempuan_india = $(this).find("bil_pindia");
+								var bil_perempuan_lain_lain = $(this).find("bil_plain_lain");
+								
+								var total_melayu = 
+								parseInt(bil_lelaki_melayu.text()) + parseInt(bil_perempuan_melayu.text());
+								var total_cina = 
+								parseInt(bil_lelaki_cina.text()) + parseInt(bil_perempuan_cina.text());
+								var total_india = 
+								parseInt(bil_lelaki_india.text()) + parseInt(bil_perempuan_india.text());
+								var total_lain = 
+								parseInt(bil_lelaki_lain_lain.text()) + parseInt(bil_perempuan_lain_lain.text());
+								var total = total_melayu + total_cina + total_india + total_lain;
+								
+								$('body').waitMe('hide');
+								$('#content').show();
+									
+								$('#bil_melayu').val(total_melayu);
+								$('#bil_cina').val(total_cina);		
+								$('#bil_india').val(total_india);
+								$('#bil_lain').val(total_lain);	
+								$('#jumlah').val(total);	
+							});
+						}
+						else if($(xml).find("status").text() == "error")
+						{
+							$('body').waitMe('hide');
+						}
+						else{}
+					},
+					error: function()
+					{
+						console.log("An error occurred while processing XML file.");
+					},
+				}
+			)
+			
+		}
+		else
+		{
+			$('#pertubuhan_carian').attr('disabled',false);
+			$('#sel_nama_pertubuhan').attr('disabled',false);
+			$('#bil_melayu').val("");
+			$('#bil_cina').val("");
+			$('#bil_india').val("");
+			$('#bil_lain').val("");
+			$('#jumlah').val("");
+			
+		}
+	}
+	
+	function namaPertubuhanCarian()
+	{
+		$(document).ready(function()
+		{
+			var carian_nama = $.trim($('#pertubuhan_carian').val());
+			
+			if (carian_nama.length == 0 || carian_nama.length < 10) 
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Sila Masukkan Sekurang-kurangnya 10 Aksara Untuk Mencari Nama Pertubuhan',
+						confirm: function(){}
+					}
+				);
+				$('#pertubuhan_carian').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+			else
+			{
+				$.ajax
+				(
+					{
+						url:"http://eroy.me-tech.com.my/api/laporan/get_nama_pertubuhan.php",
+						type:'POST',
+						data:
+						{
+							carian_nama : carian_nama
+						},
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success: function(xml, data)
+						{
+							var xmlDoc = $.parseXML(xml),
+							$xml = $(xmlDoc);
+							
+							if($(xml).find("status").text() == "ok")
+							{
+								$('#sel_nama_pertubuhan')
+								.find('option')
+								.remove()
+								.end();
+								$('#sel_nama_pertubuhan').append('<option value="">Pilih</option>');
+							
+								$(xml).find("details").each(function()
+								{						
+									var kod_id = $(this).find("kod_nama_pertubuhan");
+									var nama_penuh_pertubuhan = $(this).find("nama_penuh_pertubuhan");
+									
+									$('body').waitMe('hide');
+									$('#content').show();
+									
+									$('#sel_nama_pertubuhan').append('<option value="'+$(kod_id).text()+'">'+$(nama_penuh_pertubuhan).text()+'</option>');
+								});
+							}
+							else if($(xml).find("status").text() == "error")
+							{
+								$('body').waitMe('hide');
+							}
+							else{}
+						},
+						error: function()
+						{
+							console.log("An error occurred while processing XML file.");
+						},
+					}
+				)
+			}
+		});
+	}
+
+	function displayResult()
+	{
+		$(document).ready(function()
+		{
+			var kod_pertubuhan =  $('#sel_nama_pertubuhan').val();
+			$.ajax
+			(
+				{
+					url:"http://eroy.me-tech.com.my/api/laporan/get_bilangan_ahli.php",
+					type:'POST',
+					data:
+					{
+						kod_pertubuhan : kod_pertubuhan
+					},
+					beforeSend: function() 
+					{
+						run_waitMe();
+					},
+					success: function(xml, data)
+					{
+						var xmlDoc = $.parseXML(xml),
+						$xml = $(xmlDoc);
+						
+						if($(xml).find("status").text() == "ok")
+						{
+							$(xml).find("details").each(function()
+							{			
+								var kod_id = $(this).find("kod_nama_pertubuhan");
+								var bil_lelaki_melayu = $(this).find("bil_lelaki_melayu");
+								var bil_lelaki_cina = $(this).find("bil_lelaki_cina");
+								var bil_lelaki_india = $(this).find("bil_lelaki_india");
+								var bil_lelaki_lain_lain = $(this).find("bil_lelaki_lain_lain");
+								var bil_perempuan_melayu = $(this).find("bil_perempuan_melayu");
+								var bil_perempuan_cina = $(this).find("bil_perempuan_cina");
+								var bil_perempuan_india = $(this).find("bil_perempuan_india");
+								var bil_perempuan_lain_lain = $(this).find("bil_perempuan_lain_lain");
+								
+								var total_melayu = 
+								parseInt(bil_lelaki_melayu.text()) + parseInt(bil_perempuan_melayu.text());
+								var total_cina = 
+								parseInt(bil_lelaki_cina.text()) + parseInt(bil_perempuan_cina.text());
+								var total_india = 
+								parseInt(bil_lelaki_india.text()) + parseInt(bil_perempuan_india.text());
+								var total_lain = 
+								parseInt(bil_lelaki_lain_lain.text()) + parseInt(bil_perempuan_lain_lain.text());
+								var total = total_melayu + total_cina + total_india + total_lain;
+								
+								$('body').waitMe('hide');
+								$('#content').show();
+									
+								$('#bil_melayu').val(total_melayu);
+								$('#bil_cina').val(total_cina);		
+								$('#bil_india').val(total_india);
+								$('#bil_lain').val(total_lain);	
+								$('#jumlah').val(total);	
+							});
+						}
+						else if($(xml).find("status").text() == "error")
+						{
+							$('body').waitMe('hide');
+						}
+						else{}
+					},
+					error: function()
+					{
+						console.log("An error occurred while processing XML file.");
+					},
+				}
+			)
+		});
+
+	}
+
+	</script>
 	</body>
 </html>
