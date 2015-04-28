@@ -59,6 +59,7 @@
 	
 	<a href="pindaan_maklumat_pembayaran.html">PAYMENT</a><br/>
 	<a href="pindaan_maklumat_perlembagaan.html">PERLEMBAGAAN</a>
+	<a href="#" onclick="openBrowser();">Open Child Browser</a>
 
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -84,13 +85,16 @@
 	<script src="phonegap.js"></script> 
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
+	<script src="childbrowser.js" />
 	<script>
 
 	
 	var devicePlatform = cordova.platformId;
 	localStorage['DEVICE_PLATFORM'] = devicePlatform;
 	StatusBar.overlaysWebView(false);
-   
+	function openBrowser(){
+		window.plugins.childBrowser.showWebPage('http://www.google.com, { showLocationBar: true });
+	}
 //  document.addEventListener("deviceready", onDeviceReady, false);
 //  function onDeviceReady() 
 //	{
