@@ -503,7 +503,7 @@
 			marginLeftPX = '30';
 		
 			/*SET SUB-FASAL VALUE*/
-			var selectedFasalTxt = $('#'+(id)+' .sub_fasal_label').html();;
+			var selectedFasalTxt = $('#'+(id)+' .sub_fasal_label').html();
 			var arr = selectedFasalTxt.split('.');
 			var arrLength = arr.length;
 			
@@ -561,9 +561,12 @@
 		rewriteID();
 		
 		if(loopForMarginLeftValue < 2){
-			rewriteSubfasalOnAdd();
+			rewriteSubfasalOnAdd(loopForMarginLeftValue);
 		}
-		rewriteSubfasalOnAddFromSubFasal(loopForMarginLeftValue);
+		else
+		{
+			rewriteSubfasalOnAddFromSubFasal(loopForMarginLeftValue);
+		}
 	}
 	
 	function rewriteID()
@@ -753,26 +756,46 @@
 			var tr_id = this.id;
 			var aaa = $('#'+(tr_id)+' .sub_fasal_label').html();	
 			if(aaa != null){
+		
+			var levelID = $('#'+(tr_id)).children().attr('id');
+			levelIDShow = (levelID).replace('level_', '');
 				
-				/*$('#'+tr_id +' .sub_fasal_label').each(function() {
+
+
+
+				if(levelIDShow > 1){ 
+				//$('#'+tr_id+' .sub_fasal_label').each(function() {
+				//$('#'+tr_id+' .sub_fasal_label').each(function() {
+
 					var depanSekali = ''; 
 					var prevFasalTxtShow = '';
-					var xx = this.id;
+					//var xx = this.id;
+					var xx = tr_id;
+					var ccc = '';
+				
 					
-					var selectedFasalTxt = $('#'+xx).html();;
+					var selectedFasalTxt = $('#'+xx+' .sub_fasal_label').html();
 					var arr = selectedFasalTxt.split('.');
+					//$('#'+xx+' .sub_fasal_label').html('');
+					alert(selectedFasalTxt);
+					alert(levelIDShow);
 
-					for(var arrLength = 0; arrLength<arr.length-1; arrLength++)
+					for(var arrLength = 0; arrLength<levelIDShow; arrLength++)
 					{
-						depanSekali += $.trim(arr[arrLength]);
+						depanSekali += $.trim(arr[arrLength])+'.';
+						ccc++;
 					}	
-					for(var arrLengthNoChange = levelSelected; arrLengthNoChange < arr.length; arrLengthNoChange++)
+
+					for(var arrLengthNoChange = levelIDShow; arrLengthNoChange < arr.length; arrLengthNoChange++)
 					{			
-						prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
+						prevFasalTxtShow += $.trim(arr[1])+'.';
+
 					}
-					
-					$('#'+xx).html(depanSekali+''+prevFasalTxtShow);
-				});*/
+				
+					alert(depanSekali +' --- '+prevFasalTxtShow);
+					$('#'+xx+' .sub_fasal_label').html(depanSekali+''+prevFasalTxtShow);
+				//});
+			}
 				
 			}
 		});
