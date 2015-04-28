@@ -396,21 +396,6 @@
 			zzz = parseInt(zzz+1);
 		});
 		
-		//subfasal fasal-index rewrite
-		$('.sub_fasal_label').each(function() {
-			var tr_id = this.id;
-			var arr = tr_id.split('_');
-			var tr_value =  $.trim("fasal_index_"+arr[2]);
-		
-			$('#'+tr_value).attr('id','xxxxxx_'+zz);
-			zz = parseInt(zz+1);
-
-		});
-
-		//$('.sub_fasal_label').each(function() {
-		//	$('#xxxxxx_'+zzz).attr('id','fasal_index_sub_'+zzz);
-		//	zzz = parseInt(zzz+1);
-		//});
 	}
 	
 	//Edit Fasal
@@ -520,14 +505,6 @@
 			label_text = 'Fasal '+ fasal_index;
 			marginLeftPX = '0';
 		}
-		
-	
-
-		//var marginLeftPX = 0;
-		//for(var x = 1; x < loopForMarginLeftValue ; x++)
-		//{
-		//	marginLeftPX = parseInt(marginLeftPX+30);
-		//}
 
 		/*On click display - check if null*/
 		if($('#fasal_added_'+(id)).val() != "")
@@ -555,18 +532,20 @@
 			}
 		});
 	
+		var zz=1;
+		//subfasal fasal-index rewrite
+		$('.sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			$('#'+tr_id).attr('id','xxxxxx_'+zz);
+			zz = parseInt(zz+1);
+			
+		});
+	
+	
 		$('#new_added_'+appendId).attr('id',appendId);
 
-		
 		rewriteID();
-		
-		if(loopForMarginLeftValue < 2){
-			rewriteSubfasalOnAdd(loopForMarginLeftValue);
-		}
-		else
-		{
-			rewriteSubfasalOnAddFromSubFasal(loopForMarginLeftValue);
-		}
+		rewriteSubfasalOnAdd(thisID);
 	}
 	
 	function rewriteID()
@@ -661,17 +640,22 @@
 			$('#xxx_'+indexFasalRXX).attr('id','tr_'+indexFasalRXX+'_img');
 			indexFasalRXX = parseInt(indexFasalRXX+1);
 		});
+		
+
+		
 	}
 
 	function rewriteSubFasal(selected,prevID)
 	{
+		
 		var idSelected = selected;
 		var idPrev = prevID;
 
 		var levelID = $('#'+(idPrev)).children().attr('id');
 		levelIDShow = (levelID).replace('level_', '');
 
-
+		if(levelIDShow < 2){
+		
 		$('#'+(idPrev)+' .sub_fasal_label').each(function() {
 			var tr_id = this.id;
 			var currentSubFasal = $('#'+tr_id).html();
@@ -718,35 +702,133 @@
 
 			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);
 		});
+		
+		}
+		else
+		{
+		
+			$('#'+(idPrev)+' .sub_fasal_label').each(function() {
+				var tr_id = this.id;
+				var currentSubFasal = $('#'+tr_id).html();
+				
+				var arr = currentSubFasal.split('.');
+				var val =  parseInt(arr[0]);
+	
+				var newSubFasalAdd = '';
+				var ccc = '';
+				
+			
+				for(var arrLength = levelIDShow-1; arrLength<arr.length; arrLength++)
+				{
+					if(arr.length > 2 && arrLength != parseInt(arr.length)-1)
+					{
+						ccc += '.'+(parseInt(arr[arrLength])+1);
+					}
+					
+					if(arr.length > 2 && arrLength == parseInt(arr.length)-1)
+					{
+						newSubFasalAdd = '.'+(parseInt(arr[arrLength]));
+					}
+					else
+					{
+						newSubFasalAdd = '.'+(parseInt(arr[arrLength])+1);
+					}
+				}	
+				$('#'+tr_id).html(val+ccc+newSubFasalAdd);
+			});
+			
+			$('#'+(idSelected)+' .sub_fasal_label').each(function() {
+				var tr_id = this.id;
+				var currentSubFasal = $('#'+tr_id).html();
+				
+				var arr = currentSubFasal.split('.');
+				var val =  parseInt(arr[0]);
+	
+				var middle = '';
+				var bb = '';
+			
+				for(var arrLength = levelIDShow-1; arrLength<arr.length; arrLength++)
+				{
+					if(arr.length > 2 && arrLength != parseInt(arr.length)-1)
+					{
+						middle += '.'+(parseInt(arr[arrLength])-1);
+					}
+	
+					if(arr.length > 2 && arrLength == parseInt(arr.length)-1)
+					{
+						bb = '.'+(parseInt(arr[arrLength]));
+					}
+					else
+					{
+						bb = '.'+(parseInt(arr[arrLength])-1);
+					}
+					
+					
+				}	
+				$('#'+tr_id).html(val+middle+bb);
+			});
+		}
 	}
 
 	
-	function rewriteSubfasalOnAdd(levelSelected)
+	function rewriteSubfasalOnAdd(selectedID)
 	{	
-		$('.checkbox').each(function() {
-			
-			var tr_id = this.id;
-			var aaa = $('#'+(tr_id)+' .fasal_label').html();			
-			if(aaa != null){
+		
+		var xx = $('#'+(selectedID)).children().attr('id');
+		var levelSelected = (xx).replace('level_', '');
+		
+		if(levelSelected < 2){
+		
+			$('.checkbox').each(function() {
 				
-				var depanSekali = aaa.replace('Fasal ', '');
+				var tr_id = this.id;
 				
-				$('#'+tr_id +' .sub_fasal_label').each(function() {
-					var prevFasalTxtShow = '';
-					var xx = this.id;
-					var selectedFasalTxt = $('#'+xx).html();;
-					var arr = selectedFasalTxt.split('.');
+				var levelID = $('#'+(tr_id)).children().attr('id');
+				levelIDShow = (levelID).replace('level_', '');
+				
+				var aaa = $('#'+(tr_id)+' .fasal_label').html();			
+				if(aaa != null){
+				
+					$('#'+tr_id +' .sub_fasal_label').each(function() {
+						var prevFasalTxtShow = '';
+						var xx = this.id;
+						var selectedFasalTxt = $('#'+xx).html();
+						var arr = selectedFasalTxt.split('.');
 
-					for(var arrLengthNoChange = levelSelected; arrLengthNoChange < arr.length; arrLengthNoChange++)
-					{			
-						prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
-					}
-					
-					$('#'+xx).html(depanSekali+''+prevFasalTxtShow);
-				});
-			}
-		});
+						if(levelIDShow == 1) 
+						{
+							var depanSekali = aaa.replace('Fasal ', '');
+						}
+						
+						for(var arrLengthNoChange = levelIDShow; arrLengthNoChange < arr.length; arrLengthNoChange++)
+						{			
+							prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
+						}
 
+						$('#'+xx).html(depanSekali+''+prevFasalTxtShow);
+					});
+				}
+			});
+		}
+		else
+		{
+			$('.checkbox .sub_fasal_label').each(function() {
+				
+				var prevFasalTxtShow = '';
+				var subLabel = this.id;
+				var ddd = $('#'+subLabel).html();
+				var arr = ddd.split('.');
+				
+				for(var arrLengthNoChange = 1; arrLengthNoChange < arr.length; arrLengthNoChange++)
+				{			
+					prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
+				}
+				
+				$('#'+subLabel).html(ddd[0]+''+prevFasalTxtShow);
+
+				
+			});
+		}
 	}
 	
 	function rewriteSubfasalOnAddFromSubFasal(levelSelected)
@@ -760,41 +842,38 @@
 			var levelID = $('#'+(tr_id)).children().attr('id');
 			levelIDShow = (levelID).replace('level_', '');
 				
+				if(levelIDShow > 1){
 
-
-
-				if(levelIDShow > 1){ 
+				
 				//$('#'+tr_id+' .sub_fasal_label').each(function() {
-				//$('#'+tr_id+' .sub_fasal_label').each(function() {
+				/*$('#'+tr_id+' .sub_fasal_label').each(function() {
 
 					var depanSekali = ''; 
 					var prevFasalTxtShow = '';
 					//var xx = this.id;
 					var xx = tr_id;
-					var ccc = '';
+					var ccc = 0;
 				
 					
 					var selectedFasalTxt = $('#'+xx+' .sub_fasal_label').html();
 					var arr = selectedFasalTxt.split('.');
 					//$('#'+xx+' .sub_fasal_label').html('');
-					alert(selectedFasalTxt);
-					alert(levelIDShow);
+		
 
-					for(var arrLength = 0; arrLength<levelIDShow; arrLength++)
+					for(var arrLength = 0; arrLength<levelIDShow-1; arrLength++)
 					{
 						depanSekali += $.trim(arr[arrLength])+'.';
 						ccc++;
 					}	
 
-					for(var arrLengthNoChange = levelIDShow; arrLengthNoChange < arr.length; arrLengthNoChange++)
+					for(var arrLengthNoChange = ccc; arrLengthNoChange < arr.length; arrLengthNoChange++)
 					{			
-						prevFasalTxtShow += $.trim(arr[1])+'.';
-
+						prevFasalTxtShow += $.trim(arr[arrLengthNoChange])+'.';
 					}
 				
-					alert(depanSekali +' --- '+prevFasalTxtShow);
+					//alert(depanSekali +' --- '+prevFasalTxtShow);
 					$('#'+xx+' .sub_fasal_label').html(depanSekali+''+prevFasalTxtShow);
-				//});
+				});*/
 			}
 				
 			}
