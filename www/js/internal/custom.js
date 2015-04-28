@@ -131,12 +131,6 @@ TQ
 	{
 		$("#navigation").load('navigation_menu/nav_login.html');
 	}
-
-	/* Refresh Captcha  */
-	function refreshCaptcha() 
-	{
-		$("#captcha_code").attr('src','http://eroy.me-tech.com.my/api/captcha_code.php');
-	}
 	
 	/* Email Validation */
 	function ValidateEmail(email)
