@@ -3,6 +3,7 @@
 	<script src="phonegap.js"></script> 
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
+	<script src="childbrowser.js" />
 <nav class="menu slide-menu-right">
 		<ul>
 			<li class="title">Menu</li>
@@ -19,7 +20,8 @@
 	/* --- SET MENU FIX TO FALSE--- */
 	window.localStorage.setItem("_MENU_FIX", "FALSE");	
 	function openPDF() {
-		window.open('http://eroy.gov.my/manual_pengguna.pdf', '_blank', 'location=yes')
+		window.plugins.childBrowser.showWebPage('http://eroy.gov.my/manual_pengguna.pdf', { showLocationBar: true });
+		//window.open('http://eroy.gov.my/manual_pengguna.pdf', '_blank', 'location=yes')
 }
 </script>
 <!-- /slide menu right -->
