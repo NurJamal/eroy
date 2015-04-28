@@ -52,6 +52,7 @@
 			<img src="img/jata.png" class="logo2"/>
 			<div class="default_button_holder">
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
+				<button id="btn_browser" onclick="window.plugins.childBrowser.showWebPage('http://www.google.com, { showLocationBar: true });">Open Child Browser</a>
 
 			</div>	
 		</div>
@@ -59,7 +60,7 @@
 	
 	<a href="pindaan_maklumat_pembayaran.html">PAYMENT</a><br/>
 	<a href="pindaan_maklumat_perlembagaan.html">PERLEMBAGAAN</a>
-	<a href="#" onclick="openBrowser();">Open Child Browser</a>
+		
 
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
@@ -86,22 +87,23 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script src="childbrowser.js" />
+
 	<script>
 
+	
 	
 	var devicePlatform = cordova.platformId;
 	localStorage['DEVICE_PLATFORM'] = devicePlatform;
 	StatusBar.overlaysWebView(false);
-	function openBrowser(){
-		window.plugins.childBrowser.showWebPage('http://www.google.com, { showLocationBar: true });
-	}
 //  document.addEventListener("deviceready", onDeviceReady, false);
 //  function onDeviceReady() 
 //	{
 //		var devicePlatform = cordova.platformId;		
 //	}
 	
-
+$("#btn_browser").click(function(e){
+	alert('test test ');
+});
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());
@@ -169,7 +171,10 @@
 		}
 
 	});	
-
+	function openBrowser() {
+		alert('test test');
+		//window.plugins.childBrowser.showWebPage('http://www.google.com, { showLocationBar: true });
+	}
     </script>
 
 	</body>
