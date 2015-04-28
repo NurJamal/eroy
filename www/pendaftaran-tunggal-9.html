@@ -102,6 +102,7 @@
 	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_tunggal').html(window.localStorage.getItem("NAMA_PENDAFTARAN_TUNGGAL"));
+
     var status = window.localStorage.getItem('STATUS');
     if(status == "kuiri")
     {
@@ -126,6 +127,7 @@
         var insertData = "true";
         var kad_pengenalan = window.localStorage.getItem('LOGIN');
     }
+
 	$("#btn_submit").click(function(e){
 		
 		redisplayHeader();
@@ -155,15 +157,14 @@
 				type:'POST',
 				data: {
 					kad_pengenalan : kad_pengenalan,
-                    insertData : insertData,
+					insertData : insertData,
+
 				},
 				beforeSend: function() {
 						run_waitMe();
 					},
 				success:function(data){
-					console.log(data);
 					var json = $.xml2json(data);
-					console.log(json);
 					if (json.status == 'SEND_SUCCESS') {
 						
 						$.alert

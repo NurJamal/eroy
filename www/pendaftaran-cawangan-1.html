@@ -170,6 +170,8 @@
 								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
 
 								$('body').waitMe('hide');
+								
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 
 							}
 							else if (json.status == 'VIEW') {
@@ -361,7 +363,7 @@
 							}
 						);
 						window.localStorage.setItem("NAMA_PENDAFTARAN_CAWANGAN", nama_penuh_pertubuhan);
-
+						localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 					}
 					else if (json.status == 'UPDATE_ERROR') {
 						$.alert

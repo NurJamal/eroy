@@ -378,10 +378,9 @@
 				$("#negeri_pos").val(negeri);
 				
 				var daerah = $("#daerah_menetap").val();
-				$("#daerah_pos").val(daerah);
-				
 				//if copy address from main address. auto retrieve daerah
-				getDaerahFromSelectedCountry3(); 
+				getDaerah(negeri,$('#daerah_pos').attr('id'),daerah);
+				
 
 			}
 			
@@ -428,6 +427,8 @@
 	
 	
 	$("#btn_submit").click(function(e){
+		
+		redisplayHeader();
 		
 		var empty = false;
 		e.preventDefault();

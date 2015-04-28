@@ -57,7 +57,9 @@
 		</div>
 	</div>
 	
-	<a href="pindaan_maklumat_pembayaran.html">XXX</a>
+	<a href="pindaan_maklumat_pembayaran.html">PAYMENT</a><br/>
+	<a href="pindaan_maklumat_perlembagaan.html">PERLEMBAGAAN</a>
+
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -83,6 +85,19 @@
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
 	<script>
+
+	
+	var devicePlatform = cordova.platformId;
+	localStorage['DEVICE_PLATFORM'] = devicePlatform;
+	StatusBar.overlaysWebView(false);
+   
+//  document.addEventListener("deviceready", onDeviceReady, false);
+//  function onDeviceReady() 
+//	{
+//		var devicePlatform = cordova.platformId;		
+//	}
+	
+
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());

@@ -72,6 +72,7 @@
 	<script src="../../cordova_plugins.js"></script>
 	
 	<script>
+	
 	initiatePayment();
 	function initiatePayment(){
 		$('body').waitMe({
@@ -96,12 +97,23 @@
 		var paymentChannel = localStorage.getItem('PAYMENT_CHANNEL');
 		var redirect_url = localStorage.getItem('REDIRECT_URL');
 		var paymentItemCode = localStorage.getItem("PAYMENT_REF_CODE");
-
 		var kad_pengenalan = localStorage.getItem('LOGIN');
 		
+
 		var time = new Date();
 		var outStr = time.getSeconds();
 		var encryptKP = $.md5($.trim(kad_pengenalan+""+outStr));
+		
+		
+		alert('PAYMENT_AMOUNT'+paymentAmount);
+		alert('PAYMENT_DESC'+paymentDesc);
+		alert('PAYMENT_ITEMNAME'+paymentItemName);
+		alert('PAYMENT_KEY'+paymentKey);
+		alert('PAYMENT_CHANNEL'+paymentChannel);
+		alert('REDIRECT_URL'+redirect_url);
+		alert('PAYMENT_REF_CODE'+paymentItemCode);
+		alert('LOGIN'+kad_pengenalan);
+		alert('encryptKP'+encryptKP);
 		
 		var key = 'initialApp';
 		$.ajax({
@@ -127,8 +139,11 @@
 					console.log(data);
 					if (json.status == 'INSERT_SUCCESS') {
 						//navigator.app.loadUrl('http://payment.telcowin.com/payment.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
+						//window.location.href = 'http://payment.telcowin.com/payment_redirect.php?c='+encryptKP;
+
 						if(localStorage.getItem('DEVICE_PLATFORM') == 'android')
 						{
+							//window.location.href = 'http://payment.telcowin.com/payment_redirect.php?c='+encryptKP;
 							navigator.app.loadUrl('http://payment.telcowin.com/payment_redirect.php?c='+encryptKP+'', { openExternal:true,data : 'test' } );
 						}
 						else if(localStorage.getItem('DEVICE_PLATFORM')  == 'ios')
@@ -174,6 +189,15 @@
 						}
 					}
 				);
+				
+				localStorage.removeItem('PAYMENT_AMOUNT');
+				localStorage.removeItem('PAYMENT_DESC');
+				localStorage.removeItem('PAYMENT_ITEMNAME');
+				localStorage.removeItem('PAYMENT_KEY');
+				localStorage.removeItem('PAYMENT_CHANNEL');
+				localStorage.removeItem('REDIRECT_URL');
+				localStorage.removeItem('PAYMENT_REF_CODE');
+			
 				//window.location.replace('../../'+redirect_url_after_payment);
 		}
 		else
@@ -184,10 +208,11 @@
 						title: 'Status',
 						content: 'Pembayaran Tidak Berjaya.(will have a proper message later)',
 						confirm: function(){
-							window.location.replace('../../index.html');
+							goBack();
 						}
 					}
 				);	
+				
 				//window.location.replace('../../index.html');
 		}
 	}

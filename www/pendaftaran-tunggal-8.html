@@ -63,38 +63,49 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-    <form action="" name="pendaftaran" id="pendaftaran">
-        <input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
-	    <div class="_form">
-            <div>
-                <h5 id="_orange_title">Nama Pertubuhan</h5>
-                <h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
-            </div>
-		    <div class="selection" id="jenisbayaran_selection" style="margin-top: 0px;">
+
+
+	<div class="_form">
+	
+		<div>
+			<h5 id="_orange_title">Nama Pertubuhan</h5>
+			<h1 class="_dark_text" id="nama_pendaftaran_tunggal" style="margin-top:5px;"></h1><br/>
+		</div>
+	
+		<div class="selection" id="jenis_bayaran_selection">
 				<h5 id="_orange_title">Bentuk Bayaran</h5>
-                <select id="sel_jenisbayaran" name="sel_jenisbayaran" class="_sel">
-                <option value="" selected>Pilih Bentuk Bayaran</option>
-                </select>
-		    </div>
-            <div>
-                <input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
-            </div>
-            <div>
-                <h5 id="_orange_title">Jumlah wang pendaftaran yang perlu dibayar</h5>
-            </div>
-            <div class="display">
-                <input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" style="margin-top: 8px;" disabled></br>
-                <input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
-            </div>
-            <input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal">
-            <input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
-            <input type="hidden" name="Key" id="key" value="E-ROY"/>
-            <input type="hidden" name="Channel" id="channel" value="02"/>
-            <div class="default_button_holder">
-                <input class="default_button" type="button" value="SIMPAN" id="btn_submit">
-            </div>
-	    </div>
-    </form>
+					
+					<select id="sel_jenisbayaran" name="jenis_bayaran" class="_sel">
+				<option value="" selected>Pilih Bentuk Bayaran</option>
+						</select>
+		</div>
+		
+		<div>
+			<input type="text" name="wang_tidak_online" id="wang_tidak_online" placeholder="Nombor Wang Pos/Bank Draf"></br><br/>
+		</div>
+		
+		<div>
+			<h5 id="_orange_title">Jumlah wang pendaftaran yang perlu dibayar</h5>
+		</div>
+			
+		<div class="display">
+			<input type="text" name="jumlah_perlu_dibayar" id="jumlah_perlu_dibayar" placeholder="" disabled></br>
+			<input type="hidden" name="id_amaun_bayaran" id="id_amaun_bayaran" ></br>
+		</div>
+		
+		<input type="hidden" name="Amount" id="amount" />
+		<input type="hidden" name="PaymentDesc" id="paymentDesc" value="Pendaftaran Pertubuhan Tunggal"/>
+		<input type="hidden" name="PaymentItemName" id="paymentItemName" value="Pendaftaran Pertubuhan"/>
+		<input type="hidden" name="Key" id="key" value="E-ROY"/>
+		<input type="hidden" name="Channel" id="channel" value="02"/>
+		
+		<div class="default_button_holder">
+			<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+		</div>
+		
+	</div>
+	</div>
+  
 	</div>
 	<!-- end of form -->
 	
@@ -269,7 +280,7 @@
 				if($('#sel_jenisbayaran').val() == 2)
 				{
 					
-					var amount = $.trim($('#jumlah_perlu_dibayar').val().replace('RM', ''));
+					var amount = $.trim($('#amount').val());
 					var paymentDesc = $.trim($('#paymentDesc').val());
 					var paymentItemName = $.trim($('#paymentItemName').val());
 					var key = $.trim($('#key').val());

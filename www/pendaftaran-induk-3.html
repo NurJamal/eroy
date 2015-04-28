@@ -2,23 +2,28 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
 		</div>	
+		
+		<div id="loadingLayer"></div>
+
 	</head>
-	
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
-	<!-- slide menu right -->
+	<!-- slide menu right. -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
 	
@@ -29,7 +34,7 @@
 		<a href="pendaftaran-induk-2.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -55,108 +60,87 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_induk"></h1><br/>
-		</div>
-		
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-20px">Tarikh Mesyuarat Penubuhan</h5>
-			<h5 id="_dark_text" style="margin-top:0px">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
-		</div>
-	</div>
-		
-	<div class="inform">
-			<input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick">
-			<br/>	
-	</div>
-	</br>
-	
-	<div class="_form">
-
+    <form action="" name="pendaftaran" id="pendaftaran">
+        <input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
+        <div class="_form">
+            <div>
+                <h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_induk"></h1><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-20px">Tarikh Mesyuarat Penubuhan</h5>
+                <h5 id="_dark_text" style="margin-top:0px">(Berdasarkan tarikh penubuhan pertubuhan belia.)</h5>
+            </div>
+        </div>
+        <div class="inform">
+            <input type="text" name="p_tmesyuarat" onfocus="(this.type='date')" onblur="(this.type='text')"  id="p_tmesyuarat" placeholder="Tarikh Mesyuarat Penubuhan" class="_datepick">
+            <br/>
+        </div>
+    	</br>
+	    <div class="_form">
 			<h5 id="_orange_title" style="margin-top:-15px">Bilangan yang menghadiri mesyuarat penubuhan</h5>
 			<h5 id="_dark_text" style="margin-top:0px">(Minimum 7 orang.)</h5>
+			<input type="number" name="bil_ahli" id="bil_ahli" placeholder="Bilangan ahli"></br><br/>
+            <div>
+                <h5 id="_orange_title" style="margin-top:-15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
+                <h5 id="_dark_text" style="margin-top:0px">Lelaki</h5>
+            </div>
+            <input type="number" name="ahli_melayu_lelaki" id="ahli_melayu_lelaki" placeholder="Melayu"><br/>
+            <input type="number" name="ahli_cina_lelaki" id="ahli_cina_lelaki" placeholder="Cina"><br/>
+            <input type="number" name="ahli_india_lelaki" id="ahli_india_lelaki" placeholder="India"><br/>
+            <input type="number" name="ahli_lain2_lelaki" id="ahli_lain2_lelaki" placeholder="Lain-lain"><br>
 			
-			<input type="number" style="margin-top:0px" name="bil_ahli" id="bil_ahli" placeholder="Bilangan ahli"></br><br/>
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:-15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
-			<h5 id="_dark_text" style="margin-top:0px">Lelaki</h5>
-		</div>
-		
-			<input type="number" style="margin-top:0px" name="ahli_melayu_lelaki" id="ahli_melayu_lelaki" placeholder="Melayu"><br/>
-			<input type="number" name="ahli_cina_lelaki" id="ahli_cina_lelaki" placeholder="Cina"><br/>
-			<input type="number" name="ahli_india_lelaki" id="ahli_india_lelaki" placeholder="India"><br/>
-			<input type="number" name="ahli_lain2_lelaki" id="ahli_lain2_lelaki" placeholder="Lain-lain"><br>	
-
-		<div class="display_number">	
-			<input type="number" name="jumlah_lelaki" id="jumlah_lelaki" placeholder="Jumlah" disabled><br/>
-		</div>
-		
-		<div>
-			<h5 id="_orange_title" style="margin-top:15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
-			<h5 id="_dark_text" style="margin-top:0px">Perempuan</h5>
-		</div>
-			
-			<input type="number" style="margin-top:0px" name="ahli_melayu_perempuan" id="ahli_melayu_perempuan" placeholder="Melayu"><br/>
+            <div class="display_number">
+                <input type="number" name="jumlah_lelaki" id="jumlah_lelaki" placeholder="Jumlah" disabled><br/>
+            </div>
+            <div>
+                <h5 id="_orange_title" style="margin-top:15px">Bilangan terkini ahli dalam daftar keanggotaan</h5>
+                <h5 id="_dark_text" style="margin-top:0px">Perempuan</h5>
+            </div>
+			<input type="number" name="ahli_melayu_perempuan" id="ahli_melayu_perempuan" placeholder="Melayu"><br/>
 			<input type="number" name="ahli_cina_perempuan" id="ahli_cina_perempuan" placeholder="Cina"><br/>
 			<input type="number" name="ahli_india_perempuan" id="ahli_india_perempuan" placeholder="India"><br/>
 			<input type="number" name="ahli_lain2_perempuan" id="ahli_lain2_perempuan" placeholder="Lain-lain"><br>
-		
-		
-		<div class="display_number">
-			<input type="number" name="jumlah_perempuan" id="jumlah_perempuan" placeholder="Jumlah" disabled><br/>
-			<input type="number" name="jumlah_keseluruhan" id="jumlah_keseluruhan" placeholder="Jumlah Keseluruhan" disabled><br/></br>
+            <div class="display_number">
+                <input type="number" name="jumlah_perempuan" id="jumlah_perempuan" placeholder="Jumlah" disabled><br/>
+                <input type="number" name="jumlah_keseluruhan" id="jumlah_keseluruhan" placeholder="Jumlah Keseluruhan" disabled><br/></br>
+            </div>
+    		<div>
+                <h5 id="_orange_title" style="margin-top:-15px">Pernahkah pertubuhan ini didaftarkan sebelum ini dibawah Akta Pertubuhan 1966 atau Akta Pertubuhan Belia dan
+                    Pembangunan Belia 2007?</h5>
+                <div class="selection" id="akta_selection" style="margin-top:0px">
+                    <form action="">
+                    <select id="sel_akta" name="sel_akta" class="_sel">
+                    <option value="">Pilih</option>
+                    <option value="Y">Ya</option>
+                    <option value="N">Tidak</option>
+                    </select>
+                </div>
+                <div>
+                    <h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
+                </div>
+		        <input type="text" name="no_akta_dahulu" id="no_akta_dahulu"><br/></br>
+		    </div>
+            <h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
+            <div class="selection" id="logo_selection" style="margin-top: 0px">
+                <select id="sel_logo" name="sel_logo" class="_sel">
+                <option value="">Pilih</option>
+                <option value="Y">Ya</option>
+                <option value="N">Tidak</option>
+                </select>
+            </div>
 		</div>
-		
-		<div>
-		<h5 id="_orange_title" style="margin-top:-15px">Pernahkah pertubuhan ini didaftarkan sebelum ini dibawah Akta Pertubuhan 1966 atau Akta Pertubuhan Belia dan 
-			Pembangunan Belia 2007?</h5>
-			
-		<div class="selection" id="akta_selection">
-					<form action="">
-					<select id="bawah_akta" name="bawah_akta" class="_sel">
-					<option value="">Pilih</option>
-					<option value="Y">Ya</option>
-					<option value="N">Tidak</option>
-					</select>
-		</div>
-		
-		<div>
-			<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila nyatakan nombor pendaftaran terdahulu</h5>
-		</div>
-		
-			<input type="text" style="margin-top:0px" name="no_akta_dahulu" id="no_akta_dahulu"><br/></br>
-		</div>
-
-		
-		<h5 id="_orange_title" style="margin-top:-15px">Adakah pertubuhan belia ini akan menggunakan bendera, lambang, lencana atau warna atau apa-apa tanda lain?</h5>
-			
-		<div class="selection" id="logo_selection">
-					<select id="dengan_logo" name="dengan_logo" class="_sel">
-					<option value="">Pilih</option>
-					<option value="Y">Ya</option>
-					<option value="N">Tidak</option>
-					</select>
-		</div>
-		</div>
-		
-		<div>
-			<h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
-		</div>
-		
+        <div>
+            <h5 id="_dark_text" style="margin-top:0px">Jika Ya, sila muat naik gambar</h5>
+        </div>
 		<div class="inform">
-			<input id="logo" type="file"  name="muat_naik" onfocus="(this.type='file')" onblur="(this.type='file')" id="muat_naik" placeholder="Muat Naik" class="_upload"><br/>
+			<input id="logo" type="file"  name="logo" onfocus="(this.type='file')" onblur="(this.type='file')" placeholder="Muat Naik" class="_upload"><br/>
 		</div>
-
 		<div class="default_button_holder">
 			<input class="default_button" type="button" value="SIMPAN" id="btn_submit" action="pendaftaran-induk-4.html">
 		</div>
-			</div>
+    </form>
+    </div>
 	</div>
 	<!-- end of form -->
 	
@@ -179,14 +163,124 @@
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-		
+
+    <script type="text/javascript" src="js/jquery.qtip.js"></script>
+
   </body>
- 
   <script>
   
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_induk').html(window.localStorage.getItem("NAMA_PENDAFTARAN_INDUK"));
 	
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+    var status = window.localStorage.getItem('STATUS');
+
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_3.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "kuiri"
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    for (var i = 0; i < formLength; i++) {
+                        if(document.pendaftaran.elements[i].type != 'button')
+                        {
+                            document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+                        }
+                    };
+                    if (json.status == 'SELECT') {
+                        console.log(json.details);
+                        $('#ahli_melayu_perempuan').val(json.details.bil_perempuan_melayu);
+                        $('#ahli_cina_perempuan').val(json.details.bil_perempuan_cina);
+                        $('#ahli_india_perempuan').val(json.details.bil_perempuan_india);
+                        $('#ahli_lain2_perempuan').val(json.details.bil_perempuan_lain_lain);
+                        $('#jumlah_perempuan').val(json.details.jumlah_perempuan);
+                        $('#ahli_melayu_lelaki').val(json.details.bil_lelaki_melayu);
+                        $('#ahli_cina_lelaki').val(json.details.bil_lelaki_cina);
+                        $('#ahli_india_lelaki').val(json.details.bil_lelaki_india);
+                        $('#ahli_lain2_lelaki').val(json.details.bil_lelaki_lain_lain);
+                        $('#jumlah_lelaki').val(json.details.jumlah_lelaki);
+                        $('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
+                        $('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
+                        $('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
+                        $('#sel_logo').val(json.details.dengan_lambang);
+                        $('#sel_akta').val(json.details.daftar_akta1966);
+                        $('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
+                        //$('#logo').val(json.details.lambang);
+                        checkKuiriPendaftaran(kad_pengenalan,'3');
+                        //$('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
+    else
+    {
+        var insertData = "TRUE";
+        var kad_pengenalan = window.localStorage.getItem("LOGIN");
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_3.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "select"
+
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        console.log(json.details);
+                        $('#ahli_melayu_perempuan').val(json.details.bil_perempuan_melayu);
+                        $('#ahli_cina_perempuan').val(json.details.bil_perempuan_cina);
+                        $('#ahli_india_perempuan').val(json.details.bil_perempuan_india);
+                        $('#ahli_lain2_perempuan').val(json.details.bil_perempuan_lain_lain);
+                        $('#jumlah_perempuan').val(json.details.jumlah_perempuan);
+                        $('#ahli_melayu_lelaki').val(json.details.bil_lelaki_melayu);
+                        $('#ahli_cina_lelaki').val(json.details.bil_lelaki_cina);
+                        $('#ahli_india_lelaki').val(json.details.bil_lelaki_india);
+                        $('#ahli_lain2_lelaki').val(json.details.bil_lelaki_lain_lain);
+                        $('#jumlah_lelaki').val(json.details.jumlah_lelaki);
+                        $('#jumlah_keseluruhan').val(json.details.jumlah_keseluruhan);
+                        $('#p_tmesyuarat').val(json.details.tarikh_mesyuarat_penubuhan);
+                        $('#bil_ahli').val(json.details.bil_hadir_mesyuarat);
+                        $('#sel_logo').val(json.details.dengan_lambang);
+                        $('#sel_akta').val(json.details.daftar_akta1966);
+                        $('#no_akta_dahulu').val(json.details.no_pendaftaran_dahulu);
+                        //$('#logo').val(json.details.lambang);
+
+                        $('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
 	/*Calc Jumlah ahli lelaki*/
 	$("#ahli_melayu_lelaki,#ahli_cina_lelaki,#ahli_india_lelaki,#ahli_lain2_lelaki").keyup(function() 
 	{
@@ -219,22 +313,28 @@
 	/*Submit form*/
 	$("#btn_submit").click(function(e){
 		
+		redisplayHeader();
+		
 		/*Clear all highlighted*/
 		$('#p_tmesyuarat,#bil_ahli,#logo_selection,#akta_selection,#no_akta_dahulu,#logo').css({"border":"","box-shadow":""});
-		
+
 		var ahliMelayuP = $('#ahli_melayu_perempuan').val();
 		var ahliCinaP = $('#ahli_cina_perempuan').val();
 		var ahliIndiaP = $('#ahli_india_perempuan').val();
 		var ahliLainP = $('#ahli_lain2_perempuan').val();
+		var jumlah_perempuan = $('#jumlah_perempuan').val();
 		var ahliMelayuL = $('#ahli_melayu_lelaki').val();
 		var ahliCinaL = $('#ahli_cina_lelaki').val();
 		var ahliIndiaL = $('#ahli_india_lelaki').val();
 		var ahliLainL = $('#ahli_lain2_lelaki').val();
+		var jumlah_lelaki = $('#jumlah_lelaki').val();
+		var jumlah_keseluruhan = $('#jumlah_keseluruhan').val();
 		var p_tmesyuarat = $('#p_tmesyuarat').val();
 		var bil_ahli = $('#bil_ahli').val();
-		var dengan_logo = $('#dengan_logo').val();
-		var bawah_akta = $('#bawah_akta').val();
-		var dengan_logo = $('#dengan_logo').val();
+		var sel_logo = $('#sel_logo').val();
+		var sel_akta = $('#sel_akta').val();
+		var logo = $('#logo').val();
+		var no_akta_dahulu = $('#no_akta_dahulu').val();
 		
 		empty = false;
 	
@@ -249,17 +349,18 @@
 			$('#bil_ahli').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(dengan_logo.length == 0)
+
+		if(sel_logo.length == 0)
 		{
 			$('#logo_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(bawah_akta.length == 0)
+		if(sel_akta.length == 0)
 		{
 			$('#akta_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
-		if(bawah_akta == 'Y')
+		if(sel_akta == 'Y')
 		{
 				var no_akta_dahulu = $('#no_akta_dahulu').val();
 				if(no_akta_dahulu.length == 0){
@@ -268,7 +369,7 @@
 					empty = true;
 				}
 		}
-		if(dengan_logo == 'Y')
+		if(sel_logo == 'Y')
 		{
 				var logo = $('#logo').val();
 				if(logo.length == 0)	{
@@ -292,64 +393,91 @@
 		}
 		else if(empty == false)
 		{
-
-		$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_3.php",
-				type:'POST',
-				data: {
-
-					ahliMelayuL : ahliMelayuL,
-					ahliCinaL: ahliCinaL,
-					ahliIndiaL : ahliIndiaL,
-					ahliLainL : ahliLainL,
-					ahliMelayuP : ahliMelayuP,
-					ahliCinaP : ahliCinaP,
-					ahliIndiaP : ahliIndiaP,
-					ahliLainP : ahliLainP,
-					p_tmesyuarat : p_tmesyuarat,
-					bil_ahli : bil_ahli,
-					dengan_logo : dengan_logo,
-					bawah_akta : bawah_akta,
-					no_akta_dahulu : no_akta_dahulu,
-					logo : logo,
-
-				},
-				beforeSend: function() {
-						run_waitMe();
-					},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-									window.location.href = "pendaftaran-induk-4.html";
-								}
-							}
-						);
-					
+			if(bil_ahli < 7)
+			{
+				$.alert
+				(
+					{
+						title: 'Perhatian',
+						content: 'Minimum bilangan yang hadir ialah 7 orang',
+						confirm: function(){ }
 					}
-					else if (json.status == 'error') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-				}
-			});	
+				);
+				$('#bil_ahli').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			}
+            else
+			{
+                if (id_pertubuhan == 'empty')
+                {
+                    window.location.href = "pendaftaran-induk-4.html";
+                }
+                else
+                {
+                    $.ajax({
+                        url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_induk_3.php",
+                        type: 'POST',
+                        data: {
+
+                            ahliMelayuL: ahliMelayuL,
+                            ahliCinaL: ahliCinaL,
+                            ahliIndiaL: ahliIndiaL,
+                            ahliLainL: ahliLainL,
+                            ahliMelayuP: ahliMelayuP,
+                            ahliCinaP: ahliCinaP,
+                            ahliIndiaP: ahliIndiaP,
+                            ahliLainP: ahliLainP,
+                            p_tmesyuarat: p_tmesyuarat,
+                            bil_ahli: bil_ahli,
+                            dengan_logo: sel_logo,
+                            bawah_akta: sel_akta,
+                            no_akta_dahulu: no_akta_dahulu,
+                            logo: logo,
+                            jumlah_lelaki: jumlah_lelaki,
+                            jumlah_perempuan: jumlah_perempuan,
+                            jumlah_keseluruhan: jumlah_keseluruhan,
+                            kad_pengenalan: kad_pengenalan,
+                            insertData: insertData,
+                        },
+                        beforeSend: function () {
+                            run_waitMe();
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            var json = $.xml2json(data);
+                            console.log(json);
+                            if (json.status == 'ok') {
+
+                                $.alert
+                                (
+                                        {
+                                            title: 'Status',
+                                            content: json.message,
+                                            confirm: function () {
+                                                window.location.href = "pendaftaran-induk-4.html";
+                                            }
+                                        }
+                                );
+
+                            }
+                            else if (json.status == 'error') {
+                                $.alert
+                                (
+                                        {
+                                            title: 'Status',
+                                            content: json.message,
+                                            confirm: function () {
+                                            }
+                                        }
+                                );
+                            }
+                            else {
+                            }
+                            $('body').waitMe('hide');
+                        }
+                    });
+                }
+			}
+		
 			
 		}
 		
@@ -359,4 +487,4 @@
 
   </script>
   
- </html>
+</html>

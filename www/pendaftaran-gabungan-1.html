@@ -273,6 +273,7 @@
 							var json = $.xml2json(data);
 							console.log(json);
 							if (json.status == 'SELECT') {
+							
 								console.log(json);
 								$("#f_lokaliti").val(json.details.lokaliti);
 								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
@@ -285,6 +286,8 @@
 								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
 
 								$('body').waitMe('hide');
+							
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
 
 							}
 							else if (json.status == 'VIEW') {
@@ -408,72 +411,78 @@
 				}
 				else
 				{
-				$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
-				type:'POST',
-				data: {
-					nama_pertubuhan: nama_pertubuhan,
-					nama_ringkasan : nama_ringkasan,
-					nama_penuh_pertubuhan : nama_penuh_pertubuhan,
-					emel_pertubuhan : emel_pertubuhan,
-					sel_peringkat : sel_peringkat,
-					sel_kategori : sel_kategori,
-					sel_negeri : sel_negeri,
-					sel_daerah : sel_daerah,
-					jenis_pertubuhan : jenis_pertubuhan,
-					kad_pengenalan : kad_pengenalan,
-					insertData : insertData,
-				},
-				beforeSend: function() {
-						run_waitMe();
+					$.ajax(
+					{
+					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+					type:'POST',
+					data: 
+					{
+						nama_pertubuhan: nama_pertubuhan,
+						nama_ringkasan : nama_ringkasan,
+						nama_penuh_pertubuhan : nama_penuh_pertubuhan,
+						emel_pertubuhan : emel_pertubuhan,
+						sel_peringkat : sel_peringkat,
+						sel_kategori : sel_kategori,
+						sel_negeri : sel_negeri,
+						sel_daerah : sel_daerah,
+						jenis_pertubuhan : jenis_pertubuhan,
+						kad_pengenalan : kad_pengenalan,
+						insertData : insertData,
 					},
-				success:function(data){
-					var json = $.xml2json(data);
-					if (json.status == 'INSERT_SUCCESS') {
-						
+					beforeSend: function() {
+							run_waitMe();
+						},
+					success:function(data){
+						var json = $.xml2json(data);
+						if (json.status == 'INSERT_SUCCESS') {
+							
 
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								window.location.href = "pendaftaran-gabungan-2.html";
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									window.location.href = "pendaftaran-gabungan-2.html";
+									}
 								}
-							}
-						);
-						window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
-					}
-					else if (json.status == 'UPDATE_SUCCESS') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								window.location.href = "pendaftaran-gabungan-2.html";
+							);
+							window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+
+						}
+						else if (json.status == 'UPDATE_SUCCESS') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									window.location.href = "pendaftaran-gabungan-2.html";
+									}
 								}
-							}
-						);
-						window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+							);
+							window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+											
+						}
+						else if (json.status == 'UPDATE_ERROR') {
+							$.alert
+							(
+								{
+									title: 'Status',
+									content: json.message,
+									confirm: function(){
+									}
+								}
+							);
+						}
+						else{}
+						$('body').waitMe('hide');
 
 					}
-					else if (json.status == 'UPDATE_ERROR') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-
-				}
-			});
+				});
+			}
 			}
 		}
 	});

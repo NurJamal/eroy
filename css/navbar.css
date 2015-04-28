@@ -1,0 +1,70 @@
+.eroy-tab{
+	border-bottom: none;
+	margin-bottom: 0px;
+}
+.eroy-tab>li>a, 
+.eroy-tab>li>a:hover, 
+.eroy-tab>li>a:focus {
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px !important; 
+  cursor: default;
+  margin-right: 10px;
+}
+
+.eroy-tab>li.active>a, 
+.eroy-tab>li.active>a:hover, 
+.eroy-tab>li.active>a:focus {
+  color: #fff;
+  background-color: rgb(223, 144, 0);
+  border: 1px solid #ddd;
+  border-radius: 20px !important; 
+  cursor: default;
+  font-weight: 600;
+}
+
+.eroy-tab li:after{
+  top: 17px;
+  height: 2px;
+  content: " ";
+  width: 10px;
+  background: #000;
+  position: absolute;
+  margin-left: -10px;
+}
+
+.eroy-tab li.active:before{
+  top: 36px;
+  height: 2px;
+  content: " ";
+  width: 10px;
+  background: #000;
+  position: absolute;
+  margin-left: 11px;
+/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.eroy-tab li.seperator:after{
+	background: none;
+}
+
+.tab-content .tab-pane h3{
+	margin-top: 10px;
+	text-transform: uppercase;
+	color: rgb(223, 144, 0);
+	font-style: 20px;
+}

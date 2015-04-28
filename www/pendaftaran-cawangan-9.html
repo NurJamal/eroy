@@ -61,29 +61,25 @@
 	<!-- end of navbar -->
 	
 	<!-- form -->
-	
-	
-	
-	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" id="nama_pendaftaran_cawangan" style="margin-top:5px;"></h1></br>
-		</div>
-		<h6 id="_orange_title">
-		<table><tr>
-			<td><input type="checkbox" name="checking" id="check" class="checkboxClass"> <label for="check">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label> </td>
-		
-			</tr></table>
+    <form action="" name="pendaftaran" id="pendaftaran">
+	    <div class="_form">
+            <div>
+                <h5 id="_orange_title">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" id="nama_pendaftaran_cawangan" style="margin-top:5px;"></h1></br>
+            </div>
+            <h6 id="_orange_title">
+            <table><tr>
+                <td><input type="checkbox" name="checking" id="check" class="checkboxClass"> <label for="check">Saya mengesahkan bahawa maklumat permohonan yang diisi adalah betul</label> </td>
 
-		</h6>
-		
-		<div class="default_button_holder">
-			<input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit">
+                </tr></table>
+            </h6>
+            <div class="default_button_holder">
+                <input class="default_button" type="button" value="HANTAR PERMOHONAN" id="btn_submit">
+            </div>
 		</div>
-		
-		</div></div></div>
-
+    </form>
+    </div>
+    </div>
 		
 	<!-- end of form -->
 	
@@ -106,29 +102,69 @@
 	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_cawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_CAWANGAN"));
-	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+
+    var status = window.localStorage.getItem('STATUS');
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+
+        for (var i = 0; i < formLength; i++) {
+            if(document.pendaftaran.elements[i].type != 'button')
+            {
+                document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+            }
+
+            if(document.pendaftaran.elements[i].type == 'checkbox')
+            {
+                document.pendaftaran.elements[i].setAttribute("checked", "checked");
+            }
+        }
+
+    }else
+    {
+        var insertData = "true";
+        var kad_pengenalan = window.localStorage.getItem('LOGIN');
+    }
+
 	$("#btn_submit").click(function(e){
 		
 		redisplayHeader();
 		var empty = false;
 		e.preventDefault();
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
-	
-		if($('#check').is(':checked'))
-		{
+        if($('input[type=checkbox]:checked').length == 0)
+        {
+            empty = true;
+        }
+
+        if(empty == true)
+        {
+            $.alert
+            (
+                    {
+                        title: 'Perhatian',
+                        content: "Sila tandakan pengesahan maklumat permohonan",
+                        confirm: function(){
+                        }
+                    }
+            );
+        }else if(empty == false)
+        {
 			$.ajax({
 				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_cawangan_9.php",
 				type:'POST',
 				data: {
 					kad_pengenalan : kad_pengenalan,
+					insertData : insertData,
+
 				},
 				beforeSend: function() {
 						run_waitMe();
 					},
 				success:function(data){
-					console.log(data);
 					var json = $.xml2json(data);
-					console.log(json);
 					if (json.status == 'SEND_SUCCESS') {
 						
 						$.alert
@@ -168,18 +204,6 @@
 					$('body').waitMe('hide');
 				}
 			});
-		}
-		else
-		{
-			$.alert	
-				(
-					{
-						title: 'Perhatian',
-						content: "Sila tandakan pengesahan maklumat permohonan",
-						confirm: function(){
-						}
-					}
-				);
 		}
 	});
 	
