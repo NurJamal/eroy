@@ -65,12 +65,13 @@
 		
 	<div class="_form">
 		
-		<form id="pendaftaran" action="" name="pendaftaran">
+		
 					
 			<div class="selection_no_icon" style="margin-top:-10px">
 					<h5 id="_orange_title">Jenis Pertubuhan</h5>
 					<span id="jenis_pendaftaran_pertubuhan"></span>
-					<input type="hidden" value="3" name="jenis_pertubuhan" id="pertubuhan_gabungan">	
+					<input type="hidden" value="3" name="jenis_pertubuhan" id="pertubuhan_gabungan">
+					<input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
 			</div>
 							
 			<div class="selection" style="margin-top:14px" id="peringkat_selection" >
@@ -114,7 +115,7 @@
 				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
 				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
 			
-		</div>
+	
 		
 			<div class="inform" style="margin-top:9px">
 				<input type="text" style="margin-top:0px" name="no_sijil_gabungan" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
@@ -125,9 +126,9 @@
 			</div>
 
 			
-		</form>
-			</div>
+		
 	</div>
+	
 	
 	<!-- end of form -->
 	
@@ -256,6 +257,123 @@
 		
 		/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
 		var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		var status = window.localStorage.getItem('STATUS');
+
+		if(status == "kuiri")
+		{
+			var insertData = "kuiriUpdate";
+			var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+			formLength = document.pendaftaran.elements.length;
+						
+			$(function() 
+				{
+					$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "kuiri"
+						},
+						beforeSend: function() 
+						{
+							run_waitMe();
+						},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') 
+								{
+									for (var i = 0; i < formLength; i++) 
+									{
+										if(document.pendaftaran.elements[i].type != 'button')
+										{
+											document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+										}
+									};																
+														
+								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+								$("#sel_peringkat").val(json.details.peringkat_pertubuhan);
+								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
+								checkKuiriPendaftaran(kad_pengenalan,'3');
+								//$('body').waitMe('hide');
+							
+							}
+							else if (json.status == 'VIEW') 
+							{
+							
+							//Do nothing. Just display
+							
+							}
+						
+						$('body').waitMe('hide');
+						}
+					});
+			});
+		}
+		
+		else
+		{
+		
+		var insertData = "TRUE";
+		
+		$(function() 
+			{
+				$.ajax({
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+						type:'POST',
+						data: {
+							kad_pengenalan : kad_pengenalan,
+							insertData : "select"
+
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data){
+							var json = $.xml2json(data);
+							console.log(json);
+							if (json.status == 'SELECT') {
+							
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+								
+								$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
+								$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
+								$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
+								$("#f_emel_pertubuhan").val(json.details.emel_pertubuhan);
+								$("#sel_peringkat").val(json.details.peringkat_pertubuhan);
+								$("#sel_kategori").val(json.details.id_kategori_pertubuhan);
+								getDaerah(json.details.id_negeri,$('#sel_daerah').attr('id'));	
+								getCountry($('#sel_negeri').attr('id'),json.details.id_negeri,json.details.id_daerah);
+
+								$('body').waitMe('hide');							
+								
+							}
+							else if (json.status == 'VIEW') 
+							{
+							//Do nothing. Just display
+							
+							}
+						
+						$('body').waitMe('hide');
+						}
+					});
+			});
+		
+		}
+		
+		function getDaerahFromSelectedCountry()  
+		{
+			var selected_country = $('#sel_negeri').val();
+			getDaerah(selected_country,$('#sel_daerah').attr('id'));	
+		}
+
+		
+		
 		$(function() 
 			{
 				$.ajax({
@@ -408,82 +526,90 @@
 						}
 					);
 					$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-				}
+				}		
 				else
 				{
-					$.ajax(
+					if(id_pertubuhan == 'empty')
 					{
-					url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
-					type:'POST',
-					data: 
-					{
-						nama_pertubuhan: nama_pertubuhan,
-						nama_ringkasan : nama_ringkasan,
-						nama_penuh_pertubuhan : nama_penuh_pertubuhan,
-						emel_pertubuhan : emel_pertubuhan,
-						sel_peringkat : sel_peringkat,
-						sel_kategori : sel_kategori,
-						sel_negeri : sel_negeri,
-						sel_daerah : sel_daerah,
-						jenis_pertubuhan : jenis_pertubuhan,
-						kad_pengenalan : kad_pengenalan,
-						insertData : insertData,
-					},
-					beforeSend: function() {
-							run_waitMe();
-						},
-					success:function(data){
-						var json = $.xml2json(data);
-						if (json.status == 'INSERT_SUCCESS') {
-							
-
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-									window.location.href = "pendaftaran-gabungan-2.html";
-									}
-								}
-							);
-							window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
-							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
-
-						}
-						else if (json.status == 'UPDATE_SUCCESS') {
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-									window.location.href = "pendaftaran-gabungan-2.html";
-									}
-								}
-							);
-							window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
-							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
-											
-						}
-						else if (json.status == 'UPDATE_ERROR') {
-							$.alert
-							(
-								{
-									title: 'Status',
-									content: json.message,
-									confirm: function(){
-									}
-								}
-							);
-						}
-						else{}
-						$('body').waitMe('hide');
-
+                    window.localStorage.setItem("NAMA_PENDAFTARAN_MAJLIS", nama_penuh_pertubuhan);
+                    window.location.href = "pendaftaran-majlis-2.html";
 					}
-				});
-			}
-			}
+					
+					else
+					{
+						$.ajax(
+						{
+						url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_1.php",
+						type:'POST',
+						data: 
+						{
+							nama_pertubuhan: nama_pertubuhan,
+							nama_ringkasan : nama_ringkasan,
+							nama_penuh_pertubuhan : nama_penuh_pertubuhan,
+							emel_pertubuhan : emel_pertubuhan,
+							sel_peringkat : sel_peringkat,
+							sel_kategori : sel_kategori,
+							sel_negeri : sel_negeri,
+							sel_daerah : sel_daerah,
+							jenis_pertubuhan : jenis_pertubuhan,
+							kad_pengenalan : kad_pengenalan,
+							insertData : insertData,
+						},
+						beforeSend: function() {
+								run_waitMe();
+							},
+						success:function(data)
+						{
+							var json = $.xml2json(data);
+							if (json.status == 'INSERT_SUCCESS') {
+							
+							window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);
+								localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+								
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										window.location.href = "pendaftaran-gabungan-2.html";
+										}
+									}
+								);
+								
+							}
+							else if (json.status == 'UPDATE_SUCCESS') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										window.location.href = "pendaftaran-gabungan-2.html";
+										}
+									}
+								);
+								window.localStorage.setItem("NAMA_PENDAFTARAN_GABUNGAN", nama_penuh_pertubuhan);							
+											
+							}
+							else if (json.status == 'UPDATE_ERROR') {
+								$.alert
+								(
+									{
+										title: 'Status',
+										content: json.message,
+										confirm: function(){
+										}
+									}
+								);
+							}
+							else{}
+							$('body').waitMe('hide');
+
+						}	
+						});
+					}
+				}
 		}
 	});
 	

@@ -239,11 +239,11 @@
 							data: {
 								kad_pengenalan : kad_pengenalan,
 								insertData : "kuiri"
-
 							},
-							beforeSend: function() {
-									run_waitMe();
-								},
+							beforeSend: function() 
+							{
+								run_waitMe();
+							},
 							success:function(data){
 								var json = $.xml2json(data);
 								console.log(json);
@@ -304,8 +304,7 @@
 						if (json.status == 'SELECT') {
 
 							localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
-
-							$("#f_lokaliti").val(json.details.lokaliti);
+							
 							$("#f_nama_pertubuhan").val(json.details.nama_pertubuhan);
 							$("#f_nama_ringkasan").val(json.details.nama_ringkasan);
 							$("#f_nama_penuh_pertubuhan").val(json.details.nama_penuh_pertubuhan);
