@@ -3,9 +3,10 @@
 	/*Need to clear all localStorage related perlembagaan first */
 
 		// Create the tooltips only when document ready
+		
+
 		$("#appendPerlembagaan").delegate(".openToolTip", "click", function (){
 		
-		rewriteID();
 		var currentSelectedId = $(this).attr('id');
 		var arr = currentSelectedId.split('_');
 		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
@@ -187,9 +188,9 @@
 						});
 						
 						
-		
-								
-								
+						/*RE-WRITE ALL ID*/
+						rewriteID()	
+						checkAllFasal();		
 						},
 						error: function() 
 						{
@@ -562,12 +563,32 @@
 			index = parseInt(index+1);
 		});
 		
-		var indexx = 1;
 		$('.checkbox').each(function() {
 			$('#xx_'+indexx).attr('id','tr_'+indexx);
 			indexx = parseInt(indexx+1);
 		});
-	
+		
+		
+		var chk_index = 1;
+		var chk_indexx = 1;
+		/* Re-write checkbox no */
+		$('.checkboxClass').each(function() {
+		var tr_id = this.id;
+		var tr_value =  $('#'+tr_id).attr('id');
+		$('#'+tr_value).attr('id','rewritechkbox_'+chk_index);
+			chk_index = parseInt(chk_index+1);
+		});
+		
+		$('.checkboxClass').each(function() {
+			$('#rewritechkbox_'+chk_indexx).attr('id','c'+chk_indexx);
+
+			$('#c'+chk_indexx).next().attr('for','c'+chk_indexx);
+			$('#c'+chk_indexx).next().next().attr('id','span_'+chk_indexx)
+			$('#span_'+chk_indexx).children().attr('for','c'+chk_indexx)
+			chk_indexx = parseInt(chk_indexx+1);				
+		});
+
+		
 
 		/* Re-write <FASAL LABEL NO/ID> */
 		var indexFasal = 1;
@@ -903,6 +924,13 @@ function setInputMargin(levelIDShow,zzzz)
 		return mg;
 }
 	
+	function checkAllFasal()
+	{
+		$('.checkboxClass').each(function() {
+			var tr_id = this.id;
+			$("#"+tr_id).prop('checked',true);
+		});
+	}
 	
 	
 	
@@ -922,8 +950,14 @@ function simpanFasal()
 
 	
 	$('.checkbox').each(function() {
-			
+				
+		
 			var tr_id = this.id;
+			
+			
+			var atLeastOneIsChecked = $('#'+tr_id+ ' .checkboxClass :checkbox:checked').length > 0;
+			alert(tr_id+ '-' +atLeastOneIsChecked);
+			
 			var levelID = $('#'+(tr_id)).children().attr('id');
 			var levelToPush_ = levelID.replace('level_', '');
 
@@ -1003,23 +1037,12 @@ function simpanFasal()
 					});
 
 				});
-
-
-				
-	
-
 			}
-			
-
-				
-			
-
 
 		});
 }	
 	
-	
-	
+
 	
 	
 	
