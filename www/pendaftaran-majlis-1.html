@@ -109,11 +109,14 @@
 			
 				<input type="text" name="emel_pertubuhan" id="emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
 
-			<div id="sijil">
-				<input type="text" name="no_sijil_1" id="no_sijil" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_2" id="no_sijil" placeholder="No Sijil Gabungan"><br/>								
-			</div>
-    
+		
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan1" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan2" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan3" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan4" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan5" placeholder="No Sijil Gabungan">							
+		</div>
+		
 				<div class="inform" style="margin-top:9px">
 					<input type="text" style="margin-top:0px" name="no_sijil" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
 				</div>
@@ -150,6 +153,11 @@
 		
 		$('#negeri_selection').hide();
 		$('#daerah_selection').hide();
+		$('#f_no_sijil_gabungan1').hide();
+		$('#f_no_sijil_gabungan2').hide();
+		$('#f_no_sijil_gabungan3').hide();
+		$('#f_no_sijil_gabungan4').hide();
+		$('#f_no_sijil_gabungan5').hide();
 		
 		function tambah_field()
 		{			
@@ -359,17 +367,29 @@
 		{ 
 			var selectedIndex = sel_peringkat.options[sel_peringkat.selectedIndex].value;
 		
-			if (selectedIndex == "10") 
-					
-			{ 
-			$('#negeri_selection').show();
+			if (selectedIndex == "9")
+			{
+				$('#f_no_sijil_gabungan1').show();
+				$('#f_no_sijil_gabungan2').show();
+				$('#f_no_sijil_gabungan3').show();
+				$('#f_no_sijil_gabungan4').show();
+				$('#f_no_sijil_gabungan5').show();									
 			}
 			
-			else if (selectedIndex == "11") 
 			
+			else if (selectedIndex == "10") 					
 			{ 
-			$('#negeri_selection').show();
-			$('#daerah_selection').show();
+				$('#negeri_selection').show();
+				$('#f_no_sijil_gabungan1').show();
+				$('#f_no_sijil_gabungan2').show();	
+			}
+			
+			else if (selectedIndex == "11") 			
+			{ 
+				$('#negeri_selection').show();
+				$('#daerah_selection').show();
+				$('#f_no_sijil_gabungan1').show();
+				$('#f_no_sijil_gabungan2').show();
 			}
 			
 			
