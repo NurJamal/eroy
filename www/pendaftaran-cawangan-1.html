@@ -30,7 +30,7 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="menu_pendaftaran.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="semakan_permohonan_listing.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 		
 		
 	</div>	
@@ -49,8 +49,6 @@
 	<!-- end of header-title-->
 	
 	<div id="content">
-	
-
 		
 	<!-- navbar -->
 		<div class="navbar">
@@ -62,8 +60,7 @@
 			</div>
 		
 		</div>
-	<!-- end of navbar -->
-	
+	<!-- end of navbar -->	
 		
 	<!-- form -->
 		<div class="_form">
@@ -75,34 +72,27 @@
 			</div>
 				
 			<div class="selection" style="margin-top:14px" id="kategori_selection">
-					<h5 id="_orange_title">Kategori Pertubuhan</h5>
-					<form action="">
+					<h5 id="_orange_title">Kategori Pertubuhan</h5>					
 						<select id="sel_kategori" name="sel_kategori" class="_sel">
 						<option value="" selected >Pilih Kategori</option>
-
-						</select>
-					</form>		
+						</select>						
 			</div>
 				
 			<div class="selection" style="margin-top:14px"  id="negeri_selection">
-					<h5 id="_orange_title">Negeri</h5>
-					<form action="">
+					<h5 id="_orange_title">Negeri</h5>					
 						<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry()">
 						<option value="" selected>Pilih Negeri</option>
-						</select>
-					</form>		
+						</select>							
 			</div>
 			
 			<div class="selection" style="margin-top:14px" id="daerah_selection">
-					<h5 id="_orange_title">Daerah</h5>
-					<form action="">
+					<h5 id="_orange_title">Daerah</h5>					
 						<select id="sel_daerah" name="sel_daerah" class="_sel">
 						<option value="" selected>Pilih Daerah</option>
-						</select>
-					</form>		
+						</select>							
 			</div>
 		
-			<form id="" action="" method="POST">
+			
 				<input type="text" style="margin-top:5px" name="f_lokaliti" id="f_lokaliti" placeholder="Lokaliti"><br/>
 				<input type="text" name="f_nama_pertubuhan" id="f_nama_pertubuhan" placeholder="Nama Pertubuhan"><br/>
 				<input type="text" name="f_nama_ringkasan" id="f_nama_ringkasan" placeholder="Nama Ringkasan"><br/>
@@ -116,7 +106,7 @@
 				<a href="pendaftaran-cawangan-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
 			
-			</form>
+			
 		</div>
 	</div>
 	</div>
@@ -238,7 +228,7 @@
 		
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
-		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
+		$('#f_lokaliti,#f_nama_ringkasan,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
 
 		var insertData = "TRUE";
 
@@ -262,6 +252,12 @@
 		if(nama_pertubuhan.length == 0)
 		{
 			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(nama_ringkasan.length == 0)
+		{
+			$('#f_nama_ringkasan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 
 		}

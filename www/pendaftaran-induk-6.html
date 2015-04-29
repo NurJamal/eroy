@@ -18,10 +18,9 @@
 		<div id="loadingLayer"></div>
 
 	</head>
-	
 	<body>
 	<div id="transparent_layer" ></div>
-
+	
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -32,17 +31,15 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="pendaftaran-induk-5.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+
 	</div>	
 	<!-- end of header -->
-	
 	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
 			<div class="input-group-btn">
-				<h1 class="main_title">PENDAFTARAN CAWANGAN</h1>
+				<h1 class="main_title">PENDAFTARAN INDUK</h1>
 			</div>
 		</div>
 	</div>
@@ -115,9 +112,9 @@
 	<script>	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_induk').html(window.localStorage.getItem("NAMA_PENDAFTARAN_INDUK"))
-
+	
 	/*Get Fasal Template*/
-	getFasal('appendPerlembagaan', 5);
+	getFasal('appendPerlembagaan', 1);
 	
 	function underConstruction()
 	{
@@ -139,21 +136,3 @@
 		
   </body>
 </html>
-
-
-<!--<div>
-			<h5 id="_orange_title">Fasal 2 - Alamat Pendaftaran dan Tempat Urusan</h5>
-		</div>	
-		
-		<h2 class="_orange_text">Alamat Pendaftaran</h2>
-
-			<textarea style="height: 90px; resize: none; width: 337px;" id="d_alamat_pos" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
-		
-			<h2 class="_orange_text">Alamat Surat Menyurat</h2>
-													
-			<textarea style="height: 90px; resize: none; width: 337px;" id="d_alamat_pos" name="d_alamat_pos" disabled>C-1-2A Block C Jalan GC1 Glomac Cyberjaya Cyber4 63200 Cyberjaya Selangor</textarea>
-				
-		<div class="default_button_holder">
-			<a href=""><input class="default_button" type="button" value="PAPAR" id="btn_submit"></a>
-			<a href="pendaftaran-induk-7.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
-		</div>-->

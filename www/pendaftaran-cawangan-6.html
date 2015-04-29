@@ -20,7 +20,7 @@
 	</head>
 	<body>
 	<div id="transparent_layer" ></div>
-
+	
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -31,11 +31,9 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="pendaftaran-cawangan-5.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
-		
-		
+
 	</div>	
 	<!-- end of header -->
-	
 	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
@@ -114,9 +112,9 @@
 	<script>	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_cawangan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_CAWANGAN"))
-
+	
 	/*Get Fasal Template*/
-	getFasal('appendPerlembagaan', 2);
+	getFasal('appendPerlembagaan', 1);
 	
 	function underConstruction()
 	{
@@ -138,16 +136,3 @@
 		
   </body>
 </html>
-
-
-<!--<h2 class="_orange_text">Alamat Pendaftaran</h2>
-
-			<div class="display">
-				<textarea id="alamat_pendaftaran" name="alamat_pendaftaran"  style="text-transform: uppercase;resize:none"></textarea>
-			</div>
-		
-			<h2 class="_orange_text">Alamat Surat Menyurat</h2>									
-				
-			<div class="display">
-				<textarea id="alamat_surat_menyurat" name="alamat_surat_menyurat"  style="text-transform: uppercase;resize:none"></textarea>
-			</div> -->

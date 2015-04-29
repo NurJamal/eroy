@@ -106,9 +106,11 @@
 				</div>
 				
 				<input type="email" name="f_emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
+				
 				<div class="default_button_holder">
 					<a href="pendaftaran-tunggal-2.html"><input class="default_button" type="button" value="SIMPAN" id="btn_submit"></a>
 				</div>
+
 			</form>
 		</div>
 	</div>
@@ -365,7 +367,8 @@
                     window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
                     window.location.href = "pendaftaran-tunggal-2.html";
                 }
-				else {
+				else 
+				{
                     $.ajax({
                         url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
                         type: 'POST',

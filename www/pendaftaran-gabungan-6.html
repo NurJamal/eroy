@@ -20,7 +20,7 @@
 	</head>
 	<body>
 	<div id="transparent_layer" ></div>
-
+	
 	
 	<!-- slide menu right -->
 	<div id="navigation"></div>
@@ -31,10 +31,9 @@
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
 		<a href="pendaftaran-gabungan-5.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+
 	</div>	
 	<!-- end of header -->
-
-	
 	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
@@ -43,10 +42,9 @@
 				<h1 class="main_title">PENDAFTARAN GABUNGAN</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
-
+	
 	<div id="content">
 	
 	<!-- navbar -->
@@ -59,6 +57,7 @@
 			</div>
 		
 		</div>
+	<!-- end of navbar -->
 
 	
 	
@@ -87,9 +86,7 @@
 	</div>
 		</div>
 		</div>
-		
 	<!-- end of form -->
-	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -110,13 +107,14 @@
 	
 	<!-- Perlembagaan JS -->
 	<script src="js/internal/perlembagaan.js" type="text/javascript" language="javascript"></script>
+
+	
 	<script>	
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_gabungan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_GABUNGAN"))
-
-	/*Get Fasal Template*/
-	getFasal('appendPerlembagaan', 3);
 	
+	/*Get Fasal Template*/
+	getFasal('appendPerlembagaan', 1);
 	
 	function underConstruction()
 	{
@@ -133,5 +131,8 @@
 
 	</script>
 	
+	</script>	
+		
+		
   </body>
 </html>

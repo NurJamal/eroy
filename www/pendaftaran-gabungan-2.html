@@ -2,22 +2,28 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<!--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, maximum-scale=1">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/body.css" />
-		<link rel="stylesheet" type="text/css" href="css/color_icon.css">
+		<link rel="stylesheet" type="text/css" href="css/body.css">
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-confirm.css" />
+		<link rel="stylesheet" href="css/jquery-confirm.less" />
+		<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+        <link type="text/css" rel="stylesheet" href="js/jquery.qtip.css" />
+
 		<div id="scrollTop" >
 			<img src="img/up_arrow.png" class="scrolltop_arrow"/>		
-		</div>
+		</div>	
 		
+		<div id="loadingLayer"></div>
+
 	</head>
 	<body>
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	
-	<!-- slide menu right -->
+	<!-- slide menu right. -->
 	<div id="navigation"></div>
 	<!-- end of slide menu right -->
 	
@@ -25,11 +31,11 @@
 	<div id="head">
 		<img src="img/logo-atas.png" class="logo"/>
 		<img src="img/menu-icon.png" class="toggle-slide-right menu_icon" align="right"/>
-		<a href="pendaftaran-gabungan-1.html"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
+		<a href="#" onclick="goBack(); return false;"><img src="img/back-icon.png" class="back_icon" align="left"/></a>
 	</div>	
 	<!-- end of header -->
 	
-	
+	<div class="containerBlock">
 	<!-- header title -->
 	<div class="content_title">
 		<div class="input-group add-on search-box">
@@ -37,130 +43,244 @@
 				<h1 class="main_title">PENDAFTARAN GABUNGAN</h1>
 			</div>
 		</div>
-	
 	</div>
 	<!-- end of header-title-->
 	
 	<div id="content">	
 	
 	<!-- navbar -->
-		<div class="navbar">
-		
-			<div align="center">
-		
-				<img src="img\numbering2.png" style="width:100%;height:auto"/>
-			
-			</div>
-		
+	<div class="navbar">
+		<div align="center">
+			<img src="img\numbering2.png" style="width:100%;height:auto"/>
 		</div>
+	</div>
 	<!-- end of navbar -->
 	
 	<!-- form -->
 	
 	<div class="_form">
-	
-		<div>
-			<h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
-			<h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_gabungan"></h1><br/>
-		</div>
+        <form action="" name="pendaftaran" id="pendaftaran">
+            <div>
+                <h5 id="_orange_title" style="margin-top:-13px">Nama Pertubuhan</h5>
+                <h1 class="_dark_text" style="margin-top:-4px" id="nama_pendaftaran_gabungan"></h1><br/>
+                <input type="hidden" value="" name="id_pertubuhan" id="id_pertubuhan">
+            </div>
 
-		
-			
-		<h5 id="_orange_title" style="margin-top:-20px">Alamat Tempat Urusan</h5>
-			<form id="" action="" method="POST">
-				<input type="text" name="alamat_1" id="alamat1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat_2" id="alamat2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat_3" id="alamat3" placeholder="Alamat 3"><br/>
-				<input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
-			</form>
-			
-			<div class="selection" id="negeri_selection">
-				<h5 id="_orange_title">Negeri</h5>
-				<select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry1()">
-				<option value="" selected>Pilih Negeri</option>
-				</select>	
-			</div>
-			
-			<div class="selection" style="margin-top:14px" id="daerah_selection">
-				<h5 id="_orange_title">Daerah</h5>
-				<select id="sel_daerah" name="sel_daerah" class="_sel">
-				<option value="" selected>Pilih Daerah</option>
-				</select>
-			</div>
-			
-			<br/>
-			
-			<h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
-			<form id="" action="" method="POST">
-			<h5 id="" style="margin-top:0px">
-			<input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)"> 
-			<label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
-				
-				<input type="text" style="margin-top:0px" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
-				<input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
-				<input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
-				<input type="number" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
+            <h5 id="_orange_title" style="margin-top:-20px">Alamat Tempat Urusan</h5>
+            <input type="text" name="alamat_1" id="alamat_1" placeholder="Alamat 1"><br/>
+            <input type="text" name="alamat_2" id="alamat_2" placeholder="Alamat 2"><br/>
+            <input type="text" name="alamat_3" id="alamat_3" placeholder="Alamat 3"><br/>
+            <input type="number" name="poskod" id="poskod" placeholder="Poskod"><br/>
 
-			<div class="selection" id="negeripos_selection">
-				<h5 id="_orange_title">Negeri</h5>
-				<select id="sel_negeripos" name="sel_negeripos" class="_sel" onChange="getDaerahFromSelectedCountry2()">
-				<option value="" selected>Pilih Negeri</option>
-				</select>	
-			</div>
-			
-			<div class="selection" style="margin-top:14px" id="daerahpos_selection">
-				<h5 id="_orange_title">Daerah</h5>
-				<select id="sel_daerahpos" name="sel_daerahpos" class="_sel">
-				<option value="" selected>Pilih Daerah</option>
-				</select>
-			</div>
-														
-			<div class="default_button_holder">
-				<input class="default_button" type="button" value="SIMPAN" id="btn_submit">
-			</div>
-			
-			</form>
-		</div>
+            <div class="selection" id="negeri_selection" style="margin-top: 0px">
+                <h5 id="_orange_title">Negeri</h5>
+                <select id="sel_negeri" name="sel_negeri" class="_sel" onChange="getDaerahFromSelectedCountry1()">
+                <option value="" selected>Pilih Negeri</option>
+                </select>
+            </div>
+
+            <div class="selection" id="daerah_selection">
+                <h5 id="_orange_title">Daerah</h5>
+                <select id="sel_daerah" name="sel_daerah" class="_sel">
+                <option value="" selected>Pilih Daerah</option>
+                </select>
+            </div>
+
+            <br/>
+
+            <h5 id="_orange_title" style="margin-top:-20px">Alamat Pos</h5>
+            <h5 id="" style="margin-top:0px">
+            <input type="checkbox" name="alamat_sama" id="c_box1" class="checkboxClass" onclick="salinAlamat(this.form)">
+            <label for="c_box1">Klik jika alamat sama seperti di atas</label></h5>
+
+                <input type="text" name="alamat_pos1" id="alamat_pos1" placeholder="Alamat 1"><br/>
+                <input type="text" name="alamat_pos2" id="alamat_pos2" placeholder="Alamat 2"><br/>
+                <input type="text" name="alamat_pos3" id="alamat_pos3" placeholder="Alamat 3"><br/>
+                <input type="number" name="poskod_pos" id="poskod_pos" placeholder="Poskod"><br/>
+
+            <div class="selection" id="negeripos_selection" style="margin-top: 0px">
+                <h5 id="_orange_title">Negeri</h5>
+                <select id="sel_negeripos" name="sel_negeripos" class="_sel" onChange="getDaerahFromSelectedCountry2()">
+                <option value="" selected>Pilih Negeri</option>
+                </select>
+            </div>
+
+            <div class="selection" id="daerahpos_selection" >
+                <h5 id="_orange_title">Daerah</h5>
+                <select id="sel_daerahpos" name="sel_daerahpos" class="_sel">
+                <option value="" selected>Pilih Daerah</option>
+                </select>
+            </div>
+
+            <div class="default_button_holder">
+                <input class="default_button" type="button" value="SIMPAN" id="btn_submit">
+            </div>
+        </form>
 	</div>
 	</div>
 	<!-- end of form -->
-		
+	
 				
-	</div>
+	
 	
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
 	
+	<!-- jquery js-->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-1.9.1.min.js" type="text/javascript" language="javascript"></script>
 	<script src="js/jquery.xml2json.js" type="text/javascript" language="javascript"></script>
+
 	<!-- Scroll To Top (Add tag a header for all page) Import js/internal/custom.js-->
 	<script src="js/internal/custom.js" type="text/javascript" language="javascript"></script>
+
+	<!-- alert box -->
+	<script src="js/jquery-confirm.js"></script>
+	<script src="js/jquery-confirm.min.js"></script>	
 	
-</body>
+	<!--Loading Indicator -->
+	<script src="js/waitMe.js"></script>
+
+    <script type="text/javascript" src="js/jquery.qtip.js"></script>
+	
+	</body>
 </html>
-	
-	<script>
-	
+
+<script>
+
 	/*PAPARKAN NAMA PERSATUAN DARI FORM SEBELUM*/
 	$('#nama_pendaftaran_gabungan').html(window.localStorage.getItem("NAMA_PENDAFTARAN_GABUNGAN"));
 	
 	getCountry($('#sel_negeri').attr('id'));		
 	getCountry($('#sel_negeripos').attr('id'));
 
+	/*GET DATA FROM SERVER - IF USER DATA ALREADY EXIST*/
+	var kad_pengenalan = window.localStorage.getItem('LOGIN');
+    var status = window.localStorage.getItem('STATUS');
+
+    if(status == "kuiri")
+    {
+        var insertData = "kuiriUpdate";
+        var kad_pengenalan = window.localStorage.getItem('KUIRI_KOD_PERTUBUHAN');
+        formLength = document.pendaftaran.elements.length;
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_2.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "kuiri"
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        for (var i = 0; i < formLength; i++) {
+                            if(document.pendaftaran.elements[i].type != 'button')
+                            {
+                                document.pendaftaran.elements[i].setAttribute("disabled", "disabled");
+                            }
+
+                            if(document.pendaftaran.elements[i].type == 'checkbox')
+                            {
+                                document.pendaftaran.elements[i].setAttribute("checked", "checked");
+                            }
+                        };
+                        $("#alamat_1").val(json.details.alamat1);
+                        $("#alamat_2").val(json.details.alamat2);
+                        $("#alamat_3").val(json.details.alamat3);
+                        $("#sel_negeri").val(json.details.negeri);
+                        $("#sel_daerah").val(json.details.daerah);
+                        $("#poskod").val(json.details.poskod);
+                        getDaerah(json.details.negeri, $('#sel_daerah').attr('id'),json.details.daerah);
+                        $("#sel_daerah").val(json.details.daerah);
+
+                        $("#alamat_pos1").val(json.details.alamat_pos1);
+                        $("#alamat_pos2").val(json.details.alamat_pos2);
+                        $("#alamat_pos3").val(json.details.alamat_pos3);
+                        $("#sel_negeripos").val(json.details.negeri_pos);
+                        $("#poskod_pos").val(json.details.poskod_pos);
+                        getDaerah(json.details.negeri_pos, $('#sel_daerahpos').attr('id'),json.details.daerah_pos);
+                        $("#sel_daerahpos").val(json.details.daerah_pos);
+                        checkKuiriPendaftaran(kad_pengenalan,'2');
+                        //$('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
+    else
+    {
+        var insertData = "TRUE";
+        var kad_pengenalan = window.localStorage.getItem('LOGIN');
+        $(function () {
+            $.ajax({
+                url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_2.php",
+                type: 'POST',
+                data: {
+                    kad_pengenalan: kad_pengenalan,
+                    insertData: "select"
+                },
+                beforeSend: function () {
+                    run_waitMe();
+                },
+                success: function (data) {
+                    var json = $.xml2json(data);
+                    console.log(json);
+                    if (json.status == 'SELECT') {
+                        console.log(json);
+
+                        $("#alamat_1").val(json.details.alamat1);
+                        $("#alamat_2").val(json.details.alamat2);
+                        $("#alamat_3").val(json.details.alamat3);
+                        $("#sel_negeri").val(json.details.negeri);
+                        $("#sel_daerah").val(json.details.daerah);
+                        $("#poskod").val(json.details.poskod);
+                        getDaerah(json.details.negeri, $('#sel_daerah').attr('id'));
+                        $("#sel_daerah").val(json.details.daerah);
+
+                        $("#alamat_pos1").val(json.details.alamat_pos1);
+                        $("#alamat_pos2").val(json.details.alamat_pos2);
+                        $("#alamat_pos3").val(json.details.alamat_pos3);
+                        $("#sel_negeripos").val(json.details.negeri_pos);
+                        $("#poskod_pos").val(json.details.poskod_pos);
+                        getDaerah(json.details.negeri_pos, $('#sel_daerahpos').attr('id'));
+                        $("#sel_daerahpos").val(json.details.daerah_pos);
+
+                        $('body').waitMe('hide');
+                    }
+                    else if (json.status == 'VIEW') {
+                        //Do nothing. Just display
+
+                    }
+
+                    $('body').waitMe('hide');
+                }
+            });
+        });
+    }
 	function salinAlamat(f) 
 	{
 		if(f.alamat_sama.checked == true) 
 			{	
-				var alamat1 = $("#alamat1").val();
+				var alamat1 = $("#alamat_1").val();
 				$("#alamat_pos1").val(alamat1);
 				
-				var alamat2 = $("#alamat2").val();
+				var alamat2 = $("#alamat_2").val();
 				$("#alamat_pos2").val(alamat2);
 				
-				var alamat3 = $("#alamat3").val();
+				var alamat3 = $("#alamat_3").val();
 				$("#alamat_pos3").val(alamat3);
 				
 				var poskod = $("#poskod").val();
@@ -169,14 +289,18 @@
 				var negeri = $("#sel_negeri").val();
 				$("#sel_negeripos").val(negeri);
 				
+				var daerah = $("#sel_daerah").val();
 				//if copy address from main address. auto retrieve daerah
-				getDaerahFromSelectedCountry2(); 
-				
+				getDaerah(negeri,$('#sel_daerahpos').attr('id'),daerah);	
+
 				
 			}
 			
 		else{
 				$('#alamat_pos1, #alamat_pos2, #alamat_pos3, #poskod_pos, #sel_negeripos, #sel_daerahpos').val('');
+				$('#sel_daerahpos').find('option').remove().end();
+				$('#sel_daerahpos').append('<option value="" selected>Pilih Daerah</option>');
+
 			}
 	}
 	
@@ -191,22 +315,21 @@
 	{
 		var selected_country2 = $('#sel_negeripos').val();
 		getDaerah(selected_country2,$('#sel_daerahpos').attr('id'));	
-		
-		var daerah = $("#sel_daerah").val();
-		$("#sel_daerahpos").val(daerah);
 	}
 	
 	$("#btn_submit").click(function(e){
 		
+		redisplayHeader();
 		var empty = false;
 		e.preventDefault();
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
 		
-		$('#alamat1,#alamat_pos1,#poskod,#poskod_pos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
+		$('#alamat_1,#alamat_pos1,#poskod,#poskod_pos,#negeripos_selection,#daerahpos_selection,#negeri_selection,#daerah_selection').css({"border":"","box-shadow":""});
 
-		var alamat1= $("#alamat1").val();
-		var alamat2 = $("#alamat2").val();
-		var alamat3 = $("#alamat3").val();
+		var nama_pertubuhan= window.localStorage.getItem("NAMA_PENDAFTARAN_GABUNGAN");
+		var alamat1= $("#alamat_1").val();
+		var alamat2 = $("#alamat_2").val();
+		var alamat3 = $("#alamat_3").val();
 		var sel_negeri = $("#sel_negeri").val();
 		var sel_daerah = $("#sel_daerah").val();
 		var poskod= $("#poskod").val();
@@ -223,7 +346,7 @@
 		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
 		if (alamat1.length == 0)
 		{
-			$('#alamat1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			$('#alamat_1').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
 			empty = true;
 		}
 		if(sel_negeri.length == 0)
@@ -277,67 +400,98 @@
 			);
 		}
 		else if(empty == false)
-		{
-				
-			$.ajax({
-				url:"http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_2.php",
-				type:'POST',
-				data: {
+        {
+            if (id_pertubuhan == 'empty')
+            {
+                window.location.href = "pendaftaran-gabungan-3.html";
+            }
+            else {
+                $.ajax({
+                    url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_gabungan_2.php",
+                    type: 'POST',
+                    data: {
 
-					alamat1 : alamat1,
-					alamat2: alamat2,
-					alamat3 : alamat3,
-					sel_negeri : sel_negeri,
-					sel_daerah : sel_daerah,
-					poskod : poskod,
-					alamat_pos1 : alamat_pos1,
-					alamat_pos2 : alamat_pos2,
-					alamat_pos3 : alamat_pos3,
-					sel_negeripos : sel_negeripos,
-					sel_daerahpos : sel_daerahpos,
-					poskod_pos : poskod_pos,
-					
-				},
-				beforeSend: function() {
-						run_waitMe();
-					},
-				success:function(data){
-					console.log(data);
-					var json = $.xml2json(data);
-					console.log(json);
-					if (json.status == 'ok') {
-						
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-									window.location.href = "pendaftaran-gabungan-3.html";
-								}
-							}
-						);
-					
-					}
-					else if (json.status == 'error') {
-						$.alert
-						(
-							{
-								title: 'Status',
-								content: json.message,
-								confirm: function(){
-								}
-							}
-						);
-					}
-					else{}
-					$('body').waitMe('hide');
-				}
-			});
-			
-		}
+                        nama_pertubuhan: nama_pertubuhan,
+                        alamat1: alamat1,
+                        alamat2: alamat2,
+                        alamat3: alamat3,
+                        sel_negeri: sel_negeri,
+                        sel_daerah: sel_daerah,
+                        poskod: poskod,
+                        alamat_pos1: alamat_pos1,
+                        alamat_pos2: alamat_pos2,
+                        alamat_pos3: alamat_pos3,
+                        sel_negeripos: sel_negeripos,
+                        sel_daerahpos: sel_daerahpos,
+                        poskod_pos: poskod_pos,
+                        insertData: insertData,
+                        kad_pengenalan: kad_pengenalan,
+                    },
+                    beforeSend: function () {
+                        run_waitMe();
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        var json = $.xml2json(data);
+                        console.log(json);
+                        if (json.status == 'INSERT_SUCCESS') {
+
+                            $.alert
+                            (
+                                    {
+                                        title: 'Status',
+                                        content: json.message,
+                                        confirm: function () {
+                                            window.location.href = "pendaftaran-gabungan-3.html";
+                                        }
+                                    }
+                            );
+
+                        }
+                        else if (json.status == 'INSERT_ERROR') {
+                            $.alert
+                            (
+                                    {
+                                        title: 'Status',
+                                        content: json.message,
+                                        confirm: function () {
+                                        }
+                                    }
+                            );
+                        }
+                        else if (json.status == 'UPDATE_SUCCESS') {
+                            $.alert
+                            (
+                                    {
+                                        title: 'Status',
+                                        content: json.message,
+                                        confirm: function () {
+                                            window.location.href = "pendaftaran-gabungan-3.html";
+
+                                        }
+                                    }
+                            );
+                        }
+                        else if (json.status == 'UPDATE_ERROR') {
+                            $.alert
+                            (
+                                    {
+                                        title: 'Status',
+                                        content: json.message,
+                                        confirm: function () {
+                                        }
+                                    }
+                            );
+                        }
+                        else {
+                        }
+                        $('body').waitMe('hide');
+                    }
+                });
+            }
+        }
 	});
 	
-	</script>
 	
-	
+			
+</script>
