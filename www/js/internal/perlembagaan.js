@@ -947,22 +947,26 @@ function simpanFasal()
 	var mainSubLevel = [];
 	var refLevel = [];
 	var jenisPertubuhan = [];
-
 	
+
 	$('.checkbox').each(function() {
 				
 		
 			var tr_id = this.id;
-			
-			
-			var atLeastOneIsChecked = $('#'+tr_id+ ' .checkboxClass :checkbox:checked').length > 0;
-			alert(tr_id+ '-' +atLeastOneIsChecked);
-			
+			var proceed = false;
+
+			if($('#c'+tr_id.replace('tr_','')).is(":checked"))
+			{
+				proceed = true;	
+			}
+
+
 			var levelID = $('#'+(tr_id)).children().attr('id');
 			var levelToPush_ = levelID.replace('level_', '');
 
-			if(levelToPush_ < 2){ 
+			if(levelToPush_ < 2 && proceed == true){ 
 				$('#'+tr_id+' .fasal_label').each(function() {
+
 
 				var firstLevelLabel = this.id;
 				var mainCodeLevel = $('#'+firstLevelLabel).html().replace('Fasal ','');
@@ -982,179 +986,100 @@ function simpanFasal()
 				refLevel.push('-');
 				jenisPertubuhan.push('1');
 
-				inc++;
+					
 
 					$('#'+tr_id+' .sub_fasal_label').each(function() {
 
+					var sub_proceed = false;
 					var firstLevelLabel = this.id;
-					var label = $('#'+firstLevelLabel).html();
-					
-					fasal.push($('#'+firstLevelLabel).next().html());
-					codeLevel.push(label);
-					
-					var arr = label.split('.');
-					var mainSubLevel_ = '';
-					var refLevel_ = '';
-
-					/* GET MAIN SUB LEVEL - DEPEND ON SUB FASAL TXT */
-					var stopper = 0;
-					if(arr.length < 3)
+					var parentSpan = $('#'+firstLevelLabel).parent().attr('for');
+				
+					if($('#'+parentSpan).is(":checked"))
 					{
-						stopper = 1;
-					}
-					else
-					{
-						stopper = 2;
-					}
+							
+						var label = $('#'+firstLevelLabel).html();
+						fasal.push($('#'+firstLevelLabel).next().html());
+						codeLevel.push(label);
+						
+						var arr = label.split('.');
+						var mainSubLevel_ = '';
+						var refLevel_ = '';
 
-					/* MAIN SUB LEVEL */
-					for(var arrLengthNoChange = 0; arrLengthNoChange < stopper ; arrLengthNoChange++)
-					{			
-						mainSubLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
-					}
+						/* GET MAIN SUB LEVEL - DEPEND ON SUB FASAL TXT */
+						var stopper = 0;
+						if(arr.length < 3)
+						{
+							stopper = 1;
+						}
+						else
+						{
+							stopper = 2;
+						}
 
-					/* REF LEVEL */
-					for(var arrLengthNoChange = 0; arrLengthNoChange < arr.length-1 ; arrLengthNoChange++)
-					{			
-						refLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
-					}
+						/* MAIN SUB LEVEL */
+						for(var arrLengthNoChange = 0; arrLengthNoChange < stopper ; arrLengthNoChange++)
+						{			
+							mainSubLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
+						}
 
-					/* CLEAN CODE FIRST */
+						/* REF LEVEL */
+						for(var arrLengthNoChange = 0; arrLengthNoChange < arr.length-1 ; arrLengthNoChange++)
+						{			
+							refLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
+						}
 
-					mainSubLevel_ = mainSubLevel_.replace('.','');
-					refLevel_ = refLevel_.replace('.','');
+						/* CLEAN CODE FIRST */
 
-					noFasal.push('-');
-					mainRefLevel.push(mainCodeLevel);
-					mainSubLevel.push(mainSubLevel_);
-					refLevel.push(refLevel_);
+						mainSubLevel_ = mainSubLevel_.replace('.','');
+						refLevel_ = refLevel_.replace('.','');
 
-					//will change depend on jenis pertubuhan
-					jenisPertubuhan.push('1');
+						noFasal.push('-');
+						mainRefLevel.push(mainCodeLevel);
+						mainSubLevel.push(mainSubLevel_);
+						refLevel.push(refLevel_);
 
-					level.push((arr.length).toString());
+						//will change depend on jenis pertubuhan
+						jenisPertubuhan.push('1');
 
+						level.push((arr.length).toString());
+						}
 					});
+
+				
 
 				});
 			}
+			
+			inc++;
 
 		});
+
+
+	sendPerlembagaan(level,fasal,codeLevel,noFasal,mainRefLevel,mainSubLevel,refLevel,jenisPertubuhan);
 }	
 	
 
 	
 	
-	
-	
-	
-	/*$("#btn_submit").click(function(e){
-		
+	function sendPerlembagaan(level,fasal,codeLevel,noFasal,mainRefLevel,mainSubLevel,refLevel,jenisPertubuhan)
+	{
+		var insertData = 'TRUE';
 		redisplayHeader();
-		var empty = false;
-		e.preventDefault();
-		
-		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
-		
-		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
 
-
-        var id_pertubuhan = $("#id_pertubuhan").val();
-		var lokaliti= $("#f_lokaliti").val();
-		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
-		var nama_ringkasan = $("#f_nama_ringkasan").val();
-		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
-		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
-		var sel_kategori = $("#sel_kategori").val();
-		var sel_negeri = $("#sel_negeri").val();
-		var sel_daerah = $("#sel_daerah").val();
-		var jenis_pertubuhan = $("#pertubuhan_tunggal").val();
-		//var kad_pengenalan = window.localStorage.getItem('LOGIN');
-		
-		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
-		if (lokaliti.length == 0)
-		{
-			$('#f_lokaliti').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(nama_pertubuhan.length == 0)
-		{
-			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-
-		}
-		if(emel_pertubuhan.length == 0)
-		{
-			$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-	
-		if(sel_kategori.length == 0)
-		{
-			$('#kategori_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(sel_negeri.length == 0)
-		{
-			$('#negeri_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		if(sel_daerah.length == 0)
-		{
-			$('#daerah_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-			empty = true;
-		}
-		
-		
-		if(empty == true)
-		{
-			$.alert
-			(
-				{
-					title: 'Perhatian',
-					content: 'Sila isikan tempat kosong!',
-					confirm: function(){				
-					}
-				}
-			);
-		}
-		else if(empty == false)
-		{
-            if(!ValidateEmail(emel_pertubuhan))
-            {
-                $.alert
-                (
-                    {
-                        title: 'Perhatian',
-                        content: 'Sila Isikan Format Emel yang Betul',
-                        confirm: function(){ }
-                    }
-                );
-                $('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
-            }
-            else
-            {
-                if(id_pertubuhan == 'empty')
-                {
-                    window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
-                    window.location.href = "pendaftaran-tunggal-2.html";
-                }
-				else {
-                    $.ajax({
-                        url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+			 $.ajax({
+                        url: "http://eroy.me-tech.com.my/api/perlembagaan/perlembagaan.php",
                         type: 'POST',
                         data: {
-                            lokaliti: lokaliti,
-                            nama_pertubuhan: nama_pertubuhan,
-                            nama_ringkasan: nama_ringkasan,
-                            nama_penuh_pertubuhan: nama_penuh_pertubuhan,
-                            emel_pertubuhan: emel_pertubuhan,
-                            sel_kategori: sel_kategori,
-                            sel_negeri: sel_negeri,
-                            sel_daerah: sel_daerah,
-                            jenis_pertubuhan: jenis_pertubuhan,
-                            kad_pengenalan: kad_pengenalan,
-                            insertData: insertData,
+                            level: level,
+                            fasal: fasal,
+                            codeLevel: codeLevel,
+                            noFasal: noFasal,
+                            mainRefLevel: mainRefLevel,
+                            mainSubLevel: mainSubLevel,
+                            refLevel: refLevel,
+                            jenisPertubuhan: jenisPertubuhan,
+                            insertData : insertData,
+                      
                         },
                         beforeSend: function () {
                             run_waitMe();
@@ -1173,7 +1098,7 @@ function simpanFasal()
                                             title: 'Status',
                                             content: json.message,
                                             confirm: function () {
-                                                window.location.href = "pendaftaran-tunggal-2.html";
+                                                window.location.href = "pendaftaran-tunggal-7.html";
                                             }
                                         }
                                 );
@@ -1186,7 +1111,7 @@ function simpanFasal()
                                             title: 'Status',
                                             content: json.message,
                                             confirm: function () {
-                                                window.location.href = "pendaftaran-tunggal-2.html";
+                                                window.location.href = "pendaftaran-tunggal-7.html";
                                             }
                                         }
                                 );
@@ -1210,7 +1135,13 @@ function simpanFasal()
 
                         }
                     });
-                }*/
+	
+	}
+	
+
+		
+                   
+              
 
 	
 	
