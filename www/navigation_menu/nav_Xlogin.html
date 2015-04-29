@@ -3,7 +3,6 @@
 	<script src="phonegap.js"></script> 
 	<script src="cordova.js"></script> 
 	<script src="cordova_plugins.js"></script>
-	<script src="childbrowser.js" />
 <nav class="menu slide-menu-right">
 		<ul>
 			<li class="title">Menu</li>
@@ -12,7 +11,7 @@
 			<li class="title">Pengenalan</li>
 			<li id="colored"><a href="hubungi_kami.html"><img src="img/telefon-icon.png" class="menu-icon"/>Hubungi Kami</a></li>
 			<li id="colored"><a href="#" onclick="openPDF()"><img src="img/manual-icon.png" class="menu-icon"/>Manual Pengguna</a></li>
-			<a href="#" onclick="window.open('http://www.example.com','_blank','location=yes','closebuttoncaption=back');">open</a>
+			<a href="#" onclick="window.open('http://www.google.com', '_self', 'location=yes', 'closebuttoncaption=Tutup');">open</a>
 			<li></li>
 		</ul>
 </nav>
@@ -22,7 +21,7 @@
 	window.localStorage.setItem("_MENU_FIX", "FALSE");	
 	function openPDF() {
 	//	window.plugins.childBrowser.showWebPage('http://www.google.com, { showLocationBar: true });
-		window.open('http://www.google.com','_blank','location=yes','closebuttoncaption=done');
+		window.open('http://www.google.com', '_self', 'location=yes', 'closebuttoncaption=Tutup');
 }
 </script>
 <!-- /slide menu right -->
