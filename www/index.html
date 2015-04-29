@@ -18,7 +18,8 @@
 		<div id="loadingLayer"></div>
 		
 	</head>
-	<body onload="onDeviceReady()">
+	<body>
+	<!-- <body onload="onDeviceReady()"> -->
 	
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
@@ -52,14 +53,10 @@
 			<img src="img/jata.png" class="logo2"/>
 			<div class="default_button_holder">
 				<a href="log_masuk.html"><input class="default_button" type="button" value="TERUSKAN"></a>
-
 			</div>	
 		</div>
 	</div>
 	
-	<a href="pindaan_maklumat_pembayaran.html">PAYMENT</a><br/>
-	<a href="pindaan_maklumat_perlembagaan.html">PERLEMBAGAAN</a>
-
 	<!-- js for slide menu -->
 	<script src="js/classie.js"></script>
 	<script src="js/nav.js"></script>
@@ -81,39 +78,31 @@
 	
 	<!--Loading Indicator -->
 	<script src="js/waitMe.js"></script>
-	<script src="phonegap.js"></script> 
-	<script src="cordova.js"></script> 
-	<script src="cordova_plugins.js"></script>
-	<script>
 
-	
+	<script>	
 	var devicePlatform = cordova.platformId;
 	localStorage['DEVICE_PLATFORM'] = devicePlatform;
-	StatusBar.overlaysWebView(false);
-   
+	//StatusBar.overlaysWebView(false);
+	
 //  document.addEventListener("deviceready", onDeviceReady, false);
 //  function onDeviceReady() 
 //	{
 //		var devicePlatform = cordova.platformId;		
 //	}
-	
-
+   
 	$("#btn_submit").click(function(e)
 	{
 		var carian_nama = $.trim($('#n_carian').val());
 		
 		e.preventDefault();			
 
-		
-		
-		
 		if (carian_nama.length == 0 || carian_nama.length < 10) 
 		{
 			$.alert
 			(
 				{
 					title: 'Halaman Utama',
-					content: 'Sila masukkan sekurang-kurangnya 10 aksara untuk semak nama pertubuhan',
+					content: 'Sila Masukkan Sekurang-kurangnya 10 Aksara Untuk Semak Nama Pertubuhan',
 					confirm: function(){}
 				}
 			);
@@ -159,6 +148,10 @@
 						}
 						else{}
 						$('body').waitMe('hide');
+					},
+					error : function()
+					{
+						console.log("An error occurred while processing XML file.");
 					}
 				}
 			)

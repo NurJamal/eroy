@@ -69,7 +69,8 @@
 		
 		
 		<div class="default_button_holder">
-			<a href="pindaan_maklumat_pembayaran.html"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
+			<!--pindaan_maklumat_pembayaran.html-->
+			<a href="#"><input class="default_button" type="button" value="TERUSKAN" id="btn_submit"></a>
 		</div>
 	</div>
 
@@ -109,7 +110,12 @@
 	$('#nama_pertubuhan').html('PERSATUAN SELSA MALAYSIA');
 	
 	getFasal('appendPerlembagaan', 1);
+	$("#btn_submit").click(function(e){
+	
+		simpanFasal();
 		
+	
+	});
 
 	</script>
 	</body>

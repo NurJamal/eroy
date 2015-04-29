@@ -827,7 +827,8 @@ h2._white_text{
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.orange_wrap{
+.orange_wrap
+{
 	width: 20%;
 	height: 185px;
 	/* margin-top: 5px; */
@@ -840,11 +841,14 @@ h2._white_text{
 	-moz-outline-radius: 3px;
 }
 
-.vertical_text{
+.vertical_text
+{
 	white-space: pre;
 	text-align: center;
 	font-size: 16px;
 	margin: -20px;
+	  margin-right: -10px;
+	/* margin-right: -45px; */
 	margin-left: -245px;
 }
 

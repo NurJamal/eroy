@@ -3,9 +3,10 @@
 	/*Need to clear all localStorage related perlembagaan first */
 
 		// Create the tooltips only when document ready
+		
+
 		$("#appendPerlembagaan").delegate(".openToolTip", "click", function (){
 		
-		rewriteID();
 		var currentSelectedId = $(this).attr('id');
 		var arr = currentSelectedId.split('_');
 		localStorage['selected_id_perlembagaan'] = $.trim("tr_"+arr[1]);
@@ -107,7 +108,7 @@
 								var checkBoxFirstLvl = '<input class="checkboxClass" id="checkbox'+fasal_list.id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label for="checkbox'+fasal_list.id+'"></label>';
 								
 								//First Lvl
-								$('#'+fasal_id).append('<div class="checkbox" id="tr_'+fasal_list.id+'"><div width="30px" id="level_'+fasal_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+fasal_list.id+'"></span></div></div>');
+								$('#'+fasal_id).append('<div class="checkbox" id="tr_'+fasal_list.id+'"><div width="30px" class="level" id="level_'+fasal_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+fasal_list.id+'"></span></div></div>');
 								$('#fasal_'+fasal_list.id).append('<label for="checkbox'+fasal_list.id+'"><span class="fasal_label" id="fasal_index_'+fasal_list.id+'"> Fasal '+ fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+fasal_list.id+'_text"> '+fasal_list.fasal+'</span></label>');
 								var arrayCode = [];
 								
@@ -127,7 +128,7 @@
 												{
 												
 
-													$('#tr_'+fasal_list.id).append('<div class="checkbox" style="margin-left:30px;" id="tr_'+sub_fasal_list.id+'"><div width="30px" id="level_'+sub_fasal_list.level+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<span id="fasal_'+sub_fasal_list.id+'"></span></div>');
+													$('#tr_'+fasal_list.id).append('<div class="checkbox" style="margin-left:30px;" id="tr_'+sub_fasal_list.id+'"><div width="30px" class="level" id="level_'+sub_fasal_list.level+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<span id="fasal_'+sub_fasal_list.id+'"></span></div>');
 													$('#fasal_'+sub_fasal_list.id).append('<label for="checkbox'+sub_fasal_list.id+'"><span class="sub_fasal_label" id="fasal_index_'+sub_fasal_list.id+'">'+ sub_fasal_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_list.id+'_text"> '+sub_fasal_list.fasal+'</span></label>');
 													
 													
@@ -152,7 +153,7 @@
 																					marginLeftPX = '30';
 																				}
 																	
-																					$('#tr_'+sub_fasal_nested_list_1.id).append('<div class="checkbox" style="margin-left:'+marginLeftPX+'px;" id="tr_'+sub_fasal_nested_list.id+'"><div id="level_'+sub_fasal_nested_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+sub_fasal_nested_list.id+'"></span></div>');
+																					$('#tr_'+sub_fasal_nested_list_1.id).append('<div class="checkbox" style="margin-left:'+marginLeftPX+'px;" id="tr_'+sub_fasal_nested_list.id+'"><div class="level" id="level_'+sub_fasal_nested_list.level+'">'+editorImgFirstLvl+' '+checkBoxFirstLvl+'<span id="fasal_'+sub_fasal_nested_list.id+'"></span></div>');
 																					$('#fasal_'+sub_fasal_nested_list.id).append('<label for="checkbox'+sub_fasal_nested_list.id+'"><span class="sub_fasal_label" id="fasal_index_'+sub_fasal_nested_list.id+'">'+ sub_fasal_nested_list.code_level+'</span> - <span class="fasal_label_text" id="fasal_index_'+sub_fasal_nested_list.id+'_text"> '+sub_fasal_nested_list.fasal+'</span></label>');										
 																				
 																					//if((index_4_2+1) == (fasal_list.sub_fasal).length){
@@ -187,9 +188,9 @@
 						});
 						
 						
-		
-								
-								
+						/*RE-WRITE ALL ID*/
+						rewriteID()	
+						checkAllFasal();		
 						},
 						error: function() 
 						{
@@ -256,13 +257,13 @@
 		rewriteID();
 	}
 	
-	//Add Bottom
 	function addFasal()
 	{	
 		var selected = localStorage.getItem('selected_id_perlembagaan');
 		var levelID = $('#'+(selected)).children().attr('id');
-		var selectedFasalTxtShow;
 		var levelIDShow = levelID.replace('level_','');
+		var subFasalNo = '';
+		var selectedFasalTxtShow = '';
 		
 		localStorage['fasal_index'] = (parseInt((selected).replace('tr_', ''))+1);
 		localStorage['level_id'] = levelIDShow;
@@ -280,20 +281,29 @@
 
 
 
-		//get current fasal & plus one
 		if(levelIDShow < 2){
+			//SET FASAL VALUE
 			var selectedFasalTxt = $('#'+(selected)+' .fasal_label').html();;
 			selectedFasalTxtShow = 'Fasal '+(parseInt((selectedFasalTxt).replace('Fasal ', ''))+1);
 		}
 		else
 		{
-			var selectedFasalTxt = $('#'+(selected)+' .sub_fasal_label').html();;
-			selectedFasalTxtShow = selectedFasalTxt;
+			/*SET SUB-FASAL VALUE*/
+			var selectedFasalTxt = $('#'+(selected)+' .sub_fasal_label').html();
+			var arr = selectedFasalTxt.split('.');
+			var arrLength = arr.length;
+			
+			for(var arrLengthNoChange = 0; arrLengthNoChange < arrLength - 1; arrLengthNoChange++)
+			{			
+				subFasalNo += $.trim(arr[arrLengthNoChange])+'.';
+			}
+				
+			selectedFasalTxtShow = subFasalNo+''+(parseInt(arr[arr.length-1])+1);
 		}
 		
 		$('.inform').remove();
 
-		var divToAppend = "<div style='margin-left:"+mg+"px;' class='inform' id='added_"+selected+"'><table><tr><td width='90px'><input type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='"+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>";
+		var divToAppend = "<div style='margin-left:"+mg+"px;' class='inform' id='added_"+selected+"'><table><tr><td width='80px'><input style='text-align:center;' type='text' id='no_fasal_"+(selected+1)+"_added' placeholder='"+selectedFasalTxtShow+"' disabled></input></td><td width='10px'>&nbsp;</td><td><input type='text' id='fasal_added_"+selected+"'></input></td><td width='90px'><div class='okIcon' id='search' onclick='addDisplay();'></div></td></tr></table></div>";
 
 		if(nextAppendID != null){
 			$("#tr_"+localStorage['fasal_index']).prepend(divToAppend);
@@ -304,6 +314,7 @@
 
 		$("div").qtip('hide');	
 
+		/*REWRITE FASAL NO & ID*/
 		$('.fasal_label').each(function() {
 			var span_id = this.id;
 			var span_value = $('#'+span_id).html();
@@ -317,6 +328,56 @@
 			}
 
 		});
+		
+		if(levelIDShow > 1){
+		/*REWRITE FASAL NO & ID*/
+		$('.checkbox').each(function() {
+			var subFasalNo = '';
+			var value_first1 = '';
+			var value_first2 = '';
+
+			//selected sub_fasal_value
+			var selectedFasalTxt = $('#'+(selected)+' .sub_fasal_label').html();
+			var arr1 = selectedFasalTxt.split('.');
+			
+			//set no depan
+			for(var arrLengthNoChange = 0; arrLengthNoChange < levelIDShow-1; arrLengthNoChange++)
+			{			
+				value_first1 += $.trim(arr1[arrLengthNoChange])+'.';
+			}
+			var value_last1 = parseInt(arr1[arr1.length-1]);
+
+		
+			//all sub_fasal value available
+			var span_id = $('#'+(this.id)+' .sub_fasal_label').attr('id');
+			var subLevelLevel = $('#'+(this.id)+' .level').attr('id');
+			var subLevelLevel2 = subLevelLevel.replace('level_','');
+
+			var span_value = $('#'+span_id).html();
+			var arr2 = span_value.split('.');
+			
+			//set no depan
+			for(var arrLengthNoChange = 0; arrLengthNoChange < subLevelLevel2-1; arrLengthNoChange++)
+			{			
+				value_first2 += $.trim(arr2[arrLengthNoChange])+'.';
+			}
+
+			var value_last2 = parseInt(arr2[arr2.length-1]);
+
+			if(value_first1 == value_first2 && levelIDShow == subLevelLevel2)
+				{
+					if(value_last1 < value_last2)
+					{
+						for(var arrLengthNoChange = 0; arrLengthNoChange < arrLength - 1; arrLengthNoChange++)
+						{			
+							subFasalNo += $.trim(arr[arrLengthNoChange])+'.';
+						}
+							var afterAdd = parseInt(value_last2+1);
+							$('#'+span_id).html(subFasalNo+''+afterAdd);
+					}
+				}
+		});
+	}
 		
 		var zz = 1;
 		var zzz = 1;
@@ -335,6 +396,7 @@
 			$('#xxxxx_'+zzz).attr('id','fasal_index_'+zzz);
 			zzz = parseInt(zzz+1);
 		});
+		
 	}
 	
 	//Edit Fasal
@@ -419,12 +481,24 @@
 		var loopForMarginLeftValue = localStorage.getItem('level_id');
 		var label_class;
 		var label_text;
+		var XXXX = '';
 		var marginLeftPX;
 		if(loopForMarginLeftValue > 1)
 		{
 			label_class = 'sub_fasal_label';
-			label_text = 'PerPuluhan';
 			marginLeftPX = '30';
+		
+			/*SET SUB-FASAL VALUE*/
+			var selectedFasalTxt = $('#'+(id)+' .sub_fasal_label').html();
+			var arr = selectedFasalTxt.split('.');
+			var arrLength = arr.length;
+			
+			/*SET SUB_FASAL VALUE*/
+			for(var arrLengthNoChange = 0; arrLengthNoChange < arrLength - 1; arrLengthNoChange++)
+			{			
+				XXXX += $.trim(arr[arrLengthNoChange])+'.';
+			}
+			label_text = XXXX+''+(parseInt(arr[arr.length-1])+1);
 		}
 		else
 		{
@@ -432,14 +506,6 @@
 			label_text = 'Fasal '+ fasal_index;
 			marginLeftPX = '0';
 		}
-		
-	
-
-		//var marginLeftPX = 0;
-		//for(var x = 1; x < loopForMarginLeftValue ; x++)
-		//{
-		//	marginLeftPX = parseInt(marginLeftPX+30);
-		//}
 
 		/*On click display - check if null*/
 		if($('#fasal_added_'+(id)).val() != "")
@@ -448,7 +514,7 @@
 			var checkBoxSecondLvl = '<input class="checkboxClass" id="checkbox'+id+'" type="checkbox" name="senarai" value="Maklumat Sijil Pendaftaran Pertubuhan Belia" /><label/>';
 
 
-			$('<div class="checkbox" id="new_added_'+appendId+'" style="margin-left:'+marginLeftPX+'px;" ><div width="30px" class="xx" id="level_'+loopForMarginLeftValue+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<label id="fasal_added_'+(id+1)+'" for="checkbox'+id+'"><span class="'+label_class+'" id="fasal_index_'+appendId+'">'+label_text+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId.replace('tr_', '')+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></div></div>').insertAfter($('#'+id));				
+			$('<div class="checkbox" id="new_added_'+appendId+'" style="margin-left:'+marginLeftPX+'px;" ><div width="30px" class="level" id="level_'+loopForMarginLeftValue+'">'+editorImgSecondLvl+' '+checkBoxSecondLvl+'<label id="fasal_added_'+(id+1)+'" for="checkbox'+id+'"><span class="'+label_class+'" id="fasal_index_a'+appendId.replace('tr_', '')+'">'+label_text+'</span> - <span class="fasal_label_text" id="fasal_index_'+appendId.replace('tr_', '')+'_text"> '+$('#fasal_added_'+(id)).val()+'</span></label></div></div>').insertAfter($('#'+id));				
 		}
 		
 		$('#added_'+id).remove();
@@ -466,10 +532,21 @@
 				$('#'+tr_id).attr('id','tr_'+trAfterAdd);
 			}
 		});
-		
+	
+		var zz=1;
+		//subfasal fasal-index rewrite
+		$('.sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			$('#'+tr_id).attr('id','xxxxxx_'+zz);
+			zz = parseInt(zz+1);
+			
+		});
+	
+	
 		$('#new_added_'+appendId).attr('id',appendId);
-		
+
 		rewriteID();
+		rewriteSubfasalOnAdd(thisID);
 	}
 	
 	function rewriteID()
@@ -486,12 +563,32 @@
 			index = parseInt(index+1);
 		});
 		
-		var indexx = 1;
 		$('.checkbox').each(function() {
 			$('#xx_'+indexx).attr('id','tr_'+indexx);
 			indexx = parseInt(indexx+1);
 		});
-	
+		
+		
+		var chk_index = 1;
+		var chk_indexx = 1;
+		/* Re-write checkbox no */
+		$('.checkboxClass').each(function() {
+		var tr_id = this.id;
+		var tr_value =  $('#'+tr_id).attr('id');
+		$('#'+tr_value).attr('id','rewritechkbox_'+chk_index);
+			chk_index = parseInt(chk_index+1);
+		});
+		
+		$('.checkboxClass').each(function() {
+			$('#rewritechkbox_'+chk_indexx).attr('id','c'+chk_indexx);
+
+			$('#c'+chk_indexx).next().attr('for','c'+chk_indexx);
+			$('#c'+chk_indexx).next().next().attr('id','span_'+chk_indexx)
+			$('#span_'+chk_indexx).children().attr('for','c'+chk_indexx)
+			chk_indexx = parseInt(chk_indexx+1);				
+		});
+
+		
 
 		/* Re-write <FASAL LABEL NO/ID> */
 		var indexFasal = 1;
@@ -564,43 +661,22 @@
 			$('#xxx_'+indexFasalRXX).attr('id','tr_'+indexFasalRXX+'_img');
 			indexFasalRXX = parseInt(indexFasalRXX+1);
 		});
+		
+
+		
 	}
 
 	function rewriteSubFasal(selected,prevID)
 	{
+		
 		var idSelected = selected;
 		var idPrev = prevID;
-
-		/*Get current fasal text selected - plus one for switch with top*/
-		/*var selectedFasalTxt = $('#'+(idSelected)+' .fasal_label').html();
-		selectedFasalTxtShow = parseInt((selectedFasalTxt).replace('Fasal ', ''))-1;
-
-		$('#'+(idSelected)+' .sub_fasal_label').each(function() {
-			var tr_id = this.id;
-			var currentSubFasal = $('#'+tr_id).html();
-			
-			var arr = currentSubFasal.split('.');
-			var val =  $.trim(arr[0]);
-			var newSubFasalMinus = '';
-			for(var arrLength = 1; arrLength<arr.length; arrLength++)
-			{
-				newSubFasalMinus += '.'+$.trim(arr[arrLength]);
-
-			}	
-
-			$('#'+tr_id).html(selectedFasalTxtShow+''+newSubFasalMinus);
-		});
-
-
-		/*Get prev fasal text - add one for switch with bottom*/
-		/* need to use level value to determine the no */
-		//var prevFasalTxt = $('#'+(idPrev)+' .fasal_label').html();
-		//prevFasalTxtShow = parseInt((prevFasalTxt).replace('Fasal ', ''))+1;
 
 		var levelID = $('#'+(idPrev)).children().attr('id');
 		levelIDShow = (levelID).replace('level_', '');
 
-
+		if(levelIDShow < 2){
+		
 		$('#'+(idPrev)+' .sub_fasal_label').each(function() {
 			var tr_id = this.id;
 			var currentSubFasal = $('#'+tr_id).html();
@@ -639,7 +715,6 @@
 			for(var arrLength = zz; arrLength<arr.length; arrLength++)
 			{
 				newSubFasalAdd += '.'+$.trim(arr[arrLength]);
-
 			}	
 			for(var arrLengthNoChange = 0; arrLengthNoChange< zz; arrLengthNoChange++)
 			{			
@@ -648,8 +723,185 @@
 
 			$('#'+tr_id).html(prevFasalTxtShow+''+newSubFasalAdd);
 		});
+		
+		}
+		else
+		{
+		
+			$('#'+(idPrev)+' .sub_fasal_label').each(function() {
+				var tr_id = this.id;
+				var currentSubFasal = $('#'+tr_id).html();
+				
+				var arr = currentSubFasal.split('.');
+				var val =  parseInt(arr[0]);
+	
+				var newSubFasalAdd = '';
+				var ccc = '';
+				
+			
+				for(var arrLength = levelIDShow-1; arrLength<arr.length; arrLength++)
+				{
+					if(arr.length > 2 && arrLength != parseInt(arr.length)-1)
+					{
+						ccc += '.'+(parseInt(arr[arrLength])+1);
+					}
+					
+					if(arr.length > 2 && arrLength == parseInt(arr.length)-1)
+					{
+						newSubFasalAdd = '.'+(parseInt(arr[arrLength]));
+					}
+					else
+					{
+						newSubFasalAdd = '.'+(parseInt(arr[arrLength])+1);
+					}
+				}	
+				$('#'+tr_id).html(val+ccc+newSubFasalAdd);
+			});
+			
+			$('#'+(idSelected)+' .sub_fasal_label').each(function() {
+				var tr_id = this.id;
+				var currentSubFasal = $('#'+tr_id).html();
+				
+				var arr = currentSubFasal.split('.');
+				var val =  parseInt(arr[0]);
+	
+				var middle = '';
+				var bb = '';
+			
+				for(var arrLength = levelIDShow-1; arrLength<arr.length; arrLength++)
+				{
+					if(arr.length > 2 && arrLength != parseInt(arr.length)-1)
+					{
+						middle += '.'+(parseInt(arr[arrLength])-1);
+					}
+	
+					if(arr.length > 2 && arrLength == parseInt(arr.length)-1)
+					{
+						bb = '.'+(parseInt(arr[arrLength]));
+					}
+					else
+					{
+						bb = '.'+(parseInt(arr[arrLength])-1);
+					}
+					
+					
+				}	
+				$('#'+tr_id).html(val+middle+bb);
+			});
+		}
 	}
 
+	
+	function rewriteSubfasalOnAdd(selectedID)
+	{	
+		
+		var xx = $('#'+(selectedID)).children().attr('id');
+		var levelSelected = (xx).replace('level_', '');
+		
+		if(levelSelected < 2){
+		
+			$('.checkbox').each(function() {
+				
+				var tr_id = this.id;
+				
+				var levelID = $('#'+(tr_id)).children().attr('id');
+				levelIDShow = (levelID).replace('level_', '');
+				
+				var aaa = $('#'+(tr_id)+' .fasal_label').html();			
+				if(aaa != null){
+				
+					$('#'+tr_id +' .sub_fasal_label').each(function() {
+						var prevFasalTxtShow = '';
+						var xx = this.id;
+						var selectedFasalTxt = $('#'+xx).html();
+						var arr = selectedFasalTxt.split('.');
+
+						if(levelIDShow == 1) 
+						{
+							var depanSekali = aaa.replace('Fasal ', '');
+						}
+						
+						for(var arrLengthNoChange = levelIDShow; arrLengthNoChange < arr.length; arrLengthNoChange++)
+						{			
+							prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
+						}
+
+						$('#'+xx).html(depanSekali+''+prevFasalTxtShow);
+					});
+				}
+			});
+		}
+		else
+		{
+			$('.checkbox .sub_fasal_label').each(function() {
+				
+				var prevFasalTxtShow = '';
+				var subLabel = this.id;
+				var ddd = $('#'+subLabel).html();
+				var arr = ddd.split('.');
+				
+				for(var arrLengthNoChange = 1; arrLengthNoChange < arr.length; arrLengthNoChange++)
+				{			
+					prevFasalTxtShow += '.'+$.trim(arr[arrLengthNoChange]);
+				}
+				
+				$('#'+subLabel).html(ddd[0]+''+prevFasalTxtShow);
+
+				
+			});
+		}
+	}
+	
+	function rewriteSubfasalOnAddFromSubFasal(levelSelected)
+	{	
+		$('.checkbox').each(function() {
+			
+			var tr_id = this.id;
+			var aaa = $('#'+(tr_id)+' .sub_fasal_label').html();	
+			if(aaa != null){
+		
+			var levelID = $('#'+(tr_id)).children().attr('id');
+			levelIDShow = (levelID).replace('level_', '');
+				
+				if(levelIDShow > 1){
+
+				
+				//$('#'+tr_id+' .sub_fasal_label').each(function() {
+				/*$('#'+tr_id+' .sub_fasal_label').each(function() {
+
+					var depanSekali = ''; 
+					var prevFasalTxtShow = '';
+					//var xx = this.id;
+					var xx = tr_id;
+					var ccc = 0;
+				
+					
+					var selectedFasalTxt = $('#'+xx+' .sub_fasal_label').html();
+					var arr = selectedFasalTxt.split('.');
+					//$('#'+xx+' .sub_fasal_label').html('');
+		
+
+					for(var arrLength = 0; arrLength<levelIDShow-1; arrLength++)
+					{
+						depanSekali += $.trim(arr[arrLength])+'.';
+						ccc++;
+					}	
+
+					for(var arrLengthNoChange = ccc; arrLengthNoChange < arr.length; arrLengthNoChange++)
+					{			
+						prevFasalTxtShow += $.trim(arr[arrLengthNoChange])+'.';
+					}
+				
+					//alert(depanSekali +' --- '+prevFasalTxtShow);
+					$('#'+xx+' .sub_fasal_label').html(depanSekali+''+prevFasalTxtShow);
+				});*/
+			}
+				
+			}
+		});
+
+	}	
+	
 function setInputMargin(levelIDShow,zzzz)
 {
 	var mg = 0;
@@ -672,6 +924,294 @@ function setInputMargin(levelIDShow,zzzz)
 		return mg;
 }
 	
+	function checkAllFasal()
+	{
+		$('.checkboxClass').each(function() {
+			var tr_id = this.id;
+			$("#"+tr_id).prop('checked',true);
+		});
+	}
+	
+	
+	
+function simpanFasal()
+{
+	var inc = 1;	
+
+	var level = [];
+	var fasal = [];
+	var codeLevel = [];
+			
+	var noFasal = [];
+	var mainRefLevel = [];
+	var mainSubLevel = [];
+	var refLevel = [];
+	var jenisPertubuhan = [];
+
+	
+	$('.checkbox').each(function() {
+				
+		
+			var tr_id = this.id;
+			
+			
+			var atLeastOneIsChecked = $('#'+tr_id+ ' .checkboxClass :checkbox:checked').length > 0;
+			alert(tr_id+ '-' +atLeastOneIsChecked);
+			
+			var levelID = $('#'+(tr_id)).children().attr('id');
+			var levelToPush_ = levelID.replace('level_', '');
+
+			if(levelToPush_ < 2){ 
+				$('#'+tr_id+' .fasal_label').each(function() {
+
+				var firstLevelLabel = this.id;
+				var mainCodeLevel = $('#'+firstLevelLabel).html().replace('Fasal ','');
+
+
+				var levelID_ = $('#'+(firstLevelLabel)).children().attr('id');
+				var levelToPush = levelToPush_;
+
+				level.push(levelToPush);
+
+				fasal.push($('#'+firstLevelLabel).html());
+				codeLevel.push(mainCodeLevel);
+				
+				noFasal.push(inc);
+				mainRefLevel.push('-');
+				mainSubLevel.push('-');
+				refLevel.push('-');
+				jenisPertubuhan.push('1');
+
+				inc++;
+
+					$('#'+tr_id+' .sub_fasal_label').each(function() {
+
+					var firstLevelLabel = this.id;
+					var label = $('#'+firstLevelLabel).html();
+					
+					fasal.push($('#'+firstLevelLabel).next().html());
+					codeLevel.push(label);
+					
+					var arr = label.split('.');
+					var mainSubLevel_ = '';
+					var refLevel_ = '';
+
+					/* GET MAIN SUB LEVEL - DEPEND ON SUB FASAL TXT */
+					var stopper = 0;
+					if(arr.length < 3)
+					{
+						stopper = 1;
+					}
+					else
+					{
+						stopper = 2;
+					}
+
+					/* MAIN SUB LEVEL */
+					for(var arrLengthNoChange = 0; arrLengthNoChange < stopper ; arrLengthNoChange++)
+					{			
+						mainSubLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
+					}
+
+					/* REF LEVEL */
+					for(var arrLengthNoChange = 0; arrLengthNoChange < arr.length-1 ; arrLengthNoChange++)
+					{			
+						refLevel_ += '.'+$.trim(arr[arrLengthNoChange]);
+					}
+
+					/* CLEAN CODE FIRST */
+
+					mainSubLevel_ = mainSubLevel_.replace('.','');
+					refLevel_ = refLevel_.replace('.','');
+
+					noFasal.push('-');
+					mainRefLevel.push(mainCodeLevel);
+					mainSubLevel.push(mainSubLevel_);
+					refLevel.push(refLevel_);
+
+					//will change depend on jenis pertubuhan
+					jenisPertubuhan.push('1');
+
+					level.push((arr.length).toString());
+
+					});
+
+				});
+			}
+
+		});
+}	
+	
+
+	
+	
+	
+	
+	
+	/*$("#btn_submit").click(function(e){
+		
+		redisplayHeader();
+		var empty = false;
+		e.preventDefault();
+		
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - Change border css
+		
+		$('#f_lokaliti,#f_nama_pertubuhan,#f_emel_pertubuhan,#kategori_selection,#daerah_selection,#negeri_selection').css({"border":"","box-shadow":""});
+
+
+        var id_pertubuhan = $("#id_pertubuhan").val();
+		var lokaliti= $("#f_lokaliti").val();
+		var nama_pertubuhan = $("#f_nama_pertubuhan").val();
+		var nama_ringkasan = $("#f_nama_ringkasan").val();
+		var nama_penuh_pertubuhan = $("#f_nama_penuh_pertubuhan").val().toUpperCase();
+		var emel_pertubuhan = $("#f_emel_pertubuhan").val();
+		var sel_kategori = $("#sel_kategori").val();
+		var sel_negeri = $("#sel_negeri").val();
+		var sel_daerah = $("#sel_daerah").val();
+		var jenis_pertubuhan = $("#pertubuhan_tunggal").val();
+		//var kad_pengenalan = window.localStorage.getItem('LOGIN');
+		
+		//NEED TO CREATE ONE GLOBAL FUNCTION FOR THIS VALIDATION - validate empty fill
+		if (lokaliti.length == 0)
+		{
+			$('#f_lokaliti').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(nama_pertubuhan.length == 0)
+		{
+			$('#f_nama_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+
+		}
+		if(emel_pertubuhan.length == 0)
+		{
+			$('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+	
+		if(sel_kategori.length == 0)
+		{
+			$('#kategori_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_negeri.length == 0)
+		{
+			$('#negeri_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		if(sel_daerah.length == 0)
+		{
+			$('#daerah_selection').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+			empty = true;
+		}
+		
+		
+		if(empty == true)
+		{
+			$.alert
+			(
+				{
+					title: 'Perhatian',
+					content: 'Sila isikan tempat kosong!',
+					confirm: function(){				
+					}
+				}
+			);
+		}
+		else if(empty == false)
+		{
+            if(!ValidateEmail(emel_pertubuhan))
+            {
+                $.alert
+                (
+                    {
+                        title: 'Perhatian',
+                        content: 'Sila Isikan Format Emel yang Betul',
+                        confirm: function(){ }
+                    }
+                );
+                $('#f_emel_pertubuhan').css({"border":"1px solid red","box-shadow":"0 0 3px #F22613"});
+            }
+            else
+            {
+                if(id_pertubuhan == 'empty')
+                {
+                    window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+                    window.location.href = "pendaftaran-tunggal-2.html";
+                }
+				else {
+                    $.ajax({
+                        url: "http://eroy.me-tech.com.my/api/pendaftaran/pendaftaran_tunggal_1.php",
+                        type: 'POST',
+                        data: {
+                            lokaliti: lokaliti,
+                            nama_pertubuhan: nama_pertubuhan,
+                            nama_ringkasan: nama_ringkasan,
+                            nama_penuh_pertubuhan: nama_penuh_pertubuhan,
+                            emel_pertubuhan: emel_pertubuhan,
+                            sel_kategori: sel_kategori,
+                            sel_negeri: sel_negeri,
+                            sel_daerah: sel_daerah,
+                            jenis_pertubuhan: jenis_pertubuhan,
+                            kad_pengenalan: kad_pengenalan,
+                            insertData: insertData,
+                        },
+                        beforeSend: function () {
+                            run_waitMe();
+                        },
+                        success: function (data) {
+                            var json = $.xml2json(data);
+                            console.log(data);
+                            if (json.status == 'INSERT_SUCCESS') {
+
+                                window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+                                localStorage.setItem("PAYMENT_REF_CODE", json.ref_code);
+
+                                $.alert
+                                (
+                                        {
+                                            title: 'Status',
+                                            content: json.message,
+                                            confirm: function () {
+                                                window.location.href = "pendaftaran-tunggal-2.html";
+                                            }
+                                        }
+                                );
+
+                            }
+                            else if (json.status == 'UPDATE_SUCCESS') {
+                                $.alert
+                                (
+                                        {
+                                            title: 'Status',
+                                            content: json.message,
+                                            confirm: function () {
+                                                window.location.href = "pendaftaran-tunggal-2.html";
+                                            }
+                                        }
+                                );
+                                window.localStorage.setItem("NAMA_PENDAFTARAN_TUNGGAL", nama_penuh_pertubuhan);
+
+                            }
+                            else if (json.status == 'UPDATE_ERROR') {
+                                $.alert
+                                (
+                                        {
+                                            title: 'Status',
+                                            content: json.message,
+                                            confirm: function () {
+                                            }
+                                        }
+                                );
+                            }
+                            else {
+                            }
+                            $('body').waitMe('hide');
+
+                        }
+                    });
+                }*/
+
 	
 	
 	
@@ -689,3 +1229,34 @@ function setInputMargin(levelIDShow,zzzz)
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	/*Get current fasal text selected - plus one for switch with top*/
+		/*var selectedFasalTxt = $('#'+(idSelected)+' .fasal_label').html();
+		selectedFasalTxtShow = parseInt((selectedFasalTxt).replace('Fasal ', ''))-1;
+
+		$('#'+(idSelected)+' .sub_fasal_label').each(function() {
+			var tr_id = this.id;
+			var currentSubFasal = $('#'+tr_id).html();
+			
+			var arr = currentSubFasal.split('.');
+			var val =  $.trim(arr[0]);
+			var newSubFasalMinus = '';
+			for(var arrLength = 1; arrLength<arr.length; arrLength++)
+			{
+				newSubFasalMinus += '.'+$.trim(arr[arrLength]);
+
+			}	
+
+			$('#'+tr_id).html(selectedFasalTxtShow+''+newSubFasalMinus);
+		});
+
+
+		/*Get prev fasal text - add one for switch with bottom*/
+		/* need to use level value to determine the no */
+		//var prevFasalTxt = $('#'+(idPrev)+' .fasal_label').html();
+		//prevFasalTxtShow = parseInt((prevFasalTxt).replace('Fasal ', ''))+1;
