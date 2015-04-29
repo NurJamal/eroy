@@ -111,11 +111,15 @@
 				<textarea id="f_nama_penuh_pertubuhan" name="nama_penuh_pertubuhan"  style="text-transform: uppercase;resize:none" disabled>Nama Penuh Pertubuhan</textarea>
 			</div>
 			
-				<input type="text" name="emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan"><br/>
-				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
-				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan" placeholder="No Sijil Gabungan"><br/>
+				<input type="text" name="emel_pertubuhan" id="f_emel_pertubuhan" placeholder="Emel Pertubuhan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan1" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan2" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan3" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan4" placeholder="No Sijil Gabungan">
+				<input type="text" name="no_sijil_gabungan" id="f_no_sijil_gabungan5" placeholder="No Sijil Gabungan">
+				
 			
-	
+	</div>
 		
 			<div class="inform" style="margin-top:9px">
 				<input type="text" style="margin-top:0px" name="no_sijil_gabungan" id="tambah_field_sijil" onclick="tambah_field();" placeholder="No Sijil Gabungan" class="_add_sijil"><br/></br>
@@ -127,6 +131,8 @@
 
 			
 		
+	</div>
+	
 	</div>
 	
 	
@@ -156,7 +162,12 @@
 		
 		$('#negeri_selection').hide();
 		$('#daerah_selection').hide();
-		
+		$('#f_no_sijil_gabungan1').hide();
+		$('#f_no_sijil_gabungan2').hide();
+		$('#f_no_sijil_gabungan3').hide();
+		$('#f_no_sijil_gabungan4').hide();
+		$('#f_no_sijil_gabungan5').hide();
+				
 		function tambah_field()
 		{			
 			
@@ -235,18 +246,40 @@
 		$('#sel_peringkat').change(function()
 		{ 
 			var selectedIndex = sel_peringkat.options[sel_peringkat.selectedIndex].value;
+			
+			
+			if (selectedIndex == "5") 
+					
+			{			
+			$('#f_no_sijil_gabungan1').show();
+			$('#f_no_sijil_gabungan2').show();
+			$('#f_no_sijil_gabungan3').show();
+			$('#f_no_sijil_gabungan4').show();
+			$('#f_no_sijil_gabungan5').show();											
+			}
 		
-			if (selectedIndex == "6") 
+			else if (selectedIndex == "6") 
 					
 			{ 
 			$('#negeri_selection').show();
+			$('#f_no_sijil_gabungan1').show();
+			$('#f_no_sijil_gabungan2').show();													
 			}
+			
 			
 			else if (selectedIndex == "7") 
 			
 			{ 
 			$('#negeri_selection').show();
 			$('#daerah_selection').show();
+			$('#f_no_sijil_gabungan1').show();
+			$('#f_no_sijil_gabungan2').show();
+			}
+			
+			else if (selectedIndex == "8")
+			{			
+			$('#f_no_sijil_gabungan1').show();
+			$('#f_no_sijil_gabungan2').show();						
 			}
 			
 			
